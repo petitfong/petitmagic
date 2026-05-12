@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>쁘띠치과 | Petit Dental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g:#1E3D30;--g2:#2D5A44;
+  --cr:#FAF8F0;--cr2:#EDE8D8;
+  --go:#C8A84B;--go2:rgba(200,168,75,.1);
+  --tx:#2C2C2C;--mu:#7A7A6A;--wh:#fff;
+  --sf:'Noto Serif KR',serif;--ss:'Noto Sans KR',sans-serif
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--ss);background:var(--cr);color:var(--tx);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:48px 20px 80px}
+
+/* HEADER */
+.logo{font-family:var(--sf);font-size:22px;font-weight:700;color:var(--g);letter-spacing:.04em;margin-bottom:4px;text-align:center}
+.logo em{color:var(--go);font-style:normal}
+.tagline{font-size:12px;color:var(--mu);letter-spacing:.12em;text-align:center;margin-bottom:36px}
+
+/* PROFILE CIRCLE */
+.profile{width:72px;height:72px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px}
+
+/* LINKS WRAP */
+.wrap{width:100%;max-width:420px}
+
+/* SECTION LABEL */
+.sec-label{font-size:10.5px;letter-spacing:.15em;color:var(--mu);text-transform:uppercase;font-weight:500;margin:26px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--cr2)}
+
+/* LINK CARD */
+.lk{display:flex;align-items:center;gap:14px;background:var(--wh);border:1.5px solid var(--cr2);border-radius:14px;padding:14px 16px;margin-bottom:9px;text-decoration:none;transition:border-color .15s,transform .12s,box-shadow .15s;cursor:pointer}
+.lk:hover{border-color:var(--go);transform:translateY(-1px);box-shadow:0 4px 16px rgba(30,61,48,.08)}
+.lk-icon{width:40px;height:40px;border-radius:10px;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.lk-icon.gold{background:var(--go)}
+.lk-icon.cream{background:var(--cr2)}
+.lk-body{flex:1}
+.lk-title{font-size:13.5px;font-weight:600;color:var(--tx);margin-bottom:2px}
+.lk-sub{font-size:11.5px;color:var(--mu);line-height:1.4}
+.lk-arr{font-size:14px;color:var(--cr2);flex-shrink:0}
+.lk:hover .lk-arr{color:var(--go)}
+
+/* EXTERNAL BADGE */
+.ext{font-size:9.5px;font-weight:600;letter-spacing:.08em;background:var(--go2);color:var(--go);border-radius:4px;padding:2px 6px;margin-left:5px;vertical-align:middle}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--cr2);margin:10px 0}
+
+/* FOOTER */
+.foot{margin-top:44px;text-align:center;font-size:12px;color:var(--mu);line-height:2}
+.foot strong{color:var(--g);font-weight:500;display:block;font-family:var(--sf);font-size:13px;margin-bottom:4px}
+</style>
+</head>
+<body>
+
+<div class="profile">🦷</div>
+<div class="logo">쁘띠치과 <em>·</em> Petit Dental</div>
+<div class="tagline">생활의 기본 쁘띠치과, 기본이 기적이다</div>
+
+<div class="wrap">
+
+  <!-- 예약·상담 -->
+  <div class="sec-label">예약 · 상담</div>
+
+  <a class="lk" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">
+    <div class="lk-icon gold">📅</div>
+    <div class="lk-body">
+      <div class="lk-title">네이버 예약<span class="ext">NAVER</span></div>
+      <div class="lk-sub">진료 예약 바로가기</div>
+    </div>
+    <div class="lk-arr">→</div>
+  </a>
+
+  <a class="lk" href="https://pf.kakao.com/_xbhXYb" target="_blank">
+    <div class="lk-icon gold">💬</div>
+    <div class="lk-body">
+      <div class="lk-title">카카오 채널<span class="ext">KAKAO</span></div>
+      <div class="lk-sub">상담 문의 · 빠른 답변</div>
+    </div>
+    <div class="lk-arr">→</div>
+  </a>
+
+  <!-- 상담 자료 -->
+  <div class="sec-label">상담 자료</div>
+
+  <a class="lk" href="petit_consultation_widget.html" target="_blank">
+    <div class="lk-icon">📋</div>
+    <div class="lk-body">
+      <div class="lk-title">교합재건 상담 위젯</div>
+      <div class="lk-sub">증상 체크 → 분석 → 타입 확인 → 치료 효과</div>
+    </div>
+    <div class="lk-arr">→</div>
+  </a>
+
+  <a class="lk" href="petit_lifecycle_occlusion.html" target="_blank">
+    <div class="lk-icon">🕰️</div>
+    <div class="lk-body">
+      <div class="lk-title">생애주기별 교합 노화 타임라인</div>
+      <div class="lk-sub">태어남부터 노년까지 — 교합이 무너지는 이유</div>
+    </div>
+    <div class="lk-arr">→</div>
+  </a>
+
+  <!-- 치료 안내 -->
+  <div class="sec-label">치료 안내</div>
+
+  <a class="lk" href="petit_treatment_by_age.html" target="_blank">
+    <div class="lk-icon">🌱</div>
+    <div class="lk-body">
+      <div class="lk-title">바른턱얼굴 교합치료</div>
+      <div class="lk-sub">어린이 · 청소년·청년 · 중장년 — 대상별 안내</div>
+    </div>
+    <div class="lk-arr">→</div>
+  </a>
+
+  <!-- FoANa -->
+  <div class="sec-label">FoANa</div>
+
+  <a class="lk" href="petit_foana_brand.html" target="_blank">
+    <div class="lk-icon cream">☕</div>
+    <div class="lk-body">
+      <div class="lk-title">FoANa × 쁘띠치과</div>
+      <div class="lk-sub">삶의 기본을 알려주는 연결의 장 — 브랜드 스토리</div>
+    </div>
+    <div class="lk-arr">→</div>
+  </a>
+
+</div>
+
+<div class="foot">
+  <strong>생활의 기본 쁘띠치과</strong>
+  📍 대구시 남구 대봉로 66 2층<br>
+  📞 053-472-2828<br>
+  교합치료 · 근기능훈련(MFT) · 안면성장 디자인
+</div>
+
+</body>
+</html>
