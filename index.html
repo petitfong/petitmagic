@@ -3,148 +3,264 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>쁘띠치과 | Petit Dental</title>
+<title>생활의 기본, 쁘띠치과</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --g:#1E3D30;--g2:#2D5A44;
-  --cr:#FAF8F0;--cr2:#EDE8D8;
+  --cr:#FAF8F0;--cr2:#EDE8D8;--cr3:#DDD5C0;
   --go:#C8A84B;--go2:rgba(200,168,75,.1);
   --tx:#2C2C2C;--mu:#7A7A6A;--wh:#fff;
   --sf:'Noto Serif KR',serif;--ss:'Noto Sans KR',sans-serif
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--ss);background:var(--cr);color:var(--tx);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:48px 20px 80px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:var(--ss);background:var(--g);color:var(--tx);min-height:100vh;overflow-x:hidden}
 
-/* HEADER */
-.logo{font-family:var(--sf);font-size:22px;font-weight:700;color:var(--g);letter-spacing:.04em;margin-bottom:4px;text-align:center}
-.logo em{color:var(--go);font-style:normal}
-.tagline{font-size:12px;color:var(--mu);letter-spacing:.12em;text-align:center;margin-bottom:36px}
+/* ── HERO ── */
+.hero{min-height:100vh;background:var(--g);display:flex;flex-direction:column;justify-content:flex-end;padding:80px 28px 56px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 50% at 80% 25%,rgba(200,168,75,.09),transparent)}
+.hero-ring{position:absolute;border-radius:50%;border:1px solid rgba(200,168,75,.08);pointer-events:none}
+.r1{width:500px;height:500px;right:-150px;top:-100px}
+.r2{width:350px;height:350px;right:-80px;top:-40px}
+.r3{width:200px;height:200px;right:-20px;top:20px}
+.hero-inner{max-width:480px;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(250,248,240,.1);border-radius:100px;padding:6px 14px;margin-bottom:24px;opacity:0;animation:up .8s .1s forwards}
+.hb-dot{width:5px;height:5px;border-radius:50%;background:var(--go)}
+.hb-txt{font-size:10px;letter-spacing:.18em;color:rgba(250,248,240,.35);text-transform:uppercase}
+.hero-title{font-family:var(--sf);font-size:clamp(36px,8vw,64px);font-weight:900;color:var(--cr);line-height:1.15;margin-bottom:6px;opacity:0;animation:up .8s .3s forwards}
+.hero-title em{color:var(--go);font-style:normal;display:block}
+.hero-sub{font-family:var(--sf);font-size:clamp(13px,2vw,16px);color:rgba(250,248,240,.35);font-weight:300;letter-spacing:.06em;margin-bottom:32px;opacity:0;animation:up .8s .5s forwards}
+.hero-desc{font-size:13px;color:rgba(250,248,240,.4);line-height:1.85;max-width:340px;margin-bottom:36px;opacity:0;animation:up .8s .65s forwards}
+.hero-cta-row{display:flex;gap:10px;opacity:0;animation:up .8s .8s forwards}
+.hcta{padding:13px 24px;border-radius:50px;font-size:13px;font-weight:600;font-family:var(--ss);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:all .15s}
+.hcta.naver{background:#03C75A;color:var(--wh)}
+.hcta.naver:hover{filter:brightness(1.1)}
+.hcta.kakao{background:#FEE500;color:#191919}
+.hcta.kakao:hover{filter:brightness(1.05)}
+.hero-scroll{position:absolute;bottom:36px;right:28px;display:flex;align-items:center;gap:8px;opacity:0;animation:up .8s 1.2s forwards}
+.hs-txt{font-size:9px;letter-spacing:.15em;color:rgba(250,248,240,.18);text-transform:uppercase}
+.hs-line{width:32px;height:1px;background:linear-gradient(to right,rgba(200,168,75,.4),transparent)}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
-/* PROFILE CIRCLE */
-.profile{width:72px;height:72px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px}
+/* ── MAIN CONTENT ── */
+.main{background:var(--cr);border-radius:28px 28px 0 0;margin-top:-28px;position:relative;z-index:1;padding:48px 24px 80px}
+.max{max-width:480px;margin:0 auto}
 
-/* LINKS WRAP */
-.wrap{width:100%;max-width:420px}
+/* SECTION HEAD */
+.sh{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.sh-line{flex:1;height:1px;background:var(--cr2)}
+.sh-txt{font-size:10px;letter-spacing:.16em;color:var(--mu);text-transform:uppercase;font-weight:500;white-space:nowrap}
 
-/* SECTION LABEL */
-.sec-label{font-size:10.5px;letter-spacing:.15em;color:var(--mu);text-transform:uppercase;font-weight:500;margin:26px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--cr2)}
-
-/* LINK CARD */
-.lk{display:flex;align-items:center;gap:14px;background:var(--wh);border:1.5px solid var(--cr2);border-radius:14px;padding:14px 16px;margin-bottom:9px;text-decoration:none;transition:border-color .15s,transform .12s,box-shadow .15s;cursor:pointer}
-.lk:hover{border-color:var(--go);transform:translateY(-1px);box-shadow:0 4px 16px rgba(30,61,48,.08)}
-.lk-icon{width:40px;height:40px;border-radius:10px;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.lk-icon.gold{background:var(--go)}
-.lk-icon.cream{background:var(--cr2)}
+/* LINK CARDS */
+.lk{display:flex;align-items:center;gap:13px;background:var(--wh);border:1.5px solid var(--cr2);border-radius:14px;padding:14px 16px;margin-bottom:9px;text-decoration:none;transition:all .15s;position:relative;overflow:hidden}
+.lk::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:transparent;transition:background .15s}
+.lk:hover{border-color:var(--go);transform:translateX(3px);box-shadow:0 3px 16px rgba(30,61,48,.07)}
+.lk:hover::after{background:var(--go)}
+.lk-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.lk-icon.g{background:var(--g)}
+.lk-icon.go{background:var(--go)}
+.lk-icon.cr{background:var(--cr2)}
+.lk-icon.nd{background:#03C75A}
+.lk-icon.kk{background:#FEE500}
 .lk-body{flex:1}
-.lk-title{font-size:13.5px;font-weight:600;color:var(--tx);margin-bottom:2px}
-.lk-sub{font-size:11.5px;color:var(--mu);line-height:1.4}
-.lk-arr{font-size:14px;color:var(--cr2);flex-shrink:0}
+.lk-title{font-size:13.5px;font-weight:600;color:var(--tx);margin-bottom:2px;line-height:1.3}
+.lk-sub{font-size:11.5px;color:var(--mu);line-height:1.35}
+.lk-arr{font-size:13px;color:var(--cr3);flex-shrink:0;transition:color .15s}
 .lk:hover .lk-arr{color:var(--go)}
 
-/* EXTERNAL BADGE */
-.ext{font-size:9.5px;font-weight:600;letter-spacing:.08em;background:var(--go2);color:var(--go);border-radius:4px;padding:2px 6px;margin-left:5px;vertical-align:middle}
+/* HERO CARD — 강조 카드 */
+.lk-hero{background:var(--g);border-color:var(--g)}
+.lk-hero:hover{border-color:var(--g2);background:var(--g2)}
+.lk-hero .lk-title{color:var(--cr)}
+.lk-hero .lk-sub{color:rgba(250,248,240,.45)}
+.lk-hero .lk-arr{color:var(--go)}
+.lk-hero::after{background:var(--go)}
 
-/* DIVIDER */
-.divider{height:1px;background:var(--cr2);margin:10px 0}
+/* FOANA CARD */
+.lk-foana{background:linear-gradient(135deg,#1E3D30,#2a4a35);border-color:rgba(200,168,75,.2)}
+.lk-foana:hover{border-color:var(--go);background:linear-gradient(135deg,#2D5A44,#1E3D30)}
+.lk-foana .lk-title{color:var(--cr)}
+.lk-foana .lk-sub{color:rgba(250,248,240,.4)}
+.lk-foana .lk-arr{color:rgba(200,168,75,.5)}
+
+/* RESERVE ROW */
+.reserve-row{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:9px}
+.btn-reserve{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 10px;border-radius:14px;text-decoration:none;font-size:13px;font-weight:600;font-family:var(--ss);transition:all .15s}
+.btn-reserve:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.btn-naver{background:#03C75A;color:var(--wh)}
+.btn-kakao{background:#FEE500;color:#191919}
+
+/* SECTION GAP */
+.gap{height:28px}
+.gap-sm{height:14px}
+
+/* PHILOSOPHY */
+.phil-box{background:var(--g);border-radius:16px;padding:24px 22px;margin-top:6px}
+.pb-kw{font-size:10px;letter-spacing:.15em;color:rgba(200,168,75,.5);text-transform:uppercase;font-weight:500;margin-bottom:10px}
+.pb-title{font-family:var(--sf);font-size:17px;font-weight:700;color:var(--cr);line-height:1.6;margin-bottom:8px}
+.pb-title em{color:var(--go);font-style:normal}
+.pb-body{font-size:12.5px;color:rgba(250,248,240,.45);line-height:1.8}
 
 /* FOOTER */
-.foot{margin-top:44px;text-align:center;font-size:12px;color:var(--mu);line-height:2}
-.foot strong{color:var(--g);font-weight:500;display:block;font-family:var(--sf);font-size:13px;margin-bottom:4px}
+.foot{text-align:center;margin-top:44px;padding-top:28px;border-top:1px solid var(--cr2)}
+.foot-logo{font-family:var(--sf);font-size:15px;font-weight:700;color:var(--g);margin-bottom:6px}
+.foot-logo em{color:var(--go);font-style:normal}
+.foot-info{font-size:12px;color:var(--mu);line-height:2}
+
+/* MOBILE */
+@media(max-width:480px){
+  .hero{padding:60px 20px 50px}
+  .main{padding:36px 18px 70px;border-radius:20px 20px 0 0}
+  .reserve-row{grid-template-columns:1fr 1fr;gap:7px}
+}
 </style>
 </head>
 <body>
 
-<div class="profile">🦷</div>
-<div class="logo">쁘띠치과 <em>·</em> Petit Dental</div>
-<div class="tagline">생활의 기본 쁘띠치과, 기본이 기적이다</div>
-
-<div class="wrap">
-
-  <!-- 예약·상담 -->
-  <div class="sec-label">예약 · 상담</div>
-
-  <a class="lk" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">
-    <div class="lk-icon gold">📅</div>
-    <div class="lk-body">
-      <div class="lk-title">네이버 예약<span class="ext">NAVER</span></div>
-      <div class="lk-sub">진료 예약 바로가기</div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-ring r1"></div>
+  <div class="hero-ring r2"></div>
+  <div class="hero-ring r3"></div>
+  <div class="hero-inner">
+    <h1 class="hero-title">생활의 기본,<em>쁘띠치과</em></h1>
+    <div class="hero-sub">Basic is Magic &nbsp;·&nbsp; 기본이 기적이다.</div>
+    <p class="hero-desc">
+      교합치료 · 근기능훈련 · 안면성장 디자인<br>
+      자연치아를 지키고, 편안하게 씹으며,<br>나다운 상태로 살아가도록 함께합니다.
+    </p>
+    <div class="hero-cta-row">
+      <a class="hcta naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/></svg>
+        네이버 예약
+      </a>
+      <a class="hcta kakao" href="https://pf.kakao.com/_xbhXYb" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#191919"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.67 1.648 5.012 4.146 6.396L5 21l5.12-2.983C10.734 18.01 11.363 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z"/></svg>
+        카카오 상담
+      </a>
     </div>
-    <div class="lk-arr">→</div>
-  </a>
+  </div>
+  <div class="hero-scroll"><div class="hs-txt">scroll</div><div class="hs-line"></div></div>
+</section>
 
-  <a class="lk" href="https://pf.kakao.com/_xbhXYb" target="_blank">
-    <div class="lk-icon gold">💬</div>
-    <div class="lk-body">
-      <div class="lk-title">카카오 채널<span class="ext">KAKAO</span></div>
-      <div class="lk-sub">상담 문의 · 빠른 답변</div>
-    </div>
-    <div class="lk-arr">→</div>
-  </a>
+<!-- MAIN -->
+<div class="main">
+<div class="max">
 
-  <!-- 상담 자료 -->
-  <div class="sec-label">상담 자료</div>
+  <!-- 예약 -->
+  <div class="sh"><div class="sh-line"></div><div class="sh-txt">예약 · 상담</div><div class="sh-line"></div></div>
+  <div class="reserve-row">
+    <a class="btn-reserve btn-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/></svg>
+      네이버 예약
+    </a>
+    <a class="btn-reserve btn-kakao" href="https://pf.kakao.com/_xbhXYb" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#191919"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.67 1.648 5.012 4.146 6.396L5 21l5.12-2.983C10.734 18.01 11.363 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z"/></svg>
+      카카오 상담
+    </a>
+  </div>
 
-  <a class="lk" href="petit_occlusion_selfcheck.html" target="_blank">
-    <div class="lk-icon gold">🔍</div>
+  <div class="gap"></div>
+
+  <!-- 자가체크 — 강조 -->
+  <div class="sh"><div class="sh-line"></div><div class="sh-txt">지금 바로 시작하기</div><div class="sh-line"></div></div>
+  <a class="lk lk-hero" href="petit_occlusion_selfcheck.html" target="_blank">
+    <div class="lk-icon go">🔍</div>
     <div class="lk-body">
       <div class="lk-title">교합질환 자가체크</div>
-      <div class="lk-sub">증상 확인 → 원인 파악 → 치료 방향 안내</div>
+      <div class="lk-sub">증상 선택 → 원인 파악 → 치료 방향 안내</div>
+    </div>
+    <div class="lk-arr">→</div>
+  </a>
+
+  <div class="gap"></div>
+
+  <!-- 치료 안내 -->
+  <div class="sh"><div class="sh-line"></div><div class="sh-txt">치료 안내</div><div class="sh-line"></div></div>
+
+  <a class="lk" href="petit_treatment_by_age.html" target="_blank">
+    <div class="lk-icon g">🌱</div>
+    <div class="lk-body">
+      <div class="lk-title">바른턱얼굴 교합치료</div>
+      <div class="lk-sub">성장교정 · 4D입체교정 · 교합재건</div>
+    </div>
+    <div class="lk-arr">→</div>
+  </a>
+
+  <a class="lk" href="petit_natural_tooth.html" target="_blank">
+    <div class="lk-icon g">🌿</div>
+    <div class="lk-body">
+      <div class="lk-title">자연치아살리기</div>
+      <div class="lk-sub">MTA 신경재생 · 엠도게인 치주재생 · 무삭제 레진</div>
     </div>
     <div class="lk-arr">→</div>
   </a>
 
   <a class="lk" href="petit_consultation_widget.html" target="_blank">
-    <div class="lk-icon">📋</div>
+    <div class="lk-icon g">📋</div>
     <div class="lk-body">
       <div class="lk-title">교합재건 상담 위젯</div>
-      <div class="lk-sub">증상 체크 → 분석 → 타입 확인 → 치료 효과</div>
+      <div class="lk-sub">중장년 심층 상담 — 타입 확인 · 치료 계획</div>
+    </div>
+    <div class="lk-arr">→</div>
+  </a>
+
+  <div class="gap"></div>
+
+  <!-- 교육 콘텐츠 -->
+  <div class="sh"><div class="sh-line"></div><div class="sh-txt">교육 · 이해</div><div class="sh-line"></div></div>
+
+  <a class="lk" href="petit_occlusion_selfcheck.html" target="_blank">
+    <div class="lk-icon cr">🔍</div>
+    <div class="lk-body">
+      <div class="lk-title">교합질환 — 왜 반복될까?</div>
+      <div class="lk-sub">원인 · 부정교합 · 반복되는 치료의 진실</div>
     </div>
     <div class="lk-arr">→</div>
   </a>
 
   <a class="lk" href="petit_lifecycle_occlusion.html" target="_blank">
-    <div class="lk-icon">🕰️</div>
+    <div class="lk-icon cr">🕰️</div>
     <div class="lk-body">
-      <div class="lk-title">생애주기별 교합 노화 타임라인</div>
+      <div class="lk-title">생애주기별 교합 노화</div>
       <div class="lk-sub">태어남부터 노년까지 — 교합이 무너지는 이유</div>
     </div>
     <div class="lk-arr">→</div>
   </a>
 
-  <!-- 치료 안내 -->
-  <div class="sec-label">치료 안내</div>
-
-  <a class="lk" href="petit_treatment_by_age.html" target="_blank">
-    <div class="lk-icon">🌱</div>
-    <div class="lk-body">
-      <div class="lk-title">바른턱얼굴 교합치료</div>
-      <div class="lk-sub">어린이 · 청소년·청년 · 중장년 — 대상별 안내</div>
-    </div>
-    <div class="lk-arr">→</div>
-  </a>
+  <div class="gap"></div>
 
   <!-- FoANa -->
-  <div class="sec-label">FoANa</div>
-
-  <a class="lk" href="petit_foana_brand.html" target="_blank">
-    <div class="lk-icon cream">☕</div>
+  <div class="sh"><div class="sh-line"></div><div class="sh-txt">FoANa</div><div class="sh-line"></div></div>
+  <a class="lk lk-foana" href="petit_foana_brand.html" target="_blank">
+    <div class="lk-icon cr">☕</div>
     <div class="lk-body">
       <div class="lk-title">FoANa × 쁘띠치과</div>
-      <div class="lk-sub">삶의 기본을 알려주는 연결의 장 — 브랜드 스토리</div>
+      <div class="lk-sub">삶의 기본을 알려주는 연결의 장</div>
     </div>
     <div class="lk-arr">→</div>
   </a>
 
-</div>
+  <!-- PHILOSOPHY -->
+  <div class="phil-box">
+    <div class="pb-kw">Philosophy</div>
+    <div class="pb-title">편안하고, 건강하고,<br><em>나다운 상태.</em><br>기본에 집중할 때 만들어집니다.</div>
+    <div class="pb-body">입술·혀·호흡·자세가 바르게 작동할 때<br>교합이 완성되고, 전신이 편안해집니다.</div>
+  </div>
 
-<div class="foot">
-  <strong>생활의 기본 쁘띠치과</strong>
-  📍 대구시 남구 대봉로 66 2층<br>
-  📞 053-472-2828<br>
-  교합치료 · 근기능훈련(MFT) · 안면성장 디자인
-</div>
+  <!-- FOOTER -->
+  <div class="foot">
+    <div class="foot-logo">생활의 기본, <em>쁘띠치과</em></div>
+    <div class="foot-info">
+      📍 대구시 남구 대봉로 66 2층<br>
+      📞 053-472-2828<br>
+      교합치료 · 근기능훈련(MFT) · 안면성장 디자인
+    </div>
+  </div>
 
+</div>
+</div>
 </body>
 </html>
