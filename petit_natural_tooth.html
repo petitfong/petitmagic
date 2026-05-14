@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>자연치아살리기 | 쁘띠치과</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g:#1E3D30;--g2:#2D5A44;
+  --cr:#FAF8F0;--cr2:#EDE8D8;
+  --go:#C8A84B;--go2:rgba(200,168,75,.1);
+  --tx:#2C2C2C;--mu:#7A7A6A;--wh:#fff;
+  --rd:#C94040;--rd2:rgba(201,64,64,.07);
+  --sf:'Noto Serif KR',serif;--ss:'Noto Sans KR',sans-serif
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidden}
+
+/* NAV */
+.gnav{position:sticky;top:0;z-index:200;background:rgba(15,32,22,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(250,248,240,.07)}
+.gnav-inner{max-width:720px;margin:0 auto;display:flex;align-items:center;padding:0 20px}
+.gnav-logo{font-family:var(--sf);font-size:13px;color:var(--cr);font-weight:600;padding:14px 0;margin-right:auto}
+.gnav-logo em{color:var(--go);font-style:normal}
+.gnav-home{font-size:12px;color:rgba(250,248,240,.4);text-decoration:none;padding:14px 12px;transition:color .15s}
+.gnav-home:hover{color:var(--go)}
+.gnav-cta{margin-left:8px;background:var(--go);color:var(--g);border:none;padding:7px 15px;border-radius:20px;font-size:11.5px;font-weight:600;font-family:var(--ss);cursor:pointer;text-decoration:none;display:inline-block}
+
+/* HERO */
+.hero{background:var(--g);min-height:72vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 28px 52px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 75% 30%,rgba(200,168,75,.09),transparent)}
+.hero::after{content:'';position:absolute;right:0;top:0;bottom:0;width:45%;background:linear-gradient(to left,rgba(200,168,75,.04),transparent)}
+.hero-inner{max-width:680px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-kw{font-size:10px;letter-spacing:.2em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.hero-kw::before{content:'';width:24px;height:1px;background:var(--go)}
+.hero-title{font-family:var(--sf);font-size:clamp(30px,6vw,56px);font-weight:900;color:var(--cr);line-height:1.2;margin-bottom:18px}
+.hero-title em{color:var(--go);font-style:normal;display:block}
+.hero-sub{font-size:14px;color:rgba(250,248,240,.5);line-height:1.85;max-width:440px;margin-bottom:28px}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap}
+.ht{background:rgba(250,248,240,.07);border:1px solid rgba(250,248,240,.12);border-radius:8px;padding:7px 13px;font-size:12px;color:rgba(250,248,240,.6);font-weight:500}
+.ht.gold{background:var(--go2);border-color:rgba(200,168,75,.25);color:var(--go)}
+
+/* CONTENT */
+.wrap{max-width:720px;margin:0 auto;padding:0 24px}
+
+/* WHY SECTION */
+.why-sec{padding:60px 0 50px}
+.sec-kw{font-size:10px;letter-spacing:.18em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:10px}
+.sec-title{font-family:var(--sf);font-size:clamp(20px,4vw,30px);font-weight:700;color:var(--g);line-height:1.5;margin-bottom:16px}
+.sec-body{font-size:13.5px;color:var(--mu);line-height:1.9;margin-bottom:24px}
+.sec-body strong{color:var(--tx);font-weight:500}
+
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+.cmp{border-radius:14px;padding:20px 18px}
+.cmp-natural{background:var(--g);border:none}
+.cmp-implant{background:var(--wh);border:1.5px solid var(--cr2)}
+.cmp-label{font-size:10px;letter-spacing:.12em;font-weight:600;margin-bottom:10px;text-transform:uppercase}
+.cmp-natural .cmp-label{color:rgba(200,168,75,.6)}
+.cmp-implant .cmp-label{color:var(--mu)}
+.cmp-title{font-family:var(--sf);font-size:15px;font-weight:700;margin-bottom:10px}
+.cmp-natural .cmp-title{color:var(--cr)}
+.cmp-implant .cmp-title{color:var(--g)}
+.cmp-item{font-size:12px;line-height:1.65;display:flex;align-items:flex-start;gap:6px;margin-bottom:5px}
+.cmp-natural .cmp-item{color:rgba(250,248,240,.6)}
+.cmp-implant .cmp-item{color:var(--mu)}
+.cmp-item::before{content:'·';flex-shrink:0;margin-top:0}
+.cmp-natural .cmp-item::before{color:var(--go)}
+.cmp-item.good::before{content:'✓';color:var(--go);font-weight:700;font-size:10px}
+.cmp-item.bad::before{content:'△';color:var(--rd);font-size:10px}
+
+.key-msg{background:var(--go2);border-left:3px solid var(--go);border-radius:0 12px 12px 0;padding:14px 18px;font-size:13.5px;color:var(--tx);line-height:1.75}
+.key-msg strong{color:var(--g);font-weight:600}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--cr2),transparent);margin:8px 0}
+
+/* TREATMENT 3 */
+.tx-sec{padding:50px 0 60px}
+.tx-cards{display:flex;flex-direction:column;gap:20px}
+.txc{border-radius:18px;overflow:hidden;border:1.5px solid var(--cr2);background:var(--wh)}
+.txc-head{padding:20px 24px;display:flex;align-items:center;gap:14px}
+.txc-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sf);font-size:16px;font-weight:700;flex-shrink:0}
+.txc-htxt{}
+.txc-kw{font-size:10px;letter-spacing:.12em;font-weight:600;text-transform:uppercase;margin-bottom:3px}
+.txc-title{font-family:var(--sf);font-size:16px;font-weight:700}
+.txc-tag{margin-left:auto;font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+
+.txc-body{padding:0 24px 22px}
+.txc-symptom{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.sym-chip{background:var(--rd2);border:1px solid rgba(201,64,64,.15);color:var(--rd);border-radius:6px;padding:4px 10px;font-size:11.5px;font-weight:500}
+.txc-desc{font-size:13px;color:var(--mu);line-height:1.8;margin-bottom:14px}
+.txc-desc strong{color:var(--tx);font-weight:500}
+.txc-how{background:var(--cr);border-radius:10px;padding:14px 16px}
+.txc-how-title{font-size:11px;letter-spacing:.1em;color:var(--go);text-transform:uppercase;font-weight:600;margin-bottom:9px}
+.txc-how-item{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--tx);line-height:1.55;margin-bottom:7px}
+.txc-how-item:last-child{margin-bottom:0}
+.txc-how-item::before{content:'→';color:var(--go);font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* 1 - 잇몸 */
+.txc-1 .txc-head{background:#1E3D30}
+.txc-1 .txc-num{background:rgba(200,168,75,.2);color:var(--go)}
+.txc-1 .txc-kw{color:rgba(200,168,75,.6)}
+.txc-1 .txc-title{color:var(--cr)}
+.txc-1 .txc-tag{background:var(--go);color:var(--g)}
+/* 2 - 신경 */
+.txc-2 .txc-head{background:#2D5A44}
+.txc-2 .txc-num{background:rgba(200,168,75,.2);color:var(--go)}
+.txc-2 .txc-kw{color:rgba(200,168,75,.6)}
+.txc-2 .txc-title{color:var(--cr)}
+.txc-2 .txc-tag{background:var(--go);color:var(--g)}
+/* 3 - 파절 */
+.txc-3 .txc-head{background:#3a5a40}
+.txc-3 .txc-num{background:rgba(200,168,75,.2);color:var(--go)}
+.txc-3 .txc-kw{color:rgba(200,168,75,.6)}
+.txc-3 .txc-title{color:var(--cr)}
+.txc-3 .txc-tag{background:var(--go);color:var(--g)}
+
+/* NEXT STEP */
+.next-sec{background:var(--g);border-radius:20px;padding:32px 28px;margin:10px 0 60px;position:relative;overflow:hidden}
+.next-sec::before{content:'';position:absolute;right:-20px;bottom:-20px;width:120px;height:120px;border-radius:50%;background:rgba(200,168,75,.07)}
+.next-kw{font-size:10px;letter-spacing:.15em;color:rgba(200,168,75,.55);text-transform:uppercase;font-weight:500;margin-bottom:10px}
+.next-title{font-family:var(--sf);font-size:18px;font-weight:700;color:var(--cr);line-height:1.55;margin-bottom:8px}
+.next-body{font-size:13px;color:rgba(250,248,240,.5);line-height:1.75;margin-bottom:20px}
+.next-body strong{color:rgba(250,248,240,.75)}
+.next-links{display:flex;flex-direction:column;gap:9px}
+.nl{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:12px;text-decoration:none;transition:all .15s}
+.nl.main{background:var(--go);border:none}
+.nl.sub{background:rgba(250,248,240,.06);border:1px solid rgba(250,248,240,.1)}
+.nl:hover{opacity:.85;transform:translateX(3px)}
+.nl-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.nl.main .nl-icon{background:rgba(30,61,48,.2)}
+.nl.sub .nl-icon{background:rgba(250,248,240,.08)}
+.nl-body{flex:1}
+.nl-title{font-size:13px;font-weight:600}
+.nl.main .nl-title{color:var(--g)}
+.nl.sub .nl-title{color:var(--cr)}
+.nl-sub{font-size:11px;margin-top:1px}
+.nl.main .nl-sub{color:rgba(30,61,48,.55)}
+.nl.sub .nl-sub{color:rgba(250,248,240,.4)}
+.nl-arr{font-size:13px}
+.nl.main .nl-arr{color:var(--g)}
+.nl.sub .nl-arr{color:rgba(200,168,75,.6)}
+
+/* CTA */
+.cta-sec{padding:0 0 80px}
+.cta-box{background:var(--cr2);border-radius:18px;padding:28px 24px;text-align:center}
+.cta-title{font-family:var(--sf);font-size:18px;font-weight:700;color:var(--g);line-height:1.55;margin-bottom:8px}
+.cta-sub{font-size:13px;color:var(--mu);line-height:1.75;margin-bottom:22px}
+.cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-naver{background:#03C75A;color:var(--wh);border:none;padding:13px 24px;border-radius:50px;font-size:13px;font-weight:600;font-family:var(--ss);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
+.btn-kakao{background:#FEE500;color:#191919;border:none;padding:13px 24px;border-radius:50px;font-size:13px;font-weight:600;font-family:var(--ss);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
+.cta-info{margin-top:18px;font-size:12px;color:var(--mu);line-height:1.9}
+
+/* MOBILE */
+@media(max-width:600px){
+  .hero{padding:60px 18px 40px;min-height:60vh}
+  .wrap{padding:0 16px}
+  .why-sec,.tx-sec{padding:44px 0 36px}
+  .compare{grid-template-columns:1fr}
+  .txc-head{padding:16px 18px;gap:11px}
+  .txc-body{padding:0 18px 18px}
+  .next-sec{padding:24px 20px}
+  .cta-btns{flex-direction:column;align-items:center}
+  .btn-naver,.btn-kakao{width:100%;max-width:280px;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<nav class="gnav">
+  <div class="gnav-inner">
+    <div class="gnav-logo">생활의 기본, <em>쁘띠치과</em></div>
+    <a class="gnav-home" href="index.html">← 홈</a>
+    <a class="gnav-cta" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-kw">자연치아살리기 · Natural Tooth Preservation</div>
+    <h1 class="hero-title">뽑기 전에<em>먼저 확인하세요</em></h1>
+    <p class="hero-sub">
+      흔들리고, 깨지고, 썩어도 살릴 수 있습니다.<br>
+      임플란트는 언제든 할 수 있지만,<br>
+      자연치아는 한 번 뽑으면 돌아오지 않습니다.
+    </p>
+    <div class="hero-tags">
+      <div class="ht gold">#자연치아살리기</div>
+      <div class="ht gold">#MTA신경재생치료</div>
+      <div class="ht gold">#엠도게인치주재생</div>
+      <div class="ht">#무삭제레진재건</div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <!-- WHY -->
+  <section class="why-sec">
+    <div class="sec-kw">왜 자연치아인가</div>
+    <h2 class="sec-title">임플란트도 훌륭합니다.<br>하지만 자연치아를 이길 수는 없습니다.</h2>
+    <p class="sec-body">
+      자연치아 뿌리 주변에는 <strong>치주인대</strong>가 있습니다.<br>
+      이 조직이 씹는 힘을 섬세하게 감지하고 완충해 뼈를 보호합니다.<br>
+      임플란트는 이 감각이 없습니다.<br>
+      그래서 자연치아가 있는 한, 먼저 살리는 것이 맞습니다.
+    </p>
+
+    <div class="compare">
+      <div class="cmp cmp-natural">
+        <div class="cmp-label">자연치아</div>
+        <div class="cmp-title">살아있는 구조물</div>
+        <div class="cmp-item good">씹는 힘을 섬세하게 감지</div>
+        <div class="cmp-item good">뼈를 자연스럽게 보호</div>
+        <div class="cmp-item good">교합력 균등 분배</div>
+        <div class="cmp-item good">평생 함께할 수 있음</div>
+      </div>
+      <div class="cmp cmp-implant">
+        <div class="cmp-label">임플란트</div>
+        <div class="cmp-title">훌륭한 대안</div>
+        <div class="cmp-item bad">감각 신경 없음</div>
+        <div class="cmp-item bad">뼈 흡수 진행 가능</div>
+        <div class="cmp-item bad">과부하에 취약</div>
+        <div class="cmp-item good">결손 시 최선의 선택</div>
+      </div>
+    </div>
+
+    <div class="key-msg">
+      <strong>쁘띠치과는 뽑기 전에 살릴 수 있는지를 먼저 확인합니다.</strong><br>
+      살릴 수 있는 치아를 뽑는 것은 가장 피해야 할 일입니다.<br>
+      살릴 수 없다고 판단되면 그때 솔직하게 말씀드립니다.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TREATMENTS -->
+  <section class="tx-sec">
+    <div class="sec-kw">상태별 치료</div>
+    <h2 class="sec-title">어떤 상태여도<br>방법이 있습니다</h2>
+
+    <div class="tx-cards">
+
+      <!-- 1. 흔들리는 치아 -->
+      <div class="txc txc-1">
+        <div class="txc-head">
+          <div class="txc-num">1</div>
+          <div class="txc-htxt">
+            <div class="txc-kw">잇몸 · 치주 문제</div>
+            <div class="txc-title">흔들리는 치아</div>
+          </div>
+          <div class="txc-tag">엠도게인 치주재생</div>
+        </div>
+        <div class="txc-body">
+          <div class="txc-symptom">
+            <div class="sym-chip">치아 흔들림</div>
+            <div class="sym-chip">잇몸 내려앉음</div>
+            <div class="sym-chip">잇몸 붓고 피남</div>
+            <div class="sym-chip">치아 시림</div>
+          </div>
+          <div class="txc-desc">
+            잇몸이 내려앉고 치아가 흔들린다고 해서 바로 뽑을 필요가 없습니다.<br>
+            <strong>엠도게인(Emdogain)은 치아 발생 단백질을 활용해 파괴된 치주 조직을 재생</strong>시키는 치료입니다. 잃었던 뼈와 잇몸을 되살려 흔들리던 치아를 안정시킵니다.
+          </div>
+          <div class="txc-how">
+            <div class="txc-how-title">치료 순서</div>
+            <div class="txc-how-item">철저한 잇몸치료 + 양치질 교육으로 염증 제거</div>
+            <div class="txc-how-item">엠도게인 단백질 적용으로 치주 조직 재생 유도</div>
+            <div class="txc-how-item">교합조정으로 흔들리는 치아에 걸리는 과부하 제거</div>
+            <div class="txc-how-item">기능 재훈련 — 재생된 조직이 오래 유지되도록</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. 부러진 치아 -->
+      <div class="txc txc-2">
+        <div class="txc-head">
+          <div class="txc-num">2</div>
+          <div class="txc-htxt">
+            <div class="txc-kw">신경 · 치수 문제</div>
+            <div class="txc-title">부러진 치아</div>
+          </div>
+          <div class="txc-tag">MTA 신경재생치료</div>
+        </div>
+        <div class="txc-body">
+          <div class="txc-symptom">
+            <div class="sym-chip">치아 파절</div>
+            <div class="sym-chip">깨진 치아</div>
+            <div class="sym-chip">뿌리만 남은 치아</div>
+            <div class="sym-chip">신경치료 반복</div>
+          </div>
+          <div class="txc-desc">
+            부러졌다고 바로 뽑는 것이 아닙니다. <strong>MTA(Mineral Trioxide Aggregate)는 생체친화적 소재로 노출된 신경을 덮고, 치아 뿌리를 살려쓸 수 있게</strong> 합니다. 기존 신경치료로 마무리하던 것보다 치아 수명이 훨씬 길어집니다.
+          </div>
+          <div class="txc-how">
+            <div class="txc-how-title">치료 순서</div>
+            <div class="txc-how-item">신경치료 후 MTA로 치수강 밀봉·재생 유도</div>
+            <div class="txc-how-item">치아 뿌리(치근)를 살려 기둥(포스트) 세우기</div>
+            <div class="txc-how-item">크라운으로 치아 머리 재건</div>
+            <div class="txc-how-item">교합조정으로 재건한 치아 보호</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. 부분 파절 -->
+      <div class="txc txc-3">
+        <div class="txc-head">
+          <div class="txc-num">3</div>
+          <div class="txc-htxt">
+            <div class="txc-kw">치관 · 마모 문제</div>
+            <div class="txc-title">부분 파절·마모된 치아</div>
+          </div>
+          <div class="txc-tag">무삭제 레진 재건</div>
+        </div>
+        <div class="txc-body">
+          <div class="txc-symptom">
+            <div class="sym-chip">부분 파절</div>
+            <div class="sym-chip">치아 마모·닳음</div>
+            <div class="sym-chip">치경부 패임</div>
+            <div class="sym-chip">치아 시림</div>
+          </div>
+          <div class="txc-desc">
+            머리가 부분적으로 깨지거나 닳았다고 신경치료까지 갈 필요가 없습니다. <strong>무삭제 레진 재건은 치아를 깎지 않고 레진으로 형태를 복원</strong>합니다. 여기에 교합조정을 더하면 다시 파절되는 것을 막을 수 있습니다.
+          </div>
+          <div class="txc-how">
+            <div class="txc-how-title">치료 순서</div>
+            <div class="txc-how-item">교합 분석 — 어디서 힘이 잘못 걸리는지 확인</div>
+            <div class="txc-how-item">교합조정으로 과부하 제거</div>
+            <div class="txc-how-item">무삭제 레진으로 파절·마모 부위 재건</div>
+            <div class="txc-how-item">이갈이·이악물기 습관 차단 장치 병행 (필요시)</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- NEXT STEP -->
+  <div class="next-sec">
+    <div class="next-kw">치아를 살린 다음은</div>
+    <div class="next-title">치아를 살렸다면,<br>교합을 다시 세워야 합니다</div>
+    <div class="next-body">
+      치아를 살리는 것은 시작입니다.<br>
+      <strong>왜 흔들리고 깨졌는지—교합이라는 원인</strong>을 함께 해결하지 않으면<br>
+      살린 치아도 다시 같은 방식으로 무너집니다.
+    </div>
+    <div class="next-links">
+      <a class="nl main" href="petit_consultation_widget.html" target="_blank">
+        <div class="nl-icon">🌿</div>
+        <div class="nl-body"><div class="nl-title">교합재건 심층 상담 위젯</div><div class="nl-sub">나의 교합 상태와 치료 계획 확인</div></div>
+        <div class="nl-arr">→</div>
+      </a>
+      <a class="nl sub" href="petit_treatment_by_age.html" target="_blank">
+        <div class="nl-icon">📋</div>
+        <div class="nl-body"><div class="nl-title">바른턱얼굴 교합치료</div><div class="nl-sub">대상별 치료 안내</div></div>
+        <div class="nl-arr">→</div>
+      </a>
+      <a class="nl sub" href="petit_lifecycle_occlusion.html" target="_blank">
+        <div class="nl-icon">🕰️</div>
+        <div class="nl-body"><div class="nl-title">생애주기별 교합 노화</div><div class="nl-sub">왜 지금 이 상태인지 이해하기</div></div>
+        <div class="nl-arr">→</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-sec">
+    <div class="cta-box">
+      <div class="cta-title">뽑기 전에 한 번만 더<br>확인해 주세요</div>
+      <div class="cta-sub">살릴 수 있는지 없는지, 솔직하게 말씀드리겠습니다.<br>처음 방문 시 교합·치주·신경 상태를 함께 확인합니다.</div>
+      <div class="cta-btns">
+        <a href="https://booking.naver.com/booking/13/bizes/743904" target="_blank" class="btn-naver">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/></svg>
+          네이버 예약
+        </a>
+        <a href="https://pf.kakao.com/_xbhXYb" target="_blank" class="btn-kakao">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#191919"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.67 1.648 5.012 4.146 6.396L5 21l5.12-2.983C10.734 18.01 11.363 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z"/></svg>
+          카카오톡 상담
+        </a>
+      </div>
+      <div class="cta-info">📍 대구시 남구 대봉로 66 2층 &nbsp;·&nbsp; 📞 053-472-2828</div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
