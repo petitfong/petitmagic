@@ -19,611 +19,319 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidden}
 
-/* ── GNAV ── */
-.gnav{position:sticky;top:0;z-index:200;background:rgba(15,32,22,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(250,248,240,.07)}
-.gnav-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;padding:0 20px;gap:0}
-.gnav-logo{font-family:var(--sf);font-size:13px;color:var(--cr);font-weight:600;letter-spacing:.03em;padding:14px 0;margin-right:auto;flex-shrink:0;white-space:nowrap}
+/* NAV */
+.gnav{position:sticky;top:0;z-index:200;background:rgba(15,32,22,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(250,248,240,.07)}
+.gnav-inner{max-width:680px;margin:0 auto;display:flex;align-items:center;padding:0 20px;gap:0}
+.gnav-logo{font-family:var(--sf);font-size:13px;color:var(--cr);font-weight:600;padding:14px 0;margin-right:auto;flex-shrink:0}
 .gnav-logo em{color:var(--go);font-style:normal}
-.gnav-menu{display:flex;gap:0;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
-.gnav-menu::-webkit-scrollbar{display:none}
-.gm{padding:15px 14px;font-size:12px;font-weight:500;color:rgba(250,248,240,.38);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;user-select:none}
-.gm:hover{color:rgba(250,248,240,.7)}
-.gm.act{color:var(--go);border-bottom-color:var(--go)}
-.gnav-cta{margin-left:12px;flex-shrink:0;background:var(--go);color:var(--g);border:none;padding:8px 16px;border-radius:20px;font-size:11.5px;font-weight:600;font-family:var(--ss);cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block}
+.gnav-home{font-size:12px;color:rgba(250,248,240,.4);text-decoration:none;padding:14px 12px;transition:color .15s;white-space:nowrap}
+.gnav-home:hover{color:var(--go)}
+.gnav-cta{margin-left:8px;flex-shrink:0;background:var(--go);color:var(--g);border:none;padding:7px 15px;border-radius:20px;font-size:11.5px;font-weight:600;font-family:var(--ss);cursor:pointer;text-decoration:none;display:inline-block}
 
-/* ── HERO ── */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 28px 60px;position:relative;overflow:hidden;background:#1E3D30}
-.hero-bg{position:absolute;inset:0;z-index:0}
+/* HERO */
+.hero{min-height:52vh;display:flex;flex-direction:column;justify-content:flex-end;padding:60px 28px 48px;position:relative;overflow:hidden;background:#1E3D30}
+.hero-bg{position:absolute;inset:0}
 .hero-bg-img{position:absolute;inset:0;background:url('img1.png') center center/cover no-repeat}
-.hero-bg-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(10,28,20,.88) 0%,rgba(10,28,20,.75) 45%,rgba(10,28,20,.35) 100%)}
-.hero-grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:.3}
-.hero-inner{max-width:640px;margin:0 auto;position:relative;z-index:1}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(250,248,240,.12);border-radius:100px;padding:6px 16px;margin-bottom:28px;opacity:0;animation:up .8s .1s forwards}
-.hero-tag-dot{width:5px;height:5px;border-radius:50%;background:var(--go)}
-.hero-tag-txt{font-size:10px;letter-spacing:.2em;color:rgba(250,248,240,.4);text-transform:uppercase}
-.hero-q{font-family:var(--sf);font-size:clamp(13px,2.5vw,16px);color:rgba(250,248,240,.45);margin-bottom:12px;line-height:1.6;opacity:0;animation:up .8s .25s forwards}
-.hero-title{font-family:var(--sf);font-size:clamp(34px,7vw,64px);font-weight:900;color:var(--cr);line-height:1.15;margin-bottom:24px;opacity:0;animation:up .8s .4s forwards}
+.hero-bg-ov{position:absolute;inset:0;background:linear-gradient(105deg,rgba(10,28,20,.92) 0%,rgba(10,28,20,.78) 50%,rgba(10,28,20,.4) 100%)}
+.hero-inner{max-width:640px;margin:0 auto;position:relative;z-index:1;width:100%}
+.hero-kw{font-size:10px;letter-spacing:.2em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.hero-title{font-family:var(--sf);font-size:clamp(28px,6vw,52px);font-weight:900;color:var(--cr);line-height:1.2;margin-bottom:14px}
 .hero-title em{color:var(--go);font-style:normal;display:block}
-.hero-sub{font-size:14px;color:rgba(250,248,240,.45);line-height:1.85;max-width:420px;margin-bottom:36px;opacity:0;animation:up .8s .55s forwards}
-.hero-badge{display:flex;gap:10px;flex-wrap:wrap;opacity:0;animation:up .8s .7s forwards}
-.hb{background:rgba(250,248,240,.07);border:1px solid rgba(250,248,240,.12);border-radius:8px;padding:8px 14px;font-size:12px;color:rgba(250,248,240,.6);font-weight:500}
-.hb.gold{background:var(--go2);border-color:rgba(200,168,75,.25);color:var(--go)}
-.scroll-cue{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:up .8s 1.1s forwards}
-.sc-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(200,168,75,.5),transparent);animation:pulse 1.6s infinite}
-.sc-txt{font-size:9px;letter-spacing:.18em;color:rgba(250,248,240,.2);text-transform:uppercase}
-@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+.hero-sub{font-size:13.5px;color:rgba(250,248,240,.5);line-height:1.8;max-width:400px}
 
-/* ── STORY SECTIONS ── */
-.story{padding:64px 28px}
-.story-inner{max-width:660px;margin:0 auto}
-.st-label{font-size:10px;letter-spacing:.18em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:12px}
-.st-title{font-family:var(--sf);font-size:clamp(22px,4vw,32px);font-weight:700;color:var(--g);line-height:1.45;margin-bottom:16px}
-.st-title em{color:var(--go);font-style:normal}
-.st-body{font-size:13.5px;color:var(--mu);line-height:1.9}
-.st-body strong{color:var(--tx);font-weight:500}
+/* CHECK CARD */
+.check-wrap{max-width:680px;margin:0 auto;padding:36px 24px 80px}
 
-/* pain cards */
-.pain-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:24px 0}
-.pc{background:var(--wh);border:1.5px solid var(--cr2);border-radius:14px;padding:16px 14px;text-align:center}
-.pc-icon{font-size:26px;margin-bottom:8px}
-.pc-t{font-size:13px;font-weight:600;color:var(--g);margin-bottom:4px}
-.pc-s{font-size:11px;color:var(--mu);line-height:1.4}
+.step-box{background:var(--wh);border:1.5px solid var(--cr2);border-radius:18px;padding:24px;margin-bottom:16px}
+.step-num{font-size:10px;letter-spacing:.15em;color:var(--go);text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.step-title{font-family:var(--sf);font-size:16px;font-weight:700;color:var(--g);margin-bottom:16px}
+.req{color:var(--go)}
 
-/* money pain */
-.money-box{background:var(--g);border-radius:16px;padding:26px;margin:28px 0;position:relative;overflow:hidden}
-.money-box::before{content:'💸';position:absolute;right:20px;top:20px;font-size:48px;opacity:.15}
-.mb-title{font-family:var(--sf);font-size:18px;font-weight:700;color:var(--cr);line-height:1.5;margin-bottom:10px}
-.mb-title em{color:var(--go);font-style:normal}
-.mb-body{font-size:13px;color:rgba(250,248,240,.55);line-height:1.8}
-.mb-body strong{color:rgba(250,248,240,.8)}
-
-/* aha */
-.aha{background:linear-gradient(135deg,rgba(200,168,75,.08),rgba(200,168,75,.03));border:1.5px solid rgba(200,168,75,.2);border-radius:18px;padding:28px;margin:28px 0;text-align:center}
-.aha-title{font-family:var(--sf);font-size:clamp(18px,3.5vw,26px);font-weight:700;color:var(--g);line-height:1.55;margin-bottom:10px}
-.aha-title em{color:var(--rd);font-style:normal}
-.aha-sub{font-size:13px;color:var(--mu);line-height:1.75}
-.aha-sub strong{color:var(--g)}
-
-/* cause list */
-.cause-list{display:flex;flex-direction:column;gap:10px;margin:20px 0}
-.cl{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-radius:12px;border:1.5px solid var(--cr2);background:var(--wh)}
-.cl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px}
-.cl-body{font-size:13px;color:var(--tx);line-height:1.6}
-.cl-body strong{font-weight:600;display:block;margin-bottom:2px}
-.cl-body span{font-size:11.5px;color:var(--mu)}
-
-/* petit promise */
-.promise{background:var(--g);border-radius:20px;padding:32px 28px;margin:28px 0;text-align:center}
-.pr-title{font-family:var(--sf);font-size:clamp(18px,3.5vw,26px);font-weight:700;color:var(--cr);line-height:1.55;margin-bottom:8px}
-.pr-title em{color:var(--go);font-style:normal}
-.pr-sub{font-size:13px;color:rgba(250,248,240,.5);line-height:1.8;margin-bottom:20px}
-.hashtags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.ht{background:rgba(200,168,75,.15);border:1px solid rgba(200,168,75,.25);color:var(--go);font-size:12.5px;font-weight:600;padding:6px 14px;border-radius:100px}
-
-/* ── CHECK SECTION ── */
-.check-sec{background:var(--wh);padding:60px 28px}
-.check-inner{max-width:660px;margin:0 auto}
-.check-head{text-align:center;margin-bottom:36px}
-.ch-tag{font-size:10px;letter-spacing:.18em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:10px}
-.ch-title{font-family:var(--sf);font-size:clamp(20px,4vw,28px);font-weight:700;color:var(--g);line-height:1.5;margin-bottom:8px}
-.ch-sub{font-size:13px;color:var(--mu);line-height:1.7}
-
-/* age selector */
-.age-sel{display:flex;flex-direction:column;gap:10px;margin:20px 0 30px}
-.age-q{font-size:13px;font-weight:600;color:var(--g);margin-bottom:10px;text-align:center}
+/* AGE OPTS */
 .age-opts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.age-opt{padding:14px 10px;border:1.5px solid var(--cr2);border-radius:12px;cursor:pointer;user-select:none;text-align:center;background:var(--wh);transition:all .15s}
-.age-opt:hover{border-color:#7fad98}
-.age-opt.on{border-color:var(--go);background:var(--go2)}
-.age-opt .ao-label{font-size:11px;font-weight:700;color:var(--go);margin-bottom:4px;letter-spacing:.04em}
-.age-opt .ao-main{font-size:13px;font-weight:600;color:var(--g);margin-bottom:3px;line-height:1.3}
-.age-opt .ao-sub{font-size:11px;color:var(--mu);line-height:1.3}
-.age-opt.on .ao-main{color:var(--g)}
-.age-opt.on .ao-sub{color:var(--mu)}
-@media(max-width:600px){.age-opts{grid-template-columns:1fr}.age-opt{padding:13px 14px;display:flex;align-items:center;gap:12px;text-align:left}.age-opt .ao-label{margin-bottom:0;flex-shrink:0;min-width:32px}}
+.ao{padding:13px 8px;border:1.5px solid var(--cr2);border-radius:10px;cursor:pointer;text-align:center;background:var(--cr);transition:all .15s;user-select:none}
+.ao:hover{border-color:#7fad98}
+.ao.on{border-color:var(--go);background:var(--go2)}
+.ao-lbl{font-size:9.5px;font-weight:700;color:var(--go);letter-spacing:.06em;margin-bottom:4px}
+.ao-main{font-size:13px;font-weight:600;color:var(--g);margin-bottom:2px;line-height:1.3}
+.ao-sub{font-size:10.5px;color:var(--mu)}
 
-/* symptom groups */
-.sym-group{margin-bottom:24px}
-.sg-label{font-size:11px;letter-spacing:.12em;color:var(--mu);text-transform:uppercase;font-weight:500;margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--cr2);display:flex;align-items:center;gap:8px}
-.sg-label::before{content:'';width:4px;height:14px;border-radius:2px;background:var(--go);flex-shrink:0}
-.sym-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.sym{background:var(--cr);border:1.5px solid var(--cr2);border-radius:12px;padding:12px 14px;cursor:pointer;display:flex;align-items:flex-start;gap:9px;user-select:none;transition:all .15s}
+/* TEETH OPTS */
+.teeth-wrap{display:grid;grid-template-columns:1fr 1fr;gap:8px;display:none}
+.teeth-wrap.show{display:grid}
+.to{padding:13px 14px;border:1.5px solid var(--cr2);border-radius:10px;cursor:pointer;background:var(--cr);transition:all .15s;user-select:none;display:flex;align-items:center;gap:10px}
+.to:hover{border-color:#7fad98}
+.to.on{border-color:var(--go);background:var(--go2)}
+.to-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.to-body{}
+.to-main{font-size:13px;font-weight:600;color:var(--g);margin-bottom:2px}
+.to-sub{font-size:11px;color:var(--mu)}
+
+/* SYM GRID */
+.sg-label{font-size:10px;letter-spacing:.12em;color:var(--mu);text-transform:uppercase;font-weight:500;margin:16px 0 9px;padding-bottom:6px;border-bottom:1px solid var(--cr2);display:flex;align-items:center;gap:7px}
+.sg-label::before{content:'';width:3px;height:12px;border-radius:2px;background:var(--go);flex-shrink:0}
+.sym-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.sym{background:var(--cr);border:1.5px solid var(--cr2);border-radius:10px;padding:11px 13px;cursor:pointer;display:flex;align-items:flex-start;gap:8px;user-select:none;transition:all .15s}
 .sym:hover{border-color:#7fad98}
 .sym.on{border-color:var(--go);background:var(--go2)}
-.sym-ck{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--cr2);background:var(--wh);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;transition:all .15s}
-.sym.on .sym-ck{background:var(--go);border-color:var(--go);color:var(--wh)}
-.sym-txt{font-size:12.5px;line-height:1.45;color:var(--tx)}
+.ck{width:17px;height:17px;border-radius:4px;border:1.5px solid var(--cr2);background:var(--wh);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;transition:all .15s}
+.sym.on .ck{background:var(--go);border-color:var(--go);color:var(--wh)}
+.sym-txt{font-size:12px;line-height:1.45;color:var(--tx)}
 .sym.on .sym-txt{color:var(--g);font-weight:500}
 
-/* result button */
-.result-btn-wrap{text-align:center;margin-top:32px}
-.result-btn{background:var(--g);color:var(--cr);border:none;padding:16px 40px;border-radius:50px;font-size:14px;font-weight:600;font-family:var(--ss);cursor:pointer;letter-spacing:.04em;transition:background .15s}
-.result-btn:hover{background:var(--g2)}
-.result-btn:disabled{opacity:.3;cursor:default}
+/* SUBMIT */
+.submit-wrap{text-align:center;margin-top:20px}
+.submit-btn{background:var(--g);color:var(--cr);border:none;padding:14px 40px;border-radius:50px;font-size:14px;font-weight:600;font-family:var(--ss);cursor:pointer;transition:background .15s;letter-spacing:.04em}
+.submit-btn:hover{background:var(--g2)}
+.submit-btn:disabled{opacity:.3;cursor:default}
 
-/* ── RESULT SECTION ── */
-.result-sec{padding:60px 28px;display:none}
-.result-sec.show{display:block}
-.result-inner{max-width:660px;margin:0 auto}
+/* RESULT */
+.result-box{display:none;background:var(--wh);border:1.5px solid var(--cr2);border-radius:18px;overflow:hidden;margin-top:16px}
+.result-box.show{display:block}
 
-/* score box */
-.score-box{background:var(--g);border-radius:20px;padding:30px;margin-bottom:24px;text-align:center;position:relative;overflow:hidden}
-.score-box::before{content:'';position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:rgba(200,168,75,.08)}
-.score-num{font-family:var(--sf);font-size:72px;font-weight:900;color:var(--go);line-height:1}
-.score-label{font-size:14px;color:rgba(250,248,240,.6);margin-bottom:14px}
-.score-msg{font-size:13px;color:rgba(250,248,240,.6);line-height:1.75;padding-top:14px;border-top:1px solid rgba(250,248,240,.08)}
-.score-msg strong{color:var(--cr)}
+.rb-top{padding:22px 24px;position:relative;overflow:hidden}
+.rb-count{font-family:var(--sf);font-size:52px;font-weight:900;color:var(--go);line-height:1}
+.rb-count-lbl{font-size:13px;color:rgba(250,248,240,.6);margin-bottom:12px}
+.rb-msg{font-size:13px;color:rgba(250,248,240,.65);line-height:1.75}
+.rb-msg strong{color:var(--cr)}
 
-/* selected tags */
-.sel-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:24px}
-.sel-tag{background:var(--cr);border:1px solid var(--cr2);border-radius:20px;padding:5px 12px;font-size:11.5px;color:var(--tx);display:flex;align-items:center;gap:5px}
-.sel-tag::before{content:'✓';color:var(--go);font-weight:700;font-size:10px}
+.rb-dir{padding:18px 24px;border-top:1px solid rgba(250,248,240,.1)}
+.rb-dir-lbl{font-size:10px;letter-spacing:.12em;color:rgba(200,168,75,.6);text-transform:uppercase;font-weight:600;margin-bottom:6px}
+.rb-dir-title{font-size:17px;font-weight:700;color:var(--cr);margin-bottom:6px}
+.rb-dir-note{font-size:12.5px;color:rgba(250,248,240,.55);line-height:1.7}
 
-/* treatment plan */
-.tx-head{font-family:var(--sf);font-size:18px;font-weight:700;color:var(--g);margin-bottom:16px}
-.tx-plans{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
-.txp{border-radius:16px;overflow:hidden;border:1.5px solid var(--cr2)}
-.txp-header{padding:12px 16px;display:flex;align-items:center;gap:10px}
-.txp-hashtag{font-size:13px;font-weight:700;color:var(--wh)}
-.txp-items{padding:14px 16px;background:var(--wh)}
-.txp-item{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--tx);line-height:1.55;margin-bottom:7px}
-.txp-item:last-child{margin-bottom:0}
-.txp-item::before{content:'→';color:var(--go);font-weight:600;flex-shrink:0;margin-top:1px}
+.rb-tags{padding:16px 24px;display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid rgba(250,248,240,.08)}
+.rt{background:rgba(250,248,240,.08);border-radius:20px;padding:4px 11px;font-size:11px;color:rgba(250,248,240,.5);display:flex;align-items:center;gap:4px}
+.rt::before{content:'✓';color:var(--go);font-size:9px}
 
-/* cause insight */
-.insight{background:rgba(200,168,75,.07);border-left:3px solid var(--go);border-radius:0 12px 12px 0;padding:14px 18px;margin-bottom:24px}
-.insight strong{color:var(--g);font-weight:600}
-.insight-txt{font-size:13px;color:var(--tx);line-height:1.75}
+/* LINK CARDS */
+.links-wrap{padding:18px 24px;background:var(--cr);display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--cr2)}
+.links-title{font-size:11px;letter-spacing:.12em;color:var(--mu);text-transform:uppercase;font-weight:500;margin-bottom:4px}
+.link-card{display:flex;align-items:center;gap:13px;padding:14px 16px;border-radius:13px;text-decoration:none;border:1.5px solid var(--cr2);background:var(--wh);transition:all .15s;cursor:pointer}
+.link-card:hover{border-color:var(--go);transform:translateY(-1px);box-shadow:0 4px 14px rgba(30,61,48,.08)}
+.link-card.main{background:var(--g);border-color:var(--g)}
+.link-card.main:hover{background:var(--g2);border-color:var(--g2)}
+.lc-icon{width:38px;height:38px;border-radius:9px;background:var(--cr2);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.link-card.main .lc-icon{background:rgba(200,168,75,.2)}
+.lc-body{flex:1}
+.lc-title{font-size:13.5px;font-weight:600;color:var(--tx);margin-bottom:2px}
+.link-card.main .lc-title{color:var(--cr)}
+.lc-sub{font-size:11.5px;color:var(--mu);line-height:1.35}
+.link-card.main .lc-sub{color:rgba(250,248,240,.45)}
+.lc-arr{color:var(--cr2);font-size:14px;flex-shrink:0}
+.link-card.main .lc-arr{color:var(--go)}
+.link-card:hover .lc-arr{color:var(--go)}
 
-/* ── CTA ── */
-.cta-sec{background:var(--g);padding:60px 28px 80px;text-align:center}
-.cta-inner{max-width:480px;margin:0 auto}
-.cta-title{font-family:var(--sf);font-size:clamp(20px,4vw,28px);font-weight:700;color:var(--cr);line-height:1.55;margin-bottom:10px}
-.cta-title em{color:var(--go);font-style:normal}
-.cta-sub{font-size:13px;color:rgba(250,248,240,.45);line-height:1.8;margin-bottom:28px}
-.cta-btns{display:flex;gap:10px;justify-content:center;margin-bottom:28px}
-.btn-naver{background:#03C75A;color:var(--wh);border:none;padding:14px 26px;border-radius:50px;font-size:13.5px;font-weight:600;font-family:var(--ss);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px;letter-spacing:.02em}
-.btn-kakao{background:#FEE500;color:#191919;border:none;padding:14px 26px;border-radius:50px;font-size:13.5px;font-weight:600;font-family:var(--ss);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
-.cta-info{font-size:12px;color:rgba(250,248,240,.25);line-height:2}
-.cta-info strong{color:rgba(250,248,240,.4);font-weight:500;display:block;font-size:13px;margin-bottom:3px}
-.cta-tags{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:20px}
-.cta-tag{font-size:11px;color:rgba(250,248,240,.3);background:rgba(250,248,240,.05);border:1px solid rgba(250,248,240,.08);border-radius:100px;padding:4px 12px}
+/* RESET BTN */
+.reset-btn{display:block;margin:14px auto 0;background:none;border:1.5px solid var(--cr2);color:var(--mu);padding:10px 24px;border-radius:50px;font-size:12.5px;font-family:var(--ss);cursor:pointer;transition:all .15s}
+.reset-btn:hover{border-color:var(--g);color:var(--g)}
 
-/* rv */
-.rv{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
-.rv.vis{opacity:1;transform:translateY(0)}
-
-/* section images */
-.sec-img{width:100%;border-radius:16px;overflow:hidden;margin-bottom:28px;aspect-ratio:16/9;position:relative}
-.sec-img img{width:100%;height:100%;object-fit:cover;display:block;border-radius:16px}
-.sec-divider{height:1px;background:linear-gradient(90deg,transparent,var(--cr2),transparent);max-width:660px;margin:0 auto}
-
-/* ── MOBILE ── */
+/* MOBILE */
 @media(max-width:600px){
-  .gnav-inner{padding:0 10px}
-  .gnav-logo{font-size:10.5px;padding:11px 0;margin-right:6px}
-  .gm{padding:12px 8px;font-size:10.5px}
-  .gnav-cta{padding:6px 11px;font-size:10.5px;margin-left:6px}
-
-  .hero{padding:60px 18px 50px;min-height:88vh}
-  .hero-bg-overlay{background:linear-gradient(105deg,rgba(10,28,20,.93) 0%,rgba(10,28,20,.85) 55%,rgba(10,28,20,.55) 100%)}
-
-  .story{padding:40px 18px}
-  .sec-img{border-radius:12px;margin-bottom:18px}
-  .sec-img img{border-radius:12px}
-
-  .pain-cards{grid-template-columns:1fr;gap:8px}
-  .pc{display:flex;align-items:center;gap:12px;text-align:left;padding:13px 15px}
-  .pc-icon{font-size:20px;margin-bottom:0;flex-shrink:0}
-
-  .cl{padding:11px 13px}
-  .promise{padding:22px 16px}
-  .hashtags{gap:6px}
-  .ht{font-size:11px;padding:5px 11px}
-
-  .check-sec{padding:40px 18px}
-  .sym-grid{grid-template-columns:1fr;gap:7px}
-
-  .result-sec{padding:40px 18px}
-  .score-num{font-size:52px}
-  .txp-items{padding:12px 13px}
-
-  .cta-sec{padding:40px 18px 60px}
-  .cta-btns{flex-direction:column;align-items:center}
-  .btn-naver,.btn-kakao{width:100%;max-width:280px;justify-content:center}
-
-  .money-box{padding:18px 16px}
-  .mb-title{font-size:16px}
-  .aha{padding:20px 16px}
-  .score-box{padding:22px 18px}
-}
-</style>
+  .hero{padding:50px 18px 38px;min-height:45vh}
+  .check-wrap{padding:24px 16px 60px}
+  .step-box{padding:18px 16px}
+  .age-opts{grid-template-columns:1fr 1fr 1fr;gap:6px}
+  .ao{padding:10px 5px}
+  .ao-main{font-size:12px}
+  .sym-grid{grid-template-columns:1fr}
+  .rb-top{padding:18px 18px}
+  .rb-dir,.rb-tags,.links-wrap{padding:14px 18px}
+  .gnav-logo{font-size:11px}
+}</style>
 </head>
 <body>
 
-<!-- ── GNAV ── -->
 <nav class="gnav">
   <div class="gnav-inner">
     <div class="gnav-logo">생활의 기본, <em>쁘띠치과</em></div>
-    <div class="gnav-menu">
-      <div class="gm act" onclick="goTo('sec-hero')">홈</div>
-      <div class="gm" onclick="goTo('sec-pain')">아픈이유</div>
-      <div class="gm" onclick="goTo('sec-maloc')">부정교합의 진실</div>
-      <div class="gm" onclick="goTo('sec-cause')">반복되는 치료</div>
-      <div class="gm" onclick="goTo('sec-petit')">쁘띠 교합치료</div>
-      <div class="gm" onclick="goTo('sec-check')">자가체크</div>
-    </div>
-    <a href="https://booking.naver.com/booking/13/bizes/743904" target="_blank" class="gnav-cta">예약</a>
+    <a class="gnav-home" href="index.html">← 홈</a>
+    <a class="gnav-cta" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
   </div>
 </nav>
 
-<!-- ── HERO ── -->
-<section class="hero" id="sec-hero">
+<!-- HERO -->
+<section class="hero">
   <div class="hero-bg">
     <div class="hero-bg-img"></div>
-    <div class="hero-bg-overlay"></div>
-    <div class="hero-grain"></div>
+    <div class="hero-bg-ov"></div>
   </div>
-  <div class="hero-inner" style="position:relative;z-index:1">
-    <div class="hero-tag"><div class="hero-tag-dot"></div><div class="hero-tag-txt">쁘띠치과 · 교합질환 자가체크</div></div>
-    <div class="hero-q">치아가 안 좋아지는 이유가 있습니다</div>
-    <h1 class="hero-title">교합질환<em>자가체크</em></h1>
-    <p class="hero-sub">치료해도 계속 생기는 치아 문제, 원인이 따로 있습니다.<br>지금 상태를 스스로 확인해보세요.</p>
-    <div class="hero-badge">
-      <div class="hb gold">#자연치아살리기</div>
-      <div class="hb gold">#건강한턱관절</div>
-      <div class="hb">#바른턱얼굴교합치료</div>
-    </div>
-  </div>
-  <div class="scroll-cue" style="position:absolute;z-index:1"><div class="sc-txt">scroll</div><div class="sc-line"></div></div>
-</section>
-
-<!-- ── STORY 1: 아픈 이유 ── -->
-<section class="story" id="sec-pain">
-  <div class="story-inner">
-    <div class="sec-img rv"><img src="img2.png" alt="내 치아가 아픈 이유 턱관절이 아픈 이유"></div>
-    <h2 class="st-title rv">내 치아가 아픈 이유?<br>턱관절이 아픈 이유?</h2>
-    <p class="st-body rv">충치, 신경치료, 턱관절 문제... 각각 다른 치료를 받아도<br><strong>왜 계속 반복될까요?</strong></p>
-    <div style="display:flex;flex-direction:column;gap:10px;margin:24px 0">
-      <div style="display:flex;align-items:center;gap:16px;background:var(--wh);border:1.5px solid var(--cr2);border-radius:14px;padding:16px 20px">
-        <div style="width:4px;height:40px;background:var(--rd);border-radius:2px;flex-shrink:0"></div>
-        <div>
-          <div style="font-size:14px;font-weight:600;color:var(--g);margin-bottom:4px">충치·잇몸질환</div>
-          <div style="font-size:12.5px;color:var(--mu);line-height:1.55">치료해도 반복되는 이유가 있습니다</div>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;gap:16px;background:var(--wh);border:1.5px solid var(--cr2);border-radius:14px;padding:16px 20px">
-        <div style="width:4px;height:40px;background:var(--go);border-radius:2px;flex-shrink:0"></div>
-        <div>
-          <div style="font-size:14px;font-weight:600;color:var(--g);margin-bottom:4px">신경치료</div>
-          <div style="font-size:12.5px;color:var(--mu);line-height:1.55">원인을 제거하지 않으면 같은 자리가 다시 문제가 됩니다</div>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;gap:16px;background:var(--wh);border:1.5px solid var(--cr2);border-radius:14px;padding:16px 20px">
-        <div style="width:4px;height:40px;background:var(--g2);border-radius:2px;flex-shrink:0"></div>
-        <div>
-          <div style="font-size:14px;font-weight:600;color:var(--g);margin-bottom:4px">턱관절 통증</div>
-          <div style="font-size:12.5px;color:var(--mu);line-height:1.55">증상만 잡아서는 안 됩니다. 구조적 원인이 있습니다</div>
-        </div>
-      </div>
-    </div>
+  <div class="hero-inner">
+    <div class="hero-kw">쁘띠치과 · 교합질환 자가체크</div>
+    <h1 class="hero-title">치아가 안 좋아지는 이유<em>교합질환 자가체크</em></h1>
+    <p class="hero-sub">증상을 체크하면 원인과 치료 방향을 안내해 드립니다.</p>
   </div>
 </section>
 
-<div class="sec-divider"></div>
+<!-- CHECK -->
+<div class="check-wrap">
 
-<!-- ── STORY 1-5: 부정교합 ── -->
-<section class="story" id="sec-maloc">
-  <div class="story-inner">
-    <div class="st-label rv">부정교합의 진실</div>
-    <h2 class="st-title rv">치아만 움직여서는<br><em>쉽게 되지 않습니다</em></h2>
-    <p class="st-body rv" style="margin-bottom:22px">안면비대칭, 주걱턱, 돌출, 덧니, 개구교합은<br>치아만 움직이는 교정으로는 한계가 있습니다.<br><strong>교합, 즉 턱의 크기와 위치를 바꿔주는 치료</strong>가 함께 필요합니다.</p>
-
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px" class="rv">
-      <div style="background:var(--rd2);border:1px solid rgba(201,64,64,.2);border-radius:8px;padding:7px 14px;font-size:12.5px;font-weight:600;color:var(--rd)">안면비대칭</div>
-      <div style="background:var(--rd2);border:1px solid rgba(201,64,64,.2);border-radius:8px;padding:7px 14px;font-size:12.5px;font-weight:600;color:var(--rd)">주걱턱</div>
-      <div style="background:var(--rd2);border:1px solid rgba(201,64,64,.2);border-radius:8px;padding:7px 14px;font-size:12.5px;font-weight:600;color:var(--rd)">돌출</div>
-      <div style="background:var(--rd2);border:1px solid rgba(201,64,64,.2);border-radius:8px;padding:7px 14px;font-size:12.5px;font-weight:600;color:var(--rd)">덧니</div>
-      <div style="background:var(--rd2);border:1px solid rgba(201,64,64,.2);border-radius:8px;padding:7px 14px;font-size:12.5px;font-weight:600;color:var(--rd)">개구교합</div>
-    </div>
-
-    <div style="display:flex;flex-direction:column;gap:12px" class="rv">
-      <div style="background:var(--g);border-radius:16px;padding:22px 24px">
-        <div style="font-size:11px;letter-spacing:.13em;color:rgba(200,168,75,.6);text-transform:uppercase;font-weight:500;margin-bottom:10px">쁘띠의 접근</div>
-        <div style="font-size:14px;font-weight:600;color:var(--cr);line-height:1.6;margin-bottom:8px">정밀 진단을 통한<br>근본원인 제거·해결</div>
-        <div style="font-size:13px;color:rgba(250,248,240,.55);line-height:1.75">턱의 크기·위치·교합 높이를 종합 진단합니다.<br>증상만 치료하는 것이 아니라 왜 이렇게 됐는지를 먼저 확인합니다.</div>
+  <!-- STEP 1: 나이 -->
+  <div class="step-box">
+    <div class="step-num">Step 1</div>
+    <div class="step-title">연령대를 선택해 주세요 <span class="req">★</span></div>
+    <div class="age-opts">
+      <div class="ao" data-age="child" onclick="setAge(this)">
+        <div class="ao-lbl">성장기</div>
+        <div class="ao-main">어린이</div>
+        <div class="ao-sub">5~11세</div>
       </div>
-      <div style="background:var(--go2);border:1.5px solid rgba(200,168,75,.2);border-radius:16px;padding:22px 24px">
-        <div style="font-size:11px;letter-spacing:.13em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:10px">치료 방향</div>
-        <div style="font-size:14px;font-weight:700;color:var(--g);line-height:1.6;margin-bottom:8px">최대한 비발치·비수술로<br>부정교합을 해결합니다</div>
-        <div style="font-size:13px;color:var(--mu);line-height:1.75">MARPE · 4D입체교정장치를 활용해<br>턱 크기와 위치를 먼저 잡고, 치아를 정렬하고, 기능을 재훈련합니다.</div>
+      <div class="ao" data-age="teen" onclick="setAge(this)">
+        <div class="ao-lbl">성장완료</div>
+        <div class="ao-main">청소년·청년</div>
+        <div class="ao-sub">12세~30대</div>
+      </div>
+      <div class="ao" data-age="adult" onclick="setAge(this)">
+        <div class="ao-lbl">중장년</div>
+        <div class="ao-main">중장년·노년</div>
+        <div class="ao-sub">40대 이상</div>
       </div>
     </div>
   </div>
-</section>
 
-<div class="sec-divider"></div>
-
-<!-- ── STORY 2: 원인모르는 치료 ── -->
-<section class="story" id="sec-cause">
-  <div class="story-inner">
-    <div class="sec-img rv"><img src="img3.png" alt="원인모르는 치료 입안에 계속 치료하는 치아만 늘어가네요"></div>
-    <div class="money-box rv">
-      <div class="mb-title">원인모르는 치료,<br><em>입안에 계속 치료하는 치아만 늘어가네요!</em></div>
-      <div class="mb-body">그래서 치과만 생각하면 눈물이 나....<br><strong>원인도 모르고 치과치료만 하고 있었다....</strong></div>
-    </div>
-    <div class="aha rv">
-      <div class="aha-title">원인은 밖에 없습니다.<br><em>내가 나를 아프게 하고 있었습니다.</em></div>
-      <div class="aha-sub">집안 내력이 아닙니다.<br><strong>대물림된 잘못된 습관과 치과에 대한 오해</strong>가 원인입니다.<br>내가 만든 것이면, 내가 바꿀 수 있습니다.</div>
-    </div>
-  </div>
-</section>
-
-<div class="sec-divider"></div>
-
-<!-- ── STORY 3: 교합원인 ── -->
-<section class="story" id="sec-origin">
-  <div class="story-inner">
-    <div class="st-label rv">교합 붕괴의 3가지 원인</div>
-    <h2 class="st-title rv">왜 반복될까요?</h2>
-    <div class="cause-list rv">
-      <div class="cl">
-        <div class="cl-dot" style="background:var(--rd)"></div>
-        <div class="cl-body"><strong>구조적 원인</strong><span>교합 간섭 · 교합 외상 · 부정교합<br>→ 치아시림, 치아파절, 치아흔들림</span></div>
+  <!-- STEP 2: 치아 상태 -->
+  <div class="step-box" id="teethStep" style="display:none">
+    <div class="step-num">Step 2</div>
+    <div class="step-title">치아 상태를 선택해 주세요 <span class="req">★</span></div>
+    <div class="teeth-wrap show">
+      <div class="to" data-teeth="ok" onclick="setTeeth(this)">
+        <div class="to-dot" style="background:var(--g2)"></div>
+        <div class="to-body"><div class="to-main">문제 없음</div><div class="to-sub">충치·파절 없음</div></div>
       </div>
-      <div class="cl">
-        <div class="cl-dot" style="background:var(--go)"></div>
-        <div class="cl-body"><strong>기능적 원인</strong><span>이악물기 · 이갈이 · 잘못된 자세·습관<br>→ 턱관절 통증, 두통, 목·어깨통증</span></div>
-      </div>
-      <div class="cl">
-        <div class="cl-dot" style="background:var(--g2)"></div>
-        <div class="cl-body"><strong>턱·얼굴 발달 문제</strong><span>구강호흡 · 혀저위 · 상하 턱 크기·위치 불균형<br>→ 안면비대칭, 돌출·무턱·주걱턱, 치아벌어짐</span></div>
+      <div class="to" data-teeth="bad" onclick="setTeeth(this)">
+        <div class="to-dot" style="background:var(--rd)"></div>
+        <div class="to-body"><div class="to-main">썩거나 깨진 치아</div><div class="to-sub">불편함 있음</div></div>
       </div>
     </div>
   </div>
-</section>
 
-<div class="sec-divider"></div>
+  <!-- STEP 3: 증상 -->
+  <div class="step-box" id="symStep" style="display:none">
+    <div class="step-num" id="symStepNum">Step 3</div>
+    <div class="step-title">해당 증상을 모두 선택해 주세요</div>
 
-<!-- ── STORY 4: 쁘띠 차별점 ── -->
-<section class="story" id="sec-petit">
-  <div class="story-inner">
-    <div class="sec-img rv"><img src="img4.png" alt="쁘띠는 근본적인 원인을 진단하고 제거합니다"></div>
-    <div class="promise rv">
-      <div class="pr-title">쁘띠는 근본적인 원인을<br>진단하고 <em>제거합니다</em></div>
-      <div class="pr-sub">당신의 치아를 살려야 해요!<br>교합진단을 통해 원인을 제거하는 교합치료와<br>예방·습관 치료로 자연치아를 살리고<br>전신이 건강해지는 턱관절의 균형을 만듭니다.</div>
-      <div class="hashtags">
-        <div class="ht">#자연치아살리기</div>
-        <div class="ht">#건강한턱관절</div>
-        <div class="ht">#4D입체교정</div>
-        <div class="ht">#칼안대는임플란트</div>
-        <div class="ht">#턱관절교합안정장치</div>
-      </div>
+    <div class="sg-label">치아 · 잇몸</div>
+    <div class="sym-grid">
+      <div class="sym" data-cat="구조" data-plan="natural" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">치아가 시리거나 파임</div></div>
+      <div class="sym" data-cat="구조" data-plan="natural" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">치아가 깨지거나 파절</div></div>
+      <div class="sym" data-cat="구조" data-plan="natural" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">치아가 흔들림</div></div>
+      <div class="sym" data-cat="구조" data-plan="natural" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">잇몸이 내려앉거나 붓고 피남</div></div>
+      <div class="sym" data-cat="구조" data-plan="natural" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">충치가 자꾸 반복됨</div></div>
+      <div class="sym" data-cat="구조" data-plan="natural" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">치아가 닳거나 짧아짐</div></div>
     </div>
-    <div class="sec-img rv" style="margin-top:20px"><img src="img5.png" alt="쁘띠교합치료 자연치아살리기 건강한턱관절"></div>
+
+    <div class="sg-label">턱관절 · 통증</div>
+    <div class="sym-grid">
+      <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">턱관절이 아프거나 소리남</div></div>
+      <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">이갈이 또는 이악물기</div></div>
+      <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">머리·목·어깨 통증</div></div>
+      <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">한쪽으로만 씹게 됨</div></div>
+      <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">자도 자도 피곤함</div></div>
+      <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">질긴 음식을 피하게 됨</div></div>
+    </div>
+
+    <div class="sg-label">부정교합 · 얼굴형</div>
+    <div class="sym-grid">
+      <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">안면비대칭</div></div>
+      <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">돌출·무턱·주걱턱</div></div>
+      <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">덧니·치아 벌어짐</div></div>
+      <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">입호흡·코막힘</div></div>
+      <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">교정 후 재발</div></div>
+      <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">개구교합 (앞니 안 물림)</div></div>
+    </div>
+
+    <div class="submit-wrap">
+      <button class="submit-btn" id="submitBtn" onclick="showResult()" disabled>결과 확인하기 →</button>
+    </div>
   </div>
-</section>
 
-<!-- ── SYMPTOM CHECK ── -->
-<section class="check-sec" id="sec-check">
-  <div class="check-inner">
-    <div class="sec-img rv" style="max-width:660px;margin:0 auto 28px"><img src="img6.png" alt="교합질환 자기테스트 증상체크"></div>
-    <div class="check-head">
-      <div class="ch-tag">교합질환 자가테스트</div>
-      <h2 class="ch-title">지금 이런 증상이<br>있으신가요?</h2>
-      <p class="ch-sub">해당되는 증상을 모두 선택해 주세요.</p>
-    </div>
-
-    <!-- 나이 선택 -->
-    <div class="age-sel">
-      <div class="age-q" style="font-size:15px;font-weight:700;color:var(--g);margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid var(--go)">연령대를 먼저 선택해 주세요 <span style="color:var(--go)">★</span></div>
-      <div class="age-opts">
-        <div class="age-opt" data-age="child" onclick="setAge(this)">
-          <div class="ao-label">성장기</div>
-          <div class="ao-main">어린이</div>
-          <div class="ao-sub">5세 ~ 11세</div>
-        </div>
-        <div class="age-opt" data-age="teen" onclick="setAge(this)">
-          <div class="ao-label">성장완료</div>
-          <div class="ao-main">청소년 · 청년</div>
-          <div class="ao-sub">12세 ~ 30대</div>
-        </div>
-        <div class="age-opt" data-age="adult" onclick="setAge(this)">
-          <div class="ao-label">중장년</div>
-          <div class="ao-main">중장년 · 노년</div>
-          <div class="ao-sub">40대 이상</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 치아 상태 -->
-    <div class="age-sel" id="teethCondBox" style="display:none">
-      <div class="age-q" style="font-size:15px;font-weight:700;color:var(--g);margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid var(--go)">치아 상태를 선택해 주세요 <span style="color:var(--go)">★</span></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <div class="age-opt" data-teeth="ok" onclick="setTeeth(this)">
-          <div class="ao-label">양호</div>
-          <div class="ao-main">치아 문제 없음</div>
-          <div class="ao-sub">충치·파절 없음</div>
-        </div>
-        <div class="age-opt" data-teeth="bad" onclick="setTeeth(this)">
-          <div class="ao-label">치료 필요</div>
-          <div class="ao-main">썩거나 깨진 치아</div>
-          <div class="ao-sub">불편함 있음</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 구조적 -->
-    <div class="sym-group">
-      <div class="sg-label">치아 · 잇몸 증상</div>
-      <div class="sym-grid">
-        <div class="sym" data-cat="구조" data-plan="natural" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">치아가 시리거나 파임</div></div>
-        <div class="sym" data-cat="구조" data-plan="natural" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">치아가 깨지거나 파절됨</div></div>
-        <div class="sym" data-cat="구조" data-plan="natural" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">치아가 흔들림</div></div>
-        <div class="sym" data-cat="구조" data-plan="natural" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">잇몸이 내려앉거나 붓고 피남</div></div>
-        <div class="sym" data-cat="구조" data-plan="natural" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">충치가 자꾸 반복됨</div></div>
-        <div class="sym" data-cat="구조" data-plan="natural" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">치아가 닳거나 짧아짐</div></div>
-      </div>
-    </div>
-
-    <!-- 기능적 -->
-    <div class="sym-group">
-      <div class="sg-label">턱관절 · 통증 증상</div>
-      <div class="sym-grid">
-        <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">턱관절이 아프거나 소리남</div></div>
-        <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">이갈이 또는 이악물기</div></div>
-        <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">머리·목·어깨 통증</div></div>
-        <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">한쪽으로만 씹게 됨</div></div>
-        <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">자도 자도 피곤함</div></div>
-        <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">질긴 음식을 피하게 됨</div></div>
-      </div>
-    </div>
-
-    <!-- 부정교합 -->
-    <div class="sym-group">
-      <div class="sg-label">부정교합 증상</div>
-      <div class="sym-grid">
-        <div class="sym" data-cat="구조" data-plan="natural" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">위아래 치아가 잘 안 맞음</div></div>
-        <div class="sym" data-cat="구조" data-plan="natural" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">씹을 때 특정 치아만 먼저 닿음</div></div>
-        <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">위아래 앞니 사이가 벌어짐 (개구교합)</div></div>
-        <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">아래턱이 앞으로 나옴 (주걱턱)</div></div>
-        <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">치열이 고르지 않거나 삐뚤어짐</div></div>
-        <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">입을 다물기 불편하거나 입술이 안 닫힘</div></div>
-      </div>
-    </div>
-
-    <!-- 발육적 -->
-    <div class="sym-group">
-      <div class="sg-label">얼굴형 · 기능 증상</div>
-      <div class="sym-grid">
-        <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">안면비대칭</div></div>
-        <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">돌출·무턱·주걱턱</div></div>
-        <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">치아 벌어짐 또는 덧니</div></div>
-        <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">입호흡·코막힘</div></div>
-        <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">교정 후 재발</div></div>
-        <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="sym-ck">✓</div><div class="sym-txt">개구교합(앞니가 안 물림)</div></div>
-      </div>
-    </div>
-
-    <div class="result-btn-wrap">
-      <button class="result-btn" id="resultBtn" onclick="showResult()" disabled>치료 방향 확인하기 →</button>
-    </div>  </div>
-</section>
-
-<!-- ── RESULT ── -->
-<div class="result-sec" id="resultSec">
-  <div class="result-inner">
-
-    <div class="score-box">
-      <div class="score-num" id="scoreNum">0</div>
-      <div class="score-label">가지 증상이 확인되었습니다</div>
-      <div class="score-msg" id="scoreMsg"></div>
-    </div>
-
-    <div id="ageResultBox"></div>
-    <div class="sel-tags" id="selTags"></div>
-
-    <div class="insight" id="insightBox">
-      <div class="insight-txt" id="insightTxt"></div>
-    </div>
-
-    <div class="tx-head">쁘띠 바른턱얼굴 교합치료 계획</div>
-    <div class="tx-plans" id="txPlans"></div>
-
-    <div style="text-align:center;margin-top:28px">
-      <button onclick="resetCheck()" style="background:none;border:1.5px solid var(--cr2);color:var(--mu);padding:11px 28px;border-radius:50px;font-size:13px;font-family:var(--ss);cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='var(--g)';this.style.color='var(--g)'" onmouseout="this.style.borderColor='var(--cr2)';this.style.color='var(--mu)'">↺ 자가체크 다시하기</button>
-    </div>
-
+  <!-- RESULT -->
+  <div class="result-box" id="resultBox">
+    <!-- 상단 점수 -->
+    <div class="rb-top" id="rbTop"></div>
+    <!-- 치료 방향 -->
+    <div class="rb-dir" id="rbDir"></div>
+    <!-- 증상 태그 -->
+    <div class="rb-tags" id="rbTags"></div>
+    <!-- 링크 카드 -->
+    <div class="links-wrap" id="linksWrap"></div>
   </div>
+
+  <button class="reset-btn" id="resetBtn" onclick="resetCheck()" style="display:none">↺ 다시 체크하기</button>
+
 </div>
 
-<!-- ── CTA ── -->
-<section class="cta-sec">
-  <div class="cta-inner">
-    <h2 class="cta-title">지금 확인해<em>드리겠습니다</em></h2>
-    <p class="cta-sub">치료가 필요한지 확신이 없어도 괜찮습니다.<br>처음 방문 시 교합·호흡·혀 자세·자세까지 함께 확인합니다.</p>
-    <div class="cta-btns">
-      <a href="https://booking.naver.com/booking/13/bizes/743904" target="_blank" class="btn-naver">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/></svg>
-        네이버 예약
-      </a>
-      <a href="https://pf.kakao.com/_xbhXYb" target="_blank" class="btn-kakao">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="#191919"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.67 1.648 5.012 4.146 6.396L5 21l5.12-2.983C10.734 18.01 11.363 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z"/></svg>
-        카카오 상담
-      </a>
-    </div>
-    <div class="cta-tags">
-      <div class="cta-tag">#자연치아살리기</div>
-      <div class="cta-tag">#비발치비수술4D입체교정</div>
-      <div class="cta-tag">#칼안대는임플란트</div>
-      <div class="cta-tag">#턱관절교합안정장치</div>
-    </div>
-    <div class="cta-info" style="margin-top:28px">
-      <strong>생활의 기본 쁘띠치과, 기본이 기적이다!</strong>
-      📍 대구시 남구 대봉로 66 2층 &nbsp;·&nbsp; 📞 053-472-2828
-    </div>
-  </div>
-</section>
-
 <script>
-const SYMS_LABEL={};
-document.querySelectorAll('.sym').forEach(s=>{
-  SYMS_LABEL[s.querySelector('.sym-txt').textContent]=s.dataset.plan;
-});
+const BASE='https://petitfong.github.io/petitmagic/';
 
-let checked=new Set();
-let ageGroup=null;
-let teethCond=null;
+let ageGroup=null, teethCond=null, checked=new Set();
 
-const AGE_LABEL={'child':'성장기 (5~11세)','teen':'청소년·청년 (12세~30대)','adult':'중장년·노년 (40대 이상)'};
+// 치료방향 데이터
+const DIR={
+  growth:{
+    color:'#1E3D30',
+    label:'성장교정',
+    note:'성장기에는 4D입체교정장치로 턱 크기와 위치를 유도합니다. 지금 개입하면 나중의 큰 치료를 막을 수 있는 가장 효율적인 시기입니다.',
+    links:[
+      {main:true, icon:'🌱', title:'바른턱얼굴 교합치료 — 성장교정', sub:'성장교정 치료 자세히 알아보기', url:'petit_treatment_by_age.html'},
+      {main:false, icon:'📅', title:'네이버 예약', sub:'초진 상담 예약', url:'https://booking.naver.com/booking/13/bizes/743904'},
+      {main:false, icon:'💬', title:'카카오 채널 상담', sub:'궁금한 점 빠르게 문의', url:'https://pf.kakao.com/_xbhXYb'},
+    ]
+  },
+  ortho4d:{
+    color:'#2D5A44',
+    label:'4D 입체교정',
+    note:'골격·치아·기능을 함께 교정하는 비발치·비수술 4D입체교정으로 재발 없는 치료가 가능합니다. 치아와 턱의 균형, 얼굴과 몸의 균형을 설계합니다.',
+    links:[
+      {main:true, icon:'✨', title:'바른턱얼굴 교합치료 — 4D입체교정', sub:'4D 입체교정 치료 자세히 알아보기', url:'petit_treatment_by_age.html'},
+      {main:false, icon:'📅', title:'네이버 예약', sub:'초진 상담 예약', url:'https://booking.naver.com/booking/13/bizes/743904'},
+      {main:false, icon:'💬', title:'카카오 채널 상담', sub:'궁금한 점 빠르게 문의', url:'https://pf.kakao.com/_xbhXYb'},
+    ]
+  },
+  recon:{
+    color:'#5A3A1A',
+    label:'치주재생 교합재건',
+    note:'자연치아를 최대한 살리면서 교합을 재건합니다. 뽑기 전에 살릴 수 있는지 먼저 확인합니다. 심층 상담 위젯에서 나의 상태와 치료 계획을 확인하세요.',
+    links:[
+      {main:true, icon:'🌿', title:'교합재건 심층 상담 위젯', sub:'증상 분석 → 타입 확인 → 치료 계획', url:'petit_consultation_widget.html'},
+      {main:false, icon:'🕰️', title:'생애주기별 교합 노화', sub:'왜 지금 이 상태인지 이해하기', url:'petit_lifecycle_occlusion.html'},
+      {main:false, icon:'📅', title:'네이버 예약', sub:'초진 상담 예약', url:'https://booking.naver.com/booking/13/bizes/743904'},
+      {main:false, icon:'💬', title:'카카오 채널 상담', sub:'궁금한 점 빠르게 문의', url:'https://pf.kakao.com/_xbhXYb'},
+    ]
+  }
+};
 
-// 연령 + 치아 상태에 따른 메인 치료 방향
-function getTxDirection(){
+function getTxDir(){
   if(ageGroup==='child') return 'growth';
   if(ageGroup==='adult' && teethCond==='bad') return 'recon';
   return 'ortho4d';
 }
 
-const TX_DIR_MSG={
-  growth:{
-    label:'성장교정',
-    color:'#1E3D30',
-    note:'성장기 어린이는 교합 유도와 성장 교정이 가장 효과적인 시기입니다. 지금 개입하면 나중의 큰 치료를 막을 수 있습니다.'
-  },
-  ortho4d:{
-    label:'4D 입체교정',
-    color:'#2D5A44',
-    note:'치아 상태가 양호한 시기입니다. 골격·치아·기능을 함께 교정하는 비발치·비수술 4D입체교정으로 재발 없는 치료가 가능합니다.'
-  },
-  recon:{
-    label:'치주재생 교합재건',
-    color:'#5A3A1A',
-    note:'썩거나 깨진 치아가 있다면 자연치아를 먼저 살리고, 교합을 재건하는 치료가 필요합니다. 뽑기 전에 살릴 수 있는지 먼저 확인합니다.'
-  }
-};
-
 function setAge(el){
-  document.querySelectorAll('.age-opt[data-age]').forEach(e=>e.classList.remove('on'));
+  document.querySelectorAll('.ao').forEach(e=>e.classList.remove('on'));
   el.classList.add('on');
   ageGroup=el.dataset.age;
-  // 성장기면 치아 상태 불필요
-  const tb=document.getElementById('teethCondBox');
+  teethCond=null;
+  document.querySelectorAll('.to').forEach(e=>e.classList.remove('on'));
+
   if(ageGroup==='child'){
-    tb.style.display='none';
+    document.getElementById('teethStep').style.display='none';
+    document.getElementById('symStep').style.display='block';
+    document.getElementById('symStepNum').textContent='Step 2';
     teethCond='ok';
   } else {
-    tb.style.display='block';
-    teethCond=null;
-    document.querySelectorAll('.age-opt[data-teeth]').forEach(e=>e.classList.remove('on'));
+    document.getElementById('teethStep').style.display='block';
+    document.getElementById('symStep').style.display='none';
   }
   checkBtn();
 }
 
 function setTeeth(el){
-  document.querySelectorAll('.age-opt[data-teeth]').forEach(e=>e.classList.remove('on'));
+  document.querySelectorAll('.to').forEach(e=>e.classList.remove('on'));
   el.classList.add('on');
   teethCond=el.dataset.teeth;
+  document.getElementById('symStep').style.display='block';
+  document.getElementById('symStepNum').textContent='Step 3';
   checkBtn();
 }
 
@@ -636,186 +344,70 @@ function tog(el){
 
 function checkBtn(){
   const ready=checked.size>0 && ageGroup && (ageGroup==='child'||teethCond);
-  document.getElementById('resultBtn').disabled=!ready;
+  document.getElementById('submitBtn').disabled=!ready;
 }
-
-const TX={
-  natural:{
-    color:'#1E3D30',
-    title:'#자연치아살리기',
-    items:[
-      '기본 단계 — 양치질 교육 + 입술·혀·호흡·자세·바르게 씹고 삼키기 원인 파악',
-      '교합조정 — 과부하 걸리는 치아의 힘을 균등하게',
-      '무삭제 레진 재건 — 깎지 않는 치아 재건',
-      '부러진 치아 — MTA 신경재생치료로 뿌리부터 살리기',
-      '흔들리는 치아 — 엠도게인 치주재생치료',
-    ]
-  },
-  tmj:{
-    color:'#2D5A44',
-    title:'#턱관절안정장치',
-    items:[
-      '기본 단계 — 양치질 교육 + 입술·혀·호흡·자세·바르게 씹고 삼키기 원인 파악',
-      '턱관절 안정 위치를 잡아주는 교합 안정 장치',
-      '이악물기·이갈이 차단으로 치아와 턱 보호',
-      '교합 안정화 후 원인 제거 치료 진행',
-    ]
-  },
-  ortho:{
-    color:'#5A3A1A',
-    title:'#4D입체교정 — 비발치·비수술',
-    items:[
-      '기본 단계 — 양치질 교육 + 입술·혀·호흡·자세·바르게 씹고 삼키기 원인 파악',
-      '턱·얼굴·전신 진단을 통한 원인 제거 치료 계획',
-      '치아와 턱의 균형, 얼굴과 몸의 균형 회복',
-      '혀·호흡·근기능 훈련을 통한 바른미소 디자인',
-      'MARPE · 4D입체교정장치 활용',
-    ]
-  }
-};
-
-const MSGS={
-  0:'증상이 없거나 매우 초기입니다.',
-  low:'초기 단계입니다. 지금 관리를 시작하면 가장 효율적입니다.',
-  mid:'교합 불균형이 여러 부위에 영향을 주고 있습니다. 전문적인 평가가 필요합니다.',
-  high:'<strong>다수의 증상이 복합적으로 나타나고 있습니다.</strong> 원인을 정확히 찾아 근본부터 치료하는 것이 필요합니다.'
-};
-
-const INSIGHTS={
-  구조:'치아가 시리거나 파절되고 흔들리는 증상은 <strong>교합 간섭·교합 외상</strong>이 원인인 경우가 많습니다. 자연치아를 살리는 치료가 임플란트보다 먼저입니다.',
-  기능:'턱관절 통증과 이갈이·목어깨 통증은 <strong>이악물기·잘못된 자세·교합 불안정</strong>이 원인입니다. 교합 안정장치로 먼저 보호하고 원인을 제거합니다.',
-  발육:'안면비대칭·돌출·재발 교정은 <strong>구강호흡·혀저위·턱 크기 불균형</strong>이 뿌리 원인입니다. 기능을 함께 교정해야 재발하지 않습니다.',
-  복합:'여러 원인이 복합적으로 작용하고 있습니다. <strong>교합 전체를 진단하고 우선순위를 정한 치료 계획</strong>이 필요합니다.'
-};
 
 function showResult(){
   const n=checked.size;
-  if(n===0||!ageGroup) return;
-  document.getElementById('scoreNum').textContent=n;
-  document.getElementById('scoreMsg').innerHTML=n<=2?MSGS.low:n<=6?MSGS.mid:MSGS.high;
+  const dir=getTxDir();
+  const d=DIR[dir];
 
-  // 치료 방향 표시
-  const dir=getTxDirection();
-  const dm=TX_DIR_MSG[dir];
-  const ageBox=document.getElementById('ageResultBox');
-  ageBox.innerHTML=`
-    <div style="border-radius:14px;overflow:hidden;margin-bottom:18px">
-      <div style="background:${dm.color};padding:12px 16px;display:flex;align-items:center;gap:10px">
-        <div style="font-size:11px;font-weight:700;color:var(--go);letter-spacing:.06em">추천 치료 방향</div>
-        <div style="font-size:15px;font-weight:700;color:var(--cr)">${dm.label}</div>
-        <div style="font-size:11px;color:rgba(250,248,240,.4);margin-left:auto">${AGE_LABEL[ageGroup]}</div>
-      </div>
-      <div style="background:var(--wh);border:1.5px solid var(--cr2);border-top:none;padding:14px 16px;border-radius:0 0 12px 12px">
-        <div style="font-size:13px;color:var(--tx);line-height:1.75">${dm.note}</div>
-      </div>
-    </div>`;
+  // 상단 점수
+  let scoreMsg=n<=2?'초기 신호입니다. 지금 확인하는 것이 가장 좋습니다.':n<=5?'교합 불균형이 여러 곳에 영향을 주고 있습니다.':'<strong>다수의 증상이 복합적으로 나타나고 있습니다.</strong>';
+  document.getElementById('rbTop').style.background=d.color;
+  document.getElementById('rbTop').innerHTML=`
+    <div style="font-family:var(--sf);font-size:52px;font-weight:900;color:var(--go);line-height:1">${n}</div>
+    <div style="font-size:13px;color:rgba(250,248,240,.6);margin-bottom:10px">가지 증상이 확인되었습니다</div>
+    <div style="font-size:12.5px;color:rgba(250,248,240,.6);line-height:1.7;padding-top:12px;border-top:1px solid rgba(250,248,240,.1)">${scoreMsg}</div>`;
 
-  // tags
-  const tl=document.getElementById('selTags');
-  tl.innerHTML='';
-  checked.forEach(txt=>{const d=document.createElement('div');d.className='sel-tag';d.textContent=txt;tl.appendChild(d);});
+  // 치료 방향
+  document.getElementById('rbDir').style.background=d.color;
+  document.getElementById('rbDir').innerHTML=`
+    <div style="font-size:10px;letter-spacing:.12em;color:rgba(200,168,75,.6);text-transform:uppercase;font-weight:600;margin-bottom:5px">추천 치료 방향</div>
+    <div style="font-size:18px;font-weight:700;color:var(--cr);margin-bottom:7px">${d.label}</div>
+    <div style="font-size:12.5px;color:rgba(250,248,240,.55);line-height:1.7">${d.note}</div>`;
 
-  // plans
-  const tp=document.getElementById('txPlans');
-  tp.innerHTML='';
+  // 증상 태그
+  const tags=document.getElementById('rbTags');
+  tags.innerHTML='';
+  checked.forEach(txt=>{
+    const t=document.createElement('div');
+    t.className='rt';t.textContent=txt;tags.appendChild(t);
+  });
 
-  if(dir==='growth'){
-    // 성장기 전용 치료계획
-    const growthPlan={
-      color:'#1E3D30',
-      title:'#성장교정 · 성장유도',
-      items:[
-        '기본 단계 — 양치질 교육 + 입술·혀·호흡·자세·바르게 씹고 삼키기 원인 파악',
-        '4D입체교정장치로 턱 크기와 위치를 유도하며 올바른 성장 방향 설계',
-        '충치치료 — 유치와 영구치 모두 꼼꼼하게 관리',
-        '새로 나오는 영구치 안 썩도록 예방 관리 (실란트·불소 도포)',
-      ]
-    };
-    const div=document.createElement('div');
-    div.className='txp';
-    const itemsHtml=growthPlan.items.map((item,i)=>{
-      if(i===0) return `<div style="background:rgba(200,168,75,.07);border-radius:8px;padding:9px 12px;margin-bottom:9px;border-left:3px solid var(--go)"><span style="font-size:10.5px;font-weight:700;color:var(--go);display:block;margin-bottom:3px;letter-spacing:.08em">STEP 1 · 기본</span><span style="font-size:12.5px;color:var(--tx);line-height:1.5">${item.replace('기본 단계 — ','')}</span></div>`;
-      return `<div class="txp-item">${item}</div>`;
-    }).join('');
-    div.innerHTML=`<div class="txp-header" style="background:${growthPlan.color}"><div class="txp-hashtag">${growthPlan.title}</div></div><div class="txp-items">${itemsHtml}</div>`;
-    tp.appendChild(div);
-  } else {
-    const plans=new Set();
-    const cats=new Set();
-    document.querySelectorAll('.sym.on').forEach(s=>{plans.add(s.dataset.plan);cats.add(s.dataset.cat);});
-    plans.forEach(key=>{
-      const t=TX[key];
-      const div=document.createElement('div');
-      div.className='txp';
-      const itemsHtml=t.items.map((item,i)=>{
-        if(i===0) return `<div style="background:rgba(200,168,75,.07);border-radius:8px;padding:9px 12px;margin-bottom:9px;border-left:3px solid var(--go)"><span style="font-size:10.5px;font-weight:700;color:var(--go);display:block;margin-bottom:3px;letter-spacing:.08em">STEP 1 · 기본</span><span style="font-size:12.5px;color:var(--tx);line-height:1.5">${item.replace('기본 단계 — ','')}</span></div>`;
-        return `<div class="txp-item">${item}</div>`;
-      }).join('');
-      div.innerHTML=`<div class="txp-header" style="background:${t.color}"><div class="txp-hashtag">${t.title}</div></div><div class="txp-items">${itemsHtml}</div>`;
-      tp.appendChild(div);
-    });
+  // 생애주기 링크 추가 (5개 이상이면)
+  const links=[...d.links];
+  if(n>=5 && dir!=='recon'){
+    links.splice(1,0,{main:false,icon:'🕰️',title:'생애주기별 교합 노화',sub:'왜 지금 이 상태인지 이해하기',url:'petit_lifecycle_occlusion.html'});
   }
 
-  // insight
-  if(dir==='growth'){
-    document.getElementById('insightTxt').innerHTML='성장기에는 <strong>입호흡·혀 자세·구강 습관</strong>이 얼굴과 턱 발달에 직접 영향을 줍니다. 지금 바로잡으면 나중에 필요한 치료 범위가 크게 줄어듭니다.';
-  } else {
-    const cats=new Set();
-    document.querySelectorAll('.sym.on').forEach(s=>cats.add(s.dataset.cat));
-    const cat=[...cats];
-    const insKey=cat.length>=2?'복합':cat[0];
-    document.getElementById('insightTxt').innerHTML=INSIGHTS[insKey]||INSIGHTS['복합'];
-  }
+  // 링크 카드
+  const lw=document.getElementById('linksWrap');
+  lw.innerHTML=`<div class="links-title">다음 단계</div>`;
+  links.forEach(l=>{
+    lw.innerHTML+=`<a class="link-card${l.main?' main':''}" href="${l.url}" target="_blank">
+      <div class="lc-icon">${l.icon}</div>
+      <div class="lc-body"><div class="lc-title">${l.title}</div><div class="lc-sub">${l.sub}</div></div>
+      <div class="lc-arr">→</div>
+    </a>`;
+  });
 
-  const rs=document.getElementById('resultSec');
-  rs.classList.add('show');
-  setTimeout(()=>{rs.scrollIntoView({behavior:'smooth',block:'start'});},100);
+  document.getElementById('resultBox').classList.add('show');
+  document.getElementById('resetBtn').style.display='block';
+  document.getElementById('symStep').style.display='none';
+  setTimeout(()=>document.getElementById('resultBox').scrollIntoView({behavior:'smooth',block:'start'}),100);
 }
 
 function resetCheck(){
-  // 상태 초기화
-  checked.clear();
-  ageGroup=null;
-  teethCond=null;
-
-  // UI 초기화
-  document.querySelectorAll('.sym').forEach(s=>s.classList.remove('on'));
-  document.querySelectorAll('.age-opt').forEach(s=>s.classList.remove('on'));
-  document.getElementById('teethCondBox').style.display='none';
-  document.getElementById('resultBtn').disabled=true;
-
-  // 결과 섹션 숨김
-  const rs=document.getElementById('resultSec');
-  rs.classList.remove('show');
-
-  // 자가체크 섹션으로 스크롤
-  goTo('sec-check');
+  checked.clear(); ageGroup=null; teethCond=null;
+  document.querySelectorAll('.ao,.to,.sym').forEach(e=>e.classList.remove('on'));
+  document.getElementById('teethStep').style.display='none';
+  document.getElementById('symStep').style.display='none';
+  document.getElementById('submitBtn').disabled=true;
+  document.getElementById('resultBox').classList.remove('show');
+  document.getElementById('resetBtn').style.display='none';
+  document.querySelector('.step-box').scrollIntoView({behavior:'smooth',block:'start'});
 }
-
-function goTo(id){
-  const el=document.getElementById(id);
-  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-// 스크롤 위치에 따라 gnav 활성 메뉴 변경
-const secMap=[
-  {id:'sec-hero',idx:0},{id:'sec-pain',idx:1},{id:'sec-maloc',idx:2},
-  {id:'sec-cause',idx:3},{id:'sec-origin',idx:3},{id:'sec-petit',idx:4},{id:'sec-check',idx:5}
-];
-const gms=document.querySelectorAll('.gm');
-window.addEventListener('scroll',()=>{
-  let cur=0;
-  secMap.forEach(s=>{
-    const el=document.getElementById(s.id);
-    if(el&&el.getBoundingClientRect().top<=80) cur=s.idx;
-  });
-  gms.forEach((g,i)=>g.classList.toggle('act',i===cur));
-},{ passive:true });
-
-// reveal
-document.querySelectorAll('.rv').forEach((el,i)=>{
-  setTimeout(()=>el.classList.add('vis'),100+i*60);
-});
 </script>
 </body>
 </html>
