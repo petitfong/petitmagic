@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>온라인 진료 안내 | 쁘띠치과</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+/* NAV */
+/* HERO */
+.hero{padding:40px 20px 32px;border-bottom:1px solid #E0E0DA;background:#fff}
+.hero-tag{font-size:11px;letter-spacing:.14em;color:#888880;text-transform:uppercase;margin-bottom:14px}
+.hero-h{font-family:'TmonMonsori',serif;font-size:clamp(24px,6vw,36px);font-weight:300;color:#111110;line-height:1.35;letter-spacing:-.02em;margin-bottom:10px}
+.hero-sub{font-size:14px;color:#555550;line-height:1.8;margin-bottom:18px}
+.notice{background:#F7F7F3;border-left:2px solid #C8A84B;padding:11px 14px;font-size:12.5px;color:#555550;line-height:1.7;border-radius:0}
+
+/* QUESTION LIST */
+.q-section{padding:28px 20px 0;background:#FAFAF9}
+.q-label{font-family:'TmonMonsori',serif;font-size:14px;font-weight:400;color:#555550;margin-bottom:16px;letter-spacing:.02em}
+.q-list{display:flex;flex-direction:column;gap:0;background:#fff;border:1px solid #E0E0DA;border-radius:12px;overflow:hidden;margin-bottom:40px}
+.q-item{display:flex;align-items:center;gap:14px;padding:17px 18px;border-bottom:1px solid #EEEEE8;cursor:pointer;transition:background .12s;text-decoration:none;color:inherit}
+.q-item:last-child{border-bottom:none}
+.q-item:hover{background:#F9F9F7}
+.q-num{font-family:'TmonMonsori',serif;font-size:18px;font-weight:300;color:#DDDDDA;min-width:28px;flex-shrink:0}
+.q-body{flex:1}
+.q-title{font-family:'TmonMonsori',serif;font-size:16px;font-weight:400;color:#111110;margin-bottom:3px;line-height:1.4}
+.q-sub{font-size:12px;color:#888880;letter-spacing:.04em}
+.q-arr{font-size:13px;color:#CCCCCC}
+
+/* RESPONSE */
+.resp-section{display:none;padding:0 20px;background:#FAFAF9}
+.back-btn{display:flex;align-items:center;gap:6px;font-size:13px;color:#555550;cursor:pointer;background:none;border:none;font-family:'Pretendard',sans-serif;padding:20px 0 16px}
+.back-btn:hover{color:#1A1A18}
+
+.q-bubble{background:#007A54;border-radius:12px 12px 4px 12px;padding:14px 18px;margin-bottom:14px}
+.q-bubble-txt{font-family:'TmonMonsori',serif;font-size:16px;font-weight:400;color:#FAF8F0;line-height:1.5}
+
+.a-box{background:#fff;border:1px solid #E0E0DA;border-radius:4px 12px 12px 12px;padding:20px 20px 18px;margin-bottom:16px;position:relative}
+.a-brand{position:absolute;top:14px;right:16px;font-size:10px;color:#C8A84B;letter-spacing:.18em;opacity:.7;font-family:'TmonMonsori',serif}
+.a-text{font-size:14px;line-height:1.95;color:#1A1A18;white-space:pre-wrap;word-break:keep-all}
+
+/* CTA */
+.cta-wrap{background:#fff;border:1px solid #E0E0DA;border-radius:12px;padding:18px 18px 16px;margin-bottom:12px}
+.cta-label{font-size:12px;color:#888880;text-align:center;margin-bottom:12px;letter-spacing:.04em}
+.cta-btn{display:block;border-radius:100px;padding:12px 10px;text-align:center;text-decoration:none;font-size:13px;font-weight:600;font-family:'Pretendard',sans-serif}
+.cta-naver{background:#03C75A;color:#fff}
+.cta-kakao{background:#FEE500;color:#191919}
+
+.info-row{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 14px;background:#F9F9F7;border-radius:8px;font-size:13px}
+.info-left{}
+.info-addr{font-weight:500;color:#111110;margin-bottom:3px}
+.info-tel{color:#555550}
+.info-hours{font-size:12px;color:#555550;line-height:1.75;text-align:right}
+
+/* SHARE */
+.share-btn{width:100%;margin-top:10px;background:#FEE500;color:#191919;border:none;border-radius:100px;padding:13px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:'Pretendard',sans-serif;transition:all .2s}
+.share-btn.copied{background:#007A54;color:#FAF8F0}
+.share-hint{font-size:11.5px;color:#888880;text-align:center;margin-top:6px}
+
+/* RELATED */
+.rel-wrap{margin-bottom:32px}
+.rel-label{font-size:11px;letter-spacing:.14em;color:#C8A84B;text-transform:uppercase;margin-bottom:10px;font-weight:500}
+.rel-link{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #E0E0DA;border-radius:10px;padding:13px 15px;text-decoration:none;color:#1A1A18;margin-bottom:7px;transition:border-color .15s}
+.rel-link:hover{border-color:#C8A84B}
+.rel-num{font-family:'TmonMonsori',serif;font-size:13px;color:#CCCCCC;flex-shrink:0;width:22px}
+.rel-body{flex:1}
+.rel-title{font-size:14px;font-weight:500;color:#111110;margin-bottom:2px}
+.rel-sub{font-size:12px;color:#555550}
+.rel-arr{font-size:13px;color:#CCCCCC}
+.rel-link:hover .rel-arr{color:#C8A84B}
+
+@media(min-width:640px){
+  .hero,.q-section,.resp-section{padding-left:32px;padding-right:32px;max-width:720px;margin-left:auto;margin-right:auto}
+}
+
+.rel-section{padding:28px 20px;background:#F5F5F1;border-top:1px solid #E0E0DA;margin-top:8px}
+.rel-title{font-size:12px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.rel-links{display:flex;flex-direction:column;gap:8px}
+.rel-link{display:flex;align-items:center;gap:12px;padding:13px 15px;background:#fff;border-radius:10px;border:1px solid #E0E0DA;text-decoration:none;color:#1A1A18;transition:opacity .15s}
+.rel-link:hover{opacity:.75}
+.rel-link-body{flex:1}
+.rel-link-title{font-size:14px;font-weight:500;color:#111110;margin-bottom:2px}
+.rel-link-sub{font-size:12px;color:#555550}
+.rel-link-arr{font-size:14px;color:#C8A84B;font-weight:600;flex-shrink:0}
+
+@font-face {
+  font-family: 'TmonMonsori';
+  src: url('fonts/TmonMonsori_otf.otf') format('opentype'),
+       url('fonts/TmonMonsori_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('fonts/pretendard-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
+<link rel="stylesheet" href="petit-design.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="index.html">생활의 기본, <em>쁘띠치과</em></a>
+  <a class="nav-home" href="index.html">← 홈</a>
+  <a class="nav-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">Online Guide · 온라인 진료 안내</div>
+  <h1 class="hero-h">내원 전 궁금한 점을<br>먼저 알아보세요</h1>
+  <p class="hero-sub">이 안내는 진단·처방을 제공하지 않습니다.<br>실제 치료 여부는 내원 후 상담으로 결정됩니다.</p>
+  <div class="notice">이름·전화번호 등 개인정보는 입력하지 마세요.</div>
+</section>
+
+<!-- 질문 목록 -->
+<div class="q-section" id="qSection">
+  <div class="q-label">어떤 것이 궁금하신가요?</div>
+  <div class="q-list" id="qList"></div>
+</div>
+
+<!-- 답변 화면 -->
+<div class="resp-section" id="respSection">
+  <button class="back-btn" onclick="goBack()">← 다른 질문 보기</button>
+  <div class="q-bubble"><div class="q-bubble-txt" id="qBubble"></div></div>
+  <div class="a-box">
+    <div class="a-brand">PETIT</div>
+    <p class="a-text" id="aText"></p>
+  </div>
+  <div class="cta-wrap">
+    <div class="cta-label">더 자세한 상담은 직접 연결해 드릴게요</div>
+    <div class="cta-btns">
+      <a href="https://booking.naver.com/booking/13/bizes/743904" target="_blank" class="cta-btn cta-naver">네이버 예약</a>
+      <a href="https://pf.kakao.com/_xbhXYb" target="_blank" class="cta-btn cta-kakao">카카오 상담</a>
+    </div>
+    <div class="info-row">
+      <div class="info-left">
+        <div class="info-addr">대구시 남구 대봉로 66 2층</div>
+        <div class="info-tel">📞 053-472-2828</div>
+      </div>
+      <div class="info-hours">평일(화·목·금) 09:30–18:30<br>월요일(야간) 09:30–20:30<br>수·토요일 09:30–15:00<br>점심 12:30–14:00</div>
+    </div>
+    <button class="share-btn" id="shareBtn" onclick="shareResult()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+      카카오톡으로 결과 보내기
+    </button>
+    <div class="share-hint" id="shareHint"></div>
+  </div>
+  <div class="rel-wrap" id="relWrap"></div>
+</div>
+
+<script>
+const QUESTIONS = [
+
+  // ── 처음 내원합니다 ──────────────────────────
+  {
+    title:'처음 내원합니다',
+    sub:'첫 방문 · 위치 · 준비물 · 접수 · 응급 안내',
+    answer:`봉덕동에서 10년 넘게 진료하고 있는 쁘띠치과입니다. 처음 오시는 분들을 위한 안내입니다.
+
+📍 위치 · 연락처
+대구광역시 남구 대봉로 66, 2층
+전화: 053-472-2828
+진료시간:
+평일(화·목·금) 09:30–18:30
+야간 월요일 09:30–20:30
+수·토요일 09:30–15:00
+점심시간: 12:30–14:00
+수·토 간식시간: 13:00–13:30
+야간 간식시간: 18:00–18:30
+
+봉덕시장 근처에 위치해 있습니다. 봉덕시장 방면 정문과 백년가약 아파트 후문 방향, 두 곳 모두 이용 가능합니다. 계단을 따라 2층으로 올라오시면 유리문이 보입니다.
+
+🅿️ 주차 안내
+봉덕시장 공영유료주차장을 이용해 주세요. 공영주차장이라 비교적 부담이 적습니다.
+
+📋 내원 전 준비물
+신분증을 꼭 지참해 주세요.
+복용 중인 약이 있으시면 약 이름을 알고 오시면 좋습니다.
+이전 치과 엑스레이나 기록이 있으시면 지참해 주세요.
+예약 시간보다 약 30분 여유 있게 도착하시는 것을 추천드립니다.
+
+🏥 내원 시 흐름
+접수 → 등록 → 신환 안내 및 동의 → 엑스레이 촬영 → 진료실 안내 → 검진 → 치료 계획 설명 → 상담
+
+검사 후에는 현재 상태와 치료 방향을 알기 쉽게 설명해 드립니다. 치료 결정은 충분히 이해하신 후에 하셔도 됩니다.
+
+💬 예약 · 문의 방법
+• 전화: 053-472-2828 (진료 중 응대 어려울 수 있음)
+• 카카오톡: '쁘띠치과의원' 검색 — 예약 변경·진료 문의 가장 빠름
+• 네이버 예약: 날짜·시간 선택 후 처음 내원/교합/일반 선택
+• 네이버톡톡: 원장 직접 답변 채널 (진료 관련 문의 중심)
+
+🚨 응급 시 안내
+갑자기 치아가 빠지거나 극심한 통증이 있는 경우, 진료 시간 내라면 전화(053-472-2828)로 먼저 연락 주시면 최대한 당일 진료를 도와드립니다. 진료 시간 외에는 카카오 채널로 문의해 주세요.
+
+🪥 칫솔 준비
+치료 전 가능한 한 양치를 하고 오시는 것이 좋습니다. 준비가 어려우신 경우 치과에서 쁘띠치과 전용 칫솔을 구매하실 수 있습니다.
+
+🚻 화장실 안내
+여자 화장실: 본동 2층 데스크 맞은편 로비 안쪽 나무문
+남자 화장실: 로비 유리문 나와 오른쪽 → 카페동 2층 바른미소디자인센터 입구 오른쪽
+
+쁘띠치과는 아이들의 울음과 낯섦에 익숙합니다. 억지로 혼내기보다 천천히 적응할 수 있도록 도와드립니다.`,
+    links:[
+      {title:'📖 쁘띠 사용법 — 처음 오시는 분들에게',sub:'네이버 블로그 공식 안내글',url:'https://blog.naver.com/petit2828/223891804506'},
+      {title:'교합질환 자가체크',sub:'내원 전 내 상태 먼저 확인하기',url:'petit_occlusion_selfcheck.html'},
+      {title:'쁘띠치과 소개',sub:'생활의 기본이 되는 치과',url:'petit_about.html'},
+      {title:'쁘띠치과 치료 원칙',sub:'예방부터 재건까지 · 보증 책임제',url:'petit_treatment_philosophy.html'}
+    ]
+  },
+
+  // ── 충치 ────────────────────────────────────
+  {
+    title:'충치 치료는 어떻게 진행되나요?',
+    sub:'충치 · 치료 단계',
+    answer:`충치는 진행 단계에 따라 치료 방법이 다릅니다.
+
+초기 충치 (법랑질)
+치아를 최소한만 삭제하거나, 진행을 중단시키는 방향으로 관리합니다. 가능하면 삭제하지 않습니다.
+
+중기 충치 (상아질)
+필요한 만큼만 제거하고 레진이나 인레이로 재건합니다. 신경이 가까운 경우 MTA로 신경을 보호하여 신경치료를 최대한 피합니다.
+
+말기 충치 (신경 감염)
+신경치료(근관치료) 후 MTA, POST&CORE로 뿌리를 살리고 보철로 마무리합니다. 자연치아를 끝까지 보존합니다.
+
+쁘띠치과는 충치 치료 후 왜 이 자리에 반복되는지 원인(교합, 씹기 습관)까지 함께 살펴봅니다.`,
+    links:[
+      {title:'충치 원인과 치료 방향',sub:'당 컨트롤 · 세균 · 씹고삼키기 · 재발 예방',url:'petit_cavity.html'},
+      {title:'무삭제레진 원데이보철',sub:'교합 분석 후 최소 삭제 충치 치료',url:'petit_resin_oneday.html'},
+      {title:'자연치아살리기',sub:'MTA · 엠도게인 · 발치 전 마지막 수단',url:'petit_natural_tooth.html'}
+    ]
+  },
+
+  // ── 자연치아살리기 — 발치 권유 ──────────────
+  {
+    title:'다른 치과에서 발치 권유를 받았어요',
+    sub:'자연치아 보존 · 발치 전 확인',
+    answer:`발치가 반드시 필요한 치아도 있지만, 검사 없이 단정 지을 수는 없습니다.
+
+쁘띠치과에서는 치아 손상 정도, 뿌리 주변 염증, 잇몸뼈 상태, 교합 부담, 전신 건강, 관리 가능성을 함께 살펴 판단합니다.
+
+자연치아를 최대한 살리는 것이 저희의 첫 번째 목표입니다. MTA 신경치료, 치근단 절제술, 의도적 재식술 등 발치 전 마지막 수단까지 검토한 뒤에야 발치를 권유드립니다.
+
+다른 곳에서 발치 권유를 받으셨다면, 한 번 더 확인해 보시는 것을 권해드립니다.`,
+    links:[
+      {title:'자연치아살리기',sub:'발치 전 먼저 확인하세요',url:'petit_natural_tooth.html'},
+      {title:'MTA · 엠도게인 상세 안내',sub:'뿌리 기준 · 치주재생 · 신경재생 원리',url:'petit_save_tooth_guide.html'},
+      {title:'교합질환 자가체크',sub:'내 치아 상태 먼저 확인하기',url:'petit_occlusion_selfcheck.html'}
+    ]
+  },
+
+  // ── 자연치아 — 부러진 치아 ──────────────────
+  {
+    title:'치아가 부러졌어요, 살릴 수 있을까요?',
+    sub:'파절 · 자연치아살리기',
+    answer:`치아가 부러진 경우 파절 위치와 깊이에 따라 살릴 수 있는지 결정됩니다.
+
+잇몸 위에서 파절된 경우
+신경치료 후 POST&CORE로 뿌리를 보강하고, 크라운 보철로 재건합니다. 대부분 보존이 가능합니다.
+
+잇몸선 아래까지 파절된 경우
+파절 깊이가 잇몸뼈 아래까지 내려간 경우에는 발치 후 임플란트를 검토합니다. 하지만 치주재생 치료와 함께 살릴 수 있는 경우도 있습니다.
+
+세로로 파절된 경우 (치아세로골절)
+가장 예후가 불량한 경우입니다. 파열 범위와 위치에 따라 판단하며, 발치가 불가피한 경우도 있습니다.
+
+어떤 경우든 직접 확인해야 정확한 판단이 가능합니다. 포기하기 전에 먼저 상담받아 보세요.`,
+    links:[
+      {title:'자연치아살리기',sub:'파절 · MTA · POST&CORE · 치주재생',url:'petit_natural_tooth.html'},
+      {title:'MTA · 엠도게인 상세 안내',sub:'치아를 살리는 마지막 방법들',url:'petit_save_tooth_guide.html'},
+      {title:'편안한 임플란트',sub:'정말 발치가 필요하다면',url:'petit_implant.html'}
+    ]
+  },
+
+  // ── 자연치아 — 흔들리는 치아 ────────────────
+  {
+    title:'치아가 흔들려요, 살릴 수 있을까요?',
+    sub:'치아동요 · 치주재생',
+    answer:`치아가 흔들린다고 해서 반드시 뽑아야 하는 것은 아닙니다.
+
+치아가 흔들리는 원인
+• 잇몸뼈(치조골) 소실 — 치주염이 진행된 경우
+• 교합 과부하 — 특정 치아에 힘이 집중된 경우
+• 외상 — 부딪히거나 충격을 받은 경우
+
+살릴 수 있는 경우
+잇몸뼈가 남아있고 치아 뿌리가 건강하다면 치주재생 치료(엠도게인)와 교합 안정 치료를 병행하여 보존이 가능합니다.
+
+발치 후 임플란트보다 자연치아를 지키는 것이 훨씬 낫습니다. 흔들린다고 바로 포기하지 마세요.`,
+    links:[
+      {title:'자연치아살리기',sub:'흔들리는 치아 · 치주재생 · 교합 안정',url:'petit_natural_tooth.html'},
+      {title:'만성복합치주염',sub:'치주염 원인 3가지 — 세균·교합·전신',url:'petit_periodontitis.html'},
+      {title:'MTA · 엠도게인 상세 안내',sub:'치주재생 원리',url:'petit_save_tooth_guide.html'}
+    ]
+  },
+
+  // ── 4D 입체교정 ──────────────────────────────
+  {
+    title:'4D 입체교정이 뭔가요?',
+    sub:'4D 입체교정 · 교합치료',
+    answer:`4D 입체교정은 치아 배열만 맞추는 교정이 아닙니다.
+
+기존 교정과의 차이
+기존 교정은 치아(2D)를 가지런하게 하는 것에 집중합니다. 4D 입체교정은 치아 + 턱뼈 구조 + 교합 기능 + 얼굴 균형, 4가지를 함께 설계합니다.
+
+4D 입체교정이 필요한 경우
+• 교정 후 재발하신 분
+• 교합이 맞지 않아 치아가 반복적으로 깨지는 분
+• 턱관절 통증이 함께 있는 분
+• 얼굴 비대칭이 있는 분
+• 치아 배열보다 기능 회복이 먼저 필요한 분
+
+쁘띠치과의 4D 입체교정은 교합진단을 먼저 진행한 뒤, 치아의 이동 방향과 교합의 안정을 함께 설계합니다.`,
+    links:[
+      {title:'바른턱얼굴 교합치료',sub:'4D 입체교정 · 성장교정 · 교합재건',url:'petit_treatment_by_age.html'},
+      {title:'교합진단',sub:'60만원 · 1.5주 분석 · 상담 무료',url:'petit_diagnosis.html'},
+      {title:'교합질환 자가체크',sub:'내 교합 상태 먼저 확인',url:'petit_occlusion_selfcheck.html'}
+    ]
+  },
+
+  // ── 비수술 주걱턱 ────────────────────────────
+  {
+    title:'비수술로 주걱턱 치료가 가능한가요?',
+    sub:'주걱턱 · 비수술 교합치료',
+    answer:`성장이 완전히 끝난 성인의 경우 수술 없이 완전한 골격 개선은 어렵습니다. 하지만 많은 경우 수술 없이도 기능과 외모를 의미 있게 개선할 수 있습니다.
+
+비수술로 가능한 범위
+• 경미한 주걱턱: 교합 조정과 교정으로 교합 안정과 외모 개선 가능
+• 중등도 주걱턱: 4D 입체교정으로 치아 위치를 재설정하여 교합 기능 회복
+• 성장기 아이: 성장 방향을 유도하여 수술 가능성을 줄일 수 있음
+
+수술이 필요한 경우
+골격적 불일치가 심하거나 기능적 문제가 큰 경우에는 악교정 수술이 필요할 수 있습니다. 쁘띠치과는 교합진단을 통해 비수술로 해결 가능한 범위를 먼저 정확하게 알려드립니다.
+
+먼저 진단 받아보시고 결정하세요.`,
+    links:[
+      {title:'교합진단',sub:'비수술 가능 여부 정밀 분석',url:'petit_diagnosis.html'},
+      {title:'바른턱얼굴 교합치료',sub:'4D 입체교정 · 비수술 교합치료',url:'petit_treatment_by_age.html'},
+      {title:'교합재건 상담 위젯',sub:'증상 체크 → 치료 방향 확인',url:'petit_consultation_widget.html'}
+    ]
+  },
+
+  // ── 비수술 안면비대칭 ────────────────────────
+  {
+    title:'비수술·비발치로 안면비대칭 치료가 가능한가요?',
+    sub:'안면비대칭 · 비수술 교합치료',
+    answer:`안면비대칭은 골격적 원인과 기능적 원인이 함께 있는 경우가 많습니다.
+
+기능적 원인이 있다면 비수술 치료 가능
+• 한쪽으로만 씹는 습관
+• 혀 자세 불균형
+• 교합 불균형으로 인한 근육 비대칭
+
+이런 경우 교합을 균형 있게 맞추고 근기능 훈련을 병행하면 비수술로도 비대칭이 개선되는 경우가 있습니다.
+
+골격적 원인이 크다면
+턱뼈 자체의 좌우 길이 차이가 크거나 관절 이상이 있는 경우에는 수술이 필요할 수 있습니다.
+
+쁘띠치과는 교합진단으로 어떤 원인인지 먼저 파악하고, 비수술 해결 가능 여부를 솔직하게 안내해 드립니다.`,
+    links:[
+      {title:'교합진단',sub:'안면비대칭 원인 정밀 분석',url:'petit_diagnosis.html'},
+      {title:'바른미소디자인',sub:'근기능훈련 · 균형 회복',url:'petit_smile_design.html'},
+      {title:'바른턱얼굴 교합치료',sub:'4D 입체교정 · 교합재건',url:'petit_treatment_by_age.html'}
+    ]
+  },
+
+  // ── 성장교정 ─────────────────────────────────
+  {
+    title:'우리 아이 교정은 언제 해야 하나요?',
+    sub:'성장교정 · 골든타임',
+    answer:`치아가 다 날 때까지 기다리지 않아도 됩니다. 오히려 일찍 시작할수록 결과가 좋습니다.
+
+시기별 핵심
+
+유치열기 (5~6세)
+치아보다 턱뼈 성장 방향이 중요합니다. 입을 벌리고 자거나 코가 자주 막힌다면 확인이 필요합니다.
+
+혼합치열기 초기 (7~9세) — 골든타임
+제1대구치와 앞니가 나는 시기. 이 시기에 교합 방향을 잡아주면 나중에 훨씬 간단하게 치료됩니다.
+
+혼합치열기 후기 (10~12세)
+송곳니 자리가 부족하다면 이 시기에 공간을 만들어야 합니다. 방치하면 영구치 발치 교정이 필요해질 수 있습니다.
+
+청소년기 (13세~)
+골격 성장이 거의 완료됩니다. 이후에는 치아 이동 위주의 교정이 됩니다.
+
+아이 입을 벌리고 자거나, 밥을 오래 씹지 않거나, 한쪽으로만 씹는다면 지금 확인해 보세요.`,
+    links:[
+      {title:'바른턱얼굴 교합치료 — 성장교정',sub:'골든타임 · 비발치 · 비수술 성장 유도',url:'petit_treatment_by_age.html'},
+      {title:'교합진단',sub:'성장교정 시작 전 정밀 진단',url:'petit_diagnosis.html'},
+      {title:'우리 아이 치과수첩',sub:'임산부·신생아·유아 — 태어나기 전부터',url:'petit_prenatal.html'}
+    ]
+  },
+
+  // ── 기존 질문들 ──────────────────────────────
+  {
+    title:'치주염과 교합재건이 궁금해요',
+    sub:'치주재생 · 교합재건',
+    answer:`잇몸이 무너진 데에는 반드시 이유가 있습니다. 양치질만의 문제가 아닐 수 있습니다.
+
+교합 불균형이 지속되면 특정 치아에 과부하가 걸리고, 그 부위의 잇몸뼈가 빠르게 소실됩니다. 쁘띠치과에서는 잇몸 치료와 함께 교합 분석을 반드시 병행합니다.
+
+잇몸뼈를 재생하는 치주재생 치료와 교합을 안정시키는 교합재건 치료를 통합하여 진행하며, 치료 후에도 교합이 균형을 유지해야 잇몸이 오래갑니다.
+
+"왜 반복되는지"를 먼저 찾는 것, 그것이 쁘띠치과의 출발점입니다.`,
+    links:[
+      {title:'만성복합치주염',sub:'원인 · 단계 · 치료 — 세균·교합·전신',url:'petit_periodontitis.html'},
+      {title:'교합재건 상담 위젯',sub:'증상 체크 → 타입 확인 → 치료 방향',url:'petit_consultation_widget.html'},
+      {title:'생애주기별 교합 노화',sub:'잇몸이 무너지는 이유 — 흐름으로 보기',url:'petit_lifecycle_occlusion.html'}
+    ]
+  },
+  {
+    title:'턱관절 통증이 있어요',
+    sub:'교합 · 턱관절 · 수면',
+    answer:`턱 소리, 턱관절 통증, 입이 잘 안 벌어지는 증상은 단순한 근육 문제가 아닐 수 있습니다.
+
+교합이 맞지 않으면 턱관절과 주변 근육에 지속적인 긴장이 생깁니다. 두통, 목 통증, 어깨 결림으로 이어지는 경우도 많습니다.
+
+아침에 일어났을 때 턱이 더 아프거나, 자고 일어나도 개운하지 않다면 수면 중 이악물기·이갈이가 있을 수 있습니다. 이갈이는 나쁜 습관이 아니라 교합이 불안정할 때 몸이 안정점을 찾으려는 보상 반응입니다.
+
+쁘띠치과는 턱관절 물리치료 보험 인증기관으로, 턱관절 전문 특수 엑스레이와 물리치료가 건강보험 적용됩니다.`,
+    links:[
+      {title:'근이완치료',sub:'이악물기 · 이갈이 · 턱관절 물리치료 보험',url:'petit_muscle_relax.html'},
+      {title:'교합질환 자가체크',sub:'내 증상이 교합 문제인지 먼저 확인',url:'petit_occlusion_selfcheck.html'},
+      {title:'교합재건 상담 위젯',sub:'증상 체크 → 타입 확인 → 치료 방향',url:'petit_consultation_widget.html'}
+    ]
+  },
+  {
+    title:'바른미소디자인훈련이 뭔가요?',
+    sub:'MFT · 근기능훈련',
+    answer:`바른미소디자인훈련은 입술, 혀, 호흡, 삼키기의 올바른 기능을 되찾는 훈련입니다.
+
+우리 몸은 하루에 수천 번 숨을 쉬고, 삼키고, 혀로 무언가를 합니다. 이 반복되는 움직임이 잘못된 습관으로 굳어지면 치아 배열이 흐트러지고, 얼굴 형태에도 영향을 줍니다.
+
+교정 치료 후 재발하는 경우, 입이 잘 다물어지지 않는 경우, 혀를 앞으로 내밀며 삼키는 경우에 특히 효과적입니다.
+
+기능이 바뀌어야 형태가 유지됩니다.`,
+    links:[
+      {title:'바른미소디자인',sub:'근기능훈련 · 미소근육교정 · 교합치료 3단계',url:'petit_smile_design.html'},
+      {title:'바른턱얼굴 교합치료',sub:'청소년~인생2기 맞춤 치료',url:'petit_treatment_by_age.html'},
+      {title:'설소대단축증 치료',sub:'혀·호흡·발음 — 예방과 습관치료',url:'petit_tongue_tie.html'}
+    ]
+  }
+];
+
+let curQ='', curA='';
+
+// 질문 목록 렌더링
+const list = document.getElementById('qList');
+QUESTIONS.forEach((q,i)=>{
+  const a = document.createElement('div');
+  a.className='q-item';
+  a.innerHTML=`<div class="q-num">0${i+1}</div><div class="q-body"><div class="q-title">${q.title}</div><div class="q-sub">${q.sub}</div></div><div class="q-arr">→</div>`;
+  a.onclick=()=>show(i);
+  list.appendChild(a);
+});
+
+document.getElementById('shareHint').textContent =
+  navigator.share?'카카오톡 앱이 열립니다':'텍스트가 복사됩니다 — 카톡에 붙여넣기 하세요';
+
+function show(i){
+  const q=QUESTIONS[i];
+  curQ=q.title; curA=q.answer;
+  document.getElementById('qSection').style.display='none';
+  document.getElementById('respSection').style.display='block';
+  document.getElementById('qBubble').textContent=q.title;
+  document.getElementById('aText').textContent=q.answer;
+
+  // 관련 링크
+  const rw=document.getElementById('relWrap');
+  if(q.links&&q.links.length){
+    rw.innerHTML=`<div class="rel-label">관련 페이지</div>`+
+      q.links.map((l,idx)=>`
+        <a class="rel-link" href="${l.url}" target="_blank">
+          <div class="rel-num">0${idx+1}</div>
+          <div class="rel-body"><div class="rel-title">${l.title}</div><div class="rel-sub">${l.sub}</div></div>
+          <div class="rel-arr">→</div>
+        </a>`).join('');
+    rw.style.display='block';
+  } else {
+    rw.innerHTML=''; rw.style.display='none';
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function goBack(){
+  document.getElementById('qSection').style.display='block';
+  document.getElementById('respSection').style.display='none';
+  const b=document.getElementById('shareBtn');
+  b.classList.remove('copied');
+  b.innerHTML=`<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>카카오톡으로 결과 보내기`;
+}
+
+async function shareResult(){
+  const txt=`💚 쁘띠치과 진료 안내\n\n${curQ}\n\n${curA}\n\n─────────────\n📍 대구시 남구 대봉로 66 2층\n📞 053-472-2828\n예약: https://booking.naver.com/booking/13/bizes/743904`;
+  const b=document.getElementById('shareBtn');
+  if(navigator.share){
+    try{await navigator.share({title:'쁘띠치과 진료 안내',text:txt});}catch{}
+  } else {
+    try{
+      await navigator.clipboard.writeText(txt);
+      b.classList.add('copied');
+      b.textContent='✓ 복사됐어요 — 카톡에 붙여넣기 하세요';
+      setTimeout(()=>{
+        b.classList.remove('copied');
+        b.innerHTML=`<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>카카오톡으로 결과 보내기`;
+      },2500);
+    }catch{}
+  }
+}
+</script>
+
+<div class="share-float">
+  <div class="share-toast" id="shareToast">링크 복사됐습니다</div>
+  <button class="share-fab" onclick="doShare()" title="공유하기">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+  </button>
+</div>
+
+<script>
+async function doShare(){
+  var title=document.title||'쁘띠치과';
+  var url=location.href;
+  if(navigator.share){
+    try{await navigator.share({title:title,url:url});}catch(e){}
+  } else {
+    try{
+      await navigator.clipboard.writeText(url);
+      var t=document.getElementById('shareToast');
+      t.classList.add('show');
+      setTimeout(function(){t.classList.remove('show');},2000);
+    }catch(e){}
+  }
+}
+</script>
+<div class="rel-section">
+  <div class="rel-title">다음 단계 · 관련 페이지</div>
+  <div class="rel-links">
+  <a class="rel-link" href="petit_occlusion_selfcheck.html" target="_blank">
+    <div class="rel-link-body"><div class="rel-link-title">교합질환 자가체크</div><div class="rel-link-sub">증상이 교합 문제인지 먼저 확인하기</div></div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_diagnosis.html" target="_blank">
+    <div class="rel-link-body"><div class="rel-link-title">교합진단</div><div class="rel-link-sub">정확한 진단이 먼저입니다 — 60만원·상담 무료</div></div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_about.html" target="_blank">
+    <div class="rel-link-body"><div class="rel-link-title">쁘띠치과 소개</div><div class="rel-link-sub">생활의 기본이 되는 치과 — 비전·철학</div></div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  </div>
+</div>
+</body>
+</html>

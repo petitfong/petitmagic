@@ -1,0 +1,138 @@
+# 쁘띠치과 디자인 시스템 — AI 공통 적용 가이드
+# 이 내용을 ChatGPT 또는 Claude 대화 시작 시 붙여넣으세요.
+
+## 프로젝트 개요
+- 치과 이름: 쁘띠치과 (Petit Dental Clinic), 대구
+- GitHub Pages: https://petitfong.github.io/petitmagic/
+- 모든 파일은 HTML 단일 파일로 제작
+- 공통 CSS: petit-design.css (모든 HTML에 link 태그로 연결됨)
+
+---
+
+## 필수 규칙
+
+### 1. CSS 파일 연결
+모든 HTML 파일 <head>에 반드시 포함:
+<link rel="stylesheet" href="petit-design.css">
+
+### 2. 폰트
+- 제목·강조: font-family: 'TmonMonsori', serif
+  → h1, h2, hero 제목, 섹션 제목, 슬로건
+- 본문·UI: font-family: 'Pretendard', sans-serif
+  → body, nav, 버튼, 설명, 캡션
+
+폰트 파일 위치: fonts/ 폴더 (GitHub repo 내)
+- fonts/TmonMonsori_otf.otf
+- fonts/TmonMonsori_ttf.ttf
+- fonts/pretendard-variable.woff2
+
+---
+
+## 색상 규칙
+
+### 브랜드 컬러
+| 역할 | 색상 | 사용처 |
+|---|---|---|
+| 딥그린 (메인) | #007A54 | nav 배경, 섹션 헤더, CTA 배경 |
+| 라이트그린 | #009B6B | 호버, 링크, 보조 강조 |
+| 연그린 배경 | #E8F5F0 | 섹션·카드 배경 |
+| 민트 포인트 | #C5E8DC | 테두리, 칩 배경 |
+| 골드 | #C8A84B | 번호, 포인트 라인, 강조 태그 |
+| 크림 강조 배경 | #FFFBEF | 멘트·인사이트 박스 |
+| 크림 텍스트 | #FAF8F0 | 딥그린 배경 위 텍스트 |
+
+### 텍스트 컬러
+| 역할 | 색상 |
+|---|---|
+| 제목 | #111110 |
+| 본문 | #1A1A18 |
+| 보조 설명 | #888880 |
+| 캡션·태그 | #AAAAAA |
+| 중간 강조 | #555550 |
+| 딥그린 배경 위 | #FAF8F0 |
+
+### 배경 × 글자 조합 (반드시 준수)
+| 배경 | 제목 | 본문 | 보조 |
+|---|---|---|---|
+| #FAFAF9 (페이지) | #111110 | #888880 | #AAAAAA |
+| #FFFFFF (카드) | #111110 | #888880 | #007A54(링크) |
+| #007A54 (딥그린) | #FAF8F0 | rgba(250,248,240,.6) | #C8A84B(골드태그) |
+| #E8F5F0 (연그린) | #007A54 | #1A1A18 | #555550 |
+| #C5E8DC (민트) | #007A54 | #1A5C3A | — |
+| #FFFBEF (크림강조) | #8A6820 | #5A4010 | — |
+| #F5F5F1 (중간) | #111110 | #555550 | #888880 |
+
+---
+
+## 외부 서비스 버튼 — 절대 변경 금지
+
+### 네이버 예약 버튼
+- 배경: #03C75A (네이버 브랜드 컬러)
+- 텍스트: #FFFFFF
+- 클래스명: .btn-naver 또는 .nav-naver
+- URL: https://booking.naver.com/booking/13/bizes/743904
+
+### 카카오톡 상담 버튼
+- 배경: #FEE500 (카카오 브랜드 컬러)
+- 텍스트: #191919
+- 클래스명: .btn-kakao
+- URL: https://pf.kakao.com/_xbhXYb
+
+⚠️ 위 두 버튼은 각 회사의 브랜드 가이드라인에 따라 고정.
+쁘띠치과 컬러 시스템이 변경되어도 절대 바꾸지 않음.
+
+---
+
+## 사용 금지 조합
+- 딥그린(#007A54) 위에 검정 텍스트 → 가독성 없음
+- 연그린(#E8F5F0) 위에 회색(#AAAAAA) 텍스트 → 대비 부족
+- 딥그린(#007A54) 위에 라이트그린(#009B6B) 텍스트 → 대비 부족
+- 카카오 노랑(#FEE500) 위에 흰색 텍스트 → 절대 금지
+
+---
+
+## 공통 컴포넌트 패턴
+
+### 네비게이션
+<nav class="nav">
+  <a class="nav-logo" href="index.html">생활의 기본, <em>쁘띠치과</em></a>
+  <a class="nav-home" href="index.html">← 홈</a>
+  <a class="nav-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+</nav>
+
+### CTA 섹션
+<section class="cta">
+  <div class="cta-title">제목</div>
+  <div class="cta-sub">설명</div>
+  <div class="cta-btns">
+    <a class="btn-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">네이버 예약</a>
+    <a class="btn-kakao" href="https://pf.kakao.com/_xbhXYb" target="_blank">카카오 상담</a>
+  </div>
+</section>
+
+### 섹션 헤더 (딥그린 배경)
+<div class="sh">
+  <div class="sh-title">섹션 제목</div>
+  <div class="sh-sub">소제목</div>
+</div>
+
+---
+
+## 브랜드 슬로건
+- 한국어: 생활의 기본, 쁘띠치과
+- 영문: Born to Be, Basic is Magic
+- 철학: BTB (Basic is Magic) — 인간은 바르게 숨쉬고, 씹고, 삼키고, 자세를 유지하도록 태어남
+
+## 진료 예약 링크
+- 네이버 예약: https://booking.naver.com/booking/13/bizes/743904
+- 카카오 채널: https://pf.kakao.com/_xbhXYb
+
+## 페이지 목록 (주요)
+- index.html (메인)
+- petit_about.html (소개)
+- petit_diagnosis.html (교합진단)
+- petit_treatment_by_age.html (교합치료)
+- petit_cavity.html (충치 원인)
+- petit_beautiful_treatment.html (아름다운 치료)
+- petit_dental_spa.html (바른미소스파)
+- petit_implant.html (임플란트)

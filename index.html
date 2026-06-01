@@ -3,216 +3,473 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>쁘띠치과 · Petit Dental</title>
+<title>생활의 기본, 쁘띠치과</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: #FAF8F0;
-    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
-    color: #1A2820;
-    min-height: 100vh;
-  }
-  .top {
-    background: #1E3D30;
-    padding: 28px 20px 22px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .top::after {
-    content: '';
-    position: absolute;
-    top: -30px; right: -30px;
-    width: 120px; height: 120px;
-    border-radius: 50%;
-    background: rgba(200,168,75,0.08);
-  }
-  .top-sub   { font-size: 11px; letter-spacing: 0.22em; color: #C8A84B; margin-bottom: 8px; }
-  .top-title { color: rgba(250,248,240,0.95); font-size: 21px; font-weight: 300; letter-spacing: 0.05em; margin-bottom: 5px; }
-  .top-desc  { color: rgba(255,255,255,0.45); font-size: 12px; letter-spacing: 0.02em; }
+/* NAV */
+.nav-search{width:34px;height:34px;border:1px solid #E0E0DA;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#555550;flex-shrink:0}
+.nav-kakao{background:#FEE500;color:#191919;font-size:13px;font-weight:600;padding:8px 14px;border-radius:100px;text-decoration:none;white-space:nowrap;flex-shrink:0}
 
-  .wrap { padding: 20px 16px 50px; max-width: 560px; margin: 0 auto; }
+/* HERO */
+.hero{padding:44px 20px 40px;border-bottom:1px solid #E0E0DA;background:#fff}
+.hero-tag{font-size:11px;letter-spacing:.14em;color:#AAA9A0;text-transform:uppercase;margin-bottom:16px}
+.hero-h{font-family:'TmonMonsori',serif;font-size:clamp(26px,6.5vw,44px);font-weight:300;color:#111110;line-height:1.3;letter-spacing:-.02em;margin-bottom:12px}
+.hero-h strong{font-weight:700}
+.hero-sub{font-size:15px;color:#666660;line-height:1.85}
 
-  .sec-label {
-    font-size: 10.5px;
-    letter-spacing: 0.14em;
-    color: #C8A84B;
-    margin: 22px 0 9px 2px;
-    font-weight: 500;
-    text-transform: uppercase;
-  }
-  .sec-label:first-child { margin-top: 4px; }
+/* 자가체크 강조 */
+.selfcheck{display:block;background:#007A54;padding:28px 20px;text-decoration:none;border-bottom:3px solid #C8A84B}
+.sc-label{font-size:11px;letter-spacing:.14em;color:#C8A84B;text-transform:uppercase;margin-bottom:10px}
+.sc-title{font-family:'TmonMonsori',serif;font-size:22px;font-weight:600;color:#FAF8F0;line-height:1.35;margin-bottom:6px}
+.sc-sub{font-size:14px;color:rgba(250,248,240,.75);line-height:1.6;margin-bottom:16px}
+.sc-btn{display:inline-flex;align-items:center;gap:6px;background:#C8A84B;color:#007A54;padding:11px 22px;border-radius:100px;font-size:14px;font-weight:600;font-family:'Pretendard',sans-serif}
 
-  .lk {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    background: white;
-    border: 1px solid #E2DDD2;
-    border-radius: 11px;
-    padding: 13px 14px;
-    margin-bottom: 8px;
-    text-decoration: none;
-    color: #1A2820;
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .lk:hover { border-color: #C8A84B; background: #FFFDF6; }
-  .lk-icon {
-    width: 38px; height: 38px;
-    border-radius: 9px;
-    background: #EBF2ED;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-  }
-  .lk-icon.gold  { background: #F5EDD0; }
-  .lk-icon.cream { background: #F3EDDE; }
-  .lk-icon.new   { background: #E8F0FE; }
-  .lk-body { flex: 1; min-width: 0; }
-  .lk-title {
-    font-size: 13.5px; font-weight: 500;
-    margin-bottom: 3px;
-    display: flex; align-items: center; gap: 6px;
-  }
-  .badge {
-    font-size: 9px; font-weight: 600;
-    background: #C8A84B; color: white;
-    padding: 1px 6px; border-radius: 20px;
-    letter-spacing: 0.04em;
-  }
-  .ext {
-    font-size: 9px; letter-spacing: 0.1em; color: #7A8F84;
-    font-weight: 400;
-  }
-  .lk-sub  { font-size: 11.5px; color: #7A8F84; line-height: 1.4; }
-  .lk-arr  { color: #C8A84B; font-size: 15px; flex-shrink: 0; }
+/* SECTION 헤더 */
+.sh{padding:22px 20px 18px;display:flex;align-items:center;justify-content:space-between;background:#007A54}
+.sh-title{font-family:'TmonMonsori',serif;font-size:20px;font-weight:600;color:#FAF8F0;letter-spacing:-.01em}
+.sh-count{font-size:15px;color:#C8A84B;font-weight:300}
+.sh-line{height:0;margin:0}
 
-  .foot {
-    text-align: center;
-    font-size: 12px;
-    color: #7A8F84;
-    line-height: 1.85;
-    padding-top: 10px;
-    border-top: 1px solid #E2DDD2;
-    margin-top: 8px;
-  }
-  .foot strong { display: block; color: #1E3D30; font-size: 13px; margin-bottom: 4px; }
+/* CARDS */
+.cards{padding:0 20px;background:#fff}
+.card{display:flex;align-items:center;gap:14px;padding:20px 0;border-bottom:1px solid #EBEBE6;text-decoration:none}
+.card:last-child{border-bottom:none}
+.card-num{font-family:'TmonMonsori',serif;font-size:30px;font-weight:300;color:#DDDDD5;line-height:1;flex-shrink:0;width:38px;text-align:right}
+.card-body{flex:1;min-width:0}
+.card-cat{font-size:13px;color:#555550;margin-bottom:5px;letter-spacing:.02em}
+.card-title{font-family:'TmonMonsori',serif;font-size:19px;font-weight:600;color:#111110;line-height:1.4;margin-bottom:5px}
+.card-sub{font-size:14px;color:#555550;line-height:1.6}
+.card-more{font-size:13px;color:#007A54;margin-top:8px;font-weight:600}
+.card-cover{width:64px;height:86px;border-radius:6px;flex-shrink:0;display:flex;align-items:flex-end;padding:9px;box-shadow:0 2px 10px rgba(0,0,0,.14)}
+.cc-txt{font-family:'TmonMonsori',serif;font-size:12px;font-weight:400;color:rgba(255,255,255,.85);line-height:1.4}
+
+/* 커버 컬러 */
+.c-green{background:linear-gradient(160deg,#3a6a4a,#007A54)}
+.c-sage{background:linear-gradient(160deg,#6a8a6a,#3a5a3a)}
+.c-olive{background:linear-gradient(160deg,#8a9060,#5a6040)}
+.c-stone{background:linear-gradient(160deg,#7a7870,#4a4840)}
+.c-clay{background:linear-gradient(160deg,#9a7060,#6a4838)}
+.c-teal{background:linear-gradient(160deg,#4a7878,#2a4848)}
+.c-warm{background:linear-gradient(160deg,#9a8860,#6a5838)}
+.c-pine{background:linear-gradient(160deg,#4a6858,#007A54)}
+
+/* ARTICLES */
+.articles{padding:0 20px;background:#fff}
+.article{display:flex;align-items:flex-start;gap:12px;padding:18px 0;border-bottom:1px solid #EBEBE6;text-decoration:none}
+.article:last-child{border-bottom:none}
+.art-num{font-family:'TmonMonsori',serif;font-size:13px;color:#CCCCCC;flex-shrink:0;padding-top:2px;width:22px}
+.art-series{font-size:12px;color:#555550;margin-bottom:4px;letter-spacing:.04em}
+.art-title{font-family:'TmonMonsori',serif;font-size:18px;font-weight:600;color:#111110;line-height:1.45;margin-bottom:4px}
+.art-sub{font-size:14px;color:#555550;line-height:1.55}
+
+/* PHILOSOPHY */
+.phil{padding:44px 20px;border-top:1px solid #E0E0DA;background:#FAFAF9}
+.ph-q{font-family:'TmonMonsori',serif;font-size:clamp(18px,4.5vw,24px);font-weight:300;color:#1A1A18;line-height:1.75;margin-bottom:12px}
+.ph-q em{font-style:italic;color:#007A54}
+.ph-src{font-size:13px;color:#888880;letter-spacing:.06em}
+
+/* FOOTER */
+.foot{padding:32px 20px 64px;border-top:1px solid #E0E0DA;background:#FAFAF9}
+.foot-logo{font-family:'TmonMonsori',serif;font-size:16px;color:#1A1A18;margin-bottom:12px}
+.foot-logo em{color:#007A54;font-style:normal}
+.foot-info{font-size:14px;color:#888880;line-height:2}
+
+/* ACCORDION */
+.sh{cursor:pointer;user-select:none}
+.sh-arr{font-size:13px;color:#CCCCCC;transition:transform .2s;margin-left:6px;flex-shrink:0}
+.sh.open .sh-arr{transform:rotate(180deg);color:#007A54}
+.acc-body{display:none;overflow:hidden}
+.acc-body.open{display:block}
+
+/* DESKTOP */
+@media(min-width:640px){
+  .hero{padding:64px 32px 52px;max-width:720px;margin:0 auto}
+  .selfcheck{padding:0;max-width:720px;margin:0 auto;display:block}
+  .selfcheck-inner{padding:36px 32px}
+  .sh,.sh-line,.cards,.articles,.phil,.foot{max-width:720px;margin-left:auto;margin-right:auto;padding-left:32px;padding-right:32px}
+  .sh-line{padding:0;height:1px}
+  .card-title{font-size:21px}
+  .art-title{font-size:20px}
+}
+
+@font-face {
+  font-family: 'TmonMonsori';
+  src: url('fonts/TmonMonsori_otf.otf') format('opentype'),
+       url('fonts/TmonMonsori_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('fonts/pretendard-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 </style>
+<link rel="stylesheet" href="petit-design.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
-<div class="top">
-  <div class="top-sub">PETIT DENTAL · 쁘띠치과</div>
-  <div class="top-title">생활의 기본 쁘띠치과</div>
-  <div class="top-desc">기본이 기적이다 — Basic is Magic</div>
+<nav class="nav">
+  <a class="nav-logo" href="index.html">생활의 기본, <em>쁘띠치과</em></a>
+  <a class="nav-search" href="search.html" title="검색">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </a>
+  <a class="nav-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+  <a class="nav-kakao" href="https://pf.kakao.com/_xbhXYb" target="_blank">상담</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">Born to Be, Petit Dental · Daegu</div>
+  <h1 class="hero-h">치과는 먼 곳이 아닙니다.<br><strong>내 삶과 가장 가까운 곳.</strong></h1>
+  <p class="hero-sub">숨쉬고, 씹고, 삼키고, 서고, 앉고, 걷는<br>모든 순간이 쁘띠치과의 진료와 연결됩니다.</p>
+</section>
+
+<div style="background:#007A54;border-bottom:3px solid #C8A84B">
+<a class="selfcheck" href="petit_occlusion_selfcheck.html" target="_blank" style="display:block;text-decoration:none;max-width:720px;margin:0 auto;padding:28px 20px">
+  <div class="sc-label">지금 바로 시작하기</div>
+  <div class="sc-title">내 증상으로 알아보는<br>치료 방향</div>
+  <div class="sc-sub">나이 · 증상 선택 → 원인 파악 → 치료 방향 안내</div>
+  <div class="sc-btn">교합질환 자가체크 →</div>
+</a>
 </div>
 
-<div class="wrap">
-
-  <!-- 예약 · 연락 -->
-  <div class="sec-label">예약 · 연락</div>
-
-  <a class="lk" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">
-    <div class="lk-icon">📅</div>
-    <div class="lk-body">
-      <div class="lk-title">네이버 예약 <span class="ext">NAVER</span></div>
-      <div class="lk-sub">온라인 예약 · 실시간 확인</div>
+<div class="sh" id="sec-diagnosis-head" onclick="toggle('sec-diagnosis')">
+  <div class="sh-title">교합진단</div>
+  <div class="sh-arr">▼</div>
+</div>
+<div class="sh-line"></div>
+<div class="acc-body" id="sec-diagnosis">
+<div class="cards">
+  <a class="card" href="petit_diagnosis.html" target="_blank">
+    <div class="card-num">01</div>
+    <div class="card-body">
+      <div class="card-cat">치아·턱·두개골·전신 · 종합 분석</div>
+      <div class="card-title">정확한 진단은 정확한 네비게이션</div>
+      <div class="card-sub">방향·시간·제한사항 — 치료 전 모든 것을 먼저 확인합니다</div>
+      <div class="card-more">자세히 보기 →</div>
     </div>
-    <div class="lk-arr">→</div>
+    <div class="card-cover c-pine"><div class="cc-txt">교합<br>진단</div></div>
   </a>
-
-  <a class="lk" href="https://pf.kakao.com/_xbhXYb" target="_blank">
-    <div class="lk-icon gold">💬</div>
-    <div class="lk-body">
-      <div class="lk-title">카카오 채널 <span class="ext">KAKAO</span></div>
-      <div class="lk-sub">상담 문의 · 빠른 답변</div>
+</div>
+</div>
+<div class="sh" id="sec-about-head" onclick="toggle('sec-about')">
+  <div class="sh-title">쁘띠치과 소개</div>
+  <div class="sh-arr">▼</div></div>
+<div class="sh-line"></div>
+<div class="acc-body" id="sec-about">
+<div class="cards">
+  <a class="card" href="petit_about.html" target="_blank">
+    <div class="card-num">01</div>
+    <div class="card-body">
+      <div class="card-cat">철학 · 비전 · 미션</div>
+      <div class="card-title">생활의 기본이 되는 치과</div>
+      <div class="card-sub">스스로 건강해지는 습관을 만드는 것이 목표</div>
+      <div class="card-more">자세히 보기 →</div>
     </div>
-    <div class="lk-arr">→</div>
+    <div class="card-cover c-sage"><div class="cc-txt">비전<br>미션</div></div>
   </a>
-
-  <!-- 환자 안내 -->
-  <div class="sec-label">환자 안내</div>
-
-  <a class="lk" href="petit-guide-static.html" target="_blank">
-    <div class="lk-icon new">🏥</div>
-    <div class="lk-body">
-      <div class="lk-title">온라인 진료 안내 <span class="badge">NEW</span></div>
-      <div class="lk-sub">내원 전 궁금한 점 · 진료 방향 안내 · 카카오톡 공유</div>
+  <a class="card" href="petit_treatment_philosophy.html" target="_blank">
+    <div class="card-num">02</div>
+    <div class="card-body">
+      <div class="card-cat">치료 원칙 · 보증 책임제</div>
+      <div class="card-title">쁘띠치과 건강한 치료</div>
+      <div class="card-sub">예방부터 재생까지 · 1년 보증 책임제</div>
+      <div class="card-more">자세히 보기 →</div>
     </div>
-    <div class="lk-arr">→</div>
+    <div class="card-cover c-pine"><div class="cc-txt">건강<br>치료</div></div>
   </a>
-
-  <a class="lk" href="petit_dental_complete.html" target="_blank">
-    <div class="lk-icon">📝</div>
-    <div class="lk-body">
-      <div class="lk-title">환자 온라인 문진</div>
-      <div class="lk-sub">증상 · 내원 경로 · 치료 범위 사전 확인</div>
+  <a class="card" href="petit_beautiful_treatment.html" target="_blank">
+    <div class="card-num">03</div>
+    <div class="card-body">
+      <div class="card-cat">PRF · PDRN · 리프팅 · 피부 재생</div>
+      <div class="card-title">아름다운 치료</div>
+      <div class="card-sub">건강한 치아 위에 아름다운 얼굴을</div>
+      <div class="card-more">자세히 보기 →</div>
     </div>
-    <div class="lk-arr">→</div>
+    <div class="card-cover" style="background:#7A5A6A"><div class="cc-txt">아름<br>다운<br>치료</div></div>
   </a>
-
-  <!-- 상담 자료 -->
-  <div class="sec-label">상담 자료</div>
-
-  <a class="lk" href="petit_occlusion_selfcheck.html" target="_blank">
-    <div class="lk-icon gold">🔍</div>
-    <div class="lk-body">
-      <div class="lk-title">교합질환 자가체크</div>
-      <div class="lk-sub">증상 확인 → 원인 파악 → 치료 방향 안내</div>
+</div>
+</div>
+<div class="sh" id="sec-guide-head" onclick="toggle('sec-guide')">
+  <div class="sh-title">온라인 진료 안내</div>
+  <div class="sh-arr">▼</div></div>
+<div class="sh-line"></div>
+<div class="acc-body" id="sec-guide">
+<div class="cards">
+  <a class="card" href="petit_guide.html" target="_blank">
+    <div class="card-num">01</div>
+    <div class="card-body">
+      <div class="card-cat">내원 전 · Q&A · 8가지 질문</div>
+      <div class="card-title">내원 전 궁금한 점을<br>먼저 알아보세요</div>
+      <div class="card-sub">발치 권유 · 치주염 · 턱관절 · 성장교정 · 첫 방문 안내</div>
+      <div class="card-more">자세히 보기 →</div>
     </div>
-    <div class="lk-arr">→</div>
+    <div class="card-cover c-sage"><div class="cc-txt">진료<br>안내</div></div>
   </a>
-
-  <a class="lk" href="petit_consultation_widget.html" target="_blank">
-    <div class="lk-icon">📋</div>
-    <div class="lk-body">
-      <div class="lk-title">교합재건 상담 위젯</div>
-      <div class="lk-sub">증상 체크 → 분석 → 타입 확인 → 치료 효과</div>
+</div>
+</div>
+<div class="sh" id="sec-occlusion-head" onclick="toggle('sec-occlusion')">
+  <div class="sh-title">바른턱얼굴 교합치료</div>
+  <div class="sh-arr">▼</div><div class="sh-count">3</div></div>
+<div class="sh-line"></div>
+<div class="acc-body" id="sec-occlusion">
+<div class="cards">
+  <a class="card" href="petit_treatment_by_age.html" target="_blank">
+    <div class="card-num">01</div>
+    <div class="card-body">
+      <div class="card-cat">성장교정 · 4D입체교정 · 교합재건</div>
+      <div class="card-title">바른턱얼굴 교합치료</div>
+      <div class="card-sub">어린이 · 청소년 · 중장년 대상별 안내</div>
+      <div class="card-more">자세히 보기 →</div>
     </div>
-    <div class="lk-arr">→</div>
+    <div class="card-cover c-green"><div class="cc-txt">교합<br>치료</div></div>
   </a>
-
-  <a class="lk" href="petit_lifecycle_occlusion.html" target="_blank">
-    <div class="lk-icon">🕰️</div>
-    <div class="lk-body">
-      <div class="lk-title">생애주기별 교합 노화 타임라인</div>
-      <div class="lk-sub">태어남부터 노년까지 — 교합이 무너지는 이유</div>
+  <a class="card" href="petit_smile_design.html" target="_blank">
+    <div class="card-num">02</div>
+    <div class="card-body">
+      <div class="card-cat">근기능훈련 · 미소근육교정</div>
+      <div class="card-title">바른미소디자인</div>
+      <div class="card-sub">건강함과 아름다움은 함께 이뤄집니다</div>
+      <div class="card-more">자세히 보기 →</div>
     </div>
-    <div class="lk-arr">→</div>
+    <div class="card-cover c-olive"><div class="cc-txt">바른<br>미소</div></div>
   </a>
-
-  <!-- 치료 안내 -->
-  <div class="sec-label">치료 안내</div>
-
-  <a class="lk" href="petit_treatment_by_age.html" target="_blank">
-    <div class="lk-icon">🌱</div>
-    <div class="lk-body">
-      <div class="lk-title">바른턱얼굴 교합치료</div>
-      <div class="lk-sub">어린이 · 청소년·청년 · 중장년 — 대상별 안내</div>
+  <a class="card" href="petit_consultation_widget.html" target="_blank">
+    <div class="card-num">03</div>
+    <div class="card-body">
+      <div class="card-cat">중장년 · 심층상담</div>
+      <div class="card-title">교합재건 상담 위젯</div>
+      <div class="card-sub">증상 체크 → 교합 타입 → 치료 계획</div>
+      <div class="card-more">자세히 보기 →</div>
     </div>
-    <div class="lk-arr">→</div>
+    <div class="card-cover c-stone"><div class="cc-txt">상담<br>위젯</div></div>
   </a>
+</div>
 
-  <!-- FoANa -->
-  <div class="sec-label">FoANa</div>
-
-  <a class="lk" href="petit_foana_brand.html" target="_blank">
-    <div class="lk-icon cream">☕</div>
-    <div class="lk-body">
-      <div class="lk-title">FoANa × 쁘띠치과</div>
-      <div class="lk-sub">삶의 기본을 알려주는 연결의 장 — 브랜드 스토리</div>
+</div>
+<div class="sh" id="sec-natural-head" onclick="toggle('sec-natural')">
+  <div class="sh-title">자연치아살리기</div>
+  <div class="sh-arr">▼</div><div class="sh-count">4</div></div>
+<div class="sh-line"></div>
+<div class="acc-body" id="sec-natural">
+<div class="cards">
+  <a class="card" href="petit_natural_tooth.html" target="_blank">
+    <div class="card-num">01</div>
+    <div class="card-body">
+      <div class="card-cat">MTA · 엠도게인 · 무삭제레진</div>
+      <div class="card-title">뽑기 전에 먼저 확인하세요</div>
+      <div class="card-sub">흔들리고 깨진 치아도 뿌리가 살아 있다면</div>
+      <div class="card-more">자세히 보기 →</div>
     </div>
-    <div class="lk-arr">→</div>
+    <div class="card-cover c-teal"><div class="cc-txt">자연<br>치아</div></div>
   </a>
+  <a class="card" href="petit_save_tooth_guide.html" target="_blank">
+    <div class="card-num">02</div>
+    <div class="card-body">
+      <div class="card-cat">상세안내 · 원리</div>
+      <div class="card-title">엠도게인 · MTA 상세 안내</div>
+      <div class="card-sub">뿌리 기준 · 치주재생 · 신경재생 원리</div>
+      <div class="card-more">자세히 보기 →</div>
+    </div>
+    <div class="card-cover c-sage"><div class="cc-txt">상세<br>안내</div></div>
+  </a>
+  <a class="card" href="petit_resin_oneday.html" target="_blank">
+    <div class="card-num">03</div>
+    <div class="card-body">
+      <div class="card-cat">원데이보철 · 1년보증</div>
+      <div class="card-title">무삭제레진 원데이보철</div>
+      <div class="card-sub">치아 안 깎고 · 당일 완료 · 교합 동시 치료</div>
+      <div class="card-more">자세히 보기 →</div>
+    </div>
+    <div class="card-cover c-warm"><div class="cc-txt">무삭제<br>레진</div></div>
+  </a>
+  <a class="card" href="petit_periodontitis.html" target="_blank">
+    <div class="card-num">04</div>
+    <div class="card-body">
+      <div class="card-cat">치주재생 · 예방</div>
+      <div class="card-title">만성복합치주염</div>
+      <div class="card-sub">아프지 않아도 진행 중 · 세균·교합·전신</div>
+      <div class="card-more">자세히 보기 →</div>
+    </div>
+    <div class="card-cover c-clay"><div class="cc-txt">치주<br>염</div></div>
+  </a>
+</div>
 
-  <!-- 푸터 -->
-  <div class="foot">
-    <strong>생활의 기본 쁘띠치과</strong>
+</div>
+<div class="sh" id="sec-prevention-head" onclick="toggle('sec-prevention')">
+  <div class="sh-title">예방 · 습관치료</div>
+  <div class="sh-arr">▼</div><div class="sh-count">3</div></div>
+<div class="sh-line"></div>
+<div class="acc-body" id="sec-prevention">
+<div class="cards">
+  <a class="card" href="petit_prevention.html" target="_blank">
+    <div class="card-num">01</div>
+    <div class="card-body">
+      <div class="card-cat">양치질교육 · 불소 · 치주염예방</div>
+      <div class="card-title">기본은 예방과 습관</div>
+      <div class="card-sub">3회 양치질 교육 · 만성복합치주염 예방</div>
+      <div class="card-more">자세히 보기 →</div>
+    </div>
+    <div class="card-cover c-sage"><div class="cc-txt">예방<br>습관</div></div>
+  </a>
+  <a class="card" href="petit_tongue_tie.html" target="_blank">
+    <div class="card-num">02</div>
+    <div class="card-body">
+      <div class="card-cat">혀 · 호흡 · 성장 · 발음</div>
+      <div class="card-title">설소대단축증 치료</div>
+      <div class="card-sub">혀가 짧으면 숨쉬기도, 자라기도 달라집니다</div>
+      <div class="card-more">자세히 보기 →</div>
+    </div>
+    <div class="card-cover c-pine"><div class="cc-txt">설소<br>대</div></div>
+  </a>
+  <a class="card" href="petit_muscle_relax.html" target="_blank">
+    <div class="card-num">03</div>
+    <div class="card-body">
+      <div class="card-cat">이악물기 · 이갈이 · 보톡스</div>
+      <div class="card-title">근이완치료</div>
+      <div class="card-sub">이악물기·이갈이로부터 치아를 지킵니다</div>
+      <div class="card-more">자세히 보기 →</div>
+    </div>
+    <div class="card-cover c-stone"><div class="cc-txt">근이<br>완</div></div>
+  </a>
+</div>
+
+</div>
+<div class="sh" id="sec-edu-head" onclick="toggle('sec-edu')">
+  <div class="sh-title">교육 · 이해</div>
+  <div class="sh-arr">▼</div></div>
+<div class="sh-line"></div>
+<div class="acc-body" id="sec-edu">
+<div class="articles">
+  <a class="article" href="petit_lifecycle_occlusion.html" target="_blank">
+    <div class="art-num">01</div>
+    <div>
+      <div class="art-series">생애주기별 교합 노화</div>
+      <div class="art-title">태어남부터 노년까지</div>
+      <div class="art-sub">교합이 무너지는 이유 · 각 시기별 변화</div>
+    </div>
+  </a>
+  <a class="article" href="petit_occlusion_selfcheck.html" target="_blank">
+    <div class="art-num">02</div>
+    <div>
+      <div class="art-series">교합질환 원인</div>
+      <div class="art-title">치아가 안 좋아지는 이유</div>
+      <div class="art-sub">구조적·기능적·발육적 원인과 부정교합</div>
+    </div>
+  </a>
+</div>
+
+</div>
+<div class="sh" id="sec-spa-head" onclick="toggle('sec-spa')">
+  <div class="sh-title">쁘띠 바른미소스파</div>
+  <div class="sh-arr">▼</div></div>
+<div class="sh-line"></div>
+<div class="acc-body" id="sec-spa">
+<div class="cards">
+  <a class="card" href="petit_dental_spa.html" target="_blank">
+    <div class="card-num">01</div>
+    <div class="card-body">
+      <div class="card-cat">자연치아 유지 · 생활 관리 · 기능 회복</div>
+      <div class="card-title">쁘띠 바른미소스파</div>
+      <div class="card-sub">자연치아를 지키는 생활 관리 프로그램<br>BASIC · BALANCE · RECOVERY · BREATH</div>
+      <div class="card-more">자세히 보기 →</div>
+    </div>
+    <div class="card-cover c-teal"><div class="cc-txt">덴탈<br>스파</div></div>
+  </a>
+</div>
+</div>
+
+<div class="sh" id="sec-general-head" onclick="toggle('sec-general')">
+  <div class="sh-title">일반진료</div>
+  <div class="sh-arr">▼</div>
+</div>
+<div class="sh-line"></div>
+<div class="acc-body" id="sec-general">
+<div class="cards">
+  <a class="card" href="petit_general.html" target="_blank">
+    <div class="card-num">01</div>
+    <div class="card-body">
+      <div class="card-cat">예방 · 충치 · 치주 · 심미보철 · 사랑니</div>
+      <div class="card-title">기본진료</div>
+      <div class="card-sub">기본을 제대로 하는 치과가 모든 치료를 잘합니다</div>
+      <div class="card-more">자세히 보기 →</div>
+    </div>
+    <div class="card-cover c-sage"><div class="cc-txt">기본<br>진료</div></div>
+  </a>
+  <a class="card" href="petit_implant.html" target="_blank">
+    <div class="card-num">02</div>
+    <div class="card-body">
+      <div class="card-cat">Flapless · 자가혈재생인자 · 피에조 상악동거상</div>
+      <div class="card-title">임플란트</div>
+      <div class="card-sub">인공치아가 자연치아를 보호하고 살립니다</div>
+      <div class="card-more">자세히 보기 →</div>
+    </div>
+    <div class="card-cover c-teal"><div class="cc-txt">임플<br>란트</div></div>
+  </a>
+  <a class="card" href="petit_denture.html" target="_blank">
+    <div class="card-num">03</div>
+    <div class="card-body">
+      <div class="card-cat">교합 · 기능 · 심미 · 의사 직접 설계</div>
+      <div class="card-title">아름다운 틀니</div>
+      <div class="card-sub">의사가 직접 턱 위치를 설정하고 설계합니다</div>
+      <div class="card-more">자세히 보기 →</div>
+    </div>
+    <div class="card-cover c-warm"><div class="cc-txt">아름<br>다운<br>틀니</div></div>
+  </a>
+</div>
+</div>
+<div class="sh" id="sec-foana-head" onclick="toggle('sec-foana')">
+  <div class="sh-title">FöANa</div>
+  <div class="sh-arr">▼</div></div>
+<div class="sh-line"></div>
+<div class="acc-body" id="sec-foana">
+<div class="cards">
+  <a class="card" href="petit_foana_brand.html" target="_blank">
+    <div class="card-num">01</div>
+    <div class="card-body">
+      <div class="card-cat">브랜드스토리 · 카페 · 웰니스</div>
+      <div class="card-title">FöANa × 쁘띠치과</div>
+      <div class="card-sub">삶의 기본을 알려주는 연결의 장</div>
+      <div class="card-more">자세히 보기 →</div>
+    </div>
+    <div class="card-cover c-warm"><div class="cc-txt">Fö<br>ANa</div></div>
+  </a>
+</div>
+
+</div>
+<div class="phil">
+  <div class="ph-q">"편안하고, 건강하고, 나다운 상태.<br><em>기본에 집중할 때 만들어집니다.</em>"</div>
+  <div class="ph-src">쁘띠치과 · Basic is Magic · 기본이 기적이다</div>
+</div>
+
+<div class="foot">
+  <div class="foot-logo">생활의 기본, <em>쁘띠치과</em></div>
+  <div class="foot-info">
+    Born to Be, Petit Dental<br>
     📍 대구시 남구 대봉로 66 2층<br>
     📞 053-472-2828<br>
     교합치료 · 근기능훈련(MFT) · 안면성장 디자인
   </div>
-
 </div>
+
+<script>
+function toggle(id){
+  var body=document.getElementById(id);
+  var head=document.getElementById(id+'-head');
+  if(!body)return;
+  body.classList.toggle('open');
+  head.classList.toggle('open');
+}
+// 처음에 '온라인 진료 안내' 하나만 열기
+document.addEventListener('DOMContentLoaded', function(){
+  // 모두 닫힌 상태가 기본 (CSS display:none)
+  // 원하는 섹션만 열기
+});
+</script>
 </body>
 </html>

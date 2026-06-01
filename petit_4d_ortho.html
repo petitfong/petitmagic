@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4D 입체교정 | 쁘띠치과</title>
+<link rel="stylesheet" href="petit-design.css">
+<style>
+/* ── 페이지 전용 ── */
+
+/* 장치 카드 */
+.device-sec{background:#fff;padding:20px}
+.device-cards{display:flex;flex-direction:column;gap:12px}
+/* 색상 변형 */
+.compare-table{border-radius:10px;overflow:hidden;border:1.5px solid #E4E4DE;margin-top:14px}
+.ct-head{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;background:#007A54}
+.ct-th{padding:9px 10px;font-size:11px;font-weight:700;color:#FAF8F0;text-align:center}
+.ct-th:first-child{color:#C8A84B;text-align:left;padding-left:12px}
+.ct-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-top:1px solid #EAEAE4}
+.ct-row:nth-child(even){background:#F7F7F3}
+.ct-td{padding:9px 10px;font-size:12px;color:#444440;line-height:1.5;text-align:center}
+.ct-td:first-child{font-weight:600;color:#007A54;text-align:left;padding-left:12px;font-size:11.5px}
+.ct-td.g{color:#007A54;font-weight:500}
+
+/* 3단계 흐름 */
+.stage-flow{display:flex;flex-direction:column;gap:0;margin-top:16px}
+.sf{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid #EAEAE4}
+.sf:last-child{border-bottom:none}
+.sf-num{font-family:'TmonMonsori',serif;font-size:22px;font-weight:700;color:#E0E0DA;flex-shrink:0;width:36px;line-height:1}
+.sf-body{flex:1}
+.sf-title{font-family:'TmonMonsori',serif;font-size:16px;font-weight:600;color:#111110;margin-bottom:4px}
+.sf-desc{font-size:13px;color:#555550;line-height:1.7}
+.sf-tag{display:inline-flex;align-items:center;gap:4px;margin-top:6px;font-size:12px;font-weight:600;color:#007A54;border:1px solid #C5E8DC;padding:3px 10px;border-radius:100px;background:#E8F5F0}
+
+/* nav-home */
+.nav-home{font-size:12px;padding:6px 12px;border-radius:100px;border:1px solid #E0E0DA;color:#555550;text-decoration:none;white-space:nowrap;flex-shrink:0}
+
+@media(min-width:640px){
+  .nav,.hero,.hero-dark,.device-sec,.compare-sec,.btb-box,.link-sec,.cta,.content-sec,.stage-sec{max-width:720px;margin-left:auto;margin-right:auto}
+  .sh,.sh-divider{max-width:720px;margin-left:auto;margin-right:auto}
+  .share-float{right:calc(50% - 360px + 18px)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="index.html">생활의 기본, <em>쁘띠치과</em></a>
+  <a class="nav-home" href="index.html">← 홈</a>
+  <a class="nav-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero hero-dark">
+  <div class="hero-tag">4D ORTHODONTICS · 4D 입체교정</div>
+  <h1 class="hero-title">칼 안 대는 성형수술.<br><em>비발치 · 비수술 교합치료.</em></h1>
+  <p class="hero-sub">위아래 턱의 크기·위치·방향을 3차원으로 바꾸고<br>기능 훈련으로 완성하는 — 4D 입체교정입니다.</p>
+  <div style="margin-top:20px;display:inline-flex;align-items:center;gap:8px;background:rgba(200,168,75,.18);border:1px solid rgba(200,168,75,.35);border-radius:8px;padding:10px 14px;font-size:13px;color:#C8A84B;line-height:1.55;position:relative">
+    비발치 · 비수술을 원칙으로 합니다. 발치·수술은 필요한 경우에만 최후 수단으로 고려합니다.
+  </div>
+</section>
+
+<!-- 4D란 무엇인가 -->
+<div class="sh">
+  <div class="sh-title">4D가 의미하는 것</div>
+  <div class="sh-sub">3차원 공간 + 시간의 흐름</div>
+</div>
+<div class="sh-divider"></div>
+<section class="content-sec" style="background:#fff;padding:20px">
+  <p style="font-size:14px;color:#555550;line-height:1.85;margin-bottom:16px">일반 치아교정은 치아만 움직입니다. 4D 입체교정은 다릅니다.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+    <div style="padding:13px 14px;background:#E8F5F0;border-radius:10px;border-left:3px solid #007A54">
+      <div style="font-size:11px;font-weight:700;color:#007A54;letter-spacing:.08em;margin-bottom:4px">X · Y · Z</div>
+      <div style="font-family:'TmonMonsori',serif;font-size:15px;font-weight:600;color:#111110;margin-bottom:4px">3차원 이동</div>
+      <div style="font-size:12.5px;color:#555550;line-height:1.6">턱을 앞뒤·좌우·위아래 모든 방향으로 조정합니다</div>
+    </div>
+    <div style="padding:13px 14px;background:#FFFBEF;border-radius:10px;border-left:3px solid #C8A84B">
+      <div style="font-size:11px;font-weight:700;color:#8A6820;letter-spacing:.08em;margin-bottom:4px">+TIME</div>
+      <div style="font-family:'TmonMonsori',serif;font-size:15px;font-weight:600;color:#111110;margin-bottom:4px">성장의 흐름</div>
+      <div style="font-size:12.5px;color:#555550;line-height:1.6">성장 단계에 맞춰 장치와 치료 방향을 바꿔갑니다</div>
+    </div>
+    <div style="padding:13px 14px;background:#F5F5F1;border-radius:10px;border-left:3px solid #888880;grid-column:1/-1">
+      <div style="font-size:11px;font-weight:700;color:#555550;letter-spacing:.08em;margin-bottom:4px">결과</div>
+      <div style="font-size:13px;color:#333330;line-height:1.7">뼈의 크기와 위치가 바뀌고 치아가 그 위에 배열됩니다. 기능 훈련으로 완성되면 <strong style="color:#007A54">내 몸이 유지장치</strong>가 됩니다</div>
+    </div>
+  </div>
+</section>
+
+<!-- 치료 흐름 안내 -->
+<section class="content-sec" style="background:#FAFAF9;padding:16px 20px">
+  <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:#E8F5F0;border-radius:10px;border-left:3px solid #007A54">
+    <div style="flex:1;font-size:13px;color:#1A5C3A;line-height:1.75">4D 입체교정의 치료 흐름(뼈→치아→기능 3단계)과 연령별 적용 방법은 아래에서 확인하실 수 있습니다</div>
+    <a href="petit_treatment_by_age.html" style="flex-shrink:0;font-size:12px;font-weight:700;color:#007A54;text-decoration:none;border:1px solid #C5E8DC;padding:6px 12px;border-radius:100px;background:#fff;white-space:nowrap">치료 흐름 보기 →</a>
+  </div>
+</section>
+
+<!-- 4D 장치 종류 -->
+<div class="sh">
+  <div class="sh-title">4D 입체교정 장치</div>
+  <div class="sh-sub">연령·증상에 따라 다른 장치를 사용합니다</div>
+</div>
+<div class="sh-divider"></div>
+<section class="device-sec">
+  <div class="device-cards">
+
+    <div class="dc green">
+      <div class="dc-head">
+        <div>
+          <div class="dc-badge">성장 완료기 청소년 · 성인</div>
+        </div>
+        <div class="dc-info">
+          <div class="dc-name">MARPE</div>
+          <div class="dc-sub">Miniscrew-Assisted Rapid Palatal Expander · 상악 급속 확장</div>
+        </div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-item">성장이 완료되어 가는 청소년 또는 성인에서 <strong>상악 성장 부족</strong>이 있을 때 적용합니다</div>
+        <div class="dc-item">미니 스크류를 입천장 뼈에 직접 고정해 힘을 가합니다. 뼈가 굳어 일반 확장 장치로 안 되는 경우에도 비수술로 상악을 확장할 수 있습니다</div>
+        <div class="dc-item">상악 확장을 통해 <strong>비발치·비수술 치료</strong>가 가능해집니다. 발치나 양악수술의 대안이 됩니다</div>
+        <div class="dc-item">상악 확장 후 기도도 함께 넓어져 코골이·수면 무호흡 개선에도 효과가 있습니다</div>
+        <div class="dc-point">상악 성장 부족 · 성인 비발치 교정 · 기도 확장</div>
+      </div>
+    </div>
+
+    <div class="dc gold">
+      <div class="dc-head">
+        <div>
+          <div class="dc-badge">성장기 어린이 · 사춘기 / 성인</div>
+        </div>
+        <div class="dc-info">
+          <div class="dc-name">Twin Block</div>
+          <div class="dc-sub">트윈 블록 · 하악 성장 유도 · 턱 위치 조절</div>
+        </div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-item">성장기 어린이~사춘기에서 <strong>하악(아래턱) 성장을 도와주는</strong> 대표적인 장치입니다. 위아래 두 블록이 맞물리며 아래턱을 앞으로 유도합니다</div>
+        <div class="dc-item">4D 입체교정 개념에서는 어린이부터 성인까지 <strong>턱의 틀어짐·안면비대칭 개선</strong>에도 활용합니다. 턱의 수평적·수직적 위치 이동이 가능합니다</div>
+        <div class="dc-item">무턱·돌출입에서 아래턱 성장을 자극해 위아래 턱 균형을 맞춥니다. 코골이가 심한 성인 교정에도 사용됩니다</div>
+        <div class="dc-item">사춘기 성장 피크(10~13세)에 사용하면 효과가 가장 큽니다</div>
+        <div class="dc-point">무턱·돌출입 · 안면비대칭 · 하악 성장 부족 · 성장기~성인</div>
+      </div>
+    </div>
+
+    <div class="dc green">
+      <div class="dc-head">
+        <div>
+          <div class="dc-badge">성장기·성인</div>
+        </div>
+        <div class="dc-info">
+          <div class="dc-name">Han's 2-Way / 3-Way</div>
+          <div class="dc-sub">한스 장치 · 전후·좌우·수직 3차원 조절</div>
+        </div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-item">2-Way는 전후·좌우, 3-Way는 수직 방향까지 추가해 <strong>3차원으로 턱 위치를 조절</strong>합니다</div>
+        <div class="dc-item">안면 비대칭·턱 편위·복합 골격 문제에 적합합니다</div>
+        <div class="dc-item">성장기는 성장 방향 유도, 성인은 교합 재건 시 턱 위치 안정화에 사용합니다</div>
+        <div class="dc-point">안면비대칭 · 복합 골격 문제 · 교합 재건</div>
+      </div>
+    </div>
+
+    <div class="dc dark">
+      <div class="dc-head">
+        <div>
+          <div class="dc-badge">유아~성장기 · 만 5세~</div>
+        </div>
+        <div class="dc-info">
+          <div class="dc-name" style="color:#FAF8F0">Biobloc</div>
+          <div class="dc-sub">바이오블락 · Orthotropics 기반 성장 유도 장치</div>
+        </div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-item" style="color:rgba(250,248,240,.85)">Dr. John Mew(1966)의 <strong style="color:#C8A84B">Orthotropics(오쏘트로픽스)</strong> 철학에서 기인한 장치입니다. "성장(tropos)을 바르게(Orthos) 치료한다"는 개념으로, 부정교합의 원인인 잘못된 구강·근육 습관을 근본부터 바꿉니다</div>
+        <div class="dc-item" style="color:rgba(250,248,240,.85)"><strong style="color:#C8A84B">만 5세경</strong>에 시작하면 아직 유합되지 않은 두개골 봉합까지 변화시켜 근본적인 골격 개선이 가능합니다. 가철성 장치로 아이의 부담이 적습니다</div>
+        <div class="dc-item" style="color:rgba(250,248,240,.85)">Class II(하악후퇴증·무턱)와 Class III(하악과성장증·주걱턱) 모두에 적용하며, 상악이 측방 확대·전방 성장하면서 반대교합 해소, 혀 위치 상방 개선이 이루어집니다</div>
+        <div class="dc-item" style="color:rgba(250,248,240,.85)">Stage 1 Upper → Stage 1 Lower → Stage 3·4 순서로 단계별 진행합니다</div>
+        <!-- Tropic Premise 박스 -->
+        <div style="margin-top:10px;padding:12px 14px;background:rgba(200,168,75,.15);border-left:3px solid #C8A84B;border-radius:0 8px 8px 0;font-size:13px;color:rgba(250,248,240,.85);line-height:1.75">
+          <strong style="color:#C8A84B">Tropic Premise (트로픽 전제)</strong><br>
+          안정 상태일 때<br>
+          · 혀는 입천장에 붙어 있어야 하고<br>
+          · 입술은 다물어져야 하며<br>
+          · 치아는 서로 맞닿거나 거의 닿아 있어야 합니다<br>
+          <span style="font-size:12px;color:rgba(250,248,240,.6);margin-top:4px;display:block">이 세 가지가 완전히 자기 것이 될 때 Biobloc 치료는 완성됩니다</span>
+        </div>
+        <div class="dc-point" style="background:rgba(255,255,255,.1);color:rgba(250,248,240,.85);border-left:3px solid #C8A84B">유아·성장기 골격 부정교합 근본 치료 · Class II·III · 5세부터 가능</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section class="compare-sec">
+  <div class="sec-label">장치 비교</div>
+  <div class="sec-title">어떤 장치가 맞나요?</div>
+  <div class="compare-table">
+    <div class="ct-head">
+      <div class="ct-th">장치</div>
+      <div class="ct-th">주 대상</div>
+      <div class="ct-th">주 목적</div>
+      <div class="ct-th">방향</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-td">MARPE</div>
+      <div class="ct-td">청소년(성장완료기)·성인</div>
+      <div class="ct-td g">상악 확장 · 비발치·비수술 확보</div>
+      <div class="ct-td">좌우</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-td">Twin Block</div>
+      <div class="ct-td">성장기 어린이~성인</div>
+      <div class="ct-td g">하악 성장 유도 · 턱 틀어짐·비대칭</div>
+      <div class="ct-td">전후+수직</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-td">Han's 2-Way</div>
+      <div class="ct-td">성장기·성인</div>
+      <div class="ct-td g">전후·좌우 조절</div>
+      <div class="ct-td">전후+좌우</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-td">Han's 3-Way</div>
+      <div class="ct-td">성장기·성인</div>
+      <div class="ct-td g">3차원 전체 조절</div>
+      <div class="ct-td">전후+좌우+수직</div>
+    </div>
+  </div>
+  <p style="margin-top:10px;font-size:12px;color:#888880;line-height:1.7">* 장치는 진단 결과에 따라 단독 또는 병행 사용합니다. 반드시 교합진단 후 결정됩니다.</p>
+</section>
+
+<!-- BTB -->
+<div class="btb-box">
+  <div class="btb-inner">
+    <div class="btb-label">BASIC IS MAGIC · 쁘띠치과 관점</div>
+    <div class="btb-title">장치는 방향을 잡아줄 뿐입니다.<br>완성은 기능이 합니다.</div>
+    <div class="btb-items">
+      <div class="bi">4D 입체교정은 턱의 위치를 바꾸는 것에서 시작합니다. 하지만 장치가 끝난 후 혀·입술·호흡·자세가 바뀌지 않으면 턱은 다시 원래 위치로 돌아갑니다</div>
+      <div class="bi">쁘띠치과의 3단계 치료는 이 때문입니다. 뼈를 바꾸고, 치아를 배열하고, 기능을 완성하는 순서로 — 내 몸이 스스로 유지하게 만듭니다</div>
+      <div class="bi">발치·수술 없이 아름다운 얼굴을 만들 수 있는 시간은 성장기뿐입니다. 그 시간을 잘 쓰는 것이 쁘띠치과의 역할입니다</div>
+    </div>
+  </div>
+</div>
+
+<!-- 연계 페이지 -->
+<section class="link-sec">
+  <div class="link-title">함께 확인하면 좋은 페이지</div>
+  <div class="link-cards">
+    <a class="lc main" href="petit_pediatric.html">
+      <div class="lc-body">
+        <div class="lc-title">어린이 성장교정</div>
+        <div class="lc-sub">주걱턱·덧니·구호흡·돌출·안면비대칭 · 골든타임</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc sub" href="petit_treatment_by_age.html">
+      <div class="lc-body">
+        <div class="lc-title">바른턱얼굴 교합치료</div>
+        <div class="lc-sub">성장교정·교합치료·교합재건 연령별 전체 흐름</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc sub" href="petit_diagnosis.html">
+      <div class="lc-body">
+        <div class="lc-title">교합진단</div>
+        <div class="lc-sub">4D 교정 시작 전 정밀 분석 · 치료 방향 설계</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc sub" href="petit_occlusion_selfcheck.html">
+      <div class="lc-body">
+        <div class="lc-title">교합 자가체크</div>
+        <div class="lc-sub">지금 내 교합 상태 확인</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc gold" href="petit_smile_design.html">
+      <div class="lc-body">
+        <div class="lc-title">바른미소디자인</div>
+        <div class="lc-sub">3단계 기능 훈련 · 교합 완성</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-title">4D 교정이 가능한지<br>먼저 확인합니다</div>
+  <div class="cta-sub">발치·수술 없이 가능한지, 어떤 장치가 적합한지<br>교합진단 후 정확하게 안내드립니다</div>
+  <div class="cta-btns">
+    <a class="btn-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/></svg>
+      네이버 예약
+    </a>
+    <a class="btn-kakao" href="https://pf.kakao.com/_xbhXYb" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#191919"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.67 1.648 5.012 4.146 6.396L5 21l5.12-2.983C10.734 18.01 11.363 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z"/></svg>
+      카카오 상담
+    </a>
+  </div>
+  <div class="cta-info">대구시 남구 대봉로 66 2층 · 053-472-2828</div>
+</section>
+
+<!-- 공유 -->
+<div class="share-float">
+  <div class="share-toast" id="shareToast">링크 복사됐습니다</div>
+  <button class="share-fab" onclick="doShare()" title="공유하기">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+  </button>
+</div>
+
+<script>
+async function doShare(){
+  var url=location.href;
+  if(navigator.share){try{await navigator.share({title:document.title,url:url});}catch(e){}}
+  else{try{await navigator.clipboard.writeText(url);var t=document.getElementById('shareToast');t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2000);}catch(e){}}
+}
+</script>
+</body>
+</html>

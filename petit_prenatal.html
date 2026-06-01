@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>우리 아이 치과수첩 | 쁘띠치과</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* 전체 중앙 배치 */
+.nav,.sh,.cta-sec,.badge-bar{width:100%}
+.hero,.wrap,.rel-section,.booklet-cta-wrap{max-width:720px;margin-left:auto;margin-right:auto;width:100%;padding-left:20px;padding-right:20px}
+.sh .sh-title,.sh .sh-sub{max-width:720px;margin-left:auto;margin-right:auto}
+
+/* 히어로 */
+.hero{background:linear-gradient(180deg,#E8F5F0 0%,#fff 100%);padding:48px 20px 36px;border-bottom:1px solid #C5E8DC;text-align:center}
+.hero-eyebrow{font-size:11px;letter-spacing:.16em;color:var(--color-primary,#007A54);text-transform:uppercase;font-weight:600;margin-bottom:12px}
+.hero-title{font-family:var(--font-title,'Noto Serif KR',serif);font-size:clamp(24px,5vw,36px);font-weight:400;color:#111110;line-height:1.45;letter-spacing:-.02em;margin-bottom:14px}
+.hero-title em{font-style:italic;color:var(--color-primary,#007A54)}
+.hero-sub{font-size:14px;color:#555550;line-height:1.85;margin-bottom:22px}
+.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--color-primary,#007A54);color:#FAF8F0;padding:12px 22px;border-radius:100px;font-size:13px;font-weight:600;text-decoration:none}
+/* 배지 바 */
+.badge-bar{background:var(--color-primary,#007A54);padding:12px 20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;border-top:3px solid #C8A84B}
+.badge-bar::-webkit-scrollbar{display:none}
+.badge{font-size:11.5px;background:rgba(250,248,240,.15);color:#FAF8F0;border-radius:100px;padding:5px 12px;white-space:nowrap;border:1px solid rgba(250,248,240,.2);font-weight:500;flex-shrink:0}
+
+/* 섹션 헤더 */
+.sh{background:var(--color-primary,#007A54);padding:18px 20px}
+.sh-inner{max-width:720px;margin:0 auto}
+.sh-title{font-family:var(--font-title,'Noto Serif KR',serif);font-size:20px;font-weight:600;color:#FAF8F0}
+.sh-sub{font-size:12px;color:#FAF8F0;margin-top:3px}
+
+/* 콘텐츠 */
+.wrap{padding:0 20px;background:#fff;max-width:720px;margin-left:auto;margin-right:auto}
+.sec{padding:24px 0;border-bottom:1px solid #EAEAE4}
+.sec:last-child{border-bottom:none}
+.sec-tag{font-size:11px;letter-spacing:.14em;color:#C8A84B;font-weight:600;text-transform:uppercase;margin-bottom:7px}
+.sec-body{font-size:14px;color:#555550;line-height:1.9;margin-bottom:12px}
+.sec-body strong{color:#1A1A18;font-weight:500}
+
+/* 타임라인 */
+.timeline{display:flex;flex-direction:column;gap:0;margin:16px 0}
+.tl-step{display:flex;gap:14px;align-items:stretch}
+.tl-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:30px}
+.tl-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;margin-top:14px;border:2px solid #fff;box-shadow:0 0 0 2px currentColor}
+.tl-conn{width:2px;flex:1;margin:4px 0}
+.tl-body{flex:1;padding:12px 0 18px}
+.tl-period{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-bottom:5px}
+.tl-name{font-family:var(--font-title,'Noto Serif KR',serif);font-size:16px;font-weight:600;color:#111110;margin-bottom:6px;line-height:1.35}
+.tl-desc{font-size:13px;color:#555550;line-height:1.75}
+.tl-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.tc{font-size:11.5px;background:#E8F5F0;color:var(--color-primary,#007A54);border-radius:100px;padding:3px 10px;font-weight:500;border:1px solid #C5E8DC}
+
+/* 임신 시기 표 */
+.pg-table{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.pg-row{display:flex;gap:10px;align-items:flex-start;padding:13px 14px;background:#F9F9F7;border-radius:10px;border:1px solid #E0E0DA}
+.pg-period{flex-shrink:0;width:90px}
+.pg-period-label{font-size:10px;letter-spacing:.06em;color:#888880;font-weight:500;margin-bottom:3px}
+.pg-period-name{font-size:13px;font-weight:600;color:#111110}
+.pg-divider{width:1px;background:#E0E0DA;flex-shrink:0;align-self:stretch}
+.pg-content{flex:1}
+.pg-status{font-size:12px;color:#555550;margin-bottom:5px}
+.pg-services{display:flex;flex-wrap:wrap;gap:4px}
+.pg-svc{font-size:11.5px;background:#E8F5F0;color:var(--color-primary,#007A54);border-radius:100px;padding:3px 9px;font-weight:500}
+.pg-row.mid{border-color:#C5E8DC;background:#F0FAF5}
+.pg-row.mid .pg-period-name{color:var(--color-primary,#007A54)}
+
+/* 체크리스트 */
+.checklist{display:flex;flex-direction:column;gap:7px;margin:12px 0}
+.chk{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;background:#F5F5F1;border-radius:8px;font-size:13.5px;color:#555550;line-height:1.55}
+.chk-icon{width:18px;height:18px;border-radius:50%;border:1.5px solid #C0D0C0;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center}
+.chk.checked .chk-icon{background:var(--color-primary,#007A54);border-color:var(--color-primary,#007A54)}
+.chk.checked .chk-icon::after{content:'✓';font-size:10px;color:#fff;font-weight:700}
+
+/* 아기 첫 치과 카드 */
+.first-cards{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.fc{background:#fff;border:1px solid #E0E0DA;border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px}
+.fc-num{font-family:var(--font-title,'Noto Serif KR',serif);font-size:26px;font-weight:300;color:#C8A84B;flex-shrink:0;line-height:1;width:32px;padding-top:2px}
+.fc-title{font-size:14px;font-weight:500;color:#111110;margin-bottom:4px}
+.fc-desc{font-size:13px;color:#555550;line-height:1.65}
+
+/* BTB 연결 */
+.btb-box{background:var(--color-primary,#007A54);border-radius:12px;padding:18px 18px;margin:16px 0;border-top:3px solid #C8A84B}
+.btb-tag{font-size:11px;letter-spacing:.1em;color:#C8A84B;font-weight:600;margin-bottom:8px}
+.btb-title{font-family:var(--font-title,'Noto Serif KR',serif);font-size:18px;font-weight:600;color:#FAF8F0;margin-bottom:8px;line-height:1.45}
+.btb-body{font-size:13px;color:rgba(250,248,240,.85);line-height:1.8}
+.btb-flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid rgba(250,248,240,.2)}
+.btb-node{font-size:12px;background:rgba(250,248,240,.15);color:#FAF8F0;border-radius:100px;padding:4px 11px;border:1px solid rgba(250,248,240,.25)}
+.btb-arr{font-size:12px;color:#C8A84B;font-weight:700}
+
+/* 수첩 CTA */
+.booklet-cta{background:#FFFBEF;border:1.5px solid #E8D090;border-radius:12px;padding:20px 18px;margin:16px 0}
+.bc-tag{font-size:11px;letter-spacing:.1em;color:#8A6820;font-weight:600;margin-bottom:8px}
+.bc-title{font-family:var(--font-title,'Noto Serif KR',serif);font-size:18px;font-weight:600;color:#111110;margin-bottom:8px;line-height:1.45}
+.bc-body{font-size:13px;color:#5A4010;line-height:1.75;margin-bottom:14px}
+.bc-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#FAF8F0;background:var(--color-primary,#007A54);padding:10px 18px;border-radius:100px;text-decoration:none}
+
+/* 관련 링크 */
+.rel-section{padding:28px 20px;background:#F5F5F1;border-top:1px solid #E0E0DA}
+.rel-title{font-size:12px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.rel-links{display:flex;flex-direction:column;gap:8px}
+.rel-link{display:flex;align-items:center;gap:12px;padding:13px 15px;background:#fff;border-radius:10px;border:1px solid #E0E0DA;text-decoration:none;color:#1A1A18;transition:opacity .15s}
+.rel-link:hover{opacity:.75}
+.rl-body{flex:1}
+.rl-title{font-size:14px;font-weight:500;color:#111110;margin-bottom:2px}
+.rl-sub{font-size:12px;color:#555550}
+.rl-arr{font-size:14px;color:#C8A84B;font-weight:600;flex-shrink:0}
+
+.cta-sec{background:var(--color-primary,#007A54);padding:36px 20px;border-top:3px solid #C8A84B;text-align:center}
+@media(min-width:640px){
+  .nav,.badge-bar,.cta-sec{width:100%}
+  .hero{max-width:720px;margin-left:auto;margin-right:auto;padding-left:32px;padding-right:32px}
+  .wrap,.rel-section{max-width:720px;margin-left:auto;margin-right:auto;padding-left:32px;padding-right:32px}
+}
+</style>
+<link rel="stylesheet" href="petit-design.css">
+
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="index.html">생활의 기본, <em>쁘띠치과</em></a>
+  <a class="nav-home" href="index.html">← 홈</a>
+  <a class="nav-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Prenatal · Newborn · Infant</div>
+  <h1 class="hero-title">아이의 얼굴과 교합은<br><em>태어나기 전부터 만들어집니다</em></h1>
+  <p class="hero-sub">임산부 구강 관리부터 신생아, 유아 첫 치과까지<br>쁘띠치과는 출생 전부터 시작합니다</p>
+  <div class="hero-btns">
+    <a class="btn-primary" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">임산부 상담 예약</a>
+    <a class="btn-kakao" href="https://pf.kakao.com/_xbhXYb" target="_blank">카카오 문의</a>
+  </div>
+</section>
+
+<div class="badge-bar">
+  <span class="badge">임산부 구강 관리</span>
+  <span class="badge">임신성 치은염</span>
+  <span class="badge">태아 치아 형성</span>
+  <span class="badge">신생아 구강 관리</span>
+  <span class="badge">첫 치과 방문</span>
+  <span class="badge">유치열 관리</span>
+  <span class="badge">구호흡 예방</span>
+  <span class="badge">혀 자세</span>
+</div>
+
+<!-- 왜 임산부가 치과에 와야 하는가 -->
+<div class="sh">
+  <div class="sh-title">왜 임산부가 치과에 와야 할까요?</div>
+  <div class="sh-sub">태아 건강과 엄마 구강의 연결</div>
+</div>
+<div class="wrap">
+  <div class="sec">
+    <div class="sec-body">임신 중 구강 건강은 태아에게 직접 영향을 미칩니다. 치주 질환은 조산·저체중아와 관련이 있으며, <strong>임신 초기는 아이의 입술과 구개가 형성되는 중요한 시기</strong>입니다.</div>
+
+    <div class="btb-box">
+      <div class="btb-tag">쁘띠치과 BTB 철학</div>
+      <div class="btb-title">엄마의 습관이<br>아이의 얼굴을 만듭니다</div>
+      <div class="btb-body">입술·혀·호흡·자세 — 이 네 가지 기능은 태어나기 전부터 형성되기 시작합니다. 엄마의 구강 환경과 호흡 습관이 아이가 태어난 후 갖게 될 구강 기능의 토대가 됩니다.</div>
+      <div class="btb-flow">
+        <div class="btb-node">엄마 구강 환경</div><div class="btb-arr">→</div>
+        <div class="btb-node">태아 구강 발달</div><div class="btb-arr">→</div>
+        <div class="btb-node">신생아 수유·호흡</div><div class="btb-arr">→</div>
+        <div class="btb-node">아이 교합·얼굴</div>
+      </div>
+    </div>
+
+    <div class="sec-tag" style="margin-top:18px">임신 중 일어나는 구강 변화</div>
+    <div class="checklist">
+      <div class="chk checked"><div class="chk-icon"></div><div>호르몬 변화로 잇몸이 붓고 피가 나기 쉽습니다 — 임신성 치은염</div></div>
+      <div class="chk checked"><div class="chk-icon"></div><div>입덧으로 구강이 산성화되어 충치 위험이 높아집니다</div></div>
+      <div class="chk checked"><div class="chk-icon"></div><div>치주 질환이 악화되면 조산·저체중아 위험이 증가합니다</div></div>
+      <div class="chk checked"><div class="chk-icon"></div><div>충치균(뮤탄스균)은 출산 후 아이에게 전달될 수 있습니다</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 임신 시기별 치과 관리 -->
+<div class="sh" style="margin-top:0">
+  <div class="sh-title">임신 시기별 치과 관리</div>
+  <div class="sh-sub">언제, 무엇을 해야 하는가</div>
+</div>
+<div class="wrap">
+  <div class="sec">
+    <div class="pg-table">
+      <div class="pg-row">
+        <div class="pg-period">
+          <div class="pg-period-label">임신</div>
+          <div class="pg-period-name">초기<br>1~3개월</div>
+        </div>
+        <div class="pg-divider"></div>
+        <div class="pg-content">
+          <div class="pg-status">태아 착상 불안정 · 치료 최소화</div>
+          <div class="pg-services">
+            <span class="pg-svc">구강검진</span>
+            <span class="pg-svc">칫솔질 교육</span>
+            <span class="pg-svc">구강 환경 평가</span>
+          </div>
+        </div>
+      </div>
+      <div class="pg-row mid">
+        <div class="pg-period">
+          <div class="pg-period-label">임신</div>
+          <div class="pg-period-name">중기<br>4~6개월</div>
+        </div>
+        <div class="pg-divider" style="background:#C5E8DC"></div>
+        <div class="pg-content">
+          <div class="pg-status" style="color:var(--color-primary,#007A54);font-weight:500">✓ 치료 최적 시기</div>
+          <div class="pg-services">
+            <span class="pg-svc">스케일링</span>
+            <span class="pg-svc">충치 치료</span>
+            <span class="pg-svc">치주 치료</span>
+            <span class="pg-svc">구강기능 상담</span>
+          </div>
+        </div>
+      </div>
+      <div class="pg-row">
+        <div class="pg-period">
+          <div class="pg-period-label">임신</div>
+          <div class="pg-period-name">말기<br>7~9개월</div>
+        </div>
+        <div class="pg-divider"></div>
+        <div class="pg-content">
+          <div class="pg-status">자세 불편 · 응급처치 위주</div>
+          <div class="pg-services">
+            <span class="pg-svc">구강위생 관리</span>
+            <span class="pg-svc">응급처치</span>
+            <span class="pg-svc">출산 후 플랜</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#FFFBEF;border:1px solid #E8D090;border-radius:10px;padding:13px 15px;margin-top:6px">
+      <div style="font-size:11px;color:#8A6820;font-weight:600;letter-spacing:.06em;margin-bottom:6px">쁘띠치과 임산부 상담 포인트</div>
+      <div style="font-size:13px;color:#5A4010;line-height:1.75">충치 치료뿐 아니라 <strong>호흡·혀 자세·삼키기 습관</strong>을 함께 확인합니다. 엄마의 구강 기능 습관이 아이에게 전달됩니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 태아기 — 치아 형성 -->
+<div class="sh" style="margin-top:0">
+  <div class="sh-title">태아기 — 치아는 이미 만들어지고 있습니다</div>
+  <div class="sh-sub">임신 6주부터 시작되는 치아 형성</div>
+</div>
+<div class="wrap">
+  <div class="sec">
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-line">
+          <div class="tl-dot" style="color:var(--color-primary,#007A54);background:#E8F5F0"></div>
+          <div class="tl-conn" style="background:#E8F5F0"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-period" style="color:var(--color-primary,#007A54)">임신 6~8주</div>
+          <div class="tl-name">치아 싹(Tooth Bud) 형성</div>
+          <div class="tl-desc">치판(dental lamina)이 발달하고 유치 20개의 기초가 만들어집니다. 입술과 구개의 좌우 융합이 시작되는 중요한 시기입니다.</div>
+          <div class="tl-chips"><span class="tc">20개 유치 기초</span><span class="tc">입술·구개 형성</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-line">
+          <div class="tl-dot" style="color:#C8A84B;background:#FFF0D8"></div>
+          <div class="tl-conn" style="background:#F5EFD8"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-period" style="color:#8A6820">임신 3~4개월</div>
+          <div class="tl-name">법랑질 형성 시작</div>
+          <div class="tl-desc">치아의 가장 바깥층인 법랑질이 형성되기 시작합니다. 이 시기 엄마의 영양 상태(칼슘·비타민D)가 직접 영향을 줍니다.</div>
+          <div class="tl-chips"><span class="tc">법랑질 형성</span><span class="tc">칼슘·비타민D 중요</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-line">
+          <div class="tl-dot" style="color:var(--color-primary,#007A54);background:#E8F5F0"></div>
+          <div class="tl-conn" style="background:#E8F5F0"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-period" style="color:var(--color-primary,#007A54)">임신 4개월~</div>
+          <div class="tl-name">삼키기·호흡 연습 시작</div>
+          <div class="tl-desc">태아는 양수를 삼키며 삼키기 패턴을 연습합니다. 혀 움직임과 구강 근육 발달이 시작됩니다. 이 기능이 출생 후 수유와 직결됩니다.</div>
+          <div class="tl-chips"><span class="tc">삼키기 연습</span><span class="tc">혀·구강 근육</span><span class="tc">수유 준비</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-line">
+          <div class="tl-dot" style="color:#555550;background:#F5F5F1"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-period" style="color:#555550">임신 7~9개월</div>
+          <div class="tl-name">영구치 기초 형성 시작</div>
+          <div class="tl-desc">유치 아래에 영구치의 치배(tooth germ)가 이미 형성되기 시작합니다. 아이의 영구치는 태어나기 전부터 준비되고 있습니다.</div>
+          <div class="tl-chips"><span class="tc">영구치 치배</span><span class="tc">태어나기 전부터</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 신생아 구강 관리 -->
+<div class="sh" style="margin-top:0">
+  <div class="sh-title">신생아 구강 관리</div>
+  <div class="sh-sub">출생 직후부터 시작합니다</div>
+</div>
+<div class="wrap">
+  <div class="sec">
+    <div class="sec-body">유치가 나기 전에도 잇몸 관리는 시작해야 합니다. 수유 자세와 호흡 패턴이 <strong>교합과 얼굴 발달에 직접 영향</strong>을 줍니다.</div>
+    <div class="first-cards">
+      <div class="fc">
+        <div class="fc-num">01</div>
+        <div>
+          <div class="fc-title">잇몸 닦기 — 거즈 양치</div>
+          <div class="fc-desc">유치가 나기 전부터 수유 후 깨끗한 거즈로 잇몸을 닦아줍니다. 구강 청결과 동시에 구강 자극에 익숙해지게 합니다.</div>
+        </div>
+      </div>
+      <div class="fc">
+        <div class="fc-num">02</div>
+        <div>
+          <div class="fc-title">수유 자세 — 코 호흡 확인</div>
+          <div class="fc-desc">모유수유는 턱과 혀 근육을 자연스럽게 발달시킵니다. 수유 중 코로 숨 쉬는지 확인하세요. 입으로만 숨쉰다면 설소대나 비강 문제를 확인해야 합니다.</div>
+        </div>
+      </div>
+      <div class="fc">
+        <div class="fc-num">03</div>
+        <div>
+          <div class="fc-title">젖병 우식 예방</div>
+          <div class="fc-desc">잠들기 전 젖병을 물린 채로 재우지 마세요. 당분이 고여 유치 전면부에 심한 충치(nursing bottle caries)가 생깁니다.</div>
+        </div>
+      </div>
+      <div class="fc">
+        <div class="fc-num">04</div>
+        <div>
+          <div class="fc-title">설소대 확인</div>
+          <div class="fc-desc">수유가 어렵거나 혀를 내밀기 힘들다면 설소대단축증을 확인해야 합니다. 조기 발견 시 간단한 처치로 해결됩니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 유아기 첫 치과 -->
+<div class="sh" style="margin-top:0">
+  <div class="sh-title">아이의 첫 치과 방문</div>
+  <div class="sh-sub">언제, 무엇을 확인하는가</div>
+</div>
+<div class="wrap">
+  <div class="sec">
+    <div style="background:#E8F5F0;border:1px solid #C5E8DC;border-radius:10px;padding:14px 16px;margin-bottom:16px">
+      <div style="font-size:13px;font-weight:600;color:var(--color-primary,#007A54);margin-bottom:5px">첫 치과 방문 권장 시기</div>
+      <div style="font-family:var(--font-title,'Noto Serif KR',serif);font-size:20px;font-weight:600;color:#111110;margin-bottom:5px">첫 유치가 나면 바로<br>늦어도 만 1세 이전</div>
+      <div style="font-size:13px;color:#555550">대한소아치과학회·AAPD 권고 기준</div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-line">
+          <div class="tl-dot" style="color:var(--color-primary,#007A54);background:#E8F5F0"></div>
+          <div class="tl-conn" style="background:#E8F5F0"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-period" style="color:var(--color-primary,#007A54)">생후 6~12개월</div>
+          <div class="tl-name">첫 유치 맹출 · 첫 치과 방문</div>
+          <div class="tl-desc">아래 앞니부터 나기 시작합니다. 불소도포 시작, 젖병 우식 확인, 수유 습관 상담.</div>
+          <div class="tl-chips"><span class="tc">불소도포</span><span class="tc">수유 상담</span><span class="tc">구강 검진</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-line">
+          <div class="tl-dot" style="color:#C8A84B;background:#FFF0D8"></div>
+          <div class="tl-conn" style="background:#F5EFD8"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-period" style="color:#8A6820">12~24개월</div>
+          <div class="tl-name">유치 증가 · 습관 관찰</div>
+          <div class="tl-desc">손가락 빨기, 공갈젖꼭지 사용, 입호흡을 확인합니다. 이 시기 구강 습관이 악궁 발달에 영향을 줍니다.</div>
+          <div class="tl-chips"><span class="tc">구강 습관 확인</span><span class="tc">입호흡 관찰</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-line">
+          <div class="tl-dot" style="color:var(--color-primary,#007A54);background:#E8F5F0"></div>
+          <div class="tl-conn" style="background:#E8F5F0"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-period" style="color:var(--color-primary,#007A54)">24~36개월</div>
+          <div class="tl-name">유치열 완성 (20개) · 구강기능 평가</div>
+          <div class="tl-desc">유치 20개가 모두 납니다. 혀 자세·입술 힘·호흡·삼키기를 종합 평가합니다.</div>
+          <div class="tl-chips"><span class="tc">구강기능 평가</span><span class="tc">혀·입술·호흡</span><span class="tc">바른미소 기초</span></div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-line">
+          <div class="tl-dot" style="color:var(--color-primary,#007A54);background:#E8F5F0"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-period" style="color:var(--color-primary,#007A54)">만 3~5세</div>
+          <div class="tl-name">유치열기 교합 확인 · 성장교정 시작점</div>
+          <div class="tl-desc">유치열기 정상교합 4가지 조건 확인. 필요하다면 성장교정 시작 시기를 논의합니다.</div>
+          <div class="tl-chips"><span class="tc">정상교합 확인</span><span class="tc">성장교정 시작 검토</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 우리 아이 치과수첩 CTA -->
+<div class="wrap" style="padding-bottom:20px">
+
+<div class="rel-section">
+  <div class="rel-title">함께 보면 좋은 페이지</div>
+  <div class="rel-links">
+    <a class="rel-link" href="petit_cavity.html" target="_blank">
+      <div class="rl-body"><div class="rl-title">충치 원인</div><div class="rl-sub">당 컨트롤 · 씹고삼키기 · 충치 반복 이유</div></div>
+      <div class="rl-arr">→</div>
+    </a>
+    <a class="rel-link" href="petit_treatment_by_age.html" target="_blank">
+      <div class="rl-body"><div class="rl-title">바른턱얼굴 교합치료 — 성장교정</div><div class="rl-sub">골든타임 · 유치열기·혼합치열기</div></div>
+      <div class="rl-arr">→</div>
+    </a>
+    <a class="rel-link" href="petit_smile_design.html" target="_blank">
+      <div class="rl-body"><div class="rl-title">바른미소디자인</div><div class="rl-sub">입술·혀·호흡·자세 훈련</div></div>
+      <div class="rl-arr">→</div>
+    </a>
+    <a class="rel-link" href="petit_tongue_tie.html" target="_blank">
+      <div class="rl-body"><div class="rl-title">설소대단축증</div><div class="rl-sub">수유 어려움 · 발음 · 혀 기능</div></div>
+      <div class="rl-arr">→</div>
+    </a>
+    <a class="rel-link" href="petit_prevention.html" target="_blank">
+      <div class="rl-body"><div class="rl-title">기본은 예방과 습관</div><div class="rl-sub">양치질 교육 · 불소 · 스케일링</div></div>
+      <div class="rl-arr">→</div>
+    </a>
+  </div>
+</div>
+
+<section class="cta-sec">
+  <div class="cta-title">임산부·아기 치과 상담</div>
+  <div class="cta-sub">태어나기 전부터 시작하는 치과<br>쁘띠치과가 함께합니다</div>
+  <div class="cta-btns">
+    <a class="btn-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">네이버 예약</a>
+    <a class="btn-kakao" href="https://pf.kakao.com/_xbhXYb" target="_blank">카카오 상담</a>
+  </div>
+</section>
+
+</body>
+</html>

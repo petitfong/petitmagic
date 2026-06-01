@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>충치의 원인 | 쁘띠치과</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+/* HERO */
+.hero{background:#fff;padding:52px 20px 44px;border-bottom:1px solid #E0E0DA}
+.hero-tag{font-size:11px;letter-spacing:.14em;color:#888880;text-transform:uppercase;margin-bottom:14px}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,40px);font-weight:400;color:#111110;line-height:1.35;letter-spacing:-.02em;margin-bottom:14px}
+.hero-title em{font-style:italic;color:#007A54}
+.hero-sub{font-size:14px;color:#555550;line-height:1.85;margin-bottom:20px}
+.hero-insight{background:#F5F5F1;border-left:2px solid #C8A84B;padding:13px 16px;font-size:13px;color:#555550;line-height:1.75}
+.hero-insight strong{color:#1A1A18;font-weight:500}
+
+/* 섹션 구분 */
+.sh{background:#007A54;padding:18px 20px}
+.sh-title{font-family:'TmonMonsori',serif;font-size:20px;font-weight:600;color:#FAF8F0}
+.sh-sub{font-size:12px;color:#FAF8F0;margin-top:3px}
+
+.wrap{padding:0 20px;background:#fff}
+.sec{padding:28px 0;border-bottom:1px solid #EAEAE4}
+.sec:last-child{border-bottom:none}
+.sec-tag{font-size:11px;letter-spacing:.14em;color:#C8A84B;text-transform:uppercase;font-weight:500;margin-bottom:8px}
+.sec-body{font-size:14px;color:#555550;line-height:1.9;margin-bottom:14px}
+.sec-body strong{color:#1A1A18;font-weight:500}
+
+/* 원인 3가지 */
+.cause-cards{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.cc{border-radius:10px;padding:16px 16px;border:1px solid #E0E0DA;background:#F9F9F7}
+.cc-num{font-family:'TmonMonsori',serif;font-size:13px;font-weight:300;color:#C8A84B;margin-bottom:5px}
+.cc-title{font-size:15px;font-weight:600;color:#111110;margin-bottom:6px}
+.cc-body{font-size:13.5px;color:#555550;line-height:1.75}
+.cc-body strong{color:#007A54;font-weight:500}
+
+/* 진행 단계 */
+.stage-row{display:flex;align-items:stretch;gap:0;margin:14px 0}
+.stage{flex:1;padding:14px 10px;text-align:center;position:relative}
+.stage:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-size:14px;color:#C8A84B;font-weight:700;z-index:1}
+.stage-1{background:#E8F5F0;border-radius:8px 0 0 8px}
+.stage-2{background:#FFF0D8}
+.stage-3{background:#FFE8E8;border-radius:0 8px 8px 0}
+.stage-label{font-size:10px;letter-spacing:.08em;font-weight:600;margin-bottom:5px}
+.stage-1 .stage-label{color:#007A54}
+.stage-2 .stage-label{color:#8A5010}
+.stage-3 .stage-label{color:#C03020}
+.stage-name{font-family:'TmonMonsori',serif;font-size:13px;font-weight:600;color:#111110;margin-bottom:3px}
+.stage-pain{font-size:11.5px;color:#555550}
+
+/* 증상 체크 */
+.check-list{display:flex;flex-direction:column;gap:7px;margin:12px 0}
+.chk{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;background:#F5F5F1;border-radius:8px;font-size:13.5px;color:#555550;line-height:1.5}
+.chk::before{content:'→';color:#C8A84B;font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* 아이 특징 */
+.child-features{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.cf{display:flex;align-items:flex-start;gap:12px;padding:13px 15px;background:#fff;border-radius:10px;border:1px solid #E0E0DA}
+.cf-num{font-family:'TmonMonsori',serif;font-size:20px;font-weight:300;color:#DDDDD5;flex-shrink:0;line-height:1;min-width:26px}
+.cf-body{flex:1}
+.cf-title{font-size:14px;font-weight:500;color:#111110;margin-bottom:3px}
+.cf-desc{font-size:13px;color:#555550;line-height:1.65}
+
+/* 4요소 순환 */
+.cycle-box{background:#007A54;border-radius:12px;padding:20px 18px;margin:16px 0;border-top:3px solid #C8A84B}
+.cycle-title{font-family:'TmonMonsori',serif;font-size:18px;font-weight:600;color:#FAF8F0;margin-bottom:14px}
+.cycle-items{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.ci{padding:12px 14px;background:#F5F5F1;border-radius:8px}
+.ci-icon{font-size:11px;letter-spacing:.08em;color:#C8A84B;font-weight:600;margin-bottom:4px}
+.ci-title{font-size:14px;font-weight:500;color:#FAF8F0;margin-bottom:3px}
+.ci-desc{font-size:12px;color:#888880;line-height:1.6}
+.cycle-note{font-size:13px;color:#888880;line-height:1.75;padding-top:12px;border-top:1px solid rgba(250,248,240,.1)}
+.cycle-note strong{color:#FAF8F0}
+
+/* 치료 원칙 */
+.treatment-steps{display:flex;flex-direction:column;gap:0;margin:14px 0}
+.ts{display:flex;align-items:flex-start;gap:14px;padding:16px 0;border-bottom:1px solid #EAEAE4}
+.ts:last-child{border-bottom:none}
+.ts-num{font-family:'TmonMonsori',serif;font-size:26px;font-weight:300;color:#C8A84B;flex-shrink:0;line-height:1;width:32px;padding-top:2px}
+.ts-body{}
+.ts-title{font-size:15px;font-weight:500;color:#111110;margin-bottom:5px;font-family:'TmonMonsori',serif}
+.ts-desc{font-size:13.5px;color:#555550;line-height:1.75}
+.ts-desc strong{color:#007A54;font-weight:500}
+.ts-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.ts-chip{font-size:11.5px;background:#E8F5F0;color:#007A54;border-radius:100px;padding:3px 10px;font-weight:500}
+
+/* 쁘띠 박스 */
+.petit-box{background:#F5F5F1;border-radius:12px;padding:18px 18px;margin:16px 0;border:1px solid #E0E0DA}
+.pb-tag{font-size:11px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:600;margin-bottom:10px}
+.pb-title{font-family:'TmonMonsori',serif;font-size:18px;font-weight:600;color:#111110;margin-bottom:10px;line-height:1.4;letter-spacing:-.01em}
+.pb-body{font-size:13.5px;color:#555550;line-height:1.8}
+.pb-body strong{color:#007A54;font-weight:500}
+.pb-items{display:flex;flex-direction:column;gap:7px;margin-top:12px}
+.pbi{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:#555550;line-height:1.6}
+.pbi::before{content:'✓';color:#007A54;font-weight:700;flex-shrink:0}
+
+/* 인용 */
+.quote{font-family:'TmonMonsori',serif;font-size:clamp(17px,4vw,21px);font-weight:300;color:#111110;line-height:1.8;padding:28px 20px;border-top:1px solid #E0E0DA;border-bottom:1px solid #E0E0DA;margin:0;background:#fff}
+.quote em{font-style:italic;color:#007A54}
+.quote-src{font-size:12px;color:#888880;margin-top:10px;letter-spacing:.06em;font-family:'Pretendard',sans-serif}
+
+/* 관련 링크 */
+.rel-section{padding:28px 20px;background:#F5F5F1;border-top:1px solid #E0E0DA}
+.rel-title{font-size:12px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.rel-links{display:flex;flex-direction:column;gap:8px}
+.rel-link{display:flex;align-items:center;gap:12px;padding:13px 15px;background:#fff;border-radius:10px;border:1px solid #E0E0DA;text-decoration:none;color:#1A1A18;transition:opacity .15s}
+.rel-link:hover{opacity:.75}
+.rel-link-body{flex:1}
+.rel-link-title{font-size:14px;font-weight:500;color:#111110;margin-bottom:2px}
+.rel-link-sub{font-size:12px;color:#555550}
+.rel-link-arr{font-size:14px;color:#C8A84B;font-weight:600;flex-shrink:0}
+
+/* CTA */
+/* share */
+/* 색상 규칙 */
+.sh .sh-title{color:#FAF8F0}
+.sh .sh-sub{color:#FAF8F0}
+
+@media(min-width:640px){
+  .hero,.wrap,.rel-section{max-width:720px;margin-left:auto;margin-right:auto;padding-left:32px;padding-right:32px}
+  .sh,.stage-row{gap:4px}
+}
+
+@font-face {
+  font-family: 'TmonMonsori';
+  src: url('fonts/TmonMonsori_otf.otf') format('opentype'),
+       url('fonts/TmonMonsori_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('fonts/pretendard-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
+<link rel="stylesheet" href="petit-design.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="index.html">생활의 기본, <em>쁘띠치과</em></a>
+  <a class="nav-home" href="petit_general.html">← 일반진료</a>
+  <a class="nav-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Cavity · 충치</div>
+  <h1 class="hero-title">충치는 왜 반복될까요?<br><em>원인을 알면 막을 수 있습니다</em></h1>
+  <p class="hero-sub">충치는 단순히 단 것을 많이 먹어서 생기지 않습니다.<br>양치질만으로 해결되지 않는 이유가 있습니다.</p>
+  <div class="hero-insight">
+    <strong>"아직 안 아픈데 충치 치료해야 하나요?"</strong><br>
+    충치는 통증이 없을 때 발견하는 것이 가장 좋습니다. 아플 때는 이미 많이 진행된 상태입니다.
+  </div>
+</section>
+
+<!-- 충치란 -->
+<div class="sh">
+  <div class="sh-title">충치란 무엇인가요?</div>
+  <div class="sh-sub">만성 세균성 질환 · 자연 회복 불가</div>
+</div>
+<div class="wrap">
+  <div class="sec">
+    <div class="sec-body">충치는 구강 내 세균이 탄수화물을 분해하면서 생성한 산이 치아를 녹이는 질환입니다. 단순히 이가 썩는 것이 아니라, <strong>시간이 지날수록 치아 구조가 점점 파괴되는 만성 세균성 질환</strong>입니다.</div>
+    <div class="sec-body">특히 충치는 자연적으로 회복되지 않습니다. 초기에는 진행 속도가 느리지만, 관리가 부족하면 상아질을 거쳐 신경까지 도달할 수 있습니다.</div>
+    <div class="petit-box">
+      <div class="pb-tag">세계적 통계</div>
+      <div class="pb-title">세 명 중 한 명이 겪는 매우 흔한 질환</div>
+      <div class="pb-body">전 세계 충치 유병률은 평균 <strong>28.7%</strong>. 초기에는 아무 증상이 없어 모르고 지나치는 경우가 정말 많습니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 원인 -->
+<div class="sh" style="margin-top:0">
+  <div class="sh-title">당 컨트롤이 먼저인 이유</div>
+  <div class="sh-sub">세균보다 더 근본적인 원인</div>
+</div>
+<div class="wrap">
+  <div class="sec">
+    <div class="sec-body">세균(뮤탄스균)은 입안에 항상 있습니다. 없앨 수 없습니다. 세균이 문제가 되는 건 <strong>당이 공급될 때</strong>입니다.</div>
+
+    <div style="display:flex;flex-direction:column;gap:8px;margin:14px 0">
+      <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#E8F5F0;border-radius:10px;border:1px solid #C5E8DC;flex-wrap:wrap">
+        <div style="font-size:13px;color:#555550;line-height:1.6">당이 없으면</div>
+        <div style="font-size:11px;color:#888880">→</div>
+        <div style="font-size:13px;color:#555550;line-height:1.6">세균이 산을 못 만든다</div>
+        <div style="font-size:11px;color:#888880">→</div>
+        <div style="font-size:13px;font-weight:600;color:#007A54;line-height:1.6">충치가 안 생긴다</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#F5F5F1;border-radius:10px;border:1px solid #E0E0DA;flex-wrap:wrap">
+        <div style="font-size:13px;color:#555550;line-height:1.6">세균이 있어도</div>
+        <div style="font-size:11px;color:#888880">→</div>
+        <div style="font-size:13px;color:#555550;line-height:1.6">당이 없으면</div>
+        <div style="font-size:11px;color:#888880">→</div>
+        <div style="font-size:13px;font-weight:600;color:#007A54;line-height:1.6">충치가 안 생긴다</div>
+      </div>
+    </div>
+
+    <div class="sec-tag" style="margin-top:18px">당의 양보다 노출 시간·빈도가 더 중요합니다</div>
+    <div class="sec-body">당을 많이 한 번에 먹는 것보다 <strong>조금씩 자주 먹는 것이 훨씬 위험</strong>합니다.</div>
+
+    <div style="display:flex;flex-direction:column;gap:7px;margin:12px 0">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:#fff;border-radius:8px;border:1px solid #E0E0DA">
+        <div style="font-size:13.5px;color:#555550">당을 많이, 한 번에 먹기</div>
+        <div style="font-size:12px;font-weight:600;color:#009B6B;background:#E8F5F0;padding:3px 10px;border-radius:100px;white-space:nowrap">위험 낮음</div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:#FFF8E8;border-radius:8px;border:1px solid #E8D090">
+        <div style="font-size:13.5px;color:#555550">당을 조금씩 자주 먹기</div>
+        <div style="font-size:12px;font-weight:600;color:#8A5010;background:#FFF0D8;padding:3px 10px;border-radius:100px;white-space:nowrap">위험 높음</div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:#FFE8E8;border-radius:8px;border:1px solid #F0B0A0">
+        <div style="font-size:13.5px;color:#555550">음식이 치아에 오래 붙어있기</div>
+        <div style="font-size:12px;font-weight:600;color:#C03020;background:#FFE0D8;padding:3px 10px;border-radius:100px;white-space:nowrap">매우 위험</div>
+      </div>
+    </div>
+
+    <div style="padding:16px 16px;background:#007A54;border-radius:10px;margin-top:6px">
+      <div style="font-size:11px;letter-spacing:.1em;color:#C8A84B;font-weight:600;margin-bottom:10px">쁘띠치과 핵심 연결</div>
+      <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:12px">
+        <div style="font-size:13px;color:rgba(250,248,240,.75);display:flex;align-items:center;gap:8px"><span style="color:#C8A84B;font-weight:700;flex-shrink:0">→</span>씹고 삼키기가 안 되면</div>
+        <div style="font-size:13px;color:rgba(250,248,240,.75);display:flex;align-items:center;gap:8px"><span style="color:#C8A84B;font-weight:700;flex-shrink:0">→</span>음식이 치아에 오래 남는다</div>
+        <div style="font-size:13px;color:rgba(250,248,240,.75);display:flex;align-items:center;gap:8px"><span style="color:#C8A84B;font-weight:700;flex-shrink:0">→</span>세균 먹이(당)가 계속 공급된다</div>
+        <div style="font-size:13.5px;font-weight:500;color:#FAF8F0;display:flex;align-items:center;gap:8px"><span style="color:#C8A84B;font-weight:700;flex-shrink:0">→</span>충치가 반복된다</div>
+      </div>
+      <div style="padding-top:12px;border-top:1px solid rgba(250,248,240,.1);font-size:13px;color:#888880;line-height:1.75">
+        입술·혀·호흡·자세 → 씹고 삼키기 → <strong style="color:#555550">당 노출 시간 감소</strong> → 세균 활동 억제<br>이것이 쁘띠치과가 충치를 바라보는 방식입니다.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sh" style="margin-top:0">
+  <div class="sh-title">충치는 왜 생길까요?</div>
+  <div class="sh-sub">3가지 주요 원인</div>
+</div>
+<div class="wrap">
+  <div class="sec">
+    <div class="cause-cards">
+      <div class="cc">
+        <div class="cc-num">원인 01 · 세균</div>
+        <div class="cc-title">뮤탄스균이 산을 만들어 치아를 녹입니다</div>
+        <div class="cc-body">뮤탄스균(Streptococcus mutans)은 탄수화물을 분해하면서 산(acid)을 만들어냅니다. 이 산이 치아 가장 바깥층인 법랑질을 서서히 녹입니다. <strong>세균이 치아를 갉아 먹는 것이 아니라, 세균이 당을 먹고 배설하는 산이 치아를 녹이는 것</strong>입니다.</div>
+      </div>
+      <div class="cc">
+        <div class="cc-num">원인 02 · 치태 + 탄수화물</div>
+        <div class="cc-title">당이 구강에 오래 남을수록 위험합니다</div>
+        <div class="cc-body">치태는 세균이 끈적하게 뭉쳐 자라나는 덩어리입니다. 특히 설탕·전분 같은 단당류가 세균의 주요 먹이가 됩니다. <strong>음식이 구강 내에 얼마나 오래 남아있는지</strong>가 가장 중요한 요소입니다. 간식을 자주 먹거나 음료를 조금씩 자주 마시는 습관이 생각보다 훨씬 위험한 이유입니다.</div>
+      </div>
+      <div class="cc">
+        <div class="cc-num">원인 03 · 타액(침) 역할 저하</div>
+        <div class="cc-title">침이 줄면 충치가 더 쉽게 생깁니다</div>
+        <div class="cc-body">침은 하루 0.5~1.0리터가 분비되면서 소화 보조, 항균 작용, 구강 산도 조절을 합니다. 타액 분비가 줄어들거나 완충 작용이 실패하면 <strong>구강 산성화가 빨라지면서 충치가 더 쉽게 생깁니다.</strong> 입호흡이 침을 마르게 하는 주요 원인입니다.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 진행 단계 -->
+<div class="sh" style="margin-top:0">
+  <div class="sh-title">충치는 어떻게 진행될까요?</div>
+  <div class="sh-sub">조용하게, 단계적으로</div>
+</div>
+<div class="wrap">
+  <div class="sec">
+    <div class="stage-row">
+      <div class="stage stage-1">
+        <div class="stage-label">초기</div>
+        <div class="stage-name">법랑질</div>
+        <div class="stage-pain">통증 없음</div>
+      </div>
+      <div class="stage stage-2">
+        <div class="stage-label">중기</div>
+        <div class="stage-name">상아질</div>
+        <div class="stage-pain">시림·예민</div>
+      </div>
+      <div class="stage stage-3">
+        <div class="stage-label">말기</div>
+        <div class="stage-name">신경(치수)</div>
+        <div class="stage-pain">극심한 통증</div>
+      </div>
+    </div>
+    <div class="sec-body" style="margin-top:14px">충치의 가장 무서운 점은 <strong>초기에 전혀 아프지 않다</strong>는 것입니다. 법랑질 단계에서 발견하면 간단한 치료로 끝나지만, 신경까지 진행된 후에는 신경치료와 크라운까지 필요해집니다.</div>
+    <div class="petit-box">
+      <div class="pb-tag">이런 증상이 있다면</div>
+      <div class="pb-title">초기 충치 가능성을 점검하세요</div>
+      <div class="check-list">
+        <div class="chk">찬 음식에 특정 부위만 시리다</div>
+        <div class="chk">음식물이 한쪽에만 자주 낀다</div>
+        <div class="chk">단 음식을 먹으면 특정 부위가 불편하다</div>
+        <div class="chk">예전에 치료한 부위가 다시 예민하다</div>
+        <div class="chk">거울로 봤을 때 하얀 반점이나 착색이 보인다</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 재발 원인 -->
+<div class="sh" style="margin-top:0">
+  <div class="sh-title">왜 같은 자리에 반복될까요?</div>
+  <div class="sh-sub">충치 재발의 진짜 원인</div>
+</div>
+<div class="wrap">
+  <div class="sec">
+    <div class="sec-body">"충치를 치료했는데 그 자리 주변에 또 썩고, 결국 신경치료까지 하게 됐어요." — 진료실에서 자주 듣는 이야기입니다.</div>
+    <div class="sec-body"><strong>설마 그 부위만 잘 안 닦아서 그럴까요?</strong> 아닙니다. 충치가 반복되는 데는 더 근본적인 원인이 있습니다.</div>
+
+    <div class="sec-tag">충치가 잘 생기는 아이들의 공통된 모습</div>
+    <div class="child-features">
+      <div class="cf">
+        <div class="cf-num">01</div>
+        <div class="cf-body">
+          <div class="cf-title">가만히 있으면 입술이 벌어져 있다</div>
+          <div class="cf-desc">건조한 입술 = 입호흡 신호. 입안이 건조해져 침의 자정 작용이 떨어집니다.</div>
+        </div>
+      </div>
+      <div class="cf">
+        <div class="cf-num">02</div>
+        <div class="cf-body">
+          <div class="cf-title">밥을 오래 씹지 않거나, 한쪽으로만 씹는다</div>
+          <div class="cf-desc">씹고 삼키기가 힘든 이유를 찾아야 합니다. 한쪽만 사용하면 음식물이 특정 부위에 몰립니다.</div>
+        </div>
+      </div>
+      <div class="cf">
+        <div class="cf-num">03</div>
+        <div class="cf-body">
+          <div class="cf-title">입이 쉽게 마르거나 침이 고인다</div>
+          <div class="cf-desc">침은 치아를 닦아내는 자정 작용을 합니다. 바르게 씹고 삼키면 침이 치면을 자연스럽게 닦습니다.</div>
+        </div>
+      </div>
+      <div class="cf">
+        <div class="cf-num">04</div>
+        <div class="cf-body">
+          <div class="cf-title">삼킨 뒤에도 혀에 음식물이 남아 있다</div>
+          <div class="cf-desc">씹고 삼키는 과정이 제대로 이루어지지 않는다는 명확한 신호입니다.</div>
+        </div>
+      </div>
+      <div class="cf">
+        <div class="cf-num">05</div>
+        <div class="cf-body">
+          <div class="cf-title">치아 사이에 음식물이 자주 남는다</div>
+          <div class="cf-desc">턱과 치아가 잘 맞지 않으면 음식물이 치아 사이와 씹는 면에 많이 남게 됩니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:6px;padding:13px 16px;background:#FFF0D8;border-radius:10px;border:1px solid #E8C878;font-size:13.5px;color:#6A4010;line-height:1.7">
+      이 모습들은 모두 하나의 질문으로 이어집니다.<br>
+      <strong style="color:#4A2800">"이 아이는 바르게 씹고, 바르게 삼키고 있을까?"</strong>
+    </div>
+  </div>
+</div>
+
+<!-- 4요소 -->
+<div class="sh" style="margin-top:0">
+  <div class="sh-title">충치의 숨은 원인</div>
+  <div class="sh-sub">입술 · 혀 · 호흡 · 자세</div>
+</div>
+<div class="wrap">
+  <div class="sec">
+    <div class="sec-body">쁘띠치과는 충치를 치아 표면의 문제로만 보지 않습니다. 충치가 반복되는 아이들의 입안 환경 뒤에는 <strong>대부분 다음 네 가지 구조와 기능의 문제</strong>가 함께 존재합니다.</div>
+    <div class="cycle-box">
+      <div class="cycle-title">입술·혀·호흡·자세의 연결 고리</div>
+      <div class="cycle-items">
+        <div class="ci">
+          <div class="ci-icon">입술</div>
+          <div class="ci-title">입술</div>
+          <div class="ci-desc">입이 안 다물어지면 입호흡 → 침이 마름 → 충치균 활동 증가</div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon">혀</div>
+          <div class="ci-title">혀</div>
+          <div class="ci-desc">혀가 입천장에 안정적으로 닿지 못하면 삼키기 불안정 → 음식물 잔류</div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon">호흡</div>
+          <div class="ci-title">호흡</div>
+          <div class="ci-desc">입호흡 습관 → 입안 건조 → 침의 보호 작용 감소 → 충치 위험 증가</div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon">자세</div>
+          <div class="ci-title">자세</div>
+          <div class="ci-desc">고개가 앞으로 나오면 턱과 혀 위치 변화 → 씹기·삼키기 패턴 영향</div>
+        </div>
+      </div>
+      <div class="cycle-note">이 네 가지는 각각 따로 존재하는 문제가 아니라 <strong>서로 연결된 하나의 흐름</strong>입니다. 이 순환 고리에 문제가 생기면 부정교합이 발생하고, 이는 다시 씹고 삼키기를 방해하며 충치를 반복시킵니다.</div>
+    </div>
+    <div style="padding:14px 16px;background:#F5F5F1;border-radius:10px;border:1px solid #E0E0DA;font-size:13.5px;color:#555550;line-height:1.8">
+      <strong style="color:#007A54">충치가 잘 생기는 자리에 충치가 계속 생기는 이유:</strong><br>
+      이가 안 맞으면 그 자리에 음식물이 끼이고 고입니다. 양치질을 아무리 열심히 해도 교합이 맞지 않으면 그 자리에 음식물이 남기 때문입니다.
+    </div>
+  </div>
+</div>
+
+<!-- 쁘띠 치료 방향 -->
+<div class="sh" style="margin-top:0">
+  <div class="sh-title">쁘띠치과의 충치 치료 방향</div>
+  <div class="sh-sub">치료 + 원인 제거</div>
+</div>
+<div class="wrap">
+  <div class="sec">
+    <div class="sec-body">충치라고 진단되면 필요한 치료를 합니다. 하지만 쁘띠치과의 충치 치료는 <strong>단순히 삭제하고 채우는 것만을 목표로 하지 않습니다.</strong></div>
+    <div class="treatment-steps">
+
+      <div class="ts">
+        <div class="ts-num">01</div>
+        <div class="ts-body">
+          <div class="ts-title">초기 충치 — 진행을 중단시키는 것이 목표</div>
+          <div class="ts-desc">초기 충치는 무조건 삭제하지 않습니다. 검게 보이더라도 진행이 멈춘 충치라면 지켜볼 수 있습니다. 치아를 최대한 보존하면서 더 이상 진행되지 않도록 관리합니다.</div>
+          <div class="ts-chips">
+            <span class="ts-chip">최소 삭제</span>
+            <span class="ts-chip">진행 중단</span>
+            <span class="ts-chip">정기 관찰</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ts">
+        <div class="ts-num">02</div>
+        <div class="ts-body">
+          <div class="ts-title">중기 충치 — 신경을 살리는 것이 목표</div>
+          <div class="ts-desc">상아질까지 진행된 충치는 필요한 만큼만 제거하고 치아 형태를 회복합니다. 신경이 가까운 경우에는 <strong>MTA 등을 이용해 신경을 보호</strong>하고, 가능한 한 신경치료를 피하는 방향을 고려합니다.</div>
+          <div class="ts-chips">
+            <span class="ts-chip">MTA 신경 보호</span>
+            <span class="ts-chip">최소 삭제</span>
+            <span class="ts-chip">무삭제레진 또는 보존적 수복</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ts">
+        <div class="ts-num">03</div>
+        <div class="ts-body">
+          <div class="ts-title">말기 충치 — 자연치아를 최대한 살립니다</div>
+          <div class="ts-desc">충치가 깊어 신경치료가 필요하더라도 가능하다면 뿌리를 살려 자연치아를 보존합니다. <strong>MTA, 근관치료, POST &amp; CORE</strong> 등을 통해 치아 뿌리를 살리고 머리 부분을 재건한 뒤 보철치료로 마무리할 수 있습니다.</div>
+          <div class="ts-chips">
+            <span class="ts-chip">근관치료</span>
+            <span class="ts-chip">MTA</span>
+            <span class="ts-chip">POST &amp; CORE</span>
+            <span class="ts-chip">자연치아살리기</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ts">
+        <div class="ts-num">04</div>
+        <div class="ts-body">
+          <div class="ts-title">근본 원인 치료 — 재발을 막습니다</div>
+          <div class="ts-desc">충치 치료와 함께 <strong>왜 이 아이에게 충치가 생겼는지</strong> 근본 원인인 습관·구조·기능까지 함께 살펴봅니다. 이를 <strong>바른미소디자인 훈련</strong>이라고 합니다.</div>
+          <div class="ts-chips">
+            <span class="ts-chip">입술·혀·호흡·자세</span>
+            <span class="ts-chip">바르게 씹고 삼키기</span>
+            <span class="ts-chip">바른미소디자인</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="quote">
+  "충치를 예방하는 가장 근본적인 방법은<br>단 것을 줄이거나 양치 횟수를 늘리는 것만이 아닙니다.<br><em>입이 자연스럽게 다물어지고, 혀가 제자리에 놓이며,<br>코로 숨 쉬고, 바르게 씹고 삼킬 수 있는 환경</em>을<br>만드는 것입니다."
+  <div class="quote-src">쁘띠치과 · Basic is Magic</div>
+</div>
+
+<div class="rel-section">
+  <div class="rel-title">다음 단계 · 관련 페이지</div>
+  <div class="rel-links">
+    <a class="rel-link" href="petit_prenatal.html" target="_blank">
+      <div class="rel-link-body"><div class="rel-link-title">우리 아이 치과수첩</div><div class="rel-link-sub">임산부·신생아·유아 — 아이 충치 예방의 시작</div></div>
+      <div class="rel-link-arr">→</div>
+    </a>
+    <a class="rel-link" href="petit_prevention.html" target="_blank">
+      <div class="rel-link-body"><div class="rel-link-title">기본은 예방과 습관</div><div class="rel-link-sub">양치질 교육 3회 · 불소 · 스케일링 · 충치 예방</div></div>
+      <div class="rel-link-arr">→</div>
+    </a>
+    <a class="rel-link" href="petit_resin_oneday.html" target="_blank">
+      <div class="rel-link-body"><div class="rel-link-title">무삭제레진 원데이보철</div><div class="rel-link-sub">교합 원인 함께 해결하는 최소 삭제 충치 치료</div></div>
+      <div class="rel-link-arr">→</div>
+    </a>
+    <a class="rel-link" href="petit_natural_tooth.html" target="_blank">
+      <div class="rel-link-body"><div class="rel-link-title">자연치아살리기</div><div class="rel-link-sub">MTA · 엠도게인 · 발치 전 마지막 수단</div></div>
+      <div class="rel-link-arr">→</div>
+    </a>
+    <a class="rel-link" href="petit_smile_design.html" target="_blank">
+      <div class="rel-link-body"><div class="rel-link-title">바른미소디자인</div><div class="rel-link-sub">입술·혀·호흡·자세 — 충치 재발 막는 근본 훈련</div></div>
+      <div class="rel-link-arr">→</div>
+    </a>
+    <a class="rel-link" href="petit_treatment_by_age.html" target="_blank">
+      <div class="rel-link-body"><div class="rel-link-title">바른턱얼굴 교합치료 — 성장교정</div><div class="rel-link-sub">충치 환경을 근본적으로 바꾸는 성장기 치료</div></div>
+      <div class="rel-link-arr">→</div>
+    </a>
+  </div>
+</div>
+
+<section class="cta">
+  <div class="cta-title">충치 상담 · 예약</div>
+  <div class="cta-sub">6개월에 한 번 정기 검진만으로도<br>초기에 발견하고 간단하게 해결할 수 있습니다</div>
+  <div class="cta-btns">
+    <a class="btn-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">네이버 예약</a>
+    <a class="btn-kakao" href="https://pf.kakao.com/_xbhXYb" target="_blank">카카오 상담</a>
+  </div>
+</section>
+
+<div class="share-float">
+  <div class="share-toast" id="shareToast">링크 복사됐습니다</div>
+  <button class="share-fab" onclick="doShare()" title="공유하기">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+  </button>
+</div>
+<script>
+async function doShare(){
+  if(navigator.share){try{await navigator.share({title:document.title,url:location.href});}catch(e){}}
+  else{try{await navigator.clipboard.writeText(location.href);var t=document.getElementById('shareToast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}catch(e){}}
+}
+</script>
+</body>
+</html>

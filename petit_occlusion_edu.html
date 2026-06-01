@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>교합이란 무엇인가 | 쁘띠치과</title>
+<link rel="stylesheet" href="petit-design.css">
+<style>
+/* NAV */
+/* HERO */
+.hero{background:#007A54;padding:52px 20px 44px;position:relative;overflow:hidden;border-bottom:3px solid #C8A84B}
+.hero::before{content:'';position:absolute;right:-50px;top:-50px;width:240px;height:240px;border-radius:50%;background:rgba(200,168,75,.12)}
+.hero::after{content:'';position:absolute;left:-30px;bottom:-60px;width:180px;height:180px;border-radius:50%;background:rgba(250,248,240,.05)}
+.hero-tag{font-size:11px;letter-spacing:.16em;color:#C8A84B;text-transform:uppercase;margin-bottom:14px;position:relative}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(28px,6.5vw,44px);font-weight:700;color:#FAF8F0;line-height:1.2;margin-bottom:14px;position:relative}
+.hero-title em{color:#C8A84B;font-style:normal}
+.hero-sub{font-size:15px;color:rgba(250,248,240,.7);line-height:1.85;position:relative}
+
+/* 정의 섹션 */
+.def-sec{background:#fff;padding:28px 20px}
+.def-q{font-family:'TmonMonsori',serif;font-size:22px;font-weight:700;color:#007A54;margin-bottom:14px;line-height:1.35}
+.def-body{font-size:15px;color:#222220;line-height:1.9;margin-bottom:18px}
+.def-body strong{color:#007A54;font-weight:600}
+.def-highlight{background:#E8F5F0;border-left:4px solid #007A54;border-radius:0 10px 10px 0;padding:16px 18px;font-size:14px;color:#1A5C3A;line-height:1.8}
+.def-highlight strong{font-weight:700}
+
+/* 구조 설명 */
+.struct-sec{background:#FAFAF9;padding:24px 20px}
+.struct-cards{display:flex;flex-direction:column;gap:8px}
+.sc{border-radius:10px;padding:14px 16px}
+.sc-row{display:flex;align-items:flex-start;gap:12px}
+.sc-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'TmonMonsori',serif;font-size:14px;font-weight:700;flex-shrink:0;margin-top:2px}
+.sc-body{}
+.sc-title{font-family:'TmonMonsori',serif;font-size:16px;font-weight:600;margin-bottom:4px}
+.sc-desc{font-size:13px;color:#555550;line-height:1.7}
+.sc-point{margin-top:8px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:100px;display:inline-block}
+
+/* 교합 종류 */
+.type-sec{background:#fff;padding:24px 20px}
+.type-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.tc{border-radius:10px;padding:13px 13px;text-align:center}
+.tc-title{font-family:'TmonMonsori',serif;font-size:14px;font-weight:600;margin-bottom:4px}
+.tc-desc{font-size:12px;line-height:1.6}
+.tc.normal{background:#E8F5F0;border:1.5px solid #C5E8DC}
+.tc.normal .tc-title{color:#007A54}
+.tc.normal .tc-desc{color:#1A5C3A}
+.tc.abnormal{background:#F7F7F3;border:1.5px solid #E4E4DE}
+.tc.abnormal .tc-title{color:#555550}
+.tc.abnormal .tc-desc{color:var(--color-text-sub)}
+
+/* 왜 중요한가 */
+.why-sec{background:#007A54;padding:24px 20px}
+.why-title{font-family:'TmonMonsori',serif;font-size:20px;font-weight:600;color:#FAF8F0;margin-bottom:6px}
+.why-sub{font-size:13px;color:#C8A84B;margin-bottom:16px}
+.why-items{display:flex;flex-direction:column;gap:10px}
+.wi-card{background:rgba(255,255,255,.08);border-radius:10px;padding:14px 16px;border:1px solid rgba(200,168,75,.2)}
+.wi-head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.wi-icon{font-family:'TmonMonsori',serif;font-size:22px;font-weight:700;color:#C8A84B;flex-shrink:0;width:28px}
+.wi-name{font-family:'TmonMonsori',serif;font-size:16px;font-weight:600;color:#FAF8F0}
+.wi-body{font-size:13px;color:rgba(250,248,240,.75);line-height:1.75;padding-left:38px}
+
+/* 교합이 무너지면 */
+.collapse-sec{background:#fff;padding:24px 20px}
+.sec-head-sm{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.sec-head-sm-title{font-family:'TmonMonsori',serif;font-size:20px;font-weight:600;color:#111110}
+.collapse-flow{display:flex;flex-direction:column;gap:0}
+.cf-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid #F0F0EB}
+.cf-item:last-child{border-bottom:none}
+.cf-num{font-family:'TmonMonsori',serif;font-size:24px;font-weight:700;color:#E0E0DA;flex-shrink:0;width:36px;line-height:1}
+.cf-body{}
+.cf-title{font-family:'TmonMonsori',serif;font-size:16px;font-weight:600;color:#111110;margin-bottom:3px}
+.cf-desc{font-size:13px;color:#555550;line-height:1.65}
+.cf-link{display:inline-flex;align-items:center;gap:4px;margin-top:6px;font-size:12px;font-weight:600;color:#007A54;text-decoration:none;border:1px solid #C5E8DC;padding:3px 10px;border-radius:100px;background:#E8F5F0}
+
+/* 교합 치료 3단계 */
+.stage-sec{background:#FAFAF9;padding:24px 20px}
+.stages{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.stage{border-radius:12px;overflow:hidden}
+.stage-head{padding:14px 16px;display:flex;align-items:center;gap:12px}
+.stage-num{font-family:'TmonMonsori',serif;font-size:13px;font-weight:700;padding:4px 10px;border-radius:100px;flex-shrink:0}
+.stage-title{font-family:'TmonMonsori',serif;font-size:17px;font-weight:600}
+.stage-period{font-size:12px;margin-top:2px}
+.stage-body{padding:0 16px 16px;font-size:13px;line-height:1.75}
+.stage-body strong{font-weight:600}
+
+.stage.s1{background:#E8F5F0;border:1.5px solid #C5E8DC}
+.stage.s1 .stage-num{background:#007A54;color:#FAF8F0}
+.stage.s1 .stage-title{color:#007A54}
+.stage.s1 .stage-period{color:#1A5C3A}
+.stage.s1 .stage-body{color:#1A3A2A}
+
+.stage.s2{background:#F0F0EC;border:1.5px solid #E0E0DA}
+.stage.s2 .stage-num{background:#555550;color:#FAF8F0}
+.stage.s2 .stage-title{color:#333330}
+.stage.s2 .stage-period{color:var(--color-text-sub)}
+.stage.s2 .stage-body{color:#444440}
+
+.stage.s3{background:#FFFBEF;border:1.5px solid #E8D090}
+.stage.s3 .stage-num{background:#C8A84B;color:#fff}
+.stage.s3 .stage-title{color:#8A6820}
+.stage.s3 .stage-period{color:#8A6820}
+.stage.s3 .stage-body{color:#5A4010}
+
+/* 교합과 일반 교정 차이 */
+.compare-sec{background:#fff;padding:24px 20px}
+.compare-table{border-radius:10px;overflow:hidden;border:1.5px solid #E4E4DE;margin-top:14px}
+.ct-head{display:grid;grid-template-columns:1fr 1fr 1fr;background:#007A54}
+.ct-th{padding:10px 12px;font-size:12px;font-weight:700;color:#FAF8F0;text-align:center}
+.ct-th:first-child{color:#C8A84B;text-align:left;padding-left:14px}
+.ct-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid #EAEAE4}
+.ct-row:nth-child(even){background:#F7F7F3}
+.ct-td{padding:10px 12px;font-size:12.5px;color:#444440;line-height:1.55}
+.ct-td:first-child{font-weight:600;color:#007A54;padding-left:14px;font-size:12px}
+.ct-td.good{color:#007A54;font-weight:500}
+
+/* BTB */
+.btb-quote{font-family:'TmonMonsori',serif;font-size:18px;font-weight:600;color:#FAF8F0;line-height:1.55;margin-bottom:14px}
+.btb-quote em{color:#C8A84B;font-style:normal}
+.btb-desc{font-size:13px;color:rgba(250,248,240,.75);line-height:1.85}
+
+/* 연계 */
+/* .lc 클래스는 design.css에서 정의 */
+/* 공유 */
+@media(min-width:640px){
+  .nav,.hero,.def-sec,.struct-sec,.type-sec,.why-sec,.collapse-sec,.stage-sec,.compare-sec,.btb-box,.link-sec,.cta{max-width:720px;margin-left:auto;margin-right:auto}
+  .share-float{right:calc(50% - 360px + 18px)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="index.html">생활의 기본, <em>쁘띠치과</em></a>
+  <a class="nav-home" href="index.html">← 홈</a>
+  <a class="nav-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero hero-dark">
+  <div class="hero-tag">OCCLUSION EDUCATION · 교합 이해</div>
+  <h1 class="hero-title">교합이란<br><em>무엇인가</em></h1>
+  <p class="hero-sub">치아를 오래 지키려면<br>충치나 잇몸염증과 같은 문제만 보는 것이 아니라<br>왜 그 치아에 같은 문제가 반복되는지<br>원인까지 함께 보아야 합니다.</p>
+</section>
+
+<!-- 정의 -->
+<section class="def-sec">
+  <div class="def-q">교합이란 무엇인가?</div>
+  <div class="def-body">
+    교합은 위아래 치아가 서로 <strong>만나는 방식</strong>입니다. 단순히 치아가 닿는 모양만을 뜻하지 않습니다.<br><br>
+    위턱과 아래턱의 위치, 치아의 배열, 씹는 힘의 방향, 턱관절의 움직임이 <strong>함께 만들어내는 관계</strong>입니다.<br><br>
+    더 넓게 보면 교합은 혀의 위치, 입술의 힘, 호흡 방식, 자세 습관의 영향을 받습니다. 그래서 쁘띠치과에서는 교합을 볼 때 치아만 보지 않고, <strong>턱·얼굴·호흡·자세까지 함께</strong> 살펴봅니다.
+  </div>
+  <div class="def-highlight">
+    <strong>핵심 메시지</strong><br>
+    교합은 치아가 만나는 방식이지만, 실제로는 턱·얼굴·호흡·자세가 함께 만든 결과입니다.<br>
+    치아를 오래 지키려면 <strong>왜 그 치아에 문제가 반복되는지, 교합의 균형까지 함께 보아야</strong> 합니다.
+  </div>
+</section>
+
+<!-- 좋은 교합이란 -->
+<section class="struct-sec">
+  <div class="sec-label">좋은 교합이란</div>
+  <div class="sec-title">바른턱얼굴교합</div>
+
+  <!-- 속담 도입 -->
+  <div style="margin-bottom:18px;border-radius:12px;overflow:hidden;border:1.5px solid #2A5C3A">
+
+    <!-- 속담 헤더 -->
+    <div style="background:#1E3D30;padding:16px 18px;border-bottom:2px solid #C8A84B">
+      <div style="font-family:'TmonMonsori',serif;font-size:19px;font-weight:700;color:#C8A84B;margin-bottom:6px">"이가 잘 맞아야 잘 산다"</div>
+      <div style="font-size:13px;color:rgba(250,248,240,.7);line-height:1.7">치과가 없던 시절에 만들어진 속담이지만, 현대 물리학의 최소 작용의 원리와 정확히 맞닿아 있습니다. 우리 몸이라는 시스템이 완벽하게 정렬된 상태 — 그것이 이가 잘 맞는 상태입니다.</div>
+    </div>
+
+    <!-- 3단계 해석 -->
+    <div style="background:#F7F7F3">
+
+      <div style="padding:14px 18px;border-bottom:1px solid #E4E4DE">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div style="flex-shrink:0;background:#007A54;color:#FAF8F0;font-family:'TmonMonsori',serif;font-size:11px;font-weight:700;padding:4px 9px;border-radius:100px;white-space:nowrap;margin-top:2px">이가 잘 맞다</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#007A54;margin-bottom:3px">최적의 정렬 Alignment</div>
+            <div style="font-size:13px;color:#444440;line-height:1.7">톱니바퀴가 딱 맞물리면 힘을 안 들여도 부드럽게 돌아가듯, 이가 잘 맞으면 저항이 사라지고 에너지가 물 흐르듯 흐릅니다. 위아래 턱과 치아의 정렬, 그 안에서 자연스럽게 맞물리는 상태입니다</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:14px 18px;border-bottom:1px solid #E4E4DE">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div style="flex-shrink:0;background:#555550;color:#FAF8F0;font-family:'TmonMonsori',serif;font-size:11px;font-weight:700;padding:4px 9px;border-radius:100px;white-space:nowrap;margin-top:2px">힘 안 들이고</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#555550;margin-bottom:3px">최소 작용의 원리 Least Action</div>
+            <div style="font-size:13px;color:#444440;line-height:1.7">이가 잘 맞으면 근육이 애를 쓸 필요가 없습니다. 억지로 힘을 주지 않아도 저절로 씹히고 넘어가는 상태 — 가장 적은 에너지로 최대의 효율을 냅니다. 이가 안 맞아 생기는 불필요한 근육 긴장이 사라집니다</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:14px 18px">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div style="flex-shrink:0;background:#C8A84B;color:#fff;font-family:'TmonMonsori',serif;font-size:11px;font-weight:700;padding:4px 9px;border-radius:100px;white-space:nowrap;margin-top:2px">잘 산다</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#8A6820;margin-bottom:3px">삶의 여유 Negentropy</div>
+            <div style="font-size:13px;color:#444440;line-height:1.7">이가 잘 맞아서 아낀 에너지는 삶의 여유로 돌아옵니다. 입안에서 시작된 질서가 전신으로 이어져 잘 먹고, 잘 자고, 사랑하는 사람들과 더 많은 시간을 보낼 수 있습니다. 그것이 조상들이 말한 "잘 사는 것"입니다</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 결론 -->
+    <div style="background:#007A54;padding:12px 18px">
+      <div style="font-size:13px;color:rgba(250,248,240,.9);line-height:1.75">이가 잘 맞는 것 = 교합이 좋은 것. 쁘띠치과는 아이의 성장교정부터, 청소년·청년의 4D입체교정, 중장년의 교합재건까지 — 교합을 바로잡아 오래 자연치아로 살아가도록 돕습니다</div>
+    </div>
+
+  </div>
+
+  <p style="font-size:14px;color:#555550;line-height:1.75;margin-bottom:16px">쁘띠치과에서 말하는 좋은 교합은 아래 세 가지가 함께 이루어진 상태입니다.</p>
+  <div class="struct-cards">
+
+    <div class="sc" style="background:#E8F5F0;border:1px solid #C5E8DC">
+      <div class="sc-row">
+        <div class="sc-dot" style="background:#007A54;color:#FAF8F0;font-size:11px"></div>
+        <div class="sc-body">
+          <div class="sc-title" style="color:#007A54">바른 턱</div>
+          <div class="sc-desc">위아래 턱이 바르게 정렬되고 턱관절이 편안한 위치에 있는 상태입니다. 적당한 크기의 위아래 턱의 정렬 안에 정상 크기·형태·수의 치아가 바르게 배열될 수 있습니다. 그 안에서 혀는 바른 위치에서 기능하고, 입술은 힘주지 않고 닫히며, 편안하게 호흡할 수 있습니다. 바른 턱은 바른 몸의 정렬을 위한 필수 조건입니다</div>
+          <div class="sc-point" style="background:#E8F5F0;color:#007A54;border:1px solid #C5E8DC">턱관절·턱 위치·치아 배열이 함께 안정된 상태</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" style="background:#FFFBEF;border:1px solid #E8D090">
+      <div class="sc-row">
+        <div class="sc-dot" style="background:#C8A84B;color:#fff;font-size:11px"></div>
+        <div class="sc-body">
+          <div class="sc-title" style="color:#8A6820">바른얼굴</div>
+          <div class="sc-desc">교합 간섭이 있으면 몸은 무의식적으로 그 접촉을 피하려 합니다. 한쪽으로 씹거나 턱을 틀거나 이를 악무는 습관이 생길 수 있고, 오래되면 턱관절과 근육에 부담이 쌓이고 얼굴의 긴장감이나 비대칭으로 이어질 수 있습니다. 교합 간섭이 적고 균형이 안정되면 씹는 것이 편안해지고 표정도 자연스러워집니다</div>
+          <div class="sc-point" style="background:#FFFBEF;color:#8A6820;border:1px solid #E8D090">아프지 않은 교합을 넘어, 편안하고 자연스럽고 아름다운 균형</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc" style="background:#F7F7F3;border:1px solid #E4E4DE">
+      <div class="sc-row">
+        <div class="sc-dot" style="background:#555550;color:#FAF8F0;font-size:11px"></div>
+        <div class="sc-body">
+          <div class="sc-title" style="color:#333330">바른 교합</div>
+          <div class="sc-desc">치아에는 매일 반복적인 씹는 힘이 가해집니다. 이 힘이 여러 치아에 고르게 나누어지면 치아와 잇몸, 턱관절이 안정적으로 기능할 수 있습니다. 특정 치아가 먼저 닿거나 한쪽 치아에만 힘이 집중되면 치아 벌어짐·음식물 끼임·마모·파절·시림·잇몸 퇴축으로 이어질 수 있습니다</div>
+          <div class="sc-point" style="background:#F7F7F3;color:#555550;border:1px solid #E4E4DE">턱의 힘이 치아에 효율적으로 분산되며 조화롭게 움직이고, 잘 씹히고 잘 삼켜질 때 어금니 교합이 완성된다</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 교합의 종류 -->
+<section class="type-sec">
+  <div class="sec-label">교합진단명</div>
+  <div class="sec-title">정상교합과 부정교합</div>
+  <p style="font-size:14px;color:#555550;line-height:1.75;margin-bottom:4px">위 치아가 아래 치아를 <strong style="color:#007A54">적당히 덮고</strong>, 위아래가 균형 있게 맞물리며, 씹을 때 고르게 힘이 분산되는 것이 건강한 교합입니다.</p>
+  <div class="type-cards">
+    <div class="tc normal" style="grid-column:1/-1;text-align:left">
+      <div class="tc-title">정상 교합 <span style="font-size:10px;color:#007A54;font-weight:400;opacity:.8">Normal Occlusion</span></div>
+      <div class="tc-desc">위 앞니가 아래 앞니를 2~3mm 정도 덮는 형태. 어금니는 위아래가 1:2로 맞물려 씹는 힘이 고르게 전달됩니다</div>
+    </div>
+
+    <div class="tc abnormal">
+      <div class="tc-title">반대 교합 <span style="font-size:10px;color:var(--color-text-sub);font-weight:400">Class III / Anterior Crossbite</span></div>
+      <div class="tc-desc">아래 앞니가 위보다 앞으로 나온 상태 (주걱턱)</div>
+    </div>
+    <div class="tc abnormal">
+      <div class="tc-title">절단 교합 <span style="font-size:10px;color:var(--color-text-sub);font-weight:400">Edge-to-edge Bite</span></div>
+      <div class="tc-desc">위아래 앞니 끝이 서로 맞닿는 상태. 앞니에 힘이 집중되어 마모나 파절이 생기기 쉽습니다</div>
+    </div>
+
+    <div class="tc abnormal" style="grid-column:1/-1;text-align:left">
+      <div class="tc-title">돌출 <span style="font-size:10px;color:var(--color-text-sub);font-weight:400">Protrusion / Bimaxillary Protrusion</span></div>
+      <div style="margin-top:8px;display:flex;flex-direction:column;gap:8px">
+        <div style="padding:9px 11px;background:#fff;border-radius:7px;border:1px solid #E4E4DE">
+          <div style="font-size:11px;font-weight:700;color:#555550;margin-bottom:3px">앞니 돌출 · Deep Bite 원인</div>
+          <div style="font-size:12px;color:#555550;line-height:1.65">위 앞니가 앞으로 기울거나 아래 앞니를 과하게 덮는 상태. 수직적 과피개가 깊어지면 Deep Bite로 이어집니다</div>
+        </div>
+        <div style="padding:9px 11px;background:#fff;border-radius:7px;border:1px solid #E4E4DE">
+          <div style="font-size:11px;font-weight:700;color:#555550;margin-bottom:3px">양악돌출 · Bimaxillary Protrusion</div>
+          <div style="font-size:12px;color:#555550;line-height:1.65">위아래 모두 앞으로 나온 상태. 겉으로 비슷해 보여도 <strong style="color:#333">두개골 대비 상악·하악의 성장 정도</strong>를 분석해 진단합니다. 상악만 문제인지, 하악만인지, 둘 다인지에 따라 치료 방향이 완전히 달라집니다</div>
+        </div>
+        <div style="font-size:11px;color:#B04040;font-weight:600;padding:4px 2px">"돌출"이라고 같은 것이 아닙니다 — 정밀 진단이 반드시 필요합니다</div>
+      </div>
+    </div>
+
+    <div class="tc abnormal">
+      <div class="tc-title">개구 교합 <span style="font-size:10px;color:var(--color-text-sub);font-weight:400">Open Bite</span></div>
+      <div class="tc-desc">위아래 앞니가 맞닿지 않고 열려있는 상태. 입을 다물어도 앞니 사이에 공간이 남습니다</div>
+    </div>
+    <div class="tc abnormal">
+      <div class="tc-title">교차 교합 <span style="font-size:10px;color:var(--color-text-sub);font-weight:400">Crossbite</span></div>
+      <div class="tc-desc">위아래 치아가 정상적인 안팎 관계와 다르게 엇갈려 물리는 상태. 한쪽 저작 습관이나 턱 비대칭과 연결될 수 있습니다</div>
+    </div>
+
+    <div class="tc abnormal" style="grid-column:1/-1;text-align:left">
+      <div class="tc-title">안면비대칭 <span style="font-size:10px;color:var(--color-text-sub);font-weight:400">Facial Asymmetry</span></div>
+      <div class="tc-desc">턱이 한쪽으로 틀어지거나 좌우 얼굴 높이·길이가 다른 상태. 한쪽 저작 습관·교합 간섭이 원인인 경우가 많으며, 교합이 안정되면 비대칭도 함께 개선됩니다</div>
+    </div>
+  </div>
+  <div style="margin-top:12px;padding:12px 14px;background:#E8F5F0;border-radius:8px;font-size:13px;color:#1A5C3A;line-height:1.7">
+    부정교합은 유전만의 문제가 아닙니다. <strong>입호흡·혀 위치·자세 습관</strong>이 누적되면 정상 교합도 무너집니다. 반대로 기능을 바로잡으면 구조도 회복됩니다.
+  </div>
+</section>
+
+<!-- 교합이 중요한 이유 -->
+<section class="why-sec">
+  <div class="why-title">교합이 중요한 이유</div>
+  <div class="why-sub">치아 하나의 문제가 아닙니다</div>
+  <div class="why-items">
+
+    <div class="wi-card">
+      <div class="wi-head">
+        <div class="wi-icon">01</div>
+        <div class="wi-name">임플란트·보철 수명</div>
+      </div>
+      <div class="wi-body">교합이 맞지 않으면 임플란트와 보철물에 불균등한 힘이 가해져 <strong style="color:#C8A84B">파절·탈락·골흡수</strong>가 반복됩니다. 같은 곳에 치료를 반복하는 이유가 교합에 있는 경우가 많습니다</div>
+    </div>
+
+    <div class="wi-card">
+      <div class="wi-head">
+        <div class="wi-icon">02</div>
+        <div class="wi-name">치아 마모와 시림</div>
+      </div>
+      <div class="wi-body">교합 간섭이 있는 치아에 힘이 집중되면 <strong style="color:#C8A84B">치아 목이 파이고(치경부 마모)</strong>, 법랑질이 닳아 시림이 생깁니다. 코팅만 반복해도 재발하는 이유입니다</div>
+    </div>
+
+    <div class="wi-card">
+      <div class="wi-head">
+        <div class="wi-icon">03</div>
+        <div class="wi-name">잇몸과 뼈 손실</div>
+      </div>
+      <div class="wi-body">교합 외상이 있는 치아 주변 잇몸 뼈가 <strong style="color:#C8A84B">선택적으로 흡수되는 경우</strong>가 있습니다. 세균만 치료해도 교합이 원인이라면 잇몸이 계속 내려갈 수 있습니다</div>
+    </div>
+
+    <div class="wi-card">
+      <div class="wi-head">
+        <div class="wi-icon">04</div>
+        <div class="wi-name">전신 건강과 자세</div>
+      </div>
+      <div class="wi-body">턱과 치아의 맞물림은 씹기, 삼키기, 호흡, 머리와 목의 자세와 연결되어 있습니다. 교합 불균형이 있는 경우 <strong style="color:#C8A84B">턱관절 불편감·두통·목·어깨 긴장·수면 중 이갈이</strong>와 함께 나타나는 경우도 있습니다. 쁘띠치과에서는 치아만 보지 않고 턱·얼굴·호흡·자세의 관계를 함께 살펴봅니다</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 교합이 무너지는 흐름 -->
+<section class="collapse-sec">
+  <div style="font-family:'TmonMonsori',serif;font-size:20px;font-weight:600;color:#111110;margin-bottom:6px">교합이 무너지는 흐름</div>
+  <div style="font-size:13px;color:var(--color-text-sub);margin-bottom:18px">갑자기 생긴 문제가 아닙니다 — 오랫동안 쌓인 결과입니다</div>
+  <div class="collapse-flow">
+
+    <div class="cf-item">
+      <div class="cf-num">01</div>
+      <div class="cf-body">
+        <div class="cf-title">기능 불균형 시작</div>
+        <div class="cf-desc">입호흡·한쪽 저작·혀 위치 이상·이갈이 등 잘못된 기능 습관이 시작됩니다. 증상이 없어 모르고 지나칩니다. 잘못된 습관은 성장의 방향에 영향을 주고 부정교합과 몸의 틀어짐이라는 질환으로 나타납니다</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+          <a class="cf-link" href="petit_treatment_by_age.html">성장교정 →</a>
+    <a class="lc sub" href="petit_4d_ortho.html">
+      <div class="lc-body">
+        <div class="lc-title">4D 입체교정</div>
+        <div class="lc-sub">MARPE · Twin Block · Han's 2-Way/3-Way · Biobloc</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+          <a class="cf-link" href="petit_tongue_tie.html">설소대 치료 →</a>
+          <a class="cf-link" href="petit_smile_design.html">바른미소디자인훈련 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cf-item">
+      <div class="cf-num">02</div>
+      <div class="cf-body">
+        <div class="cf-title">교합 간섭 발생</div>
+        <div class="cf-desc">힘이 고르지 않게 분산되면서 특정 치아에만 과부하가 집중됩니다. 이때 이갈이·이악물기가 있으면 진행이 빠릅니다</div>
+        <a class="cf-link" href="petit_occlusion_selfcheck.html">교합 자가체크 →</a>
+      </div>
+    </div>
+
+    <div class="cf-item">
+      <div class="cf-num">03</div>
+      <div class="cf-body">
+        <div class="cf-title">치아 손상 시작</div>
+        <div class="cf-desc">마모·치경부 파임·시림·충치 반복이 시작됩니다. "관리를 잘 하는데 왜 계속 문제가 생기지?" 하는 시점입니다</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+          <a class="cf-link" href="petit_sensitive.html">시림·치아목 파임 →</a>
+          <a class="cf-link" href="petit_cavity.html">충치 →</a>
+          <a class="cf-link" href="petit_periodontitis.html">치주염 →</a>
+          <a class="cf-link" href="petit_natural_tooth.html">자연치아살리기 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cf-item">
+      <div class="cf-num">04</div>
+      <div class="cf-body">
+        <div class="cf-title">턱관절·잇몸 영향</div>
+        <div class="cf-desc">턱관절 통증·소리, 잇몸 퇴축·흔들림이 나타납니다. 단순 잇몸 치료나 물리치료로는 해결이 잘 안 되는 이유가 교합에 있습니다</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+          <a class="cf-link" href="petit_muscle_relax.html">근이완치료 →</a>
+          <a class="cf-link" href="petit_splint.html">교합안정장치 →</a>
+          <a class="cf-link" href="petit_periodontitis.html">만성복합치주염 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cf-item">
+      <div class="cf-num">05</div>
+      <div class="cf-body">
+        <div class="cf-title">교합 붕괴 · 전신 영향</div>
+        <div class="cf-desc">치아 상실, 임플란트·보철 반복 파절, 전신 자세 불균형, 수면 장애로 이어집니다. 이 단계에서의 치료는 더 복잡하고 오래 걸립니다</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+          <a class="cf-link" href="petit_lifecycle_occlusion.html">생애주기 교합 →</a>
+          <a class="cf-link" href="petit_consultation_widget.html">교합재건 자가테스트 →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 교합 치료 3단계 -->
+<section class="stage-sec">
+  <div class="sec-label">쁘띠치과 교합 치료</div>
+  <div class="sec-title">교합은 3단계로<br>회복됩니다</div>
+  <p style="font-size:13px;color:var(--color-text-sub);line-height:1.7;margin-bottom:4px">치아만 움직이는 교정과 다릅니다. 뼈→치아→기능 순서로 근본부터 바꿉니다.</p>
+  <div class="stages">
+
+    <div class="stage s1">
+      <div class="stage-head">
+        <div class="stage-num">STAGE 1</div>
+        <div>
+          <div class="stage-title">턱의 위치와 성장 방향 조정 — 4D 입체교정</div>
+          <div class="stage-period">약 6개월 · 2주 간격 내원</div>
+        </div>
+      </div>
+      <div class="stage-body">
+        턱의 크기, 위치, 수평·수직·전후 관계를 평가하고 장치를 통해 <strong>더 안정적인 방향으로 유도</strong>합니다. 안면 비대칭 개선, 코골이·수면 무호흡 개선에도 도움이 될 수 있습니다. 하루 10시간 이상 착용, 잠잘 때도 착용합니다.
+      </div>
+    </div>
+
+    <div class="stage s2">
+      <div class="stage-head">
+        <div class="stage-num">STAGE 2</div>
+        <div>
+          <div class="stage-title">치아의 이동 — 교합 교정</div>
+          <div class="stage-period">6개월~2년 · 2주 간격 내원</div>
+        </div>
+      </div>
+      <div class="stage-body">
+        바로잡힌 턱 위에 <strong>치아를 정렬</strong>합니다. MEAW·3DSOM·인비절라인 장치를 환자 상태에 맞게 선택합니다. 치아를 움직이는 동시에 교합 간섭을 제거해 힘이 고르게 분산되도록 합니다.<br><br>
+        <strong>이 단계에서 바른미소디자인 훈련이 함께 진행됩니다.</strong> 치아가 움직이는 과정에서 입술·혀·호흡·자세를 함께 훈련해야 치아가 바른 자리를 찾아갑니다.
+      </div>
+    </div>
+
+    <div class="stage s3">
+      <div class="stage-head">
+        <div class="stage-num">STAGE 3</div>
+        <div>
+          <div class="stage-title">기능의 완성 — 바른미소디자인</div>
+          <div class="stage-period">평생 유지 · 6개월 훈련</div>
+        </div>
+      </div>
+      <div class="stage-body">
+        치아 배열의 완성은 <strong>바른 호흡 · 바른 자세 · 바른 연하(삼키기)</strong>로 마무리되고, 이 기능이 유지되는 한 교합도 유지됩니다.<br><br>
+        이 단계 없이는 치료 후 재발합니다. 장치로 치아를 움직여도 기능이 바뀌지 않으면 치아는 원래 자리로 돌아갑니다. 올바른 기능이 치료의 진짜 유지장치입니다.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 교합치료 vs 일반 교정 비교 -->
+<section class="compare-sec">
+  <div class="sec-label">교합치료 vs 일반 치아교정</div>
+  <div class="sec-title">무엇이 다른가?</div>
+  <div class="compare-table">
+    <div class="ct-head">
+      <div class="ct-th">구분</div>
+      <div class="ct-th">일반적인 치아배열 교정</div>
+      <div class="ct-th" style="color:#C8A84B">쁘띠치과 바른턱얼굴 교합치료</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-td">주된 관점</div>
+      <div class="ct-td">치아 배열 개선</div>
+      <div class="ct-td good">턱·치아·기능의 균형</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-td">진단 범위</div>
+      <div class="ct-td">치아와 교합 중심</div>
+      <div class="ct-td good">치아·턱관절·얼굴·호흡·자세까지 함께 평가</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-td">치료 방향</div>
+      <div class="ct-td">치아 이동 중심</div>
+      <div class="ct-td good">턱 위치·치아 접촉·기능훈련을 단계적으로 고려</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-td">발치·수술</div>
+      <div class="ct-td">필요 시 고려</div>
+      <div class="ct-td good">원인 분석 후 비발치·비수술 가능성을 먼저 검토</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-td">유지관리</div>
+      <div class="ct-td">유지장치와 정기검진</div>
+      <div class="ct-td good">내 몸이 유지장치 + 정기검진을 통한 습관관리</div>
+    </div>
+    <div class="ct-row">
+
+    </div>
+  </div>
+</section>
+
+<!-- BTB 철학 -->
+<div class="btb-box">
+  <div class="btb-inner">
+    <div class="btb-label">BASIC IS MAGIC · 쁘띠치과 철학</div>
+    <div class="btb-quote">"교합은 기능이 만들고,<br>기능 이상이 무너뜨리며,<br><em>기능 회복이 다시 완성한다.</em>"</div>
+    <div class="btb-desc">
+      인간은 태어날 때부터 올바른 교합을 만들 수 있는 기능적 청사진을 가지고 있습니다. 코호흡·혀 상방 위치·균형 저작·바른 자세 — 이 네 가지가 정상적으로 작동하면 교합은 자연스럽게 완성됩니다.<br><br>
+      하지만 현대인의 생활 환경은 이 기능들을 무너뜨립니다. 입호흡·스마트폰 자세·가공식품·스트레스로 인한 이갈이가 교합을 서서히 망가뜨립니다.<br><br>
+      쁘띠치과의 치료는 증상을 없애는 것이 아니라, <strong style="color:#C8A84B">잃어버린 기능을 되찾는 것</strong>입니다. 그것이 Basic is Magic입니다.
+    </div>
+  </div>
+</div>
+
+<!-- 연계 페이지 -->
+<section class="link-sec">
+  <div class="link-title">더 알아보기</div>
+  <div class="link-cards">
+    <a class="lc main" href="petit_occlusion_selfcheck.html">
+      <div class="lc-body">
+        <div class="lc-title">교합질환 자가체크</div>
+        <div class="lc-sub">지금 내 교합 상태 확인 — 증상별 치료 방향 안내</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc sub" href="petit_diagnosis.html">
+      <div class="lc-body">
+        <div class="lc-title">교합진단</div>
+        <div class="lc-sub">3D 스캐너·CT·안모 촬영 정밀 분석 · 맞춤 치료 계획</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc sub" href="petit_treatment_by_age.html">
+      <div class="lc-body">
+        <div class="lc-title">바른턱얼굴 교합치료</div>
+        <div class="lc-sub">성장교정 · 4D입체교정 · 교합재건 · 연령별 안내</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc sub" href="petit_lifecycle_occlusion.html">
+      <div class="lc-body">
+        <div class="lc-title">생애주기별 교합 노화</div>
+        <div class="lc-sub">태어남부터 노년까지 교합이 무너지는 흐름</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc gold" href="petit_consultation_widget.html">
+      <div class="lc-body">
+        <div class="lc-title">교합재건 위젯</div>
+        <div class="lc-sub">내 증상 분석 · 치료 방향 확인</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc gold" href="petit_splint.html">
+      <div class="lc-body">
+        <div class="lc-title">교합안정장치</div>
+        <div class="lc-sub">이갈이·턱관절·마모 차단 · 스플린트</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-title">교합이 궁금하다면<br>먼저 확인해 드립니다</div>
+  <div class="cta-sub">교합 문제인지, 어떤 단계가 필요한지<br>자가체크 후 내원하시면 처음부터 정확하게 안내드립니다</div>
+  <div class="cta-btns">
+    <a class="btn-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/></svg>
+      네이버 예약
+    </a>
+    <a class="btn-kakao" href="https://pf.kakao.com/_xbhXYb" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#191919"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.67 1.648 5.012 4.146 6.396L5 21l5.12-2.983C10.734 18.01 11.363 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z"/></svg>
+      카카오 상담
+    </a>
+  </div>
+  <div class="cta-info">대구시 남구 대봉로 66 2층 · 053-472-2828</div>
+</section>
+
+<!-- 공유 -->
+<div class="share-float">
+  <div class="share-toast" id="shareToast">링크 복사됐습니다</div>
+  <button class="share-fab" onclick="doShare()" title="공유하기">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+  </button>
+</div>
+
+<script>
+async function doShare(){
+  var title=document.title||'쁘띠치과';
+  var url=location.href;
+  if(navigator.share){
+    try{await navigator.share({title:title,url:url});}catch(e){}
+  } else {
+    try{
+      await navigator.clipboard.writeText(url);
+      var t=document.getElementById('shareToast');
+      t.classList.add('show');
+      setTimeout(function(){t.classList.remove('show');},2000);
+    }catch(e){}
+  }
+}
+</script>
+</body>
+</html>

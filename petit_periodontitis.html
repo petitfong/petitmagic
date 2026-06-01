@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>만성복합치주염 | 쁘띠치과</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+:root{
+  --g:#007A54;--g2:#009B6B;
+  --cr:#FAFAF9;--cr2:#EFEFEB;
+  --go:#C8A84B;--go2:#FFFBEF;
+  --tx:#1A1A18;--mu:#888880;--lt:#B8B8B0;--wh:#fff;
+  --br:#E8E8E4;
+  --sf:'Noto Serif KR',serif;--ss:'Noto Sans KR',sans-serif
+}
+html{scroll-behavior:smooth}
+.gnav{position:sticky;top:0;z-index:200;background:rgba(250,250,249,.97);backdrop-filter:blur(12px);border-bottom:1px solid #F5F5F1}
+.gnav-inner{max-width:720px;margin:0 auto;display:flex;align-items:center;padding:0 20px}
+.gnav-logo{font-family:'TmonMonsori',serif;font-size:13px;color:#555550;font-weight:400;padding:14px 0;margin-right:auto}
+.gnav-logo em{color:#007A54;font-style:normal}
+.gnav-home{font-size:13px;color:#555550;text-decoration:none;padding:14px 12px}
+.gnav-home:hover{color:var(--go)}
+.gnav-cta{margin-left:8px;background:#03C75A;color:#FFFFFF;border:none;padding:7px 15px;border-radius:20px;font-size:11.5px;font-weight:600;font-family:'Pretendard',sans-serif;cursor:pointer;text-decoration:none;display:inline-block}
+
+/* HERO */
+.hero{background:#fff;min-height:60vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 28px 52px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 50% at 75% 30%,#FFFBEF,transparent)}
+.hero-inner{max-width:680px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-kw{font-size:10px;letter-spacing:.2em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.hero-kw::before{content:'';width:20px;height:1px;background:var(--go)}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(28px,5.5vw,48px);font-weight:700;color:#111110;line-height:1.2;margin-bottom:16px}
+.hero-title em{color:var(--go);font-style:normal}
+.hero-term{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.ht{border-radius:8px;padding:6px 13px;font-size:12px;font-weight:600}
+.ht-rd{background:rgba(201,64,64,.18);border:1px solid rgba(201,64,64,.3);color:#e87070}
+.ht-go{background:var(--go2);border:1px solid rgba(200,168,75,.25);color:var(--go)}
+.hero-sub{font-size:14px;color:#555550;line-height:1.85;max-width:460px}
+
+/* WRAP */
+.wrap{max-width:720px;margin:0 auto;padding:0 24px}
+.sec{padding:48px 0 8px}
+.sec-kw{font-size:10px;letter-spacing:.18em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:10px}
+.sec-body{font-size:13.5px;color:var(--mu);line-height:1.9;margin-bottom:16px}
+.sec-body strong{color:var(--tx);font-weight:500}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--cr2),transparent);margin:8px 0}
+.insight{font-size:14px;background:var(--go2);border-left:3px solid var(--go);border-radius:0 10px 10px 0;padding:13px 16px;margin:14px 0;font-size:13px;color:var(--tx);line-height:1.75}
+.insight strong{color:var(--g);font-weight:600}
+.warn{background:var(--rd2);border-left:3px solid rgba(201,64,64,.35);border-radius:0 10px 10px 0;padding:13px 16px;margin:14px 0;font-size:13px;color:var(--tx);line-height:1.75}
+.warn strong{color:var(--rd);font-weight:600}
+
+/* 3-WORD BOX */
+.word3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:20px 0}
+.w3{border-radius:14px;padding:20px 16px;text-align:center}
+.w3-1{background:rgba(201,64,64,.08);border:1.5px solid rgba(201,64,64,.15)}
+.w3-2{background:rgba(200,168,75,.1);border:1.5px solid rgba(200,168,75,.2)}
+.w3-3{background:#E8F5F0;border:1.5px solid rgba(0,122,84,.12)}
+.w3-ko{font-family:'TmonMonsori',serif;font-size:20px;font-weight:900;margin-bottom:6px}
+.w3-1 .w3-ko{color:var(--rd)}
+.w3-2 .w3-ko{color:var(--go)}
+.w3-3 .w3-ko{color:var(--g)}
+.w3-def{font-size:11px;font-weight:600;color:var(--mu);margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em}
+.w3-body{font-size:12px;color:var(--mu);line-height:1.5}
+
+/* CAUSE 3 */
+.cause3{display:flex;flex-direction:column;gap:10px;margin:18px 0}
+.cause{display:flex;gap:14px;align-items:flex-start;background:var(--wh);border:1.5px solid var(--cr2);border-radius:13px;padding:15px 17px}
+.cause-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.cause-body{}
+.cause-title{font-size:14px;font-weight:600;color:var(--g);margin-bottom:4px}
+.cause-desc{font-size:13px;color:var(--mu);line-height:1.7}
+.cause-desc strong{color:var(--tx);font-weight:500}
+
+/* DEPTH METER */
+.depth-sec{background:var(--wh);border:1.5px solid var(--cr2);border-radius:18px;padding:22px 22px;margin:20px 0}
+.depth-title{font-size:12px;letter-spacing:.1em;color:var(--mu);text-transform:uppercase;font-weight:500;margin-bottom:16px}
+.depth-rows{display:flex;flex-direction:column;gap:10px}
+.dr{display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:10px}
+.dr-mm{font-size:12px;font-weight:700;color:var(--tx);text-align:right;flex-shrink:0}
+.dr-bar-wrap{position:relative;height:10px;background:var(--cr2);border-radius:5px;overflow:hidden}
+.dr-bar{height:100%;border-radius:5px;transition:width .8s ease}
+.b-ok{background:linear-gradient(90deg,#009B6B,#4aad78)}
+.b-light{background:linear-gradient(90deg,#7abd7a,#95cc70)}
+.b-warn{background:linear-gradient(90deg,#C8892A,#e0a040)}
+.b-mid{background:linear-gradient(90deg,#d07020,#c05818)}
+.b-bad{background:linear-gradient(90deg,#C94040,#e05555)}
+.b-critical{background:linear-gradient(90deg,#8B0000,#C94040)}
+.dr-label{font-size:11.5px;font-weight:600;white-space:nowrap}
+.dr-note{grid-column:2/-1;font-size:11px;color:var(--mu);padding-left:0;margin-top:-4px;line-height:1.4}
+
+/* SYMPTOM PROGRESS */
+.progress{display:flex;flex-direction:column;gap:0;border-radius:14px;overflow:hidden;border:1.5px solid var(--cr2);margin:18px 0}
+.pg{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-bottom:1px solid var(--cr2);background:var(--wh)}
+.pg:last-child{border-bottom:none}
+.pg-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+.pg-body{}
+.pg-title{font-size:13.5px;font-weight:600;color:var(--g);margin-bottom:3px}
+.pg-desc{font-size:14px;color:var(--mu);line-height:1.6}
+
+/* TREATMENT STAGES */
+.tx-stages{display:flex;flex-direction:column;gap:12px;margin:18px 0}
+.txs{border-radius:16px;overflow:hidden;border:1.5px solid var(--cr2)}
+.txs-head{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;background:var(--wh);transition:background .15s;user-select:none}
+.txs:hover .txs-head{background:#FFFBEF}
+.txs.open .txs-head{border-bottom:1px solid var(--cr2)}
+.txs-stage{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.txs-body-wrap{flex:1}
+.txs-title{font-size:14px;font-weight:600;color:var(--g);margin-bottom:2px}
+.txs-sub{font-size:11.5px;color:var(--mu)}
+.txs-arr{font-size:11px;color:var(--cr2);transition:transform .2s}
+.txs.open .txs-arr{transform:rotate(180deg);color:var(--go)}
+.txs-content{display:none;padding:16px 18px;background:var(--cr)}
+.txs.open .txs-content{display:block}
+.txs-content p{font-size:14px;color:var(--mu);line-height:1.8;margin-bottom:10px}
+.txs-content p:last-child{margin-bottom:0}
+.txs-content strong{color:var(--tx);font-weight:500}
+.txs-content em{color:var(--g);font-style:normal;font-weight:600}
+.tx-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tc{background:var(--g);color:#E0E0D8;border-radius:6px;padding:4px 11px;font-size:11.5px;font-weight:500}
+.tc.go{background:var(--go);color:var(--g)}
+.tc.special{background:linear-gradient(90deg,var(--g),var(--go));color:#1A1A18}
+
+/* PETIT ADVANTAGE */
+.petit-adv{background:#F5F5F1;border:1px solid #E8E8E4;border-radius:18px;padding:26px 24px;margin:20px 0}
+.pa-kw{font-size:10px;letter-spacing:.12em;color:#555550;text-transform:uppercase;font-weight:500;margin-bottom:10px}
+.pa-title{font-family:'TmonMonsori',serif;font-size:17px;font-weight:700;color:#1A1A18;line-height:1.6;margin-bottom:12px}
+.pa-title em{color:var(--go);font-style:normal}
+.pa-items{display:flex;flex-direction:column;gap:9px;margin-bottom:14px}
+.pai{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;border-radius:9px;background:#F9F9F7}
+.pai-dot{width:7px;height:7px;border-radius:50%;background:var(--go);flex-shrink:0;margin-top:4px}
+.pai-txt{font-size:14px;color:#555550;line-height:1.7}
+.pai-txt strong{color:#1A1A18}
+.pa-note{font-size:12px;color:#AAAAAA;padding-top:12px;border-top:1px solid #F5F5F1;line-height:1.65;font-style:italic}
+
+/* CTA */
+.cta-sec{padding:14px 0 80px}
+@media(max-width:600px){
+  .hero{padding:60px 18px 40px}
+  .wrap{padding:0 16px}
+  .word3{grid-template-columns:1fr}
+  .dr{grid-template-columns:70px 1fr auto}
+  .btn-naver,}
+
+/* ── BRUNCH CONTENT ── */
+.wrap,.content{max-width:800px;margin:0 auto;}
+.sec,.sec-sec{padding:48px 28px 8px;}
+.sec-kw{font-size:12px;letter-spacing:.14em;color:#555550;text-transform:uppercase;font-weight:400;margin-bottom:10px;}
+.sec-body{font-size:15px;color:#555550;line-height:1.95;margin-bottom:18px;}
+.sec-body strong{color:#1A1A18;font-weight:500;}
+.divider{height:1px;background:#E8E8E4;margin:4px 0;}
+.insight{font-size:14px;background:#F5F5F1;border-left:2px solid #C8A84B;border-radius:0;padding:14px 18px;margin:16px 0;font-size:13.5px;color:#1A1A18;line-height:1.8;}
+.insight strong{color:#007A54;font-weight:500;}
+.warn,.warn-box{background:#FDF6F6;border-left:2px solid #D89090;border-radius:0;padding:14px 18px;margin:14px 0;font-size:13px;color:#1A1A18;line-height:1.75;}
+.warn strong,.warn-box strong{color:#A05050;font-weight:500;}
+/* sec-title serif */
+h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-.015em;}
+/* dark boxes → light */
+.vm,.warranty,.petit-adv,.next-sec,.goal,.phil-box,.phil-quote,.def-box,.sd-final,.exercise,.self-care,.guarantee,.promise{
+  background:#F5F5F1;border:1px solid #E8E8E4;border-radius:12px;
+}
+.vm .vm-title,.warranty .w-title,.petit-adv .pa-title,.next-sec .next-title,.goal .goal-title,.def-box .def-ko,
+.guarantee .g-title,.promise .pr-title{
+  font-family:'TmonMonsori',serif;font-weight:400;color:#1A1A18;
+}
+.vm .vm-body,.warranty .w-body,.petit-adv .pa-body,.def-box .def-body{color:#555550;}
+.vm .vm-label,.warranty .w-tag,.petit-adv .pa-kw,.next-sec .next-kw{color:#555550;}
+.g-tag{background:#007A54;color:#FAF8F0;}
+/* stage/care cards */
+.stage,.care,.feat,.reason,.txs,.txc,.tx-detail,.tx-card{background:#fff;border:1px solid #E8E8E4;border-radius:12px;}
+.stage-head,.care-head,.feat-head,.reason-head,.txs-head,.txc-head,.txd-head{background:#fff;}
+.stage.open .stage-head,.care.open .care-head,.feat.open .feat-head,.reason.open .reason-head{background:#F9F9F7;}
+/* numbered steps */
+.stage-num,.care-num,.feat-num,.rn-num,.pf-num,.sc-step-num,.ex-num,.tf-num{background:#007A54;color:#C8A84B;}
+/* progress/symptom */
+.pg,.pf,.cn-item,.sc-step{background:#F9F9F7;border:1px solid #E8E8E4;border-radius:10px;}
+.cause{background:#F9F9F7;}
+/* CTA */
+.cta-sec,.cta-box,.closing{background:#F5F5F1;border-radius:16px;border:1px solid #E8E8E4;}
+.cta-title,.cl-title{font-family:'TmonMonsori',serif;font-weight:400;color:#1A1A18;}
+.cta-title em,.cl-title em{color:#007A54;font-style:italic;}
+.cta-sub,.cl-body{color:#555550;}
+/* m3 mission cards */
+.m3-1,.m3-2,.m3-3{background:#F5F5F1;border:1px solid #E8E8E4;}
+.m3-title{color:#1A1A18;}
+.m3-body{color:#555550;}
+/* chain */
+.chain-box{background:#F9F9F7;border:1px solid #E8E8E4;}
+/* funny note */
+.funny{background:#F5F5F1;border:1px solid #E8E8E4;}
+.funny-title{color:#007A54;}
+.funny-body{color:#555550;}
+/* hb cards */
+.hb-health,.hb-beauty{background:#F5F5F1;border:1px solid #E8E8E4;}
+.hb-health .hb-title,.hb-beauty .hb-title{color:#1A1A18;}
+.hb-health .hb-item,.hb-beauty .hb-item{color:#555550;}
+/* smile detail */
+.smile-detail{background:#F5F5F1;border:1px solid #E8E8E4;}
+.sd-kw{color:#555550;}
+.sd-title{color:#1A1A18;}
+.sd-item{background:#fff;border:1px solid #E8E8E4;}
+.sd-item-title{color:#1A1A18;}
+.sd-item-body{color:#555550;}
+/* lifetime */
+.lifetime{background:#F5F5F1;border:1px solid #E8E8E4;}
+.lt-title{color:#1A1A18;}
+.lt-body{color:#555550;}
+/* phil quote */
+.phil-quote .ph-q{color:#1A1A18;}
+/* section headers */
+.sec-title-wrap{border-bottom:1px solid #E8E8E4;}
+.section-wrap{max-width:800px;margin:0 auto;padding:0 28px;}
+
+/* ── SERIF NUMBER STYLE ── */
+.step-num,.care-num,.feat-num,.rn-num,.pf-num,.sc-step-num,.ex-num,.tf-num,
+.stage-num,.txs-stage,.txc-num,.w3-ko{
+  font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-.01em;
+}
+.flow-step .fs-circle,.fc-icon,.ec-icon,.funny-emoji,.pg-icon,.sym-chip{
+  font-size:inherit;
+}
+
+/* ── MOBILE RESPONSIVE ── */
+@media(max-width:640px){
+  /* nav */
+  .gnav-inner,.gnav-logo,.gnav-logo span,.nav-logo span{display:none;}
+  .gnav-home{padding:5px 10px;font-size:11px;}
+  .gnav-cta,.nb{padding:6px 12px;font-size:11px;}
+
+  /* hero */
+  .hero{padding:40px 16px 32px;}
+  .hero-title{font-size:clamp(22px,6vw,32px);}
+  .hero-inner{padding:0;}
+
+  /* wrap / content */
+  .wrap,.content,.inner{padding:0 16px;}
+  .sec{padding:36px 0 6px;}
+
+  /* grids → 1열 */
+  .word3,.func-grid,.hb-cards,.vs-wrap,.root-cards,.sd-grid,
+  .sym-grid,.age-opts,.effect-grid,.daily-cards,.perio-stages,
+  .cause3,.two-phil,.compare,.reserve-row{
+    grid-template-columns:1fr !important;
+  }
+
+  /* 3열 → 1열 예외: 2열 유지 */
+  .sym-grid{grid-template-columns:1fr 1fr !important;}
+
+  /* 단계 카드 패딩 */
+  .stage-head,.care-head,.feat-head,.reason-head,
+  .txs-head,.txc-head,.txd-head{padding:13px 14px;}
+  .stage-body,.care-body,.feat-body,.reason-body,
+  .txs-content,.txc-body,.txd-body{padding:12px 14px;}
+
+  /* 책 커버 */
+  .book,.book-item{grid-template-columns:80px 1fr !important;}
+  .cov,.book-cover{width:80px !important;height:112px !important;}
+  .bi,.book-info{padding-left:12px !important;}
+  .bi-desc,.book-info .bi-desc{display:none;}
+
+  /* article list */
+  .aitem,.al-item{grid-template-columns:1fr 50px !important;}
+  .aitem-thumb,.al-thumb{width:50px !important;height:40px !important;}
+
+  /* CTA 버튼 */
+  .cta-btns,.btn-row{flex-direction:column;align-items:center;}
+  .btn-naver,.btn-kakao,.btn-cr,.btn-g,.btn-go{
+    width:100% !important;max-width:280px;justify-content:center;
+  }
+
+  /* flow */
+  .flow{flex-wrap:wrap;gap:12px;}
+  .flow-step{min-width:80px;flex:0 0 calc(50% - 6px);}
+  .flow-step::after{display:none;}
+  .timing{gap:8px;}
+  .tt{flex:0 0 18%;}
+
+  /* 비교 카드 */
+  .cmp,.vs,.rc,.hb{border-radius:10px !important;}
+
+  /* footer */
+  .foot,.footer{flex-direction:column;gap:8px;align-items:flex-start !important;}
+  .foot-info,.footer-info{text-align:left !important;}
+
+  /* 체크 */
+  .step-box{padding:16px 14px;}
+  .age-opts{grid-template-columns:1fr 1fr 1fr !important;}
+  .ao{padding:10px 6px;}
+  .ao-main{font-size:15px;font-size:12px;}
+  .ao-sub{font-size:10px;}
+
+  /* 탭 */
+  .tabs{gap:2px;padding:8px 10px;overflow-x:auto;}
+  .tab{font-size:11px;padding:6px 9px;white-space:nowrap;}
+
+  /* 체인 */
+  .chain,.chain-box{flex-wrap:wrap;}
+
+  /* science box */
+  .science,.insight,.warn,.warn-box{padding:11px 13px;}
+
+  /* phil */
+  .philosophy,.phil{padding:28px 0;}
+  .ph-q,.hero-h{font-size:clamp(18px,5vw,24px);}
+}
+
+/* ── HERO BRUNCH ── */
+.hero{background:#fff;min-height:auto;padding:52px 28px 44px;border-bottom:1px solid #E0E0DA;position:relative;overflow:hidden}
+.hero::before,.hero::after,.hero-ring{display:none}
+.hero-inner{max-width:760px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-kw{font-size:11px;letter-spacing:.16em;color:#FAF8F0;text-transform:uppercase;font-weight:400;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.hero-kw::before{display:none}
+.hero-tag{font-size:11px;letter-spacing:.14em;color:#888880;text-transform:uppercase;margin-bottom:14px}
+.hero-pretitle{font-size:12px;color:#555550;font-weight:300;margin-bottom:8px}
+.hero-eyebrow{font-size:11px;letter-spacing:.14em;color:#888880;text-transform:uppercase;margin-bottom:14px;opacity:1;animation:none}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;letter-spacing:-.02em;opacity:1;animation:none}
+.hero-title em{font-style:italic;font-weight:400;color:#007A54}
+.hero-title strong{font-weight:700;font-style:normal;color:#111110}
+.hero-h{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;letter-spacing:-.02em;opacity:1;animation:none}
+.hero-h em{font-style:italic;color:#007A54}
+.hero-h strong{font-weight:700;color:#111110}
+.hero-main{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;opacity:1;animation:none}
+.hero-main em{color:#007A54;font-style:normal;display:block}
+.hero-sub{font-family:'TmonMonsori',serif;font-size:clamp(14px,2vw,17px);font-weight:300;color:#555550;line-height:1.85;max-width:520px;opacity:1;animation:none}
+.hero-sub p{color:#555550}
+.hero-desc{font-size:14px;color:#555550;line-height:1.85;max-width:480px;opacity:1;animation:none}
+.hero-badge,.hero-scroll,.hs-line,.hs-txt{display:none}
+.hero-cat{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.hc{border-radius:100px;padding:5px 13px;font-size:12px;font-weight:500}
+.hc-health{background:#E8F5F0;color:#007A54}
+.hc-beauty{background:#F5EFD8;color:#8A6820}
+.hero-term{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.ht-ko{border-radius:100px;padding:5px 13px;font-size:12px;font-weight:500;background:#E8F5F0;color:#007A54}
+.ht-en{border-radius:100px;padding:5px 13px;font-size:12px;color:#555550;border:1px solid #E0E0DA}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.hp.go{background:#F5EFD8;border:1px solid #E8D898;color:#8A6820;border-radius:100px;padding:5px 12px;font-size:12px}
+.hp.wh{background:#F5F5F1;border:1px solid #E0E0DA;color:#555550;border-radius:100px;padding:5px 12px;font-size:12px}
+.hero-copy{display:flex;flex-direction:column;gap:7px;margin-top:18px}
+.hero-copy-item{font-size:15px;color:#555550;line-height:1.5;display:flex;align-items:flex-start;gap:8px}
+.hero-copy-item::before{content:'—';color:#C8A84B;flex-shrink:0}
+
+/* ── 색상 규칙 ── */
+/* 딥그린 배경 → 크림 글자 */
+.sh .sh-title{color:#FAF8F0}
+.sh .sh-sub{color:#FAF8F0}
+.selfcheck .sc-title{color:#FAF8F0}
+.selfcheck .sc-sub{color:rgba(250,248,240,.55)}
+.selfcheck .sc-label{color:rgba(200,168,75,.7)}
+.cta .cta /* 밝은 배경 → 어두운 글자 */
+.hero .hero-title{color:#111110}
+.hero .hero-sub{color:#888880}
+.hero .hero-tag{color:#AAAAAA}
+/* 예외: 딥그린 hero */
+.hero-child .hero-title,.hero-teen .hero-title,.hero-adult .hero-title{color:#FAF8F0 !important}
+.hero-child .hero-subtitle,.hero-teen .hero-subtitle,.hero-adult .hero-subtitle{color:#FAF8F0 !important}
+
+/* 관련 페이지 링크 */
+.rel-section{padding:28px 20px;background:#F5F5F1;border-top:1px solid #E0E0DA;margin-top:8px}
+.rel-title{font-size:12px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.rel-links{display:flex;flex-direction:column;gap:8px}
+.rel-link{display:flex;align-items:center;gap:12px;padding:13px 15px;background:#fff;border-radius:10px;border:1px solid #E0E0DA;text-decoration:none;color:#1A1A18;transition:opacity .15s}
+.rel-link:hover{opacity:.75}
+.rel-link-body{flex:1}
+.rel-link-title{font-size:14px;font-weight:500;color:#111110;margin-bottom:2px}
+.rel-link-sub{font-size:12px;color:#555550}
+.rel-link-arr{font-size:14px;color:#C8A84B;font-weight:600;flex-shrink:0}
+
+@font-face {
+  font-family: 'TmonMonsori';
+  src: url('fonts/TmonMonsori_otf.otf') format('opentype'),
+       url('fonts/TmonMonsori_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('fonts/pretendard-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
+<link rel="stylesheet" href="petit-design.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<nav class="gnav">
+  <div class="gnav-inner">
+    <div class="gnav-logo">생활의 기본, <em>쁘띠치과</em><span style="font-size:10px;color:#555550;font-weight:400;letter-spacing:.06em;margin-left:8px;font-style:italic">Born to Be, Petit Dental</span></div>
+    <a href="search.html" style="margin-left:8px;width:32px;height:32px;border-radius:50%;border:1px solid #E8E8E4;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:#555550;font-size:15px;transition:all .15s" title="검색">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </a>
+    <a class="gnav-home" href="index.html">← 홈</a>
+    <a class="gnav-cta" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-kw">예방과 습관치료 · 치주 건강</div>
+    <div class="hero-term">
+      <div class="ht ht-rd">만성</div>
+      <div class="ht ht-rd">복합</div>
+      <div class="ht ht-rd">치주염</div>
+    </div>
+    <h1 class="hero-title">아프지 않아도<br>이미 진행 중일 수 있습니다.<br><em>만성복합치주염</em></h1>
+    <p class="hero-sub">통증이 잘 느껴지지 않습니다. 문제없는 줄 알고 방치하다가 치아가 흔들리기 시작하면 이미 늦었습니다.</p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <!-- 용어 풀이 -->
+  <section class="sec">
+    <div class="sec-kw">만성복합치주염이란</div>
+    <h2 class="sec-title">이름 안에 치료의<br>방향이 담겨 있습니다</h2>
+
+    <div class="word3">
+      <div class="w3 w3-1">
+        <div class="w3-ko">만성</div>
+        <div class="w3-def">Chronic</div>
+        <div class="w3-body">한번 발병하면 평생 가지고 가는 병.<br>당뇨처럼 완치가 아닌 관리가 필요합니다.</div>
+      </div>
+      <div class="w3 w3-2">
+        <div class="w3-ko">복합</div>
+        <div class="w3-def">Complex</div>
+        <div class="w3-body">원인이 복합적.<br>세균·힘(교합)·전신 관점에서 치료가 필요합니다.</div>
+      </div>
+      <div class="w3 w3-3">
+        <div class="w3-ko">치주염</div>
+        <div class="w3-def">Periodontitis</div>
+        <div class="w3-body">치아 주변 염증.<br>잇몸·뼈·치주인대가 모두 포함됩니다.</div>
+      </div>
+    </div>
+
+    <div class="warn">
+      <strong>어른이 치아를 잃는 가장 흔한 원인</strong>은 충치가 아닙니다. 잇몸뼈가 녹아 치아가 흔들리는 치주염입니다. 치아는 하나도 안 썩었지만 뽑게 됩니다.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 원인 3가지 -->
+  <section class="sec">
+    <div class="sec-kw">원인</div>
+    <h2 class="sec-title">세 가지 원인이<br>동시에 작용합니다</h2>
+
+    <div class="cause3">
+      <div class="cause">
+        <div class="cause-dot" style="background:var(--rd)"></div>
+        <div class="cause-body">
+          <div class="cause-title">세균 — 양치질 문제</div>
+          <div class="cause-desc">음식물 찌꺼기와 세균이 만들어낸 독소가 잇몸에 염증을 일으킵니다. 시간이 지나면 <strong>단단한 치석</strong>으로 변해 잇몸 깊숙이 파고들어 뼈를 녹입니다.</div>
+        </div>
+      </div>
+      <div class="cause">
+        <div class="cause-dot" style="background:var(--go)"></div>
+        <div class="cause-body">
+          <div class="cause-title">힘 — 교합 문제</div>
+          <div class="cause-desc">턱의 위치, 치아 배열 이상으로 인한 <strong>교합간섭·외상</strong>이 특정 치아 주변 뼈를 녹입니다. 세균 원인만 치료해도 교합 원인이 남아 있으면 재발합니다. <strong>교합치료가 반드시 필요합니다.</strong></div>
+        </div>
+      </div>
+      <div class="cause">
+        <div class="cause-dot" style="background:var(--g2)"></div>
+        <div class="cause-body">
+          <div class="cause-title">전신 — 호르몬·기저질환</div>
+          <div class="cause-desc">고혈압약은 잇몸 부종을 악화시키는 부작용이 있습니다. 임신, 당뇨 등 <strong>호르몬·전신질환이 치주염을 악화</strong>시킬 수 있습니다. 기저질환 조절이 함께 필요합니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 치주낭 깊이 단계 -->
+  <section class="sec">
+    <div class="sec-kw">치주낭 깊이와 단계</div>
+    <h2 class="sec-title">mm 단위로 진행됩니다<br>숫자가 커질수록 위험합니다</h2>
+
+    <div class="depth-sec">
+      <div class="depth-title">치주낭 깊이 기준</div>
+      <div class="depth-rows">
+        <div class="dr">
+          <div class="dr-mm">1.2~1.5mm</div>
+          <div class="dr-bar-wrap"><div class="dr-bar b-ok" style="width:10%"></div></div>
+          <div class="dr-label" style="color:#009B6B">정상</div>
+          <div class="dr-note">건강한 잇몸의 깊이입니다</div>
+        </div>
+        <div class="dr">
+          <div class="dr-mm">1.5~2mm</div>
+          <div class="dr-bar-wrap"><div class="dr-bar b-light" style="width:22%"></div></div>
+          <div class="dr-label" style="color:#5a9a40">치은염</div>
+          <div class="dr-note">치석제거와 양치질 관리로 회복 가능합니다</div>
+        </div>
+        <div class="dr">
+          <div class="dr-mm">2~3mm</div>
+          <div class="dr-bar-wrap"><div class="dr-bar b-warn" style="width:38%"></div></div>
+          <div class="dr-label" style="color:#C8892A">초기 치주염</div>
+          <div class="dr-note">치주인대가 녹기 시작. 치석이 뿌리를 타고 내려갑니다</div>
+        </div>
+        <div class="dr">
+          <div class="dr-mm">3~5mm</div>
+          <div class="dr-bar-wrap"><div class="dr-bar b-mid" style="width:58%"></div></div>
+          <div class="dr-label" style="color:#c05818">중기 치주염</div>
+          <div class="dr-note">잇몸치료(치근활택술·치주소파술) 필요</div>
+        </div>
+        <div class="dr">
+          <div class="dr-mm">5~7mm</div>
+          <div class="dr-bar-wrap"><div class="dr-bar b-bad" style="width:78%"></div></div>
+          <div class="dr-label" style="color:var(--rd)">중말기</div>
+          <div class="dr-note">치주재생치료(엠도게인) 필요. 교합치료 병행 필수</div>
+        </div>
+        <div class="dr">
+          <div class="dr-mm">7mm 이상</div>
+          <div class="dr-bar-wrap"><div class="dr-bar b-critical" style="width:100%"></div></div>
+          <div class="dr-label" style="color:#8B0000">말기</div>
+          <div class="dr-note">뿌리 반 이상 뼈가 내려간 상태. 교합치료 병행 시 자연치아 보존 가능성 있음</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="warn">
+      <strong>통증이 없다고 안전한 게 아닙니다.</strong> 치주염은 아프지 않습니다. 냄새가 나고 치아가 흔들리기 시작하면 이미 중말기입니다. 정기 검진이 반드시 필요한 이유입니다.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 증상 진행 -->
+  <section class="sec">
+    <div class="sec-kw">증상 진행</div>
+    <h2 class="sec-title">이렇게 진행됩니다</h2>
+
+    <div class="progress">
+      <div class="pg">
+        <div class="pg-icon">🔴</div>
+        <div class="pg-body">
+          <div class="pg-title">초기 — 잇몸이 살짝 붓고 피가 납니다</div>
+          <div class="pg-desc">양치질할 때 피가 나거나 잇몸이 부어 있습니다. 이 단계에서 관리하면 완전히 회복됩니다.</div>
+        </div>
+      </div>
+      <div class="pg">
+        <div class="pg-icon">🟠</div>
+        <div class="pg-body">
+          <div class="pg-title">중기 — 잇몸이 검붉어지고 냄새가 납니다</div>
+          <div class="pg-desc">초기 증상이 반복되면서 잇몸이 검붉어지고 냄새도 납니다. 피도 잘 납니다. 치석이 뿌리를 타고 내려가며 뼈가 녹기 시작합니다.</div>
+        </div>
+      </div>
+      <div class="pg">
+        <div class="pg-icon">🔴</div>
+        <div class="pg-body">
+          <div class="pg-title">말기 — 치아가 흔들려 뽑게 됩니다</div>
+          <div class="pg-desc">뼈가 녹으면 치아는 하나도 안 썩었지만 흔들려 뽑게 됩니다. 이때는 응급 상황으로 교합치료와 자연치아살리기를 병행할 때만 가능성이 있습니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 치료 방법 -->
+  <section class="sec">
+    <div class="sec-kw">치료 방법</div>
+    <h2 class="sec-title">단계에 따라<br>치료가 달라집니다</h2>
+
+    <div class="tx-stages">
+
+      <div class="txs" onclick="toggleTx(this)">
+        <div class="txs-head">
+          <div class="txs-stage" style="background:#e8f5ec;color:#009B6B">1</div>
+          <div class="txs-body-wrap">
+            <div class="txs-title">초기 — 스케일링 + 양치질 교육</div>
+            <div class="txs-sub">치은염 · 1.5~2mm 단계</div>
+          </div>
+          <div class="txs-arr">▼</div>
+        </div>
+        <div class="txs-content">
+          <p>간단한 스케일링과 <em>올바른 양치질</em>만으로 건강한 상태로 돌아갑니다. 이 단계에서 관리하면 완전히 회복 가능합니다.</p>
+          <p>쁘띠치과에서는 <strong>양치질 교육을 3회 제공</strong>하며 칫솔·치간칫솔·치실을 처방합니다.</p>
+          <div class="tx-chips">
+            <div class="tc go">스케일링</div>
+            <div class="tc go">양치질 교육 3회</div>
+            <div class="tc">치간칫솔·치실 처방</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="txs" onclick="toggleTx(this)">
+        <div class="txs-head">
+          <div class="txs-stage" style="background:#fff3e0;color:#c05818">2</div>
+          <div class="txs-body-wrap">
+            <div class="txs-title">중기 — 잇몸치료 (치근활택술·치주소파술)</div>
+            <div class="txs-sub">중기 치주염 · 3~5mm 단계</div>
+          </div>
+          <div class="txs-arr">▼</div>
+        </div>
+        <div class="txs-content">
+          <p><strong>치근활택술</strong> — 치아 뿌리를 따라 손기구로 긁어 뿌리에 생긴 치석을 제거합니다.</p>
+          <p><strong>치주소파술</strong> — 치아 주변 염증이 생긴 연조직 염증을 제거합니다. 마취가 필요합니다.</p>
+          <div class="tx-chips">
+            <div class="tc">치근활택술</div>
+            <div class="tc">치주소파술</div>
+            <div class="tc go">교합치료 병행</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="txs" onclick="toggleTx(this)">
+        <div class="txs-head">
+          <div class="txs-stage" style="background:#F5F5F1;border:1px solid #E8E8E4;color:var(--go)">3</div>
+          <div class="txs-body-wrap">
+            <div class="txs-title">중말기 — 치주재생치료 (엠도게인)</div>
+            <div class="txs-sub">중말기 치주염 · 5mm 이상 단계</div>
+          </div>
+          <div class="txs-arr">▼</div>
+        </div>
+        <div class="txs-content">
+          <p><strong>엠도게인(Emdogain)</strong>은 치주수술과 함께 진행합니다. 염증이 없는 치아 뿌리 표면에 적용해야 <em>치주인대가 재생</em>됩니다.</p>
+          <p>쁘띠치과에서는 <strong>교합체크를 통한 교합간섭·외상 최소화</strong>와 환자교육을 병행하므로 성공률이 높습니다.</p>
+          <p>치주염 5mm 이상 환자는 <strong>교합치료 또는 교합안정장치가 반드시 병행</strong>되어야 결과가 유지됩니다.</p>
+          <div class="tx-chips">
+            <div class="tc special">엠도게인 치주재생</div>
+            <div class="tc">치주수술</div>
+            <div class="tc go">교합치료 필수 병행</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="txs" onclick="toggleTx(this)">
+        <div class="txs-head">
+          <div class="txs-stage" style="background:#F2F2EE;border:1px solid #E8E8E4;color:var(--go)">4</div>
+          <div class="txs-body-wrap">
+            <div class="txs-title">레이저 치주치료</div>
+            <div class="txs-sub">엠도게인과 병행 시 재생 효과 극대화</div>
+          </div>
+          <div class="txs-arr">▼</div>
+        </div>
+        <div class="txs-content">
+          <p>레이저는 특정 파장의 빛 에너지입니다. 잇몸에 조사되면 <strong>주변 조직 재생이 활발</strong>해집니다.</p>
+          <p><em>레이저 + 엠도게인</em>을 함께 사용하면 재생 효과가 더욱 좋아집니다.</p>
+          <div class="tx-chips">
+            <div class="tc">레이저 치주치료</div>
+            <div class="tc special">레이저 + 엠도게인</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 쁘띠 차별점 -->
+  <div class="petit-adv">
+    <div class="pa-kw">쁘띠치과의 치주염 치료</div>
+    <div class="pa-title">세균만 잡는 것이 아니라<br><em>교합 원인까지 함께 제거합니다</em></div>
+    <div class="pa-items">
+      <div class="pai"><div class="pai-dot"></div><div class="pai-txt"><strong>교합간섭·외상 제거</strong> — 치주치료 전 교합을 먼저 분석하고 특정 치아에 가해지는 과부하를 줄입니다</div></div>
+      <div class="pai"><div class="pai-dot"></div><div class="pai-txt"><strong>환자 교육</strong> — 양치질 교육, 혀·호흡·자세 교육으로 재발 원인을 환자 스스로 관리할 수 있게 합니다</div></div>
+      <div class="pai"><div class="pai-dot"></div><div class="pai-txt"><strong>엠도게인 + 교합치료</strong> — 두 가지를 병행해야 재생 결과가 오래 유지됩니다</div></div>
+    </div>
+    <div class="pa-note">세균만 치료하면 교합 원인이 남아 재발합니다. 교합만 치료하면 세균 원인이 남습니다. 두 가지를 함께 해야 합니다.</div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-sec">
+    <div class="cta-btns">
+      <a href="https://booking.naver.com/booking/13/bizes/743904" target="_blank" class="btn-naver">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/></svg>
+        네이버 예약
+      </a>
+      <a href="https://pf.kakao.com/_xbhXYb" target="_blank" class="btn-kakao">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#191919"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.67 1.648 5.012 4.146 6.396L5 21l5.12-2.983C10.734 18.01 11.363 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z"/></svg>
+        카카오톡 상담
+      </a>
+    </div>
+    <div class="cta-info">📍 대구시 남구 대봉로 66 2층 &nbsp;·&nbsp; 📞 053-472-2828</div>
+  </section>
+
+</div>
+
+<script>
+function toggleTx(el){el.classList.toggle('open')}
+</script>
+
+<div class="share-float">
+  <div class="share-toast" id="shareToast">링크 복사됐습니다</div>
+  <button class="share-fab" onclick="doShare()" title="공유하기">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+  </button>
+</div>
+
+<script>
+async function doShare(){
+  var title=document.title||'쁘띠치과';
+  var url=location.href;
+  if(navigator.share){
+    try{await navigator.share({title:title,url:url});}catch(e){}
+  } else {
+    try{
+      await navigator.clipboard.writeText(url);
+      var t=document.getElementById('shareToast');
+      t.classList.add('show');
+      setTimeout(function(){t.classList.remove('show');},2000);
+    }catch(e){}
+  }
+}
+</script>
+<div class="rel-section">
+  <div class="rel-title">다음 단계 · 관련 페이지</div>
+  <div class="rel-links">
+  <a class="rel-link" href="petit_natural_tooth.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">자연치아살리기</div>
+      <div class="rel-link-sub">치주염으로 흔들리는 치아 — 발치 전 먼저 확인하세요</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_consultation_widget.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">교합재건 상담 위젯</div>
+      <div class="rel-link-sub">잇몸과 교합을 함께 — 재발 없는 치료 방향 확인</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_prevention.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">기본은 예방과 습관</div>
+      <div class="rel-link-sub">치주염 예방 · 양치질 교육 · 스케일링</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_diagnosis.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">교합진단</div>
+      <div class="rel-link-sub">잇몸이 무너지는 진짜 원인 찾기 — 정밀 진단</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  </div>
+</div>
+</body>
+</html>

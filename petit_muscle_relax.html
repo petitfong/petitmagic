@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>근이완치료 | 쁘띠치과</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+:root{
+  --g:#007A54;--g2:#009B6B;
+  --cr:#FAFAF9;--cr2:#EFEFEB;
+  --go:#C8A84B;--go2:#FFFBEF;
+  --tx:#1A1A18;--mu:#888880;--lt:#B8B8B0;--wh:#fff;
+  --br:#E8E8E4;
+  --sf:'Noto Serif KR',serif;--ss:'Noto Sans KR',sans-serif
+}
+html{scroll-behavior:smooth}
+.gnav{position:sticky;top:0;z-index:200;background:rgba(250,250,249,.97);backdrop-filter:blur(12px);border-bottom:1px solid #F5F5F1}
+.gnav-inner{max-width:720px;margin:0 auto;display:flex;align-items:center;padding:0 20px}
+.gnav-logo{font-family:'TmonMonsori',serif;font-size:13px;color:#555550;font-weight:400;padding:14px 0;margin-right:auto}
+.gnav-logo em{color:#007A54;font-style:normal}
+.gnav-home{font-size:13px;color:#555550;text-decoration:none;padding:14px 12px}
+.gnav-home:hover{color:var(--go)}
+.gnav-cta{margin-left:8px;background:#03C75A;color:#FFFFFF;border:none;padding:7px 15px;border-radius:20px;font-size:11.5px;font-weight:600;font-family:'Pretendard',sans-serif;cursor:pointer;text-decoration:none;display:inline-block}
+
+/* HERO */
+.hero{background:#fff;min-height:62vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 28px 52px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 50% at 75% 30%,rgba(200,168,75,.1),transparent)}
+.hero-inner{max-width:680px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-kw{font-size:10px;letter-spacing:.2em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.hero-kw::before{content:'';width:20px;height:1px;background:var(--go)}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(28px,5.5vw,48px);font-weight:700;color:#111110;line-height:1.2;margin-bottom:16px}
+.hero-title em{color:var(--go);font-style:normal}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.hp{border-radius:8px;padding:7px 13px;font-size:12px;font-weight:600}
+.hp.go{background:var(--go2);border:1px solid rgba(200,168,75,.25);color:var(--go)}
+.hp.wh{background:#F9F9F7;border:1px solid #E8E8E4;color:#555550}
+.hero-sub{font-size:14px;color:#555550;line-height:1.85;max-width:460px}
+
+/* WRAP */
+.wrap{max-width:720px;margin:0 auto;padding:0 24px}
+.sec{padding:48px 0 8px}
+.sec-kw{font-size:10px;letter-spacing:.18em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:10px}
+.sec-body{font-size:13.5px;color:var(--mu);line-height:1.9;margin-bottom:18px}
+.sec-body strong{color:var(--tx);font-weight:500}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--cr2),transparent);margin:8px 0}
+.insight{font-size:14px;background:var(--go2);border-left:3px solid var(--go);border-radius:0 10px 10px 0;padding:13px 16px;margin:14px 0;font-size:13px;color:var(--tx);line-height:1.75}
+.insight strong{color:var(--g);font-weight:600}
+.warn-box{background:var(--rd2);border-left:3px solid rgba(201,64,64,.3);border-radius:0 10px 10px 0;padding:13px 16px;margin:14px 0;font-size:13px;color:var(--tx);line-height:1.75}
+.warn-box strong{color:var(--rd);font-weight:600}
+
+/* CAUSE CHAIN */
+.chain{display:flex;align-items:center;flex-wrap:wrap;gap:6px;padding:18px;background:var(--wh);border:1.5px solid var(--cr2);border-radius:14px;margin:20px 0}
+.cn{background:var(--cr2);border-radius:7px;padding:7px 12px;font-size:12.5px;font-weight:500;color:var(--tx)}
+.cn.bad{background:var(--rd2);border:1px solid rgba(201,64,64,.15);color:var(--rd)}
+.cn.warn{background:rgba(200,120,20,.1);color:#8A5010}
+.arr{color:var(--mu);font-size:14px;font-weight:300}
+
+/* SYMPTOM GRID */
+.sym-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0}
+.sym-item{background:var(--wh);border:1.5px solid var(--cr2);border-radius:11px;padding:13px 14px;display:flex;align-items:flex-start;gap:8px}
+.si-dot{width:7px;height:7px;border-radius:50%;background:var(--rd);flex-shrink:0;margin-top:4px}
+.si-txt{font-size:14px;color:var(--tx);line-height:1.45}
+
+/* TREATMENT FLOW */
+.tx-flow{display:flex;flex-direction:column;gap:0;border-radius:16px;overflow:hidden;border:1.5px solid var(--cr2);margin:20px 0}
+.tf{display:flex;gap:0;border-bottom:1px solid var(--cr2)}
+.tf:last-child{border-bottom:none}
+.tf-left{width:60px;flex-shrink:0;background:var(--g);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 0}
+.tf-num{font-family:'TmonMonsori',serif;font-size:18px;font-weight:900;color:var(--go);line-height:1}
+.tf-label{font-size:9px;color:#AAAAAA;letter-spacing:.06em;margin-top:3px;text-align:center;padding:0 4px}
+.tf-right{flex:1;padding:16px 18px}
+.tf-title{font-size:14px;font-weight:600;color:var(--g);margin-bottom:5px}
+.tf-body{font-size:14px;color:var(--mu);line-height:1.7}
+.tf-body strong{color:var(--tx);font-weight:500}
+.tf-tag{display:inline-block;font-size:10px;font-weight:700;background:var(--go);color:var(--g);border-radius:20px;padding:2px 10px;margin-left:8px;vertical-align:middle}
+
+/* EFFECT CARDS */
+.effect-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+.ec{background:var(--wh);border:1.5px solid var(--cr2);border-radius:13px;padding:16px 15px}
+.ec.highlight{background:var(--g);border-color:var(--g)}
+.ec-icon{font-size:22px;margin-bottom:8px}
+.ec-title{font-size:13px;font-weight:600;color:var(--g);margin-bottom:4px}
+.ec.highlight .ec-title{color:#555550}
+.ec-body{font-size:11.5px;color:var(--mu);line-height:1.5}
+.ec.highlight .ec-body{color:#555550}
+
+/* TIMING */
+.timing{display:flex;position:relative;margin:18px 0;padding:18px 0}
+.timing::before{content:'';position:absolute;top:26px;left:18px;right:18px;height:2px;background:linear-gradient(to right,var(--g),var(--go));border-radius:2px}
+.tt{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;position:relative;z-index:1}
+.tt-dot{width:18px;height:18px;border-radius:50%;background:var(--g);border:2.5px solid var(--go);flex-shrink:0}
+.tt-time{font-size:13px;font-weight:700;color:var(--go)}
+.tt-desc{font-size:13px;color:var(--mu);text-align:center;line-height:1.35}
+
+/* SELF CARE BOX */
+.self-care{background:linear-gradient(135deg,var(--go2),#FFFBEF);border:1.5px solid rgba(200,168,75,.2);border-radius:18px;padding:26px 24px;margin:20px 0}
+.sc-title{font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;color:var(--g);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.sc-title span{font-size:18px}
+.sc-steps{display:flex;flex-direction:column;gap:10px}
+.sc-step{display:flex;align-items:flex-start;gap:12px;padding:13px 15px;background:var(--wh);border-radius:11px}
+.sc-step-num{width:26px;height:26px;border-radius:50%;background:var(--g);color:var(--go);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-family:'TmonMonsori',serif}
+.sc-step-txt{font-size:13px;color:var(--tx);line-height:1.55}
+.sc-step-txt strong{color:var(--g);font-weight:600}
+
+/* CAUTION */
+.caution{background:var(--wh);border:1.5px solid var(--cr2);border-radius:14px;padding:18px 20px;margin:14px 0}
+.caution-title{font-size:12px;letter-spacing:.1em;color:var(--mu);text-transform:uppercase;font-weight:600;margin-bottom:11px}
+.caution-list{display:flex;flex-direction:column;gap:7px}
+.ci{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--tx);line-height:1.55}
+.ci.ok::before{content:'✓';color:var(--go);font-weight:700;font-size:11px;flex-shrink:0;margin-top:2px}
+.ci.no::before{content:'✕';color:var(--rd);font-weight:700;font-size:11px;flex-shrink:0;margin-top:2px}
+
+/* FUNNY NOTE */
+.funny{background:#F5F5F1;border:1px solid #E8E8E4;border-radius:14px;padding:18px 20px;margin:20px 0;text-align:center}
+.funny-emoji{font-size:28px;margin-bottom:8px}
+.funny-title{font-family:'TmonMonsori',serif;font-size:14px;font-weight:700;color:var(--go);margin-bottom:6px}
+.funny-body{font-size:14px;color:#555550;line-height:1.7}
+
+/* CTA */
+.cta-sec{padding:10px 0 80px}
+@media(max-width:600px){
+  .hero{padding:60px 18px 40px}
+  .wrap{padding:0 16px}
+  .sym-grid{grid-template-columns:1fr}
+  .effect-grid{grid-template-columns:1fr 1fr}
+  .timing{overflow-x:auto}
+  }
+
+/* ── BRUNCH CONTENT ── */
+.wrap,.content{max-width:800px;margin:0 auto;}
+.sec,.sec-sec{padding:48px 28px 8px;}
+.sec-kw{font-size:12px;letter-spacing:.14em;color:#555550;text-transform:uppercase;font-weight:400;margin-bottom:10px;}
+.sec-body{font-size:15px;color:#555550;line-height:1.95;margin-bottom:18px;}
+.sec-body strong{color:#1A1A18;font-weight:500;}
+.divider{height:1px;background:#E8E8E4;margin:4px 0;}
+.insight{font-size:14px;background:#F5F5F1;border-left:2px solid #C8A84B;border-radius:0;padding:14px 18px;margin:16px 0;font-size:13.5px;color:#1A1A18;line-height:1.8;}
+.insight strong{color:#007A54;font-weight:500;}
+.warn,.warn-box{background:#FDF6F6;border-left:2px solid #D89090;border-radius:0;padding:14px 18px;margin:14px 0;font-size:13px;color:#1A1A18;line-height:1.75;}
+.warn strong,.warn-box strong{color:#A05050;font-weight:500;}
+/* sec-title serif */
+h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-.015em;}
+/* dark boxes → light */
+.vm,.warranty,.petit-adv,.next-sec,.goal,.phil-box,.phil-quote,.def-box,.sd-final,.exercise,.self-care,.guarantee,.promise{
+  background:#F5F5F1;border:1px solid #E8E8E4;border-radius:12px;
+}
+.vm .vm-title,.warranty .w-title,.petit-adv .pa-title,.next-sec .next-title,.goal .goal-title,.def-box .def-ko,
+.guarantee .g-title,.promise .pr-title{
+  font-family:'TmonMonsori',serif;font-weight:400;color:#1A1A18;
+}
+.vm .vm-body,.warranty .w-body,.petit-adv .pa-body,.def-box .def-body{color:#555550;}
+.vm .vm-label,.warranty .w-tag,.petit-adv .pa-kw,.next-sec .next-kw{color:#555550;}
+.g-tag{background:#007A54;color:#FAF8F0;}
+/* stage/care cards */
+.stage,.care,.feat,.reason,.txs,.txc,.tx-detail,.tx-card{background:#fff;border:1px solid #E8E8E4;border-radius:12px;}
+.stage-head,.care-head,.feat-head,.reason-head,.txs-head,.txc-head,.txd-head{background:#fff;}
+.stage.open .stage-head,.care.open .care-head,.feat.open .feat-head,.reason.open .reason-head{background:#F9F9F7;}
+/* numbered steps */
+.stage-num,.care-num,.feat-num,.rn-num,.pf-num,.sc-step-num,.ex-num,.tf-num{background:#007A54;color:#C8A84B;}
+/* progress/symptom */
+.pg,.pf,.cn-item,.sc-step{background:#F9F9F7;border:1px solid #E8E8E4;border-radius:10px;}
+.cause{background:#F9F9F7;}
+/* CTA */
+.cta-sec,.cta-box,.closing{background:#F5F5F1;border-radius:16px;border:1px solid #E8E8E4;}
+.cta-title,.cl-title{font-family:'TmonMonsori',serif;font-weight:400;color:#1A1A18;}
+.cta-title em,.cl-title em{color:#007A54;font-style:italic;}
+.cta-sub,.cl-body{color:#555550;}
+/* m3 mission cards */
+.m3-1,.m3-2,.m3-3{background:#F5F5F1;border:1px solid #E8E8E4;}
+.m3-title{color:#1A1A18;}
+.m3-body{color:#555550;}
+/* chain */
+.chain-box{background:#F9F9F7;border:1px solid #E8E8E4;}
+/* funny note */
+.funny{background:#F5F5F1;border:1px solid #E8E8E4;}
+.funny-title{color:#007A54;}
+.funny-body{color:#555550;}
+/* hb cards */
+.hb-health,.hb-beauty{background:#F5F5F1;border:1px solid #E8E8E4;}
+.hb-health .hb-title,.hb-beauty .hb-title{color:#1A1A18;}
+.hb-health .hb-item,.hb-beauty .hb-item{color:#555550;}
+/* smile detail */
+.smile-detail{background:#F5F5F1;border:1px solid #E8E8E4;}
+.sd-kw{color:#555550;}
+.sd-title{color:#1A1A18;}
+.sd-item{background:#fff;border:1px solid #E8E8E4;}
+.sd-item-title{color:#1A1A18;}
+.sd-item-body{color:#555550;}
+/* lifetime */
+.lifetime{background:#F5F5F1;border:1px solid #E8E8E4;}
+.lt-title{color:#1A1A18;}
+.lt-body{color:#555550;}
+/* phil quote */
+.phil-quote .ph-q{color:#1A1A18;}
+/* section headers */
+.sec-title-wrap{border-bottom:1px solid #E8E8E4;}
+.section-wrap{max-width:800px;margin:0 auto;padding:0 28px;}
+
+/* ── SERIF NUMBER STYLE ── */
+.step-num,.care-num,.feat-num,.rn-num,.pf-num,.sc-step-num,.ex-num,.tf-num,
+.stage-num,.txs-stage,.txc-num,.w3-ko{
+  font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-.01em;
+}
+.flow-step .fs-circle,.fc-icon,.ec-icon,.funny-emoji,.pg-icon,.sym-chip{
+  font-size:inherit;
+}
+
+/* ── MOBILE RESPONSIVE ── */
+@media(max-width:640px){
+  /* nav */
+  .gnav-inner,.gnav-logo,.gnav-logo span,.nav-logo span{display:none;}
+  .gnav-home{padding:5px 10px;font-size:11px;}
+  .gnav-cta,.nb{padding:6px 12px;font-size:11px;}
+
+  /* hero */
+  .hero{padding:40px 16px 32px;}
+  .hero-title{font-size:clamp(22px,6vw,32px);}
+  .hero-inner{padding:0;}
+
+  /* wrap / content */
+  .wrap,.content,.inner{padding:0 16px;}
+  .sec{padding:36px 0 6px;}
+
+  /* grids → 1열 */
+  .word3,.func-grid,.hb-cards,.vs-wrap,.root-cards,.sd-grid,
+  .sym-grid,.age-opts,.effect-grid,.daily-cards,.perio-stages,
+  .cause3,.two-phil,.compare,.reserve-row{
+    grid-template-columns:1fr !important;
+  }
+
+  /* 3열 → 1열 예외: 2열 유지 */
+  .sym-grid{grid-template-columns:1fr 1fr !important;}
+
+  /* 단계 카드 패딩 */
+  .stage-head,.care-head,.feat-head,.reason-head,
+  .txs-head,.txc-head,.txd-head{padding:13px 14px;}
+  .stage-body,.care-body,.feat-body,.reason-body,
+  .txs-content,.txc-body,.txd-body{padding:12px 14px;}
+
+  /* 책 커버 */
+  .book,.book-item{grid-template-columns:80px 1fr !important;}
+  .cov,.book-cover{width:80px !important;height:112px !important;}
+  .bi,.book-info{padding-left:12px !important;}
+  .bi-desc,.book-info .bi-desc{display:none;}
+
+  /* article list */
+  .aitem,.al-item{grid-template-columns:1fr 50px !important;}
+  .aitem-thumb,.al-thumb{width:50px !important;height:40px !important;}
+
+  /* CTA 버튼 */
+  .cta-btns,.btn-row{flex-direction:column;align-items:center;}
+  .btn-naver,.btn-kakao,.btn-cr,.btn-g,.btn-go{
+    width:100% !important;max-width:280px;justify-content:center;
+  }
+
+  /* flow */
+  .flow{flex-wrap:wrap;gap:12px;}
+  .flow-step{min-width:80px;flex:0 0 calc(50% - 6px);}
+  .flow-step::after{display:none;}
+  .timing{gap:8px;}
+  .tt{flex:0 0 18%;}
+
+  /* 비교 카드 */
+  .cmp,.vs,.rc,.hb{border-radius:10px !important;}
+
+  /* footer */
+  .foot,.footer{flex-direction:column;gap:8px;align-items:flex-start !important;}
+  .foot-info,.footer-info{text-align:left !important;}
+
+  /* 체크 */
+  .step-box{padding:16px 14px;}
+  .age-opts{grid-template-columns:1fr 1fr 1fr !important;}
+  .ao{padding:10px 6px;}
+  .ao-main{font-size:15px;font-size:12px;}
+  .ao-sub{font-size:10px;}
+
+  /* 탭 */
+  .tabs{gap:2px;padding:8px 10px;overflow-x:auto;}
+  .tab{font-size:11px;padding:6px 9px;white-space:nowrap;}
+
+  /* 체인 */
+  .chain,.chain-box{flex-wrap:wrap;}
+
+  /* science box */
+  .science,.insight,.warn,.warn-box{padding:11px 13px;}
+
+  /* phil */
+  .philosophy,.phil{padding:28px 0;}
+  .ph-q,.hero-h{font-size:clamp(18px,5vw,24px);}
+}
+
+/* ── HERO BRUNCH ── */
+.hero{background:#fff;min-height:auto;padding:52px 28px 44px;border-bottom:1px solid #E0E0DA;position:relative;overflow:hidden}
+.hero::before,.hero::after,.hero-ring{display:none}
+.hero-inner{max-width:760px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-kw{font-size:11px;letter-spacing:.16em;color:#FAF8F0;text-transform:uppercase;font-weight:400;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.hero-kw::before{display:none}
+.hero-tag{font-size:11px;letter-spacing:.14em;color:#888880;text-transform:uppercase;margin-bottom:14px}
+.hero-pretitle{font-size:12px;color:#555550;font-weight:300;margin-bottom:8px}
+.hero-eyebrow{font-size:11px;letter-spacing:.14em;color:#888880;text-transform:uppercase;margin-bottom:14px;opacity:1;animation:none}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;letter-spacing:-.02em;opacity:1;animation:none}
+.hero-title em{font-style:italic;font-weight:400;color:#007A54}
+.hero-title strong{font-weight:700;font-style:normal;color:#111110}
+.hero-h{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;letter-spacing:-.02em;opacity:1;animation:none}
+.hero-h em{font-style:italic;color:#007A54}
+.hero-h strong{font-weight:700;color:#111110}
+.hero-main{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;opacity:1;animation:none}
+.hero-main em{color:#007A54;font-style:normal;display:block}
+.hero-sub{font-family:'TmonMonsori',serif;font-size:clamp(14px,2vw,17px);font-weight:300;color:#555550;line-height:1.85;max-width:520px;opacity:1;animation:none}
+.hero-sub p{color:#555550}
+.hero-desc{font-size:14px;color:#555550;line-height:1.85;max-width:480px;opacity:1;animation:none}
+.hero-badge,.hero-scroll,.hs-line,.hs-txt{display:none}
+.hero-cat{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.hc{border-radius:100px;padding:5px 13px;font-size:12px;font-weight:500}
+.hc-health{background:#E8F5F0;color:#007A54}
+.hc-beauty{background:#F5EFD8;color:#8A6820}
+.hero-term{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.ht-ko{border-radius:100px;padding:5px 13px;font-size:12px;font-weight:500;background:#E8F5F0;color:#007A54}
+.ht-en{border-radius:100px;padding:5px 13px;font-size:12px;color:#555550;border:1px solid #E0E0DA}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.hp.go{background:#F5EFD8;border:1px solid #E8D898;color:#8A6820;border-radius:100px;padding:5px 12px;font-size:12px}
+.hp.wh{background:#F5F5F1;border:1px solid #E0E0DA;color:#555550;border-radius:100px;padding:5px 12px;font-size:12px}
+.hero-copy{display:flex;flex-direction:column;gap:7px;margin-top:18px}
+.hero-copy-item{font-size:15px;color:#555550;line-height:1.5;display:flex;align-items:flex-start;gap:8px}
+.hero-copy-item::before{content:'—';color:#C8A84B;flex-shrink:0}
+
+/* ── 색상 규칙 ── */
+/* 딥그린 배경 → 크림 글자 */
+.sh .sh-title{color:#FAF8F0}
+.sh .sh-sub{color:#FAF8F0}
+.selfcheck .sc-title{color:#FAF8F0}
+.selfcheck .sc-sub{color:rgba(250,248,240,.55)}
+.selfcheck .sc-label{color:rgba(200,168,75,.7)}
+/* cta-sec(밝은배경) 안 cta-info */
+.cta-sec .cta-info{color:#888880}
+.hero .hero-title{color:#111110}
+.hero .hero-sub{color:#888880}
+.hero .hero-tag{color:#AAAAAA}
+/* 예외: 딥그린 hero */
+.hero-child .hero-title,.hero-teen .hero-title,.hero-adult .hero-title{color:#FAF8F0 !important}
+.hero-child .hero-subtitle,.hero-teen .hero-subtitle,.hero-adult .hero-subtitle{color:#FAF8F0 !important}
+
+/* 관련 페이지 링크 */
+.rel-section{padding:28px 20px;background:#F5F5F1;border-top:1px solid #E0E0DA;margin-top:8px}
+.rel-title{font-size:12px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.rel-links{display:flex;flex-direction:column;gap:8px}
+.rel-link{display:flex;align-items:center;gap:12px;padding:13px 15px;background:#fff;border-radius:10px;border:1px solid #E0E0DA;text-decoration:none;color:#1A1A18;transition:opacity .15s}
+.rel-link:hover{opacity:.75}
+.rel-link-body{flex:1}
+.rel-link-title{font-size:14px;font-weight:500;color:#111110;margin-bottom:2px}
+.rel-link-sub{font-size:12px;color:#555550}
+.rel-link-arr{font-size:14px;color:#C8A84B;font-weight:600;flex-shrink:0}
+
+@font-face {
+  font-family: 'TmonMonsori';
+  src: url('fonts/TmonMonsori_otf.otf') format('opentype'),
+       url('fonts/TmonMonsori_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('fonts/pretendard-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
+<link rel="stylesheet" href="petit-design.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<nav class="gnav">
+  <div class="gnav-inner">
+    <div class="gnav-logo">생활의 기본, <em>쁘띠치과</em><span style="font-size:10px;color:#555550;font-weight:400;letter-spacing:.06em;margin-left:8px;font-style:italic">Born to Be, Petit Dental</span></div>
+    <a href="search.html" style="margin-left:8px;width:32px;height:32px;border-radius:50%;border:1px solid #E8E8E4;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:#555550;font-size:15px;transition:all .15s" title="검색">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </a>
+    <a class="gnav-home" href="index.html">← 홈</a>
+    <a class="gnav-cta" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-kw">건강한 치료 · 근이완치료</div>
+    <h1 class="hero-title">이악물기·이갈이로부터<br><em>치아를 지킵니다</em></h1>
+    <div class="hero-pills">
+      <div class="hp go">#이악물기 완화</div>
+      <div class="hp go">#보톡스 근이완</div>
+      <div class="hp go">#4~7일 내 효과</div>
+      <div class="hp wh">#치아 보존 예방</div>
+    </div>
+    <p class="hero-sub">
+      스스로 자기를 물어뜯는 이악물기·이갈이.<br>
+      근육의 힘을 줄여 치아·관절·뼈를 보호합니다.
+    </p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <!-- 왜 생기나 -->
+  <section class="sec">
+    <div class="sec-kw">원인</div>
+    <h2 class="sec-title">갑자기 아픈 것처럼 보이지만<br>원인은 오래전부터 쌓였습니다</h2>
+    <p class="sec-body">
+      씹기 근육을 식사 시간 외에도 계속 사용하면 치아에 무리한 힘이 가해집니다.<br>
+      치아가 닳고 부분적으로 떨어져 나가거나, 치아가 버티지 못한 힘이<br>
+      <strong>뼈와 관절로 전달되어 뼈가 울퉁불퉁 커지거나 턱관절에 무리</strong>가 옵니다.
+    </p>
+
+    <div class="chain">
+      <div class="cn bad">이악물기·이갈이</div><div class="arr">→</div>
+      <div class="cn warn">과도한 교합력</div><div class="arr">→</div>
+      <div class="cn bad">치아 마모·파절</div><div class="arr">→</div>
+      <div class="cn bad">뼈·관절 손상</div>
+    </div>
+
+    <div class="insight">
+      원인은 <strong>습관 + 환경 + 교합의 복합적 결과</strong>입니다. 치아를 쓰기 시작한 시점부터 쌓인 원인이 어느 순간 갑작스러운 통증으로 나타납니다.
+    </div>
+
+    <div class="sec-kw" style="margin-top:24px">이런 증상이 있으신가요?</div>
+    <div class="sym-grid">
+      <div class="sym-item"><div class="si-dot"></div><div class="si-txt">치아가 닳거나 짧아짐</div></div>
+      <div class="sym-item"><div class="si-dot"></div><div class="si-txt">치아가 깨지거나 파절됨</div></div>
+      <div class="sym-item"><div class="si-dot"></div><div class="si-txt">치아가 시림</div></div>
+      <div class="sym-item"><div class="si-dot"></div><div class="si-txt">턱관절 통증·소리</div></div>
+      <div class="sym-item"><div class="si-dot"></div><div class="si-txt">두통·목·어깨 통증</div></div>
+      <div class="sym-item"><div class="si-dot"></div><div class="si-txt">자고 일어나면 턱이 뻐근함</div></div>
+      <div class="sym-item"><div class="si-dot"></div><div class="si-txt">얼굴 옆 근육이 발달·비대칭</div></div>
+      <div class="sym-item"><div class="si-dot"></div><div class="si-txt">볼 안쪽을 자주 깨뭄</div></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 치료 순서 -->
+  <section class="sec">
+    <div class="sec-kw">치료 방법</div>
+    <h2 class="sec-title">교합 분석 후<br>단계적으로 진행합니다</h2>
+
+    <div class="tx-flow">
+      <div class="tf">
+        <div class="tf-left"><div class="tf-num">①</div><div class="tf-label">진단</div></div>
+        <div class="tf-right">
+          <div class="tf-title">교합분석 진단 <span class="tf-tag">선행 필수</span></div>
+          <div class="tf-body">씹는 근육의 과활성 패턴, 교합 간섭 위치, 턱관절 상태를 분석합니다. 진단 없이 치료하면 원인이 남습니다.</div>
+        </div>
+      </div>
+      <div class="tf">
+        <div class="tf-left"><div class="tf-num">②</div><div class="tf-label">1차</div></div>
+        <div class="tf-right">
+          <div class="tf-title">보톡스 근이완 1차 치료</div>
+          <div class="tf-body"><strong>씹기 근육(교근)에 보톡스를 주입</strong>해 근육의 힘을 줄입니다. 치아·관절·뼈에 가해지는 과부하가 낮아집니다.</div>
+        </div>
+      </div>
+      <div class="tf">
+        <div class="tf-left"><div class="tf-num">③</div><div class="tf-label">2차</div></div>
+        <div class="tf-right">
+          <div class="tf-title">1개월 후 2차 치료</div>
+          <div class="tf-body">1차 치료 효과를 확인하고 필요시 2차 보톡스를 진행합니다. 필요한 경우 <strong>교합안정장치와 근기능훈련을 병행</strong>합니다.</div>
+        </div>
+      </div>
+      <div class="tf">
+        <div class="tf-left"><div class="tf-num">④</div><div class="tf-label">유지</div></div>
+        <div class="tf-right">
+          <div class="tf-title">3개월 단위 유지 관리</div>
+          <div class="tf-body">3개월 간격으로 체크하며 추가 치료 여부를 결정합니다. 교합 원인이 함께 해결되면 치료 간격이 늘어납니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 타임라인 -->
+    <div class="sec-kw" style="margin-top:28px">효과 타임라인</div>
+    <div class="timing">
+      <div class="tt">
+        <div class="tt-dot"></div>
+        <div class="tt-time">치료 당일</div>
+        <div class="tt-desc">주사 완료<br>일상 활동 가능</div>
+      </div>
+      <div class="tt">
+        <div class="tt-dot"></div>
+        <div class="tt-time">4~7일</div>
+        <div class="tt-desc">변화 감지<br>시작</div>
+      </div>
+      <div class="tt">
+        <div class="tt-dot"></div>
+        <div class="tt-time">1개월</div>
+        <div class="tt-desc">효과 본격<br>나타남</div>
+      </div>
+      <div class="tt">
+        <div class="tt-dot"></div>
+        <div class="tt-time">2차 치료</div>
+        <div class="tt-desc">효과 확인<br>·보강</div>
+      </div>
+      <div class="tt">
+        <div class="tt-dot"></div>
+        <div class="tt-time">3개월+</div>
+        <div class="tt-desc">유지 관리<br>체크</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 치료 효과 -->
+  <section class="sec">
+    <div class="sec-kw">치료 효과</div>
+    <h2 class="sec-title">씹는 힘이 줄면<br>연결된 것들이 나아집니다</h2>
+    <div class="effect-grid">
+      <div class="ec"><div class="ec-icon"></div><div class="ec-title">치아 시림 감소</div><div class="ec-body">과부하가 줄면서 치아 시림 원인이 함께 줄어듭니다</div></div>
+      <div class="ec"><div class="ec-icon"></div><div class="ec-title">치아 파절 예방</div><div class="ec-body">씹는 힘이 줄어 치아가 깨지는 것을 예방합니다</div></div>
+      <div class="ec"><div class="ec-icon"></div><div class="ec-title">턱관절 통증 완화</div><div class="ec-body">관절에 걸리는 하중이 줄어 통증이 감소합니다</div></div>
+      <div class="ec"><div class="ec-icon"></div><div class="ec-title">두통·어깨 완화</div><div class="ec-body">씹기 근육 긴장이 풀리면서 연결 근육도 이완됩니다</div></div>
+    </div>
+
+    <div style="background:#F5F5F1;border:1px solid #E8E8E4;border-radius:14px;padding:22px 22px;margin:20px 0">
+      <div style="font-size:11px;letter-spacing:.14em;color:#555550;text-transform:uppercase;font-weight:400;margin-bottom:14px">부작용 안내</div>
+
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px">
+        <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:#fff;border-radius:9px;border:1px solid #E8E8E4">
+          <div style="font-family:'TmonMonsori',serif;font-size:12px;color:#555550;min-width:28px;padding-top:1px">일반</div>
+          <div style="font-size:13px;color:#1A1A18;line-height:1.7">주사 부위의 <strong style="font-weight:500">일시적 붓기나 멍</strong>이 생길 수 있으며 대부분 1~3일 내 자연 소실됩니다.</div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:#fff;border-radius:9px;border:1px solid #E8E8E4">
+          <div style="font-family:'TmonMonsori',serif;font-size:12px;color:#555550;min-width:28px;padding-top:1px">근육</div>
+          <div style="font-size:13px;color:#1A1A18;line-height:1.7">교근(씹기 근육)이 약해지면서 초기 2~4주간 <strong style="font-weight:500">딱딱한 음식을 씹을 때 불편함</strong>을 느낄 수 있습니다. 시간이 지나면서 적응됩니다.</div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:#fff;border-radius:9px;border:1px solid #E8E8E4">
+          <div style="font-family:'TmonMonsori',serif;font-size:12px;color:#555550;min-width:28px;padding-top:1px">확산</div>
+          <div style="font-size:13px;color:#1A1A18;line-height:1.7">드물게 인접 근육으로 보톡스가 확산되어 <strong style="font-weight:500">미소 비대칭이나 일시적 표정 변화</strong>가 나타날 수 있습니다. 일반적으로 6~8주 내 회복됩니다.</div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:#fff;border-radius:9px;border:1px solid #E8E8E4">
+          <div style="font-family:'TmonMonsori',serif;font-size:12px;color:#555550;min-width:28px;padding-top:1px">지속</div>
+          <div style="font-size:13px;color:#1A1A18;line-height:1.7">효과는 <strong style="font-weight:500">3~6개월간 유지</strong>되다가 점차 원래 상태로 돌아옵니다. 교합 원인이 함께 해결되면 치료 간격이 늘어납니다.</div>
+        </div>
+      </div>
+
+      <div style="padding-top:14px;border-top:1px solid #E8E8E4;font-size:14px;color:#555550;line-height:1.75;font-style:italic">
+        부수적으로, 교근 부피 감소로 얼굴 윤곽이 부드러워지는 결과가 있습니다. 이미 이쁘거나 잘 생기신 분들은 과해질 수 있으므로 주의 바랍니다.
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 치료 후 주의사항 -->
+  <section class="sec">
+    <div class="sec-kw">치료 후 주의사항</div>
+    <h2 class="sec-title">치료 후 하루 이틀만<br>조심하시면 됩니다</h2>
+
+    <div class="caution">
+      <div class="caution-title">주의사항</div>
+      <div class="caution-list">
+        <div class="ci no">하루~이틀 사우나 자제</div>
+        <div class="ci no">치료 부위를 자주 만지거나 문지르지 않기</div>
+        <div class="ci ok">화장·일상 활동 모두 가능</div>
+        <div class="ci ok">식사 포함 모든 일반 활동 가능</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 생활습관 자가 이완 -->
+  <section class="sec">
+    <div class="sec-kw">생활습관 자가 이완법</div>
+    <h2 class="sec-title">지금 당장 할 수 있는<br>가장 쉬운 이완 방법</h2>
+    <p class="sec-body">치료와 함께 생활 속에서 꾸준히 하면 훨씬 효과가 좋아집니다.</p>
+
+    <div class="self-care">
+      <div class="sc-title"><span></span> 혀·호흡 이완법</div>
+      <div class="sc-steps">
+        <div class="sc-step">
+          <div class="sc-step-num">1</div>
+          <div class="sc-step-txt"><strong>혀를 입천장에 살짝 터치</strong>합니다. 치아에 힘이 덜 가게 되고 씹기 근육이 자연스럽게 이완됩니다.</div>
+        </div>
+        <div class="sc-step">
+          <div class="sc-step-num">2</div>
+          <div class="sc-step-txt"><strong>코로 크게 들이쉬고 내쉬기</strong>를 수시로 합니다. 몸 전체의 긴장이 줄어들고 치아에 가는 힘도 함께 줄어듭니다.</div>
+        </div>
+        <div class="sc-step">
+          <div class="sc-step-num">3</div>
+          <div class="sc-step-txt">이 두 가지를 <strong>수시로 반복</strong>하는 것만으로도 이악물기 습관을 스스로 줄여갈 수 있습니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <strong>혀가 입천장에 닿아 있을 때</strong> 코로 숨을 쉬는 것이 자연스러운 상태입니다. 이 자세가 치아·턱·전신 긴장을 줄이는 기본입니다.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 수면과 턱관절 -->
+  <section class="sec">
+    <div class="sec-kw">Sleep · 수면과 턱관절</div>
+    <h2 class="sec-title">왜 아침에 턱이 더 아플까요?</h2>
+    <p class="sec-body">
+      낮에는 말하고, 씹고, 표정을 바꾸며 턱의 긴장을 분산시킵니다. 하지만 <strong>잠을 자면 의식적 조절이 사라지고</strong>, 무의식의 긴장 패턴이 그대로 드러납니다. 이갈이·이악물기가 밤에 더 심해지는 이유입니다.
+    </p>
+    <div class="insight">
+      <strong>이갈이는 나쁜 습관이 아닙니다.</strong> 교합이 불안정하거나 호흡이 얕고 불안할 때, 몸이 안정점을 찾으려는 보상 반응입니다. 원인이 아니라 몸이 보내는 불안정 신호입니다.
+    </div>
+    <p class="sec-body" style="margin-top:14px">
+      수면 중에는 근육 이완이 완전하지 않고 턱 위치가 흔들리기 쉽습니다. 이때 몸은 이를 물거나 갈아서 턱과 머리를 고정하려 합니다. <strong>밤새 턱은 쉬지 않고 버팁니다.</strong>
+    </p>
+
+    <div style="background:#F5F5F1;border-radius:12px;padding:18px 18px;margin:16px 0;border:1px solid #E0E0DA">
+      <div style="font-size:12px;letter-spacing:.1em;color:#C8A84B;text-transform:uppercase;font-weight:500;margin-bottom:12px">아침 자가 체크</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#555550;line-height:1.6"><span style="color:#C8A84B;font-weight:600;flex-shrink:0">→</span>뺨 안쪽에 하얀 자국이 있다</div>
+        <div style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#555550;line-height:1.6"><span style="color:#C8A84B;font-weight:600;flex-shrink:0">→</span>혀가 부은 느낌이 든다</div>
+        <div style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#555550;line-height:1.6"><span style="color:#C8A84B;font-weight:600;flex-shrink:0">→</span>아침에 일어나면 턱·관자·목이 더 아프다</div>
+        <div style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#555550;line-height:1.6"><span style="color:#C8A84B;font-weight:600;flex-shrink:0">→</span>자고 일어나도 개운하지 않다</div>
+        <div style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#555550;line-height:1.6"><span style="color:#C8A84B;font-weight:600;flex-shrink:0">→</span>코로 숨을 쉬지 않는다</div>
+      </div>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid #E0E0DA;font-size:13px;color:#555550;line-height:1.7">
+        이 중 하나라도 해당된다면 수면 중 턱이 충분히 쉬지 못하고 있는 것입니다.
+      </div>
+    </div>
+
+    <p class="sec-body">
+      쁘띠치과에서는 턱관절 치료 시 <strong>수면 상태를 반드시 함께 확인</strong>합니다. 잠들기까지 걸리는 시간, 자주 깨는지, 코로 숨 쉬는지 — 이 질문들은 턱이 밤에 어떻게 사용되고 있는지를 보여주는 중요한 단서입니다.
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 턱관절 인증 -->
+  <section class="sec" style="padding-bottom:28px">
+    <div style="background:#007A54;border-radius:12px;padding:22px 20px;border-top:3px solid #C8A84B">
+      <div style="font-size:11px;letter-spacing:.14em;color:#C8A84B;text-transform:uppercase;font-weight:500;margin-bottom:10px">공식 인증</div>
+      <div style="font-family:'TmonMonsori',serif;font-size:19px;font-weight:600;color:#FAF8F0;line-height:1.45;margin-bottom:8px">턱관절 물리치료<br>보험 인증기관</div>
+      <div style="font-size:13.5px;color:rgba(250,248,240,.75);line-height:1.8;margin-bottom:14px">쁘띠치과는 턱관절 치료 공식 인증기관으로 아래 항목이 건강보험 적용됩니다.</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,.1);border-radius:8px;border:1px solid rgba(200,168,75,.3)">
+          <div style="width:6px;height:6px;border-radius:50%;background:#C8A84B;flex-shrink:0"></div>
+          <div style="font-size:14px;color:#FAF8F0;font-weight:500">턱관절 전문 특수 엑스레이 촬영</div>
+          <div style="margin-left:auto;font-size:12px;color:#C8A84B;font-weight:600">보험적용</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,.1);border-radius:8px;border:1px solid rgba(200,168,75,.3)">
+          <div style="width:6px;height:6px;border-radius:50%;background:#C8A84B;flex-shrink:0"></div>
+          <div style="font-size:14px;color:#FAF8F0;font-weight:500">턱관절 물리치료</div>
+          <div style="margin-left:auto;font-size:12px;color:#C8A84B;font-weight:600">보험적용</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:rgba(250,248,240,.65);line-height:1.7">턱관절 통증 · 이갈이 · 이악물기 · 수면 장애가 있으신 분들께 전문적인 진단과 치료를 제공합니다.</div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-sec">
+    <div class="cta-btns">
+      <a href="https://booking.naver.com/booking/13/bizes/743904" target="_blank" class="btn-naver">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/></svg>
+        네이버 예약
+      </a>
+      <a href="https://pf.kakao.com/_xbhXYb" target="_blank" class="btn-kakao">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#191919"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.67 1.648 5.012 4.146 6.396L5 21l5.12-2.983C10.734 18.01 11.363 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z"/></svg>
+        카카오톡 상담
+      </a>
+    </div>
+    <div class="cta-info">대구시 남구 대봉로 66 2층 · 053-472-2828</div>
+  </section>
+
+</div>
+
+<div class="share-float">
+  <div class="share-toast" id="shareToast">링크 복사됐습니다</div>
+  <button class="share-fab" onclick="doShare()" title="공유하기">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+  </button>
+</div>
+
+<script>
+async function doShare(){
+  var title=document.title||'쁘띠치과';
+  var url=location.href;
+  if(navigator.share){
+    try{await navigator.share({title:title,url:url});}catch(e){}
+  } else {
+    try{
+      await navigator.clipboard.writeText(url);
+      var t=document.getElementById('shareToast');
+      t.classList.add('show');
+      setTimeout(function(){t.classList.remove('show');},2000);
+    }catch(e){}
+  }
+}
+</script>
+<div class="rel-section">
+  <div class="rel-title">다음 단계 · 관련 페이지</div>
+  <div class="rel-links">
+  <a class="rel-link" href="petit_diagnosis.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">교합진단</div>
+      <div class="rel-link-sub">이갈이·턱관절의 근본 원인 — 정밀 교합 분석</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+    <a class="lc sub" href="petit_4d_ortho.html">
+      <div class="lc-body">
+        <div class="lc-title">4D 입체교정</div>
+        <div class="lc-sub">MARPE · Twin Block · Han's 2-Way/3-Way · Biobloc</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+  <a class="rel-link" href="petit_occlusion_selfcheck.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">교합질환 자가체크</div>
+      <div class="rel-link-sub">내 증상이 교합 문제인지 먼저 확인</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_treatment_by_age.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">바른턱얼굴 교합치료</div>
+      <div class="rel-link-sub">교합이 원인이라면 — 근본 치료 안내</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  </div>
+</div>
+</body>
+</html>

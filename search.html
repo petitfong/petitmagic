@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>검색 | 쁘띠치과</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+:root{
+  --bg:#FAFAF9;--wh:#fff;--tx:#1A1A18;--mu:#888880;--lt:#B8B8B0;
+  --g:#007A54;--go:#C8A84B;--br:#E8E8E4;
+  --sf:'Noto Serif KR',serif;--ss:'Noto Sans KR',sans-serif
+}
+html{scroll-behavior:smooth}
+.nb{font-size:12px;padding:6px 14px;border-radius:100px;cursor:pointer;text-decoration:none;font-weight:400;font-family:'Pretendard',sans-serif;transition:opacity .15s;margin-left:6px;border:1px solid var(--br);color:var(--mu)}
+.nb:hover{border-color:var(--lt);color:var(--tx)}
+
+.inner{max-width:680px;margin:0 auto;padding:0 28px}
+
+/* SEARCH HEADER */
+.search-header{padding:52px 0 36px;border-bottom:1px solid var(--br)}
+.search-label{font-size:11px;letter-spacing:.14em;color:var(--mu);text-transform:uppercase;margin-bottom:16px}
+.search-box{position:relative}
+.search-input{width:100%;font-family:'TmonMonsori',serif;font-size:clamp(20px,4vw,28px);font-weight:300;color:var(--tx);background:none;border:none;border-bottom:2px solid var(--tx);outline:none;padding:10px 44px 10px 0;letter-spacing:-.01em}
+.search-input::placeholder{color:var(--lt)}
+.search-input:focus{border-bottom-color:var(--g)}
+.search-clear{position:absolute;right:0;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:var(--lt);display:none;padding:4px}
+.search-clear.show{display:block}
+.search-count{margin-top:12px;font-size:13px;color:var(--mu)}
+.search-count strong{color:var(--tx);font-weight:500}
+
+/* RESULTS */
+.results{padding:8px 0 80px}
+.result-item{display:grid;grid-template-columns:1fr 72px;gap:16px;align-items:start;padding:22px 0;border-bottom:1px solid var(--br);text-decoration:none;color:inherit;cursor:pointer;transition:opacity .15s}
+.result-item:hover{opacity:.65}
+.result-item:last-child{border-bottom:none}
+.ri-category{font-size:11px;color:var(--mu);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.ri-title{font-family:'TmonMonsori',serif;font-size:clamp(15px,2.5vw,19px);font-weight:400;color:var(--tx);line-height:1.45;margin-bottom:6px;letter-spacing:-.01em}
+.ri-title mark{background:none;color:var(--g);font-weight:600}
+.ri-desc{font-size:13.5px;color:var(--mu);line-height:1.65}
+.ri-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.ri-tag{font-size:11px;color:var(--mu);border:1px solid var(--br);border-radius:100px;padding:2px 9px}
+.ri-thumb{width:72px;height:56px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'TmonMonsori',serif;font-size:11px;color:rgba(255,255,255,.7);font-weight:400;letter-spacing:.04em;text-align:center;line-height:1.3}
+
+/* EMPTY / INITIAL */
+.empty{text-align:center;padding:60px 0}
+.empty-title{font-family:'TmonMonsori',serif;font-size:20px;font-weight:300;color:var(--mu);margin-bottom:12px}
+.empty-sub{font-size:13.5px;color:var(--lt);line-height:1.75}
+.initial{padding:32px 0}
+.init-label{font-size:11px;letter-spacing:.12em;color:var(--mu);text-transform:uppercase;margin-bottom:14px}
+.init-tags{display:flex;flex-wrap:wrap;gap:7px}
+.init-tag{font-size:13px;color:var(--mu);border:1px solid var(--br);border-radius:100px;padding:5px 14px;cursor:pointer;transition:all .15s}
+.init-tag:hover{border-color:var(--g);color:var(--g)}
+
+/* COVER COLORS */
+.c-green{background:linear-gradient(160deg,#3a6a4a,#007A54)}
+.c-sage{background:linear-gradient(160deg,#6a8a6a,#3a5a3a)}
+.c-olive{background:linear-gradient(160deg,#8a9060,#5a6040)}
+.c-stone{background:linear-gradient(160deg,#7a7870,#4a4840)}
+.c-clay{background:linear-gradient(160deg,#9a7060,#6a4838)}
+.c-teal{background:linear-gradient(160deg,#4a7878,#2a4848)}
+.c-warm{background:linear-gradient(160deg,#9a8860,#6a5838)}
+.c-pine{background:linear-gradient(160deg,#4a6858,#007A54)}
+
+@media(max-width:600px){
+  .inner{padding:0 16px}
+  .search-header{padding:36px 0 24px}
+  .result-item{grid-template-columns:1fr 50px}
+  .ri-thumb{width:50px;height:40px}
+}
+
+@font-face {
+  font-family: 'TmonMonsori';
+  src: url('fonts/TmonMonsori_otf.otf') format('opentype'),
+       url('fonts/TmonMonsori_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('fonts/pretendard-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
+<link rel="stylesheet" href="petit-design.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="index.html">생활의 기본, <em>쁘띠치과</em></a>
+  <a class="nb" href="index.html">← 홈</a>
+</nav>
+
+<div class="inner">
+
+  <div class="search-header">
+    <div class="search-label">Search · 검색</div>
+    <div class="search-box">
+      <input class="search-input" id="searchInput" type="text" placeholder="교합, 자연치아, 예방..." autocomplete="off" autofocus>
+      <button class="search-clear" id="clearBtn" onclick="clearSearch()">✕</button>
+    </div>
+    <div class="search-count" id="searchCount"></div>
+  </div>
+
+  <div class="results" id="resultsArea">
+    <div class="initial">
+      <div class="init-label">추천 검색어</div>
+      <div class="init-tags" id="initTags">
+        <span class="init-tag" onclick="setQuery('교합')">교합</span>
+        <span class="init-tag" onclick="setQuery('자연치아')">자연치아</span>
+        <span class="init-tag" onclick="setQuery('예방')">예방</span>
+        <span class="init-tag" onclick="setQuery('이악물기')">이악물기</span>
+        <span class="init-tag" onclick="setQuery('치주염')">치주염</span>
+        <span class="init-tag" onclick="setQuery('성장교정')">성장교정</span>
+        <span class="init-tag" onclick="setQuery('MTA')">MTA</span>
+        <span class="init-tag" onclick="setQuery('엠도게인')">엠도게인</span>
+        <span class="init-tag" onclick="setQuery('혀')">혀</span>
+        <span class="init-tag" onclick="setQuery('호흡')">호흡</span>
+        <span class="init-tag" onclick="setQuery('레진')">레진</span>
+        <span class="init-tag" onclick="setQuery('보톡스')">보톡스</span>
+        <span class="init-tag" onclick="setQuery('어린이')">어린이</span>
+        <span class="init-tag" onclick="setQuery('중장년')">중장년</span>
+        <span class="init-tag" onclick="setQuery('양치질')">양치질</span>
+        <span class="init-tag" onclick="setQuery('설소대')">설소대</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const PAGES = [
+  {
+    title:'교합질환 자가체크',
+    subtitle:'내 증상으로 알아보는 치료 방향',
+    category:'자가진단',
+    url:'petit_occlusion_selfcheck.html',
+    color:'c-green',
+    tags:['교합','자가진단','치료방향','증상체크'],
+    keywords:'교합질환 자가체크 증상 치료방향 부정교합 성장기 청소년 중장년 흔들리는 치아 통증 턱관절 발음 호흡 수면 자세 연하 이악물기 이갈이 두통 어깨'
+  },
+  {
+    title:'쁘띠치과 소개 · 비전과 미션',
+    subtitle:'생활의 기본이 되는 치과',
+    category:'소개',
+    url:'petit_about.html',
+    color:'c-sage',
+    tags:['비전','미션','철학','Born to Be'],
+    keywords:'비전 미션 철학 소개 Born to Be Basic is Magic 기본이 기적이다 생활의 기본 자연치아 교합치료 습관 예방 어린이 청년 중장년'
+  },
+  {
+    title:'쁘띠치과 건강한 치료',
+    subtitle:'치료 철학 · 특장점 · 보증 책임제',
+    category:'치료철학',
+    url:'petit_treatment_philosophy.html',
+    color:'c-pine',
+    tags:['치료철학','보증','특장점'],
+    keywords:'건강한 치료 철학 특장점 보증책임제 1년보증 예방 보존 재건 자연치아보존 교합치료 혀 호흡 전신균형 바른미소디자인 통합패키지'
+  },
+  {
+    title:'바른턱얼굴 교합치료',
+    subtitle:'성장교정 · 4D입체교정 · 교합재건',
+    category:'교합치료',
+    url:'petit_treatment_by_age.html',
+    color:'c-green',
+    tags:['성장교정','4D교정','교합재건','어린이','청소년','중장년'],
+    keywords:'바른턱얼굴 교합치료 성장교정 4D 입체교정 교합재건 어린이 청소년 청년 중장년 MARPE 확장 치아이동 투명교정 브라켓 안면성장 턱 교합'
+  },
+  {
+    title:'바른미소디자인',
+    subtitle:'근기능훈련 · 미소근육교정 · 교합치료 3단계',
+    category:'아름다운 치료',
+    url:'petit_smile_design.html',
+    color:'c-olive',
+    tags:['근기능훈련','미소근육','바른미소'],
+    keywords:'바른미소디자인 근기능훈련 미소근육교정 입술 혀 호흡 자세 씹기 삼키기 교합치료 3단계 아름다운 치료 바른미소 MFT'
+  },
+  {
+    title:'교합재건 상담 위젯',
+    subtitle:'중장년 심층 상담 — 타입 확인 · 치료 계획',
+    category:'교합치료',
+    url:'petit_consultation_widget.html',
+    color:'c-stone',
+    tags:['상담','교합재건','중장년'],
+    keywords:'교합재건 상담 중장년 치주재생 임플란트 자연치아 치아상태 교합타입 치료계획 흔들리는치아 뿌리'
+  },
+  {
+    title:'자연치아살리기',
+    subtitle:'뽑기 전에 먼저 확인하세요',
+    category:'자연치아살리기',
+    url:'petit_natural_tooth.html',
+    color:'c-teal',
+    tags:['MTA','엠도게인','무삭제레진'],
+    keywords:'자연치아살리기 뽑기전 뿌리 MTA 엠도게인 무삭제레진 흔들리는치아 부러진치아 파절 신경치료 치주재생 보존'
+  },
+  {
+    title:'엠도게인·MTA 상세 안내',
+    subtitle:'뿌리 기준 판단 · 치주재생 · 신경재생 원리',
+    category:'자연치아살리기',
+    url:'petit_save_tooth_guide.html',
+    color:'c-sage',
+    tags:['엠도게인','MTA','치주재생','신경재생'],
+    keywords:'엠도게인 MTA Mineral Trioxide Aggregate 치주재생 신경재생 뿌리판단 치주인대 법랑질기질단백질 줄기세포 POST CORE 교정적 정출 1년보증'
+  },
+  {
+    title:'무삭제레진 원데이보철',
+    subtitle:'치아 안 깎고 · 당일 완료 · 1년 보증',
+    category:'자연치아살리기',
+    url:'petit_resin_oneday.html',
+    color:'c-warm',
+    tags:['무삭제레진','원데이','1년보증'],
+    keywords:'무삭제레진 원데이보철 치아삭제 크라운 시멘트 임플란트 교합분석 교합조정 치아성형 충치 파절 원인 보존 당일완료 1년보증 비용이관'
+  },
+  {
+    title:'만성복합치주염',
+    subtitle:'원인 · 단계 · 치료',
+    category:'자연치아살리기',
+    url:'petit_periodontitis.html',
+    color:'c-clay',
+    tags:['치주염','치주재생','예방'],
+    keywords:'만성복합치주염 치주염 잇몸 뼈 치주인대 치주낭 세균 교합 전신 호르몬 스케일링 치근활택술 치주소파술 엠도게인 레이저 양치질 교육 당뇨 고혈압'
+  },
+  {
+    title:'예방과 습관치료',
+    subtitle:'양치질 교육 · 불소 · 혀단축증 · 치주염 예방',
+    category:'예방·습관치료',
+    url:'petit_prevention.html',
+    color:'c-sage',
+    tags:['예방','양치질','불소','치주염'],
+    keywords:'예방 습관 양치질 교육 불소 치간칫솔 치실 충치 치경부 혀단축증 설소대 이악물기 구호흡 유아형연하 만성복합치주염 성장교정'
+  },
+  {
+    title:'설소대단축증 치료',
+    subtitle:'혀·호흡·성장·발음',
+    category:'예방·습관치료',
+    url:'petit_tongue_tie.html',
+    color:'c-pine',
+    tags:['설소대','혀','호흡','발음'],
+    keywords:'설소대 단축증 혀 tongue web frenulum linguae 발음 삼키기 호흡 코호흡 구호흡 성장 교합 입천장 안면성장 혀운동 근기능훈련 수술 보험'
+  },
+  {
+    title:'근이완치료',
+    subtitle:'이악물기·이갈이 완화 · 보톡스 · 치아 보존',
+    category:'예방·습관치료',
+    url:'petit_muscle_relax.html',
+    color:'c-stone',
+    tags:['이악물기','이갈이','보톡스','근이완'],
+    keywords:'근이완치료 이악물기 이갈이 보톡스 교근 씹기근육 턱관절 치아마모 치아파절 두통 어깨 교합분석 교합안정장치 부작용 얼굴윤곽 자가이완법 혀 코호흡'
+  },
+  {
+    title:'생애주기별 교합 노화',
+    subtitle:'태어남부터 노년까지',
+    category:'교육·이해',
+    url:'petit_lifecycle_occlusion.html',
+    color:'c-olive',
+    tags:['교합노화','생애주기','타임라인'],
+    keywords:'생애주기 교합노화 성장기 유아 어린이 청소년 청년 중장년 노년 타임라인 교합변화 부정교합 자연치아 임플란트 치주염'
+  },
+  {
+    title:'FöANa × 쁘띠치과',
+    subtitle:'삶의 기본을 알려주는 연결의 장',
+    category:'FöANa',
+    url:'petit_foana_brand.html',
+    color:'c-warm',
+    tags:['FöANa','카페','웰니스','브랜드'],
+    keywords:'FöANa 카페 기본한끼 덴탈케어 수면케어 스킨케어 굿즈 웰니스 연결 사람 공간 나 쉼 일상 브랜드스토리'
+  },
+];
+
+const fuse = new Fuse(PAGES, {
+  keys: [
+    {name:'title', weight:3},
+    {name:'subtitle', weight:2},
+    {name:'tags', weight:2},
+    {name:'keywords', weight:1},
+    {name:'category', weight:1.5},
+  ],
+  threshold: 0.4,
+  includeScore: true,
+  minMatchCharLength: 1,
+  ignoreLocation: true,
+});
+
+const input = document.getElementById('searchInput');
+const clearBtn = document.getElementById('clearBtn');
+const resultsArea = document.getElementById('resultsArea');
+const searchCount = document.getElementById('searchCount');
+
+input.addEventListener('input', () => {
+  const q = input.value.trim();
+  clearBtn.classList.toggle('show', q.length > 0);
+  if (q.length === 0) {
+    showInitial();
+    searchCount.innerHTML = '';
+    return;
+  }
+  doSearch(q);
+});
+
+function setQuery(q) {
+  input.value = q;
+  clearBtn.classList.add('show');
+  doSearch(q);
+}
+
+function clearSearch() {
+  input.value = '';
+  clearBtn.classList.remove('show');
+  searchCount.innerHTML = '';
+  showInitial();
+  input.focus();
+}
+
+function showInitial() {
+  resultsArea.innerHTML = `
+    <div class="initial">
+      <div class="init-label">추천 검색어</div>
+      <div class="init-tags">
+        ${['교합','자연치아','예방','이악물기','치주염','성장교정','MTA','엠도게인','혀','호흡','레진','보톡스','어린이','중장년','양치질','설소대']
+          .map(t=>`<span class="init-tag" onclick="setQuery('${t}')">${t}</span>`).join('')}
+      </div>
+    </div>`;
+}
+
+function doSearch(q) {
+  const results = fuse.search(q);
+  if (results.length === 0) {
+    searchCount.innerHTML = `<strong>"${q}"</strong> 에 대한 결과가 없습니다`;
+    resultsArea.innerHTML = `
+      <div class="empty">
+        <div class="empty-title">검색 결과가 없습니다</div>
+        <div class="empty-sub">다른 키워드로 검색해보세요<br>예: 교합, 자연치아, 예방, MTA, 엠도게인</div>
+      </div>`;
+    return;
+  }
+
+  searchCount.innerHTML = `<strong>"${q}"</strong> 검색 결과 ${results.length}건`;
+
+  const html = results.map(({item}) => `
+    <a class="result-item" href="${item.url}" target="_blank">
+      <div>
+        <div class="ri-category">${item.category}</div>
+        <div class="ri-title">${highlight(item.title, q)}</div>
+        <div class="ri-desc">${highlight(item.subtitle, q)}</div>
+        <div class="ri-tags">${item.tags.map(t=>`<span class="ri-tag">${t}</span>`).join('')}</div>
+      </div>
+      <div class="ri-thumb ${item.color}">${item.category}</div>
+    </a>`).join('');
+
+  resultsArea.innerHTML = html;
+}
+
+function highlight(text, q) {
+  if (!q) return text;
+  const escaped = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
+}
+
+// URL 파라미터로 검색어 받기
+const urlQ = new URLSearchParams(location.search).get('q');
+if (urlQ) {
+  input.value = urlQ;
+  clearBtn.classList.add('show');
+  doSearch(urlQ);
+}
+</script>
+</body>
+</html>

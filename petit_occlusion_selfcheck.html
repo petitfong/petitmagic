@@ -5,46 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>교합질환 자가체크 | 쁘띠치과</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --g:#1E3D30;--g2:#2D5A44;
-  --cr:#FAF8F0;--cr2:#EDE8D8;
-  --go:#C8A84B;--go2:rgba(200,168,75,.12);
-  --tx:#2C2C2C;--mu:#7A7A6A;--wh:#fff;
-  --rd:#C94040;--rd2:rgba(201,64,64,.08);
+  --g:#007A54;--g2:#009B6B;
+  --cr:#FAFAF9;--cr2:#EFEFEB;
+  --go:#C8A84B;--go2:#FFFBEF;
+  --tx:#1A1A18;--mu:#888880;--lt:#B8B8B0;--wh:#fff;
+  --br:#E8E8E4;
   --sf:'Noto Serif KR',serif;--ss:'Noto Sans KR',sans-serif
 }
-*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidden}
-
-/* NAV */
-.gnav{position:sticky;top:0;z-index:200;background:rgba(15,32,22,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(250,248,240,.07)}
-.gnav-inner{max-width:680px;margin:0 auto;display:flex;align-items:center;padding:0 20px;gap:0}
-.gnav-logo{font-family:var(--sf);font-size:13px;color:var(--cr);font-weight:600;padding:14px 0;margin-right:auto;flex-shrink:0}
-.gnav-logo em{color:var(--go);font-style:normal}
-.gnav-home{font-size:12px;color:rgba(250,248,240,.4);text-decoration:none;padding:14px 12px;transition:color .15s;white-space:nowrap}
-.gnav-home:hover{color:var(--go)}
-.gnav-cta{margin-left:8px;flex-shrink:0;background:var(--go);color:var(--g);border:none;padding:7px 15px;border-radius:20px;font-size:11.5px;font-weight:600;font-family:var(--ss);cursor:pointer;text-decoration:none;display:inline-block}
+/* ── BRUNCH NAV ── */
+.gnav{position:sticky;top:0;z-index:200;background:rgba(250,250,249,.93);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #E8E8E4;}
+.gnav-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;padding:0 28px;height:52px;}
+.gnav-logo{font-family:'TmonMonsori',serif;font-size:16px;color:#555550;font-weight:400;padding:0;margin-right:auto;letter-spacing:-.01em;}
+.gnav-logo em{color:#007A54;font-style:normal;}
+.gnav-home{font-size:13px;color:#555550;text-decoration:none;padding:6px 12px;border:1px solid #E8E8E4;border-radius:100px;transition:all .15s;white-space:nowrap;}
+.gnav-home:hover{border-color:#888880;color:#1A1A18;}
+.gnav-cta{margin-left:8px;background:#007A54;color:#FAF8F0;border:none;padding:7px 16px;border-radius:100px;font-size:12px;font-weight:400;font-family:'Pretendard',sans-serif;cursor:pointer;text-decoration:none;display:inline-block;letter-spacing:.01em;}
+.gnav-cta:hover{opacity:.85;}
 
 /* HERO */
-.hero{min-height:52vh;display:flex;flex-direction:column;justify-content:flex-end;padding:60px 28px 48px;position:relative;overflow:hidden;background:#1E3D30}
+.hero{min-height:52vh;display:flex;flex-direction:column;justify-content:flex-end;padding:60px 28px 48px;position:relative;overflow:hidden;background:#007A54}
 .hero-bg{position:absolute;inset:0}
 .hero-bg-img{position:absolute;inset:0;background:url('img1.png') center center/cover no-repeat}
 .hero-bg-ov{position:absolute;inset:0;background:linear-gradient(105deg,rgba(10,28,20,.92) 0%,rgba(10,28,20,.78) 50%,rgba(10,28,20,.4) 100%)}
 .hero-inner{max-width:640px;margin:0 auto;position:relative;z-index:1;width:100%}
 .hero-kw{font-size:10px;letter-spacing:.2em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:12px}
-.hero-title{font-family:var(--sf);font-size:clamp(28px,6vw,52px);font-weight:900;color:var(--cr);line-height:1.2;margin-bottom:14px}
-.hero-title em{color:var(--go);font-style:normal;display:block}
-.hero-sub{font-size:13.5px;color:rgba(250,248,240,.5);line-height:1.8;max-width:400px}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(28px,6vw,52px);font-weight:700;color:#FAF8F0;line-height:1.2;margin-bottom:14px}
+.hero-title em{color:#C8A84B;font-style:normal;display:block}
+.hero-sub{font-size:13.5px;color:rgba(250,248,240,.85);line-height:1.8;max-width:400px}
+/* petit-design.css 덮어쓰기 방지 */
+.hero .hero-title{color:#FAF8F0 !important}
+.hero .hero-title em{color:#C8A84B !important}
+.hero .hero-sub{color:rgba(250,248,240,.85) !important}
+.hero .hero-tag{color:rgba(250,248,240,.7) !important}
+.hero .hero-eyebrow{color:rgba(250,248,240,.7) !important}
 
 /* CHECK CARD */
 .check-wrap{max-width:680px;margin:0 auto;padding:36px 24px 80px}
 
 .step-box{background:var(--wh);border:1.5px solid var(--cr2);border-radius:18px;padding:24px;margin-bottom:16px}
 .step-num{font-size:10px;letter-spacing:.15em;color:var(--go);text-transform:uppercase;font-weight:600;margin-bottom:8px}
-.step-title{font-family:var(--sf);font-size:16px;font-weight:700;color:var(--g);margin-bottom:16px}
+.step-title{font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;color:var(--g);margin-bottom:16px}
 .req{color:var(--go)}
 
 /* AGE OPTS */
@@ -53,7 +56,7 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidde
 .ao:hover{border-color:#7fad98}
 .ao.on{border-color:var(--go);background:var(--go2)}
 .ao-lbl{font-size:9.5px;font-weight:700;color:var(--go);letter-spacing:.06em;margin-bottom:4px}
-.ao-main{font-size:13px;font-weight:600;color:var(--g);margin-bottom:2px;line-height:1.3}
+.ao-main{font-size:15px;font-size:13px;font-weight:600;color:var(--g);margin-bottom:2px;line-height:1.3}
 .ao-sub{font-size:10.5px;color:var(--mu)}
 
 /* TEETH OPTS */
@@ -82,12 +85,12 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidde
 .sym.on{border-color:var(--go);background:var(--go2)}
 .ck{width:17px;height:17px;border-radius:4px;border:1.5px solid var(--cr2);background:var(--wh);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;transition:all .15s}
 .sym.on .ck{background:var(--go);border-color:var(--go);color:var(--wh)}
-.sym-txt{font-size:12px;line-height:1.45;color:var(--tx)}
-.sym.on .sym-txt{color:var(--g);font-weight:500}
+.sym-txt{font-size:14px;font-size:12px;line-height:1.45;color:var(--tx)}
+.sym.on .sym-txt{font-size:14px;color:var(--g);font-weight:500}
 
 /* SUBMIT */
 .submit-wrap{text-align:center;margin-top:20px}
-.submit-btn{background:var(--g);color:var(--cr);border:none;padding:14px 40px;border-radius:50px;font-size:14px;font-weight:600;font-family:var(--ss);cursor:pointer;transition:background .15s;letter-spacing:.04em}
+.submit-btn{background:var(--g);color:#E0E0D8;border:none;padding:14px 40px;border-radius:50px;font-size:14px;font-weight:600;font-family:'Pretendard',sans-serif;cursor:pointer;transition:background .15s;letter-spacing:.04em}
 .submit-btn:hover{background:var(--g2)}
 .submit-btn:disabled{opacity:.3;cursor:default}
 
@@ -96,41 +99,34 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidde
 .result-box.show{display:block}
 
 .rb-top{padding:22px 24px;position:relative;overflow:hidden}
-.rb-count{font-family:var(--sf);font-size:52px;font-weight:900;color:var(--go);line-height:1}
-.rb-count-lbl{font-size:13px;color:rgba(250,248,240,.6);margin-bottom:12px}
-.rb-msg{font-size:13px;color:rgba(250,248,240,.65);line-height:1.75}
-.rb-msg strong{color:var(--cr)}
+.rb-top .rb-count-lbl{color:rgba(250,248,240,.85) !important}
+.rb-top .rb-msg{color:#FAF8F0 !important;font-size:15px;font-weight:600}
+.rb-count{font-family:'TmonMonsori',serif;font-size:52px;font-weight:900;color:var(--go);line-height:1}
+.rb-count-lbl{font-size:13px;color:rgba(250,248,240,.85);margin-bottom:12px}
+.rb-msg{font-size:13px;color:rgba(250,248,240,.85);line-height:1.75}
+.rb-msg strong{color:#555550}
 
-.rb-dir{padding:18px 24px;border-top:1px solid rgba(250,248,240,.1)}
-.rb-dir-lbl{font-size:10px;letter-spacing:.12em;color:rgba(200,168,75,.6);text-transform:uppercase;font-weight:600;margin-bottom:6px}
-.rb-dir-title{font-size:17px;font-weight:700;color:var(--cr);margin-bottom:6px}
-.rb-dir-note{font-size:12.5px;color:rgba(250,248,240,.55);line-height:1.7}
+.rb-dir{padding:18px 24px;border-top:1px solid #E0E0DA}
+.rb-dir-lbl{font-size:10px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:600;margin-bottom:6px}
+.rb-dir-title{font-size:17px;font-weight:700;color:#1A1A18;margin-bottom:6px}
+.rb-dir-note{font-size:14px;color:#555550;line-height:1.7}
 
 .rb-tags{padding:16px 24px;display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid var(--cr2);background:var(--cr)}
-.rt{background:var(--wh);border:1px solid var(--cr2);border-radius:20px;padding:5px 12px;font-size:11.5px;color:var(--tx);display:flex;align-items:center;gap:4px}
+.rt{font-size:13px;background:var(--wh);border:1px solid var(--cr2);border-radius:20px;padding:5px 12px;font-size:11.5px;color:var(--tx);display:flex;align-items:center;gap:4px}
 .rt::before{content:'✓';color:var(--go);font-weight:700;font-size:10px}
 .rt::before{content:'✓';color:var(--go);font-size:9px}
 
 /* LINK CARDS */
 .links-wrap{padding:18px 24px;background:var(--cr);display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--cr2)}
 .links-title{font-size:11px;letter-spacing:.12em;color:var(--mu);text-transform:uppercase;font-weight:500;margin-bottom:4px}
-.link-card{display:flex;align-items:center;gap:13px;padding:14px 16px;border-radius:13px;text-decoration:none;border:1.5px solid var(--cr2);background:var(--wh);transition:all .15s;cursor:pointer}
-.link-card:hover{border-color:var(--go);transform:translateY(-1px);box-shadow:0 4px 14px rgba(30,61,48,.08)}
-.link-card.main{background:var(--g);border-color:var(--g)}
-.link-card.main:hover{background:var(--g2);border-color:var(--g2)}
-.lc-icon{width:38px;height:38px;border-radius:9px;background:var(--cr2);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
-.link-card.main .lc-icon{background:rgba(200,168,75,.2)}
-.lc-body{flex:1}
-.lc-title{font-size:13.5px;font-weight:600;color:var(--tx);margin-bottom:2px}
-.link-card.main .lc-title{color:var(--cr)}
-.lc-sub{font-size:11.5px;color:var(--mu);line-height:1.35}
-.link-card.main .lc-sub{color:rgba(250,248,240,.45)}
-.lc-arr{color:var(--cr2);font-size:14px;flex-shrink:0}
-.link-card.main .lc-arr{color:var(--go)}
-.link-card:hover .lc-arr{color:var(--go)}
-
-/* RESET BTN */
-.reset-btn{display:block;margin:14px auto 0;background:none;border:1.5px solid var(--cr2);color:var(--mu);padding:10px 24px;border-radius:50px;font-size:12.5px;font-family:var(--ss);cursor:pointer;transition:all .15s}
+.link-card{display:flex;align-items:center;gap:13px;padding:14px 16px;border-radius:13px;text-decoration:none;border:1.5px solid var(--cr2);background:var(--wh);transition:all .2s;cursor:pointer}
+.link-card:hover{border-color:#007A54;background:#E8F5F0;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,122,84,.12)}
+.link-card:hover .link-card:hover .link-card.main{background:#007A54;border-color:#007A54}
+.link-card.main:hover{background:#009B6B;border-color:#009B6B;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,122,84,.25)}
+.link-card.main:hover .lc-icon{width:38px;height:38px;border-radius:9px;background:var(--cr2);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.link-card.main .lc-icon{background:rgba(250,248,240,.15)}
+.link-card.main .link-card.main .link-card.main .link-card:hover /* RESET BTN */
+.reset-btn{display:block;margin:14px auto 0;background:none;border:1.5px solid var(--cr2);color:var(--mu);padding:10px 24px;border-radius:50px;font-size:12.5px;font-family:'Pretendard',sans-serif;cursor:pointer;transition:all .15s}
 .reset-btn:hover{border-color:var(--g);color:var(--g)}
 
 /* MOBILE */
@@ -140,18 +136,231 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidde
   .step-box{padding:18px 16px}
   .age-opts{grid-template-columns:1fr 1fr 1fr;gap:6px}
   .ao{padding:10px 5px}
-  .ao-main{font-size:12px}
+  .ao-main{font-size:15px;font-size:12px}
   .sym-grid{grid-template-columns:1fr}
   .rb-top{padding:18px 18px}
   .rb-dir,.rb-tags,.links-wrap{padding:14px 18px}
   .gnav-logo{font-size:11px}
-}</style>
+}
+/* ── BRUNCH SHARED EXTRA ── */
+body{background:#FAFAF9 !important;}
+.check-sec{background:#fff;padding:44px 28px;}
+.check-inner{max-width:800px;margin:0 auto;}
+.ch-title{font-family:'TmonMonsori',serif;font-weight:400;color:#1A1A18;letter-spacing:-.01em;}
+.ch-tag{font-size:11px;letter-spacing:.14em;color:#555550;text-transform:uppercase;}
+.ch-sub{color:#555550;}
+.step-box{background:#fff;border:1px solid #E8E8E4;border-radius:12px;}
+.step-title{font-family:'TmonMonsori',serif;font-weight:400;color:#1A1A18;}
+.ao,.to{background:#fff;border:1px solid #E8E8E4;}
+.ao.on,.to.on{border-color:#C8A84B;background:#FFFBEF;}
+.ao-main{font-size:15px;color:#1A1A18;font-weight:400;}
+.submit-btn{background:#007A54;color:#FAF8F0;}
+.result-box{border:1px solid #E8E8E4;}
+.rb-top{background:#007A54 !important;}
+.rb-dir{background:#F5F5F1 !important;border-top:1px solid #E8E8E4;}
+.rb-dir-title{color:#1A1A18 !important;}
+.rb-dir-note{color:#555550 !important;}
+.rb-dir-lbl{color:#555550 !important;}
+.links-wrap{background:#FAFAF9;}
+.link-card{background:#fff;border:1px solid #E8E8E4;border-radius:10px;}
+.link-card.main{background:#007A54;border-color:#007A54;}
+.reset-btn{border:1px solid #E8E8E4;color:#555550;}
+.sym{background:#F9F9F7;border:1px solid #E8E8E4;}
+.sym.on{border-color:#C8A84B;background:#FFFBEF;}
+.sg-label{border-bottom:1px solid #E8E8E4;color:#1A1A18;}
+.sg-label.open{color:#007A54;border-bottom-color:#C8A84B;}
+/* lifecycle */
+.stage-card,.key-card{background:#fff;border:1px solid #E8E8E4;}
+/* barun tab */
+.tabs{background:#fff;border-bottom:1px solid #E8E8E4;}
+.tab{color:#555550;}
+.tab.act{color:#007A54;border-bottom:2px solid #007A54;}
+.gnav{background:rgba(250,250,249,.93) !important;border-bottom:1px solid #E8E8E4 !important;}
+/* about hero dark override */
+.hero.dark-hero,#hero-dark{background:#fff !important;}
+
+/* ── SERIF NUMBER STYLE ── */
+.step-num,.care-num,.feat-num,.rn-num,.pf-num,.sc-step-num,.ex-num,.tf-num,
+.stage-num,.txs-stage,.txc-num,.w3-ko{
+  font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-.01em;
+}
+.flow-step .fs-circle,.fc-icon,.ec-icon,.funny-emoji,.pg-icon,.sym-chip{
+  font-size:inherit;
+}
+
+/* ── MOBILE RESPONSIVE ── */
+@media(max-width:640px){
+  /* nav */
+  .gnav-inner,.gnav-logo,.gnav-logo span,.nav-logo span{display:none;}
+  .gnav-home{padding:5px 10px;font-size:11px;}
+  .gnav-cta,.nb{padding:6px 12px;font-size:11px;}
+
+  /* hero */
+  .hero{padding:40px 16px 32px;}
+  .hero-title{font-size:clamp(22px,6vw,32px);}
+  .hero-inner{padding:0;}
+
+  /* wrap / content */
+  .wrap,.content,.inner{padding:0 16px;}
+  .sec{padding:36px 0 6px;}
+
+  /* grids → 1열 */
+  .word3,.func-grid,.hb-cards,.vs-wrap,.root-cards,.sd-grid,
+  .sym-grid,.age-opts,.effect-grid,.daily-cards,.perio-stages,
+  .cause3,.two-phil,.compare,.reserve-row{
+    grid-template-columns:1fr !important;
+  }
+
+  /* 3열 → 1열 예외: 2열 유지 */
+  .sym-grid{grid-template-columns:1fr 1fr !important;}
+
+  /* 단계 카드 패딩 */
+  .stage-head,.care-head,.feat-head,.reason-head,
+  .txs-head,.txc-head,.txd-head{padding:13px 14px;}
+  .stage-body,.care-body,.feat-body,.reason-body,
+  .txs-content,.txc-body,.txd-body{padding:12px 14px;}
+
+  /* 책 커버 */
+  .book,.book-item{grid-template-columns:80px 1fr !important;}
+  .cov,.book-cover{width:80px !important;height:112px !important;}
+  .bi,.book-info{padding-left:12px !important;}
+  .bi-desc,.book-info .bi-desc{display:none;}
+
+  /* article list */
+  .aitem,.al-item{grid-template-columns:1fr 50px !important;}
+  .aitem-thumb,.al-thumb{width:50px !important;height:40px !important;}
+
+  /* CTA 버튼 */
+  .cta-btns,.btn-row{flex-direction:column;align-items:center;}
+  .btn-naver,.btn-kakao,.btn-cr,.btn-g,.btn-go{
+    width:100% !important;max-width:280px;justify-content:center;
+  }
+
+  /* flow */
+  .flow{flex-wrap:wrap;gap:12px;}
+  .flow-step{min-width:80px;flex:0 0 calc(50% - 6px);}
+  .flow-step::after{display:none;}
+  .timing{gap:8px;}
+  .tt{flex:0 0 18%;}
+
+  /* 비교 카드 */
+  .cmp,.vs,.rc,.hb{border-radius:10px !important;}
+
+  /* footer */
+  .foot,.footer{flex-direction:column;gap:8px;align-items:flex-start !important;}
+  .foot-info,.footer-info{text-align:left !important;}
+
+  /* 체크 */
+  .step-box{padding:16px 14px;}
+  .age-opts{grid-template-columns:1fr 1fr 1fr !important;}
+  .ao{padding:10px 6px;}
+  .ao-main{font-size:15px;font-size:12px;}
+  .ao-sub{font-size:10px;}
+
+  /* 탭 */
+  .tabs{gap:2px;padding:8px 10px;overflow-x:auto;}
+  .tab{font-size:11px;padding:6px 9px;white-space:nowrap;}
+
+  /* 체인 */
+  .chain,.chain-box{flex-wrap:wrap;}
+
+  /* science box */
+  .science,.insight,.warn,.warn-box{padding:11px 13px;}
+
+  /* phil */
+  .philosophy,.phil{padding:28px 0;}
+  .ph-q,.hero-h{font-size:clamp(18px,5vw,24px);}
+}
+
+/* ── HERO BRUNCH ── */
+.hero{background:#fff;min-height:auto;padding:52px 28px 44px;border-bottom:1px solid #E0E0DA;position:relative;overflow:hidden}
+.hero::before,.hero::after,.hero-ring{display:none}
+.hero-inner{max-width:760px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-kw{font-size:11px;letter-spacing:.16em;color:#FAF8F0;text-transform:uppercase;font-weight:400;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.hero-kw::before{display:none}
+.hero-tag{font-size:11px;letter-spacing:.14em;color:#888880;text-transform:uppercase;margin-bottom:14px}
+.hero-pretitle{font-size:12px;color:#555550;font-weight:300;margin-bottom:8px}
+.hero-eyebrow{font-size:11px;letter-spacing:.14em;color:#888880;text-transform:uppercase;margin-bottom:14px;opacity:1;animation:none}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;letter-spacing:-.02em;opacity:1;animation:none}
+.hero-title em{font-style:italic;font-weight:400;color:#007A54}
+.hero-title strong{font-weight:700;font-style:normal;color:#111110}
+.hero-h{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;letter-spacing:-.02em;opacity:1;animation:none}
+.hero-h em{font-style:italic;color:#007A54}
+.hero-h strong{font-weight:700;color:#111110}
+.hero-main{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;opacity:1;animation:none}
+.hero-main em{color:#007A54;font-style:normal;display:block}
+.hero-sub{font-family:'TmonMonsori',serif;font-size:clamp(14px,2vw,17px);font-weight:300;color:#555550;line-height:1.85;max-width:520px;opacity:1;animation:none}
+.hero-sub p{color:#555550}
+.hero-desc{font-size:14px;color:#555550;line-height:1.85;max-width:480px;opacity:1;animation:none}
+.hero-badge,.hero-scroll,.hs-line,.hs-txt{display:none}
+.hero-cat{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.hc{border-radius:100px;padding:5px 13px;font-size:12px;font-weight:500}
+.hc-health{background:#E8F5F0;color:#007A54}
+.hc-beauty{background:#F5EFD8;color:#8A6820}
+.hero-term{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.ht-ko{border-radius:100px;padding:5px 13px;font-size:12px;font-weight:500;background:#E8F5F0;color:#007A54}
+.ht-en{border-radius:100px;padding:5px 13px;font-size:12px;color:#555550;border:1px solid #E0E0DA}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.hp.go{background:#F5EFD8;border:1px solid #E8D898;color:#8A6820;border-radius:100px;padding:5px 12px;font-size:12px}
+.hp.wh{background:#F5F5F1;border:1px solid #E0E0DA;color:#555550;border-radius:100px;padding:5px 12px;font-size:12px}
+.hero-copy{display:flex;flex-direction:column;gap:7px;margin-top:18px}
+.hero-copy-item{font-size:15px;color:#555550;line-height:1.5;display:flex;align-items:flex-start;gap:8px}
+.hero-copy-item::before{content:'—';color:#C8A84B;flex-shrink:0}
+
+/* ── 색상 규칙 ── */
+/* 딥그린 배경 → 크림 글자 */
+.sh .sh-title{color:#FAF8F0}
+.sh .sh-sub{color:#FAF8F0}
+.selfcheck .sc-title{color:#FAF8F0}
+.selfcheck .sc-sub{color:rgba(250,248,240,.55)}
+.selfcheck .sc-label{color:rgba(200,168,75,.7)}
+.cta .cta /* 밝은 배경 → 어두운 글자 */
+.hero .hero-title{color:#111110}
+.hero .hero-sub{color:#888880}
+.hero .hero-tag{color:#AAAAAA}
+/* 예외: 딥그린 hero */
+.hero-child .hero-title,.hero-teen .hero-title,.hero-adult .hero-title{color:#FAF8F0 !important}
+.hero-child .hero-subtitle,.hero-teen .hero-subtitle,.hero-adult .hero-subtitle{color:#FAF8F0 !important}
+
+/* 관련 페이지 링크 */
+.rel-section{padding:28px 20px;background:#F5F5F1;border-top:1px solid #E0E0DA;margin-top:8px}
+.rel-title{font-size:12px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.rel-links{display:flex;flex-direction:column;gap:8px}
+.rel-link{display:flex;align-items:center;gap:12px;padding:13px 15px;background:#fff;border-radius:10px;border:1px solid #E0E0DA;text-decoration:none;color:#1A1A18;transition:opacity .15s}
+.rel-link:hover{opacity:.75}
+.rel-link-body{flex:1}
+.rel-link-title{font-size:14px;font-weight:500;color:#111110;margin-bottom:2px}
+.rel-link-sub{font-size:12px;color:#555550}
+.rel-link-arr{font-size:14px;color:#C8A84B;font-weight:600;flex-shrink:0}
+
+@font-face {
+  font-family: 'TmonMonsori';
+  src: url('fonts/TmonMonsori_otf.otf') format('opentype'),
+       url('fonts/TmonMonsori_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('fonts/pretendard-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
+<link rel="stylesheet" href="petit-design.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
 <nav class="gnav">
   <div class="gnav-inner">
-    <div class="gnav-logo">생활의 기본, <em>쁘띠치과</em></div>
+    <div class="gnav-logo">생활의 기본, <em>쁘띠치과</em><span style="font-size:10px;color:#555550;font-weight:400;letter-spacing:.06em;margin-left:8px;font-style:italic">Born to Be, Petit Dental</span></div>
+    <a href="search.html" style="margin-left:8px;width:32px;height:32px;border-radius:50%;border:1px solid #E8E8E4;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:#555550;font-size:15px;transition:all .15s" title="검색">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </a>
     <a class="gnav-home" href="index.html">← 홈</a>
     <a class="gnav-cta" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
   </div>
@@ -181,17 +390,22 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidde
       <div class="ao" data-age="child" onclick="setAge(this)">
         <div class="ao-lbl">성장기</div>
         <div class="ao-main">어린이</div>
-        <div class="ao-sub">5~11세</div>
+        <div class="ao-sub">5~12세</div>
       </div>
       <div class="ao" data-age="teen" onclick="setAge(this)">
-        <div class="ao-lbl">성장완료</div>
-        <div class="ao-main">청소년·청년</div>
-        <div class="ao-sub">12세~30대</div>
+        <div class="ao-lbl">4D교정기</div>
+        <div class="ao-main">청소년</div>
+        <div class="ao-sub">13~17세</div>
       </div>
       <div class="ao" data-age="adult" onclick="setAge(this)">
+        <div class="ao-lbl">4D교정·재건</div>
+        <div class="ao-main">청년·장년</div>
+        <div class="ao-sub">18세~40대</div>
+      </div>
+      <div class="ao" data-age="senior" onclick="setAge(this)">
         <div class="ao-lbl">중장년</div>
-        <div class="ao-main">중장년·노년</div>
-        <div class="ao-sub">40대 이상</div>
+        <div class="ao-main">중장년·인생2기</div>
+        <div class="ao-sub">50대 이상</div>
       </div>
     </div>
   </div>
@@ -239,7 +453,6 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidde
           <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">이갈이 또는 이악물기</div></div>
           <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">머리·목·어깨 통증</div></div>
           <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">한쪽으로만 씹게 됨</div></div>
-          <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">자도 자도 피곤함</div></div>
           <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">질긴 음식을 피하게 됨</div></div>
         </div>
       </div>
@@ -274,6 +487,9 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidde
           <!-- 수면 -->
           <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">코골이·수면 중 무호흡</div></div>
           <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">잠을 자도 피로가 안 풀림</div></div>
+          <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">아침에 일어나면 턱·관자·목이 더 아픔</div></div>
+          <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">자는 동안 이를 간다는 말을 들음</div></div>
+          <div class="sym" data-cat="기능" data-plan="tmj" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">아침에 뺨 안쪽에 하얀 자국·혀가 부은 느낌</div></div>
           <!-- 발음 -->
           <div class="sym" data-cat="발육" data-plan="ortho" onclick="tog(this)"><div class="ck">✓</div><div class="sym-txt">발음이 부정확하거나 새는 소리</div></div>
           <!-- 자세 -->
@@ -316,21 +532,33 @@ const KAKAO_ICON=`<svg width="20" height="20" viewBox="0 0 24 24" fill="#191919"
 // 치료방향 데이터
 const DIR={
   growth:{
-    color:'#1E3D30',
+    color:'#007A54',
     label:'성장교정',
     note:'성장기에는 4D입체교정장치로 턱 크기와 위치를 유도합니다. 지금 개입하면 나중의 큰 치료를 막을 수 있는 가장 효율적인 시기입니다.',
     links:[
-      {main:true, icon:'🌱', title:'바른턱얼굴 교합치료 — 성장교정', sub:'성장교정 치료 자세히 알아보기', url:'petit_treatment_by_age.html'},
+      {main:true, icon:'', title:'바른턱얼굴 교합치료 — 성장교정', sub:'성장교정 치료 자세히 알아보기', url:'petit_treatment_by_age.html'},
+      {main:false, iconSvg:NAVER_ICON, iconBg:'#03C75A', title:'네이버 예약', sub:'진료 예약 바로가기', url:'https://booking.naver.com/booking/13/bizes/743904'},
+      {main:false, iconSvg:KAKAO_ICON, iconBg:'#FEE500', title:'카카오톡 상담', sub:'궁금한 점 빠르게 문의', url:'https://pf.kakao.com/_xbhXYb'},
+    ]
+  },
+  teen4d:{
+    color:'#009B6B',
+    label:'4D 입체교정',
+    note:'치아·교합·기능·얼굴 균형을 함께 설계하는 비발치·비수술 4D입체교정으로 재발 없는 치료가 가능합니다. 골격·치아·기능·미소, 네 가지를 함께 바꿉니다.',
+    links:[
+      {main:true, icon:'', title:'바른턱얼굴 교합치료 — 4D입체교정', sub:'4D 입체교정 치료 자세히 알아보기', url:'petit_treatment_by_age.html'},
+      {main:false, icon:'', title:'교합진단', sub:'4D교정 시작 전 정밀 진단', url:'petit_diagnosis.html'},
       {main:false, iconSvg:NAVER_ICON, iconBg:'#03C75A', title:'네이버 예약', sub:'진료 예약 바로가기', url:'https://booking.naver.com/booking/13/bizes/743904'},
       {main:false, iconSvg:KAKAO_ICON, iconBg:'#FEE500', title:'카카오톡 상담', sub:'궁금한 점 빠르게 문의', url:'https://pf.kakao.com/_xbhXYb'},
     ]
   },
   ortho4d:{
-    color:'#2D5A44',
+    color:'#009B6B',
     label:'4D 입체교정',
-    note:'골격·치아·기능을 함께 교정하는 비발치·비수술 4D입체교정으로 재발 없는 치료가 가능합니다. 치아와 턱의 균형, 얼굴과 몸의 균형을 설계합니다.',
+    note:'치아·교합·기능·얼굴 균형을 함께 설계하는 비발치·비수술 4D입체교정으로 재발 없는 치료가 가능합니다. 골격·치아·기능·미소, 네 가지를 함께 바꿉니다.',
     links:[
-      {main:true, icon:'✨', title:'바른턱얼굴 교합치료 — 4D입체교정', sub:'4D 입체교정 치료 자세히 알아보기', url:'petit_treatment_by_age.html'},
+      {main:true, icon:'', title:'바른턱얼굴 교합치료 — 4D입체교정', sub:'4D 입체교정 치료 자세히 알아보기', url:'petit_treatment_by_age.html'},
+      {main:false, icon:'', title:'근이완치료 · 턱관절 물리치료', sub:'이갈이·이악물기·수면 — 보험 인증기관', url:'petit_muscle_relax.html'},
       {main:false, iconSvg:NAVER_ICON, iconBg:'#03C75A', title:'네이버 예약', sub:'진료 예약 바로가기', url:'https://booking.naver.com/booking/13/bizes/743904'},
       {main:false, iconSvg:KAKAO_ICON, iconBg:'#FEE500', title:'카카오톡 상담', sub:'궁금한 점 빠르게 문의', url:'https://pf.kakao.com/_xbhXYb'},
     ]
@@ -340,9 +568,9 @@ const DIR={
     label:'치주재생 교합재건',
     note:'자연치아를 최대한 살리면서 교합을 재건합니다. 뽑기 전에 살릴 수 있는지 먼저 확인합니다. 심층 상담 위젯에서 나의 상태와 치료 계획을 확인하세요.',
     links:[
-      {main:true, icon:'🌿', title:'자연치아살리기', sub:'MTA 신경재생 · 엠도게인 치주재생 · 무삭제 레진 재건', url:'petit_natural_tooth.html'},
-      {main:false, icon:'📋', title:'교합재건 심층 상담 위젯', sub:'증상 분석 → 타입 확인 → 치료 계획', url:'petit_consultation_widget.html'},
-      {main:false, icon:'🕰️', title:'생애주기별 교합 노화', sub:'왜 지금 이 상태인지 이해하기', url:'petit_lifecycle_occlusion.html'},
+      {main:true, icon:'', title:'자연치아살리기', sub:'MTA 신경재생 · 엠도게인 치주재생 · 무삭제 레진 재건', url:'petit_natural_tooth.html'},
+      {main:false, icon:'', title:'교합재건 심층 상담 위젯', sub:'증상 분석 → 타입 확인 → 치료 계획', url:'petit_consultation_widget.html'},
+      {main:false, icon:'', title:'생애주기별 교합 노화', sub:'왜 지금 이 상태인지 이해하기', url:'petit_lifecycle_occlusion.html'},
       {main:false, iconSvg:NAVER_ICON, iconBg:'#03C75A', title:'네이버 예약', sub:'진료 예약 바로가기', url:'https://booking.naver.com/booking/13/bizes/743904'},
       {main:false, iconSvg:KAKAO_ICON, iconBg:'#FEE500', title:'카카오톡 상담', sub:'궁금한 점 빠르게 문의', url:'https://pf.kakao.com/_xbhXYb'},
     ]
@@ -351,6 +579,8 @@ const DIR={
 
 function getTxDir(){
   if(ageGroup==='child') return 'growth';
+  if(ageGroup==='teen') return 'teen4d';
+  if(ageGroup==='senior') return 'recon';
   if(ageGroup==='adult' && teethCond==='bad') return 'recon';
   return 'ortho4d';
 }
@@ -365,18 +595,18 @@ function setAge(el){
   document.querySelectorAll('.ao').forEach(e=>e.classList.remove('on'));
   el.classList.add('on');
   ageGroup=el.dataset.age;
+
+  // 전체 리셋
   teethCond=null;
   document.querySelectorAll('.to').forEach(e=>e.classList.remove('on'));
+  document.querySelectorAll('.sc').forEach(e=>e.classList.remove('on'));
+  checked=new Set();
+  document.getElementById('resultBox').classList.remove('show');
+  document.getElementById('symStep').style.display='none';
 
-  if(ageGroup==='child'){
-    document.getElementById('teethStep').style.display='none';
-    document.getElementById('symStep').style.display='block';
-    document.getElementById('symStepNum').textContent='Step 2';
-    teethCond='ok';
-  } else {
-    document.getElementById('teethStep').style.display='block';
-    document.getElementById('symStep').style.display='none';
-  }
+  // 어린이 포함 모든 연령 치아 상태 선택 표시
+  document.getElementById('teethStep').style.display='block';
+  document.getElementById('symStepNum').textContent='Step 3';
   checkBtn();
 }
 
@@ -397,7 +627,7 @@ function tog(el){
 }
 
 function checkBtn(){
-  const ready=checked.size>0 && ageGroup && (ageGroup==='child'||teethCond);
+  const ready=checked.size>0 && ageGroup && (ageGroup==='child'||ageGroup==='teen'||ageGroup==='senior'||teethCond);
   document.getElementById('submitBtn').disabled=!ready;
 }
 
@@ -410,16 +640,16 @@ function showResult(){
   let scoreMsg=n<=2?'초기 신호입니다. 지금 확인하는 것이 가장 좋습니다.':n<=5?'교합 불균형이 여러 곳에 영향을 주고 있습니다.':'<strong>다수의 증상이 복합적으로 나타나고 있습니다.</strong>';
   document.getElementById('rbTop').style.background=d.color;
   document.getElementById('rbTop').innerHTML=`
-    <div style="font-family:var(--sf);font-size:52px;font-weight:900;color:var(--go);line-height:1">${n}</div>
-    <div style="font-size:13px;color:rgba(250,248,240,.6);margin-bottom:10px">가지 증상이 확인되었습니다</div>
-    <div style="font-size:12.5px;color:rgba(250,248,240,.6);line-height:1.7;padding-top:12px;border-top:1px solid rgba(250,248,240,.1)">${scoreMsg}</div>`;
+    <div style="font-family:'TmonMonsori',serif;font-size:52px;font-weight:900;color:#C8A84B;line-height:1">${n}</div>
+    <div style="font-size:13px;color:rgba(250,248,240,.85);margin-bottom:10px">가지 증상이 확인되었습니다</div>
+    <div style="font-size:15px;font-weight:600;color:#FAF8F0;line-height:1.7;padding-top:12px;border-top:1px solid rgba(250,248,240,.2)">${scoreMsg}</div>`;
 
   // 치료 방향
   document.getElementById('rbDir').style.background=d.color;
   document.getElementById('rbDir').innerHTML=`
-    <div style="font-size:10px;letter-spacing:.12em;color:rgba(200,168,75,.6);text-transform:uppercase;font-weight:600;margin-bottom:5px">추천 치료 방향</div>
-    <div style="font-size:18px;font-weight:700;color:var(--cr);margin-bottom:7px">${d.label}</div>
-    <div style="font-size:12.5px;color:rgba(250,248,240,.55);line-height:1.7">${d.note}</div>`;
+    <div style="font-size:10px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:600;margin-bottom:5px">추천 치료 방향</div>
+    <div style="font-size:18px;font-weight:700;color:#1A1A18;margin-bottom:7px">${d.label}</div>
+    <div style="font-size:14px;color:#555550;line-height:1.7">${d.note}</div>`;
 
   // 증상 태그
   const tags=document.getElementById('rbTags');
@@ -432,7 +662,7 @@ function showResult(){
   // 생애주기 링크 추가 (5개 이상이면)
   const links=[...d.links];
   if(n>=5 && dir!=='recon'){
-    links.splice(1,0,{main:false,icon:'🕰️',title:'생애주기별 교합 노화',sub:'왜 지금 이 상태인지 이해하기',url:'petit_lifecycle_occlusion.html'});
+    links.splice(1,0,{main:false,icon:'',title:'생애주기별 교합 노화',sub:'왜 지금 이 상태인지 이해하기',url:'petit_lifecycle_occlusion.html'});
   }
 
   // 링크 카드
@@ -466,5 +696,69 @@ function resetCheck(){
   document.querySelector('.step-box').scrollIntoView({behavior:'smooth',block:'start'});
 }
 </script>
+
+<div class="share-float">
+  <div class="share-toast" id="shareToast">링크 복사됐습니다</div>
+  <button class="share-fab" onclick="doShare()" title="공유하기">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+  </button>
+</div>
+
+<script>
+async function doShare(){
+  var title=document.title||'쁘띠치과';
+  var url=location.href;
+  if(navigator.share){
+    try{await navigator.share({title:title,url:url});}catch(e){}
+  } else {
+    try{
+      await navigator.clipboard.writeText(url);
+      var t=document.getElementById('shareToast');
+      t.classList.add('show');
+      setTimeout(function(){t.classList.remove('show');},2000);
+    }catch(e){}
+  }
+}
+</script>
+<div class="rel-section">
+  <div class="rel-title">다음 단계 · 관련 페이지</div>
+  <div class="rel-links">
+  <a class="rel-link" href="petit_muscle_relax.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">근이완치료</div>
+      <div class="rel-link-sub">이갈이·이악물기·턱관절 물리치료 보험 인증기관</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_diagnosis.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">교합진단</div>
+      <div class="rel-link-sub">증상의 원인을 정확히 찾는 정밀 진단 — 60만원</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+    <a class="lc sub" href="petit_4d_ortho.html">
+      <div class="lc-body">
+        <div class="lc-title">4D 입체교정</div>
+        <div class="lc-sub">MARPE · Twin Block · Han's 2-Way/3-Way · Biobloc</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+  <a class="rel-link" href="petit_treatment_by_age.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">바른턱얼굴 교합치료</div>
+      <div class="rel-link-sub">교합 문제라면 — 성장교정·4D교정·교합재건</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_natural_tooth.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">자연치아살리기</div>
+      <div class="rel-link-sub">발치 권유 받으셨나요? — MTA·치주재생·무삭제 레진 재건</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  </div>
+</div>
 </body>
 </html>

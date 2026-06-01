@@ -5,74 +5,69 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>바른턱얼굴 교합치료 | 쁘띠치과</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --g:#1E3D30;--g2:#2D5A44;
-  --cr:#FAF8F0;--cr2:#EDE8D8;
-  --go:#C8A84B;--go2:rgba(200,168,75,.1);
-  --tx:#2C2C2C;--mu:#7A7A6A;--wh:#fff;
-  --c1:#2D6E8E;--c2:#1E3D30;--c3:#5A3A1A;
+  --g:#007A54;--g2:#009B6B;
+  --cr:#FAFAF9;--cr2:#EFEFEB;
+  --go:#C8A84B;--go2:#FFFBEF;
+  --tx:#1A1A18;--mu:#888880;--lt:#B8B8B0;--wh:#fff;
+  --br:#E8E8E4;
   --sf:'Noto Serif KR',serif;--ss:'Noto Sans KR',sans-serif
 }
-*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidden}
-
 /* NAV TABS */
-.nav-bar{position:sticky;top:0;z-index:100;background:var(--g);border-bottom:1px solid rgba(250,248,240,.08)}
+.nav-bar{position:sticky;top:0;z-index:100;background:rgba(250,250,249,.97);backdrop-filter:blur(12px);border-bottom:1px solid #E0E0DA}
 .nav-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;padding:0 20px}
-.nav-logo{font-family:var(--sf);color:var(--cr);font-size:14px;letter-spacing:.04em;padding:16px 0;margin-right:auto;flex-shrink:0}
-.nav-logo em{color:var(--go);font-style:normal}
-.tabs{display:flex;gap:2px}
-.tab{padding:16px 16px;font-size:12.5px;font-weight:500;color:rgba(250,248,240,.4);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;user-select:none}
-.tab:hover{color:rgba(250,248,240,.7)}
-.tab.act{color:var(--go);border-bottom-color:var(--go)}
+.tabs{display:flex;gap:0;overflow-x:auto;background:#fff;border-bottom:1px solid #E0E0DA}
+.hero-child,.hero-teen,.hero-adult{background:#007A54 !important}
+.tab{padding:14px 16px;font-size:13px;font-weight:400;color:#888880;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;user-select:none;font-family:'TmonMonsori',serif}
+.tab:hover{color:#1A1A18}
+.tab.act{color:#007A54;border-bottom-color:#007A54;font-weight:600}
 
 /* SECTIONS */
 .sec{display:none}
 .sec.on{display:block}
 
 /* HERO per section */
-.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:flex-end;padding:60px 28px 56px;position:relative;overflow:hidden}
-.hero-child{background:linear-gradient(160deg,#1a3d5c 0%,#0d2234 60%,#1E3D30 100%)}
-.hero-teen{background:linear-gradient(160deg,#1E3D30 0%,#2D5A44 50%,#1a3a2e 100%)}
-.hero-adult{background:linear-gradient(160deg,#2C1A0E 0%,#1E3D30 60%,#1a2e1a 100%)}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 80% 30%,rgba(200,168,75,.1) 0%,transparent 65%)}
+.hero{background:#fff;min-height:auto;padding:52px 28px 44px;border-bottom:1px solid #E0E0DA;position:relative;overflow:hidden}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(28px,5.5vw,48px);font-weight:700;color:#FAF8F0;line-height:1.2;margin-bottom:16px}
+.hero-title em{color:#C8A84B;font-style:italic}
+.hero-sub,.hero-sub p{font-family:'TmonMonsori',serif;font-size:clamp(13px,2vw,16px);font-weight:300;color:#555550;line-height:1.85;max-width:520px;}
+
 .hero-inner{max-width:680px;margin:0 auto;width:100%;position:relative;z-index:1}
-.hero-kw{font-size:10.5px;letter-spacing:.2em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:14px}
-.hero-title{font-family:var(--sf);font-size:clamp(28px,5vw,50px);font-weight:700;color:var(--cr);line-height:1.3;margin-bottom:16px}
-.hero-title em{color:var(--go);font-style:normal}
-.hero-subtitle{font-size:clamp(12px,2vw,15px);color:rgba(250,248,240,.5);line-height:1.85;max-width:480px;margin-bottom:24px}
-.hero-target{display:inline-flex;align-items:center;gap:8px;background:rgba(250,248,240,.08);border:1px solid rgba(250,248,240,.12);border-radius:30px;padding:8px 16px;font-size:12px;color:rgba(250,248,240,.55)}
-.hero-target strong{color:rgba(250,248,240,.85);font-weight:500}
+.hero-kw{font-size:10.5px;letter-spacing:.2em;color:#C8A84B;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(28px,5vw,50px);font-weight:700;color:#FAF8F0;line-height:1.3;margin-bottom:16px}
+.hero-title em{color:#C8A84B;font-style:italic}
+.hero-subtitle{font-size:clamp(12px,2vw,15px);color:#555550;line-height:1.85;max-width:480px;margin-bottom:24px}
+.hero-target{display:inline-flex;align-items:center;gap:8px;background:rgba(250,248,240,.15);border:1px solid rgba(250,248,240,.3);border-radius:30px;padding:8px 16px;font-size:12px;color:#FAF8F0;font-weight:500}
+.hero-target strong{color:#FAF8F0;font-weight:700}
 
 /* MAIN CONTENT */
 .content{max-width:720px;margin:0 auto;padding:60px 24px 100px}
 
 /* PROBLEM INTRO */
 .prob{background:var(--wh);border:1px solid var(--cr2);border-radius:18px;padding:28px 28px 24px;margin-bottom:40px}
-.prob-title{font-family:var(--sf);font-size:16px;font-weight:700;color:var(--g);line-height:1.5;margin-bottom:16px}
+.prob-title{font-family:'TmonMonsori',serif;font-size:17px;font-weight:400;color:#111110;line-height:1.5;margin-bottom:14px;letter-spacing:-.01em}
 .prob-qs{display:flex;flex-direction:column;gap:9px;margin-bottom:18px}
 .pq{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--tx);line-height:1.55}
-.pq::before{content:'"';color:var(--go);font-family:var(--sf);font-size:18px;line-height:1;flex-shrink:0;margin-top:-1px}
+.pq::before{content:'"';color:var(--go);font-family:'TmonMonsori',serif;font-size:18px;line-height:1;flex-shrink:0;margin-top:-1px}
 .prob-answer{background:var(--go2);border-left:3px solid var(--go);border-radius:0 10px 10px 0;padding:13px 16px;font-size:13px;color:var(--tx);line-height:1.75}
 .prob-answer strong{color:var(--g);font-weight:600}
 
 /* SECTION BLOCKS */
 .block{margin-bottom:40px}
 .block-head{margin-bottom:20px}
-.block-tag{font-size:10.5px;letter-spacing:.15em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:7px}
-.block-title{font-family:var(--sf);font-size:19px;font-weight:700;color:var(--g);line-height:1.45}
+.block-tag{font-size:11px;letter-spacing:.14em;color:#C8A84B;text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.block-title{font-family:'TmonMonsori',serif;font-size:22px;font-weight:600;color:#111110;line-height:1.45;letter-spacing:-.01em}
 
 /* WHY BOX */
-.why{background:var(--g);border-radius:16px;padding:24px;margin-bottom:28px}
-.why-title{font-size:13px;font-weight:600;color:var(--go);margin-bottom:14px;letter-spacing:.03em}
-.why-body{font-size:13px;color:rgba(250,248,240,.65);line-height:1.85}
-.why-body strong{color:rgba(250,248,240,.85)}
-.why-quote{font-family:var(--sf);font-size:13px;color:rgba(250,248,240,.4);margin-top:14px;padding-top:13px;border-top:1px solid rgba(250,248,240,.08);font-style:italic;line-height:1.6}
+.why{background:#F5F5F1;border:1px solid #E8E8E4;border-radius:16px;padding:24px;margin-bottom:28px}
+.why-title{font-size:12px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:600;margin-bottom:12px}
+.why-body{font-size:13px;color:#555550;line-height:1.85}
+.why-body strong{color:#1A1A18}
+.why-quote{font-family:'TmonMonsori',serif;font-size:13px;color:#555550;margin-top:14px;padding-top:13px;border-top:1px solid #E8E8E4;font-style:italic;line-height:1.6}
 
-/* CHAIN — HOW IT WORKS */
+/* CHAIN  HOW IT WORKS */
 .chain-strip{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:20px 0}
 .cn{background:var(--cr2);border-radius:7px;padding:6px 12px;font-size:12px;font-weight:500;color:var(--tx)}
 .cn.g{background:rgba(45,90,68,.1);color:var(--g2)}
@@ -82,23 +77,31 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidde
 /* CHANGE LIST */
 .changes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
 .ch{background:var(--wh);border:1px solid var(--cr2);border-radius:12px;padding:14px 16px}
-.ch-icon{font-size:20px;margin-bottom:8px}
-.ch-t{font-size:12.5px;font-weight:600;color:var(--g);margin-bottom:4px}
-.ch-b{font-size:11.5px;color:var(--mu);line-height:1.5}
+.ch-icon{display:none}
+.ch-t{font-size:14px;font-weight:600;color:#1A1A18;margin-bottom:5px}
+.ch-b{font-size:13px;color:#555550;line-height:1.6}
 
 /* 3 STEPS */
 .steps{display:flex;flex-direction:column;gap:0}
 .step{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--cr2)}
 .step:last-child{border-bottom:none}
-.sn{width:34px;height:34px;border-radius:50%;background:var(--g);color:var(--cr);font-family:var(--sf);font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.sn{width:34px;height:34px;border-radius:50%;background:var(--g);color:#E0E0D8;font-family:'TmonMonsori',serif;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
 .st-body{}
-.st-t{font-size:14px;font-weight:600;color:var(--g);margin-bottom:5px}
-.st-b{font-size:12.5px;color:var(--mu);line-height:1.7}
+.st-t{font-size:15px;font-weight:500;color:#1A1A18;margin-bottom:5px;font-family:'TmonMonsori',serif}
+.st-b{font-size:14px;color:var(--mu);line-height:1.7}
 .st-b strong{color:var(--tx);font-weight:500}
 
 /* ITALIC CLOSING */
-.italic-close{font-family:var(--sf);font-size:13.5px;color:var(--mu);line-height:1.8;font-style:italic;padding:18px 0;border-top:1px solid var(--cr2);margin-top:6px}
+.italic-close{font-family:'TmonMonsori',serif;font-size:13.5px;color:var(--mu);line-height:1.8;font-style:italic;padding:18px 0;border-top:1px solid var(--cr2);margin-top:6px}
 .italic-close strong{color:var(--g);font-style:normal}
+@media(max-width:600px){
+  .tabs{display:flex;gap:0;overflow-x:auto;background:#fff;border-bottom:1px solid #E0E0DA}
+.hero-child,.hero-teen,.hero-adult{background:#007A54 !important}
+  .tab{font-size:11px;padding:7px 10px}
+  .content{padding:0 16px 40px}
+  .steps{padding-left:14px}
+  .target-cards{grid-template-columns:1fr !important}
+}
 
 /* SIGNAL BOX (children) */
 .signals{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0}
@@ -107,39 +110,357 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidde
 .sig-t{font-size:12px;color:var(--tx);line-height:1.45}
 
 /* CTA SECTION */
-.cta-sec{background:var(--g);border-radius:20px;padding:30px 28px;text-align:center;margin-top:50px}
-.cta-title{font-family:var(--sf);font-size:18px;font-weight:700;color:var(--cr);margin-bottom:8px;line-height:1.5}
-.cta-sub{font-size:13px;color:rgba(250,248,240,.5);margin-bottom:22px;line-height:1.7}
-.cta-btns{display:flex;gap:10px;justify-content:center}
-.btn-cr{background:var(--cr);color:var(--g);border:none;padding:13px 24px;border-radius:50px;font-size:13px;font-weight:600;font-family:var(--ss);cursor:pointer;text-decoration:none;display:inline-block}
-.btn-go{background:var(--go);color:var(--g);border:none;padding:13px 24px;border-radius:50px;font-size:13px;font-weight:600;font-family:var(--ss);cursor:pointer;text-decoration:none;display:inline-block}
-.clinic-foot{margin-top:22px;font-size:11.5px;color:rgba(250,248,240,.3);line-height:1.9}
+.cta-sec .cta-title{font-family:'TmonMonsori',serif;font-size:22px;font-weight:600;color:#111110;margin-bottom:8px;line-height:1.45}
+.cta-sec .cta-sub{font-size:14px;color:#555550;margin-bottom:20px;line-height:1.7}
+.btn-cr{background:#03C75A;color:#fff;border:none;padding:12px 22px;border-radius:50px;font-size:13px;font-weight:600;font-family:'Pretendard',sans-serif;cursor:pointer;text-decoration:none;display:inline-block}
+.btn-go{background:#FEE500;color:#191919;border:none;padding:13px 24px;border-radius:50px;font-size:13px;font-weight:600;font-family:'Pretendard',sans-serif;cursor:pointer;text-decoration:none;display:inline-block}
+.clinic-foot{font-size:12px;color:#888880;margin-top:16px;text-align:center}
 
 /* REVEAL ANIM */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .5s ease,transform .5s ease}
-.reveal.vis{opacity:1;transform:translateY(0)}
+.reveal{opacity:1;transform:none}
+
+/*  BRUNCH SHARED EXTRA  */
+body{background:#FAFAF9 !important;}
+.check-sec{background:#fff;padding:44px 28px;}
+.check-inner{max-width:800px;margin:0 auto;}
+.ch-title{font-family:'TmonMonsori',serif;font-weight:400;color:#1A1A18;letter-spacing:-.01em;}
+.ch-tag{font-size:11px;letter-spacing:.14em;color:#555550;text-transform:uppercase;}
+.ch-sub{color:#555550;}
+.step-box{background:#fff;border:1px solid #E8E8E4;border-radius:12px;}
+.step-title{font-family:'TmonMonsori',serif;font-weight:400;color:#1A1A18;}
+.ao,.to{background:#fff;border:1px solid #E8E8E4;}
+.ao.on,.to.on{border-color:#C8A84B;background:#FFFBEF;}
+.ao-main{font-size:15px;color:#1A1A18;font-weight:400;}
+.submit-btn{background:#007A54;color:#FAF8F0;}
+.result-box{border:1px solid #E8E8E4;}
+.rb-top{background:#007A54 !important;}
+.rb-dir{background:#F5F5F1 !important;border-top:1px solid #E8E8E4;}
+.rb-dir-title{color:#1A1A18 !important;}
+.rb-dir-note{color:#555550 !important;}
+.rb-dir-lbl{color:#555550 !important;}
+.links-wrap{background:#FAFAF9;}
+.link-card{background:#fff;border:1px solid #E8E8E4;border-radius:10px;}
+.link-card.main{background:#007A54;border-color:#007A54;}
+.reset-btn{border:1px solid #E8E8E4;color:#555550;}
+.sym{background:#F9F9F7;border:1px solid #E8E8E4;}
+.sym.on{border-color:#C8A84B;background:#FFFBEF;}
+.sg-label{border-bottom:1px solid #E8E8E4;color:#1A1A18;}
+.sg-label.open{color:#007A54;border-bottom-color:#C8A84B;}
+/* lifecycle */
+.stage-card,.key-card{background:#fff;border:1px solid #E8E8E4;}
+/* barun tab */
+.tabs{display:flex;gap:0;overflow-x:auto;background:#fff;border-bottom:1px solid #E0E0DA}
+.hero-child,.hero-teen,.hero-adult{background:#007A54 !important}
+.tab{color:#888880;}
+.tab.act{color:#007A54;border-bottom:2px solid #007A54;}
+.gnav{background:rgba(250,250,249,.93) !important;border-bottom:1px solid #E8E8E4 !important;}
+/* about hero dark override */
+.hero.dark-hero,#hero-dark{background:#fff !important;}
+
+/*  MOBILE RESPONSIVE  */
+@media(max-width:640px){
+  /* nav */
+  .gnav-inner,.gnav-logo,.gnav-logo span,.nav-logo span{display:none;}
+  .gnav-home{padding:5px 10px;font-size:11px;}
+  .gnav-cta,.nb{padding:6px 12px;font-size:11px;}
+
+  /* hero */
+  .hero{padding:40px 16px 32px;}
+  .hero-title{font-size:clamp(22px,6vw,32px);}
+  .hero-inner{padding:0;}
+
+  /* wrap / content */
+  .wrap,.content,.inner{padding:0 16px;}
+  .sec{padding:36px 0 6px;}
+
+  /* grids  1열 */
+  .word3,.func-grid,.hb-cards,.vs-wrap,.root-cards,.sd-grid,
+  .sym-grid,.age-opts,.effect-grid,.daily-cards,.perio-stages,
+  .cause3,.two-phil,.compare,.reserve-row{
+    grid-template-columns:1fr !important;
+  }
+
+  /* 3열  1열 예외: 2열 유지 */
+  .sym-grid{grid-template-columns:1fr 1fr !important;}
+
+  /* 단계 카드 패딩 */
+  .stage-head,.care-head,.feat-head,.reason-head,
+  .txs-head,.txc-head,.txd-head{padding:13px 14px;}
+  .stage-body,.care-body,.feat-body,.reason-body,
+  .txs-content,.txc-body,.txd-body{padding:12px 14px;}
+
+  /* 책 커버 */
+  .book,.book-item{grid-template-columns:80px 1fr !important;}
+  .cov,.book-cover{width:80px !important;height:112px !important;}
+  .bi,.book-info{padding-left:12px !important;}
+  .bi-desc,.book-info .bi-desc{display:none;}
+
+  /* article list */
+  .aitem,.al-item{grid-template-columns:1fr 50px !important;}
+  .aitem-thumb,.al-thumb{width:50px !important;height:40px !important;}
+
+  /* CTA 버튼 */
+  .cta-btns,.btn-row{flex-direction:column;align-items:center;}
+  .btn-naver,.btn-cr,.btn-g{background:#03C75A !important;color:#fff !important}
+  .btn-kakao,.btn-go{background:#FEE500 !important;color:#191919 !important}
+.btn-go{
+    width:100% !important;max-width:280px;justify-content:center;
+  }
+
+  /* flow */
+  .flow{flex-wrap:wrap;gap:12px;}
+  .flow-step{min-width:80px;flex:0 0 calc(50% - 6px);}
+  .flow-step::after{display:none;}
+  .timing{gap:8px;}
+  .tt{flex:0 0 18%;}
+
+  /* 비교 카드 */
+  .cmp,.vs,.rc,.hb{border-radius:10px !important;}
+
+  /* footer */
+  .foot,.footer{flex-direction:column;gap:8px;align-items:flex-start !important;}
+  .foot-info,.footer-info{text-align:left !important;}
+
+  /* 체크 */
+  .step-box{padding:16px 14px;}
+  .age-opts{grid-template-columns:1fr 1fr 1fr !important;}
+  .ao{padding:10px 6px;}
+  .ao-main{font-size:15px;font-size:12px;}
+  .ao-sub{font-size:10px;}
+
+  /* 탭 */
+  .tabs{display:flex;gap:0;overflow-x:auto;background:#fff;border-bottom:1px solid #E0E0DA}
+.hero-child,.hero-teen,.hero-adult{background:#007A54 !important}
+  .tab{font-size:11px;padding:6px 9px;white-space:nowrap;}
+
+  /* 체인 */
+  .chain,.chain-box{flex-wrap:wrap;}
+
+  /* science box */
+  .science,.insight,.warn,.warn-box{padding:11px 13px;}
+
+  /* phil */
+  .philosophy,.phil{padding:28px 0;}
+  .ph-q,.hero-h{font-size:clamp(18px,5vw,24px);}
+}
+
+/*  HERO BRUNCH  */
+.hero{background:#fff;min-height:auto;padding:52px 28px 44px;border-bottom:1px solid #E0E0DA;position:relative;overflow:hidden}
+.hero::before,.hero::after,.hero-ring{display:none}
+.hero-inner{max-width:760px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-kw{font-size:11px;letter-spacing:.16em;color:#C8A84B;text-transform:uppercase;font-weight:400;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.hero-kw::before{display:none}
+.hero-tag{font-size:11px;letter-spacing:.14em;color:#C8A84B;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+.hero-pretitle{font-size:12px;color:#888880;font-weight:400;margin-bottom:8px}
+.hero-eyebrow{font-size:11px;letter-spacing:.14em;color:#C8A84B;text-transform:uppercase;font-weight:600;margin-bottom:14px;opacity:1;animation:none}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#FAF8F0;line-height:1.3;margin-bottom:14px;letter-spacing:-.02em;opacity:1;animation:none}
+.hero-title em{font-style:italic;font-weight:400;color:#C8A84B}
+.hero-title strong{font-weight:700;font-style:normal;color:#FAF8F0}
+.hero-h{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;letter-spacing:-.02em;opacity:1;animation:none}
+.hero-h em{font-style:italic;color:#007A54}
+.hero-h strong{font-weight:700;color:#111110}
+.hero-main{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;opacity:1;animation:none}
+.hero-main em{color:#007A54;font-style:normal;display:block}
+.hero-sub{font-family:'TmonMonsori',serif;font-size:clamp(14px,2vw,17px);font-weight:300;color:#555550;line-height:1.85;max-width:520px;opacity:1;animation:none}
+.hero-sub p{color:inherit}
+.hero-desc{font-size:14px;color:#555550;line-height:1.85;max-width:480px;opacity:1;animation:none}
+.hero-badge,.hero-scroll,.hs-line,.hs-txt{display:none}
+.hero-cat{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.hc{border-radius:100px;padding:5px 13px;font-size:12px;font-weight:500}
+.hc-health{background:#E8F5F0;color:#007A54}
+.hc-beauty{background:#F5EFD8;color:#8A6820}
+.hero-term{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.ht-ko{border-radius:100px;padding:5px 13px;font-size:12px;font-weight:500;background:#E8F5F0;color:#007A54}
+.ht-en{border-radius:100px;padding:5px 13px;font-size:12px;color:#555550;border:1px solid #E0E0DA}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.hp.go{background:#F5EFD8;border:1px solid #E8D898;color:#8A6820;border-radius:100px;padding:5px 12px;font-size:12px}
+.hp.wh{background:#F5F5F1;border:1px solid #E0E0DA;color:#555550;border-radius:100px;padding:5px 12px;font-size:12px}
+.hero-copy{display:flex;flex-direction:column;gap:7px;margin-top:18px}
+.hero-copy-item{font-size:15px;color:#555550;line-height:1.5;display:flex;align-items:flex-start;gap:8px}
+.hero-copy-item::before{content:'';color:#C8A84B;flex-shrink:0}
+
+/* ── 색상 규칙 ── */
+/* 딥그린 배경 → 크림 글자 */
+.sh .sh-title{color:#FAF8F0}
+.sh .sh-sub{color:#FAF8F0}
+.selfcheck .sc-title{color:#FAF8F0}
+.selfcheck .sc-sub{color:rgba(250,248,240,.85)}
+.selfcheck .sc-label{color:#C8A84B}
+.cta .cta /* 밝은 배경 → 어두운 글자 */
+.hero:not(.hero-child):not(.hero-teen):not(.hero-adult) .hero-title{color:#111110}
+.hero .hero-sub{color:#888880}
+.hero-child .hero-sub,.hero-teen .hero-sub,.hero-adult .hero-sub{color:rgba(250,248,240,.85) !important}
+.hero .hero-tag{color:#AAAAAA}
+.hero-child .hero-tag,.hero-teen .hero-tag,.hero-adult .hero-tag{color:#C8A84B !important}
+/* 예외: 딥그린 hero */
+.hero-child .hero-title,.hero-teen .hero-title,.hero-adult .hero-title{color:#FAF8F0 !important}
+.hero-child .hero-title em,.hero-teen .hero-title em,.hero-adult .hero-title em{color:#C8A84B !important}
+.hero-child .hero-subtitle,.hero-teen .hero-subtitle,.hero-adult .hero-subtitle{color:rgba(250,248,240,.85) !important}
+
+/* 관련 페이지 링크 */
+.rel-section{padding:28px 20px;background:#F5F5F1;border-top:1px solid #E0E0DA;margin-top:8px}
+.rel-title{font-size:12px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.rel-links{display:flex;flex-direction:column;gap:8px}
+.rel-link{display:flex;align-items:center;gap:12px;padding:13px 15px;background:#fff;border-radius:10px;border:1px solid #E0E0DA;text-decoration:none;color:#1A1A18;transition:opacity .15s}
+.rel-link:hover{opacity:.75}
+.rel-link-body{flex:1}
+.rel-link-title{font-size:14px;font-weight:500;color:#111110;margin-bottom:2px}
+.rel-link-sub{font-size:12px;color:#555550}
+.rel-link-arr{font-size:14px;color:#C8A84B;font-weight:600;flex-shrink:0}
+
+@font-face {
+  font-family: 'TmonMonsori';
+  src: url('fonts/TmonMonsori_otf.otf') format('opentype'),
+       url('fonts/TmonMonsori_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('fonts/pretendard-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.prob-row{cursor:default}
+.prob-row-on{background:#E8F5F0 !important}
+.prob-row-on .prob-num{color:#007A54 !important;font-weight:700 !important}
+.prob-row-on .prob-tag{background:#007A54 !important;color:#FAF8F0 !important}
 </style>
+<link rel="stylesheet" href="petit-design.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="nav-bar">
   <div class="nav-inner">
-    <div class="nav-logo">쁘띠치과 <em>·</em> 바른턱얼굴 교합치료</div>
+    <div class="nav-logo" style="line-height:1.5">생활의 기본, 쁘띠치과<br><span style="font-size:10px;color:#555550;font-weight:300;letter-spacing:.04em">기본이 기적이다 · Basic is Magic</span></div>
     <div class="tabs">
-      <div class="tab act" onclick="show('child',this)">🌱 어린이</div>
-      <div class="tab" onclick="show('teen',this)">✨ 청소년·청년</div>
-      <div class="tab" onclick="show('adult',this)">🌿 중장년</div>
+      <div class="tab act" onclick="show('overview',this)">바른턱얼굴교합치료</div>
+      <div class="tab" onclick="show('child',this)">성장교정</div>
+      <div class="tab" onclick="show('teen',this)">청소년·청년 (12~40대)</div>
+      <div class="tab" onclick="show('adult',this)">중장년·인생2기 (50대 이상)</div>
     </div>
   </div>
 </nav>
 
-<!-- ───────── CHILD ───────── -->
-<div class="sec on" id="sec-child">
+<!--  OVERVIEW  -->
+<div class="sec on" id="sec-overview">
+  <div class="hero" style="background:linear-gradient(160deg,#007A54 0%,#0d1f18 60%,#005A3C 100%);min-height:70vh">
+    <div class="hero-inner">
+      <div class="hero-kw">바른턱얼굴 교합치료 · BTB Occlusal Treatment</div>
+      <h1 class="hero-title" style="color:#FAF8F0 !important">치아만 고치는 게<br>아닙니다.<br><em style="color:#C8A84B !important;font-style:italic">원인을 함께 제거합니다.</em></h1>
+      <p class="hero-subtitle" style="color:rgba(250,248,240,.85) !important">구조·치아·기능, 세 가지가 함께 바뀌어야<br>재발하지 않습니다.</p>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- 철학 -->
+    <div style="background:#F5F5F1;border:1px solid #E8E8E4;border-radius:16px;padding:24px 26px;margin-bottom:32px" class="rv">
+      <div style="width:3px;height:44px;background:linear-gradient(180deg,var(--go),rgba(200,168,75,.2));border-radius:2px;margin-bottom:16px"></div>
+      <div style="font-family:'TmonMonsori',serif;font-size:15px;font-weight:600;color:#1A1A18;line-height:1.75;margin-bottom:8px">교합은 기능이 만들고, 기능 이상이 무너뜨리며,<br><span style="color:var(--go)">기능 회복이 다시 완성한다.</span></div>
+      <div style="font-size:11px;color:#555550;font-style:italic;line-height:1.6">Occlusion is built by function, destroyed by dysfunction, and completed again by functional restoration.</div>
+    </div>
+
+    <!-- 욕망 5층 -->
+    <div class="block rv">
+      <div class="block-head">
+        <div class="block-tag">치료를 원하는 이유</div>
+        <div class="block-title">당신이 정말 원하는 것은<br>무엇인가요?</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0;border-radius:14px;overflow:hidden;border:1.5px solid var(--cr2);margin-bottom:20px">
+        <div class="prob-row" onmouseover="this.classList.add('prob-row-on')" onmouseout="this.classList.remove('prob-row-on')" style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--cr2);background:var(--wh);transition:all .2s;cursor:default">
+          <div class="prob-num" style="font-family:'TmonMonsori',serif;font-size:20px;color:var(--cr2);text-align:center;transition:color .2s">1</div>
+          <div><div style="font-size:15px;font-weight:500;color:var(--tx);transition:color .2s">아프지 않았으면 좋겠다</div></div>
+          <div class="prob-tag" style="font-size:11px;background:var(--cr2);color:var(--mu);border-radius:20px;padding:4px 11px;white-space:nowrap;transition:all .2s">회피</div>
+        </div>
+        <div class="prob-row" onmouseover="this.classList.add('prob-row-on')" onmouseout="this.classList.remove('prob-row-on')" style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--cr2);background:var(--wh);transition:all .2s;cursor:default">
+          <div class="prob-num" style="font-family:'TmonMonsori',serif;font-size:20px;color:var(--cr2);text-align:center;transition:color .2s">2</div>
+          <div><div style="font-size:15px;font-weight:500;color:var(--tx);transition:color .2s">편하게 먹고, 편하게 자고 싶다</div></div>
+          <div class="prob-tag" style="font-size:11px;background:var(--cr2);color:var(--mu);border-radius:20px;padding:4px 11px;white-space:nowrap;transition:all .2s">편안함</div>
+        </div>
+        <div class="prob-row" onmouseover="this.classList.add('prob-row-on')" onmouseout="this.classList.remove('prob-row-on')" style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--cr2);background:var(--wh);transition:all .2s;cursor:default">
+          <div class="prob-num" style="font-family:'TmonMonsori',serif;font-size:20px;color:var(--cr2);text-align:center;transition:color .2s">3</div>
+          <div><div style="font-size:15px;font-weight:500;color:var(--tx);transition:color .2s">자신 있게 웃고 말하고 싶다</div></div>
+          <div class="prob-tag" style="font-size:11px;background:var(--cr2);color:var(--mu);border-radius:20px;padding:4px 11px;white-space:nowrap;transition:all .2s">사회적</div>
+        </div>
+        <div class="prob-row" onmouseover="this.classList.add('prob-row-on')" onmouseout="this.classList.remove('prob-row-on')" style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--cr2);background:var(--wh);transition:all .2s;cursor:default">
+          <div class="prob-num" style="font-family:'TmonMonsori',serif;font-size:20px;color:var(--cr2);text-align:center;transition:color .2s">4</div>
+          <div><div style="font-size:15px;font-weight:500;color:var(--tx);transition:color .2s">나를 잘 관리하고 싶다</div></div>
+          <div class="prob-tag" style="font-size:11px;background:var(--cr2);color:var(--mu);border-radius:20px;padding:4px 11px;white-space:nowrap;transition:all .2s">자아</div>
+        </div>
+        <div class="prob-row prob-row-5" style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;padding:16px 16px;background:var(--wh);border-top:1px solid var(--cr2);transition:all .2s">
+          <div class="prob-num" style="font-family:'TmonMonsori',serif;font-size:20px;color:var(--cr2);text-align:center;transition:color .2s">5</div>
+          <div><div style="font-size:15px;font-weight:500;color:var(--tx)">억지로 꾸미지 않아도 되는 나로 살고 싶다</div></div>
+          <div class="prob-tag" style="font-size:11px;background:var(--cr2);color:var(--mu);border-radius:20px;padding:4px 11px;white-space:nowrap;transition:all .2s">존재</div>
+        </div>
+      </div>
+    </div>
+
+
+
+        <!-- 어린이 -->
+        <div style="border-radius:18px;overflow:hidden;border:1.5px solid var(--cr2);cursor:pointer;transition:all .2s" onclick="show('child',document.querySelectorAll('.tab')[1])" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,122,84,.1)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
+          <div style="background:linear-gradient(160deg,#4a7a5a,#009B6B);padding:28px 20px 22px;text-align:center;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end">
+            <div style="font-size:48px;margin-bottom:12px"></div>
+            <div style="font-size:10px;color:#C8A84B;letter-spacing:.1em;font-weight:600;margin-bottom:6px">어린아이 · 엄마</div>
+            <div style="font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;color:#FAF8F0;line-height:1.4">꿈을 꿀 수 있는<br>편안한 치과</div>
+          </div>
+          <div style="padding:16px 18px;background:var(--wh)">
+            <div style="font-size:11.5px;color:#555550;font-style:italic;line-height:1.6;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--cr2)">"충치 때문에 데려왔다가 아이 입이 왜 벌어져 있는지 처음 들었습니다."</div>
+            <div style="font-size:12px;color:var(--g);font-weight:500;line-height:1.8"> 성장교정<br> 바른미소디자인훈련</div>
+            <div style="margin-top:10px;padding:10px 12px;background:#E8F5F0;border-radius:8px;font-size:12px;color:#1A5C3A;line-height:1.65">
+              혼합 치열기(6~12세)는 턱과 얼굴의 미래가 결정되는 골든타임입니다.<br>지금 발견하면 발치·수술 없이 방향을 바로잡을 수 있습니다.
+            </div>
+            <a href="petit_pediatric.html" style="display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:12px;font-weight:600;color:#007A54;text-decoration:none;border:1px solid #C5E8DC;padding:5px 12px;border-radius:100px;background:#fff">어린이 성장교정 자세히 보기 →</a>
+          </div>
+        </div>
+
+        <!-- 청소년·청년 -->
+        <div style="border-radius:18px;overflow:hidden;border:1.5px solid var(--cr2);cursor:pointer;transition:all .2s" onclick="show('teen',document.querySelectorAll('.tab')[2])" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,122,84,.1)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
+          <div style="background:linear-gradient(160deg,#3a6a4a,#007A54);padding:28px 20px 22px;text-align:center;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end">
+            <div style="font-size:48px;margin-bottom:12px"></div>
+            <div style="font-size:10px;color:#C8A84B;letter-spacing:.1em;font-weight:600;margin-bottom:6px">청소년·청년 (12~40대)</div>
+            <div style="font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;color:#FAF8F0;line-height:1.4">스스로의 건강함과<br>아름다움을</div>
+          </div>
+          <div style="padding:16px 18px;background:var(--wh)">
+            <div style="font-size:11.5px;color:#555550;font-style:italic;line-height:1.6;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--cr2)">"교정을 두 번 했는데 계속 재발했어요. 원인을 몰랐던 거겠죠."</div>
+            <div style="font-size:12px;color:var(--g);font-weight:500;line-height:1.8"> 4D 입체교정<br> 바른턱얼굴 교합치료</div>
+            <a href="petit_4d_ortho.html" style="display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:12px;font-weight:600;color:#007A54;text-decoration:none;border:1px solid #C5E8DC;padding:5px 12px;border-radius:100px;background:#fff">4D 입체교정 장치 보기 →</a>
+          </div>
+        </div>
+
+        <!-- 중장년 -->
+        <div style="border-radius:18px;overflow:hidden;border:1.5px solid var(--cr2);cursor:pointer;transition:all .2s" onclick="show('adult',document.querySelectorAll('.tab')[3])" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,122,84,.1)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
+          <div style="background:linear-gradient(160deg,#2a5040,#005A3C);padding:28px 20px 22px;text-align:center;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end">
+            <div style="font-size:48px;margin-bottom:12px"></div>
+            <div style="font-size:10px;color:#C8A84B;letter-spacing:.1em;font-weight:600;margin-bottom:6px">중장년·인생2기 (50대 이상)</div>
+            <div style="font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;color:#FAF8F0;line-height:1.4">신뢰할 수 있는<br>평생 파트너</div>
+          </div>
+          <div style="padding:16px 18px;background:var(--wh)">
+            <div style="font-size:11.5px;color:#555550;font-style:italic;line-height:1.6;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--cr2)">"세 군데서 뽑아야 한다고 했는데 여기서 처음으로 다른 이야기를 들었습니다."</div>
+            <div style="font-size:12px;color:var(--g);font-weight:500;line-height:1.8"> 자연치아 살리기<br> 치주재생 교합재건</div>
+            <a href="petit_natural_tooth.html" style="display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:12px;font-weight:600;color:#007A54;text-decoration:none;border:1px solid #C5E8DC;padding:5px 12px;border-radius:100px;background:#fff">자연치아살리기 →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!--  CHILD  -->
+<div class="sec" id="sec-child">
   <div class="hero hero-child">
     <div class="hero-inner">
       <div class="hero-kw">성장 교정 · 교합유도</div>
-      <h1 class="hero-title">아이의 얼굴은<br>지금 이 순간에도<br><em>만들어지고 있습니다</em></h1>
+      <h1 class="hero-title" style="color:#FAF8F0 !important">아이의 얼굴은<br>지금 이 순간에도<br><em style="color:#C8A84B !important;font-style:italic">만들어지고 있습니다</em></h1>
       <p class="hero-subtitle">이 시기에 개입하면, 나중에 훨씬 큰 치료를 막을 수 있습니다.<br>성장 교정은 치료가 아니라 성장 유도입니다.</p>
       <div class="hero-target"><strong>대상</strong> 만 5세 ~ 혼합치열기 (초등학생)</div>
     </div>
@@ -175,13 +496,13 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidde
         <div class="block-title">코가 아닌 입으로 숨 쉬면<br>얼굴이 달라집니다</div>
       </div>
       <div class="chain-strip">
-        <div class="cn b">입호흡</div><div class="arr">→</div>
-        <div class="cn">혀가 내려옴</div><div class="arr">→</div>
-        <div class="cn">위턱이 좁아짐</div><div class="arr">→</div>
-        <div class="cn b">치아 비틀림</div><div class="arr">→</div>
+        <div class="cn b">입호흡</div><div class="arr"></div>
+        <div class="cn">혀가 내려옴</div><div class="arr"></div>
+        <div class="cn">위턱이 좁아짐</div><div class="arr"></div>
+        <div class="cn b">치아 비틀림</div><div class="arr"></div>
         <div class="cn b">얼굴이 길어짐</div>
       </div>
-      <p style="font-size:12.5px;color:var(--mu);line-height:1.75">혀가 입천장을 밀어주지 않으면 위턱이 좁아지고, 좁아진 입천장은 비강을 막아 코를 더 막히게 만듭니다. 이 악순환이 반복되면서 <strong style="color:var(--tx)">치아는 비뚤어지고 얼굴은 길어집니다.</strong></p>
+      <p style="font-size:14px;color:var(--mu);line-height:1.75">혀가 입천장을 밀어주지 않으면 위턱이 좁아지고, 좁아진 입천장은 비강을 막아 코를 더 막히게 만듭니다. 이 악순환이 반복되면서 <strong style="color:var(--tx)">치아는 비뚤어지고 얼굴은 길어집니다.</strong></p>
     </div>
 
     <div class="block reveal">
@@ -190,35 +511,27 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidde
         <div class="block-title">무엇이 달라지나요</div>
       </div>
       <div class="changes">
-        <div class="ch"><div class="ch-icon">👃</div><div class="ch-t">코호흡</div><div class="ch-b">입 벌리고 자던 아이가 코로 숨쉬기 시작합니다</div></div>
-        <div class="ch"><div class="ch-icon">🦷</div><div class="ch-t">치열 정렬</div><div class="ch-b">비뚤어지려던 치아가 제자리를 잡아갑니다</div></div>
-        <div class="ch"><div class="ch-icon">😊</div><div class="ch-t">얼굴 균형</div><div class="ch-b">좁았던 위턱이 넓어져 균형 있게 자랍니다</div></div>
-        <div class="ch"><div class="ch-icon">✋</div><div class="ch-t">습관 차단</div><div class="ch-b">손가락 빨기·혀내밀기를 조기에 차단합니다</div></div>
-        <div class="ch"><div class="ch-icon">📉</div><div class="ch-t">미래 치료 축소</div><div class="ch-b">성인이 되어 필요한 교정 범위가 줄어듭니다</div></div>
-        <div class="ch"><div class="ch-icon">😴</div><div class="ch-t">수면 질</div><div class="ch-b">코골이·수면 장애가 개선됩니다</div></div>
+        <div class="ch"><div class="ch-t">코호흡</div><div class="ch-b">입 벌리고 자던 아이가 코로 숨쉬기 시작합니다</div></div>
+        <div class="ch"><div class="ch-t">치열 정렬</div><div class="ch-b">비뚤어지려던 치아가 제자리를 잡아갑니다</div></div>
+        <div class="ch"><div class="ch-t">얼굴 균형</div><div class="ch-b">좁았던 위턱이 넓어져 균형 있게 자랍니다</div></div>
+        <div class="ch"><div class="ch-t">습관 차단</div><div class="ch-b">손가락 빨기·혀내밀기를 조기에 차단합니다</div></div>
+        <div class="ch"><div class="ch-t">미래 치료 축소</div><div class="ch-b">성인이 되어 필요한 교정 범위가 줄어듭니다</div></div>
+        <div class="ch"><div class="ch-t">수면 질</div><div class="ch-b">코골이·수면 장애가 개선됩니다</div></div>
       </div>
     </div>
 
-    <div class="cta-sec reveal">
-      <div class="cta-title">아이의 성장,<br>지금 확인해 드리겠습니다</div>
-      <div class="cta-sub">초진 시 호흡·혀 자세·구강 습관·자세까지 함께 확인합니다.<br>치료가 필요한지 확신이 없어도 괜찮습니다. 먼저 여쭤보세요.</div>
-      <div class="cta-btns">
-        <a href="https://booking.naver.com/booking/13/bizes/743904" target="_blank" class="btn-cr">네이버 예약</a>
-        <a href="https://pf.kakao.com/_xbhXYb" target="_blank" class="btn-go">카카오 상담</a>
-      </div>
-      <div class="clinic-foot">📍 대구시 남구 대봉로 66 2층 &nbsp;·&nbsp; 📞 053-472-2828</div>
-    </div>
+
   </div>
 </div>
 
-<!-- ───────── TEEN ───────── -->
+<!--  TEEN  -->
 <div class="sec" id="sec-teen">
   <div class="hero hero-teen">
     <div class="hero-inner">
       <div class="hero-kw">4D 입체교정 · 칼 안 대는 성형수술</div>
-      <h1 class="hero-title">치아만 고치는<br>교정이 아닙니다.<br><em>골격·치아·기능·미소</em><br>네 가지를 동시에.</h1>
+      <h1 class="hero-title" style="color:#FAF8F0 !important">치아만 고치는<br>교정이 아닙니다.<br><em style="color:#C8A84B !important;font-style:italic">골격·치아·기능·미소</em><br>네 가지를 동시에.</h1>
       <p class="hero-subtitle">비발치 · 비수술 4D 입체교정</p>
-      <div class="hero-target"><strong>대상</strong> 청소년 · 성장 후 청년 (교정 경험 있는 분 포함)</div>
+      <div class="hero-target"><strong>대상</strong> 청소년·청년 (12~40대) · 교정 경험 있는 분 포함</div>
     </div>
   </div>
 
@@ -251,7 +564,11 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidde
         <div class="block-tag">4D가 의미하는 것</div>
         <div class="block-title">기존 교정과 무엇이<br>다른가요?</div>
       </div>
-      <div class="steps">
+      <!-- 장치 안내 링크 -->
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#E8F5F0;border-radius:10px;border-left:3px solid #007A54;margin-bottom:14px">
+        <div style="flex:1;font-size:13px;color:#1A5C3A;line-height:1.6">MARPE · Twin Block · Han's 2-Way/3-Way · Biobloc 장치별 원리와 적용 기준</div>
+        <a href="petit_4d_ortho.html" style="flex-shrink:0;font-size:12px;font-weight:700;color:#007A54;text-decoration:none;border:1px solid #C5E8DC;padding:5px 11px;border-radius:100px;background:#fff;white-space:nowrap">장치 안내 →</a>
+      </div>
         <div class="step">
           <div class="sn">1</div>
           <div class="st-body">
@@ -290,35 +607,27 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidde
         <div class="block-title">수술 없이 얼굴이<br>달라질 수 있는 이유</div>
       </div>
       <div class="changes">
-        <div class="ch"><div class="ch-icon">🌬️</div><div class="ch-t">코호흡</div><div class="ch-b">코로 편하게 숨을 쉽니다</div></div>
-        <div class="ch"><div class="ch-icon">💋</div><div class="ch-t">입술 폐쇄</div><div class="ch-b">입술이 자연스럽게 닫힙니다</div></div>
-        <div class="ch"><div class="ch-icon">🧍</div><div class="ch-t">자세</div><div class="ch-b">바른 자세를 유지하기 쉬워집니다</div></div>
-        <div class="ch"><div class="ch-icon">😄</div><div class="ch-t">미소</div><div class="ch-b">웃을 때 얼굴 전체가 균형 있게 움직입니다</div></div>
-        <div class="ch"><div class="ch-icon">🔄</div><div class="ch-t">재발 방지</div><div class="ch-b">교정 후 재발 가능성이 낮아집니다</div></div>
-        <div class="ch"><div class="ch-icon">🎭</div><div class="ch-t">인상 변화</div><div class="ch-b">입꼬리 위치·인중 길이·얼굴 인상이 바뀝니다</div></div>
+        <div class="ch"><div class="ch-t">코호흡</div><div class="ch-b">코로 편하게 숨을 쉽니다</div></div>
+        <div class="ch"><div class="ch-t">입술 폐쇄</div><div class="ch-b">입술이 자연스럽게 닫힙니다</div></div>
+        <div class="ch"><div class="ch-t">자세</div><div class="ch-b">바른 자세를 유지하기 쉬워집니다</div></div>
+        <div class="ch"><div class="ch-t">미소</div><div class="ch-b">웃을 때 얼굴 전체가 균형 있게 움직입니다</div></div>
+        <div class="ch"><div class="ch-t">재발 방지</div><div class="ch-b">교정 후 재발 가능성이 낮아집니다</div></div>
+        <div class="ch"><div class="ch-t">인상 변화</div><div class="ch-b">입꼬리 위치·인중 길이·얼굴 인상이 바뀝니다</div></div>
       </div>
     </div>
 
-    <div class="cta-sec reveal">
-      <div class="cta-title">얼굴은 뼈와 근육으로<br>만들어집니다</div>
-      <div class="cta-sub">구조를 바꾸고 기능을 되살리면, 얼굴은 달라집니다.<br>지금 상태를 먼저 확인해 드리겠습니다.</div>
-      <div class="cta-btns">
-        <a href="https://booking.naver.com/booking/13/bizes/743904" target="_blank" class="btn-cr">네이버 예약</a>
-        <a href="https://pf.kakao.com/_xbhXYb" target="_blank" class="btn-go">카카오 상담</a>
-      </div>
-      <div class="clinic-foot">📍 대구시 남구 대봉로 66 2층 &nbsp;·&nbsp; 📞 053-472-2828</div>
-    </div>
+
   </div>
 </div>
 
-<!-- ───────── ADULT ───────── -->
+<!--  ADULT  -->
 <div class="sec" id="sec-adult">
   <div class="hero hero-adult">
     <div class="hero-inner">
       <div class="hero-kw">자연치아 살리기 · 교합재건치료</div>
-      <h1 class="hero-title">닳고 빠진 치아,<br><em>포기하지 마세요.</em></h1>
+      <h1 class="hero-title" style="color:#FAF8F0 !important">닳고 빠진 치아,<br><em style="color:#C8A84B !important;font-style:italic">포기하지 마세요.</em></h1>
       <p class="hero-subtitle">남아있는 치아를 살리고, 교합을 다시 세울 수 있습니다.<br>교합이 무너진 것은 오랜 시간의 결과입니다.<br>회복도 시간이 필요합니다. 하지만 방향이 맞으면, 반드시 나아집니다.</p>
-      <div class="hero-target"><strong>대상</strong> 40–60대 · 교합 붕괴 단계 · 보철·임플란트 경험자</div>
+      <div class="hero-target"><strong>대상</strong> 중장년·인생2기 (50대 이상) · 교합 재건이 필요한 분</div>
     </div>
   </div>
 
@@ -353,10 +662,10 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidde
       </div>
       <p style="font-size:13px;color:var(--mu);line-height:1.85;margin-bottom:16px">자연치아는 뿌리 주변 조직을 통해 씹는 힘을 섬세하게 감지합니다. 이 감각이 있어야 교합력이 균등하게 분배됩니다. <strong style="color:var(--tx)">그래서 뽑기 전에 살릴 수 있는지를 먼저 확인합니다.</strong></p>
       <div class="changes">
-        <div class="ch"><div class="ch-icon">🌿</div><div class="ch-t">흔들리는 치아</div><div class="ch-b">잇몸치료 + 엠도게인 치주재생치료로 살릴 수 있습니다</div></div>
-        <div class="ch"><div class="ch-icon">🔧</div><div class="ch-t">부러진 치아</div><div class="ch-b">MTA 신경재생치료 후 기둥을 세워 살릴 수 있습니다</div></div>
-        <div class="ch"><div class="ch-icon">💎</div><div class="ch-t">부분 파절 치아</div><div class="ch-b">무삭제 레진·교합조정으로 최소 삭제 치료 가능합니다</div></div>
-        <div class="ch"><div class="ch-icon">🏗️</div><div class="ch-t">결손 부위</div><div class="ch-b">임플란트·브릿지로 채우되 전체 교합 균형을 함께 설계합니다</div></div>
+        <div class="ch"><div class="ch-t">흔들리는 치아</div><div class="ch-b">잇몸치료 + 엠도게인 치주재생치료로 살릴 수 있습니다</div></div>
+        <div class="ch"><div class="ch-t">부러진 치아</div><div class="ch-b">MTA 신경재생치료 후 기둥을 세워 살릴 수 있습니다</div></div>
+        <div class="ch"><div class="ch-t">부분 파절 치아</div><div class="ch-b">무삭제 레진·교합조정으로 최소 삭제 치료 가능합니다</div></div>
+        <div class="ch"><div class="ch-icon">️</div><div class="ch-t">결손 부위</div><div class="ch-b">임플란트·브릿지로 채우되 전체 교합 균형을 함께 설계합니다</div></div>
       </div>
     </div>
 
@@ -396,24 +705,16 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);overflow-x:hidde
         <div class="block-title">무너졌던 것들이<br>하나씩 회복됩니다</div>
       </div>
       <div class="changes">
-        <div class="ch"><div class="ch-icon">🦷</div><div class="ch-t">씹기</div><div class="ch-b">음식을 편하게 씹을 수 있습니다</div></div>
-        <div class="ch"><div class="ch-icon">🌿</div><div class="ch-t">자연치아 보존</div><div class="ch-b">남아있는 치아를 최대한 보존합니다</div></div>
-        <div class="ch"><div class="ch-icon">😌</div><div class="ch-t">통증 감소</div><div class="ch-b">턱 통증과 두통이 줄어듭니다</div></div>
-        <div class="ch"><div class="ch-icon">🌬️</div><div class="ch-t">호흡·삼키기</div><div class="ch-b">코로 숨쉬고 바르게 삼키는 기능이 회복됩니다</div></div>
-        <div class="ch"><div class="ch-icon">🧍</div><div class="ch-t">얼굴 윤곽</div><div class="ch-b">무너졌던 얼굴 높이와 윤곽이 회복됩니다</div></div>
-        <div class="ch"><div class="ch-icon">⚡</div><div class="ch-t">활력</div><div class="ch-b">수면 개선과 근긴장 완화로 일상 활력이 돌아옵니다</div></div>
+        <div class="ch"><div class="ch-t">씹기</div><div class="ch-b">음식을 편하게 씹을 수 있습니다</div></div>
+        <div class="ch"><div class="ch-t">자연치아 보존</div><div class="ch-b">남아있는 치아를 최대한 보존합니다</div></div>
+        <div class="ch"><div class="ch-t">통증 감소</div><div class="ch-b">턱 통증과 두통이 줄어듭니다</div></div>
+        <div class="ch"><div class="ch-t">호흡·삼키기</div><div class="ch-b">코로 숨쉬고 바르게 삼키는 기능이 회복됩니다</div></div>
+        <div class="ch"><div class="ch-t">얼굴 윤곽</div><div class="ch-b">무너졌던 얼굴 높이와 윤곽이 회복됩니다</div></div>
+        <div class="ch"><div class="ch-t">활력</div><div class="ch-b">수면 개선과 근긴장 완화로 일상 활력이 돌아옵니다</div></div>
       </div>
     </div>
 
-    <div class="cta-sec reveal">
-      <div class="cta-title">치아만 고치는 것이 아니라,<br>왜 이렇게 됐는지를 먼저 이야기합니다</div>
-      <div class="cta-sub">처음 방문하시면 치아뿐 아니라 호흡·혀 자세·삼키기·자세까지 함께 확인합니다.<br>어느 단계에서 오셔도 괜찮습니다. 지금 상태에서 가장 좋은 방법을 찾겠습니다.</div>
-      <div class="cta-btns">
-        <a href="https://booking.naver.com/booking/13/bizes/743904" target="_blank" class="btn-cr">네이버 예약</a>
-        <a href="https://pf.kakao.com/_xbhXYb" target="_blank" class="btn-go">카카오 상담</a>
-      </div>
-      <div class="clinic-foot">📍 대구시 남구 대봉로 66 2층 &nbsp;·&nbsp; 📞 053-472-2828</div>
-    </div>
+
   </div>
 </div>
 
@@ -426,7 +727,6 @@ function show(id,tab){
   window.scrollTo({top:0,behavior:'smooth'});
   revealAll();
 }
-
 function revealAll(){
   document.querySelectorAll('.sec.on .reveal').forEach(el=>el.classList.remove('vis'));
   document.querySelectorAll('.sec.on .reveal').forEach((el,i)=>{
@@ -436,6 +736,98 @@ function revealAll(){
 
 // 초기 실행
 revealAll();
+</script>
+
+<div class="share-float">
+  <div class="share-toast" id="shareToast">링크 복사됐습니다</div>
+  <button class="share-fab" onclick="doShare()" title="공유하기">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+  </button>
+</div>
+
+<script>
+async function doShare(){
+  var title=document.title||'쁘띠치과';
+  var url=location.href;
+  if(navigator.share){
+    try{await navigator.share({title:title,url:url});}catch(e){}
+  } else {
+    try{
+      await navigator.clipboard.writeText(url);
+      var t=document.getElementById('shareToast');
+      t.classList.add('show');
+      setTimeout(function(){t.classList.remove('show');},2000);
+    }catch(e){}
+  }
+}
+</script>
+<div class="rel-section">
+  <div class="rel-title">다음 단계 · 관련 페이지</div>
+  <div class="rel-links">
+  <a class="rel-link" href="petit_prenatal.html" target="_blank">
+    <div class="rel-link-body"><div class="rel-link-title">우리 아이 치과수첩</div><div class="rel-link-sub">임산부·신생아·유아 — 태어나기 전부터</div></div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_diagnosis.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">교합진단</div>
+      <div class="rel-link-sub">정확한 진단이 정확한 치료의 출발점입니다 — 60만원 · 2주 분석</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_occlusion_selfcheck.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">교합질환 자가체크</div>
+      <div class="rel-link-sub">내 증상이 교합 문제인지 먼저 확인해보세요</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_smile_design.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">바른미소디자인</div>
+      <div class="rel-link-sub">뼈의 이동 → 치아의 이동 → 바른미소디자인</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  </div>
+</div>
+
+<script>
+(function(){
+  var rows = document.querySelectorAll('.prob-row');
+  if(!rows.length) return;
+  var cur = 0;
+  var timer = null;
+  var paused = false;
+
+  function activate(idx){
+    rows.forEach(function(r){ r.classList.remove('prob-row-on'); });
+    rows[idx].classList.add('prob-row-on');
+    cur = idx;
+  }
+
+  function next(){
+    if(!paused) activate((cur + 1) % rows.length);
+  }
+
+  // 자동 순환 — 1.5초 간격
+  activate(0);
+  timer = setInterval(next, 1500);
+
+  // 마우스 올리면 해당 행 고정 + 자동 일시정지
+  rows.forEach(function(r, i){
+    r.addEventListener('mouseenter', function(){
+      paused = true;
+      clearInterval(timer);
+      rows.forEach(function(x){ x.classList.remove('prob-row-on'); });
+      r.classList.add('prob-row-on');
+    });
+    r.addEventListener('mouseleave', function(){
+      paused = false;
+      timer = setInterval(next, 1500);
+    });
+  });
+})();
 </script>
 </body>
 </html>

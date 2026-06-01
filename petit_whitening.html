@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>치아미백 | 쁘띠치과</title>
+<link rel="stylesheet" href="petit-design.css">
+<style>
+/* NAV */
+/* HERO */
+.hero{background:#007A54;padding:52px 20px 44px;position:relative;overflow:hidden;border-bottom:3px solid #C8A84B}
+.hero::before{content:'';position:absolute;right:-50px;top:-50px;width:240px;height:240px;border-radius:50%;background:rgba(200,168,75,.12)}
+.hero::after{content:'';position:absolute;left:-30px;bottom:-60px;width:180px;height:180px;border-radius:50%;background:rgba(250,248,240,.05)}
+.hero-tag{font-size:11px;letter-spacing:.16em;color:#C8A84B;text-transform:uppercase;margin-bottom:14px;position:relative}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(26px,6vw,40px);font-weight:700;color:#FAF8F0;line-height:1.25;margin-bottom:12px;position:relative}
+.hero-title em{color:#C8A84B;font-style:normal}
+.hero-sub{font-size:15px;color:rgba(250,248,240,.65);line-height:1.75;position:relative;margin-bottom:20px}
+.hero-notice{display:inline-flex;align-items:center;gap:8px;background:rgba(200,168,75,.18);border:1px solid rgba(200,168,75,.35);border-radius:8px;padding:10px 14px;font-size:13px;color:#C8A84B;line-height:1.5;position:relative}
+
+/* 핵심 질문 */
+.question-sec{background:#fff;padding:28px 20px 20px}
+.q-title{font-family:'TmonMonsori',serif;font-size:20px;font-weight:600;color:#111110;margin-bottom:6px;line-height:1.4}
+.q-sub{font-size:14px;color:#555550;line-height:1.7;margin-bottom:20px}
+.q-cards{display:flex;flex-direction:column;gap:10px}
+.q-card{border-radius:12px;padding:18px 16px;display:flex;align-items:flex-start;gap:14px}
+.q-card.착색{background:#E8F5F0;border:1px solid #C5E8DC}
+.q-card.변색{background:#FFFBEF;border:1px solid #E8D090}
+.q-icon{flex-shrink:0;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.q-card.착색 .q-icon{background:#C5E8DC}
+.q-card.변색 .q-icon{background:#F0E0B0}
+.q-body{}
+.q-label{font-size:11px;font-weight:700;letter-spacing:.1em;margin-bottom:4px}
+.q-card.착색 .q-label{color:#007A54}
+.q-card.변색 .q-label{color:#8A6820}
+.q-card-title{font-family:'TmonMonsori',serif;font-size:16px;font-weight:600;color:#111110;margin-bottom:4px}
+.q-card-desc{font-size:13px;color:#555550;line-height:1.65}
+.q-card-tag{display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:100px}
+.q-card.착색 .q-card-tag{background:#007A54;color:#FAF8F0}
+.q-card.변색 .q-card-tag{background:#C8A84B;color:#fff}
+
+/* SECTION HEAD */
+/* 원인 아코디언 */
+.causes{background:#fff;padding:0 20px}
+.cause{padding:20px 0;border-bottom:1px solid #EAEAE4;cursor:pointer}
+.cause:last-child{border-bottom:none}
+.cause-head{display:flex;align-items:center;gap:12px}
+.cause-num{font-family:'TmonMonsori',serif;font-size:22px;font-weight:700;color:#C8A84B;flex-shrink:0;width:32px}
+.cause-info{flex:1}
+.cause-title{font-family:'TmonMonsori',serif;font-size:17px;font-weight:600;color:#111110;margin-bottom:3px}
+.cause-desc{font-size:13px;color:#555550;line-height:1.55}
+.cause-arr{font-size:12px;color:#CCCCCC;flex-shrink:0;transition:color .15s,transform .2s}
+.cause.open .cause-arr{color:#007A54;transform:rotate(180deg)}
+.cause-detail{display:none;margin-top:14px;background:#F7F7F3;border-radius:10px;padding:14px 16px}
+.cause.open .cause-detail{display:block}
+.cause-items{display:flex;flex-direction:column;gap:7px}
+.ci{display:flex;align-items:flex-start;gap:8px;font-size:14px;color:#333330;line-height:1.6}
+.ci::before{content:'·';color:#C8A84B;font-weight:700;flex-shrink:0;font-size:18px;line-height:1.2}
+.ci strong{color:#007A54;font-weight:600}
+.cause-point{margin-top:12px;padding:11px 14px;background:#E8F5F0;border-left:3px solid #007A54;border-radius:0 8px 8px 0;font-size:13px;color:#1A5C3A;line-height:1.65}
+
+/* 치료 방법 */
+.treatments{background:#FAFAF9;padding:0 20px 8px}
+.treat{margin-bottom:10px;border-radius:12px;overflow:hidden;border:1.5px solid #E4E4DE;background:#fff}
+.treat-head{padding:16px 18px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.treat-step{font-family:'TmonMonsori',serif;font-size:12px;font-weight:600;padding:4px 10px;border-radius:100px;flex-shrink:0}
+.t1 .treat-step{background:#E8F5F0;color:#007A54}
+.t2 .treat-step{background:#E8F5F0;color:#007A54}
+.t3 .treat-step{background:#FFFBEF;color:#8A6820}
+.t4 .treat-step{background:#F5F5F1;color:#555550}
+.treat-title{font-family:'TmonMonsori',serif;font-size:17px;font-weight:600;color:#111110;flex:1;line-height:1.35}
+.treat-arr{font-size:12px;color:#CCCCCC;transition:color .15s,transform .2s}
+.treat.open .treat-arr{color:#007A54;transform:rotate(180deg)}
+.treat-body{display:none;padding:0 18px 18px}
+.treat.open .treat-body{display:block}
+.treat-items{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+.ti{display:flex;align-items:flex-start;gap:8px;font-size:14px;color:#444440;line-height:1.6}
+.ti::before{content:'→';color:#C8A84B;font-weight:600;flex-shrink:0;margin-top:1px}
+.ti strong{color:#007A54;font-weight:600}
+.treat-tag{display:inline-flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.tag{font-size:12px;padding:4px 10px;border-radius:100px;font-weight:600}
+.tag-good{background:#E8F5F0;color:#007A54}
+.tag-note{background:#FFFBEF;color:#8A6820}
+.tag-warn{background:#FDE8E8;color:#B04040}
+
+/* 경고 박스 */
+.warn-box{background:#fff;padding:20px}
+.warn-inner{border-radius:12px;padding:18px 16px;background:#FDE8E8;border:1px solid #F0C4C4}
+.warn-label{font-size:11px;font-weight:700;letter-spacing:.12em;color:#B04040;margin-bottom:8px}
+.warn-title{font-family:'TmonMonsori',serif;font-size:17px;font-weight:600;color:#7A1A1A;margin-bottom:8px;line-height:1.4}
+.warn-items{display:flex;flex-direction:column;gap:6px}
+.wi{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#5A1A1A;line-height:1.6}
+.wi::before{content:'!';font-size:12px;flex-shrink:0;margin-top:2px}
+
+/* BTB 연결 박스 */
+.btb-desc{font-size:14px;color:rgba(250,248,240,.75);line-height:1.75}
+
+/* 연계 페이지 */
+.lc-icon{font-size:18px;flex-shrink:0}
+/* .lc 클래스는 design.css에서 정의 */
+/* 공유 버튼 */
+@media(min-width:640px){
+  .nav,.hero,.question-sec,.causes,.treatments,.warn-box,.btb-box,.link-sec,.cta{max-width:720px;margin-left:auto;margin-right:auto}
+  .share-float{right:calc(50% - 360px + 18px)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="index.html">생활의 기본, <em>쁘띠치과</em></a>
+  <a class="nav-home" href="index.html">← 홈</a>
+  <a class="nav-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero hero-dark">
+  <div class="hero-tag">WHITENING · 치아미백</div>
+  <h1 class="hero-title">치아 색이 달라진 건<br><em>같은 이유가 아닙니다.</em></h1>
+  <p class="hero-sub">노랗게, 회색으로, 어둡게, 얼룩지게 — 색이 변하는 원인은 다양합니다.<br>착색인지, 변색인지 — 원인이 달라야 치료도 달라집니다.</p>
+  <div class="hero-notice">
+    <span>쁘띠치과는 무조건 미백을 권하지 않습니다.<br>맞는 방법인지 먼저 확인합니다.</span>
+  </div>
+</section>
+
+<!-- 핵심 질문: 착색 vs 변색 -->
+<section class="question-sec">
+  <div class="q-title">먼저 구분해야 합니다</div>
+  <div class="q-sub">같아 보여도 원인이 다르면 치료도 완전히 달라집니다. 정확한 진단이 미백보다 먼저입니다.</div>
+  <div class="q-cards">
+    <div class="q-card 착색">
+      
+      <div class="q-body">
+        <div class="q-label">SURFACE · 표면 문제</div>
+        <div class="q-card-title">착색</div>
+        <div class="q-card-desc">치아 표면에 색소가 쌓인 상태. 겉 색만 달라진 것이며 치아 내부 구조는 변하지 않았습니다. 커피·와인·흡연 등이 주원인이며, 스케일링이나 전문 클리닝으로 개선됩니다.</div>
+        <div class="q-card-tag">클리닝 · 미백으로 해결 가능</div>
+      </div>
+    </div>
+    <div class="q-card 변색">
+      
+      <div class="q-body">
+        <div class="q-label">INTERNAL · 내부 문제</div>
+        <div class="q-card-title">변색</div>
+        <div class="q-card-desc">치아 내부 구조가 변한 상태. 신경치료 후, 노화, 선천적 요인 등으로 발생합니다. 일반 미백으로는 효과가 제한적이며 다른 접근이 필요합니다.</div>
+        <div class="q-card-tag">일반 미백 효과 제한적 — 다른 치료 필요</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 착색 원인 -->
+<div class="sh">
+  <div class="sh-title">착색은 왜 생기나요?</div>
+  <div class="sh-sub">생활 습관이 만드는 문제 — 충분히 예방할 수 있습니다</div>
+</div>
+<div class="sh-divider"></div>
+<div class="causes">
+
+  <div class="cause" onclick="toggleCause(this)">
+    <div class="cause-head">
+      <div class="cause-num">01</div>
+      <div class="cause-info">
+        <div class="cause-title">색소 음식과 흡연</div>
+        <div class="cause-desc">커피·홍차·와인·카레, 그리고 담배</div>
+      </div>
+      <div class="cause-arr">▾</div>
+    </div>
+    <div class="cause-detail">
+      <div class="cause-items">
+        <div class="ci"><strong>커피·홍차·와인·카레</strong> 등 색소가 강한 음식이 법랑질 표면의 미세한 틈에 침착됩니다</div>
+        <div class="ci"><strong>흡연</strong>은 타르·니코틴 등 화학 성분이 치아 표면에 달라붙어 제거가 쉽지 않습니다</div>
+        <div class="ci">구강 위생이 불량하면 치석·플라그가 색소와 결합해 착색이 가속됩니다</div>
+      </div>
+      <div class="cause-point">
+        착색 음식 섭취 후 물로 헹구기, 빨대 사용이 예방에 효과적입니다
+      </div>
+    </div>
+  </div>
+
+  <div class="cause" onclick="toggleCause(this)">
+    <div class="cause-head">
+      <div class="cause-num">02</div>
+      <div class="cause-info">
+        <div class="cause-title">구강 건조 · 입호흡</div>
+        <div class="cause-desc">침이 줄면 색소 침착과 세균 번식이 쉬워집니다</div>
+      </div>
+      <div class="cause-arr">▾</div>
+    </div>
+    <div class="cause-detail">
+      <div class="cause-items">
+        <div class="ci">침에는 <strong>자정 작용</strong>이 있어 치아 표면의 색소를 씻어내는 역할을 합니다</div>
+        <div class="ci"><strong>입호흡 습관</strong>이 있으면 구강이 건조해져 착색과 세균 번식이 쉬워집니다</div>
+        <div class="ci">노화, 특정 약물 복용, 수분 섭취 부족도 구강 건조를 유발합니다</div>
+      </div>
+      <div class="cause-point">
+        쁘띠치과 BTB 철학 — 올바른 <strong>코호흡 습관</strong>은 구강 건조를 막고 치아 색을 지킵니다. 미백보다 근본 원인 해결이 먼저입니다
+      </div>
+    </div>
+  </div>
+
+  <div class="cause" onclick="toggleCause(this)">
+    <div class="cause-head">
+      <div class="cause-num">03</div>
+      <div class="cause-info">
+        <div class="cause-title">구강 위생 불량</div>
+        <div class="cause-desc">치석·플라그가 색소와 결합</div>
+      </div>
+      <div class="cause-arr">▾</div>
+    </div>
+    <div class="cause-detail">
+      <div class="cause-items">
+        <div class="ci">양치질이 부족하면 <strong>플라그(치태)</strong>가 치아 표면에 남아 색소 흡착을 돕습니다</div>
+        <div class="ci"><strong>치석</strong>으로 굳어지면 일반 양치로는 제거가 불가능하고 스케일링이 필요합니다</div>
+        <div class="ci">치간칫솔·치실로 치아 사이까지 관리하는 것이 중요합니다</div>
+      </div>
+      <div class="cause-point">
+        스케일링은 연 1회 건강보험이 적용됩니다. 착색 관리의 기본입니다
+      </div>
+    </div>
+  </div>
+
+  <div class="cause" onclick="toggleCause(this)">
+    <div class="cause-head">
+      <div class="cause-num">04</div>
+      <div class="cause-info">
+        <div class="cause-title">Black Stain — 세균성 검은 착색</div>
+        <div class="cause-desc">잇몸선 따라 생기는 검은 선·점 / 어린이·성인 모두 발생</div>
+      </div>
+      <div class="cause-arr">▾</div>
+    </div>
+    <div class="cause-detail">
+      <div class="cause-items">
+        <div class="ci"><strong>Actinomyces, Prevotella</strong> 등 색소 생성 세균이 만들어낸 황화수소가 타액 속 철분과 반응해 <strong>황화제2철(검은 침착물)</strong>을 형성합니다</div>
+        <div class="ci">잇몸선(치경부 1/3)을 따라 <strong>검은 선 또는 점선 형태</strong>로 나타납니다. 치아 표면에 단단히 붙어있어 일반 양치로는 제거되지 않습니다</div>
+        <div class="ci">어린이에서 더 흔하지만 <strong>성인에서도 동일하게 발생</strong>합니다. 유병률은 2~20%로 보고되며 남녀 차이 없습니다</div>
+        <div class="ci">구강 위생을 잘 관리하는 사람에게도 나타날 수 있습니다. 타액의 철분 농도·pH 등 <strong>개인의 타액 환경</strong>이 주요 요인입니다</div>
+        <div class="ci">흥미롭게도 Black Stain 보유자는 타액의 완충 능력과 pH가 높아 <strong>충치 발생률이 낮은 경향</strong>이 있다는 연구 결과들이 있습니다</div>
+      </div>
+      <div class="cause-point">
+        치과에서 초음파 스케일링·PMTC(전문가 기계적 치아 세정)로 제거할 수 있습니다. 다만 세균 환경이 바뀌지 않으면 재발이 흔합니다. 미백제로는 효과가 없으며, 착색 제거가 맞는 치료입니다
+      </div>
+    </div>
+  </div>
+
+</div><!-- /causes -->
+
+<!-- 변색 원인 -->
+<div class="sh" style="margin-top:8px">
+  <div class="sh-title">변색은 왜 생기나요?</div>
+  <div class="sh-sub">치아 내부의 문제 — 일반 미백으로는 해결되지 않습니다</div>
+</div>
+<div class="sh-divider"></div>
+<div class="causes">
+
+  <div class="cause" onclick="toggleCause(this)">
+    <div class="cause-head">
+      <div class="cause-num">01</div>
+      <div class="cause-info">
+        <div class="cause-title">신경치료 후 변색</div>
+        <div class="cause-desc">치아 내부 조직 변화로 회색·갈색으로 변함</div>
+      </div>
+      <div class="cause-arr">▾</div>
+    </div>
+    <div class="cause-detail">
+      <div class="cause-items">
+        <div class="ci">신경치료(근관치료) 후 <strong>치아 내부 조직</strong>이 변화하면서 외부에서 봤을 때 색이 어둡게 변합니다</div>
+        <div class="ci">일반 미백제는 치아 표면에만 작용하므로 내부 변색에는 효과가 없습니다</div>
+        <div class="ci">이 경우 <strong>실활치 내부 미백</strong> 또는 라미네이트가 적합합니다</div>
+      </div>
+      <div class="cause-point">
+        → 신경치료된 치아의 변색은 치아 삭제 없이 내부 미백으로 개선 가능한 경우가 있습니다
+      </div>
+    </div>
+  </div>
+
+  <div class="cause" onclick="toggleCause(this)">
+    <div class="cause-head">
+      <div class="cause-num">02</div>
+      <div class="cause-info">
+        <div class="cause-title">노화에 의한 변색</div>
+        <div class="cause-desc">법랑질이 얇아지며 상아질 색이 드러남</div>
+      </div>
+      <div class="cause-arr">▾</div>
+    </div>
+    <div class="cause-detail">
+      <div class="cause-items">
+        <div class="ci">나이가 들수록 치아 겉면인 <strong>법랑질</strong>이 점차 얇아집니다</div>
+        <div class="ci">그 안의 <strong>상아질(황갈색)</strong>이 더 잘 비쳐 보이면서 치아 전체 색이 달라집니다</div>
+        <div class="ci">외부 착색과 복합적으로 작용해 변색이 심해 보이는 경우가 많습니다</div>
+      </div>
+      <div class="cause-point">
+        → 노화 변색은 미백 치료 효과가 있지만, 기대치를 현실적으로 설정하는 상담이 필요합니다
+      </div>
+    </div>
+  </div>
+
+  <div class="cause" onclick="toggleCause(this)">
+    <div class="cause-head">
+      <div class="cause-num">03</div>
+      <div class="cause-info">
+        <div class="cause-title">선천적 원인</div>
+        <div class="cause-desc">치아 발육 중 형성된 구조적 문제</div>
+      </div>
+      <div class="cause-arr">▾</div>
+    </div>
+    <div class="cause-detail">
+      <div class="cause-items">
+        <div class="ci"><strong>테트라사이클린</strong> 항생제(성장기 복용)에 의한 줄무늬 변색</div>
+        <div class="ci"><strong>불소 과다</strong>로 인한 흰 반점·갈색 얼룩 (치아불소증)</div>
+        <div class="ci">에나멜질·상아질 형성부전증 등 치아 발육 이상</div>
+      </div>
+      <div class="cause-point">
+        → 선천적 변색은 미백 효과가 제한적입니다. 라미네이트나 다른 방법을 상담 후 결정합니다
+      </div>
+    </div>
+  </div>
+
+</div><!-- /causes 변색 -->
+
+<!-- 치료 방법 -->
+<div class="sh" style="margin-top:8px">
+  <div class="sh-title">쁘띠치과의 접근 방식</div>
+  <div class="sh-sub">원인에 맞는 방법을 — 자연치아를 최대한 살리는 순서로</div>
+</div>
+<div class="sh-divider"></div>
+<div class="treatments">
+
+  <!-- 착색 치료 소제목 -->
+  <div style="padding:14px 0 6px;font-size:11px;font-weight:700;letter-spacing:.12em;color:#007A54">착색 치료 · SURFACE</div>
+
+  <div class="treat t1" onclick="toggleTreat(this)">
+    <div class="treat-head">
+      <div class="treat-step">STEP 1</div>
+      <div class="treat-title">스케일링 · 착색 제거</div>
+      <div class="treat-arr">▾</div>
+    </div>
+    <div class="treat-body">
+      <div class="treat-items">
+        <div class="ti">치석과 표면 색소를 제거하는 <strong>기본 클리닝</strong>입니다</div>
+        <div class="ti">연 1회 <strong>건강보험</strong> 적용 (만 19세 이상)</div>
+        <div class="ti">착색 원인이 제거되지 않으면 미백 치료 후에도 금방 재착색됩니다</div>
+        <div class="ti">미백의 <strong>전처치</strong>로 반드시 선행되어야 합니다</div>
+        <div class="ti"><strong>심미레진(무삭제레진) 시술 전</strong>에도 착색 제거를 먼저 진행합니다. 착색이 남은 상태에서 레진을 올리면 색 재현이 정확하지 않습니다</div>
+      </div>
+      <div class="treat-tag">
+        <span class="tag tag-good">보험 적용</span>
+        <span class="tag tag-good">치아 손상 없음</span>
+        <span class="tag tag-good">미백·심미레진 공통 전처치</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="treat t2" onclick="toggleTreat(this)">
+    <div class="treat-head">
+      <div class="treat-step">STEP 2</div>
+      <div class="treat-title">전문가 미백 (외부 미백)</div>
+      <div class="treat-arr">▾</div>
+    </div>
+    <div class="treat-body">
+      <div class="treat-items">
+        <div class="ti">법랑질 깊이까지 침투해 색소를 분해하는 방식입니다</div>
+        <div class="ti">시술 후 일시적 과민 증상이 올 수 있어 전문 관리가 필요합니다</div>
+      </div>
+
+      <!-- 전처치 강조 박스 -->
+      <div style="margin-top:14px;border-radius:10px;overflow:hidden;border:1.5px solid #C5E8DC">
+        <div style="background:#007A54;padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:.1em;color:#C8A84B">미백제 적용 전 — 반드시 거치는 단계</div>
+        <div style="background:#E8F5F0;padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="flex-shrink:0;min-width:28px;font-family:'TmonMonsori',serif;font-size:13px;font-weight:700;color:#007A54;padding-top:1px">01</div>
+            <div>
+              <div style="font-size:14px;font-weight:600;color:#111110;margin-bottom:3px">리트렉터 장착</div>
+              <div style="font-size:13px;color:#555550;line-height:1.65">입술과 볼을 벌려 치아 면을 완전히 노출시킵니다. 미백제가 구강 점막에 닿지 않도록 합니다.</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="flex-shrink:0;min-width:28px;font-family:'TmonMonsori',serif;font-size:13px;font-weight:700;color:#007A54;padding-top:1px">02</div>
+            <div>
+              <div style="font-size:14px;font-weight:600;color:#111110;margin-bottom:3px">잇몸 보호제 도포</div>
+              <div style="font-size:13px;color:#555550;line-height:1.65">미백제가 잇몸 조직에 닿으면 자극과 손상이 생깁니다. 잇몸선을 따라 보호제를 꼼꼼히 도포해 차단합니다.</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="flex-shrink:0;min-width:28px;font-family:'TmonMonsori',serif;font-size:13px;font-weight:700;color:#007A54;padding-top:1px">03</div>
+            <div>
+              <div style="font-size:14px;font-weight:600;color:#111110;margin-bottom:3px">검댐(Gum Dam) 처치</div>
+              <div style="font-size:13px;color:#555550;line-height:1.65">광중합 레진 또는 전용 차단재로 잇몸과 치경부를 밀봉합니다. 이 단계가 제대로 이루어져야 시술 중 잇몸 통증과 자극을 막을 수 있습니다.</div>
+            </div>
+          </div>
+        </div>
+        <div style="background:#1E3D2A;padding:10px 14px;font-size:13px;color:rgba(250,248,240,.8);line-height:1.65">이 세 단계가 완료된 후에 미백제를 도포합니다. 치과에서 하는 미백이 안전한 이유입니다.</div>
+      </div>
+
+      <!-- 사진 촬영 -->
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <div style="flex:1;background:#F5F5F1;border-radius:8px;padding:12px 14px;border-left:3px solid #C5E8DC">
+          <div style="font-size:11px;font-weight:700;color:#007A54;letter-spacing:.08em;margin-bottom:4px">시술 전</div>
+          <div style="font-size:13px;color:#333330;line-height:1.6">사진 촬영으로 현재 치아 색조를 기록합니다</div>
+        </div>
+        <div style="flex:1;background:#F5F5F1;border-radius:8px;padding:12px 14px;border-left:3px solid #C8A84B">
+          <div style="font-size:11px;font-weight:700;color:#8A6820;letter-spacing:.08em;margin-bottom:4px">시술 후</div>
+          <div style="font-size:13px;color:#333330;line-height:1.6">변화된 색조를 촬영해 전후 비교 확인합니다</div>
+        </div>
+      </div>
+
+      <!-- 소요시간 + 횟수 -->
+      <div style="margin-top:10px;background:#FFFBEF;border-radius:8px;padding:12px 14px;border:1px solid #E8D090">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+          <div style="font-size:11px;font-weight:700;color:#8A6820;letter-spacing:.08em;white-space:nowrap">소요 시간</div>
+          <div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;gap:4px">
+            <span style="font-size:13px;background:#fff;border:1px solid #E8D090;border-radius:6px;padding:4px 10px;color:#555550">준비 10분</span>
+            <span style="font-size:12px;color:#C8A84B;padding:0 2px">—</span>
+            <span style="font-size:13px;background:#007A54;border-radius:6px;padding:4px 10px;color:#FAF8F0;font-weight:600">미백 30분</span>
+            <span style="font-size:12px;color:#C8A84B;padding:0 2px">—</span>
+            <span style="font-size:13px;background:#fff;border:1px solid #E8D090;border-radius:6px;padding:4px 10px;color:#555550">마무리 5분</span>
+          </div>
+        </div>
+        <div style="font-size:13px;color:#5A4010;line-height:1.65">보통 <strong style="color:#8A6820">2~3회</strong> 시행합니다. 회차 간격과 총 횟수는 치아 상태와 착색 정도에 따라 결정합니다.</div>
+      </div>
+
+      <div class="treat-tag" style="margin-top:12px">
+        <span class="tag tag-good">착색에 효과적</span>
+        <span class="tag tag-note">△ 내부 변색엔 효과 없음</span>
+        <span class="tag tag-note">△ 비보험</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 변색 치료 소제목 -->
+  <div style="padding:22px 0 6px;font-size:11px;font-weight:700;letter-spacing:.12em;color:#8A6820;border-top:1px solid #EAEAE4;margin-top:8px">변색 치료 · INTERNAL — 착색 치료와 종류가 다릅니다</div>
+
+  <div class="treat t3" onclick="toggleTreat(this)">
+    <div class="treat-head">
+      <div class="treat-step" style="background:#FFFBEF;color:#8A6820">실활치 미백</div>
+      <div class="treat-title">내부 미백 (치수 괴사 치아 · 실활치)</div>
+      <div class="treat-arr">▾</div>
+    </div>
+    <div class="treat-body">
+      <div class="treat-items">
+        <div class="ti">치아 안의 <strong>치수가 괴사되어</strong> 내부 조직이 변성되고 색이 어두워진 경우입니다. 착색과는 발생 원인부터 다릅니다</div>
+        <div class="ti">미백제를 <strong>치아 내부(수강)</strong>에 직접 넣어 안쪽에서부터 밝히는 방식으로, 외부 미백과 원리가 전혀 다릅니다</div>
+        <div class="ti">치아를 깎지 않고 자연치아를 보존하면서 색을 개선할 수 있습니다</div>
+        <div class="ti">신경치료(근관치료)가 완료된 치아에만 적용 가능합니다</div>
+      </div>
+      <div class="treat-tag">
+        <span class="tag tag-good">치아 삭제 없음</span>
+        <span class="tag tag-good">자연치아 보존</span>
+        <span class="tag tag-note">△ 근관치료 완료 치아에만 적용</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="treat t4" onclick="toggleTreat(this)">
+    <div class="treat-head">
+      <div class="treat-step" style="background:#F5F5F1;color:#555550">심한 변색</div>
+      <div class="treat-title">라미네이트 · 크라운</div>
+      <div class="treat-arr">▾</div>
+    </div>
+    <div class="treat-body">
+      <div class="treat-items">
+        <div class="ti"><strong>라미네이트</strong>: 치아 앞면을 얇게 덮어 색과 형태를 동시에 개선합니다. 선천적 변색, 크기·형태 문제가 함께 있을 때 고려합니다</div>
+        <div class="ti"><strong>크라운</strong>: 치아 전체를 덮는 치료. 변색 차단 효과는 강하지만 치아 삭제량이 많습니다</div>
+        <div class="ti">쁘띠치과는 <strong>자연치아 보존을 최우선</strong>으로 합니다. 삭제가 많은 치료는 신중하게 결정합니다</div>
+      </div>
+      <div class="treat-tag">
+        <span class="tag tag-note">△ 치아 삭제 필요</span>
+        <span class="tag tag-warn"주의 — 크라운은 삭제량 많음</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /treatments -->
+
+<!-- BTB 철학 연결 -->
+<div class="btb-box" style="margin-top:0">
+  <div class="btb-inner">
+    <div class="btb-label">BASIC IS MAGIC · 쁘띠치과 철학</div>
+    <div class="btb-title">예쁜 치아보다 건강한 치아가 먼저입니다</div>
+    <div class="btb-desc">미백은 치료의 마무리입니다. 교합이 안정되고, 치주 상태가 건강하고, 기능이 회복된 다음에 아름다움을 더합니다. 습관(입호흡·구강건조)이 해결되지 않으면 미백 후에도 착색은 반복됩니다. 쁘띠치과는 "왜 치아 색이 변하고 있는지"부터 함께 확인합니다.</div>
+  </div>
+</div>
+
+<!-- 연계 페이지 -->
+<section class="link-sec" style="margin-top:8px">
+  <div class="link-title">함께 확인하면 좋은 페이지</div>
+  <div class="link-cards">
+    <a class="lc main" href="petit_dental_spa.html" target="_blank">
+      <div class="lc-body">
+        <div class="lc-title">바른미소스파 RECOVERY</div>
+        <div class="lc-sub">미백 포함 · 기능 회복 · 이완 관리 프로그램</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc sub" href="petit_natural_tooth.html" target="_blank">
+      <div class="lc-body">
+        <div class="lc-title">자연치아살리기</div>
+        <div class="lc-sub">신경치료 전 선택지 · 치수재생 · MTA</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc gold" href="petit_prevention.html" target="_blank">
+      <div class="lc-body">
+        <div class="lc-title">예방과 습관치료</div>
+        <div class="lc-sub">입호흡·구강건조 해결 · 착색 근본 예방</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-title">왜 치아 색이 변했는지<br>먼저 확인해 드립니다</div>
+  <div class="cta-sub">노란색, 회색, 얼룩 — 원인에 맞는 방법을<br>진단 후 안내해 드립니다</div>
+  <div class="cta-btns">
+    <a class="btn-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/></svg>
+      네이버 예약
+    </a>
+    <a class="btn-kakao" href="https://pf.kakao.com/_xbhXYb" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#191919"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.67 1.648 5.012 4.146 6.396L5 21l5.12-2.983C10.734 18.01 11.363 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z"/></svg>
+      카카오 상담
+    </a>
+  </div>
+  <div class="cta-info">대구시 남구 대봉로 66 2층 · 053-472-2828</div>
+</section>
+
+<!-- 공유 버튼 -->
+<div class="share-float">
+  <div class="share-toast" id="shareToast">링크 복사됐습니다</div>
+  <button class="share-fab" onclick="doShare()" title="공유하기">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+  </button>
+</div>
+
+<script>
+function toggleCause(el){
+  el.classList.toggle('open');
+}
+function toggleTreat(el){
+  el.classList.toggle('open');
+}
+async function doShare(){
+  var title=document.title||'쁘띠치과';
+  var url=location.href;
+  if(navigator.share){
+    try{await navigator.share({title:title,url:url});}catch(e){}
+  } else {
+    try{
+      await navigator.clipboard.writeText(url);
+      var t=document.getElementById('shareToast');
+      t.classList.add('show');
+      setTimeout(function(){t.classList.remove('show');},2000);
+    }catch(e){}
+  }
+}
+</script>
+</body>
+</html>

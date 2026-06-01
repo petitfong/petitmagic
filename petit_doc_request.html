@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>서류발급 요청 | 쁘띠치과</title>
+<style>
+.hd{background:#007A54;padding:14px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100;border-bottom:2px solid #C8A84B}
+.hd-title{font-size:16px;font-weight:600;color:#FAF8F0;flex:1}
+.hd-date{font-size:12px;color:rgba(250,248,240,.6)}
+.hd-badge{font-size:10px;background:rgba(200,168,75,.25);color:#C8A84B;padding:3px 8px;border-radius:100px;border:1px solid rgba(200,168,75,.3)}
+
+/* 탭 */
+.tabs{display:flex;background:#fff;border-bottom:1px solid #E0E0DA;position:sticky;top:54px;z-index:99}
+.tab-btn{flex:1;padding:12px 8px;font-size:13px;font-weight:500;color:#888880;border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent}
+.tab-btn.act{color:#007A54;border-bottom-color:#007A54;font-weight:600}
+
+.panel{display:none;padding:16px;padding-bottom:100px}
+.panel.show{display:block}
+
+/* 신청 폼 */
+.form-card{background:#fff;border-radius:12px;border:1px solid #E0E0DA;padding:16px;margin-bottom:16px}
+.form-title{font-size:13px;font-weight:600;color:#007A54;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.form-title::before{content:'';width:3px;height:14px;background:#007A54;border-radius:2px}
+.form-row{margin-bottom:10px}
+.form-label{font-size:11px;color:#C8A84B;font-weight:600;letter-spacing:.06em;margin-bottom:4px}
+.form-input{width:100%;padding:10px 12px;border:1px solid #E0E0DA;border-radius:8px;font-size:14px;color:#1A1A18;background:#FAFAF9;outline:none;font-family:inherit}
+.form-input:focus{border-color:#007A54;background:#fff}
+.form-input.highlight{border-color:#C8A84B;background:#FFFBEF}
+
+/* 서류 선택 */
+.doc-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.doc-chip{padding:9px 10px;border:1.5px solid #E0E0DA;border-radius:8px;font-size:12px;color:#555550;cursor:pointer;background:#FAFAF9;transition:all .15s;text-align:center;line-height:1.35}
+.doc-chip.sel{border-color:#007A54;background:#E8F5F0;color:#007A54;font-weight:600}
+.doc-price{font-size:10px;color:#AAAAAA;display:block;margin-top:2px}
+.doc-chip.sel .doc-price{color:#007A54}
+
+/* 수량·금액 */
+.qty-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.total-box{background:#E8F5F0;border:1px solid #C5E8DC;border-radius:8px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.total-label{font-size:12px;color:#007A54;font-weight:600}
+.total-amount{font-size:18px;font-weight:700;color:#007A54}
+
+/* 승인 상태 */
+.status-row{display:flex;gap:8px;margin-bottom:12px}
+.status-btn{flex:1;padding:10px;border-radius:8px;border:1.5px solid #E0E0DA;background:#FAFAF9;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;text-align:center}
+.status-btn.pending{border-color:#C8A84B;background:#FFFBEF;color:#8A6820}
+.status-btn.approved{border-color:#007A54;background:#E8F5F0;color:#007A54}
+.status-btn.done{border-color:#AAAAAA;background:#F5F5F1;color:#888880}
+
+.submit-btn{width:100%;padding:14px;background:#007A54;color:#FAF8F0;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit}
+.submit-btn:active{background:#005A3C}
+
+/* 목록 */
+.list-filter{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.list-filter::-webkit-scrollbar{display:none}
+.filter-btn{padding:6px 12px;border-radius:100px;border:1px solid #E0E0DA;background:#fff;font-size:12px;color:#888880;white-space:nowrap;cursor:pointer}
+.filter-btn.act{background:#007A54;color:#FAF8F0;border-color:#007A54}
+
+.req-card{background:#fff;border-radius:12px;border:1px solid #E0E0DA;padding:14px;margin-bottom:8px;transition:all .15s}
+.req-card.urgent{border-left:3px solid #E05050}
+.req-card.done{opacity:.6}
+.req-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+.req-patient{font-size:15px;font-weight:600;color:#111110;flex:1}
+.req-status{font-size:11px;padding:3px 8px;border-radius:100px;font-weight:600;white-space:nowrap}
+.st-wait{background:#FFFBEF;color:#8A6820;border:1px solid #E8D090}
+.st-ok{background:#E8F5F0;color:#007A54;border:1px solid #C5E8DC}
+.st-done{background:#F5F5F1;color:#888880;border:1px solid #E0E0DA}
+.req-doc{font-size:13px;color:#555550;margin-bottom:6px}
+.req-meta{display:flex;gap:12px;flex-wrap:wrap}
+.req-meta-item{font-size:11.5px;color:#888880;display:flex;align-items:center;gap:4px}
+.req-meta-item strong{color:#555550;font-weight:500}
+.req-meta-item.dday{color:#E05050}
+.req-meta-item.dday strong{color:#E05050}
+.req-actions{display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid #E8E8E4}
+.req-action-btn{flex:1;padding:7px;border-radius:6px;border:1px solid #E0E0DA;background:#F5F5F1;font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:all .15s}
+.req-action-btn.approve{background:#E8F5F0;border-color:#C5E8DC;color:#007A54}
+.req-action-btn.complete{background:#007A54;border-color:#007A54;color:#FAF8F0}
+.req-action-btn.del{color:#E05050;border-color:#FAEAE0;background:#FAEAE0}
+
+/* 빈 상태 */
+.empty{text-align:center;padding:48px 20px;color:#AAAAAA}
+.empty-icon{font-size:40px;margin-bottom:12px}
+.empty-txt{font-size:14px}
+
+/* 요약 바 */
+.summary-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.sum-card{background:#fff;border:1px solid #E0E0DA;border-radius:10px;padding:10px;text-align:center}
+.sum-num{font-size:22px;font-weight:700;color:#111110}
+.sum-label{font-size:10.5px;color:#888880;margin-top:2px}
+.sum-card.urgent .sum-num{color:#E05050}
+.sum-card.wait .sum-num{color:#C8A84B}
+.sum-card.done .sum-num{color:#007A54}
+
+/* 메모 섹션 */
+.memo-box{background:#FFFBEF;border:1px solid #E8D090;border-radius:10px;padding:12px;margin-bottom:12px}
+.memo-label{font-size:10px;letter-spacing:.1em;color:#8A6820;font-weight:600;margin-bottom:6px}
+.memo-input{width:100%;border:none;background:transparent;font-size:13px;color:#5A4010;resize:none;outline:none;font-family:inherit;line-height:1.7;min-height:60px}
+
+@media(min-width:640px){.panel{max-width:600px;margin:0 auto}}
+</style>
+</head>
+<body>
+
+<iframe name="hidden_frame" style="display:none"></iframe>
+<div class="hd">
+  <div>
+    <div class="hd-title">📄 서류발급 요청 관리</div>
+    <div class="hd-date" id="hd-date"></div>
+  </div>
+  <div class="hd-badge">직원 전용</div>
+</div>
+
+<div class="tabs">
+  <div class="tab-btn act" onclick="showTab('list',this)">요청 목록</div>
+  <div class="tab-btn" onclick="showTab('new',this)">+ 신규 신청</div>
+</div>
+
+<!-- ══ 목록 탭 ══ -->
+<div class="panel show" id="panel-list">
+
+  <div class="summary-bar">
+    <div class="sum-card urgent"><div class="sum-num" id="sum-urgent">0</div><div class="sum-label">오늘 마감</div></div>
+    <div class="sum-card wait"><div class="sum-num" id="sum-wait">0</div><div class="sum-label">승인 대기</div></div>
+    <div class="sum-card done"><div class="sum-num" id="sum-done">0</div><div class="sum-label">완료</div></div>
+  </div>
+
+  <div class="list-filter">
+    <div class="filter-btn act" onclick="filterList('all',this)">전체</div>
+    <div class="filter-btn" onclick="filterList('wait',this)">승인 대기</div>
+    <div class="filter-btn" onclick="filterList('approved',this)">승인 완료</div>
+    <div class="filter-btn" onclick="filterList('done',this)">발급 완료</div>
+    <div class="filter-btn" onclick="filterList('urgent',this)">오늘 마감</div>
+  </div>
+
+  <div id="req-list"></div>
+
+</div>
+
+<!-- ══ 신규 신청 탭 ══ -->
+<div class="panel" id="panel-new">
+
+  <div class="form-card">
+    <div class="form-title">환자 정보</div>
+    <div class="form-row">
+      <div class="form-label">환자명 *</div>
+      <input class="form-input highlight" type="text" id="f-patient" placeholder="환자명 입력">
+    </div>
+    <div class="qty-row">
+      <div class="form-row">
+        <div class="form-label">신청일 *</div>
+        <input class="form-input" type="date" id="f-date">
+      </div>
+      <div class="form-row">
+        <div class="form-label">마감일 *</div>
+        <input class="form-input highlight" type="date" id="f-due">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-label">특이사항 메모</div>
+      <input class="form-input" type="text" id="f-memo" placeholder="예: 보험사 제출용, 급하게 필요 등">
+    </div>
+  </div>
+
+  <div class="form-card">
+    <div class="form-title">서류 선택 (복수 선택 가능)</div>
+    <div class="doc-grid" id="doc-grid">
+      <div class="doc-chip" data-name="일반진단서/소견서" data-price="10000" onclick="toggleDoc(this)">
+        일반진단서/소견서<span class="doc-price">1만원/장</span>
+      </div>
+      <div class="doc-chip" data-name="병무용 진단서" data-price="20000" onclick="toggleDoc(this)">
+        병무용 진단서<span class="doc-price">2만원/장</span>
+      </div>
+      <div class="doc-chip" data-name="영수증" data-price="0" onclick="toggleDoc(this)">
+        영수증<span class="doc-price">무료</span>
+      </div>
+      <div class="doc-chip" data-name="진료비 세부내역서" data-price="0" onclick="toggleDoc(this)">
+        진료비 세부내역서<span class="doc-price">무료</span>
+      </div>
+      <div class="doc-chip" data-name="치료확인서" data-price="10000" onclick="toggleDoc(this)">
+        치료확인서<span class="doc-price">1만원/장</span>
+      </div>
+      <div class="doc-chip" data-name="진료차트사본 1-5매" data-price="1000" onclick="toggleDoc(this)">
+        차트사본 1~5매<span class="doc-price">1천원/장</span>
+      </div>
+      <div class="doc-chip" data-name="진료차트사본 6매↑" data-price="100" onclick="toggleDoc(this)">
+        차트사본 6매↑<span class="doc-price">100원/장</span>
+      </div>
+      <div class="doc-chip" data-name="엑스레이" data-price="1000" onclick="toggleDoc(this)">
+        엑스레이<span class="doc-price">1천원/장</span>
+      </div>
+      <div class="doc-chip" data-name="상해진단서 3주미만" data-price="50000" onclick="toggleDoc(this)">
+        상해진단서 3주미만<span class="doc-price">5만원</span>
+      </div>
+      <div class="doc-chip" data-name="상해진단서 3주이상" data-price="100000" onclick="toggleDoc(this)">
+        상해진단서 3주이상<span class="doc-price">10만원</span>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-label">수량</div>
+      <input class="form-input" type="number" id="f-qty" value="1" min="1">
+    </div>
+
+    <div class="total-box">
+      <div class="total-label">예상 총금액</div>
+      <div class="total-amount" id="f-total">0원</div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <div class="form-title">원장 승인 상태</div>
+    <div class="status-row">
+      <div class="status-btn pending" id="st-wait-btn" onclick="setStatus('wait')">⏳ 승인 대기</div>
+      <div class="status-btn" id="st-ok-btn" onclick="setStatus('approved')">✓ 원장 승인</div>
+    </div>
+    <div class="memo-box">
+      <div class="memo-label">원장 메모</div>
+      <textarea class="memo-input" id="f-doc-memo" placeholder="원장 지시사항 또는 메모" rows="2"></textarea>
+    </div>
+  </div>
+
+  <button class="submit-btn" onclick="submitReq()">신청 등록하기</button>
+
+</div>
+
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxjJz5d4Wfom3H9qKJxVv5Pd4ruo5ySV8n80Denla0vKJIhndWFY2ubdI9uLlsNHGw-/exec';
+
+let requests = JSON.parse(localStorage.getItem('petit_doc_reqs') || '[]');
+let currentFilter = 'all';
+let currentStatus = 'wait';
+let selectedDocs = [];
+
+// 날짜 초기화
+const today = new Date();
+const todayStr = today.toISOString().split('T')[0];
+document.getElementById('f-date').value = todayStr;
+const days = ['일','월','화','수','목','금','토'];
+document.getElementById('hd-date').textContent =
+  `${today.getFullYear()}.${today.getMonth()+1}.${today.getDate()} (${days[today.getDay()]})`;
+
+// 탭 전환
+function showTab(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('show'));
+  document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('act'));
+  document.getElementById('panel-' + id).classList.add('show');
+  el.classList.add('act');
+}
+
+// 서류 선택
+function toggleDoc(el) {
+  el.classList.toggle('sel');
+  selectedDocs = Array.from(document.querySelectorAll('.doc-chip.sel'))
+    .map(d => ({ name: d.dataset.name, price: parseInt(d.dataset.price) }));
+  updateTotal();
+}
+function updateTotal() {
+  const qty = parseInt(document.getElementById('f-qty').value) || 1;
+  const total = selectedDocs.reduce((s, d) => s + d.price * qty, 0);
+  document.getElementById('f-total').textContent = total.toLocaleString() + '원';
+}
+document.getElementById('f-qty').addEventListener('input', updateTotal);
+
+// 승인 상태
+function setStatus(st) {
+  currentStatus = st;
+  document.getElementById('st-wait-btn').className = 'status-btn' + (st === 'wait' ? ' pending' : '');
+  document.getElementById('st-ok-btn').className = 'status-btn' + (st === 'approved' ? ' approved' : '');
+}
+
+// ── 등록 — form 직접 제출 방식 ──
+function submitReq() {
+  const patient = document.getElementById('f-patient').value.trim();
+  const date = document.getElementById('f-date').value;
+  const due = document.getElementById('f-due').value;
+  const memo = document.getElementById('f-memo').value.trim();
+  const docMemo = document.getElementById('f-doc-memo').value.trim();
+  const qty = parseInt(document.getElementById('f-qty').value) || 1;
+
+  if (!patient) { alert('환자명을 입력해주세요'); document.getElementById('f-patient').focus(); return; }
+  if (!due) { alert('마감일을 입력해주세요'); document.getElementById('f-due').value; return; }
+  if (selectedDocs.length === 0) { alert('서류를 선택해주세요'); return; }
+
+  const total = selectedDocs.reduce((s, d) => s + d.price * qty, 0);
+  const id = Date.now().toString();
+  const docsStr = selectedDocs.map(d => d.name).join(' / ');
+
+  // form 생성 → hidden_frame으로 제출 (CORS 우회)
+  const form = document.createElement('form');
+  form.method = 'GET';
+  form.action = SCRIPT_URL;
+  form.target = 'hidden_frame';
+
+  const fields = { action:'add', patient, date, due,
+    docs: docsStr, qty, total, memo, docMemo,
+    status: currentStatus, id };
+
+  Object.entries(fields).forEach(([k,v]) => {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = k;
+    input.value = v;
+    form.appendChild(input);
+  });
+
+  document.body.appendChild(form);
+  form.submit();
+  document.body.removeChild(form);
+
+  // 로컬에도 저장 (즉시 목록 반영)
+  const req = { id: parseInt(id), patient, date, due, memo, docMemo,
+    docs: docsStr, qty, total, status: currentStatus,
+    createdAt: new Date().toISOString() };
+  requests.unshift(req);
+  localStorage.setItem('petit_doc_reqs', JSON.stringify(requests));
+
+  alert('✅ 등록되었습니다');
+  resetForm();
+  showTab('list', document.querySelector('.tab-btn'));
+  renderList();
+}
+
+function resetForm() {
+  document.getElementById('f-patient').value = '';
+  document.getElementById('f-date').value = todayStr;
+  document.getElementById('f-due').value = '';
+  document.getElementById('f-memo').value = '';
+  document.getElementById('f-doc-memo').value = '';
+  document.getElementById('f-qty').value = '1';
+  document.getElementById('f-total').textContent = '0원';
+  document.querySelectorAll('.doc-chip.sel').forEach(d => d.classList.remove('sel'));
+  selectedDocs = [];
+  setStatus('wait');
+}
+
+// ── 승인·완료·삭제 — form 제출 방식 ──
+function sendAction(params) {
+  const form = document.createElement('form');
+  form.method = 'GET';
+  form.action = SCRIPT_URL;
+  form.target = 'hidden_frame';
+  Object.entries(params).forEach(([k,v]) => {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = k;
+    input.value = v;
+    form.appendChild(input);
+  });
+  document.body.appendChild(form);
+  form.submit();
+  document.body.removeChild(form);
+}
+
+function approveReq(id) {
+  const r = requests.find(r => r.id === id);
+  if (r) {
+    r.status = 'approved';
+    localStorage.setItem('petit_doc_reqs', JSON.stringify(requests));
+    sendAction({ action: 'updateStatus', id: id.toString(), status: 'approved' });
+    renderList();
+  }
+}
+
+function doneReq(id) {
+  const r = requests.find(r => r.id === id);
+  if (r && confirm(`${r.patient} 환자 서류 발급 완료 처리할까요?`)) {
+    r.status = 'done';
+    localStorage.setItem('petit_doc_reqs', JSON.stringify(requests));
+    sendAction({ action: 'updateStatus', id: id.toString(), status: 'done' });
+    renderList();
+  }
+}
+
+function delReq(id) {
+  if (confirm('삭제하시겠습니까?')) {
+    requests = requests.filter(r => r.id !== id);
+    localStorage.setItem('petit_doc_reqs', JSON.stringify(requests));
+    sendAction({ action: 'delete', id: id.toString() });
+    renderList();
+  }
+}
+
+// ── 목록 필터·렌더링 ──
+function filterList(f, el) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('act'));
+  el.classList.add('act');
+  renderList();
+}
+
+function dday(dueStr) {
+  const due = new Date(dueStr);
+  const diff = Math.ceil((due - today) / (1000*60*60*24));
+  if (diff < 0) return { txt: `D+${Math.abs(diff)} 초과`, cls: 'dday' };
+  if (diff === 0) return { txt: 'D-Day', cls: 'dday' };
+  return { txt: `D-${diff}`, cls: diff <= 2 ? 'dday' : '' };
+}
+
+function renderList() {
+  let filtered = requests;
+  if (currentFilter === 'wait') filtered = requests.filter(r => r.status === 'wait');
+  else if (currentFilter === 'approved') filtered = requests.filter(r => r.status === 'approved');
+  else if (currentFilter === 'done') filtered = requests.filter(r => r.status === 'done');
+  else if (currentFilter === 'urgent') {
+    filtered = requests.filter(r => {
+      const diff = Math.ceil((new Date(r.due) - today) / (1000*60*60*24));
+      return diff <= 1 && r.status !== 'done';
+    });
+  }
+
+  const urgent = requests.filter(r => {
+    const diff = Math.ceil((new Date(r.due) - today) / (1000*60*60*24));
+    return diff <= 0 && r.status !== 'done';
+  }).length;
+  document.getElementById('sum-urgent').textContent = urgent;
+  document.getElementById('sum-wait').textContent = requests.filter(r => r.status === 'wait').length;
+  document.getElementById('sum-done').textContent = requests.filter(r => r.status === 'done').length;
+
+  const container = document.getElementById('req-list');
+  if (filtered.length === 0) {
+    container.innerHTML = `<div class="empty"><div class="empty-icon">📋</div><div class="empty-txt">요청 없음</div></div>`;
+    return;
+  }
+
+  container.innerHTML = filtered.map(r => {
+    const dd = dday(r.due);
+    const isUrgent = dd.cls === 'dday' && r.status !== 'done';
+    const stLabel = r.status === 'wait'
+      ? '<span class="req-status st-wait">승인 대기</span>'
+      : r.status === 'approved' ? '<span class="req-status st-ok">원장 승인</span>'
+      : '<span class="req-status st-done">발급 완료</span>';
+    const approveBtn = r.status === 'wait'
+      ? `<div class="req-action-btn approve" onclick="approveReq(${r.id})">✓ 원장 승인</div>` : '';
+    const doneBtn = r.status !== 'done'
+      ? `<div class="req-action-btn complete" onclick="doneReq(${r.id})">발급 완료</div>` : '';
+    const delBtn = `<div class="req-action-btn del" onclick="delReq(${r.id})">삭제</div>`;
+
+    return `
+    <div class="req-card ${isUrgent?'urgent':''} ${r.status==='done'?'done':''}">
+      <div class="req-top">
+        <div class="req-patient">👤 ${r.patient}</div>
+        ${stLabel}
+      </div>
+      <div class="req-doc">📄 ${r.docs} × ${r.qty}장</div>
+      ${r.memo ? `<div style="font-size:12px;color:#888880;margin-bottom:5px">💬 ${r.memo}</div>` : ''}
+      ${r.docMemo ? `<div style="font-size:12px;color:#8A6820;background:#FFFBEF;padding:5px 8px;border-radius:6px;margin-bottom:5px">📝 원장: ${r.docMemo}</div>` : ''}
+      <div class="req-meta">
+        <div class="req-meta-item">📅 신청 <strong>${r.date.toString().slice(5).replace('-','/')}</strong></div>
+        <div class="req-meta-item ${dd.cls}">🗓 마감 <strong>${r.due.toString().slice(5).replace('-','/')} (${dd.txt})</strong></div>
+        ${r.total > 0 ? `<div class="req-meta-item">💰 <strong>${Number(r.total).toLocaleString()}원</strong></div>` : ''}
+      </div>
+      <div class="req-actions">${approveBtn}${doneBtn}${delBtn}</div>
+    </div>`;
+  }).join('');
+}
+
+renderList();
+</script>
+</body>

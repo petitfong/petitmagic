@@ -1,0 +1,850 @@
+/* ============================================
+   쁘띠치과 디자인 시스템 v1.0
+   petit-design.css
+   
+   모든 HTML 파일에 아래 한 줄 추가:
+   <link rel="stylesheet" href="petit-design.css">
+   
+   수정은 이 파일만 — 전체 페이지 자동 반영
+   ============================================ */
+
+/* ── 폰트 로드 ── */
+@font-face {
+  font-family: 'TmonMonsori';
+  src: url('fonts/TmonMonsori_otf.otf') format('opentype'),
+       url('fonts/TmonMonsori_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('fonts/pretendard-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── CSS 변수 ── */
+:root {
+
+  /* 브랜드 그린 */
+  --color-primary:        #007A54;   /* 딥그린 — nav, 섹션 헤더, CTA 배경 */
+  --color-primary-light:  #009B6B;   /* 라이트그린 — 호버, 링크, 보조 강조 */
+  --color-primary-bg:     #E8F5F0;   /* 연그린 배경 — 섹션·카드 배경 */
+  --color-primary-mint:   #C5E8DC;   /* 민트 포인트 — 테두리, 칩 배경 */
+
+  /* 골드 */
+  --color-gold:           #C8A84B;   /* 번호, 포인트 라인, 강조 태그 */
+  --color-gold-bg:        #FFFBEF;   /* 크림 강조 배경 — 멘트, 인사이트 박스 */
+  --color-gold-border:    #E8D090;   /* 골드 테두리 */
+  --color-gold-text:      #8A6820;   /* 골드 배경 위 제목 텍스트 */
+  --color-gold-body:      #5A4010;   /* 골드 배경 위 본문 텍스트 */
+
+  /* 페이지 배경 */
+  --color-bg-page:        #FAFAF9;   /* 기본 페이지 배경 */
+  --color-bg-white:       #FFFFFF;   /* 카드·섹션 배경 */
+  --color-bg-mid:         #F5F5F1;   /* 중간 배경 */
+  --color-cream:          #FAF8F0;   /* CTA 위 텍스트, 딥그린 위 크림 */
+
+  /* 텍스트 */
+  --color-text-title:     #111110;   /* 제목 */
+  --color-text-body:      #1A1A18;   /* 본문 */
+  --color-text-sub:       #888880;   /* 보조 설명 */
+  --color-text-caption:   #AAAAAA;   /* 캡션·태그 */
+  --color-text-mid:       #555550;   /* 중간 강조 */
+  --color-text-on-dark:   #FAF8F0;   /* 딥그린·다크 배경 위 텍스트 */
+
+  /* 테두리 */
+  --color-border:         #E0E0DA;   /* 기본 테두리 */
+  --color-border-light:   #EAEAE4;   /* 연한 테두리 */
+
+  /* 외부 서비스 — 절대 변경 금지 */
+  --color-naver:          #03C75A;   /* 네이버 예약 배경 */
+  --color-naver-text:     #FFFFFF;   /* 네이버 버튼 텍스트 */
+  --color-kakao:          #FEE500;   /* 카카오 상담 배경 */
+  --color-kakao-text:     #191919;   /* 카카오 버튼 텍스트 */
+
+  /* 폰트 */
+  --font-title:           'TmonMonsori', 'Noto Serif KR', serif;
+  --font-body:            'Pretendard', 'Noto Sans KR', sans-serif;
+
+  /* 간격 */
+  --radius-sm:            8px;
+  --radius-md:            10px;
+  --radius-lg:            12px;
+  --radius-xl:            16px;
+  --radius-pill:          100px;
+}
+
+/* ── 기본 리셋 ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  background: var(--color-bg-page);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── 공통 컴포넌트 ── */
+
+/* 네비게이션 */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250,250,249,.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 20px;
+  gap: 8px;
+}
+.nav-logo {
+  font-family: var(--font-title);
+  font-size: 14px;
+  color: #999990;
+  flex: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nav-logo em { color: var(--color-primary); font-style: normal; }
+
+/* 네이버 예약 버튼 — NAV용 (소형) — 절대 변경 금지 */
+.nav-naver {
+  background: var(--color-naver) !important;
+  color: var(--color-naver-text) !important;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 13px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  border: none;
+}
+
+/* 네이버 예약 버튼 — CTA용 (대형) — 절대 변경 금지 */
+.btn-naver {
+  background: var(--color-naver) !important;
+  color: var(--color-naver-text) !important;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 13px 24px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: none;
+}
+
+/* 카카오 상담 버튼 — CTA용 — 절대 변경 금지 */
+.btn-kakao {
+  background: var(--color-kakao) !important;
+  color: var(--color-kakao-text) !important;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 13px 24px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* 섹션 헤더 (딥그린 배경) */
+.sh {
+  background: var(--color-primary);
+  padding: 18px 20px;
+}
+/* 섹션 헤더 아래 골드 구분선 — 필요한 페이지에서 인라인 또는 별도 클래스로 사용 */
+/* .sh 아래 구분선이 필요하면 각 페이지 style 블록에서 정의하거나 아래 클래스 사용 */
+.sh-divider {
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-gold), rgba(200,168,75,.15));
+}
+.sh-title {
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-cream);
+}
+.sh-sub {
+  font-size: 12px;
+  color: rgba(200,168,75,.65);
+  margin-top: 3px;
+}
+
+/* CTA 섹션 */
+.cta {
+  background: var(--color-primary);
+  padding: 36px 20px;
+  border-top: 3px solid var(--color-gold);
+  text-align: center;
+}
+.cta-title {
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-cream);
+  margin-bottom: 8px;
+}
+.cta-sub {
+  font-size: 13px;
+  color: rgba(250,248,240,.5);
+  margin-bottom: 20px;
+  line-height: 1.75;
+}
+.cta-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* 카드 */
+.card-base {
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+/* 칩·태그 */
+.chip {
+  font-size: 11.5px;
+  background: var(--color-primary-bg);
+  color: var(--color-primary);
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  font-weight: 500;
+  display: inline-block;
+}
+.chip-gold {
+  background: #F5EFD8;
+  color: var(--color-gold-text);
+  border: 1px solid var(--color-gold-border);
+}
+
+/* 관련 링크 */
+.rel-section {
+  padding: 28px 20px;
+  background: var(--color-bg-mid);
+  border-top: 1px solid var(--color-border);
+}
+.rel-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 15px;
+  background: var(--color-bg-white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  text-decoration: none;
+  color: var(--color-text-body);
+  transition: opacity .15s;
+}
+.rel-link:hover { opacity: .75; }
+.rel-link-arr {
+  font-size: 14px;
+  color: var(--color-gold);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* 배경·글자 조합 규칙
+   ──────────────────────────────────────────
+   배경                 제목           본문           보조
+   #FAFAF9 (페이지)    #111110        #888880        #AAAAAA
+   #FFFFFF (카드)      #111110        #888880        #007A54(링크)
+   #007A54 (딥그린)    #FAF8F0        rgba(.6)       #C8A84B(골드태그)
+   #E8F5F0 (연그린)    #007A54        #1A1A18        #555550
+   #C5E8DC (민트)      #007A54        #1A5C3A        —
+   #FFFBEF (크림강조)  #8A6820        #5A4010        —
+   #F5F5F1 (중간)      #111110        #555550        #888880
+   #03C75A (네이버)    #FFFFFF        —              — (고정)
+   #FEE500 (카카오)    #191919        —              — (고정)
+   ────────────────────────────────────────── */
+
+/* ── 정보·강조 박스 컴포넌트 ──────────────────────
+   배경 + 글자 조합 규칙 엄수:
+   절대 rgba 투명 배경 사용 금지 — 글자가 묻힘
+   ──────────────────────────────────────────── */
+
+/* 골드 강조 박스 (멘트, 인사이트, 상담 멘트) */
+.box-gold {
+  background: #FFFBEF;                 /* 크림 강조 배경 */
+  border: 1px solid #E8D090;
+  border-left: 3px solid var(--color-gold, #C8A84B);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 13px 16px;
+  font-size: 13px;
+  color: #5A4010;                      /* 골드 배경 위 본문 */
+  line-height: 1.75;
+}
+.box-gold .label {
+  font-size: 10.5px;
+  letter-spacing: .1em;
+  color: #8A6820;                      /* 골드 배경 위 제목 */
+  font-weight: 600;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.box-gold strong { color: #4A2800; font-weight: 600; }
+
+/* 그린 강조 박스 (핵심 포인트, 설명) */
+.box-green {
+  background: #E8F5F0;                 /* 연그린 배경 */
+  border: 1px solid #C5E8DC;
+  border-radius: var(--radius-md);
+  padding: 13px 16px;
+  font-size: 13px;
+  color: #1A1A18;                      /* 연그린 위 본문 */
+  line-height: 1.75;
+}
+.box-green .label {
+  font-size: 11px;
+  letter-spacing: .1em;
+  color: var(--color-primary, #007A54); /* 연그린 위 제목 */
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.box-green strong { color: var(--color-primary, #007A54); font-weight: 500; }
+
+/* 중립 정보 박스 */
+.box-neutral {
+  background: #F5F5F1;
+  border: 1px solid #E0E0DA;
+  border-radius: var(--radius-md);
+  padding: 13px 16px;
+  font-size: 13px;
+  color: #555550;
+  line-height: 1.75;
+}
+.box-neutral .label {
+  font-size: 11px;
+  color: #888880;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+/* ibox — 위젯 내 안내 박스 */
+.ibox {
+  background: #E8F5F0;
+  border: 1px solid #C5E8DC;
+  border-radius: 8px;
+  padding: 11px 13px;
+  font-size: 13px;
+  color: #1A5C38;
+  line-height: 1.7;
+}
+
+/* ins — 결과 안내 박스 */
+.ins {
+  background: #FFFBEF;
+  border: 1px solid #E8D090;
+  border-left: 3px solid var(--color-gold, #C8A84B);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 14px 17px;
+  font-size: 13px;
+  color: #5A4010;
+  line-height: 1.75;
+}
+.ins strong { color: #4A2800; font-weight: 600; }
+
+/* ── 절대 사용 금지 패턴 ────────────────────────
+   아래 패턴은 글자가 배경에 묻혀 보이지 않음:
+
+   background: rgba(200,168,75, .07)   ← 골드 극투명
+   background: rgba(250,248,240, .05)  ← 크림 극투명
+   background: rgba(0,122,84, .08)     ← 그린 극투명
+   background: rgba(45,90,68, .07)     ← 구버전 그린 극투명
+
+   대신 사용:
+   골드 배경 → #FFFBEF / 텍스트 → #5A4010
+   그린 배경 → #E8F5F0 / 텍스트 → #1A1A18
+   중립 배경 → #F5F5F1 / 텍스트 → #555550
+   ──────────────────────────────────────────── */
+
+/* ── 딥그린(#007A54) 배경 위 텍스트 규칙 ─────────
+   절대 사용 금지:
+   rgba(250,248,240, .55) 이하  ← 안 보임
+   rgba(200,168,75,  .70) 이하  ← 약함
+   #888880, #AAAAAA, #F9F9F7   ← 딥그린 위에서 묻힘
+
+   반드시 사용:
+   제목             #FAF8F0             (불투명)
+   본문             rgba(250,248,240,.85) 이상
+   보조             rgba(250,248,240,.60) 이상
+   골드 태그        #C8A84B             (불투명)
+   칩·뱃지 배경     rgba(250,248,240,.15) + 테두리 .25
+   ──────────────────────────────────────────── */
+
+/* ── 태그·섹션 레이블 규칙 ──────────────────────
+   흰/크림 배경 위    → #C8A84B 골드 + font-weight:600
+   딥그린 배경 위     → #C8A84B 불투명 골드
+   절대 금지: #AAAAAA → 배경에 묻힘
+   ──────────────────────────────────────────── */
+
+@media (min-width: 640px) {
+  .nav { padding: 0 32px; }
+  .sh { padding: 18px 32px; }
+  .cta { padding: 36px 32px; }
+  .rel-section { padding: 28px 32px; }
+}
+
+/* ── 딥그린 배경 위 텍스트 강제 규칙 ─────────────
+   .sh, .cta, .hero-child, .hero-teen, .hero-adult
+   이 배경들 안의 모든 글자는 반드시 흰색/크림 계열
+   ──────────────────────────────────────────── */
+.sh *,
+.cta *,
+.hero-child *,
+.hero-teen *,
+.hero-adult * {
+  /* 회색 계열 강제 차단 — 개별 override로만 변경 가능 */
+}
+
+/* sh-sub: 섹션 헤더 부제목 */
+.sh-sub {
+  font-size: 12px;
+  color: rgba(250,248,240,.75);   /* 흰색 75% — 충분히 보임 */
+  margin-top: 3px;
+}
+
+/* hero-subtitle: 딥그린 히어로 부제목 */
+.hero-subtitle {
+  color: rgba(250,248,240,.85);   /* 흰색 85% */
+}
+
+/* hero-kw: 딥그린 히어로 소태그 */
+.hero-kw {
+  color: #C8A84B;                 /* 골드 불투명 */
+  font-weight: 600;
+}
+
+/* hero-target: 딥그린 위 대상 뱃지 */
+.hero-target {
+  background: rgba(250,248,240,.15);
+  border: 1px solid rgba(250,248,240,.3);
+  color: #FAF8F0;
+}
+.hero-target strong {
+  color: #FAF8F0;
+  font-weight: 700;
+}
+
+/* ── 핵심 가독성 규칙 요약 ──────────────────────
+   배경색별 글자색 — 절대 규칙
+
+   크림·흰·연회색 배경 (#FAF8F0 #FAFAF9 #F5F5F1 #fff)
+     제목   → #111110
+     본문   → #555550
+     보조   → #888880
+     절대금지 → rgba(250,248,240,.xx) 크림 글자
+
+   딥그린 배경 (#007A54)
+     제목   → #FAF8F0
+     본문   → rgba(250,248,240,.85)
+     골드태그 → #C8A84B
+     절대금지 → #888880 #555550 #AAAAAA 회색 글자
+
+   이 규칙을 어기는 코드는 배경에 글자가 묻혀 안 보임
+   ──────────────────────────────────────────── */
+
+/* ══════════════════════════════════════════
+   최종 확정 규칙 v2.0 (2025.05)
+   
+   크림·흰·회색 배경 → 텍스트는 검정 계열
+   딥그린 배경 → 텍스트는 흰색 계열
+   
+   회색(#888880 #AAAAAA rgba(250,248,240,.xx))을
+   크림 배경에 쓰지 않는다.
+   ══════════════════════════════════════════ */
+
+/* 크림/흰 배경 기본 텍스트 계층 */
+.text-title   { color: #111110; }
+.text-body    { color: #555550; }
+.text-sub     { color: #888880; }
+.text-caption { color: #AAAAAA; }
+
+/* 딥그린 배경 텍스트 계층 */
+.on-green .text-title   { color: #FAF8F0; }
+.on-green .text-body    { color: rgba(250,248,240,.9); }
+.on-green .text-sub     { color: rgba(250,248,240,.7); }
+.on-green .text-caption { color: #C8A84B; }
+
+/* ══════════════════════════════════════════
+   딥그린 배경 컨텍스트 클래스 — 강제 화이트
+   
+   아래 클래스들은 딥그린 배경이 확정됨
+   → 모든 텍스트를 흰색/크림으로 강제
+   ══════════════════════════════════════════ */
+
+/* 비교 카드 — 자연치아 (딥그린) */
+.cmp-natural .cmp-title  { color: #FAF8F0 !important; }
+.cmp-natural .cmp-item   { color: rgba(250,248,240,.9) !important; }
+.cmp-natural .cmp-label  { color: #C8A84B !important; }
+
+/* 치료 카드 헤더 (딥그린 계열) */
+.txc-1 .txc-title,
+.txc-2 .txc-title,
+.txc-3 .txc-title        { color: #FAF8F0 !important; }
+.txc-1 .txc-kw,
+.txc-2 .txc-kw,
+.txc-3 .txc-kw           { color: #C8A84B !important; }
+
+/* 메인 링크 카드 (딥그린 배경) */
+.nl.main .nl-title       { color: #FAF8F0 !important; }
+.nl.main .nl-sub         { color: rgba(250,248,240,.8) !important; }
+.nl.main .nl-arr         { color: #C8A84B !important; }
+
+/* link-card.main (딥그린 배경) */
+.link-card.main .lc-title { color: #FAF8F0 !important; }
+.link-card.main .lc-sub   { color: rgba(250,248,240,.8) !important; }
+
+/* rb-top (결과 박스 딥그린) */
+.rb-top .rb-count-lbl    { color: rgba(250,248,240,.85) !important; }
+.rb-top .rb-msg          { color: #FAF8F0 !important; }
+
+/* root-sec 내부 텍스트 (딥그린 배경) */
+.root-sec .root-title    { color: #FAF8F0 !important; }
+.root-sec .root-body     { color: rgba(250,248,240,.85) !important; }
+.root-sec .root-eyebrow  { color: #C8A84B !important; }
+
+/* ── 공통 원칙 재확인 ──────────────────────
+   딥그린 배경 위 절대 사용 금지:
+   #888880  #555550  #AAAAAA  #1A1A18
+   rgba(250,248,240,.55) 이하
+
+   크림 배경 위 절대 사용 금지:
+   rgba(250,248,240,.xx) — 배경에 묻힘
+   ──────────────────────────────────────── */
+
+.cta-info {
+  margin-top: 18px;
+  font-size: 12px;
+  color: rgba(250,248,240,.45);
+  line-height: 1.9;
+}
+
+/* cta-sec — 밝은 배경 CTA (페이지 내 중간 섹션용) */
+.cta-sec {
+  background: #F5F5F1;
+  border: 1px solid #E8E8E4;
+  border-radius: 20px;
+  padding: 30px 28px;
+  text-align: center;
+  margin-top: 50px;
+}
+.cta-sec .cta-title {
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--color-text-title);
+  margin-bottom: 8px;
+  line-height: 1.45;
+}
+.cta-sec .cta-sub {
+  font-size: 14px;
+  color: var(--color-text-mid);
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+   petit_diagnosis.html 등 사용
+   ──────────────────────────────────────────── */
+.navi-sub                { color: rgba(250,248,240,.85) !important; }
+.ni-txt                  { color: #555550 !important; }
+.ni-label                { color: #C8A84B !important; }
+
+/* ── 딥그린 배경 위 인라인 카드 규칙 ────────────
+   딥그린 섹션 안에 크림(#F5F5F1) 배경 카드를 쓰면
+   글자가 안 보임 → 반투명 배경으로 대체
+
+   올바른 패턴:
+   background: rgba(250,248,240,.12)
+   border: 1px solid rgba(250,248,240,.2)
+   color: #FAF8F0
+
+   절대 금지:
+   딥그린 배경 안에서 background:#F5F5F1 + color:#FAF8F0
+   → 크림배경 + 크림글자 = 안 보임
+   ──────────────────────────────────────────── */
+
+/* 딥그린 섹션 안 설명 텍스트 */
+/* color:#888880 → 아래 규칙으로 강제 */
+[style*="background:#007A54"] [style*="color:#888880"],
+[style*="background:#009B6B"] [style*="color:#888880"] {
+  color: rgba(250,248,240,.85) !important;
+}
+
+/* ── 딥그린 배경 히어로 전용 색상 강제 ──
+   .hero-dark 클래스가 있는 경우만 적용
+   흰 배경 히어로(.hero만 있는 경우)는 적용 안 됨 */
+
+.hero .hero-desc,
+.hero .hero-subtitle { color: rgba(250,248,240,.85) !important; }
+
+.hero .hero-kw,
+.hero .hero-eyebrow,
+.hero .hero-tag { color: #C8A84B !important; }
+
+/* 딥그린 배경 히어로 전용 — .hero-dark 또는 연령별 히어로 */
+.hero-dark {
+  background: var(--color-primary);
+  border-bottom: 3px solid var(--color-gold);
+}
+.hero-dark .hero-title,
+.hero-child .hero-title,
+.hero-teen .hero-title,
+.hero-adult .hero-title { color: #FAF8F0 !important; }
+
+.hero-dark .hero-subtitle,
+.hero-child .hero-subtitle,
+.hero-teen .hero-subtitle,
+.hero-adult .hero-subtitle { color: rgba(250,248,240,.85) !important; }
+
+.hero-dark .hero-tag,
+.hero-child .hero-tag,
+.hero-teen .hero-tag,
+.hero-adult .hero-tag { color: #C8A84B !important; }
+
+.sh-sub { color: rgba(250,248,240,.75) !important; }
+.cta .cta-sub { color: rgba(250,248,240,.8) !important; }
+
+/* ── 딥그린 배경 컨텍스트 클래스 ── */
+.cmp-natural .cmp-title  { color: #FAF8F0 !important; }
+.cmp-natural .cmp-item   { color: rgba(250,248,240,.9) !important; }
+.txc-1 .txc-title,
+.txc-2 .txc-title,
+.txc-3 .txc-title        { color: #FAF8F0 !important; }
+.nl.main .nl-title       { color: #FAF8F0 !important; }
+.nl.main .nl-sub         { color: rgba(250,248,240,.8) !important; }
+.link-card.main .lc-title { color: #FAF8F0 !important; }
+.link-card.main .lc-sub  { color: rgba(250,248,240,.8) !important; }
+.navi-sub                { color: rgba(250,248,240,.85) !important; }
+.ni-txt                  { color: #555550 !important; }
+.stage.highlight .st-name { color: #FAF8F0 !important; }
+.stage.highlight .ax-label { color: #C8A84B !important; }
+.stage.highlight .ax-text  { color: rgba(250,248,240,.85) !important; }
+.root-sec .root-title    { color: #FAF8F0 !important; }
+.root-sec .root-body     { color: rgba(250,248,240,.85) !important; }
+.btb-body                { color: rgba(250,248,240,.85) !important; }
+
+/* ── 버튼 강제 색상 ── */
+.btn-naver,
+.nav-naver,
+.gnav-cta,
+.btn-cr { background: #03C75A !important; color: #FFFFFF !important; }
+
+.btn-kakao { background: #FEE500 !important; color: #191919 !important; }
+
+/* ── nav 배경 강제 ── */
+.gnav,
+.nav {
+  background: rgba(250,250,249,.97) !important;
+  border-bottom: 1px solid #E0E0DA !important;
+}
+
+/* ══════════════════════════════════════════
+   공통 아이템·박스 클래스 v2.1
+   인라인 스타일 대체용
+   ══════════════════════════════════════════ */
+
+/* 연그린 아이템 (흰 배경 위) */
+.item-green {
+  display:flex;align-items:flex-start;gap:10px;
+  padding:12px 14px;background:#E8F5F0;
+  border-radius:10px;border:1px solid #C5E8DC;
+}
+
+/* 중립 아이템 (흰 배경 위) */
+.item-neutral {
+  display:flex;align-items:flex-start;gap:10px;
+  padding:12px 14px;background:#F5F5F1;
+  border-radius:10px;border:1px solid #E0E0DA;
+}
+
+/* 골드 아이템 (흰 배경 위) */
+.item-gold {
+  padding:11px 13px;background:#FFFBEF;
+  border-radius:8px;border:1px solid #E8D090;
+}
+
+/* 레드 아이템 (경고) */
+.item-red {
+  padding:13px 16px;background:#FDE8E8;
+  border-radius:10px;border:1px solid #F0C4C4;
+}
+
+/* 딥그린 배경 안 아이템 */
+.item-on-dark {
+  display:flex;align-items:flex-start;gap:10px;
+  padding:12px 14px;
+  background:rgba(255,255,255,.10);
+  border-radius:9px;border:1px solid rgba(250,248,240,.15);
+}
+.item-on-dark .item-title { color:#FAF8F0; font-weight:500; font-size:14px; margin-bottom:4px; }
+.item-on-dark .item-body  { color:rgba(250,248,240,.85); font-size:13px; line-height:1.7; }
+.item-on-dark .item-num   { color:#C8A84B; font-family:'TmonMonsori',serif; font-size:18px; font-weight:300; flex-shrink:0; min-width:28px; line-height:1.2; }
+
+/* 섹션 레이블 (흰/크림 배경 위 소제목) */
+.sec-label {
+  font-size:11px;font-weight:700;letter-spacing:.14em;
+  color:var(--color-gold);margin-bottom:8px;
+}
+
+/* 섹션 타이틀 (흰/크림 배경 위 대제목) */
+.sec-title {
+  font-family:var(--font-title);font-size:20px;font-weight:600;
+  color:var(--color-text-title);line-height:1.4;margin-bottom:16px;
+}
+
+/* 태그 공통 */
+.tag-g { font-size:12px;padding:4px 10px;border-radius:100px;font-weight:600;background:#E8F5F0;color:#007A54;display:inline-block; }
+.tag-y { font-size:12px;padding:4px 10px;border-radius:100px;font-weight:600;background:#FFFBEF;color:#8A6820;display:inline-block; }
+.tag-r { font-size:12px;padding:4px 10px;border-radius:100px;font-weight:600;background:#FDE8E8;color:#B04040;display:inline-block; }
+
+/* 링크 카드 (연결 페이지) */
+.lc { display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:10px;text-decoration:none;transition:opacity .15s; }
+.lc:hover { opacity:.8; }
+.lc.main { background:#007A54; }
+.lc.sub  { background:#F5F5F1;border:1px solid #E4E4DE; }
+.lc.gold { background:#FFFBEF;border:1px solid #E8D090; }
+.lc-body { flex:1; }
+.lc-title { font-size:14px;font-weight:600;color:#111110; }
+.lc-sub   { font-size:12px;margin-top:2px;color:#555550; }
+.lc.main .lc-title { color:#FAF8F0; }
+.lc.main .lc-sub   { color:rgba(250,248,240,.65); }
+.lc.sub  .lc-title,.lc.gold .lc-title { color:#111110; }
+.lc.sub  .lc-sub,  .lc.gold .lc-sub   { color:#555550; }
+.lc-arr { font-size:12px;color:#C8A84B;flex-shrink:0; }
+.lc.sub .lc-arr,.lc.gold .lc-arr { color:#CCCCCC; }
+
+/* 공유 버튼 (FAB) */
+/* ── BTB 철학 박스 컴포넌트 ── */
+.btb-box {
+  background: var(--color-primary);
+  padding: 20px;
+}
+.btb-inner {
+  border-radius: var(--radius-lg);
+  padding: 18px 16px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(200,168,75,.3);
+}
+.btb-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: var(--color-gold);
+  margin-bottom: 8px;
+}
+.btb-title {
+  font-family: var(--font-title);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-cream);
+  margin-bottom: 10px;
+  line-height: 1.45;
+}
+.btb-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.bi {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(250,248,240,.85);
+  line-height: 1.65;
+}
+.bi::before {
+  content: '→';
+  color: var(--color-gold);
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.bi strong { color: var(--color-gold); font-weight: 600; }
+
+/* ── 장치 카드 컴포넌트 (.dc) ── */
+.dc { border-radius:12px;overflow:hidden;border:1.5px solid #E4E4DE; }
+.dc-head { padding:14px 16px;display:flex;align-items:flex-start;gap:12px; }
+.dc-badge { font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;flex-shrink:0;white-space:nowrap;margin-top:2px; }
+.dc-info { flex:1; }
+.dc-name { font-family:var(--font-title);font-size:17px;font-weight:600;color:#111110;margin-bottom:3px; }
+.dc-sub { font-size:12px;color:#888880; }
+.dc-body { padding:0 16px 16px;display:flex;flex-direction:column;gap:7px; }
+.dc-item { display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#444440;line-height:1.7; }
+.dc-item::before { content:'→';color:var(--color-gold);font-weight:600;flex-shrink:0;margin-top:1px; }
+.dc-item strong { color:var(--color-primary);font-weight:600; }
+.dc-point { margin-top:8px;padding:10px 13px;border-radius:8px;font-size:12.5px;line-height:1.7; }
+
+/* dc 색상 변형 */
+.dc.green .dc-head  { background:#E8F5F0; }
+.dc.green .dc-badge { background:#007A54;color:#FAF8F0; }
+.dc.green .dc-point { background:#E8F5F0;color:#1A5C3A;border-left:3px solid #007A54; }
+.dc.gold .dc-head   { background:#FFFBEF; }
+.dc.gold .dc-badge  { background:#C8A84B;color:#fff; }
+.dc.gold .dc-point  { background:#FFFBEF;color:#5A4010;border-left:3px solid #C8A84B; }
+
+/* dc.dark — 딥그린 배경 카드 */
+.dc.dark .dc-head   { background:#1E3D30; }
+.dc.dark .dc-name   { color:#FAF8F0; }
+.dc.dark .dc-sub    { color:#C8A84B; }
+.dc.dark .dc-badge  { background:rgba(200,168,75,.25);color:#C8A84B; }
+.dc.dark .dc-body   { background:#1A3A2A; }
+.dc.dark .dc-item   { color:rgba(250,248,240,.85); }
+.dc.dark .dc-item::before { color:#C8A84B; }
+.dc.dark .dc-item strong  { color:#C8A84B; }
+
+/* ── 연계 페이지 링크 섹션 ── */
+.link-sec {
+  background: #FAF8F0;
+  padding: 20px;
+}
+.link-title {
+  font-family: var(--font-title);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-title);
+  margin-bottom: 14px;
+}
+.link-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.share-float { position:fixed;bottom:24px;right:18px;z-index:999;display:flex;flex-direction:column;align-items:center;gap:6px; }
+.share-fab   { width:48px;height:48px;border-radius:50%;background:#FEE500;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.15);transition:all .2s; }
+.share-fab:hover  { transform:scale(1.08); }
+.share-fab:active { transform:scale(.95); }
+.share-toast { background:#1A1A18;color:#FAF8F0;font-size:12px;padding:6px 13px;border-radius:100px;white-space:nowrap;opacity:0;transition:opacity .3s;pointer-events:none; }
+.share-toast.show { opacity:1; }
+
+/* nav-home 버튼 */
+.nav-home { font-size:12px;padding:6px 12px;border-radius:100px;border:1px solid #E0E0DA;color:#555550;text-decoration:none;white-space:nowrap;flex-shrink:0; }
+
+/* max-width 래퍼 */
+@media(min-width:640px){
+  .page-wrap { max-width:720px;margin-left:auto;margin-right:auto; }
+}

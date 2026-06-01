@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>치아 시림 | 쁘띠치과</title>
+<link rel="stylesheet" href="petit-design.css">
+<style>
+/* NAV */
+/* HERO */
+.hero{background:#007A54;padding:52px 20px 44px;position:relative;overflow:hidden;border-bottom:3px solid #C8A84B}
+.hero::before{content:'';position:absolute;right:-50px;top:-50px;width:240px;height:240px;border-radius:50%;background:rgba(200,168,75,.12)}
+.hero::after{content:'';position:absolute;left:-30px;bottom:-60px;width:180px;height:180px;border-radius:50%;background:rgba(250,248,240,.05)}
+.hero-tag{font-size:11px;letter-spacing:.16em;color:#C8A84B;text-transform:uppercase;margin-bottom:14px;position:relative}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(26px,6vw,40px);font-weight:700;color:#FAF8F0;line-height:1.25;margin-bottom:12px;position:relative}
+.hero-title em{color:#C8A84B;font-style:normal}
+.hero-sub{font-size:15px;color:rgba(250,248,240,.65);line-height:1.75;position:relative;margin-bottom:20px}
+.hero-notice{display:inline-flex;align-items:center;gap:8px;background:rgba(200,168,75,.18);border:1px solid rgba(200,168,75,.35);border-radius:8px;padding:10px 14px;font-size:13px;color:#C8A84B;line-height:1.5;position:relative}
+
+/* STRUCTURE 박스 - 치아 구조 설명 */
+.struct-sec{background:#fff;padding:24px 20px}
+.sec-sub{font-size:14px;color:#555550;line-height:1.75;margin-bottom:18px}
+.struct-cards{display:flex;flex-direction:column;gap:8px}
+.sc{border-radius:10px;padding:14px 16px;border-left:3px solid transparent}
+.sc.enamel{background:#E8F5F0;border-color:#007A54}
+.sc.dentin{background:#FFFBEF;border-color:#C8A84B}
+.sc.root{background:#FDE8E8;border-color:#B04040}
+.sc-title{font-family:'TmonMonsori',serif;font-size:15px;font-weight:600;margin-bottom:4px}
+.sc.enamel .sc-title{color:#007A54}
+.sc.dentin .sc-title{color:#8A6820}
+.sc.root .sc-title{color:#8A2020}
+.sc-desc{font-size:13px;color:#444440;line-height:1.65}
+.sc-point{font-size:12px;font-weight:600;margin-top:6px}
+.sc.enamel .sc-point{color:#007A54}
+.sc.dentin .sc-point{color:#8A6820}
+.sc.root .sc-point{color:#8A2020}
+
+/* SECTION HEAD */
+/* 원인 아코디언 */
+.causes{background:#fff;padding:0 20px}
+.cause{padding:20px 0;border-bottom:1px solid #EAEAE4;cursor:pointer}
+.cause:last-child{border-bottom:none}
+.cause-head{display:flex;align-items:center;gap:12px}
+.cause-num{font-family:'TmonMonsori',serif;font-size:22px;font-weight:700;color:#C8A84B;flex-shrink:0;width:32px}
+.cause-info{flex:1}
+.cause-title{font-family:'TmonMonsori',serif;font-size:17px;font-weight:600;color:#111110;margin-bottom:3px}
+.cause-desc{font-size:13px;color:var(--color-text-sub);line-height:1.55}
+.cause-arr{font-size:12px;color:#CCCCCC;flex-shrink:0;transition:color .15s,transform .2s}
+.cause.open .cause-arr{color:#007A54;transform:rotate(180deg)}
+.cause-detail{display:none;margin-top:14px;background:#F7F7F3;border-radius:10px;padding:14px 16px}
+.cause.open .cause-detail{display:block}
+.cause-items{display:flex;flex-direction:column;gap:8px}
+.ci{display:flex;align-items:flex-start;gap:8px;font-size:14px;color:#333330;line-height:1.65}
+.ci::before{content:'·';color:#C8A84B;font-weight:700;flex-shrink:0;font-size:18px;line-height:1.2}
+.ci strong{color:#007A54;font-weight:600}
+.cause-point{margin-top:12px;padding:11px 14px;background:#E8F5F0;border-left:3px solid #007A54;border-radius:0 8px 8px 0;font-size:13px;color:#1A5C3A;line-height:1.65}
+.cause-point.warn{background:#FDE8E8;border-color:#B04040;color:#5A1A1A}
+
+/* 방치하면 박스 */
+.danger-sec{background:#fff;padding:20px}
+.danger-inner{border-radius:12px;overflow:hidden;border:1.5px solid #F0C4C4}
+.danger-head{background:#B04040;padding:12px 16px}
+.danger-head-title{font-family:'TmonMonsori',serif;font-size:16px;font-weight:600;color:#FAF8F0}
+.danger-head-sub{font-size:12px;color:rgba(250,248,240,.7);margin-top:3px}
+.danger-items{background:#FDE8E8;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.di{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#5A1A1A;line-height:1.65}
+.di-num{font-family:'TmonMonsori',serif;font-size:13px;font-weight:700;color:#B04040;flex-shrink:0;padding-top:1px;min-width:22px}
+.di strong{color:#8A1A1A;font-weight:600}
+
+/* 치료 방법 */
+.treats{background:#FAFAF9;padding:0 20px 8px}
+.treat{margin-bottom:10px;border-radius:12px;overflow:hidden;border:1.5px solid #E4E4DE;background:#fff}
+.treat-head{padding:16px 18px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.treat-badge{font-family:'TmonMonsori',serif;font-size:12px;font-weight:600;padding:4px 10px;border-radius:100px;flex-shrink:0}
+.t-ins .treat-badge{background:#E8F5F0;color:#007A54}
+.t-ins2 .treat-badge{background:#E8F5F0;color:#007A54}
+.t-adv .treat-badge{background:#FFFBEF;color:#8A6820}
+.treat-title{font-family:'TmonMonsori',serif;font-size:17px;font-weight:600;color:#111110;flex:1;line-height:1.35}
+.treat-arr{font-size:12px;color:#CCCCCC;transition:color .15s,transform .2s}
+.treat.open .treat-arr{color:#007A54;transform:rotate(180deg)}
+.treat-body{display:none;padding:0 18px 18px}
+.treat.open .treat-body{display:block}
+.treat-items{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+.ti{display:flex;align-items:flex-start;gap:8px;font-size:14px;color:#444440;line-height:1.65}
+.ti::before{content:'→';color:#C8A84B;font-weight:600;flex-shrink:0;margin-top:1px}
+.ti strong{color:#007A54;font-weight:600}
+.treat-tag{display:inline-flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.tag{font-size:12px;padding:4px 10px;border-radius:100px;font-weight:600}
+.tag-ins{background:#E8F5F0;color:#007A54}
+.tag-note{background:#FFFBEF;color:#8A6820}
+.tag-warn{background:#FDE8E8;color:#B04040}
+
+/* BTB 박스 */
+/* 연계 페이지 */
+/* .lc 클래스는 design.css에서 정의 */
+/* 공유 버튼 */
+@media(min-width:640px){
+  .nav,.hero,.struct-sec,.causes,.danger-sec,.treats,.btb-box,.link-sec,.cta{max-width:720px;margin-left:auto;margin-right:auto}
+  .share-float{right:calc(50% - 360px + 18px)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="index.html">생활의 기본, <em>쁘띠치과</em></a>
+  <a class="nav-home" href="index.html">← 홈</a>
+  <a class="nav-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero hero-dark">
+  <div class="hero-tag">SENSITIVE TEETH · 치아 시림</div>
+  <h1 class="hero-title">시린 건 참으면<br><em>더 커집니다.</em></h1>
+  <p class="hero-sub">차가운 것, 뜨거운 것, 단 것에 찌릿한 느낌.<br>단순한 불편이 아니라 치아가 보내는 경고 신호입니다.</p>
+  <div class="hero-notice">쁘띠치과는 왜 시린지 원인부터 확인합니다.<br>원인이 다르면 치료도 달라집니다.</div>
+</section>
+
+<!-- 치아 구조 — 왜 시린가 -->
+<section class="struct-sec">
+  <div class="sec-label">왜 시린가</div>
+  <div class="sec-title">치아 구조를 알면<br>시림의 이유가 보입니다</div>
+  <div class="sec-sub">치아 시림은 외부 자극이 신경에 전달될 때 발생합니다. 어느 층이 손상됐는지에 따라 원인과 치료가 달라집니다.</div>
+  <div class="struct-cards">
+    <div class="sc enamel">
+      <div class="sc-title">법랑질 (에나멜) — 가장 바깥층</div>
+      <div class="sc-desc">치아 머리를 덮는 가장 단단한 층. 이 층이 손상되면 그 아래 상아질 세관을 통해 자극이 신경으로 전달됩니다.</div>
+      <div class="sc-point">손상 원인: 산성 음식·음료 / 잘못된 양치 습관 / 이갈이·이악물기</div>
+    </div>
+    <div class="sc dentin">
+      <div class="sc-title">상아질 (덴틴) — 중간층</div>
+      <div class="sc-desc">미세한 세관(튜브)이 촘촘하게 나 있어 신경과 연결됩니다. 법랑질이 없어지면 이 세관을 통해 찬 것·뜨거운 것·단 것이 바로 신경을 자극합니다.</div>
+      <div class="sc-point">노출되면: 매우 민감한 시림 증상 발생</div>
+    </div>
+    <div class="sc root">
+      <div class="sc-title">치근 (뿌리) — 법랑질 없음</div>
+      <div class="sc-desc">뿌리는 법랑질이 아닌 백악질로 덮여 있어 훨씬 약합니다. 잇몸이 내려가 뿌리가 드러나면 법랑질이 있을 때보다 자극에 훨씬 더 예민해집니다.</div>
+      <div class="sc-point">잇몸 퇴축이 있다면 시림이 매우 심할 수 있습니다</div>
+    </div>
+  </div>
+</section>
+
+<!-- 원인 -->
+<div class="sh">
+  <div class="sh-title">시림의 원인</div>
+  <div class="sh-sub">원인이 달라야 치료도 다릅니다</div>
+</div>
+<div class="sh-divider"></div>
+<div class="causes">
+
+  <div class="cause" onclick="toggleCause(this)">
+    <div class="cause-head">
+      <div class="cause-num">01</div>
+      <div class="cause-info">
+        <div class="cause-title">법랑질 손상</div>
+        <div class="cause-desc">치아 겉면이 닳거나 부식된 경우</div>
+      </div>
+      <div class="cause-arr">▾</div>
+    </div>
+    <div class="cause-detail">
+      <div class="cause-items">
+        <div class="ci"><strong>산성 음식·음료</strong> (탄산음료, 과일주스 등)를 자주 마시면 법랑질이 서서히 부식됩니다</div>
+        <div class="ci"><strong>너무 강하게 양치</strong>하거나 잘못된 방향으로 닦으면 법랑질이 마모됩니다</div>
+        <div class="ci"><strong>이갈이·이악물기</strong>로 치아에 과도한 힘이 지속적으로 가해지면 치경부(치아 목 부위)가 패입니다</div>
+      </div>
+      <div class="cause-point">
+        치경부 패임(치경부 마모증)은 교합 문제가 주원인인 경우가 많습니다. 교합을 같이 확인해야 재발을 막을 수 있습니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="cause" onclick="toggleCause(this)">
+    <div class="cause-head">
+      <div class="cause-num">02</div>
+      <div class="cause-info">
+        <div class="cause-title">잇몸 퇴축 · 치주 문제</div>
+        <div class="cause-desc">잇몸이 내려가 치아 뿌리가 드러난 경우</div>
+      </div>
+      <div class="cause-arr">▾</div>
+    </div>
+    <div class="cause-detail">
+      <div class="cause-items">
+        <div class="ci"><strong>치주염</strong>으로 잇몸 뼈가 흡수되면 잇몸이 내려앉아 뿌리가 드러납니다. 뿌리에는 법랑질이 없어 시림이 심합니다</div>
+        <div class="ci"><strong>교합 외상</strong>이 핵심입니다. 특정 치아에만 과도한 힘이 반복적으로 걸리면 그 치아 주변 잇몸 뼈가 선택적으로 흡수됩니다</div>
+        <div class="ci">세균(치주염) 문제만 치료하고 <strong>교합 원인을 제거하지 않으면</strong> 잇몸 퇴축이 재발합니다</div>
+      </div>
+      <div class="cause-point warn">
+        잇몸이 내려가는 원인에는 반드시 교합 점검이 필요합니다. 쁘띠치과는 잇몸 치료와 교합 조정을 함께 진행합니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="cause" onclick="toggleCause(this)">
+    <div class="cause-head">
+      <div class="cause-num">03</div>
+      <div class="cause-info">
+        <div class="cause-title">충치 · 치아 손상</div>
+        <div class="cause-desc">충치 진행 또는 파절로 신경에 가까워진 경우</div>
+      </div>
+      <div class="cause-arr">▾</div>
+    </div>
+    <div class="cause-detail">
+      <div class="cause-items">
+        <div class="ci">충치가 <strong>상아질까지 진행</strong>되면 시린 증상이 나타납니다. 초기 충치는 아프지 않다가 시림 단계에서 발견되는 경우가 많습니다</div>
+        <div class="ci">치아에 <strong>금(크랙)</strong>이 생기거나 부분 파절이 있으면 씹을 때마다 시리고 불편합니다</div>
+        <div class="ci">오래된 보철물 주변에 <strong>이차 충치</strong>가 생기면 새 충치처럼 시림 증상이 납니다</div>
+      </div>
+      <div class="cause-point">
+        시림이 특정 부위에만 있고 찬 것·단 것에 유독 예민하다면 충치 또는 크랙을 먼저 확인해야 합니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="cause" onclick="toggleCause(this)">
+    <div class="cause-head">
+      <div class="cause-num">04</div>
+      <div class="cause-info">
+        <div class="cause-title">교합 문제 — 쁘띠치과 관점</div>
+        <div class="cause-desc">특정 치아에만 힘이 몰릴 때 시림이 반복됩니다</div>
+      </div>
+      <div class="cause-arr">▾</div>
+    </div>
+    <div class="cause-detail">
+      <div class="cause-items">
+        <div class="ci">위아래 치아가 <strong>고르게 맞물리지 않으면</strong> 특정 치아에만 씹는 힘이 집중됩니다</div>
+        <div class="ci">힘이 집중된 치아는 <strong>치경부 마모 → 법랑질 손실 → 시림</strong> 순으로 악화됩니다</div>
+        <div class="ci">같은 치아에 시림이 반복된다면 교합 문제일 가능성이 높습니다</div>
+        <div class="ci"><strong>이갈이·이악물기</strong>는 자는 동안 발생하는 과부하로, 깨어있을 때보다 몇 배 강한 힘이 치아에 가해집니다</div>
+      </div>
+      <div class="cause-point">
+        코팅이나 레진 치료만 반복해도 시림이 재발한다면 교합을 함께 점검해야 합니다. 이것이 쁘띠치과가 시린이를 바라보는 방식입니다.
+      </div>
+    </div>
+  </div>
+
+</div><!-- /causes -->
+
+<!-- 치아목 파임 섹션 -->
+<div class="sh" style="margin-top:8px">
+  <div class="sh-title">치아목 파임 — 치경부 마모증</div>
+  <div class="sh-sub">충치가 아닙니다 — 치아 목 부분이 닳아서 패이는 현상</div>
+</div>
+<div class="sh-divider"></div>
+
+<section style="background:#fff;padding:20px">
+  <div style="font-size:14px;color:#444440;line-height:1.75;margin-bottom:18px">
+    치아 머리와 뿌리가 만나는 <strong style="color:#007A54">치아 목(치경부)</strong>은 법랑질이 얇아 손상되기 쉽습니다. 이 부위에 응력이 집중되면서 둥글거나 쐐기 모양으로 패이고, 상아질이 노출되어 시림이 생깁니다. 충치와 혼동하기 쉽지만 <strong style="color:#007A54">썩은 것이 아닌 마모 현상</strong>입니다.
+  </div>
+
+  <!-- 4가지 종류 -->
+  <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#007A54;margin-bottom:10px">패임의 4가지 종류</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+
+    <div style="border-radius:10px;overflow:hidden;border:1.5px solid #E4E4DE">
+      <div style="background:#007A54;padding:10px 14px;display:flex;align-items:center;gap:8px">
+        <div style="font-family:'TmonMonsori',serif;font-size:12px;font-weight:600;color:#C8A84B;flex-shrink:0">마모증 Abrasion</div>
+        <div style="font-size:12px;color:rgba(250,248,240,.7)">외부 물리적 마찰</div>
+      </div>
+      <div style="padding:12px 14px;background:#F7F7F3;font-size:13px;color:#444440;line-height:1.7">
+        칫솔을 옆으로 세게 문지르거나 딱딱한 칫솔모 사용 시 발생합니다. <strong style="color:#007A54">V자·쐐기형</strong>으로 패이며 특정 부위에 집중됩니다. 오른손잡이는 왼쪽 치아에, 왼손잡이는 오른쪽 치아에 더 많이 나타납니다.
+      </div>
+    </div>
+
+    <div style="border-radius:10px;overflow:hidden;border:1.5px solid #E4E4DE">
+      <div style="background:#007A54;padding:10px 14px;display:flex;align-items:center;gap:8px">
+        <div style="font-family:'TmonMonsori',serif;font-size:12px;font-weight:600;color:#C8A84B;flex-shrink:0">부식증 Erosion</div>
+        <div style="font-size:12px;color:rgba(250,248,240,.7)">산에 의한 화학적 용해</div>
+      </div>
+      <div style="padding:12px 14px;background:#F7F7F3;font-size:13px;color:#444440;line-height:1.7">
+        탄산음료·과일주스·위산 역류로 법랑질이 서서히 녹습니다. <strong style="color:#007A54">U자형으로 넓게</strong> 패이고 표면이 매끄럽습니다. 치아가 얇아지면서 상아질이 드러나 노란빛으로 변합니다.
+      </div>
+    </div>
+
+    <div style="border-radius:10px;overflow:hidden;border:1.5px solid #E4E4DE">
+      <div style="background:#007A54;padding:10px 14px;display:flex;align-items:center;gap:8px">
+        <div style="font-family:'TmonMonsori',serif;font-size:12px;font-weight:600;color:#C8A84B;flex-shrink:0">교모증 Attrition</div>
+        <div style="font-size:12px;color:rgba(250,248,240,.7)">치아끼리의 마찰</div>
+      </div>
+      <div style="padding:12px 14px;background:#F7F7F3;font-size:13px;color:#444440;line-height:1.7">
+        이갈이·이악물기·단단한 음식 씹기로 치아가 서로 갈립니다. 앞니에 V·U자형 패임이 생기고, 어금니 씹는 면이 평평해지면서 <strong style="color:#007A54">치아 높이가 낮아집니다.</strong>
+      </div>
+    </div>
+
+    <div style="border-radius:10px;overflow:hidden;border:1.5px solid #C5E8DC">
+      <div style="background:#1E5C40;padding:10px 14px;display:flex;align-items:center;gap:8px">
+        <div style="font-family:'TmonMonsori',serif;font-size:12px;font-weight:600;color:#C8A84B;flex-shrink:0">굴곡파절 Abfraction</div>
+        <div style="font-size:12px;color:rgba(250,248,240,.7)">교합 과부하에 의한 응력 집중</div>
+      </div>
+      <div style="padding:12px 14px;background:#E8F5F0;font-size:13px;color:#1A1A18;line-height:1.7">
+        교합 간섭으로 특정 치아에 힘이 집중되면 치아 목에 미세 균열이 쌓여 <strong style="color:#007A54">V자형·쐐기형으로 깊고 좁게</strong> 패입니다. 이갈이·이악물기, 부정교합이 주원인입니다.<br>
+        <span style="display:block;margin-top:8px;padding:8px 10px;background:#C5E8DC;border-radius:6px;font-size:12px;color:#1A5C3A;font-weight:500">쁘띠치과 관점 — 굴곡파절은 교합 문제가 직접 원인입니다. 레진으로 메워도 교합을 조정하지 않으면 반복 탈락합니다.</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 원인 요약 -->
+  <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#007A54;margin-bottom:10px">주요 원인 한눈에</div>
+  <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:18px">
+    <div style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#444440;line-height:1.65">
+      <span style="flex-shrink:0;font-weight:600;color:#C8A84B;min-width:20px">01</span>
+      <span><strong style="color:#007A54">잘못된 칫솔질</strong> — 가로 방향 강한 마찰, 딱딱한 칫솔모</span>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#444440;line-height:1.65">
+      <span style="flex-shrink:0;font-weight:600;color:#C8A84B;min-width:20px">02</span>
+      <span><strong style="color:#007A54">이갈이·이악물기</strong> — 수면 중 무의식적 과부하, 가장 큰 원인</span>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#444440;line-height:1.65">
+      <span style="flex-shrink:0;font-weight:600;color:#C8A84B;min-width:20px">03</span>
+      <span><strong style="color:#007A54">교합 간섭</strong> — 특정 치아에 힘이 집중, 굴곡파절의 직접 원인</span>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#444440;line-height:1.65">
+      <span style="flex-shrink:0;font-weight:600;color:#C8A84B;min-width:20px">04</span>
+      <span><strong style="color:#007A54">산성 음식·위산 역류</strong> — 탄산음료, 과일주스, 역류성 식도염</span>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#444440;line-height:1.65">
+      <span style="flex-shrink:0;font-weight:600;color:#C8A84B;min-width:20px">05</span>
+      <span><strong style="color:#007A54">노화</strong> — 치아가 자연적으로 마모되는 현상</span>
+    </div>
+  </div>
+
+  <!-- 방치하면 -->
+  <div style="border-radius:10px;padding:14px 16px;background:#FDE8E8;border:1px solid #F0C4C4">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#B04040;margin-bottom:8px">방치하면</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:13px;color:#5A1A1A;line-height:1.65">패임이 깊어지면 <strong>신경이 노출</strong>되어 신경치료가 필요해집니다</div>
+      <div style="font-size:13px;color:#5A1A1A;line-height:1.65">지지 구조가 약해져 저작 중 <strong>치아 파절</strong> 위험이 높아집니다</div>
+      <div style="font-size:13px;color:#5A1A1A;line-height:1.65">패인 부위에 치석이 쌓여 <strong>치주 질환</strong>을 악화시킵니다</div>
+    </div>
+  </div>
+
+  <!-- 한쪽 저작 연쇄 반응 -->
+  <div style="margin-top:16px;margin-bottom:16px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#B04040;margin-bottom:10px">한쪽으로만 씹으면 — 연쇄 반응</div>
+    <div style="background:#FDE8E8;border-radius:10px;padding:14px 16px;border:1px solid #F0C4C4">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-bottom:12px">
+        <span style="background:#B04040;color:#FAF8F0;font-size:12px;font-weight:600;padding:4px 10px;border-radius:6px">편측 저작</span>
+        <span style="color:#C8A84B;font-weight:700;font-size:14px">→</span>
+        <span style="background:#fff;border:1px solid #F0C4C4;color:#5A1A1A;font-size:12px;padding:4px 10px;border-radius:6px">턱 틀어짐</span>
+        <span style="color:#C8A84B;font-weight:700;font-size:14px">→</span>
+        <span style="background:#fff;border:1px solid #F0C4C4;color:#5A1A1A;font-size:12px;padding:4px 10px;border-radius:6px">치아목 패임</span>
+        <span style="color:#C8A84B;font-weight:700;font-size:14px">→</span>
+        <span style="background:#fff;border:1px solid #F0C4C4;color:#5A1A1A;font-size:12px;padding:4px 10px;border-radius:6px">시림</span>
+        <span style="color:#C8A84B;font-weight:700;font-size:14px">→</span>
+        <span style="background:#fff;border:1px solid #F0C4C4;color:#5A1A1A;font-size:12px;padding:4px 10px;border-radius:6px">충치·파절</span>
+      </div>
+      <div style="font-size:13px;color:#5A1A1A;line-height:1.7">한쪽 치아에만 힘이 집중되면 그 치아의 목 부분에 응력이 쌓이면서 치경부 마모가 가속됩니다. 환자는 갑자기 문제가 생겼다고 느끼지만, 오랜 시간 누적된 기능 불균형이 한꺼번에 드러나는 것입니다.</div>
+    </div>
+  </div>
+
+  <!-- 치료 -->
+  <div style="margin-top:16px;padding:14px 16px;background:#E8F5F0;border-radius:10px;border:1px solid #C5E8DC">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#007A54;margin-bottom:8px">쁘띠치과 치료 원칙</div>
+    <div style="display:flex;flex-direction:column;gap:7px">
+      <div style="font-size:13px;color:#1A1A18;line-height:1.65"><strong style="color:#007A54">교합 조정 먼저</strong> — 원인을 제거하지 않으면 레진이 반복 탈락합니다</div>
+      <div style="font-size:13px;color:#1A1A18;line-height:1.65"><strong style="color:#007A54">무삭제 레진 재건</strong> — 치아를 깎지 않고 패인 부위를 메웁니다</div>
+      <div style="font-size:13px;color:#1A1A18;line-height:1.65"><strong style="color:#007A54">이갈이 장치 병행</strong> — 야간 과부하를 차단해 재발을 막습니다</div>
+      <div style="font-size:13px;color:#1A1A18;line-height:1.65">패임이 깊어 신경이 노출된 경우 <strong style="color:#007A54">MTA로 신경 보존</strong>을 먼저 시도합니다</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- 방치하면 -->
+<section class="danger-sec" style="margin-top:8px">
+  <div class="danger-inner">
+    <div class="danger-head">
+      <div class="danger-head-title">시림을 방치하면</div>
+      <div class="danger-head-sub">처음엔 찌릿한 불편 — 나중엔 더 복잡한 치료</div>
+    </div>
+    <div class="danger-items">
+      <div class="di">
+        <div class="di-num">01</div>
+        <div>법랑질 손상이 계속되면 <strong>상아질이 더 넓게 노출</strong>되고, 시림 범위가 넓어지며 강도가 심해집니다</div>
+      </div>
+      <div class="di">
+        <div class="di-num">02</div>
+        <div>치주 문제가 진행되면 <strong>잇몸 뼈가 계속 흡수</strong>되어 치아가 흔들리고 결국 발치로 이어질 수 있습니다</div>
+      </div>
+      <div class="di">
+        <div class="di-num">03</div>
+        <div>충치가 신경까지 도달하면 <strong>신경치료</strong>가 필요해집니다. 초기에 간단히 해결할 수 있던 것이 훨씬 복잡한 치료로 확대됩니다</div>
+      </div>
+      <div class="di">
+        <div class="di-num">04</div>
+        <div>교합 원인이 해결되지 않으면 치료 후에도 <strong>같은 부위에 시림이 반복</strong>됩니다</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 치료 방법 -->
+<div class="sh" style="margin-top:8px">
+  <div class="sh-title">쁘띠치과의 접근</div>
+  <div class="sh-sub">원인 제거 + 자연치아 보존 순서로</div>
+</div>
+<div class="sh-divider"></div>
+<div class="treats">
+
+  <div class="treat t-ins" onclick="toggleTreat(this)">
+    <div class="treat-head">
+      <div class="treat-badge">기본 처치</div>
+      <div class="treat-title">치아목 코팅 · 불소 도포</div>
+      <div class="treat-arr">▾</div>
+    </div>
+    <div class="treat-body">
+      <div class="treat-items">
+        <div class="ti">치아 목 부분(치경부)이 노출된 초기에 <strong>코팅제를 도포</strong>해 상아질 세관을 막습니다. 자극이 신경으로 전달되는 통로를 차단하는 방식입니다</div>
+        <div class="ti"><strong>불소 도포</strong>는 법랑질을 강화하고 치경부 노출 부위의 민감도를 낮춥니다. 3~6개월 주기로 관리합니다</div>
+        <div class="ti">근본 원인(교합·잇몸)을 함께 해결하지 않으면 효과가 일시적입니다</div>
+      </div>
+      <div class="treat-tag">
+        <span class="tag tag-ins">코팅 — 보험 적용</span>
+        <span class="tag tag-ins">불소 — 보험 적용</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="treat t-ins" onclick="toggleTreat(this)">
+    <div class="treat-head">
+      <div class="treat-badge">교합 원인 제거</div>
+      <div class="treat-title">교합 조정</div>
+      <div class="treat-arr">▾</div>
+    </div>
+    <div class="treat-body">
+      <div class="treat-items">
+        <div class="ti">특정 치아에 힘이 집중되는 <strong>교합 간섭</strong>을 확인하고 제거합니다</div>
+        <div class="ti">시림의 근본 원인이 교합에 있을 때 코팅·레진 치료의 <strong>재발을 막는 핵심 단계</strong>입니다</div>
+        <div class="ti">이갈이·이악물기 습관이 있다면 <strong>장치 치료</strong>를 병행해 야간 과부하를 차단합니다</div>
+      </div>
+      <div class="treat-tag">
+        <span class="tag tag-ins">보험 적용</span>
+        <span class="tag tag-note">재발 방지 핵심</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="treat t-ins2" onclick="toggleTreat(this)">
+    <div class="treat-head">
+      <div class="treat-badge">손상 부위 수복</div>
+      <div class="treat-title">레진 · 무삭제 레진 재건</div>
+      <div class="treat-arr">▾</div>
+    </div>
+    <div class="treat-body">
+      <div class="treat-items">
+        <div class="ti">마모되거나 패인 치경부를 <strong>레진으로 메워</strong> 시린 부위를 덮고 치아 형태를 회복합니다</div>
+        <div class="ti">쁘띠치과는 <strong>치아를 깎지 않는 무삭제 레진 재건</strong>을 원칙으로 합니다. 자연치아를 최대한 보존합니다</div>
+        <div class="ti">교합 조정과 함께 진행해야 같은 부위에 레진이 반복적으로 탈락하는 것을 막을 수 있습니다</div>
+      </div>
+      <div class="treat-tag">
+        <span class="tag tag-note">비보험</span>
+        <span class="tag tag-ins">치아 삭제 없음</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="treat t-ins2" onclick="toggleTreat(this)">
+    <div class="treat-head">
+      <div class="treat-badge">잇몸 원인</div>
+      <div class="treat-title">잇몸 치료 · 치주 재생</div>
+      <div class="treat-arr">▾</div>
+    </div>
+    <div class="treat-body">
+      <div class="treat-items">
+        <div class="ti"><strong>스케일링 및 치근 활택술</strong>로 치석과 세균을 제거해 잇몸 염증을 가라앉힙니다</div>
+        <div class="ti">잇몸 뼈 손실이 있다면 <strong>엠도게인(Emdogain) 치주재생 치료</strong>로 파괴된 치주 조직을 재생시킵니다</div>
+        <div class="ti">잇몸 치료 후 반드시 <strong>교합 조정</strong>을 병행합니다. 교합 원인이 남으면 잇몸이 다시 내려앉습니다</div>
+      </div>
+      <div class="treat-tag">
+        <span class="tag tag-ins">스케일링 — 보험</span>
+        <span class="tag tag-note">엠도게인 — 보험 적용</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="treat t-adv" onclick="toggleTreat(this)">
+    <div class="treat-head">
+      <div class="treat-badge">심화 단계</div>
+      <div class="treat-title">신경치료 · 자연치아 보존</div>
+      <div class="treat-arr">▾</div>
+    </div>
+    <div class="treat-body">
+      <div class="treat-items">
+        <div class="ti">시림이 극심해지고 자발통(가만히 있어도 아픈 경우)이 생기면 신경까지 손상된 것으로 판단합니다</div>
+        <div class="ti">쁘띠치과는 <strong>MTA를 이용해 신경을 최대한 보존</strong>하고, 불가피한 경우에만 신경치료를 진행합니다</div>
+        <div class="ti">신경치료 후에도 <strong>자연치아 뿌리를 살려 보존</strong>하는 것을 원칙으로 합니다</div>
+      </div>
+      <div class="treat-tag">
+        <span class="tag tag-warn">시림 방치 시 도달</span>
+        <span class="tag tag-note">자연치아 보존 우선</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /treats -->
+
+<!-- BTB 철학 연결 -->
+<div class="btb-box" style="margin-top:8px">
+  <div class="btb-inner">
+    <div class="btb-label">BASIC IS MAGIC · 쁘띠치과 관점</div>
+    <div class="btb-title">시림과 치아목 패임은<br>교합과 전신이 보내는 신호입니다</div>
+    <div class="btb-items">
+      <div class="bi">코팅이나 레진 치료 후에도 같은 자리에 시림이 반복된다면 교합 간섭이 원인일 수 있습니다</div>
+      <div class="bi">이갈이·이악물기 습관은 수면 중 발생해 본인이 모르는 경우가 많습니다. 아침에 턱이 뻐근하다면 신호입니다</div>
+      <div class="bi">잇몸 퇴축은 세균 문제만이 아닙니다. 교합 외상으로 잇몸 뼈가 선택적으로 흡수되는 경우가 있습니다</div>
+    </div>
+
+    <!-- 전신 연결 -->
+    <div style="margin-top:16px;padding:14px;background:rgba(255,255,255,.08);border-radius:8px;border:1px solid rgba(200,168,75,.2)">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#C8A84B;margin-bottom:10px">교합 · 전신 · 가속 노화</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:13px;color:rgba(250,248,240,.85);line-height:1.7">
+          교합은 단순히 치아가 맞물리는 형태가 아닙니다. <strong style="color:#C8A84B">혀·턱·호흡·두개경추·골반·전신 근육 패턴</strong>이 함께 만들어내는 결과물입니다.
+        </div>
+        <div style="font-size:13px;color:rgba(250,248,240,.85);line-height:1.7">
+          스마트폰 사용과 잘못된 자세는 승모근과 후두하근을 지속적으로 긴장시키고, 하악을 앞으로 밀며 입이 벌어지게 합니다. 이 자세가 교합 간섭을 만들고, 치아목 패임과 시림으로 이어집니다.
+        </div>
+        <div style="background:rgba(200,168,75,.15);border-radius:6px;padding:10px 12px;font-size:13px;color:#C8A84B;line-height:1.7">
+          교합 붕괴는 단순한 노화가 아닌 <strong>가속 노화</strong>입니다. 입호흡·혀 기능 저하·저작 불균형·고개 전방화가 복합적으로 작용해 치아 문제가 생각보다 빠르게 진행됩니다. 구조를 고치고 기능을 그대로 두면 같은 방식으로 재발합니다.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 연계 페이지 -->
+<section class="link-sec" style="margin-top:8px">
+  <div class="link-title">함께 확인하면 좋은 페이지</div>
+  <div class="link-cards">
+    <a class="lc main" href="petit_natural_tooth.html">
+      <div class="lc-body">
+        <div class="lc-title">자연치아살리기</div>
+        <div class="lc-sub">시림이 심해지기 전에 — MTA · 엠도게인 · 치주재생</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc sub" href="petit_cavity.html">
+      <div class="lc-body">
+        <div class="lc-title">충치의 원인</div>
+        <div class="lc-sub">충치로 인한 시림 — 교합·습관과의 연결</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc sub" href="petit_prevention.html">
+      <div class="lc-body">
+        <div class="lc-title">예방과 습관치료</div>
+        <div class="lc-sub">불소 도포 · 양치 교육 · 치경부 관리</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc gold" href="petit_muscle_relax.html">
+      <div class="lc-body">
+        <div class="lc-title">근이완치료</div>
+        <div class="lc-sub">이갈이·이악물기 · 교합 과부하 차단</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc gold" href="petit_dental_spa.html">
+      <div class="lc-body">
+        <div class="lc-title">바른미소스파 BALANCE</div>
+        <div class="lc-sub">교합 체크 · 정기 관리 프로그램</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-title">시림의 원인을<br>함께 찾겠습니다</div>
+  <div class="cta-sub">어느 치아가, 언제, 어떻게 시린지<br>처음 내원 시 교합·치주·신경 상태를 함께 확인합니다</div>
+  <div class="cta-btns">
+    <a class="btn-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/></svg>
+      네이버 예약
+    </a>
+    <a class="btn-kakao" href="https://pf.kakao.com/_xbhXYb" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#191919"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.67 1.648 5.012 4.146 6.396L5 21l5.12-2.983C10.734 18.01 11.363 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z"/></svg>
+      카카오 상담
+    </a>
+  </div>
+  <div class="cta-info">대구시 남구 대봉로 66 2층 · 053-472-2828</div>
+</section>
+
+<!-- 공유 버튼 -->
+<div class="share-float">
+  <div class="share-toast" id="shareToast">링크 복사됐습니다</div>
+  <button class="share-fab" onclick="doShare()" title="공유하기">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+  </button>
+</div>
+
+<script>
+function toggleCause(el){ el.classList.toggle('open'); }
+function toggleTreat(el){ el.classList.toggle('open'); }
+async function doShare(){
+  var title=document.title||'쁘띠치과';
+  var url=location.href;
+  if(navigator.share){
+    try{await navigator.share({title:title,url:url});}catch(e){}
+  } else {
+    try{
+      await navigator.clipboard.writeText(url);
+      var t=document.getElementById('shareToast');
+      t.classList.add('show');
+      setTimeout(function(){t.classList.remove('show');},2000);
+    }catch(e){}
+  }
+}
+</script>
+</body>
+</html>

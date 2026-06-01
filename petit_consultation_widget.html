@@ -5,31 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>교합재건 상담 | 쁘띠치과</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--g:#1E3D30;--g2:#2D5A44;--cr:#FAF8F0;--cr2:#EDE8D8;--go:#C8A84B;--go2:rgba(200,168,75,.1);--tx:#2C2C2C;--mu:#7A7A6A;--wh:#fff;--rd:#C94040;--rd2:rgba(201,64,64,.07);--sf:'Noto Serif KR',serif;--ss:'Noto Sans KR',sans-serif}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:var(--ss);background:var(--cr);color:var(--tx);min-height:100vh}
-.hd{background:var(--g);padding:17px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.hd-logo{font-family:var(--sf);color:var(--cr);font-size:16px;letter-spacing:.04em}
-.hd-logo em{color:var(--go);font-style:normal}
-.hd-tag{font-size:10px;color:rgba(250,248,240,.4);letter-spacing:.12em;text-transform:uppercase}
-.prog{background:var(--g);padding:0 28px 20px}
+:root{
+  --g:#007A54;--g2:#009B6B;
+  --cr:#FAFAF9;--cr2:#EFEFEB;
+  --go:#C8A84B;--go2:#FFFBEF;
+  --tx:#1A1A18;--mu:#888880;--lt:#B8B8B0;--wh:#fff;
+  --br:#E8E8E4;
+  --sf:'Noto Serif KR',serif;--ss:'Noto Sans KR',sans-serif
+}
+.hd{background:rgba(250,250,249,.97);backdrop-filter:blur(12px);border-bottom:1px solid #E0E0DA;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.hd-logo{font-family:'TmonMonsori',serif;color:#555550;font-size:15px;font-weight:400;letter-spacing:.02em}
+.hd-logo em{color:#007A54;font-style:normal}
+.hd-tag{font-size:11px;color:#C8A84B;letter-spacing:.12em;text-transform:uppercase;font-weight:400}
+.prog{background:#fff;padding:0 24px 16px;border-bottom:1px solid #E0E0DA}
 .prog-inner{display:flex;position:relative}
-.prog-line{position:absolute;top:13px;left:13px;right:13px;height:1px;background:rgba(250,248,240,.1)}
+.prog-line{position:absolute;top:13px;left:13px;right:13px;height:1px;background:#F5F5F1}
 .ps{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;position:relative;z-index:1}
-.pd{width:26px;height:26px;border-radius:50%;border:1.5px solid rgba(250,248,240,.18);background:transparent;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:rgba(250,248,240,.25);transition:all .25s}
-.ps.act .pd{background:var(--go);border-color:var(--go);color:var(--g);font-weight:600}
-.ps.dn .pd{background:rgba(200,168,75,.2);border-color:rgba(200,168,75,.6);color:rgba(200,168,75,.8)}
-.pl{font-size:10px;color:rgba(250,248,240,.25);text-align:center;line-height:1.2;white-space:nowrap}
-.ps.act .pl{color:var(--go)}
-.ps.dn .pl{color:rgba(200,168,75,.5)}
+.pd{width:26px;height:26px;border-radius:50%;border:1.5px solid rgba(250,248,240,.18);background:transparent;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:#555550;transition:all .25s}
+.ps.act .pd{background:#007A54;border-color:var(--go);color:rgba(250,248,240,.85);font-weight:600}
+.ps.dn .pd{background:rgba(200,168,75,.2);border-color:#C8A84B;color:rgba(200,168,75,.8)}
+.pl{font-size:10px;color:#555550;text-align:center;line-height:1.2;white-space:nowrap}
+.ps.act .pl{color:#1A1A18}
+.ps.dn .pl{color:#555550}
 .main{max-width:680px;margin:0 auto;padding:32px 28px 110px}
 .scr{display:none;animation:fu .32s ease}
 .scr.on{display:block}
 @keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .tag-lbl{font-size:11px;letter-spacing:.15em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:10px}
-.big-t{font-family:var(--sf);font-size:24px;font-weight:600;color:var(--g);line-height:1.45;margin-bottom:7px}
+.big-t{font-family:'TmonMonsori',serif;font-size:24px;font-weight:600;color:var(--g);line-height:1.45;margin-bottom:7px}
 .sub-t{font-size:13px;color:var(--mu);line-height:1.75;margin-bottom:26px}
 .cat{font-size:10.5px;letter-spacing:.12em;color:var(--mu);text-transform:uppercase;font-weight:500;margin:24px 0 11px;padding-bottom:7px;border-bottom:1px solid var(--cr2)}
 .cat.gold{border-color:var(--go);color:var(--go)}
@@ -49,7 +53,7 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);min-height:100vh
 .opts{display:flex;gap:7px;flex-wrap:wrap}
 .op{padding:9px 14px;border:1.5px solid var(--cr2);border-radius:9px;cursor:pointer;user-select:none;font-size:12.5px;font-weight:500;color:var(--mu);transition:all .15s;white-space:nowrap}
 .op:hover{border-color:#7fad98;color:var(--tx)}
-.op.on{background:var(--g);border-color:var(--g);color:var(--cr)}
+.op.on{background:var(--g);border-color:var(--g);color:#E0E0D8}
 .op.red-on{background:var(--rd);border-color:var(--rd);color:var(--wh)}
 .divider{height:1px;background:var(--cr2);margin:13px 0}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -57,7 +61,7 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);min-height:100vh
 .col-opts{display:flex;gap:6px}
 .col-opt{flex:1;padding:8px 5px;border:1.5px solid var(--cr2);border-radius:9px;text-align:center;cursor:pointer;user-select:none;font-size:12px;font-weight:500;color:var(--mu);transition:all .15s}
 .col-opt:hover{border-color:#7fad98;color:var(--tx)}
-.col-opt.on{background:var(--g);border-color:var(--g);color:var(--cr)}
+.col-opt.on{background:var(--g);border-color:var(--g);color:#E0E0D8}
 .crown-fu{display:none;margin-top:13px;padding-top:13px;border-top:1px solid var(--cr2)}
 .crown-fu.show{display:block}
 .flag{background:var(--rd2);border-left:3px solid var(--rd);border-radius:0 9px 9px 0;padding:10px 14px;margin-top:10px;font-size:12px;color:var(--tx);line-height:1.6;display:none}
@@ -71,64 +75,63 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);min-height:100vh
 .ph-icon{font-size:22px;width:30px;text-align:center;flex-shrink:0}
 .ph-t{font-size:13px;font-weight:500;color:var(--tx);margin-bottom:3px}
 .ph-s{font-size:11.5px;color:var(--mu);line-height:1.4}
-.phil.on .ph-s{color:rgba(30,61,48,.5)}
+.phil.on .ph-s{color:rgba(0,122,84,.5)}
 .phil-note{font-size:12px;color:var(--mu);margin-bottom:12px;line-height:1.5}
-.nav{position:fixed;bottom:0;left:0;right:0;background:var(--cr);border-top:1px solid var(--cr2);padding:13px 28px;z-index:50}
 .nav-in{max-width:680px;margin:0 auto;display:flex;align-items:center;gap:11px}
 .sp{flex:1}
-.bg{background:var(--g);color:var(--cr);border:none;padding:13px 26px;border-radius:50px;font-size:13px;font-weight:500;font-family:var(--ss);cursor:pointer;letter-spacing:.04em;transition:background .15s;white-space:nowrap}
+.bg{background:var(--g);color:#E0E0D8;border:none;padding:13px 26px;border-radius:50px;font-size:13px;font-weight:500;font-family:'Pretendard',sans-serif;cursor:pointer;letter-spacing:.04em;transition:background .15s;white-space:nowrap}
 .bg:hover{background:var(--g2)}
 .bg:disabled{opacity:.3;cursor:default}
-.bgo{background:var(--go);color:var(--g);border:none;padding:13px 26px;border-radius:50px;font-size:13px;font-weight:600;font-family:var(--ss);cursor:pointer}
+.bgo{background:var(--go);color:var(--g);border:none;padding:13px 26px;border-radius:50px;font-size:13px;font-weight:600;font-family:'Pretendard',sans-serif;cursor:pointer}
 .bgo:hover{filter:brightness(1.07)}
-.bo{background:transparent;border:1.5px solid var(--cr2);color:var(--mu);padding:12px 18px;border-radius:50px;font-size:13px;font-family:var(--ss);cursor:pointer;transition:all .15s}
+.bo{background:transparent;border:1.5px solid var(--cr2);color:var(--mu);padding:12px 18px;border-radius:50px;font-size:13px;font-family:'Pretendard',sans-serif;cursor:pointer;transition:all .15s}
 .bo:hover{border-color:var(--g);color:var(--g)}
-.ah{background:var(--g);border-radius:18px;padding:26px;margin-bottom:18px;position:relative;overflow:hidden}
+.ah{background:#F5F5F1;border:1px solid #E8E8E4;border-radius:18px;padding:26px;margin-bottom:18px;position:relative;overflow:hidden}
 .ah::before{content:'';position:absolute;right:-25px;top:-25px;width:110px;height:110px;border-radius:50%;background:rgba(200,168,75,.1)}
-.an{font-family:var(--sf);font-size:60px;font-weight:700;color:var(--go);line-height:1;margin-bottom:3px}
-.ac{font-size:14px;color:rgba(250,248,240,.7);margin-bottom:16px}
-.am{font-size:12.5px;color:rgba(250,248,240,.6);line-height:1.7;padding-top:14px;border-top:1px solid rgba(250,248,240,.1)}
+.an{font-family:'TmonMonsori',serif;font-size:60px;font-weight:700;color:var(--go);line-height:1;margin-bottom:3px}
+.ac{font-size:14px;color:#555550;margin-bottom:16px}
+.am{font-size:14px;color:#555550;line-height:1.7;padding-top:14px;border-top:1px solid #E8E8E4}
 .tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
 .tg{background:var(--wh);border:1px solid var(--cr2);border-radius:20px;padding:5px 12px;font-size:11.5px;color:var(--tx);display:flex;align-items:center;gap:5px}
 .tg::before{content:'✓';color:var(--go);font-weight:700;font-size:10px}
-.ins{background:rgba(200,168,75,.07);border-left:3px solid var(--go);border-radius:0 10px 10px 0;padding:13px 17px;font-size:13px;color:var(--tx);line-height:1.7}
-.ins strong{color:var(--g);font-weight:600}
+.ins{background:#FFFBEF;border:1px solid #E8D090;border-left:3px solid var(--go);border-radius:0 10px 10px 0;padding:14px 17px;font-size:13px;color:#5A4010;line-height:1.75}
+.ins strong{color:#4A2800;font-weight:600}
 .sum-sect{margin:16px 0 0}
 .sum-title{font-size:11px;letter-spacing:.1em;color:var(--mu);text-transform:uppercase;font-weight:500;margin-bottom:9px}
 .chips{display:flex;flex-wrap:wrap;gap:7px}
 .chip{background:var(--cr2);border-radius:20px;padding:5px 12px;font-size:11.5px;color:var(--g);font-weight:500}
 .chip.warn{background:rgba(201,64,64,.1);color:var(--rd)}
 .chip.phil{background:rgba(200,168,75,.15);color:#7a5e1a}
-.chip.note{background:rgba(45,90,68,.08);color:var(--g2)}
+.chip.note{background:#E8F5F0;color:var(--g2)}
 .pmsg{background:var(--go2);border-left:3px solid var(--go);border-radius:0 10px 10px 0;padding:13px 17px;font-size:13px;color:var(--tx);line-height:1.7;margin-top:16px}
 .pmsg strong{color:var(--g);font-weight:600}
 .tlist{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
 .tc{background:var(--wh);border:1.5px solid var(--cr2);border-radius:14px;padding:17px;transition:all .3s;opacity:.5}
 .tc.vis{opacity:1}
-.tc.hl{background:var(--g);border-color:var(--g);opacity:1;transform:scale(1.012);box-shadow:0 4px 20px rgba(30,61,48,.15)}
+.tc.hl{background:var(--g);border-color:var(--g);opacity:1;transform:scale(1.012);box-shadow:0 4px 20px rgba(0,122,84,.15)}
 .tc-h{display:flex;align-items:center;gap:11px;margin-bottom:9px}
-.tb{width:32px;height:32px;border-radius:7px;background:var(--cr2);color:var(--g);font-family:var(--sf);font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tb{width:32px;height:32px;border-radius:7px;background:var(--cr2);color:var(--g);font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .tc.hl .tb{background:var(--go);color:var(--g)}
 .tn{font-size:14px;font-weight:600;color:var(--g)}
-.tc.hl .tn{color:var(--cr)}
+.tc.hl .tn{color:#555550}
 .ts{font-size:11px;color:var(--mu);margin-top:1px}
-.tc.hl .ts{color:rgba(250,248,240,.5)}
+.tc.hl .ts{color:#555550}
 .mt{margin-left:auto;background:var(--go);color:var(--g);font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;flex-shrink:0}
 .td{font-size:12.5px;line-height:1.65;color:var(--mu)}
-.tc.hl .td{color:rgba(250,248,240,.72)}
+.tc.hl .td{color:#555550}
 .pa{margin-top:10px;padding:9px 12px;border-radius:8px;background:rgba(200,168,75,.15);font-size:12px;color:var(--g);line-height:1.5;display:none}
 .pa.show{display:block}
-.tc.hl .pa{background:rgba(200,168,75,.2);color:var(--cr)}
+.tc.hl .pa{background:rgba(200,168,75,.2);color:#1A1A18}
 .tp{margin-top:11px;padding-top:10px;border-top:1px solid var(--cr2);display:flex;align-items:center;gap:7px}
-.tc.hl .tp{border-top-color:rgba(250,248,240,.12)}
+.tc.hl .tp{border-top-color:#F5F5F1}
 .plbl{font-size:11px;color:var(--mu)}
-.tc.hl .plbl{color:rgba(250,248,240,.5)}
+.tc.hl .plbl{color:#555550}
 .dots{display:flex;gap:3px}
 .d{width:8px;height:8px;border-radius:50%;background:var(--cr2)}
 .tc:not(.hl) .d.f{background:var(--g2)}
 .tc.hl .d.f{background:var(--go)}
 .ptxt{font-size:11px;color:var(--mu)}
-.tc.hl .ptxt{color:rgba(250,248,240,.5)}
+.tc.hl .ptxt{color:#555550}
 .eg{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px}
 .ec{background:var(--wh);border-radius:14px;padding:17px;border:1px solid var(--cr2);position:relative;overflow:hidden}
 .ec::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--go);transform:scaleX(0);transform-origin:left;transition:transform .28s}
@@ -137,38 +140,244 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);min-height:100vh
 .et{font-size:12.5px;font-weight:600;color:var(--g);margin-bottom:5px}
 .eb{font-size:11px;color:#bbb;text-decoration:line-through;margin-bottom:3px;line-height:1.35}
 .ea{font-size:11.5px;color:var(--tx);line-height:1.4}
-.tbox{background:var(--g);border-radius:16px;padding:20px;margin-bottom:20px}
-.tt{font-family:var(--sf);font-size:14px;color:var(--cr);margin-bottom:16px}
+.tbox{background:#F5F5F1;border:1px solid #E8E8E4;border-radius:16px;padding:20px;margin-bottom:20px}
+.tt{font-family:'TmonMonsori',serif;font-size:14px;color:#1A1A18;margin-bottom:16px}
 .trow{display:flex;position:relative}
-.trow::before{content:'';position:absolute;top:13px;left:14px;right:14px;height:1px;background:rgba(250,248,240,.12)}
+.trow::before{content:'';position:absolute;top:13px;left:14px;right:14px;height:1px;background:#F5F5F1}
 .ti{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:1}
 .tdot{width:26px;height:26px;border-radius:50%;background:rgba(200,168,75,.18);border:1px solid rgba(200,168,75,.4);display:flex;align-items:center;justify-content:center;font-size:12px}
 .twk{font-size:10px;color:var(--go);font-weight:600}
-.tdesc{font-size:11px;color:rgba(250,248,240,.58);text-align:center;line-height:1.35}
-.cq{font-family:var(--sf);font-size:22px;color:var(--g);font-weight:600;line-height:1.5;margin-bottom:7px}
+.tdesc{font-size:11px;color:#555550;text-align:center;line-height:1.35}
+.cq{font-family:'TmonMonsori',serif;font-size:22px;color:var(--g);font-weight:600;line-height:1.5;margin-bottom:7px}
 .cq em{color:var(--go);font-style:normal}
 .csub{font-size:13px;color:var(--mu);line-height:1.75}
 .cc{background:var(--wh);border-radius:15px;border:1px solid var(--cr2);padding:20px;margin-bottom:18px}
-.cnm{font-family:var(--sf);font-size:16px;color:var(--g);font-weight:600;margin-bottom:11px}
+.cnm{font-family:'TmonMonsori',serif;font-size:16px;color:var(--g);font-weight:600;margin-bottom:11px}
 .crow{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--mu);margin-bottom:6px}
 .crow a{color:var(--g);text-decoration:none;font-weight:500}
-.ctains{border-left:3px solid var(--go);border-radius:0 10px 10px 0;padding:13px 17px;font-size:13px;color:var(--tx);line-height:1.7;margin-bottom:18px;background:rgba(200,168,75,.07)}
+.ctains{border-left:3px solid var(--go);border-radius:0 10px 10px 0;padding:13px 17px;font-size:13px;color:var(--tx);line-height:1.7;margin-bottom:18px;background:#FFFBEF}
 .ctains strong{color:var(--g);font-weight:600}
 .chain{background:var(--wh);border:1px solid var(--cr2);border-radius:14px;padding:17px;margin-bottom:16px}
 .chain-t{font-size:11.5px;font-weight:600;color:var(--g);margin-bottom:12px;letter-spacing:.03em}
 .chain-row{display:flex;align-items:center;flex-wrap:wrap;gap:4px}
 .chn{background:var(--cr2);border-radius:6px;padding:5px 10px;font-size:11.5px;color:var(--tx);font-weight:500}
 .chn.bad{background:rgba(201,64,64,.1);color:var(--rd)}
-.chn.end{background:rgba(200,168,75,.12);color:#7a5e1a;font-weight:600}
+.chn.end{background:#FFFBEF;color:#7a5e1a;font-weight:600}
 .arr{color:var(--mu);font-size:13px;font-weight:300}
 .chain-note{font-size:11.5px;color:var(--mu);line-height:1.65;margin-top:11px;padding-top:10px;border-top:1px solid var(--cr2)}
 .chain-note strong{color:var(--g)}
-.ibox{background:rgba(45,90,68,.07);border-left:3px solid var(--g2);border-radius:0 9px 9px 0;padding:10px 14px;margin-top:10px;font-size:12px;color:var(--tx);line-height:1.65}
+.ibox{background:#E8F5F0;border:1px solid #C5E8DC;border-radius:8px;padding:11px 13px;font-size:13px;color:#1A5C38;line-height:1.7}
 .ibox strong{color:var(--g);font-weight:600}
 .tfu{display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--cr2)}
 .tfu.show{display:block}
-.rbtn{background:none;border:none;font-size:12px;color:var(--mu);cursor:pointer;text-decoration:underline;font-family:var(--ss);padding:4px;display:block;margin:20px auto 0}
+.rbtn{background:none;border:none;font-size:12px;color:var(--mu);cursor:pointer;text-decoration:underline;font-family:'Pretendard',sans-serif;padding:4px;display:block;margin:20px auto 0}
+
+/* ── BRUNCH SHARED EXTRA ── */
+body{background:#FAFAF9 !important;}
+.check-sec{background:#fff;padding:44px 28px;}
+.check-inner{max-width:800px;margin:0 auto;}
+.ch-title{font-family:'TmonMonsori',serif;font-weight:400;color:#1A1A18;letter-spacing:-.01em;}
+.ch-tag{font-size:11px;letter-spacing:.14em;color:#555550;text-transform:uppercase;}
+.ch-sub{color:#555550;}
+.step-box{background:#fff;border:1px solid #E8E8E4;border-radius:12px;}
+.step-title{font-family:'TmonMonsori',serif;font-weight:400;color:#1A1A18;}
+.ao,.to{background:#fff;border:1px solid #E8E8E4;}
+.ao.on,.to.on{border-color:#C8A84B;background:#FFFBEF;}
+.ao-main{font-size:15px;color:#1A1A18;font-weight:400;}
+.submit-btn{background:#007A54;color:#FAF8F0;}
+.result-box{border:1px solid #E8E8E4;}
+.rb-top{background:#007A54 !important;}
+.rb-dir{background:#F5F5F1 !important;border-top:1px solid #E8E8E4;}
+.rb-dir-title{color:#1A1A18 !important;}
+.rb-dir-note{color:#555550 !important;}
+.rb-dir-lbl{color:#555550 !important;}
+.links-wrap{background:#FAFAF9;}
+.link-card{background:#fff;border:1px solid #E8E8E4;border-radius:10px;}
+.link-card.main{background:#007A54;border-color:#007A54;}
+.reset-btn{border:1px solid #E8E8E4;color:#555550;}
+.sym{background:#F9F9F7;border:1px solid #E8E8E4;}
+.sym.on{border-color:#C8A84B;background:#FFFBEF;}
+.sg-label{border-bottom:1px solid #E8E8E4;color:#1A1A18;}
+.sg-label.open{color:#007A54;border-bottom-color:#C8A84B;}
+/* lifecycle */
+.stage-card,.key-card{background:#fff;border:1px solid #E8E8E4;}
+/* barun tab */
+.tabs{background:#fff;border-bottom:1px solid #E8E8E4;}
+.tab{color:#555550;}
+.tab.act{color:#007A54;border-bottom:2px solid #007A54;}
+.gnav{background:rgba(250,250,249,.93) !important;border-bottom:1px solid #E8E8E4 !important;}
+/* about hero dark override */
+.hero.dark-hero,#hero-dark{background:#fff !important;}
+
+/* ── MOBILE RESPONSIVE ── */
+@media(max-width:640px){
+  /* nav */
+  .gnav-inner,.gnav-logo,.gnav-logo span,.nav-logo span{display:none;}
+  .gnav-home{padding:5px 10px;font-size:11px;}
+  .gnav-cta,.nb{padding:6px 12px;font-size:11px;}
+
+  /* hero */
+  .hero{padding:40px 16px 32px;}
+  .hero-title{font-size:clamp(22px,6vw,32px);}
+  .hero-inner{padding:0;}
+
+  /* wrap / content */
+  .wrap,.content,.inner{padding:0 16px;}
+  .sec{padding:36px 0 6px;}
+
+  /* grids → 1열 */
+  .word3,.func-grid,.hb-cards,.vs-wrap,.root-cards,.sd-grid,
+  .sym-grid,.age-opts,.effect-grid,.daily-cards,.perio-stages,
+  .cause3,.two-phil,.compare,.reserve-row{
+    grid-template-columns:1fr !important;
+  }
+
+  /* 3열 → 1열 예외: 2열 유지 */
+  .sym-grid{grid-template-columns:1fr 1fr !important;}
+
+  /* 단계 카드 패딩 */
+  .stage-head,.care-head,.feat-head,.reason-head,
+  .txs-head,.txc-head,.txd-head{padding:13px 14px;}
+  .stage-body,.care-body,.feat-body,.reason-body,
+  .txs-content,.txc-body,.txd-body{padding:12px 14px;}
+
+  /* 책 커버 */
+  .book,.book-item{grid-template-columns:80px 1fr !important;}
+  .cov,.book-cover{width:80px !important;height:112px !important;}
+  .bi,.book-info{padding-left:12px !important;}
+  .bi-desc,.book-info .bi-desc{display:none;}
+
+  /* article list */
+  .aitem,.al-item{grid-template-columns:1fr 50px !important;}
+  .aitem-thumb,.al-thumb{width:50px !important;height:40px !important;}
+
+  /* CTA 버튼 */
+  .cta-btns,.btn-row{flex-direction:column;align-items:center;}
+  .btn-naver,.btn-kakao,.btn-cr,.btn-g,.btn-go{
+    width:100% !important;max-width:280px;justify-content:center;
+  }
+
+  /* flow */
+  .flow{flex-wrap:wrap;gap:12px;}
+  .flow-step{min-width:80px;flex:0 0 calc(50% - 6px);}
+  .flow-step::after{display:none;}
+  .timing{gap:8px;}
+  .tt{flex:0 0 18%;}
+
+  /* 비교 카드 */
+  .cmp,.vs,.rc,.hb{border-radius:10px !important;}
+
+  /* footer */
+  .foot,.footer{flex-direction:column;gap:8px;align-items:flex-start !important;}
+  .foot-info,.footer-info{text-align:left !important;}
+
+  /* 체크 */
+  .step-box{padding:16px 14px;}
+  .age-opts{grid-template-columns:1fr 1fr 1fr !important;}
+  .ao{padding:10px 6px;}
+  .ao-main{font-size:15px;font-size:12px;}
+  .ao-sub{font-size:10px;}
+
+  /* 탭 */
+  .tabs{gap:2px;padding:8px 10px;overflow-x:auto;}
+  .tab{font-size:11px;padding:6px 9px;white-space:nowrap;}
+
+  /* 체인 */
+  .chain,.chain-box{flex-wrap:wrap;}
+
+  /* science box */
+  .science,.insight,.warn,.warn-box{padding:11px 13px;}
+
+  /* phil */
+  .philosophy,.phil{padding:28px 0;}
+  .ph-q,.hero-h{font-size:clamp(18px,5vw,24px);}
+}
+
+/* ── HERO BRUNCH ── */
+.hero{background:#fff;min-height:auto;padding:52px 28px 44px;border-bottom:1px solid #E0E0DA;position:relative;overflow:hidden}
+.hero::before,.hero::after,.hero-ring{display:none}
+.hero-inner{max-width:760px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-kw{font-size:11px;letter-spacing:.16em;color:#FAF8F0;text-transform:uppercase;font-weight:400;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.hero-kw::before{display:none}
+.hero-tag{font-size:11px;letter-spacing:.14em;color:#888880;text-transform:uppercase;margin-bottom:14px}
+.hero-pretitle{font-size:12px;color:#555550;font-weight:300;margin-bottom:8px}
+.hero-eyebrow{font-size:11px;letter-spacing:.14em;color:#888880;text-transform:uppercase;margin-bottom:14px;opacity:1;animation:none}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;letter-spacing:-.02em;opacity:1;animation:none}
+.hero-title em{font-style:italic;font-weight:400;color:#007A54}
+.hero-title strong{font-weight:700;font-style:normal;color:#111110}
+.hero-h{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;letter-spacing:-.02em;opacity:1;animation:none}
+.hero-h em{font-style:italic;color:#007A54}
+.hero-h strong{font-weight:700;color:#111110}
+.hero-main{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;opacity:1;animation:none}
+.hero-main em{color:#007A54;font-style:normal;display:block}
+.hero-sub{font-family:'TmonMonsori',serif;font-size:clamp(14px,2vw,17px);font-weight:300;color:#555550;line-height:1.85;max-width:520px;opacity:1;animation:none}
+.hero-sub p{color:#555550}
+.hero-desc{font-size:14px;color:#555550;line-height:1.85;max-width:480px;opacity:1;animation:none}
+.hero-badge,.hero-scroll,.hs-line,.hs-txt{display:none}
+.hero-cat{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.hc{border-radius:100px;padding:5px 13px;font-size:12px;font-weight:500}
+.hc-health{background:#E8F5F0;color:#007A54}
+.hc-beauty{background:#F5EFD8;color:#8A6820}
+.hero-term{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.ht-ko{border-radius:100px;padding:5px 13px;font-size:12px;font-weight:500;background:#E8F5F0;color:#007A54}
+.ht-en{border-radius:100px;padding:5px 13px;font-size:12px;color:#555550;border:1px solid #E0E0DA}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.hp.go{background:#F5EFD8;border:1px solid #E8D898;color:#8A6820;border-radius:100px;padding:5px 12px;font-size:12px}
+.hp.wh{background:#F5F5F1;border:1px solid #E0E0DA;color:#555550;border-radius:100px;padding:5px 12px;font-size:12px}
+.hero-copy{display:flex;flex-direction:column;gap:7px;margin-top:18px}
+.hero-copy-item{font-size:15px;color:#555550;line-height:1.5;display:flex;align-items:flex-start;gap:8px}
+.hero-copy-item::before{content:'—';color:#C8A84B;flex-shrink:0}
+
+/* ── 색상 규칙 ── */
+/* 딥그린 배경 → 크림 글자 */
+.sh .sh-title{color:#FAF8F0}
+.sh .sh-sub{color:#FAF8F0}
+.selfcheck .sc-title{color:#FAF8F0}
+.selfcheck .sc-sub{color:rgba(250,248,240,.55)}
+.selfcheck .sc-label{color:rgba(200,168,75,.7)}
+.cta .cta /* 밝은 배경 → 어두운 글자 */
+.hero .hero-title{color:#111110}
+.hero .hero-sub{color:#888880}
+.hero .hero-tag{color:#AAAAAA}
+/* 예외: 딥그린 hero */
+.hero-child .hero-title,.hero-teen .hero-title,.hero-adult .hero-title{color:#FAF8F0 !important}
+.hero-child .hero-subtitle,.hero-teen .hero-subtitle,.hero-adult .hero-subtitle{color:#FAF8F0 !important}
+
+.rel-section{padding:28px 20px;background:#F5F5F1;border-top:1px solid #E0E0DA;margin-top:8px}
+.sym-link{display:flex;align-items:center;gap:12px;padding:13px 15px;background:#fff;border-radius:10px;border:1px solid #E0E0DA;text-decoration:none;color:#1A1A18;transition:opacity .15s}
+.sym-link:hover{opacity:.75}
+.sym-link-body{flex:1}
+.sym-link-title{font-size:14px;font-weight:600;color:#111110;margin-bottom:2px}
+.sym-link-sub{font-size:12px;color:#555550}
+.sym-link-arr{font-size:14px;color:#C8A84B;font-weight:600;flex-shrink:0}
+.rel-title{font-size:12px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.rel-links{display:flex;flex-direction:column;gap:8px}
+.rel-link{display:flex;align-items:center;gap:12px;padding:13px 15px;background:#fff;border-radius:10px;border:1px solid #E0E0DA;text-decoration:none;color:#1A1A18;transition:opacity .15s}
+.rel-link:hover{opacity:.75}
+.rel-link-body{flex:1}
+.rel-link-title{font-size:14px;font-weight:500;color:#111110;margin-bottom:2px}
+.rel-link-sub{font-size:12px;color:#555550}
+.rel-link-arr{font-size:14px;color:#C8A84B;font-weight:600;flex-shrink:0}
+
+@font-face {
+  font-family: 'TmonMonsori';
+  src: url('fonts/TmonMonsori_otf.otf') format('opentype'),
+       url('fonts/TmonMonsori_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('fonts/pretendard-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 </style>
+<link rel="stylesheet" href="petit-design.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
@@ -209,6 +418,9 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);min-height:100vh
     <div class="sc" data-id="s10" onclick="tog(this)"><div class="ck">✓</div><div class="st">한쪽으로만 씹는 습관이 있습니다</div></div>
     <div class="sc" data-id="s11" onclick="tog(this)"><div class="ck">✓</div><div class="st">입을 벌리고 있거나 입호흡을 합니다</div></div>
     <div class="sc" data-id="s12" onclick="tog(this)"><div class="ck">✓</div><div class="st">얼굴 비대칭이 심해진 것 같습니다</div></div>
+    <div class="sc" data-id="s13" onclick="tog(this)"><div class="ck">✓</div><div class="st">같은 자리에 충치가 반복됩니다</div></div>
+    <div class="sc" data-id="s14" onclick="tog(this)"><div class="ck">✓</div><div class="st">음식이 특정 치아 사이에 자주 낍니다</div></div>
+    <div class="sc" data-id="s15" onclick="tog(this)"><div class="ck">✓</div><div class="st">차갑거나 단 것에 특정 부위만 시립니다</div></div>
   </div>
 
   <div class="cat">임플란트 · 결손 현황 <span class="req">★</span></div>
@@ -257,6 +469,57 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);min-height:100vh
         <strong>주의:</strong> 탈락 크라운을 오래 방치하면 치아가 이동·기울어져 교합 재건 난이도가 높아질 수 있습니다. 오늘 꼭 확인해 드리겠습니다.
       </div>
     </div>
+  </div>
+
+  <div class="cat">충치 · 치아 손상 현황</div>
+  <div class="hbox">
+
+    <div class="hq" style="font-size:12.5px;margin-bottom:9px">같은 자리에 충치가 반복되거나, 치료한 부위가 다시 썩은 경험이 있으신가요?</div>
+    <div class="opts">
+      <div class="op" data-g="cavity-rep" data-v="no" onclick="sel(this);tfu('cavity-rep',false)">없음</div>
+      <div class="op" data-g="cavity-rep" data-v="yes" onclick="sel(this);tfu('cavity-rep',true)">있음</div>
+    </div>
+    <div class="tfu" id="fu-cavity-rep">
+      <div class="ibox">충치가 같은 자리에 반복된다면 <strong>교합 불균형이 원인</strong>일 수 있습니다. 음식이 그 자리에 계속 끼이고 고이는 것이죠. 쁘띠치과는 충치 치료와 함께 원인인 교합을 확인합니다.</div>
+      <a href="petit_cavity.html" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:8px;font-size:12px;color:#007A54;text-decoration:none;border:1px solid #C5E8DC;padding:4px 11px;border-radius:100px;background:#E8F5F0;font-weight:500">충치 반복 원인 자세히 보기 →</a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="hq" style="font-size:12.5px;margin-bottom:9px">현재 충치가 있거나, 치료가 필요한 치아가 있으신가요?</div>
+    <div class="opts">
+      <div class="op" data-g="cavity-now" data-v="no" onclick="sel(this);tfu('cavity-now',false)">없음</div>
+      <div class="op" data-g="cavity-now" data-v="early" onclick="sel(this);tfu('cavity-now',true)">초기 (별로 안 아픔)</div>
+      <div class="op" data-g="cavity-now" data-v="mid" onclick="sel(this);tfu('cavity-now',true)">중기 (시리거나 예민)</div>
+      <div class="op" data-g="cavity-now" data-v="late" onclick="sel(this);tfu('cavity-now',true)">말기 (많이 아픔)</div>
+    </div>
+    <div class="tfu" id="fu-cavity-now">
+      <div class="ibox"><strong>초기:</strong> 최소 삭제로 진행 중단이 목표입니다. <strong>중기:</strong> MTA로 신경을 살리고 최소 삭제로 재건합니다. <strong>말기:</strong> 신경치료 후 자연치아살리기로 뿌리를 보존합니다.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="hq" style="font-size:12.5px;margin-bottom:9px">아이(18세 미만)의 충치 또는 교합 문제로 내원하셨나요?</div>
+    <div class="opts">
+      <div class="op" data-g="child-cavity" data-v="no" onclick="sel(this);tfu('child-cavity',false)">아니요</div>
+      <div class="op" data-g="child-cavity" data-v="yes" onclick="sel(this);tfu('child-cavity',true)">예</div>
+    </div>
+    <div class="tfu" id="fu-child-cavity">
+      <div class="ibox">아이 충치가 반복된다면 <strong>입술·혀·호흡·자세</strong>와 씹고 삼키기 문제를 함께 확인합니다. 충치 예방의 근본은 교합 환경을 만드는 것입니다.</div>
+      <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+        <div style="padding:11px 13px;background:#E8F5F0;border-radius:8px;border:1px solid #C5E8DC">
+          <div style="font-size:11px;font-weight:700;color:#007A54;letter-spacing:.08em;margin-bottom:5px">5~12세 · 성장기</div>
+          <div style="font-size:13px;color:#1A1A18;line-height:1.65;margin-bottom:7px">골격 성장을 유도할 수 있는 시기입니다. 지금 개입하면 나중의 큰 치료를 막을 수 있습니다.</div>
+          <a href="petit_treatment_by_age.html" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#007A54;text-decoration:none;border:1px solid #C5E8DC;padding:4px 11px;border-radius:100px;background:#fff;font-weight:500">성장교정 안내 →</a>
+        </div>
+        <div style="padding:11px 13px;background:#FFFBEF;border-radius:8px;border:1px solid #E8D090">
+          <div style="font-size:11px;font-weight:700;color:#8A6820;letter-spacing:.08em;margin-bottom:5px">13~17세 · 4D교정기</div>
+          <div style="font-size:13px;color:#1A1A18;line-height:1.65;margin-bottom:7px">골격 성장이 거의 완료되는 시기입니다. 치아·교합·기능·얼굴 균형을 함께 설계하는 4D입체교정이 적합합니다.</div>
+          <a href="petit_treatment_by_age.html" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#8A6820;text-decoration:none;border:1px solid #E8D090;padding:4px 11px;border-radius:100px;background:#fff;font-weight:500">4D입체교정 안내 →</a>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <div class="cat">살리고 싶은 치아 현황</div>
@@ -343,7 +606,7 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);min-height:100vh
   <div class="phil-note">아래 중 나의 생각에 <strong>가장 가까운 것</strong>을 하나 선택해 주세요. 이 선택이 상담 방향에 반영됩니다.</div>
 
   <div class="phil" data-v="1" onclick="setPhil(this)">
-    <div class="ph-icon">🌿</div>
+    <div class="ph-icon"></div>
     <div><div class="ph-t">자연치아를 최대한 살리고 싶습니다</div><div class="ph-s">시간·비용이 더 들어도 내 치아를 가능하면 지키고 싶습니다</div></div>
   </div>
   <div class="phil" data-v="2" onclick="setPhil(this)">
@@ -351,11 +614,11 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);min-height:100vh
     <div><div class="ph-t">보존을 원하지만 현실도 고려합니다</div><div class="ph-s">자연치아 우선이지만, 상황에 따라 현실적인 선택도 열려 있습니다</div></div>
   </div>
   <div class="phil" data-v="3" onclick="setPhil(this)">
-    <div class="ph-icon">⚡</div>
+    <div class="ph-icon"></div>
     <div><div class="ph-t">효율적인 치료를 원합니다</div><div class="ph-s">시간·비용이 많이 든다면 발치 후 임플란트가 더 낫다고 생각합니다</div></div>
   </div>
   <div class="phil" data-v="4" onclick="setPhil(this)">
-    <div class="ph-icon">💬</div>
+    <div class="ph-icon"></div>
     <div><div class="ph-t">선생님 판단에 맡기겠습니다</div><div class="ph-s">전문가의 소견과 권고를 최대한 따르겠습니다</div></div>
   </div>
 </div>
@@ -384,6 +647,12 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);min-height:100vh
     <div class="chips" id="histchips"></div>
   </div>
   <div class="pmsg" id="philmsg"></div>
+
+  <!-- 증상별 관련 페이지 -->
+  <div id="sym-linkwrap" style="display:none;margin-top:8px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#007A54;margin-bottom:10px">선택하신 증상 · 관련 페이지</div>
+    <div id="sym-linkbox" style="display:flex;flex-direction:column;gap:8px"></div>
+  </div>
 </div>
 
 <!-- STEP 3 -->
@@ -419,34 +688,34 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);min-height:100vh
   <div class="big-t">구조가 바뀌면<br>기능이 살아납니다</div>
   <div class="sub-t">교합재건은 치아만 고치는 치료가 아닙니다.<br>뼈 → 치아 → 기능, 이 순서가 맞아야 오래 유지됩니다.</div>
 
-  <div style="background:var(--g);border-radius:14px;padding:18px 20px;margin-bottom:18px">
+  <div style="background:#F5F5F1;border:1px solid #E8E8E4;border-radius:14px;padding:18px 20px;margin-bottom:18px">
     <div style="font-size:11px;letter-spacing:.12em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:12px">3단계 치료 원칙</div>
     <div style="display:flex;flex-direction:column;gap:10px">
       <div style="display:flex;gap:11px;align-items:flex-start">
         <div style="width:22px;height:22px;border-radius:50%;background:rgba(200,168,75,.2);border:1px solid rgba(200,168,75,.5);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--go);font-weight:700;flex-shrink:0;margin-top:1px">1</div>
-        <div><div style="font-size:13px;font-weight:600;color:var(--cr);margin-bottom:2px">구조를 바로잡습니다</div><div style="font-size:11.5px;color:rgba(250,248,240,.55);line-height:1.5">무너진 교합 높이와 아래턱 위치를 회복합니다. 구조가 바뀌지 않으면 그 위에 아무리 치료해도 재발합니다.</div></div>
+        <div><div style="font-size:13px;font-weight:600;color:#1A1A18;margin-bottom:2px">구조를 바로잡습니다</div><div style="font-size:11.5px;color:#555550;line-height:1.5">무너진 교합 높이와 아래턱 위치를 회복합니다. 구조가 바뀌지 않으면 그 위에 아무리 치료해도 재발합니다.</div></div>
       </div>
       <div style="display:flex;gap:11px;align-items:flex-start">
         <div style="width:22px;height:22px;border-radius:50%;background:rgba(200,168,75,.2);border:1px solid rgba(200,168,75,.5);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--go);font-weight:700;flex-shrink:0;margin-top:1px">2</div>
-        <div><div style="font-size:13px;font-weight:600;color:var(--cr);margin-bottom:2px">치아를 재건합니다</div><div style="font-size:11.5px;color:rgba(250,248,240,.55);line-height:1.5">어금니가 제대로 물려야 삼킬 때 턱이 안정되고, 하중이 균등하게 분산됩니다. 손상된 치아는 최대한 살리며 진행합니다.</div></div>
+        <div><div style="font-size:13px;font-weight:600;color:#1A1A18;margin-bottom:2px">치아를 재건합니다</div><div style="font-size:11.5px;color:#555550;line-height:1.5">어금니가 제대로 물려야 삼킬 때 턱이 안정되고, 하중이 균등하게 분산됩니다. 손상된 치아는 최대한 살리며 진행합니다.</div></div>
       </div>
       <div style="display:flex;gap:11px;align-items:flex-start">
         <div style="width:22px;height:22px;border-radius:50%;background:rgba(200,168,75,.2);border:1px solid rgba(200,168,75,.5);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--go);font-weight:700;flex-shrink:0;margin-top:1px">3</div>
-        <div><div style="font-size:13px;font-weight:600;color:var(--cr);margin-bottom:2px">기능을 되살립니다</div><div style="font-size:11.5px;color:rgba(250,248,240,.55);line-height:1.5">코호흡·혀 위치·바른 삼키기·자세 교정을 통해 몸이 새 균형을 기억하게 합니다. 이 단계가 없으면 교합은 다시 무너집니다.</div></div>
+        <div><div style="font-size:13px;font-weight:600;color:#1A1A18;margin-bottom:2px">기능을 되살립니다</div><div style="font-size:11.5px;color:#555550;line-height:1.5">코호흡·혀 위치·바른 삼키기·자세 교정을 통해 몸이 새 균형을 기억하게 합니다. 이 단계가 없으면 교합은 다시 무너집니다.</div></div>
       </div>
     </div>
-    <div style="margin-top:14px;padding-top:13px;border-top:1px solid rgba(250,248,240,.1);font-size:12px;color:rgba(250,248,240,.45);line-height:1.6;font-style:italic">"교합은 기능이 만들고, 기능 이상이 무너뜨리며, 기능 회복이 다시 완성한다."</div>
+    <div style="margin-top:14px;padding-top:13px;border-top:1px solid #E8E8E4;font-size:12px;color:#555550;line-height:1.6;font-style:italic">"교합은 기능이 만들고, 기능 이상이 무너뜨리며, 기능 회복이 다시 완성한다."</div>
   </div>
   <div style="font-size:11px;letter-spacing:.12em;color:var(--mu);text-transform:uppercase;font-weight:500;margin-bottom:11px">회복되는 기능들</div>
   <div class="eg">
-    <div class="ec"><div class="ei">🦷</div><div class="et">씹기 기능</div><div class="eb">한쪽만 씹기, 질긴 음식 회피</div><div class="ea">양쪽으로 고르게 씹고, 저작력이 회복됩니다</div></div>
-    <div class="ec"><div class="ei">🎯</div><div class="et">턱·목·어깨</div><div class="eb">만성 통증, 근막 긴장</div><div class="ea">턱 위치가 안정되고 목·어깨 근긴장이 완화됩니다</div></div>
-    <div class="ec"><div class="ei">🌬️</div><div class="et">호흡·수면</div><div class="eb">입호흡, 코골이, 수면 장애</div><div class="ea">코호흡이 편해지고 수면 질이 향상됩니다</div></div>
-    <div class="ec"><div class="ei">🧍</div><div class="et">자세·체형</div><div class="eb">거북목, 어깨·등 불균형</div><div class="ea">두개-경추 정렬이 개선되고 자세가 편해집니다</div></div>
-    <div class="ec"><div class="ei">⚡</div><div class="et">활력·피로</div><div class="eb">자도 자도 피곤, 만성 피로</div><div class="ea">수면 개선과 근긴장 완화로 활력이 돌아옵니다</div></div>
-    <div class="ec"><div class="ei">🌿</div><div class="et">치아 수명</div><div class="eb">마모·파절 지속, 발치 위험</div><div class="ea">하중이 균등하게 분산되어 자연치아를 오래 씁니다</div></div>
-    <div class="ec"><div class="ei">💬</div><div class="et">삼키기·발음</div><div class="eb">비정상 연하, 발음 부정확</div><div class="ea">바른 삼키기 패턴이 회복되고 발음이 또렷해집니다</div></div>
-    <div class="ec"><div class="ei">😊</div><div class="et">입술·인상</div><div class="eb">입꼬리 처짐, 자연스럽지 않은 미소</div><div class="ea">입술 근육이 되살아나 자연스러운 미소가 됩니다</div></div>
+    <div class="ec"><div class="ei"></div><div class="et">씹기 기능</div><div class="eb">한쪽만 씹기, 질긴 음식 회피</div><div class="ea">양쪽으로 고르게 씹고, 저작력이 회복됩니다</div></div>
+    <div class="ec"><div class="ei"></div><div class="et">턱·목·어깨</div><div class="eb">만성 통증, 근막 긴장</div><div class="ea">턱 위치가 안정되고 목·어깨 근긴장이 완화됩니다</div></div>
+    <div class="ec"><div class="ei"></div><div class="et">호흡·수면</div><div class="eb">입호흡, 코골이, 수면 장애</div><div class="ea">코호흡이 편해지고 수면 질이 향상됩니다</div></div>
+    <div class="ec"><div class="ei"></div><div class="et">자세·체형</div><div class="eb">거북목, 어깨·등 불균형</div><div class="ea">두개-경추 정렬이 개선되고 자세가 편해집니다</div></div>
+    <div class="ec"><div class="ei"></div><div class="et">활력·피로</div><div class="eb">자도 자도 피곤, 만성 피로</div><div class="ea">수면 개선과 근긴장 완화로 활력이 돌아옵니다</div></div>
+    <div class="ec"><div class="ei"></div><div class="et">치아 수명</div><div class="eb">마모·파절 지속, 발치 위험</div><div class="ea">하중이 균등하게 분산되어 자연치아를 오래 씁니다</div></div>
+    <div class="ec"><div class="ei"></div><div class="et">삼키기·발음</div><div class="eb">비정상 연하, 발음 부정확</div><div class="ea">바른 삼키기 패턴이 회복되고 발음이 또렷해집니다</div></div>
+    <div class="ec"><div class="ei"></div><div class="et">입술·인상</div><div class="eb">입꼬리 처짐, 자연스럽지 않은 미소</div><div class="ea">입술 근육이 되살아나 자연스러운 미소가 됩니다</div></div>
   </div>
 
 </div>
@@ -455,19 +724,19 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);min-height:100vh
 <div class="scr" id="s5">
   <div class="tag-lbl">Step 5 · 다음 단계</div>
   <div style="text-align:center;padding:18px 0 26px">
-    <div style="font-size:38px;margin-bottom:18px">🌿</div>
+    <div style="font-size:38px;margin-bottom:18px"></div>
     <div class="cq">기본이 기적입니다.<br><em>Basic is Magic.</em></div>
     <div class="csub" style="margin-top:10px">교합이 무너진 것은 오랜 시간의 결과입니다.<br>회복도 시간이 필요합니다.<br>하지만 방향이 맞으면, 반드시 나아집니다.</div>
   </div>
   <div class="ctains" id="ctamsg"></div>
   <div class="cc">
-    <div class="cnm">🦷 생활의 기본 쁘띠치과, 기본이 기적이다</div>
+    <div class="cnm"> 생활의 기본 쁘띠치과, 기본이 기적이다 · Basic is Magic</div>
     <div class="crow">📍 대구시 남구 대봉로 66 2층</div>
     <div class="crow">📞 053-472-2828</div>
     <div style="margin-top:10px;font-size:11px;color:#bbb">교합치료 · 근기능훈련(MFT) · 안면성장 디자인 전문</div>
   </div>
   <div style="display:flex;gap:10px">
-    <a href="https://booking.naver.com/booking/13/bizes/743904" target="_blank" style="flex:1;text-decoration:none"><div style="background:var(--g);color:var(--cr);text-align:center;padding:14px;border-radius:50px;font-size:13px;font-weight:500;cursor:pointer">네이버 예약하기</div></a>
+    <a href="https://booking.naver.com/booking/13/bizes/743904" target="_blank" style="flex:1;text-decoration:none"><div style="background:#F5F5F1;border:1px solid #E8E8E4;color:#1A1A18;text-align:center;padding:14px;border-radius:50px;font-size:13px;font-weight:500;cursor:pointer">네이버 예약하기</div></a>
     <a href="https://pf.kakao.com/_xbhXYb" target="_blank" style="flex:1;text-decoration:none"><div style="background:var(--go);color:var(--g);text-align:center;padding:14px;border-radius:50px;font-size:13px;font-weight:600;cursor:pointer">카카오 상담</div></a>
   </div>
   <button class="rbtn" onclick="restart()">처음부터 다시 하기</button>
@@ -478,8 +747,8 @@ body{font-family:var(--ss);background:var(--cr);color:var(--tx);min-height:100vh
 <div class="nav"><div class="nav-in" id="navIn"><div class="sp"></div><button class="bg" id="btnNext" onclick="go(2)" disabled>분석 결과 보기 →</button></div></div>
 
 <script>
-const SYMS={s1:'턱관절 통증·소리',s2:'반복 두통',s3:'목·어깨 만성통증',s4:'피로가 안 풀림',s5:'치아 시림·목파임',s6:'잇몸 내려앉음·흔들림',s7:'이갈이·이악물기',s8:'치아 마모·단축',s9:'저작 기능 저하',s10:'편측 저작',s11:'입호흡',s12:'얼굴 비대칭'};
-const PTXT={'1':'🌿 자연치아 보존 지향','2':'⚖️ 보존 우선·현실 고려','3':'⚡ 효율·결과 중심','4':'💬 전문가 판단 우선'};
+const SYMS={s1:'턱관절 통증·소리',s2:'반복 두통',s3:'목·어깨 만성통증',s4:'피로가 안 풀림',s5:'치아 시림·목파임',s6:'잇몸 내려앉음·흔들림',s7:'이갈이·이악물기',s8:'치아 마모·단축',s9:'저작 기능 저하',s10:'편측 저작',s11:'입호흡',s12:'얼굴 비대칭',s13:'충치 반복',s14:'음식 자주 낌',s15:'시림·예민'};
+const PTXT={'1':' 자연치아 보존 지향','2':'⚖️ 보존 우선·현실 고려','3':' 효율·결과 중심','4':' 전문가 판단 우선'};
 const PMSG={
   '1':'<strong>자연치아 보존이 최우선이라면 치주재생 교합재건치료가 가장 잘 맞습니다.</strong> 쁘띠치과는 뽑기 전에 살릴 수 있는지를 먼저 확인합니다. MTA 신경재생치료, 엠도게인 치주재생치료 등 자연치아를 살리는 치료를 임플란트보다 우선 검토합니다.',
   '2':'<strong>현실적인 균형을 원하신다면</strong> 보존 가능한 치아는 최대한 살리되, 예후가 불량한 부위는 명확하게 설명드리고 함께 선택하는 방식으로 진행합니다. 정확한 상태 파악 없이는 어떤 선택도 올바를 수 없습니다.',
@@ -580,6 +849,42 @@ function b2(){
   const om={none:'타의원 상담 없음',once:'타의원 상담 경험',multi:'여러 치과 상담 경험'};if(st.other)add(om[st.other],'chip note');
   if(phil)add(PTXT[phil],'chip phil');
   if(phil)document.getElementById('philmsg').innerHTML=PMSG[phil];
+
+  // 증상별 관련 페이지 링크 동적 생성
+  const PAGE_MAP = {
+    s5:  [{url:'petit_sensitive.html',  title:'치아 시림 · 치아목파임', sub:'원인별 구분 · 교합 과부하 · 치료 방법'}],
+    s15: [{url:'petit_sensitive.html',  title:'치아 시림 · 치아목파임', sub:'원인별 구분 · 교합 과부하 · 치료 방법'}],
+    s7:  [{url:'petit_muscle_relax.html', title:'근이완치료', sub:'이갈이 · 이악물기 · 교합 과부하 차단'}],
+    s8:  [{url:'petit_nerve.html', title:'신경치료', sub:'신경치료 과정 · MTA 보존 먼저 시도 · 오해 해소'},
+          {url:'petit_resin_oneday.html', title:'무삭제레진 원데이보철', sub:'치아 마모 · 파절 재건 · 교합 동시 치료'},
+          {url:'petit_natural_tooth.html', title:'자연치아살리기', sub:'뽑기 전에 먼저 확인 · MTA · 엠도게인'}],
+    s6:  [{url:'petit_periodontitis.html', title:'만성복합치주염', sub:'잇몸 내려앉음 · 흔들림 · 세균+교합 원인'},
+          {url:'petit_natural_tooth.html', title:'자연치아살리기', sub:'흔들리는 치아 · 엠도게인 치주재생'}],
+    s13: [{url:'petit_cavity.html', title:'충치의 원인', sub:'반복 충치 · 교합·습관 연결 고리'}],
+    s11: [{url:'petit_prevention.html', title:'예방과 습관치료', sub:'입호흡 · 혀단축증 · 구강건조 해결'},
+          {url:'petit_tongue_tie.html', title:'설소대단축증 치료', sub:'혀 · 호흡 · 발음 · 성장'}],
+    s1:  [{url:'petit_muscle_relax.html', title:'근이완치료', sub:'턱관절 통증 · 소리 · 물리치료 보험 인증기관'},
+          {url:'petit_splint.html', title:'교합안정장치', sub:'이갈이·턱관절·치아 마모 차단 · 스플린트'}],
+  };
+  const lb = document.getElementById('sym-linkbox');
+  lb.innerHTML = '';
+  const seen = new Set();
+  let hasLink = false;
+  ['s5','s15','s7','s8','s6','s13','s11','s1'].forEach(id => {
+    if (!checked.has(id)) return;
+    (PAGE_MAP[id]||[]).forEach(p => {
+      if (seen.has(p.url)) return;
+      seen.add(p.url);
+      hasLink = true;
+      const a = document.createElement('a');
+      a.className = 'sym-link';
+      a.href = p.url;
+      a.target = '_blank';
+      a.innerHTML = `<div class="sym-link-body"><div class="sym-link-title">${p.title}</div><div class="sym-link-sub">${p.sub}</div></div><div class="sym-link-arr">→</div>`;
+      lb.appendChild(a);
+    });
+  });
+  document.getElementById('sym-linkwrap').style.display = hasLink ? 'block' : 'none';
 }
 
 function b3(){
@@ -603,5 +908,42 @@ function b5(){document.getElementById('ctamsg').innerHTML=PCTA[phil||'4'];}
 
 function restart(){checked.clear();st={};phil=null;document.querySelectorAll('.sc,.op,.col-opt,.phil').forEach(e=>e.classList.remove('on'));crownFu(false);go(1);}
 </script>
+
+<div class="share-float">
+  <div class="share-toast" id="shareToast">링크 복사됐습니다</div>
+  <button class="share-fab" onclick="doShare()" title="공유하기">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+  </button>
+</div>
+
+<script>
+async function doShare(){
+  var title=document.title||'쁘띠치과';
+  var url=location.href;
+  if(navigator.share){
+    try{await navigator.share({title:title,url:url});}catch(e){}
+  } else {
+    try{
+      await navigator.clipboard.writeText(url);
+      var t=document.getElementById('shareToast');
+      t.classList.add('show');
+      setTimeout(function(){t.classList.remove('show');},2000);
+    }catch(e){}
+  }
+}
+</script>
+<div class="rel-section">
+  <div class="rel-title">다음 단계 · 관련 페이지</div>
+  <div class="rel-links">
+  <a class="rel-link" href="petit_diagnosis.html" target="_blank">
+    <div class="rel-link-body"><div class="rel-link-title">교합진단</div><div class="rel-link-sub">정밀 진단으로 치료 방향 확정 — 60만원·2주 분석·상담 무료</div></div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_lifecycle_occlusion.html" target="_blank">
+    <div class="rel-link-body"><div class="rel-link-title">생애주기별 교합 노화</div><div class="rel-link-sub">내 증상의 원인 흐름으로 이해하기</div></div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  </div>
+</div>
 </body>
 </html>

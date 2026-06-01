@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>신경치료 | 쁘띠치과</title>
+<link rel="stylesheet" href="petit-design.css">
+<style>
+/* NAV */
+/* HERO */
+.hero{background:#007A54;padding:52px 20px 44px;position:relative;overflow:hidden;border-bottom:3px solid #C8A84B}
+.hero::before{content:'';position:absolute;right:-50px;top:-50px;width:240px;height:240px;border-radius:50%;background:rgba(200,168,75,.12)}
+.hero::after{content:'';position:absolute;left:-30px;bottom:-60px;width:180px;height:180px;border-radius:50%;background:rgba(250,248,240,.05)}
+.hero-tag{font-size:11px;letter-spacing:.16em;color:#C8A84B;text-transform:uppercase;margin-bottom:14px;position:relative}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(26px,6vw,40px);font-weight:700;color:#FAF8F0;line-height:1.25;margin-bottom:12px;position:relative}
+.hero-title em{color:#C8A84B;font-style:normal}
+.hero-sub{font-size:15px;color:rgba(250,248,240,.65);line-height:1.75;position:relative;margin-bottom:20px}
+.hero-notice{display:inline-flex;align-items:center;gap:8px;background:rgba(200,168,75,.18);border:1px solid rgba(200,168,75,.35);border-radius:8px;padding:10px 14px;font-size:13px;color:#C8A84B;line-height:1.5;position:relative}
+
+/* 오해 해소 섹션 */
+.myth-sec{background:#fff;padding:24px 20px}
+.myth-cards{display:flex;flex-direction:column;gap:10px}
+.myth-card{border-radius:12px;overflow:hidden;border:1.5px solid #E4E4DE}
+.myth-head{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#FDE8E8;border-bottom:1px solid #F0C4C4}
+.myth-badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:100px;background:#B04040;color:#FAF8F0;flex-shrink:0}
+.myth-q{font-family:'TmonMonsori',serif;font-size:15px;font-weight:600;color:#7A1A1A}
+.myth-ans{padding:13px 14px;background:#F7F7F3;font-size:13px;color:#333330;line-height:1.75}
+.myth-ans strong{color:#007A54}
+
+/* SECTION HEAD */
+/* 신경치료가 필요한 경우 */
+.when-sec{background:#fff;padding:20px}
+.when-items{display:flex;flex-direction:column;gap:8px}
+.wi{display:flex;align-items:flex-start;gap:12px;padding:13px 14px;border-radius:10px;background:#F7F7F3;border-left:3px solid #C8A84B}
+.wi-num{font-family:'TmonMonsori',serif;font-size:13px;font-weight:700;color:#C8A84B;flex-shrink:0;padding-top:1px}
+.wi-body{}
+.wi-title{font-size:14px;font-weight:600;color:#111110;margin-bottom:3px}
+.wi-desc{font-size:13px;color:#555550;line-height:1.65}
+
+/* 치료 단계 */
+.steps-sec{background:#FAFAF9;padding:20px}
+.step{margin-bottom:10px;border-radius:12px;overflow:hidden;border:1.5px solid #E4E4DE;background:#fff}
+.step-head{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer}
+.step-num{font-family:'TmonMonsori',serif;font-size:24px;font-weight:700;color:#C8A84B;flex-shrink:0;width:36px}
+.step-info{flex:1}
+.step-title{font-family:'TmonMonsori',serif;font-size:17px;font-weight:600;color:#111110;margin-bottom:2px}
+.step-sub{font-size:12px;color:var(--color-text-sub)}
+.step-arr{font-size:12px;color:#CCCCCC;transition:color .15s,transform .2s;flex-shrink:0}
+.step.open .step-arr{color:#007A54;transform:rotate(180deg)}
+.step-body{display:none;padding:0 18px 18px}
+.step.open .step-body{display:block}
+.step-items{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+.si{display:flex;align-items:flex-start;gap:8px;font-size:14px;color:#444440;line-height:1.65}
+.si::before{content:'→';color:#C8A84B;font-weight:600;flex-shrink:0;margin-top:1px}
+.si strong{color:#007A54;font-weight:600}
+.step-point{padding:11px 14px;background:#E8F5F0;border-left:3px solid #007A54;border-radius:0 8px 8px 0;font-size:13px;color:#1A5C3A;line-height:1.65}
+.step-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.tag{font-size:12px;padding:4px 10px;border-radius:100px;font-weight:600}
+/* 주의사항 */
+.care-sec{background:#fff;padding:20px}
+.care-inner{border-radius:12px;overflow:hidden;border:1.5px solid #E4E4DE}
+.care-head{background:#1E3D30;padding:12px 16px}
+.care-head-title{font-family:'TmonMonsori',serif;font-size:16px;font-weight:600;color:#FAF8F0}
+.care-head-sub{font-size:12px;color:rgba(250,248,240,.6);margin-top:3px}
+.care-items{padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.ci-item{display:flex;align-items:flex-start;gap:12px}
+.ci-label{flex-shrink:0;font-family:'TmonMonsori',serif;font-size:11px;font-weight:700;color:#007A54;background:#E8F5F0;padding:3px 8px;border-radius:4px;white-space:nowrap;margin-top:2px}
+.ci-desc{font-size:13px;color:#333330;line-height:1.7}
+.ci-desc strong{color:#007A54}
+.care-warn{margin:14px 16px;padding:11px 14px;background:#FFFBEF;border-left:3px solid #C8A84B;border-radius:0 8px 8px 0;font-size:13px;color:#5A4010;line-height:1.65}
+
+/* BTB 박스 */
+/* 연계 페이지 */
+/* .lc 클래스는 design.css에서 정의 */
+/* 공유 */
+@media(min-width:640px){
+  .nav,.hero,.myth-sec,.when-sec,.steps-sec,.care-sec,.btb-box,.link-sec,.cta{max-width:720px;margin-left:auto;margin-right:auto}
+  .share-float{right:calc(50% - 360px + 18px)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="index.html">생활의 기본, <em>쁘띠치과</em></a>
+  <a class="nav-home" href="index.html">← 홈</a>
+  <a class="nav-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero hero-dark">
+  <div class="hero-tag">ROOT CANAL TREATMENT · 신경치료</div>
+  <h1 class="hero-title">신경치료는<br><em>치아를 살리는 치료</em>입니다.</h1>
+  <p class="hero-sub">죽이는 것이 아닙니다.<br>치아 내부 감염을 제거해 뿌리까지 오래 쓸 수 있도록 합니다.</p>
+  <div class="hero-notice">쁘띠치과는 신경치료 전 MTA로 신경 보존을 먼저 시도합니다.<br>신경치료가 꼭 필요한 경우에만 진행합니다.</div>
+</section>
+
+<!-- 오해 해소 -->
+<section class="myth-sec">
+  <div class="sec-label">자주 하는 오해</div>
+  <div class="sec-title">신경치료에 대한<br>잘못된 생각들</div>
+  <div class="myth-cards">
+
+    <div class="myth-card">
+      <div class="myth-head">
+        <div class="myth-badge">오해</div>
+        <div class="myth-q">"신경치료를 하면 치아가 죽는다"</div>
+      </div>
+      <div class="myth-ans">신경치료 후 치아는 <strong>감각 신경과 혈관이 제거</strong>되어 냉온 자극을 느끼지 못하게 됩니다. 그러나 뿌리는 여전히 살아있어 턱뼈에 단단히 고정된 상태로 오래 사용할 수 있습니다. 치아를 죽이는 것이 아니라 <strong>감염된 내부를 치료해 치아를 유지</strong>하는 과정입니다.</div>
+    </div>
+
+    <div class="myth-card">
+      <div class="myth-head">
+        <div class="myth-badge">오해</div>
+        <div class="myth-q">"신경치료는 너무 아프다"</div>
+      </div>
+      <div class="myth-ans">충분한 <strong>국소 마취</strong> 하에 진행하므로 시술 중 통증은 거의 없습니다. 치수가 이미 괴사(사망)한 경우 마취 없이 진행하기도 합니다. 치료 후 며칠 간 뻐근한 느낌이 있을 수 있지만 이는 <strong>일시적인 염증 반응</strong>으로 진통제로 충분히 조절됩니다.</div>
+    </div>
+
+    <div class="myth-card">
+      <div class="myth-head">
+        <div class="myth-badge">오해</div>
+        <div class="myth-q">"신경치료 후 치아를 뽑아야 한다"</div>
+      </div>
+      <div class="myth-ans">신경치료의 목적은 오히려 <strong>발치를 막기 위한 것</strong>입니다. 치료 후 크라운(씌우기)으로 치아를 보호하면 수십 년도 사용할 수 있습니다. 뿌리가 건전하다면 신경치료 후에도 <strong>임플란트 없이 자연치아</strong>로 계속 쓸 수 있습니다.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 언제 필요한가 -->
+<div class="sh">
+  <div class="sh-title">신경치료가 필요한 경우</div>
+  <div class="sh-sub">이런 증상이 있다면 확인이 필요합니다</div>
+</div>
+<div class="sh-divider"></div>
+<section class="when-sec">
+  <div class="when-items">
+    <div class="wi">
+      <div class="wi-num">01</div>
+      <div class="wi-body">
+        <div class="wi-title">자발통 — 건드리지 않아도 욱신거림</div>
+        <div class="wi-desc">가만히 있어도 치아가 욱신거리거나 뛰는 느낌이 있다면 치수(신경)까지 세균이 침투한 신호입니다</div>
+      </div>
+    </div>
+    <div class="wi">
+      <div class="wi-num">02</div>
+      <div class="wi-body">
+        <div class="wi-title">뜨거운 것에 오래 시린 경우</div>
+        <div class="wi-desc">찬 것에 시리다가 금방 괜찮아지면 가역적 치수염입니다. 뜨거운 것에 통증이 30초 이상 지속된다면 비가역적 치수염으로 신경치료가 필요합니다</div>
+      </div>
+    </div>
+    <div class="wi">
+      <div class="wi-num">03</div>
+      <div class="wi-body">
+        <div class="wi-title">잇몸에 농이 차거나 붓는 경우</div>
+        <div class="wi-desc">뿌리 끝 염증이 진행되면 잇몸에 여드름처럼 농이 생기거나 뺨이 붓습니다. 항생제만으로는 해결되지 않고 신경치료로 감염원을 제거해야 합니다</div>
+      </div>
+    </div>
+    <div class="wi">
+      <div class="wi-num">04</div>
+      <div class="wi-body">
+        <div class="wi-title">깊은 충치 — 신경에 가까운 경우</div>
+        <div class="wi-desc">충치가 상아질 깊이까지 진행해 신경과 가까워지면 MTA 치수보존술을 먼저 시도합니다. 보존이 어려운 경우 신경치료로 넘어갑니다</div>
+      </div>
+    </div>
+    <div class="wi">
+      <div class="wi-num">05</div>
+      <div class="wi-body">
+        <div class="wi-title">외상·파절로 신경이 노출된 경우</div>
+        <div class="wi-desc">사고나 이갈이로 치아가 깨져 신경이 노출됐을 때입니다. 노출 시간과 범위에 따라 MTA 보존 또는 신경치료를 결정합니다</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MTA 먼저 시도 -->
+<div style="background:#FFFBEF;padding:16px 20px;border-top:2px solid #C8A84B;border-bottom:2px solid #C8A84B;margin-top:0">
+  <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#8A6820;margin-bottom:6px">쁘띠치과 원칙 — 신경치료 전</div>
+  <div style="font-family:'TmonMonsori',serif;font-size:16px;font-weight:600;color:#5A4010;margin-bottom:6px;line-height:1.45">신경치료 전 MTA 치수보존술을 먼저 시도합니다</div>
+  <div style="font-size:13px;color:#5A4010;line-height:1.7">충치가 깊어도 신경이 완전히 감염되지 않은 상태라면 MTA로 신경을 덮어 보존할 수 있습니다. 신경을 살린 채 치아를 유지하면 수명이 훨씬 길어집니다. 신경치료는 보존이 불가능하다고 판단될 때만 진행합니다.</div>
+  <a href="petit_save_tooth_guide.html" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:12px;font-weight:600;color:#8A6820;text-decoration:none;border:1px solid #E8D090;border-radius:100px;padding:5px 12px;background:#fff">MTA 치수보존술 자세히 보기 →</a>
+</div>
+
+<!-- 신경치료 3단계 -->
+<div class="sh" style="margin-top:0">
+  <div class="sh-title">신경치료 단계</div>
+  <div class="sh-sub">보통 3~5회 내원 — 각 단계에서 무엇을 하는지</div>
+</div>
+<div class="sh-divider"></div>
+<div class="steps-sec">
+
+  <div class="step" onclick="toggleStep(this)">
+    <div class="step-head">
+      <div class="step-num">1</div>
+      <div class="step-info">
+        <div class="step-title">압력 해소 · 감염 치수 제거</div>
+        <div class="step-sub">응급 처치 — 통증 완화 단계</div>
+      </div>
+      <div class="step-arr">▾</div>
+    </div>
+    <div class="step-body">
+      <div class="step-items">
+        <div class="si"><strong>국소 마취</strong> 후 치아 머리 부분에 작은 구멍을 뚫어 내부 압력을 해소합니다</div>
+        <div class="si">방사선 촬영으로 치수강 형태와 치근 길이를 확인합니다</div>
+        <div class="si">염증으로 팽창된 <strong>감염 치수</strong>를 제거해 즉각적인 통증 완화를 도모합니다</div>
+        <div class="si">치수가 이미 괴사한 경우 감각이 없어 마취 없이 진행하기도 합니다</div>
+      </div>
+      <div class="step-point">이 단계 후 통증이 크게 줄어듭니다. 임시 충전을 하고 다음 방문까지 치료받은 쪽으로 씹지 않도록 주의합니다</div>
+    </div>
+  </div>
+
+  <div class="step" onclick="toggleStep(this)">
+    <div class="step-head">
+      <div class="step-num">2</div>
+      <div class="step-info">
+        <div class="step-title">근관 청소 · 소독</div>
+        <div class="step-sub">3~5회 내원 — 치료의 핵심 단계</div>
+      </div>
+      <div class="step-arr">▾</div>
+    </div>
+    <div class="step-body">
+      <div class="step-items">
+        <div class="si"><strong>나이타이 파일·핸드 파일</strong>로 치근관 내 잔여 치수와 세균을 철저히 제거합니다</div>
+        <div class="si"><strong>차아염소산나트륨 소독액</strong>으로 근관을 세척합니다. 세균 사멸과 잔여 조직 용해 역할을 합니다</div>
+        <div class="si">근관 벽을 다듬어 최종 밀봉 재료가 잘 들어갈 수 있도록 형태를 만듭니다</div>
+        <div class="si">증상이 남아있으면 소독·치료를 반복합니다. <strong>서두르지 않고 완전히 깨끗해질 때까지</strong> 진행합니다</div>
+      </div>
+      <div class="step-point">이 단계를 충분히 해야 재감염이 줄어듭니다. 방문 횟수를 줄이려고 서두르면 장기 예후가 나빠집니다</div>
+      <div class="step-tags">
+        <span class="tag tag-g">3~5회 내원</span>
+        <span class="tag tag-y">치료 중 딱딱한 음식 금지</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step" onclick="toggleStep(this)">
+    <div class="step-head">
+      <div class="step-num">3</div>
+      <div class="step-info">
+        <div class="step-title">근관 밀봉 · 치아 재건</div>
+        <div class="step-sub">최종 마무리 — MTA 또는 GP cone 사용</div>
+      </div>
+      <div class="step-arr">▾</div>
+    </div>
+    <div class="step-body">
+      <div class="step-items">
+        <div class="si">근관이 깨끗해지고 증상이 없으면 <strong>MTA(광물 삼산화 응집체)</strong>로 근관을 완전히 밀봉합니다</div>
+        <div class="si">MTA는 강한 염기성으로 뿌리 끝 산성 염증을 중화하고, 높은 밀폐성으로 <strong>세균 재감염을 차단</strong>합니다</div>
+        <div class="si">밀봉 후 치아 머리 부분을 코어로 채우고, <strong>크라운(씌우기)으로 치아를 보호</strong>합니다</div>
+        <div class="si">크라운 없이 방치하면 치아가 약해져 파절될 수 있습니다. 신경치료 후 크라운은 선택이 아닌 필수입니다</div>
+      </div>
+      <div class="step-point">쁘띠치과는 가능한 경우 무삭제 레진 재건으로 치아 삭제 없이 마무리합니다. 크라운이 꼭 필요한지 함께 판단합니다</div>
+      <div class="step-tags">
+        <span class="tag tag-g">MTA 밀봉 — 재감염 차단</span>
+        <span class="tag tag-y">크라운으로 보호 필수</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 신경치료 후 주의사항 -->
+<div class="sh" style="margin-top:0">
+  <div class="sh-title">치료 후 주의사항</div>
+  <div class="sh-sub">치료 결과를 지키는 것은 관리에 달려 있습니다</div>
+</div>
+<div class="sh-divider"></div>
+<section class="care-sec">
+  <div class="care-inner">
+    <div class="care-head">
+      <div class="care-head-title">신경치료 중·후 꼭 지켜야 할 것들</div>
+      <div class="care-head-sub">지키지 않으면 치료가 실패할 수 있습니다</div>
+    </div>
+    <div class="care-items">
+      <div class="ci-item">
+        <div class="ci-label">치료 중</div>
+        <div class="ci-desc"><strong>치료받은 쪽으로 씹지 마세요.</strong> 치아가 약해져 있어 딱딱한 음식에 파절될 수 있습니다. 임시 충전물이 탈락하면 바로 내원해야 합니다</div>
+      </div>
+      <div class="ci-item">
+        <div class="ci-label">마취 후</div>
+        <div class="ci-desc">마취는 2~3시간 후 풀립니다. <strong>마취가 풀리기 전 식사는 금지</strong>입니다. 입술이나 뺨을 깨물어 상처를 낼 수 있습니다</div>
+      </div>
+      <div class="ci-item">
+        <div class="ci-label">통증 관리</div>
+        <div class="ci-desc">치료 후 며칠 간 뻐근하거나 압통이 있을 수 있습니다. 이는 <strong>일시적인 염증 반응</strong>으로 진통제로 조절합니다. 갑자기 심하게 붓거나 통증이 극심해지면 바로 연락하세요</div>
+      </div>
+      <div class="ci-item">
+        <div class="ci-label">치료 일정</div>
+        <div class="ci-desc">중간에 치료를 중단하면 안 됩니다. <strong>근관이 오염되어 처음부터 다시 해야 하거나 발치</strong>로 이어질 수 있습니다. 통증이 없어졌어도 치료가 끝난 것이 아닙니다</div>
+      </div>
+      <div class="ci-item">
+        <div class="ci-label">치료 완료 후</div>
+        <div class="ci-desc">신경치료가 끝난 치아는 <strong>감각 신경이 없어 충치가 생겨도 통증을 느끼지 못합니다.</strong> 정기 검진으로 조기 발견이 필수입니다. 수분 공급이 줄어 치아가 잘 부서지므로 크라운 후에도 딱딱한 음식은 주의합니다</div>
+      </div>
+    </div>
+    <div class="care-warn">신경치료 완료 후에도 교합 원인이 해결되지 않으면 같은 방식으로 재발합니다. 쁘띠치과는 신경치료 후 교합 조정을 함께 진행해 재발을 막습니다.</div>
+  </div>
+</section>
+
+<!-- BTB 박스 -->
+<div class="btb-box" style="margin-top:8px">
+  <div class="btb-inner">
+    <div class="btb-label">BASIC IS MAGIC · 쁘띠치과 관점</div>
+    <div class="btb-title">신경치료는 마지막이 아니라<br>새 출발입니다</div>
+    <div class="btb-items">
+      <div class="bi">신경치료 자체보다 왜 신경까지 감염됐는지가 중요합니다. 교합 과부하, 반복 충치, 잘못된 습관 — 원인이 남아있으면 같은 방식으로 재발합니다</div>
+      <div class="bi">신경치료 후 뿌리를 살려 자연치아로 계속 사용하는 것이 임플란트보다 훨씬 좋습니다. 치주인대가 살아있는 자연치아는 씹는 감각을 그대로 전달합니다</div>
+      <div class="bi">치료 후 크라운 없이 방치하다 치아가 깨지면 그때는 살리기 어렵습니다. 마무리 수복까지가 신경치료입니다</div>
+    </div>
+  </div>
+</div>
+
+<!-- 연계 페이지 -->
+<section class="link-sec" style="margin-top:8px">
+  <div class="link-title">함께 확인하면 좋은 페이지</div>
+  <div class="link-cards">
+    <a class="lc main" href="petit_natural_tooth.html">
+      <div class="lc-body">
+        <div class="lc-title">자연치아살리기</div>
+        <div class="lc-sub">신경치료 전 선택지 · MTA · 엠도게인 · 뿌리 보존</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc sub" href="petit_save_tooth_guide.html">
+      <div class="lc-body">
+        <div class="lc-title">MTA 치수보존술 상세</div>
+        <div class="lc-sub">신경을 살리는 치료 · 치근단 절제술 · 의도적 재식술</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc sub" href="petit_resin_oneday.html">
+      <div class="lc-body">
+        <div class="lc-title">무삭제레진 원데이보철</div>
+        <div class="lc-sub">신경치료 후 마무리 · 치아 삭제 최소화 · 교합 동시 치료</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc gold" href="petit_sensitive.html">
+      <div class="lc-body">
+        <div class="lc-title">치아 시림 · 치아목 파임</div>
+        <div class="lc-sub">시림이 심해지기 전에 — 신경치료로 이어지는 경로</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+    <a class="lc gold" href="petit_cavity.html">
+      <div class="lc-body">
+        <div class="lc-title">충치의 원인</div>
+        <div class="lc-sub">반복 충치 · 교합과의 연결 · 신경치료 예방</div>
+      </div>
+      <div class="lc-arr">→</div>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-title">신경치료가 필요한지<br>먼저 확인해 드립니다</div>
+  <div class="cta-sub">MTA로 신경을 살릴 수 있는지,<br>신경치료가 필요한 경우 단계와 예후를 함께 안내드립니다</div>
+  <div class="cta-btns">
+    <a class="btn-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/></svg>
+      네이버 예약
+    </a>
+    <a class="btn-kakao" href="https://pf.kakao.com/_xbhXYb" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#191919"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.67 1.648 5.012 4.146 6.396L5 21l5.12-2.983C10.734 18.01 11.363 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z"/></svg>
+      카카오 상담
+    </a>
+  </div>
+  <div class="cta-info">대구시 남구 대봉로 66 2층 · 053-472-2828</div>
+</section>
+
+<!-- 공유 -->
+<div class="share-float">
+  <div class="share-toast" id="shareToast">링크 복사됐습니다</div>
+  <button class="share-fab" onclick="doShare()" title="공유하기">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+  </button>
+</div>
+
+<script>
+function toggleStep(el){ el.classList.toggle('open'); }
+async function doShare(){
+  var title=document.title||'쁘띠치과';
+  var url=location.href;
+  if(navigator.share){
+    try{await navigator.share({title:title,url:url});}catch(e){}
+  } else {
+    try{
+      await navigator.clipboard.writeText(url);
+      var t=document.getElementById('shareToast');
+      t.classList.add('show');
+      setTimeout(function(){t.classList.remove('show');},2000);
+    }catch(e){}
+  }
+}
+</script>
+</body>
+</html>

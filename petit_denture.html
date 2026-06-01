@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>아름다운 틀니 | 쁘띠치과</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+.hero{background:#fff;padding:52px 20px 44px;border-bottom:1px solid #E0E0DA}
+.hero-tag{font-size:11px;letter-spacing:.14em;color:#888880;text-transform:uppercase;margin-bottom:14px}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,40px);font-weight:400;color:#111110;line-height:1.35;letter-spacing:-.02em;margin-bottom:14px}
+.hero-title em{font-style:italic;color:#007A54}
+.hero-sub{font-size:14px;color:#555550;line-height:1.85;margin-bottom:18px}
+.hero-insight{background:#F5F5F1;border-left:2px solid #C8A84B;padding:13px 16px;font-size:13px;color:#555550;line-height:1.75}
+.hero-insight strong{color:#1A1A18;font-weight:500}
+
+.sh{background:#007A54;padding:18px 20px}
+.sh-title{font-family:'TmonMonsori',serif;font-size:20px;font-weight:600;color:#FAF8F0}
+.sh-sub{font-size:12px;color:#FAF8F0;margin-top:3px}
+
+.wrap{padding:0 20px;background:#fff}
+
+/* 비교표 */
+.compare{margin:20px 0;border:1px solid #E0E0DA;border-radius:12px;overflow:hidden}
+.cmp-head{display:grid;grid-template-columns:1fr 1fr 1fr;background:#F5F5F1}
+.cmp-h{padding:11px 12px;font-size:12px;font-weight:500;color:#555550;text-align:center;border-right:1px solid #E0E0DA}
+.cmp-h:last-child{border-right:none}
+.cmp-h.highlight{background:#007A54;color:#FAF8F0}
+.cmp-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid #EAEAE4}
+.cmp-cell{padding:12px 12px;font-size:13px;color:#555550;text-align:center;border-right:1px solid #EAEAE4;line-height:1.5}
+.cmp-cell:last-child{border-right:none}
+.cmp-cell.label{color:#1A1A18;font-weight:500;background:#FAFAF9;text-align:left;font-size:12px}
+.cmp-cell.highlight{color:#007A54;font-weight:500;background:#FFFBEF}
+
+/* 설계 단계 */
+.steps{padding:0 20px;background:#FAFAF9;padding-top:16px;padding-bottom:8px}
+.step-title{font-family:'TmonMonsori',serif;font-size:18px;font-weight:400;color:#111110;margin-bottom:16px;letter-spacing:-.01em}
+.step{display:flex;align-items:flex-start;gap:14px;padding:16px;background:#fff;border-radius:10px;border:1px solid #E0E0DA;margin-bottom:9px}
+.step-num{font-family:'TmonMonsori',serif;font-size:22px;font-weight:300;color:#C8A84B;flex-shrink:0;line-height:1;min-width:28px}
+.step-body{}
+.step-title2{font-size:15px;font-weight:500;color:#111110;margin-bottom:4px}
+.step-desc{font-size:13px;color:#555550;line-height:1.65}
+.step-petit{font-size:12px;color:#007A54;font-weight:500;margin-top:6px;border-left:2px solid #C8A84B;padding-left:9px;line-height:1.6}
+
+/* 3요소 */
+.three{padding:20px 20px;background:#fff}
+.three-title{font-family:'TmonMonsori',serif;font-size:18px;font-weight:400;color:#111110;margin-bottom:16px;letter-spacing:-.01em}
+.three-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+.tg{background:#F5F5F1;border-radius:10px;padding:16px 14px;border:1px solid #E0E0DA}
+.tg-tag{font-size:10px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:500;margin-bottom:7px}
+.tg-title{font-family:'TmonMonsori',serif;font-size:15px;font-weight:600;color:#111110;margin-bottom:7px}
+.tg-items{font-size:12px;color:#555550;line-height:1.9}
+
+.phil{padding:40px 20px;border-top:1px solid #E0E0DA;background:#fff;margin-top:8px}
+.ph-q{font-family:'TmonMonsori',serif;font-size:clamp(17px,4.5vw,22px);font-weight:300;color:#111110;line-height:1.75;margin-bottom:10px}
+.ph-q em{font-style:italic;color:#007A54}
+.ph-src{font-size:12px;color:#888880;letter-spacing:.06em}
+
+@media(max-width:480px){.three-grid{grid-template-columns:1fr}}
+@media(min-width:640px){
+  .hero,.wrap,.steps,.three,.phil{max-width:720px;margin-left:auto;margin-right:auto;padding-left:32px;padding-right:32px}
+  .sh,}
+
+/* ── 색상 규칙 ── */
+/* 딥그린 배경 → 크림 글자 */
+.sh .sh-title{color:#FAF8F0}
+.sh .sh-sub{color:#FAF8F0}
+.selfcheck .sc-title{color:#FAF8F0}
+.selfcheck .sc-sub{color:rgba(250,248,240,.55)}
+.selfcheck .sc-label{color:rgba(200,168,75,.7)}
+.cta .cta /* 밝은 배경 → 어두운 글자 */
+.hero .hero-title{color:#111110}
+.hero .hero-sub{color:#888880}
+.hero .hero-tag{color:#AAAAAA}
+/* 예외: 딥그린 hero */
+.hero-child .hero-title,.hero-teen .hero-title,.hero-adult .hero-title{color:#FAF8F0 !important}
+.hero-child .hero-subtitle,.hero-teen .hero-subtitle,.hero-adult .hero-subtitle{color:#FAF8F0 !important}
+
+@font-face {
+  font-family: 'TmonMonsori';
+  src: url('fonts/TmonMonsori_otf.otf') format('opentype'),
+       url('fonts/TmonMonsori_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('fonts/pretendard-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
+<link rel="stylesheet" href="petit-design.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="index.html">생활의 기본, <em>쁘띠치과</em></a>
+  <a class="nav-home" href="petit_general.html">← 일반진료</a>
+  <a class="nav-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">Beautiful Denture · 아름다운 틀니</div>
+  <h1 class="hero-title">의사가 직접 설계하는<br><em>아름다운 틀니</em></h1>
+  <p class="hero-sub">틀니는 원래 의사가 직접 턱 위치를 설정하고,<br>기능과 심미를 확인하며 만들어야 합니다.<br>쁘띠치과에서는 그것을 기본으로 합니다.</p>
+  <div class="hero-insight">
+    <strong>"당연한 것을 당연하게 합니다."</strong> 의사가 직접 하는 것이 특별한 게 아닙니다. 그게 원래 맞는 방식입니다.
+  </div>
+</section>
+
+<div class="sh">
+  <div class="sh-title">무엇이 다른가요?</div>
+  <div class="sh-sub">일반 틀니 vs 아름다운 틀니</div>
+</div>
+
+<div class="wrap" style="padding-top:20px;padding-bottom:20px">
+  <div class="compare">
+    <div class="cmp-head">
+      <div class="cmp-h">항목</div>
+      <div class="cmp-h">일반적인 틀니</div>
+      <div class="cmp-h highlight">쁘띠치과 아름다운 틀니</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell label">턱 위치 설정</div>
+      <div class="cmp-cell">기공소 기준</div>
+      <div class="cmp-cell highlight">의사가 직접 설정</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell label">교합 설계</div>
+      <div class="cmp-cell">표준 규격</div>
+      <div class="cmp-cell highlight">개인 교합 분석 후 설계</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell label">기능 확인</div>
+      <div class="cmp-cell">없음</div>
+      <div class="cmp-cell highlight">혀·발음·삼키기 직접 확인</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell label">심미 설계</div>
+      <div class="cmp-cell">치아 모양만</div>
+      <div class="cmp-cell highlight">얼굴·입술 지지 함께 설계</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell label">설계자</div>
+      <div class="cmp-cell">기공사 중심</div>
+      <div class="cmp-cell highlight">의사 직접 디자인</div>
+    </div>
+  </div>
+</div>
+
+<!-- 설계 3요소 -->
+<div class="three">
+  <div class="three-title">아름다운 틀니의 세 기둥</div>
+  <div class="three-grid">
+    <div class="tg">
+      <div class="tg-tag">교합</div>
+      <div class="tg-title">턱 위치</div>
+      <div class="tg-items">수직고경 설정<br>턱관절 안정<br>교합 균형</div>
+    </div>
+    <div class="tg">
+      <div class="tg-tag">기능</div>
+      <div class="tg-title">일상 기능</div>
+      <div class="tg-items">혀 운동 확인<br>발음 테스트<br>삼키기 기능</div>
+    </div>
+    <div class="tg">
+      <div class="tg-tag">심미</div>
+      <div class="tg-title">얼굴 디자인</div>
+      <div class="tg-items">얼굴 지지력<br>입술 지지<br>자연스러운 외형</div>
+    </div>
+  </div>
+</div>
+
+<!-- 제작 단계 -->
+<div class="steps">
+  <div class="step-title">제작 과정</div>
+
+  <div class="step">
+    <div class="step-num">01</div>
+    <div class="step-body">
+      <div class="step-title2">정밀 진단 · 교합 분석</div>
+      <div class="step-desc">현재 턱 위치, 교합 높이(수직고경), 턱관절 상태를 분석합니다.</div>
+      <div class="step-petit">기존 틀니가 있다면 무엇이 불편한지, 왜 그런지를 먼저 파악합니다.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">02</div>
+    <div class="step-body">
+      <div class="step-title2">턱 위치 직접 설정</div>
+      <div class="step-desc">의사가 직접 턱의 안정 위치를 결정합니다. 이 단계가 모든 것의 기준이 됩니다.</div>
+      <div class="step-petit">이 과정이 빠지면 아무리 좋은 재료도 소용없습니다.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">03</div>
+    <div class="step-body">
+      <div class="step-title2">기능 시적 · 확인</div>
+      <div class="step-desc">임시 틀니를 착용해보며 발음, 삼키기, 혀 운동이 자연스러운지 확인합니다.</div>
+      <div class="step-petit">말하고, 삼키고, 웃는 모습을 직접 보며 조정합니다.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">04</div>
+    <div class="step-body">
+      <div class="step-title2">심미 설계 · 최종 완성</div>
+      <div class="step-desc">치아 형태, 색상, 입술과 얼굴의 지지력을 함께 보며 최종 설계합니다.</div>
+      <div class="step-petit">젊어 보이는 것이 목표가 아닙니다. 자연스럽고 기능적인 것이 목표입니다.</div>
+    </div>
+  </div>
+</div>
+
+<div class="phil">
+  <div class="ph-q">"틀니가 잘 맞으면<br>먹고, 말하고, 웃는 것이<br><em>달라집니다.</em>"</div>
+  <div class="ph-src">쁘띠치과 · 아름다운 틀니</div>
+</div>
+
+<section class="cta">
+  <div class="cta-title">틀니 상담</div>
+  <div class="cta-sub">현재 틀니가 불편하시거나<br>처음 틀니를 고려 중이신 분 모두 환영합니다</div>
+  <div class="cta-btns">
+    <a class="btn-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">네이버 예약</a>
+    <a class="btn-kakao" href="https://pf.kakao.com/_xbhXYb" target="_blank">카카오 상담</a>
+  </div>
+</section>
+
+<div class="share-float">
+  <div class="share-toast" id="shareToast">링크 복사됐습니다</div>
+  <button class="share-fab" onclick="doShare()" title="공유하기">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+  </button>
+</div>
+<script>
+async function doShare(){
+  if(navigator.share){try{await navigator.share({title:document.title,url:location.href});}catch(e){}}
+  else{try{await navigator.clipboard.writeText(location.href);var t=document.getElementById('shareToast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}catch(e){}}
+}
+</script>
+</body>
+</html>

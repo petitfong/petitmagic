@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>쁘띠치과 디자인 시스템 v2.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600&family=Noto+Serif+KR:wght@400;600&display=swap" rel="stylesheet">
+<style>
+h1{font-family:'Noto Serif KR',serif;font-size:22px;font-weight:600;color:#111110;margin-bottom:4px}
+.sub{font-size:12px;color:#555550;margin-bottom:24px}
+
+/* 섹션 */
+.sec{margin-bottom:32px}
+/* 컬러 칩 */
+.color-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.chip{border-radius:10px;overflow:hidden;border:0.5px solid rgba(0,0,0,.08)}
+.chip-swatch{height:56px}
+.chip-info{background:#fff;padding:8px 10px}
+.chip-name{font-size:12px;font-weight:500;color:#111110;margin-bottom:2px}
+.chip-hex{font-size:11px;color:#555550;font-family:monospace}
+.chip-use{font-size:10.5px;color:#888880;margin-top:3px;line-height:1.4}
+
+/* 배경-글자 조합 */
+.combo-grid{display:flex;flex-direction:column;gap:6px}
+.combo{border-radius:10px;overflow:hidden;display:flex}
+.combo-bg{flex-shrink:0;width:90px;display:flex;align-items:center;justify-content:center;padding:14px 10px;text-align:center}
+.combo-bg-label{font-size:10px;font-weight:600;line-height:1.4}
+.combo-texts{flex:1;padding:12px 14px;background:#fff;border-left:0.5px solid rgba(0,0,0,.06)}
+.combo-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.combo-row:last-child{margin-bottom:0}
+.combo-label{font-size:10px;color:#888880;width:36px;flex-shrink:0}
+.combo-sample{font-size:14px;font-weight:500}
+.combo-hex{font-size:10px;color:#888880;font-family:monospace;margin-left:auto}
+
+/* 금지 */
+.ban-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.ban{border-radius:10px;overflow:hidden}
+.ban-swatch{padding:12px 14px;font-size:13px}
+.ban-label{font-size:10.5px;padding:6px 10px;font-weight:500}
+.ban-ok{background:#E8F5F0;color:#1E5C38}
+.ban-no{background:#FAEAE0;color:#B04020}
+
+/* 폰트 */
+.font-card{background:#fff;border-radius:10px;border:0.5px solid #E0E0DA;padding:16px;margin-bottom:8px}
+.font-label{font-size:10px;letter-spacing:.1em;color:#C8A84B;font-weight:600;text-transform:uppercase;margin-bottom:8px}
+.font-sample-serif{font-family:'Noto Serif KR',serif;font-size:24px;font-weight:600;color:#111110;margin-bottom:6px}
+.font-sample-sans{font-family:'Noto Sans KR',sans-serif;font-size:16px;color:#555550;margin-bottom:6px}
+.font-use{font-size:11.5px;color:#555550;line-height:1.65}
+
+/* 버튼 */
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.btn{padding:11px 20px;border-radius:100px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px;text-decoration:none;border:none;cursor:default}
+.btn-note{font-size:11px;color:#555550;margin-top:4px}
+
+/* 정보 박스 */
+.boxes{display:flex;flex-direction:column;gap:8px}
+.box{border-radius:10px;padding:14px 16px}
+.box-label{font-size:10px;letter-spacing:.1em;font-weight:600;text-transform:uppercase;margin-bottom:6px}
+.box-text{font-size:13px;line-height:1.7}
+.box-text strong{font-weight:600}
+
+/* 핵심 규칙 */
+.rule-card{background:#FAFAF9;border-radius:12px;padding:16px 18px;margin-bottom:8px;border-left:3px solid #C8A84B}
+.rule-title{font-size:13px;font-weight:600;color:#FAF8F0;margin-bottom:8px}
+.rule-items{display:flex;flex-direction:column;gap:5px}
+.rule-item{font-size:12.5px;color:#888880;display:flex;gap:8px;line-height:1.5}
+.rule-icon{flex-shrink:0;font-weight:700}
+.rule-icon.ok{color:#80D8A8}
+.rule-icon.no{color:#F09090}
+
+/* 간격 */
+.radius-row{display:flex;gap:8px;flex-wrap:wrap}
+.radius-chip{background:#fff;border:1px solid #E0E0DA;padding:12px 16px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.radius-box{background:#E8F5F0;border:1.5px solid #007A54}
+.radius-val{font-size:11px;color:#555550;font-family:monospace}
+
+/* guide 헤더 */
+.guide-header{background:#007A54;border-radius:12px;padding:20px 18px;margin-bottom:24px;border-bottom:3px solid #C8A84B}
+.guide-header h1{color:#FAF8F0;margin-bottom:4px}
+.guide-header .sub{color:#888880;margin-bottom:0}
+.guide-badge{display:inline-block;background:rgba(200,168,75,.2);color:#C8A84B;font-size:11px;padding:3px 10px;border-radius:100px;border:1px solid rgba(200,168,75,.3);margin-bottom:12px;font-weight:600;letter-spacing:.06em}
+
+@media(min-width:640px){body{max-width:720px;margin:0 auto}}
+</style>
+</head>
+<body>
+
+<div class="guide-header">
+  <div class="guide-badge">DESIGN SYSTEM v2.0</div>
+  <h1>쁘띠치과 디자인 시스템</h1>
+  <div class="sub">2025년 5월 확정 · petit-design.css 기준</div>
+</div>
+
+<!-- 브랜드 컬러 -->
+<div class="sec">
+  <div class="sec-title">브랜드 컬러</div>
+  <div class="color-grid">
+    <div class="chip">
+      <div class="chip-swatch" style="background:#007A54"></div>
+      <div class="chip-info"><div class="chip-name">딥그린 (메인)</div><div class="chip-hex">#007A54</div><div class="chip-use">nav, 섹션 헤더, CTA 배경</div></div>
+    </div>
+    <div class="chip">
+      <div class="chip-swatch" style="background:#009B6B"></div>
+      <div class="chip-info"><div class="chip-name">라이트그린</div><div class="chip-hex">#009B6B</div><div class="chip-use">호버, 링크, 보조 강조</div></div>
+    </div>
+    <div class="chip">
+      <div class="chip-swatch" style="background:#E8F5F0;border-bottom:1px solid #C5E8DC"></div>
+      <div class="chip-info"><div class="chip-name">연그린 배경</div><div class="chip-hex">#E8F5F0</div><div class="chip-use">섹션·카드 배경</div></div>
+    </div>
+    <div class="chip">
+      <div class="chip-swatch" style="background:#C5E8DC"></div>
+      <div class="chip-info"><div class="chip-name">민트 포인트</div><div class="chip-hex">#C5E8DC</div><div class="chip-use">테두리, 칩 배경</div></div>
+    </div>
+    <div class="chip">
+      <div class="chip-swatch" style="background:#C8A84B"></div>
+      <div class="chip-info"><div class="chip-name">골드</div><div class="chip-hex">#C8A84B</div><div class="chip-use">번호, 포인트, 강조 태그</div></div>
+    </div>
+    <div class="chip">
+      <div class="chip-swatch" style="background:#FFFBEF;border-bottom:1px solid #E8D090"></div>
+      <div class="chip-info"><div class="chip-name">크림 강조 배경</div><div class="chip-hex">#FFFBEF</div><div class="chip-use">멘트, 인사이트 박스</div></div>
+    </div>
+    <div class="chip">
+      <div class="chip-swatch" style="background:#FAFAF9;border-bottom:1px solid #E0E0DA"></div>
+      <div class="chip-info"><div class="chip-name">페이지 배경</div><div class="chip-hex">#FAFAF9</div><div class="chip-use">기본 페이지 배경</div></div>
+    </div>
+    <div class="chip">
+      <div class="chip-swatch" style="background:#F5F5F1;border-bottom:1px solid #E0E0DA"></div>
+      <div class="chip-info"><div class="chip-name">중간 배경</div><div class="chip-hex">#F5F5F1</div><div class="chip-use">보조 섹션 배경</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 텍스트 컬러 -->
+<div class="sec">
+  <div class="sec-title">텍스트 컬러</div>
+  <div class="color-grid">
+    <div class="chip">
+      <div class="chip-swatch" style="background:#111110"></div>
+      <div class="chip-info"><div class="chip-name">제목</div><div class="chip-hex">#111110</div><div class="chip-use">h1, h2, 카드 제목</div></div>
+    </div>
+    <div class="chip">
+      <div class="chip-swatch" style="background:#1A1A18"></div>
+      <div class="chip-info"><div class="chip-name">본문</div><div class="chip-hex">#1A1A18</div><div class="chip-use">강조 본문</div></div>
+    </div>
+    <div class="chip">
+      <div class="chip-swatch" style="background:#555550"></div>
+      <div class="chip-info"><div class="chip-name">중간 강조</div><div class="chip-hex">#555550</div><div class="chip-use">일반 본문 텍스트</div></div>
+    </div>
+    <div class="chip">
+      <div class="chip-swatch" style="background:#888880"></div>
+      <div class="chip-info"><div class="chip-name">보조 설명</div><div class="chip-hex">#888880</div><div class="chip-use">설명, 캡션</div></div>
+    </div>
+    <div class="chip">
+      <div class="chip-swatch" style="background:#AAAAAA"></div>
+      <div class="chip-info"><div class="chip-name">캡션·태그</div><div class="chip-hex">#AAAAAA</div><div class="chip-use">부가 정보, 날짜</div></div>
+    </div>
+    <div class="chip">
+      <div class="chip-swatch" style="background:#FAF8F0"></div>
+      <div class="chip-info"><div class="chip-name">딥그린 위</div><div class="chip-hex">#FAF8F0</div><div class="chip-use">딥그린 배경 위 텍스트</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 핵심: 배경-글자 조합 규칙 -->
+<div class="sec">
+  <div class="sec-title">배경 × 글자 조합 규칙 — 핵심</div>
+  <div class="combo-grid">
+
+    <div class="combo" style="border:0.5px solid #E0E0DA;border-radius:10px;overflow:hidden">
+      <div class="combo-bg" style="background:#FAFAF9">
+        <div class="combo-bg-label" style="color:#555550;font-size:10px">페이지 배경<br>#FAFAF9</div>
+      </div>
+      <div class="combo-texts">
+        <div class="combo-row"><span class="combo-label">제목</span><span class="combo-sample" style="color:#111110">제목 텍스트</span><span class="combo-hex">#111110</span></div>
+        <div class="combo-row"><span class="combo-label">본문</span><span class="combo-sample" style="color:#555550">본문 텍스트</span><span class="combo-hex">#555550</span></div>
+        <div class="combo-row"><span class="combo-label">보조</span><span class="combo-sample" style="color:#555550">보조 텍스트</span><span class="combo-hex">#888880</span></div>
+      </div>
+    </div>
+
+    <div class="combo" style="border:0.5px solid #C5E8DC;border-radius:10px;overflow:hidden">
+      <div class="combo-bg" style="background:#E8F5F0">
+        <div class="combo-bg-label" style="color:#007A54;font-size:10px">연그린 배경<br>#E8F5F0</div>
+      </div>
+      <div class="combo-texts">
+        <div class="combo-row"><span class="combo-label">제목</span><span class="combo-sample" style="color:#007A54">제목 텍스트</span><span class="combo-hex">#007A54</span></div>
+        <div class="combo-row"><span class="combo-label">본문</span><span class="combo-sample" style="color:#1A1A18">본문 텍스트</span><span class="combo-hex">#1A1A18</span></div>
+        <div class="combo-row"><span class="combo-label">보조</span><span class="combo-sample" style="color:#555550">보조 텍스트</span><span class="combo-hex">#555550</span></div>
+      </div>
+    </div>
+
+    <div class="combo" style="border:0.5px solid #E8D090;border-radius:10px;overflow:hidden">
+      <div class="combo-bg" style="background:#FFFBEF">
+        <div class="combo-bg-label" style="color:#8A6820;font-size:10px">크림 강조<br>#FFFBEF</div>
+      </div>
+      <div class="combo-texts">
+        <div class="combo-row"><span class="combo-label">제목</span><span class="combo-sample" style="color:#8A6820">제목 텍스트</span><span class="combo-hex">#8A6820</span></div>
+        <div class="combo-row"><span class="combo-label">본문</span><span class="combo-sample" style="color:#5A4010">본문 텍스트</span><span class="combo-hex">#5A4010</span></div>
+        <div class="combo-row"><span class="combo-label">인용</span><span class="combo-sample" style="color:#5A4010;font-style:italic">"인용 텍스트"</span><span class="combo-hex">#5A4010</span></div>
+      </div>
+    </div>
+
+    <div class="combo" style="border:0.5px solid #C5E8DC;border-radius:10px;overflow:hidden">
+      <div class="combo-bg" style="background:#007A54">
+        <div class="combo-bg-label" style="color:#FAF8F0;font-size:10px">딥그린<br>#007A54</div>
+      </div>
+      <div class="combo-texts" style="background:#007A54;border-left:0.5px solid rgba(255,255,255,.15)">
+        <div class="combo-row"><span class="combo-label" style="color:#888880">제목</span><span class="combo-sample" style="color:#FAF8F0">제목 텍스트</span><span class="combo-hex" style="color:#888880">#FAF8F0</span></div>
+        <div class="combo-row"><span class="combo-label" style="color:#888880">본문</span><span class="combo-sample" style="color:#555550">본문 텍스트</span><span class="combo-hex" style="color:#888880">rgba(.85)</span></div>
+        <div class="combo-row"><span class="combo-label" style="color:#888880">태그</span><span class="combo-sample" style="color:#C8A84B">골드 태그</span><span class="combo-hex" style="color:#888880">#C8A84B</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 절대 금지 -->
+<div class="sec">
+  <div class="sec-title">절대 금지 조합</div>
+  <div class="ban-grid">
+    <div class="ban" style="border:1px solid #E0E0DA;border-radius:10px;overflow:hidden">
+      <div class="ban-swatch" style="background:#007A54;color:rgba(250,248,240,.85)">딥그린 위 회색</div>
+      <div class="ban-label ban-no">✗ 보이지 않음</div>
+    </div>
+    <div class="ban" style="border:1px solid #E0E0DA;border-radius:10px;overflow:hidden">
+      <div class="ban-swatch" style="background:#FAFAF9;color:#555550">크림 위 크림</div>
+      <div class="ban-label ban-no">✗ 보이지 않음</div>
+    </div>
+    <div class="ban" style="border:1px solid #E0E0DA;border-radius:10px;overflow:hidden">
+      <div class="ban-swatch" style="background:#007A54;color:#1A1A18">딥그린 위 검정</div>
+      <div class="ban-label ban-no">✗ 가독성 없음</div>
+    </div>
+    <div class="ban" style="border:1px solid #E0E0DA;border-radius:10px;overflow:hidden">
+      <div class="ban-swatch" style="background:#FEE500;color:#fff">카카오 위 흰색</div>
+      <div class="ban-label ban-no">✗ 절대 금지</div>
+    </div>
+  </div>
+</div>
+
+<!-- 외부 버튼 -->
+<div class="sec">
+  <div class="sec-title">외부 서비스 버튼 — 절대 변경 금지</div>
+  <div class="btn-row">
+    <div class="btn" style="background:#03C75A;color:#fff">네이버 예약</div>
+    <div class="btn" style="background:#FEE500;color:#191919">카카오 상담</div>
+  </div>
+  <div class="rule-card" style="margin-top:8px">
+    <div class="rule-title">버튼 고정 규칙</div>
+    <div class="rule-items">
+      <div class="rule-item"><span class="rule-icon ok">✓</span>네이버 예약 — 배경 #03C75A / 텍스트 #FFFFFF — 브랜드 컬러 변경 시에도 유지</div>
+      <div class="rule-item"><span class="rule-icon ok">✓</span>카카오 상담 — 배경 #FEE500 / 텍스트 #191919 — 절대 불변</div>
+      <div class="rule-item"><span class="rule-icon no">✗</span>두 버튼 모두 쁘띠치과 컬러로 바꾸지 말 것</div>
+    </div>
+  </div>
+</div>
+
+<!-- 폰트 -->
+<div class="sec">
+  <div class="sec-title">폰트 시스템</div>
+  <div class="font-card">
+    <div class="font-label">제목 · 강조 — TmonMonsori</div>
+    <div class="font-sample-serif">기본이 기적이다</div>
+    <div class="font-use">h1, h2, 섹션 제목, 슬로건, 카드 제목, 번호<br>파일: fonts/TmonMonsori_otf.otf</div>
+  </div>
+  <div class="font-card">
+    <div class="font-label">본문 · UI — Pretendard Variable</div>
+    <div class="font-sample-sans">Basic is Magic — 생활의 기본이 되는 치과</div>
+    <div class="font-use">body, nav, 버튼, 설명, 캡션 — weight 300~700<br>파일: fonts/pretendard-variable.woff2</div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-title">폰트 적용 방법</div>
+    <div class="rule-items">
+      <div class="rule-item"><span class="rule-icon ok">✓</span>모든 HTML에 &lt;link rel="stylesheet" href="petit-design.css"&gt; 추가</div>
+      <div class="rule-item"><span class="rule-icon ok">✓</span>제목: font-family: 'TmonMonsori', serif</div>
+      <div class="rule-item"><span class="rule-icon ok">✓</span>본문: font-family: 'Pretendard', sans-serif</div>
+      <div class="rule-item"><span class="rule-icon no">✗</span>Noto Serif KR / Noto Sans KR — fallback으로만 사용, 직접 지정 금지</div>
+    </div>
+  </div>
+</div>
+
+<!-- 정보 박스 컴포넌트 -->
+<div class="sec">
+  <div class="sec-title">정보 박스 컴포넌트</div>
+  <div class="boxes">
+    <div class="box" style="background:#FFFBEF;border:1px solid #E8D090;border-left:3px solid #C8A84B;border-radius:0 10px 10px 0">
+      <div class="box-label" style="color:#8A6820">box-gold · 멘트·인사이트</div>
+      <div class="box-text" style="color:#5A4010">"충치가 반복되는 건 단순히 단 걸 좋아해서가 아닙니다." <strong>원인이 있습니다.</strong></div>
+    </div>
+    <div class="box" style="background:#E8F5F0;border:1px solid #C5E8DC;border-radius:10px">
+      <div class="box-label" style="color:#007A54">box-green · 핵심 포인트</div>
+      <div class="box-text" style="color:#1A1A18">교합 불균형이 충치 반복의 원인입니다. <strong style="color:#007A54">바르게 씹고 삼켜야</strong> 재발이 줄어듭니다.</div>
+    </div>
+    <div class="box" style="background:#F5F5F1;border:1px solid #E0E0DA;border-radius:10px">
+      <div class="box-label" style="color:#555550">box-neutral · 일반 안내</div>
+      <div class="box-text" style="color:#555550">6개월에 한 번 정기 검진만으로도 초기에 발견할 수 있습니다.</div>
+    </div>
+    <div class="box" style="background:#007A54;border-top:3px solid #C8A84B;border-radius:12px">
+      <div class="box-label" style="color:#C8A84B">딥그린 강조 박스</div>
+      <div class="box-text" style="color:#555550">임플란트 뼈 재생에도 피부 재생에도 <strong style="color:#FAF8F0">같은 기술</strong>이 적용됩니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 핵심 규칙 요약 -->
+<div class="sec">
+  <div class="sec-title">핵심 규칙 요약</div>
+  <div class="rule-card">
+    <div class="rule-title">크림·흰·연회색 배경 (#FAFAF9 #FAF8F0 #F5F5F1 #fff)</div>
+    <div class="rule-items">
+      <div class="rule-item"><span class="rule-icon ok">✓</span>제목 → #111110</div>
+      <div class="rule-item"><span class="rule-icon ok">✓</span>본문 → #555550</div>
+      <div class="rule-item"><span class="rule-icon ok">✓</span>보조 → #888880</div>
+      <div class="rule-item"><span class="rule-icon no">✗</span>rgba(250,248,240,.xx) 사용 금지 — 배경에 묻혀 보이지 않음</div>
+    </div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-title">딥그린 배경 (#007A54)</div>
+    <div class="rule-items">
+      <div class="rule-item"><span class="rule-icon ok">✓</span>제목 → #FAF8F0</div>
+      <div class="rule-item"><span class="rule-icon ok">✓</span>본문 → rgba(250,248,240,.85) 이상</div>
+      <div class="rule-item"><span class="rule-icon ok">✓</span>태그·강조 → #C8A84B 불투명 골드</div>
+      <div class="rule-item"><span class="rule-icon no">✗</span>#888880 #555550 #AAAAAA 회색 계열 사용 금지</div>
+      <div class="rule-item"><span class="rule-icon no">✗</span>rgba(250,248,240,.5) 이하 사용 금지 — 안 보임</div>
+    </div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-title">골드 강조 배경 (#FFFBEF)</div>
+    <div class="rule-items">
+      <div class="rule-item"><span class="rule-icon ok">✓</span>제목·레이블 → #8A6820</div>
+      <div class="rule-item"><span class="rule-icon ok">✓</span>본문·인용 → #5A4010</div>
+      <div class="rule-item"><span class="rule-icon no">✗</span>흰색·크림 텍스트 사용 금지</div>
+    </div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-title">테두리 규칙</div>
+    <div class="rule-items">
+      <div class="rule-item"><span class="rule-icon ok">✓</span>기본 테두리 → #E0E0DA</div>
+      <div class="rule-item"><span class="rule-icon ok">✓</span>연한 테두리 → #EAEAE4</div>
+      <div class="rule-item"><span class="rule-icon ok">✓</span>딥그린 위 테두리 → rgba(250,248,240,.25) 이상</div>
+      <div class="rule-item"><span class="rule-icon ok">✓</span>연그린 테두리 → #C5E8DC</div>
+      <div class="rule-item"><span class="rule-icon no">✗</span>딥그린 위 #E8E8E4 흰 테두리 — 보이지 않음</div>
+    </div>
+  </div>
+</div>
+
+<!-- 간격 -->
+<div class="sec">
+  <div class="sec-title">Border Radius</div>
+  <div class="radius-row">
+    <div class="radius-chip" style="border-radius:8px;border:0.5px solid #E0E0DA">
+      <div class="radius-box" style="width:32px;height:32px;border-radius:8px"></div>
+      <div class="radius-val">8px · sm</div>
+    </div>
+    <div class="radius-chip" style="border-radius:10px;border:0.5px solid #E0E0DA">
+      <div class="radius-box" style="width:32px;height:32px;border-radius:10px"></div>
+      <div class="radius-val">10px · md</div>
+    </div>
+    <div class="radius-chip" style="border-radius:12px;border:0.5px solid #E0E0DA">
+      <div class="radius-box" style="width:32px;height:32px;border-radius:12px"></div>
+      <div class="radius-val">12px · lg</div>
+    </div>
+    <div class="radius-chip" style="border-radius:16px;border:0.5px solid #E0E0DA">
+      <div class="radius-box" style="width:32px;height:32px;border-radius:16px"></div>
+      <div class="radius-val">16px · xl</div>
+    </div>
+    <div class="radius-chip" style="border-radius:100px;border:0.5px solid #E0E0DA">
+      <div class="radius-box" style="width:48px;height:24px;border-radius:100px"></div>
+      <div class="radius-val">100px · pill</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

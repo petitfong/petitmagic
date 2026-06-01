@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>아름다운 치료 | 쁘띠치과</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+/* HERO */
+.hero{background:#fff;padding:52px 20px 44px;border-bottom:1px solid #E0E0DA}
+.hero-tag{font-size:11px;letter-spacing:.14em;color:#888880;text-transform:uppercase;margin-bottom:14px}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,40px);font-weight:400;color:#111110;line-height:1.35;letter-spacing:-.02em;margin-bottom:14px}
+.hero-title em{font-style:italic;color:#7A5A6A}
+.hero-sub{font-size:14px;color:#555550;line-height:1.85;margin-bottom:20px}
+.hero-insight{background:#F5F5F1;border-left:2px solid #C8A84B;padding:13px 16px;font-size:13px;color:#555550;line-height:1.75}
+.hero-insight strong{color:#1A1A18;font-weight:500}
+
+/* PRF 연결 */
+.prf-box{background:#007A54;border-radius:12px;padding:20px 20px;margin:20px 20px 0;border-top:3px solid #C8A84B}
+.prf-tag{font-size:11px;letter-spacing:.1em;color:#C8A84B;font-weight:600;margin-bottom:8px}
+.prf-title{font-family:'TmonMonsori',serif;font-size:18px;font-weight:600;color:#FAF8F0;margin-bottom:8px;line-height:1.45}
+.prf-body{font-size:13px;color:#888880;line-height:1.8}
+.prf-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.prf-chip{font-size:12px;background:rgba(250,248,240,.1);color:#FAF8F0;border-radius:100px;padding:4px 12px;border:1px solid rgba(250,248,240,.15)}
+
+/* 섹션 헤더 */
+.sh{background:#007A54;padding:18px 20px;margin-top:0}
+.sh-title{font-family:'TmonMonsori',serif;font-size:20px;font-weight:600;color:#FAF8F0}
+.sh-sub{font-size:12px;color:#FAF8F0;margin-top:3px}
+
+/* 시술 카드 */
+.treatments{padding:16px 20px;background:#fff;display:flex;flex-direction:column;gap:12px}
+.tx-card{background:#F9F9F7;border:1px solid #E0E0DA;border-radius:12px;padding:20px 18px}
+.tx-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:12px}
+.tx-icon{width:50px;height:50px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tx-icon-txt{font-family:'TmonMonsori',serif;font-size:10.5px;color:#555550;text-align:center;line-height:1.4;font-weight:600}
+.tx-info{}
+.tx-num{font-size:11px;letter-spacing:.1em;color:#C8A84B;font-weight:600;margin-bottom:3px}
+.tx-title{font-family:'TmonMonsori',serif;font-size:17px;font-weight:600;color:#111110;line-height:1.35}
+.tx-en{font-size:12px;color:#888880;margin-top:2px}
+.tx-desc{font-size:13.5px;color:#555550;line-height:1.8;margin-bottom:12px}
+.tx-chips{display:flex;flex-wrap:wrap;gap:5px}
+.tc{font-size:11.5px;background:#E8F5F0;color:#007A54;border-radius:100px;padding:3px 10px;font-weight:500}
+
+/* 추천 대상 */
+.for-whom{background:#FAFAF9;padding:20px 20px;border-top:1px solid #E0E0DA}
+.fw-title{font-family:'TmonMonsori',serif;font-size:17px;font-weight:400;color:#111110;margin-bottom:14px;letter-spacing:-.01em}
+.fw-items{display:flex;flex-direction:column;gap:8px}
+.fwi{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:#fff;border-radius:9px;border:1px solid #E0E0DA}
+.fwi::before{content:'→';color:#C8A84B;font-weight:700;flex-shrink:0;font-size:14px;margin-top:1px}
+.fwi-txt{font-size:13.5px;color:#555550;line-height:1.6}
+
+/* phil */
+.phil{padding:40px 20px;border-top:1px solid #E0E0DA;background:#fff;margin-top:8px}
+.ph-q{font-family:'TmonMonsori',serif;font-size:clamp(17px,4.5vw,22px);font-weight:300;color:#111110;line-height:1.75;margin-bottom:10px}
+.ph-q em{font-style:italic;color:#7A5A6A}
+.ph-src{font-size:12px;color:#888880;letter-spacing:.06em}
+
+/* 관련 링크 */
+.rel-section{padding:28px 20px;background:#F5F5F1;border-top:1px solid #E0E0DA}
+.rel-title{font-size:12px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.rel-links{display:flex;flex-direction:column;gap:8px}
+.rel-link{display:flex;align-items:center;gap:12px;padding:13px 15px;background:#fff;border-radius:10px;border:1px solid #E0E0DA;text-decoration:none;color:#1A1A18;transition:opacity .15s}
+.rel-link:hover{opacity:.75}
+.rel-link-body{flex:1}
+.rel-link-title{font-size:14px;font-weight:500;color:#111110;margin-bottom:2px}
+.rel-link-sub{font-size:12px;color:#555550}
+.rel-link-arr{font-size:14px;color:#C8A84B;font-weight:600;flex-shrink:0}
+
+.sh .sh-title{color:#FAF8F0}
+.sh .sh-sub{color:#FAF8F0}
+
+@media(min-width:640px){
+  .hero,.prf-box,.treatments,.for-whom,.phil,.rel-section{max-width:720px;margin-left:auto;margin-right:auto;padding-left:32px;padding-right:32px}
+  .prf-box{margin-left:auto;margin-right:auto}
+  .sh,}
+
+@font-face {
+  font-family: 'TmonMonsori';
+  src: url('fonts/TmonMonsori_otf.otf') format('opentype'),
+       url('fonts/TmonMonsori_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('fonts/pretendard-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
+<link rel="stylesheet" href="petit-design.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="index.html">생활의 기본, <em>쁘띠치과</em></a>
+  <a class="nav-home" href="index.html">← 홈</a>
+  <a class="nav-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">Beautiful Treatment · 아름다운 치료</div>
+  <h1 class="hero-title">건강한 치아 위에<br><em>아름다운 얼굴을</em></h1>
+  <p class="hero-sub">쁘띠치과는 치아와 교합 치료에서 쌓은 기술을<br>피부 재생과 얼굴 리프팅에도 활용합니다.<br>기능과 심미, 두 가지를 함께 완성합니다.</p>
+  <div class="hero-insight">
+    <strong>자가혈재생인자(PRF)</strong>는 임플란트 뼈 재생에도, 피부 재생에도 같은 원리로 적용됩니다. 이것이 쁘띠치과 아름다운 치료의 출발점입니다.
+  </div>
+</section>
+
+<!-- PRF 연결 -->
+<div class="prf-box">
+  <div class="prf-tag">쁘띠치과만의 연결</div>
+  <div class="prf-title">임플란트 뼈 재생에도<br>피부 재생에도 같은 기술</div>
+  <div class="prf-body">편안한 임플란트에서 활용하는 자가혈재생인자(PRF)는 본인의 혈액에서 추출한 성장인자입니다. 뼈를 재생하는 원리와 피부를 재생하는 원리가 같습니다. 쁘띠치과는 이 기술을 피부 미용에도 적용합니다.</div>
+  <div class="prf-chips">
+    <span class="prf-chip">본인 혈액</span>
+    <span class="prf-chip">거부반응 없음</span>
+    <span class="prf-chip">뼈 + 피부 재생</span>
+    <span class="prf-chip">자연스러운 결과</span>
+  </div>
+</div>
+
+<!-- 5가지 시술 -->
+<div class="sh" style="margin-top:16px">
+  <div class="sh-title">5가지 아름다운 치료</div>
+  <div class="sh-sub">피부 재생 · 수분 · 리프팅</div>
+</div>
+
+<div class="treatments">
+
+  <div class="tx-card">
+    <div class="tx-head">
+      <div class="tx-icon" style="background:#007A54">
+        <div class="tx-icon-txt">자가혈<br>재생</div>
+      </div>
+      <div class="tx-info">
+        <div class="tx-num">01 · PRF Vampire Facial</div>
+        <div class="tx-title">자가혈재생인자 피부 술식</div>
+        <div class="tx-en">뱀파이어 술식</div>
+      </div>
+    </div>
+    <div class="tx-desc">본인의 혈액에서 추출한 PRF(혈소판풍부피브린)를 피부에 적용합니다. 임플란트 뼈 재생에 사용하는 동일한 기술로, 피부 재생·탄력·혈색을 자연스럽게 개선합니다. 거부반응이 없고 자연스러운 결과를 원하는 분께 적합합니다.</div>
+    <div class="tx-chips">
+      <span class="tc">본인 혈액</span><span class="tc">거부반응 없음</span><span class="tc">피부 재생</span><span class="tc">탄력·혈색</span>
+    </div>
+  </div>
+
+  <div class="tx-card">
+    <div class="tx-head">
+      <div class="tx-icon" style="background:#009B6B">
+        <div class="tx-icon-txt">PDRN<br>재생</div>
+      </div>
+      <div class="tx-info">
+        <div class="tx-num">02 · PDRN Regeneration</div>
+        <div class="tx-title">PDRN 재생치료</div>
+        <div class="tx-en">DNA 재생 인자</div>
+      </div>
+    </div>
+    <div class="tx-desc">DNA 유래 성분으로 피부 세포 재생을 촉진합니다. 손상된 피부 회복, 모공 개선, 피부 톤 균일화에 효과적입니다. 예민한 피부에도 적합하며 자연스러운 재생 효과를 원하는 분께 권합니다.</div>
+    <div class="tx-chips">
+      <span class="tc">세포 재생</span><span class="tc">모공 개선</span><span class="tc">피부 톤</span><span class="tc">예민 피부 가능</span>
+    </div>
+  </div>
+
+  <div class="tx-card">
+    <div class="tx-head">
+      <div class="tx-icon" style="background:#3A6A7A">
+        <div class="tx-icon-txt" style="color:#555550">물광<br>주사</div>
+      </div>
+      <div class="tx-info">
+        <div class="tx-num">03 · Skin Booster</div>
+        <div class="tx-title">물광주사</div>
+        <div class="tx-en">수분 보충·광채</div>
+      </div>
+    </div>
+    <div class="tx-desc">히알루론산 등 보습 성분을 피부 진피층에 직접 주입합니다. 즉각적인 수분감과 광채를 주고 피부 결을 개선합니다. 건조하거나 칙칙한 피부, 피부 결이 고르지 않은 분께 효과적입니다.</div>
+    <div class="tx-chips">
+      <span class="tc">즉각 수분</span><span class="tc">광채</span><span class="tc">피부 결 개선</span>
+    </div>
+  </div>
+
+  <div class="tx-card">
+    <div class="tx-head">
+      <div class="tx-icon" style="background:#7A5A4A">
+        <div class="tx-icon-txt" style="color:#555550">실리<br>프팅</div>
+      </div>
+      <div class="tx-info">
+        <div class="tx-num">04 · Thread Lifting</div>
+        <div class="tx-title">실리프팅</div>
+        <div class="tx-en">비절개 리프팅</div>
+      </div>
+    </div>
+    <div class="tx-desc">실을 이용해 처진 피부를 끌어올리는 리프팅 시술입니다. 절개 없이 자연스러운 리프팅 효과를 줍니다. 턱선·볼·이마 등 얼굴 윤곽을 개선하며 교합 치료 후 얼굴 밸런스를 완성하는 데 활용됩니다.</div>
+    <div class="tx-chips">
+      <span class="tc">비절개</span><span class="tc">자연스러운 리프팅</span><span class="tc">윤곽 개선</span>
+    </div>
+  </div>
+
+  <div class="tx-card">
+    <div class="tx-head">
+      <div class="tx-icon" style="background:#7A4A5A">
+        <div class="tx-icon-txt" style="color:#555550">고주파<br>리프팅</div>
+      </div>
+      <div class="tx-info">
+        <div class="tx-num">05 · RF Lifting</div>
+        <div class="tx-title">고주파 리프팅</div>
+        <div class="tx-en">콜라겐 재생</div>
+      </div>
+    </div>
+    <div class="tx-desc">고주파 에너지로 피부 진피층을 자극해 콜라겐 재생을 유도합니다. 주사 없이 피부 탄력을 높이고 처짐을 개선합니다. 통증이 적고 일상 복귀가 빠른 것이 장점입니다.</div>
+    <div class="tx-chips">
+      <span class="tc">비주사</span><span class="tc">콜라겐 재생</span><span class="tc">탄력</span><span class="tc">빠른 회복</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- 추천 대상 -->
+<div class="for-whom">
+  <div class="fw-title">이런 분께 권합니다</div>
+  <div class="fw-items">
+    <div class="fwi"><div class="fwi-txt">교합·교정 치료 후 얼굴 밸런스까지 완성하고 싶은 분</div></div>
+    <div class="fwi"><div class="fwi-txt">자연스러운 방법으로 피부 재생을 원하는 분</div></div>
+    <div class="fwi"><div class="fwi-txt">임플란트 후 얼굴 볼륨 회복을 원하는 분</div></div>
+    <div class="fwi"><div class="fwi-txt">건강한 치과 치료와 함께 얼굴 심미를 함께 관리하고 싶은 분</div></div>
+    <div class="fwi"><div class="fwi-txt">화학적 시술보다 자연 재생을 선호하는 분</div></div>
+  </div>
+</div>
+
+<div class="phil">
+  <div class="ph-q">"건강한 치아와 교합이 기반이 될 때<br><em>아름다움도 오래갑니다.</em>"</div>
+  <div class="ph-src">쁘띠치과 · 아름다운 치료</div>
+</div>
+
+<div class="rel-section">
+  <div class="rel-title">함께 보면 좋은 페이지</div>
+  <div class="rel-links">
+    <a class="rel-link" href="petit_implant.html" target="_blank">
+      <div class="rel-link-body"><div class="rel-link-title">편안한 임플란트</div><div class="rel-link-sub">자가혈재생인자(PRF) · Flapless · 피에조 상악동거상</div></div>
+      <div class="rel-link-arr">→</div>
+    </a>
+    <a class="rel-link" href="petit_dental_spa.html" target="_blank">
+      <div class="rel-link-body"><div class="rel-link-title">바른미소스파</div><div class="rel-link-sub">BASIC · BALANCE · RECOVERY — 관리 프로그램</div></div>
+      <div class="rel-link-arr">→</div>
+    </a>
+    <a class="rel-link" href="petit_treatment_philosophy.html" target="_blank">
+      <div class="rel-link-body"><div class="rel-link-title">쁘띠치과 건강한 치료</div><div class="rel-link-sub">예방부터 재생까지 · 1년 보증 책임제</div></div>
+      <div class="rel-link-arr">→</div>
+    </a>
+  </div>
+</div>
+
+<section class="cta">
+  <div class="cta-title">아름다운 치료 상담</div>
+  <div class="cta-sub">어떤 시술이 나에게 맞는지<br>카카오톡으로 먼저 문의해 주세요</div>
+  <div class="cta-btns">
+    <a class="btn-naver" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">네이버 예약</a>
+    <a class="btn-kakao" href="https://pf.kakao.com/_xbhXYb" target="_blank">카카오 상담</a>
+  </div>
+</section>
+
+<div class="share-float">
+  <div class="share-toast" id="shareToast">링크 복사됐습니다</div>
+  <button class="share-fab" onclick="doShare()" title="공유하기">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+  </button>
+</div>
+<script>
+async function doShare(){
+  if(navigator.share){try{await navigator.share({title:document.title,url:location.href});}catch(e){}}
+  else{try{await navigator.clipboard.writeText(location.href);var t=document.getElementById('shareToast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}catch(e){}}
+}
+</script>
+</body>
+</html>

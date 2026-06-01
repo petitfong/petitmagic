@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>쁘띠치과 소개 | 생활의 기본이 되는 치과</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+:root{
+  --g:#007A54;--g2:#009B6B;
+  --cr:#FAFAF9;--cr2:#EFEFEB;
+  --go:#C8A84B;--go2:#FFFBEF;
+  --tx:#1A1A18;--mu:#888880;--lt:#B8B8B0;--wh:#fff;
+  --br:#E8E8E4;
+  --sf:'Noto Serif KR',serif;--ss:'Noto Sans KR',sans-serif
+}
+html{scroll-behavior:smooth}
+.gnav{position:sticky;top:0;z-index:200;background:rgba(250,250,249,.97);backdrop-filter:blur(12px);border-bottom:1px solid #F5F5F1}
+.gnav-inner{max-width:720px;margin:0 auto;display:flex;align-items:center;padding:0 20px}
+.gnav-logo{font-family:'TmonMonsori',serif;font-size:13px;color:#555550;font-weight:400;padding:14px 0;margin-right:auto}
+.gnav-logo em{color:#007A54;font-style:normal}
+.gnav-home{font-size:13px;color:#555550;text-decoration:none;padding:14px 12px}
+.gnav-home:hover{color:var(--go)}
+.gnav-cta{margin-left:8px;background:#03C75A;color:#FFFFFF;border:none;padding:7px 15px;border-radius:20px;font-size:11.5px;font-weight:600;font-family:'Pretendard',sans-serif;cursor:pointer;text-decoration:none;display:inline-block}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--g);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:100px 28px 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 40%,#FFFBEF,transparent)}
+.hero-ring{position:absolute;border-radius:50%;border:1px solid #FFFBEF;pointer-events:none}
+.r1{width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%)}
+.r2{width:420px;height:420px;top:50%;left:50%;transform:translate(-50%,-50%)}
+.r3{width:240px;height:240px;top:50%;left:50%;transform:translate(-50%,-50%)}
+.hero-inner{position:relative;z-index:1;max-width:560px}
+.hero-eyebrow{font-size:10px;letter-spacing:.22em;color:#C8A84B;text-transform:uppercase;font-weight:500;margin-bottom:20px;opacity:0;animation:up .8s .1s forwards}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(13px,2.5vw,17px);font-weight:300;color:#888880;letter-spacing:.08em;margin-bottom:12px;opacity:0;animation:up .8s .3s forwards}
+.hero-main{font-family:'TmonMonsori',serif;font-size:clamp(36px,8vw,70px);font-weight:700;color:var(--tx);line-height:1.1;margin-bottom:24px;opacity:0;animation:up .8s .5s forwards}
+.hero-main em{color:var(--go);font-style:normal;display:block}
+.hero-sub{font-size:14px;color:#888880;line-height:1.95;max-width:420px;margin:0 auto;opacity:0;animation:up .8s .7s forwards}
+.hero-scroll{position:absolute;bottom:36px;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:up .8s 1.2s forwards}
+.hs-line{width:1px;height:44px;background:linear-gradient(to bottom,rgba(200,168,75,.45),transparent);animation:pulse 1.8s infinite}
+.hs-txt{font-size:9px;letter-spacing:.15em;color:rgba(250,248,240,.18);text-transform:uppercase}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+
+/* MAIN */
+.main{background:var(--cr);border-radius:28px 28px 0 0;margin-top:-28px;position:relative;z-index:1}
+.wrap{max-width:680px;margin:0 auto;padding:0 24px}
+
+/* SECTION */
+.sec{padding:60px 0 8px}
+.sec-kw{font-size:10px;letter-spacing:.18em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:10px}
+.sec-title em{color:var(--go);font-style:normal}
+.sec-body{font-size:13.5px;color:var(--mu);line-height:1.95;margin-bottom:20px}
+.sec-body strong{color:var(--tx);font-weight:500}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--cr2),transparent);margin:8px 0}
+.insight{font-size:14px;background:var(--go2);border-left:3px solid var(--go);border-radius:0 12px 12px 0;padding:14px 18px;margin:18px 0;font-size:13.5px;color:var(--tx);line-height:1.8}
+.insight strong{color:var(--g);font-weight:600}
+
+/* DAILY MOMENTS */
+.moments{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:22px 0}
+.moment{background:var(--wh);border:1.5px solid var(--cr2);border-radius:13px;padding:16px 15px;display:flex;align-items:flex-start;gap:10px}
+.moment-icon{font-size:20px;flex-shrink:0}
+.moment-body{}
+.moment-title{font-size:13px;font-weight:600;color:var(--g);margin-bottom:4px}
+.moment-desc{font-size:11.5px;color:var(--mu);line-height:1.5}
+
+/* VISION MISSION BOX */
+.vm{background:#F5F5F1;border:1px solid #E8E8E4;border-radius:20px;padding:30px 28px;margin:24px 0;position:relative;overflow:hidden}
+.vm::before{content:'';position:absolute;right:-30px;top:-30px;width:140px;height:140px;border-radius:50%;background:#FFFBEF}
+.vm-label{font-size:10px;letter-spacing:.16em;color:#555550;text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.vm-title{font-family:'TmonMonsori',serif;font-size:clamp(17px,3.5vw,22px);font-weight:700;color:#1A1A18;line-height:1.55;margin-bottom:10px}
+.vm-title em{color:var(--go);font-style:normal}
+.vm-body{font-size:13px;color:#555550;line-height:1.85}
+.vm-body strong{color:#1A1A18}
+
+/* WHY SPECIAL */
+.reasons{display:flex;flex-direction:column;gap:14px;margin:22px 0}
+.reason{background:var(--wh);border:1.5px solid var(--cr2);border-radius:16px;overflow:hidden}
+.reason-head{display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;user-select:none;transition:background .15s}
+.reason:hover .reason-head{background:#FFFBEF}
+.reason.open .reason-head{border-bottom:1px solid var(--cr2)}
+.rn-num{width:36px;height:36px;border-radius:50%;background:var(--g);color:var(--go);font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rn-body{flex:1}
+.rn-title{font-size:14px;font-weight:600;color:var(--g);margin-bottom:3px}
+.rn-sub{font-size:11.5px;color:var(--mu)}
+.rn-arr{font-size:11px;color:var(--cr2);transition:transform .2s}
+.reason.open .rn-arr{transform:rotate(180deg);color:var(--go)}
+.reason-body{display:none;padding:18px 20px;font-size:13.5px;color:var(--mu);line-height:1.9;background:#FAFAF9}
+.reason.open .reason-body{display:block}
+.reason-body strong{color:var(--tx);font-weight:500}
+
+/* MISSION 3 */
+.mission3{display:flex;flex-direction:column;gap:12px;margin:22px 0}
+.m3{border-radius:16px;overflow:hidden}
+.m3-head{padding:18px 20px;display:flex;align-items:center;gap:12px}
+.m3-icon{font-size:24px;flex-shrink:0}
+.m3-htxt{}
+.m3-who{font-size:10px;letter-spacing:.12em;font-weight:600;text-transform:uppercase;margin-bottom:4px}
+.m3-title{font-family:'TmonMonsori',serif;font-size:15px;font-weight:700;color:#1A1A18;line-height:1.4}
+.m3-body{padding:14px 20px 18px;font-size:13px;color:#555550;line-height:1.8}
+.m3-body strong{color:#1A1A18}
+.m3-1{background:#006B48}
+.m3-1 .m3-who{color:#555550}
+.m3-2{background:#007A54}
+.m3-2 .m3-who{color:#555550}
+.m3-3{background:#007A54}
+.m3-3 .m3-who{color:var(--go)}
+
+/* CLOSING */
+.closing{background:var(--g);padding:60px 28px 80px;text-align:center;border-radius:20px;margin:40px 0}
+.cl-eyebrow{font-size:10px;letter-spacing:.18em;color:rgba(200,168,75,.4);text-transform:uppercase;font-weight:500;margin-bottom:16px}
+.cl-title{font-family:'TmonMonsori',serif;font-size:clamp(20px,4vw,28px);font-weight:700;color:#1A1A18;line-height:1.6;margin-bottom:14px}
+.cl-title em{color:var(--go);font-style:normal}
+.cl-body{font-size:13.5px;color:#555550;line-height:2;margin-bottom:28px;max-width:440px;margin-left:auto;margin-right:auto}
+.cl-info{margin-top:20px;font-size:12px;color:rgba(250,248,240,.22);line-height:1.9}
+
+/* pb */
+.pb{padding-bottom:60px}
+
+@media(max-width:600px){
+  .hero{padding:80px 20px 60px}
+  .main{border-radius:20px 20px 0 0}
+  .wrap{padding:0 16px}
+  .moments{grid-template-columns:1fr}
+  .vm{padding:24px 20px}
+  .reason-head{padding:15px 16px;gap:11px}
+  .reason-body{padding:14px 16px}
+  .m3-head{padding:16px 18px}
+  .m3-body{padding:12px 18px 16px}
+  .btn-naver,}
+
+/* ── BRUNCH CONTENT ── */
+.wrap,.content{max-width:800px;margin:0 auto;}
+.sec,.sec-sec{padding:48px 28px 8px;}
+.sec-kw{font-size:12px;letter-spacing:.14em;color:#555550;text-transform:uppercase;font-weight:400;margin-bottom:10px;}
+.sec-body{font-size:15px;color:#555550;line-height:1.95;margin-bottom:18px;}
+.sec-body strong{color:#1A1A18;font-weight:500;}
+.divider{height:1px;background:#E8E8E4;margin:4px 0;}
+.insight{font-size:14px;background:#F5F5F1;border-left:2px solid #C8A84B;border-radius:0;padding:14px 18px;margin:16px 0;font-size:13.5px;color:#1A1A18;line-height:1.8;}
+.insight strong{color:#007A54;font-weight:500;}
+.warn,.warn-box{background:#FDF6F6;border-left:2px solid #D89090;border-radius:0;padding:14px 18px;margin:14px 0;font-size:13px;color:#1A1A18;line-height:1.75;}
+.warn strong,.warn-box strong{color:#A05050;font-weight:500;}
+/* sec-title serif */
+h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-.015em;}
+/* dark boxes → light */
+.vm,.warranty,.petit-adv,.next-sec,.goal,.phil-box,.phil-quote,.def-box,.sd-final,.exercise,.self-care,.guarantee,.promise{
+  background:#F5F5F1;border:1px solid #E8E8E4;border-radius:12px;
+}
+.vm .vm-title,.warranty .w-title,.petit-adv .pa-title,.next-sec .next-title,.goal .goal-title,.def-box .def-ko,
+.guarantee .g-title,.promise .pr-title{
+  font-family:'TmonMonsori',serif;font-weight:400;color:#1A1A18;
+}
+.vm .vm-body,.warranty .w-body,.petit-adv .pa-body,.def-box .def-body{color:#555550;}
+.vm .vm-label,.warranty .w-tag,.petit-adv .pa-kw,.next-sec .next-kw{color:#555550;}
+.g-tag{background:#007A54;color:#FAF8F0;}
+/* stage/care cards */
+.stage,.care,.feat,.reason,.txs,.txc,.tx-detail,.tx-card{background:#fff;border:1px solid #E8E8E4;border-radius:12px;}
+.stage-head,.care-head,.feat-head,.reason-head,.txs-head,.txc-head,.txd-head{background:#fff;}
+.stage.open .stage-head,.care.open .care-head,.feat.open .feat-head,.reason.open .reason-head{background:#F9F9F7;}
+/* numbered steps */
+.stage-num,.care-num,.feat-num,.rn-num,.pf-num,.sc-step-num,.ex-num,.tf-num{background:#007A54;color:#C8A84B;}
+/* progress/symptom */
+.pg,.pf,.cn-item,.sc-step{background:#F9F9F7;border:1px solid #E8E8E4;border-radius:10px;}
+.cause{background:#F9F9F7;}
+/* CTA */
+.cta-sec,.cta-box,.closing{background:#F5F5F1;border-radius:16px;border:1px solid #E8E8E4;}
+.cta-title,.cl-title{font-family:'TmonMonsori',serif;font-weight:400;color:#1A1A18;}
+.cta-title em,.cl-title em{color:#007A54;font-style:italic;}
+.cta-sub,.cl-body{color:#555550;}
+/* m3 mission cards */
+.m3-1,.m3-2,.m3-3{background:#F5F5F1;border:1px solid #E8E8E4;}
+.m3-title{color:#1A1A18;}
+.m3-body{color:#555550;}
+/* chain */
+.chain-box{background:#F9F9F7;border:1px solid #E8E8E4;}
+/* funny note */
+.funny{background:#F5F5F1;border:1px solid #E8E8E4;}
+.funny-title{color:#007A54;}
+.funny-body{color:#555550;}
+/* hb cards */
+.hb-health,.hb-beauty{background:#F5F5F1;border:1px solid #E8E8E4;}
+.hb-health .hb-title,.hb-beauty .hb-title{color:#1A1A18;}
+.hb-health .hb-item,.hb-beauty .hb-item{color:#555550;}
+/* smile detail */
+.smile-detail{background:#F5F5F1;border:1px solid #E8E8E4;}
+.sd-kw{color:#555550;}
+.sd-title{color:#1A1A18;}
+.sd-item{background:#fff;border:1px solid #E8E8E4;}
+.sd-item-title{color:#1A1A18;}
+.sd-item-body{color:#555550;}
+/* lifetime */
+.lifetime{background:#F5F5F1;border:1px solid #E8E8E4;}
+.lt-title{color:#1A1A18;}
+.lt-body{color:#555550;}
+/* phil quote */
+.phil-quote .ph-q{color:#1A1A18;}
+/* section headers */
+.sec-title-wrap{border-bottom:1px solid #E8E8E4;}
+.section-wrap{max-width:800px;margin:0 auto;padding:0 28px;}
+
+/* ── SERIF NUMBER STYLE ── */
+.step-num,.care-num,.feat-num,.rn-num,.pf-num,.sc-step-num,.ex-num,.tf-num,
+.stage-num,.txs-stage,.txc-num,.w3-ko{
+  font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-.01em;
+}
+.flow-step .fs-circle,.fc-icon,.ec-icon,.funny-emoji,.pg-icon,.sym-chip{
+  font-size:inherit;
+}
+
+/* ── MOBILE RESPONSIVE ── */
+@media(max-width:640px){
+  /* nav */
+  .gnav-inner,.gnav-logo,.gnav-logo span,.nav-logo span{display:none;}
+  .gnav-home{padding:5px 10px;font-size:11px;}
+  .gnav-cta,.nb{padding:6px 12px;font-size:11px;}
+
+  /* hero */
+  .hero{padding:40px 16px 32px;}
+  .hero-title{font-size:clamp(22px,6vw,32px);}
+  .hero-inner{padding:0;}
+
+  /* wrap / content */
+  .wrap,.content,.inner{padding:0 16px;}
+  .sec{padding:36px 0 6px;}
+
+  /* grids → 1열 */
+  .word3,.func-grid,.hb-cards,.vs-wrap,.root-cards,.sd-grid,
+  .sym-grid,.age-opts,.effect-grid,.daily-cards,.perio-stages,
+  .cause3,.two-phil,.compare,.reserve-row{
+    grid-template-columns:1fr !important;
+  }
+
+  /* 3열 → 1열 예외: 2열 유지 */
+  .sym-grid{grid-template-columns:1fr 1fr !important;}
+
+  /* 단계 카드 패딩 */
+  .stage-head,.care-head,.feat-head,.reason-head,
+  .txs-head,.txc-head,.txd-head{padding:13px 14px;}
+  .stage-body,.care-body,.feat-body,.reason-body,
+  .txs-content,.txc-body,.txd-body{padding:12px 14px;}
+
+  /* 책 커버 */
+  .book,.book-item{grid-template-columns:80px 1fr !important;}
+  .cov,.book-cover{width:80px !important;height:112px !important;}
+  .bi,.book-info{padding-left:12px !important;}
+  .bi-desc,.book-info .bi-desc{display:none;}
+
+  /* article list */
+  .aitem,.al-item{grid-template-columns:1fr 50px !important;}
+  .aitem-thumb,.al-thumb{width:50px !important;height:40px !important;}
+
+  /* CTA 버튼 */
+  .cta-btns,.btn-row{flex-direction:column;align-items:center;}
+  .btn-naver,.btn-kakao,.btn-cr,.btn-g,.btn-go{
+    width:100% !important;max-width:280px;justify-content:center;
+  }
+
+  /* flow */
+  .flow{flex-wrap:wrap;gap:12px;}
+  .flow-step{min-width:80px;flex:0 0 calc(50% - 6px);}
+  .flow-step::after{display:none;}
+  .timing{gap:8px;}
+  .tt{flex:0 0 18%;}
+
+  /* 비교 카드 */
+  .cmp,.vs,.rc,.hb{border-radius:10px !important;}
+
+  /* footer */
+  .foot,.footer{flex-direction:column;gap:8px;align-items:flex-start !important;}
+  .foot-info,.footer-info{text-align:left !important;}
+
+  /* 체크 */
+  .step-box{padding:16px 14px;}
+  .age-opts{grid-template-columns:1fr 1fr 1fr !important;}
+  .ao{padding:10px 6px;}
+  .ao-main{font-size:15px;font-size:12px;}
+  .ao-sub{font-size:10px;}
+
+  /* 탭 */
+  .tabs{gap:2px;padding:8px 10px;overflow-x:auto;}
+  .tab{font-size:11px;padding:6px 9px;white-space:nowrap;}
+
+  /* 체인 */
+  .chain,.chain-box{flex-wrap:wrap;}
+
+  /* science box */
+  .science,.insight,.warn,.warn-box{padding:11px 13px;}
+
+  /* phil */
+  .philosophy,.phil{padding:28px 0;}
+  .ph-q,.hero-h{font-size:clamp(18px,5vw,24px);}
+}
+
+/* ── HERO BRUNCH ── */
+.hero{background:#fff;min-height:auto;padding:52px 28px 44px;border-bottom:1px solid #E0E0DA;position:relative;overflow:hidden}
+.hero::before,.hero::after,.hero-ring{display:none}
+.hero-inner{max-width:760px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-kw{font-size:11px;letter-spacing:.16em;color:#FAF8F0;text-transform:uppercase;font-weight:400;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.hero-kw::before{display:none}
+.hero-tag{font-size:11px;letter-spacing:.14em;color:#888880;text-transform:uppercase;margin-bottom:14px}
+.hero-pretitle{font-size:12px;color:#555550;font-weight:300;margin-bottom:8px}
+.hero-eyebrow{font-size:11px;letter-spacing:.14em;color:#888880;text-transform:uppercase;margin-bottom:14px;opacity:1;animation:none}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;letter-spacing:-.02em;opacity:1;animation:none}
+.hero-title em{font-style:italic;font-weight:400;color:#007A54}
+.hero-title strong{font-weight:700;font-style:normal;color:#111110}
+.hero-h{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;letter-spacing:-.02em;opacity:1;animation:none}
+.hero-h em{font-style:italic;color:#007A54}
+.hero-h strong{font-weight:700;color:#111110}
+.hero-main{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;opacity:1;animation:none}
+.hero-main em{color:#007A54;font-style:normal;display:block}
+.hero-sub{font-family:'TmonMonsori',serif;font-size:clamp(14px,2vw,17px);font-weight:300;color:#555550;line-height:1.85;max-width:520px;opacity:1;animation:none}
+.hero-sub p{color:#555550}
+.hero-desc{font-size:14px;color:#555550;line-height:1.85;max-width:480px;opacity:1;animation:none}
+.hero-badge,.hero-scroll,.hs-line,.hs-txt{display:none}
+.hero-cat{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.hc{border-radius:100px;padding:5px 13px;font-size:12px;font-weight:500}
+.hc-health{background:#E8F5F0;color:#007A54}
+.hc-beauty{background:#F5EFD8;color:#8A6820}
+.hero-term{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.ht-ko{border-radius:100px;padding:5px 13px;font-size:12px;font-weight:500;background:#E8F5F0;color:#007A54}
+.ht-en{border-radius:100px;padding:5px 13px;font-size:12px;color:#555550;border:1px solid #E0E0DA}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.hp.go{background:#F5EFD8;border:1px solid #E8D898;color:#8A6820;border-radius:100px;padding:5px 12px;font-size:12px}
+.hp.wh{background:#F5F5F1;border:1px solid #E0E0DA;color:#555550;border-radius:100px;padding:5px 12px;font-size:12px}
+.hero-copy{display:flex;flex-direction:column;gap:7px;margin-top:18px}
+.hero-copy-item{font-size:15px;color:#555550;line-height:1.5;display:flex;align-items:flex-start;gap:8px}
+.hero-copy-item::before{content:'—';color:#C8A84B;flex-shrink:0}
+
+/* ── 색상 규칙 ── */
+/* 딥그린 배경 → 크림 글자 */
+.sh .sh-title{color:#FAF8F0}
+.sh .sh-sub{color:#FAF8F0}
+.selfcheck .sc-title{color:#FAF8F0}
+.selfcheck .sc-sub{color:rgba(250,248,240,.55)}
+.selfcheck .sc-label{color:rgba(200,168,75,.7)}
+.cta .cta /* 밝은 배경 → 어두운 글자 */
+.hero .hero-title{color:#111110}
+.hero .hero-sub{color:#888880}
+.hero .hero-tag{color:#AAAAAA}
+/* 예외: 딥그린 hero */
+.hero-child .hero-title,.hero-teen .hero-title,.hero-adult .hero-title{color:#FAF8F0 !important}
+.hero-child .hero-subtitle,.hero-teen .hero-subtitle,.hero-adult .hero-subtitle{color:#FAF8F0 !important}
+
+/* 관련 페이지 링크 */
+.rel-section{padding:28px 20px;background:#F5F5F1;border-top:1px solid #E0E0DA;margin-top:8px}
+.rel-title{font-size:12px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.rel-links{display:flex;flex-direction:column;gap:8px}
+.rel-link{display:flex;align-items:center;gap:12px;padding:13px 15px;background:#fff;border-radius:10px;border:1px solid #E0E0DA;text-decoration:none;color:#1A1A18;transition:opacity .15s}
+.rel-link:hover{opacity:.75}
+.rel-link-body{flex:1}
+.rel-link-title{font-size:14px;font-weight:500;color:#111110;margin-bottom:2px}
+.rel-link-sub{font-size:12px;color:#555550}
+.rel-link-arr{font-size:14px;color:#C8A84B;font-weight:600;flex-shrink:0}
+
+@font-face {
+  font-family: 'TmonMonsori';
+  src: url('fonts/TmonMonsori_otf.otf') format('opentype'),
+       url('fonts/TmonMonsori_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('fonts/pretendard-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
+<link rel="stylesheet" href="petit-design.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<nav class="gnav">
+  <div class="gnav-inner">
+    <div class="gnav-logo">생활의 기본, <em>쁘띠치과</em><span style="font-size:10px;color:#555550;font-weight:400;letter-spacing:.06em;margin-left:8px;font-style:italic">Born to Be, Petit Dental</span></div>
+    <a href="search.html" style="margin-left:8px;width:32px;height:32px;border-radius:50%;border:1px solid #E8E8E4;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:#555550;font-size:15px;transition:all .15s" title="검색">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </a>
+    <a class="gnav-home" href="index.html">← 홈</a>
+    <a class="gnav-cta" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-ring r1"></div>
+  <div class="hero-ring r2"></div>
+  <div class="hero-ring r3"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">쁘띠치과 소개 · About Petit Dental</div>
+    <div class="hero-title">생활의 기본이 되는 치과</div>
+    <h1 class="hero-main">치과는<br>먼 곳이 아닙니다.<br><em>내 삶의 기본입니다.</em></h1>
+    <p class="hero-sub">숨쉬고, 마시고, 씹고, 삼키고, 서고, 앉고, 걷고, 눕는<br>모든 순간이 쁘띠치과의 진료와 연결됩니다.</p>
+  </div>
+  <div class="hero-scroll"><div class="hs-txt">scroll</div><div class="hs-line"></div></div>
+</section>
+
+<!-- MAIN -->
+<div class="main">
+<div class="wrap">
+
+  <!-- 일상과 연결 -->
+  <section class="sec">
+    <div class="sec-kw">치과와 일상의 연결</div>
+    <h2 class="sec-title">우리의 모든 순간이<br>치아·턱·몸과 연결됩니다</h2>
+    <p class="sec-body">
+      치아 건강을 지키는 것은 단순히 양치질을 잘하는 것이 아닙니다.<br>
+      우리가 하루 동안 반복하는 <strong>작은 습관들 속에서 건강한 교합</strong>이 만들어지고,<br>
+      건강한 교합이 자연치아를 살리는 필수 조건이 됩니다.
+    </p>
+
+    <div class="moments">
+      <div class="moment">
+        <div class="moment-icon"></div>
+        <div class="moment-body"><div class="moment-title">숨쉬기</div><div class="moment-desc">올바른 코호흡이 치아 건강과 얼굴 균형에 영향을 줍니다</div></div>
+      </div>
+      <div class="moment">
+        <div class="moment-icon"></div>
+        <div class="moment-body"><div class="moment-title">씹기</div><div class="moment-desc">바르게 씹는 습관이 교합과 턱 건강을 결정합니다</div></div>
+      </div>
+      <div class="moment">
+        <div class="moment-icon"></div>
+        <div class="moment-body"><div class="moment-title">삼키기</div><div class="moment-desc">혀의 위치와 삼키는 방식이 얼굴과 치아 형태에 영향을 줍니다</div></div>
+      </div>
+      <div class="moment">
+        <div class="moment-icon"></div>
+        <div class="moment-body"><div class="moment-title">서고 앉고 걷고 눕기</div><div class="moment-desc">자세가 턱과 교합, 전신 균형에 영향을 미칩니다</div></div>
+      </div>
+    </div>
+
+    <div class="insight">
+      그래서 쁘띠치과는 언제나 쁘띠님들과 함께합니다.<br>
+      <strong>"입술 · 혀 · 호흡 · 자세"</strong> — 기본이 기적이다 · Basic is Magic
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 비전 -->
+  <section class="sec">
+    <div class="sec-kw">Vision · 비전</div>
+    <h2 class="sec-title">쁘띠치과가<br>되고자 하는 곳</h2>
+
+    <div class="vm">
+      <div class="vm-label">Vision</div>
+      <div class="vm-title">"생활의 기본"이 되는 치과<em>모든 순간에 필요한 기본</em></div>
+      <div class="vm-body">쁘띠치과는 쁘띠님들의 생활의 기본이 되는 치과가 되고자 합니다.<br>모든 순간(일상 생활)에 필요한 기본이 되어 <strong>건강하고 아름다운 삶을 살도록 돕는 것</strong>이 목표입니다.</div>
+    </div>
+
+    <div class="vm" style="background:#009B6B">
+      <div class="vm-label">Mission</div>
+      <div class="vm-title">건강한 습관을 만드는 치과<em>스스로 건강해지고 아름다워진다</em></div>
+      <div class="vm-body">
+        <strong>자연치아 보존치료</strong>와 <strong>건강한 교합치료</strong>로<br>
+        건강한 삶을 스스로 만드는 습관을 만들어 드리는 것이 현재 쁘띠치과 치료의 목표입니다.
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 특별한 이유 -->
+  <section class="sec">
+    <div class="sec-kw">쁘띠치과가 특별한 이유</div>
+    <h2 class="sec-title">치료가 아니라<br>삶을 바꾸는 치과</h2>
+
+    <div class="reasons">
+      <div class="reason" onclick="this.classList.toggle('open')">
+        <div class="reason-head">
+          <div class="rn-num">1</div>
+          <div class="rn-body">
+            <div class="rn-title">일상 생활의 모든 순간과 연결된 진료</div>
+            <div class="rn-sub">'스스로 건강해지는' 치아·턱·몸 전체 연결 관점</div>
+          </div>
+          <div class="rn-arr">▼</div>
+        </div>
+        <div class="reason-body">치아 건강을 단순히 아플 때 필요한 '빼고 채워넣기' 문제만 보는 관점이 아니라, <strong>치아·턱·몸 전체와 연결하는 관점</strong>에서 바라봅니다. 입호흡 습관, 자세, 씹기 패턴까지 고려하여 개인의 생활 습관을 분석하고 개선을 돕습니다.<br><br>내 자연치아를 보존하고, 스스로 건강해지고 아름다워지는 비밀은 내 안에 이미 있습니다.</div>
+      </div>
+      <div class="reason" onclick="this.classList.toggle('open')">
+        <div class="reason-head">
+          <div class="rn-num">2</div>
+          <div class="rn-body">
+            <div class="rn-title">치료를 위한 건강한 습관을 만드는 치과</div>
+            <div class="rn-sub">치료가 끝이 아닙니다 — 습관이 결과를 만듭니다</div>
+          </div>
+          <div class="rn-arr">▼</div>
+        </div>
+        <div class="reason-body">치료가 끝이 아니라, 환자가 <strong>건강한 치아를 오래 유지할 수 있도록 습관을 바꾸는 것</strong>이 중요합니다. 아이들에게는 올바른 성장과 교합을, 성인들에게는 기능 회복과 유지 방법을 제안합니다.</div>
+      </div>
+      <div class="reason" onclick="this.classList.toggle('open')">
+        <div class="reason-head">
+          <div class="rn-num">3</div>
+          <div class="rn-body">
+            <div class="rn-title">치과를 더 가깝게, 더 익숙한 공간으로</div>
+            <div class="rn-sub">예방과 습관을 관리하는 곳, 내 몸을 이해하는 곳</div>
+          </div>
+          <div class="rn-arr">▼</div>
+        </div>
+        <div class="reason-body">쁘띠치과는 단순한 아픔을 제거하는 치료 공간이 아닙니다. <strong>진료를 받는 동안, 내가 숨쉬고 씹고 삼키는 방식을 이해하는 경험</strong>을 제공합니다.<br><br>아이들에게는 성장의 방향을, 청년들에게는 삶의 진정한 가치를, 중장년층에게는 신뢰할 수 있는 평생 파트너가 되어드립니다.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 대상별 약속 -->
+  <section class="sec">
+    <div class="sec-kw">대상별 약속</div>
+    <h2 class="sec-title">모든 나이에<br>함께하겠습니다</h2>
+
+    <div class="mission3">
+      <div class="m3 m3-1">
+        <div class="m3-head">
+          <div class="m3-icon"></div>
+          <div class="m3-htxt">
+            <div class="m3-who">어린이에게</div>
+            <div class="m3-title">꿈을 꿀 수 있는 편안한 치과<br>건강하게 성장하도록 책임집니다</div>
+          </div>
+        </div>
+        <div class="m3-body">아이들이 치과를 두려운 곳이 아닌 <strong>편안하게 성장을 맡길 수 있는 곳</strong>으로 느끼도록 합니다. 올바른 교합과 성장 방향을 함께 설계합니다.</div>
+      </div>
+      <div class="m3 m3-2">
+        <div class="m3-head">
+          <div class="m3-icon"></div>
+          <div class="m3-htxt">
+            <div class="m3-who">청년에게</div>
+            <div class="m3-title">삶의 진정한 가치를 찾도록 응원하며<br>스스로의 건강함과 아름다움을 드립니다</div>
+          </div>
+        </div>
+        <div class="m3-body">평생 유지하는 습관을 만들어 드립니다. <strong>스스로 건강해지고 아름다워지는 것</strong>이 목표입니다.</div>
+      </div>
+      <div class="m3 m3-3">
+        <div class="m3-head">
+          <div class="m3-icon"></div>
+          <div class="m3-htxt">
+            <div class="m3-who">중장년층에게</div>
+            <div class="m3-title">신뢰할 수 있는 평생 파트너<br>기능의 회복과 삶의 질 향상을 약속합니다</div>
+          </div>
+        </div>
+        <div class="m3-body">뽑고 심고 끝나는 치료가 아닌 <strong>평생 관리 서비스</strong>로 함께합니다. 기능의 회복과 삶의 질 향상을 드립니다.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing -->
+  <div class="closing">
+    <div class="cl-eyebrow">쁘띠치과의 다짐</div>
+    <h2 class="cl-title">아파서 오는 곳이 아니라<br><em>내 몸을 돌보러 오는 곳</em></h2>
+    <p class="cl-body">
+      치과는 단순히 치료를 받는 곳이 아니라,<br>내 몸을 이해하고 건강한 습관을 만들어 가는 곳입니다.<br><br>
+      환자 한 분 한 분이 자신의 몸을 더 잘 이해하고,<br>건강한 치아를 오래 유지할 수 있도록 돕겠습니다.<br><br>
+      언제든지 편하게 찾아오세요.
+    </p>
+    <div class="cta-btns">
+      <a href="https://booking.naver.com/booking/13/bizes/743904" target="_blank" class="btn-naver">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/></svg>
+        네이버 예약
+      </a>
+      <a href="https://pf.kakao.com/_xbhXYb" target="_blank" class="btn-kakao">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#191919"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.67 1.648 5.012 4.146 6.396L5 21l5.12-2.983C10.734 18.01 11.363 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z"/></svg>
+        카카오톡 상담
+      </a>
+    </div>
+    <div class="cl-info">📍 대구시 남구 대봉로 66 2층 &nbsp;·&nbsp; 📞 053-472-2828</div>
+  </div>
+
+  <div class="pb"></div>
+
+</div>
+</div>
+
+<script>
+// 아코디언은 onclick으로 처리
+</script>
+
+<div class="share-float">
+  <div class="share-toast" id="shareToast">링크 복사됐습니다</div>
+  <button class="share-fab" onclick="doShare()" title="공유하기">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+  </button>
+</div>
+
+<script>
+async function doShare(){
+  var title=document.title||'쁘띠치과';
+  var url=location.href;
+  if(navigator.share){
+    try{await navigator.share({title:title,url:url});}catch(e){}
+  } else {
+    try{
+      await navigator.clipboard.writeText(url);
+      var t=document.getElementById('shareToast');
+      t.classList.add('show');
+      setTimeout(function(){t.classList.remove('show');},2000);
+    }catch(e){}
+  }
+}
+</script>
+<div class="rel-section">
+  <div class="rel-title">다음 단계 · 관련 페이지</div>
+  <div class="rel-links">
+  <a class="rel-link" href="petit_occlusion_selfcheck.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">교합질환 자가체크</div>
+      <div class="rel-link-sub">내 상태가 교합 문제인지 먼저 확인해보세요</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_guide.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">온라인 진료 안내</div>
+      <div class="rel-link-sub">내원 전 궁금한 점 — 8가지 Q&A</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_diagnosis.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">교합진단</div>
+      <div class="rel-link-sub">치료를 시작하기 전 정확한 진단이 먼저입니다</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  </div>
+</div>
+</body>
+</html>

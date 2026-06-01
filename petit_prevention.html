@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>예방과 습관치료 | 쁘띠치과</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+:root{
+  --g:#007A54;--g2:#009B6B;
+  --cr:#FAFAF9;--cr2:#EFEFEB;
+  --go:#C8A84B;--go2:#FFFBEF;
+  --tx:#1A1A18;--mu:#888880;--lt:#B8B8B0;--wh:#fff;
+  --br:#E8E8E4;
+  --sf:'Noto Serif KR',serif;--ss:'Noto Sans KR',sans-serif
+}
+html{scroll-behavior:smooth}
+.gnav{position:sticky;top:0;z-index:200;background:rgba(250,250,249,.97);backdrop-filter:blur(12px);border-bottom:1px solid #F5F5F1}
+.gnav-inner{max-width:720px;margin:0 auto;display:flex;align-items:center;padding:0 20px}
+.gnav-logo{font-family:'TmonMonsori',serif;font-size:13px;color:#555550;font-weight:400;padding:14px 0;margin-right:auto}
+.gnav-logo em{color:#007A54;font-style:normal}
+.gnav-home{font-size:13px;color:#555550;text-decoration:none;padding:14px 12px}
+.gnav-home:hover{color:var(--go)}
+.gnav-cta{margin-left:8px;background:#03C75A;color:#FFFFFF;border:none;padding:7px 15px;border-radius:20px;font-size:11.5px;font-weight:600;font-family:'Pretendard',sans-serif;cursor:pointer;text-decoration:none;display:inline-block}
+
+/* HERO */
+.hero{background:#fff;min-height:58vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 28px 52px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 50% at 75% 30%,rgba(200,168,75,.1),transparent)}
+.hero-inner{max-width:680px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-kw{font-size:10px;letter-spacing:.2em;color:var(--go);text-transform:uppercase;font-weight:500;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.hero-kw::before{content:'';width:20px;height:1px;background:var(--go)}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(28px,5.5vw,48px);font-weight:700;color:#111110;line-height:1.2;margin-bottom:16px}
+.hero-title em{color:var(--go);font-style:normal}
+.hero-sub{font-size:14px;color:#555550;line-height:1.85;max-width:460px}
+
+/* WRAP */
+.wrap{max-width:720px;margin:0 auto;padding:0 24px}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--cr2),transparent);margin:8px 0}
+
+/* CARE CARDS — 4개 */
+.care-list{display:flex;flex-direction:column;gap:16px;padding:40px 0 60px}
+
+.care{background:var(--wh);border:1.5px solid var(--cr2);border-radius:18px;overflow:hidden}
+.care-head{display:flex;align-items:center;gap:14px;padding:20px 22px;cursor:pointer;transition:background .15s;user-select:none}
+.care:hover .care-head{background:#FFFBEF}
+.care.open .care-head{border-bottom:1px solid var(--cr2)}
+.care-num{width:36px;height:36px;border-radius:50%;background:var(--g);color:var(--go);font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.care-htxt{flex:1}
+.care-title{font-size:16px;font-weight:600;color:var(--g);margin-bottom:3px}
+.care-sub{font-size:11.5px;color:var(--mu)}
+.care-arr{font-size:12px;color:var(--cr2);transition:transform .2s;flex-shrink:0}
+.care.open .care-arr{transform:rotate(180deg);color:var(--go)}
+
+.care-body{display:none;padding:20px 22px}
+.care.open .care-body{display:block}
+.cb-body{font-size:15px;color:var(--mu);line-height:1.9;margin-bottom:14px}
+.cb-body strong{color:var(--tx);font-weight:500}
+.cb-body em{color:var(--g);font-style:normal;font-weight:600}
+
+/* 포인트 박스 */
+.point{background:var(--cr);border-radius:11px;padding:14px 16px;margin-bottom:12px}
+.point-title{font-size:11px;letter-spacing:.1em;color:var(--go);text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.point-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--tx);line-height:1.6;margin-bottom:6px}
+.point-item:last-child{margin-bottom:0}
+.point-item::before{content:'→';color:var(--go);font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* 경고 박스 */
+.warn-box{background:rgba(201,64,64,.06);border-left:3px solid rgba(201,64,64,.3);border-radius:0 10px 10px 0;padding:13px 16px;margin:12px 0}
+.warn-box p{font-size:14px;color:var(--tx);line-height:1.75}
+.warn-box strong{color:var(--rd);font-weight:600}
+
+/* 인사이트 박스 */
+.insight{font-size:14px;background:var(--go2);border-left:3px solid var(--go);border-radius:0 10px 10px 0;padding:13px 16px;margin:12px 0}
+.insight p{font-size:14px;color:var(--tx);line-height:1.75}
+.insight strong{color:var(--g);font-weight:600}
+
+/* 블로그 링크 */
+.blog-link{display:flex;align-items:center;gap:12px;padding:12px 15px;background:rgba(3,199,90,.08);border:1px solid rgba(3,199,90,.2);border-radius:11px;text-decoration:none;margin-top:12px;transition:all .15s}
+.blog-link:hover{background:rgba(3,199,90,.14)}
+.blog-link-icon{width:30px;height:30px;border-radius:7px;background:#03C75A;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.blog-link-txt{font-size:12.5px;font-weight:600;color:var(--g)}
+.blog-link-sub{font-size:11px;color:var(--mu)}
+.blog-link-arr{font-size:12px;color:rgba(3,199,90,.6);margin-left:auto}
+
+/* 치주염 단계 */
+.perio-stages{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px 0}
+.ps{border-radius:11px;padding:14px 12px;text-align:center}
+.ps-label{font-size:9.5px;letter-spacing:.1em;font-weight:600;text-transform:uppercase;margin-bottom:6px}
+.ps-name{font-size:13px;font-weight:700;margin-bottom:4px;font-family:'TmonMonsori',serif}
+.ps-desc{font-size:11px;line-height:1.4}
+.ps-1{background:#e8f0eb;}.ps-1 .ps-label{color:#009B6B}.ps-1 .ps-name{color:var(--g)}.ps-1 .ps-desc{color:var(--mu)}
+.ps-2{background:#fff3e0;}.ps-2 .ps-label{color:#a06020}.ps-2 .ps-name{color:#7a4010}.ps-2 .ps-desc{color:var(--mu)}
+.ps-3{background:rgba(201,64,64,.08);}.ps-3 .ps-label{color:var(--rd)}.ps-3 .ps-name{color:var(--rd)}.ps-3 .ps-desc{color:var(--mu)}
+
+/* 예방 흐름 */
+.prev-flow{display:flex;flex-direction:column;gap:0;border-radius:14px;overflow:hidden;border:1.5px solid var(--cr2);margin:14px 0}
+.pf{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--cr2);background:var(--wh)}
+.pf:last-child{border-bottom:none}
+.pf-num{width:26px;height:26px;border-radius:50%;background:var(--g);color:var(--go);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'TmonMonsori',serif}
+.pf-body{font-size:14px;color:var(--tx);line-height:1.5}
+.pf-body strong{color:var(--g);font-weight:600}
+
+/* CTA */
+.cta-sec{padding:10px 0 80px}
+@media(max-width:600px){
+  .hero{padding:60px 18px 40px}
+  .wrap{padding:0 16px}
+  .care-head{padding:16px 16px;gap:11px}
+  .care-body{padding:16px 16px}
+  .perio-stages{grid-template-columns:1fr}
+  .btn-naver,}
+
+/* ── BRUNCH CONTENT ── */
+.wrap,.content{max-width:800px;margin:0 auto;}
+.sec,.sec-sec{padding:48px 28px 8px;}
+.sec-kw{font-size:12px;letter-spacing:.14em;color:#555550;text-transform:uppercase;font-weight:400;margin-bottom:10px;}
+.sec-body{font-size:15px;color:#555550;line-height:1.95;margin-bottom:18px;}
+.sec-body strong{color:#1A1A18;font-weight:500;}
+.divider{height:1px;background:#E8E8E4;margin:4px 0;}
+.insight{font-size:14px;background:#F5F5F1;border-left:2px solid #C8A84B;border-radius:0;padding:14px 18px;margin:16px 0;font-size:13.5px;color:#1A1A18;line-height:1.8;}
+.insight strong{color:#007A54;font-weight:500;}
+.warn,.warn-box{background:#FDF6F6;border-left:2px solid #D89090;border-radius:0;padding:14px 18px;margin:14px 0;font-size:13px;color:#1A1A18;line-height:1.75;}
+.warn strong,.warn-box strong{color:#A05050;font-weight:500;}
+/* sec-title serif */
+h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-.015em;}
+/* dark boxes → light */
+.vm,.warranty,.petit-adv,.next-sec,.goal,.phil-box,.phil-quote,.def-box,.sd-final,.exercise,.self-care,.guarantee,.promise{
+  background:#F5F5F1;border:1px solid #E8E8E4;border-radius:12px;
+}
+.vm .vm-title,.warranty .w-title,.petit-adv .pa-title,.next-sec .next-title,.goal .goal-title,.def-box .def-ko,
+.guarantee .g-title,.promise .pr-title{
+  font-family:'TmonMonsori',serif;font-weight:400;color:#1A1A18;
+}
+.vm .vm-body,.warranty .w-body,.petit-adv .pa-body,.def-box .def-body{color:#555550;}
+.vm .vm-label,.warranty .w-tag,.petit-adv .pa-kw,.next-sec .next-kw{color:#555550;}
+.g-tag{background:#007A54;color:#FAF8F0;}
+/* stage/care cards */
+.stage,.care,.feat,.reason,.txs,.txc,.tx-detail,.tx-card{background:#fff;border:1px solid #E8E8E4;border-radius:12px;}
+.stage-head,.care-head,.feat-head,.reason-head,.txs-head,.txc-head,.txd-head{background:#fff;}
+.stage.open .stage-head,.care.open .care-head,.feat.open .feat-head,.reason.open .reason-head{background:#F9F9F7;}
+/* numbered steps */
+.stage-num,.care-num,.feat-num,.rn-num,.pf-num,.sc-step-num,.ex-num,.tf-num{background:#007A54;color:#C8A84B;}
+/* progress/symptom */
+.pg,.pf,.cn-item,.sc-step{background:#F9F9F7;border:1px solid #E8E8E4;border-radius:10px;}
+.cause{background:#F9F9F7;}
+/* CTA */
+.cta-sec,.cta-box,.closing{background:#F5F5F1;border-radius:16px;border:1px solid #E8E8E4;}
+.cta-title,.cl-title{font-family:'TmonMonsori',serif;font-weight:400;color:#1A1A18;}
+.cta-title em,.cl-title em{color:#007A54;font-style:italic;}
+.cta-sub,.cl-body{color:#555550;}
+/* m3 mission cards */
+.m3-1,.m3-2,.m3-3{background:#F5F5F1;border:1px solid #E8E8E4;}
+.m3-title{color:#1A1A18;}
+.m3-body{color:#555550;}
+/* chain */
+.chain-box{background:#F9F9F7;border:1px solid #E8E8E4;}
+/* funny note */
+.funny{background:#F5F5F1;border:1px solid #E8E8E4;}
+.funny-title{color:#007A54;}
+.funny-body{color:#555550;}
+/* hb cards */
+.hb-health,.hb-beauty{background:#F5F5F1;border:1px solid #E8E8E4;}
+.hb-health .hb-title,.hb-beauty .hb-title{color:#1A1A18;}
+.hb-health .hb-item,.hb-beauty .hb-item{color:#555550;}
+/* smile detail */
+.smile-detail{background:#F5F5F1;border:1px solid #E8E8E4;}
+.sd-kw{color:#555550;}
+.sd-title{color:#1A1A18;}
+.sd-item{background:#fff;border:1px solid #E8E8E4;}
+.sd-item-title{color:#1A1A18;}
+.sd-item-body{color:#555550;}
+/* lifetime */
+.lifetime{background:#F5F5F1;border:1px solid #E8E8E4;}
+.lt-title{color:#1A1A18;}
+.lt-body{color:#555550;}
+/* phil quote */
+.phil-quote .ph-q{color:#1A1A18;}
+/* section headers */
+.sec-title-wrap{border-bottom:1px solid #E8E8E4;}
+.section-wrap{max-width:800px;margin:0 auto;padding:0 28px;}
+
+/* ── SERIF NUMBER STYLE ── */
+.step-num,.care-num,.feat-num,.rn-num,.pf-num,.sc-step-num,.ex-num,.tf-num,
+.stage-num,.txs-stage,.txc-num,.w3-ko{
+  font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-.01em;
+}
+.flow-step .fs-circle,.fc-icon,.ec-icon,.funny-emoji,.pg-icon,.sym-chip{
+  font-size:inherit;
+}
+
+/* ── MOBILE RESPONSIVE ── */
+@media(max-width:640px){
+  /* nav */
+  .gnav-inner,.gnav-logo,.gnav-logo span,.nav-logo span{display:none;}
+  .gnav-home{padding:5px 10px;font-size:11px;}
+  .gnav-cta,.nb{padding:6px 12px;font-size:11px;}
+
+  /* hero */
+  .hero{padding:40px 16px 32px;}
+  .hero-title{font-size:clamp(22px,6vw,32px);}
+  .hero-inner{padding:0;}
+
+  /* wrap / content */
+  .wrap,.content,.inner{padding:0 16px;}
+  .sec{padding:36px 0 6px;}
+
+  /* grids → 1열 */
+  .word3,.func-grid,.hb-cards,.vs-wrap,.root-cards,.sd-grid,
+  .sym-grid,.age-opts,.effect-grid,.daily-cards,.perio-stages,
+  .cause3,.two-phil,.compare,.reserve-row{
+    grid-template-columns:1fr !important;
+  }
+
+  /* 3열 → 1열 예외: 2열 유지 */
+  .sym-grid{grid-template-columns:1fr 1fr !important;}
+
+  /* 단계 카드 패딩 */
+  .stage-head,.care-head,.feat-head,.reason-head,
+  .txs-head,.txc-head,.txd-head{padding:13px 14px;}
+  .stage-body,.care-body,.feat-body,.reason-body,
+  .txs-content,.txc-body,.txd-body{padding:12px 14px;}
+
+  /* 책 커버 */
+  .book,.book-item{grid-template-columns:80px 1fr !important;}
+  .cov,.book-cover{width:80px !important;height:112px !important;}
+  .bi,.book-info{padding-left:12px !important;}
+  .bi-desc,.book-info .bi-desc{display:none;}
+
+  /* article list */
+  .aitem,.al-item{grid-template-columns:1fr 50px !important;}
+  .aitem-thumb,.al-thumb{width:50px !important;height:40px !important;}
+
+  /* CTA 버튼 */
+  .cta-btns,.btn-row{flex-direction:column;align-items:center;}
+  .btn-naver,.btn-kakao,.btn-cr,.btn-g,.btn-go{
+    width:100% !important;max-width:280px;justify-content:center;
+  }
+
+  /* flow */
+  .flow{flex-wrap:wrap;gap:12px;}
+  .flow-step{min-width:80px;flex:0 0 calc(50% - 6px);}
+  .flow-step::after{display:none;}
+  .timing{gap:8px;}
+  .tt{flex:0 0 18%;}
+
+  /* 비교 카드 */
+  .cmp,.vs,.rc,.hb{border-radius:10px !important;}
+
+  /* footer */
+  .foot,.footer{flex-direction:column;gap:8px;align-items:flex-start !important;}
+  .foot-info,.footer-info{text-align:left !important;}
+
+  /* 체크 */
+  .step-box{padding:16px 14px;}
+  .age-opts{grid-template-columns:1fr 1fr 1fr !important;}
+  .ao{padding:10px 6px;}
+  .ao-main{font-size:15px;font-size:12px;}
+  .ao-sub{font-size:10px;}
+
+  /* 탭 */
+  .tabs{gap:2px;padding:8px 10px;overflow-x:auto;}
+  .tab{font-size:11px;padding:6px 9px;white-space:nowrap;}
+
+  /* 체인 */
+  .chain,.chain-box{flex-wrap:wrap;}
+
+  /* science box */
+  .science,.insight,.warn,.warn-box{padding:11px 13px;}
+
+  /* phil */
+  .philosophy,.phil{padding:28px 0;}
+  .ph-q,.hero-h{font-size:clamp(18px,5vw,24px);}
+}
+
+/* ── HERO BRUNCH ── */
+.hero{background:#fff;min-height:auto;padding:52px 28px 44px;border-bottom:1px solid #E0E0DA;position:relative;overflow:hidden}
+.hero::before,.hero::after,.hero-ring{display:none}
+.hero-inner{max-width:760px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-kw{font-size:11px;letter-spacing:.16em;color:#FAF8F0;text-transform:uppercase;font-weight:400;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.hero-kw::before{display:none}
+.hero-tag{font-size:11px;letter-spacing:.14em;color:#888880;text-transform:uppercase;margin-bottom:14px}
+.hero-pretitle{font-size:12px;color:#555550;font-weight:300;margin-bottom:8px}
+.hero-eyebrow{font-size:11px;letter-spacing:.14em;color:#888880;text-transform:uppercase;margin-bottom:14px;opacity:1;animation:none}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;letter-spacing:-.02em;opacity:1;animation:none}
+.hero-title em{font-style:italic;font-weight:400;color:#007A54}
+.hero-title strong{font-weight:700;font-style:normal;color:#111110}
+.hero-h{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;letter-spacing:-.02em;opacity:1;animation:none}
+.hero-h em{font-style:italic;color:#007A54}
+.hero-h strong{font-weight:700;color:#111110}
+.hero-main{font-family:'TmonMonsori',serif;font-size:clamp(26px,5vw,42px);font-weight:400;color:#111110;line-height:1.3;margin-bottom:14px;opacity:1;animation:none}
+.hero-main em{color:#007A54;font-style:normal;display:block}
+.hero-sub{font-family:'TmonMonsori',serif;font-size:clamp(14px,2vw,17px);font-weight:300;color:#555550;line-height:1.85;max-width:520px;opacity:1;animation:none}
+.hero-sub p{color:#555550}
+.hero-desc{font-size:14px;color:#555550;line-height:1.85;max-width:480px;opacity:1;animation:none}
+.hero-badge,.hero-scroll,.hs-line,.hs-txt{display:none}
+.hero-cat{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.hc{border-radius:100px;padding:5px 13px;font-size:12px;font-weight:500}
+.hc-health{background:#E8F5F0;color:#007A54}
+.hc-beauty{background:#F5EFD8;color:#8A6820}
+.hero-term{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.ht-ko{border-radius:100px;padding:5px 13px;font-size:12px;font-weight:500;background:#E8F5F0;color:#007A54}
+.ht-en{border-radius:100px;padding:5px 13px;font-size:12px;color:#555550;border:1px solid #E0E0DA}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.hp.go{background:#F5EFD8;border:1px solid #E8D898;color:#8A6820;border-radius:100px;padding:5px 12px;font-size:12px}
+.hp.wh{background:#F5F5F1;border:1px solid #E0E0DA;color:#555550;border-radius:100px;padding:5px 12px;font-size:12px}
+.hero-copy{display:flex;flex-direction:column;gap:7px;margin-top:18px}
+.hero-copy-item{font-size:15px;color:#555550;line-height:1.5;display:flex;align-items:flex-start;gap:8px}
+.hero-copy-item::before{content:'—';color:#C8A84B;flex-shrink:0}
+
+/* ── 색상 규칙 ── */
+/* 딥그린 배경 → 크림 글자 */
+.sh .sh-title{color:#FAF8F0}
+.sh .sh-sub{color:#FAF8F0}
+.selfcheck .sc-title{color:#FAF8F0}
+.selfcheck .sc-sub{color:rgba(250,248,240,.55)}
+.selfcheck .sc-label{color:rgba(200,168,75,.7)}
+.cta .cta /* 밝은 배경 → 어두운 글자 */
+.hero .hero-title{color:#111110}
+.hero .hero-sub{color:#888880}
+.hero .hero-tag{color:#AAAAAA}
+/* 예외: 딥그린 hero */
+.hero-child .hero-title,.hero-teen .hero-title,.hero-adult .hero-title{color:#FAF8F0 !important}
+.hero-child .hero-subtitle,.hero-teen .hero-subtitle,.hero-adult .hero-subtitle{color:#FAF8F0 !important}
+
+/* 관련 페이지 링크 */
+.rel-section{padding:28px 20px;background:#F5F5F1;border-top:1px solid #E0E0DA;margin-top:8px}
+.rel-title{font-size:12px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:500;margin-bottom:12px}
+.rel-links{display:flex;flex-direction:column;gap:8px}
+.rel-link{display:flex;align-items:center;gap:12px;padding:13px 15px;background:#fff;border-radius:10px;border:1px solid #E0E0DA;text-decoration:none;color:#1A1A18;transition:opacity .15s}
+.rel-link:hover{opacity:.75}
+.rel-link-body{flex:1}
+.rel-link-title{font-size:14px;font-weight:500;color:#111110;margin-bottom:2px}
+.rel-link-sub{font-size:12px;color:#555550}
+.rel-link-arr{font-size:14px;color:#C8A84B;font-weight:600;flex-shrink:0}
+
+@font-face {
+  font-family: 'TmonMonsori';
+  src: url('fonts/TmonMonsori_otf.otf') format('opentype'),
+       url('fonts/TmonMonsori_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('fonts/pretendard-variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
+<link rel="stylesheet" href="petit-design.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<nav class="gnav">
+  <div class="gnav-inner">
+    <div class="gnav-logo">생활의 기본, <em>쁘띠치과</em><span style="font-size:10px;color:#555550;font-weight:400;letter-spacing:.06em;margin-left:8px;font-style:italic">Born to Be, Petit Dental</span></div>
+    <a href="search.html" style="margin-left:8px;width:32px;height:32px;border-radius:50%;border:1px solid #E8E8E4;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:#555550;font-size:15px;transition:all .15s" title="검색">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </a>
+    <a class="gnav-home" href="index.html">← 홈</a>
+    <a class="gnav-cta" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank">예약</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-kw">건강한 치료 · 예방과 습관치료</div>
+    <h1 class="hero-title">치료보다 먼저,<br><em>예방과 습관</em>입니다</h1>
+    <p class="hero-sub">치료를 잘 하는 것보다 치료가 필요 없도록 하는 것이 먼저입니다.<br>쁘띠치과의 예방과 습관치료가 그 시작입니다.</p>
+  </div>
+</section>
+
+<div class="wrap">
+<div class="care-list">
+
+  <!-- 1. 예방 -->
+  <div class="care" onclick="toggleCare(this)">
+    <div class="care-head">
+      <div class="care-num">1</div>
+      <div class="care-htxt">
+        <div class="care-title">예방 — 양치질 교육</div>
+        <div class="care-sub">칫솔·치간칫솔·치실 처방 + 3회 교육</div>
+      </div>
+      <div class="care-arr">▼</div>
+    </div>
+    <div class="care-body">
+      <div class="cb-body">
+        쁘띠치과에서는 <strong>간단 양치질 교육을 3회 제공</strong>합니다.<br>
+        칫솔, 치간칫솔, 치실을 <em>환자에게 알맞은 크기로 처방</em>하고 사용법을 안내합니다.
+      </div>
+      <div class="point">
+        <div class="point-title">제공 내용</div>
+        <div class="point-item">환자 구강 상태에 맞는 칫솔·치간칫솔·치실 크기 처방</div>
+        <div class="point-item">올바른 칫솔질 방법 1:1 교육 (총 3회)</div>
+        <div class="point-item">치간칫솔·치실 사용법 실습</div>
+      </div>
+      <div class="insight">
+        <p>양치질 교육은 치료의 시작이자 가장 중요한 예방입니다. <strong>아무리 좋은 치료도 올바른 양치질 없이는 유지되지 않습니다.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. 불소 -->
+  <div class="care" onclick="toggleCare(this)">
+    <div class="care-head">
+      <div class="care-num">2</div>
+      <div class="care-htxt">
+        <div class="care-title">불소 — 충치 및 치경부 예방</div>
+        <div class="care-sub">3~6개월 주기 · 어린이부터 성인까지</div>
+      </div>
+      <div class="care-arr">▼</div>
+    </div>
+    <div class="care-body">
+      <div class="cb-body">
+        충치가 염려되거나 <strong>치아목(치경부)이 드러난 부위</strong>는 미리 예방하기 위해 불소도포를 주기적으로 시행합니다.
+      </div>
+      <div class="point">
+        <div class="point-title">불소의 작용</div>
+        <div class="point-item">치아 겉면을 단단하게 만들어 충치 저항력 향상</div>
+        <div class="point-item">세균이 당분을 소화하지 못하도록 항균 작용</div>
+        <div class="point-item">치경부 노출 부위 민감도 감소</div>
+      </div>
+      <div class="insight">
+        <p><strong>대상:</strong> 어린이부터, 잇몸과 뼈가 내려가기 시작하는 시기의 성인까지 처방됩니다. 3~6개월 간격으로 정기적으로 시행합니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 습관 교육 -->
+  <div class="care" onclick="toggleCare(this)">
+    <div class="care-head">
+      <div class="care-num">3</div>
+      <div class="care-htxt">
+        <div class="care-title">습관 교육 — 이악물기·구호흡·혀단축증</div>
+        <div class="care-sub">원인 습관 차단 + 5회 혀운동치료 병행</div>
+      </div>
+      <div class="care-arr">▼</div>
+    </div>
+    <div class="care-body">
+      <div class="cb-body">
+        <strong>설소대(혀소대)가 혀를 잡고 있는 경우</strong>, 혀가 짧아지고 자연스럽게 밑으로 자리잡게 되어 구호흡·부정교합의 원인이 됩니다.
+      </div>
+      <div class="warn-box">
+        <p><strong>혀단축증이 방치되면</strong> → 혀 저위 → 위턱 협소 → 구호흡 → 부정교합·안면비대칭으로 이어집니다.</p>
+      </div>
+      <div class="point">
+        <div class="point-title">치료 방법</div>
+        <div class="point-item">혀단축증 치료 — 어린 나이에 시행하는 보험 진료</div>
+        <div class="point-item">아이: 예방치료 / 성인: 습관치료로 처방</div>
+        <div class="point-item">5회 혀운동치료와 함께 병행</div>
+        <div class="point-item">교정 환자의 경우 전체 치료에 포함</div>
+      </div>
+      <a class="blog-link" href="https://m.blog.naver.com/petit2828/222939342837" target="_blank">
+        <div class="blog-link-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/></svg>
+        </div>
+        <div>
+          <div class="blog-link-txt">혀단축증 더 자세히 보기</div>
+          <div class="blog-link-sub">쁘띠치과 네이버 블로그</div>
+        </div>
+        <div class="blog-link-arr">→</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 4. 만성복합치주염 예방 -->
+  <div class="care" onclick="toggleCare(this)">
+    <div class="care-head">
+      <div class="care-num">4</div>
+      <div class="care-htxt">
+        <div class="care-title">만성복합치주염 예방</div>
+        <div class="care-sub">평생 관리가 필요한 만성질환 — 당뇨처럼</div>
+      </div>
+      <div class="care-arr">▼</div>
+    </div>
+    <div class="care-body">
+      <div class="cb-body">
+        치아가 멀쩡한데도 뽑히게 되는 가장 흔한 원인이 바로 치주염입니다.<br>
+        정식 명칭은 <em>만성복합치주염</em>입니다.
+      </div>
+
+      <div class="perio-stages">
+        <div class="ps ps-1">
+          <div class="ps-label">만성</div>
+          <div class="ps-name">한 번 발병하면</div>
+          <div class="ps-desc">평생 완치 안 됨<br>당뇨처럼 꾸준한<br>생활습관 관리 필요</div>
+        </div>
+        <div class="ps ps-2">
+          <div class="ps-label">복합</div>
+          <div class="ps-name">원인이 복합적</div>
+          <div class="ps-desc">세균 문제<br>교합 문제<br>호르몬·전신 문제</div>
+        </div>
+        <div class="ps ps-3">
+          <div class="ps-label">치주염</div>
+          <div class="ps-name">뼈가 녹는다</div>
+          <div class="ps-desc">잇몸뼈 파괴<br>치아 흔들림<br>결국 발치</div>
+        </div>
+      </div>
+
+      <div class="cb-body" style="margin-top:14px">
+        만성복합치주염의 원인은 세 가지입니다.<br>
+        <strong>세균적 원인</strong> (양치질 불량), <strong>교합적 원인</strong> (위아래 치아 간섭), <strong>전신·호르몬 원인</strong> (임신·당뇨 등)<br>
+        원인에 따라 치료 방법이 다르므로 복합적인 접근이 필요합니다.
+      </div>
+
+      <div class="point">
+        <div class="point-title">예방을 위한 처방</div>
+        <div class="point-item">양치질 교육 + 정기 체크 (3~6개월)</div>
+        <div class="point-item">올바른 턱 위치와 치아 배열을 위한 성장교정·4D입체교정</div>
+        <div class="point-item">교합조정으로 교합 원인 제거</div>
+      </div>
+
+      <div class="warn-box" style="margin-top:14px">
+        <p>어린이 시기에 치아가 제대로 나오고 올바르게 성장하도록 도와주면서 <strong>평생 관리할 수 있는 습관을 잡아주는 것</strong>이 충치도 예방하고 치주염도 막는 가장 중요한 과정입니다.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="divider"></div>
+
+<!-- 블로그 전체 -->
+<div style="padding:28px 0 20px">
+  <a class="blog-link" href="https://naver.me/5FeDSFjO" target="_blank">
+    <div class="blog-link-icon">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/></svg>
+    </div>
+    <div>
+      <div class="blog-link-txt">쁘띠치과 네이버 블로그 — 더 자세한 내용</div>
+      <div class="blog-link-sub">치료 케이스 · 설명 · 예방 정보 보기</div>
+    </div>
+    <div class="blog-link-arr">→</div>
+  </a>
+</div>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="cta-btns">
+    <a href="https://booking.naver.com/booking/13/bizes/743904" target="_blank" class="btn-naver">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/></svg>
+      네이버 예약
+    </a>
+    <a href="https://pf.kakao.com/_xbhXYb" target="_blank" class="btn-kakao">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#191919"><path d="M12 3C6.477 3 2 6.477 2 10.5c0 2.67 1.648 5.012 4.146 6.396L5 21l5.12-2.983C10.734 18.01 11.363 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z"/></svg>
+      카카오톡 상담
+    </a>
+  </div>
+  <div class="cta-info">📍 대구시 남구 대봉로 66 2층 &nbsp;·&nbsp; 📞 053-472-2828</div>
+</section>
+
+</div>
+
+<script>
+function toggleCare(el){
+  el.classList.toggle('open');
+}
+</script>
+
+<div class="share-float">
+  <div class="share-toast" id="shareToast">링크 복사됐습니다</div>
+  <button class="share-fab" onclick="doShare()" title="공유하기">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.92 2 11.76c0 2.96 1.6 5.59 4.08 7.27L5 21l2.42-1.29c1.47.41 3.02.63 4.58.63 5.52 0 10-3.92 10-8.76C22 6.92 17.52 3 12 3z" fill="#191919"/></svg>
+  </button>
+</div>
+
+<script>
+async function doShare(){
+  var title=document.title||'쁘띠치과';
+  var url=location.href;
+  if(navigator.share){
+    try{await navigator.share({title:title,url:url});}catch(e){}
+  } else {
+    try{
+      await navigator.clipboard.writeText(url);
+      var t=document.getElementById('shareToast');
+      t.classList.add('show');
+      setTimeout(function(){t.classList.remove('show');},2000);
+    }catch(e){}
+  }
+}
+</script>
+<div class="rel-section">
+  <div class="rel-title">다음 단계 · 관련 페이지</div>
+  <div class="rel-links">
+  <a class="rel-link" href="petit_dental_spa.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">바른미소스파</div>
+      <div class="rel-link-sub">예방 관리를 프로그램으로 — BASIC·BALANCE·RECOVERY</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_tongue_tie.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">설소대단축증 치료</div>
+      <div class="rel-link-sub">호흡·혀·발음 — 습관 치료의 기본</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_general.html" target="_blank">
+    <div class="rel-link-body">
+      <div class="rel-link-title">일반진료</div>
+      <div class="rel-link-sub">예방·충치·치주·심미보철·사랑니 발치</div>
+    </div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  </div>
+</div>
+  <a class="rel-link" href="petit_smile_design.html" target="_blank">
+    <div class="rel-link-body"><div class="rel-link-title">바른미소디자인</div><div class="rel-link-sub">입술·혀·호흡·자세 — 충치 재발 막는 근본 훈련</div></div>
+    <div class="rel-link-arr">→</div>
+  </a>
+  <a class="rel-link" href="petit_4d_ortho.html" target="_blank">
+    <div class="rel-link-body"><div class="rel-link-title">4D 입체교정</div><div class="rel-link-sub">MARPE · Twin Block · Han's 2-Way/3-Way · Biobloc</div></div>
+    <div class="rel-link-arr">→</div>
+  </a>
+</div>
+</body>
+</html>
