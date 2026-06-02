@@ -1,0 +1,2723 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>쁘띠치과 · 업무 보고</title>
+<style>
+  :root {
+    --green: #007A54;
+    --green-dark: #005c3e;
+    --green-light: #e8f4ef;
+    --gold: #C8A84B;
+    --gold-light: #f9f3e3;
+    --cream: #FAF8F0;
+    --text: #1a2e25;
+    --text-soft: #5a7060;
+    --border: #d4e4db;
+    --white: #ffffff;
+    --red: #c0392b;
+    --red-light: #fdecea;
+    --blue: #2471a3;
+    --blue-light: #eaf2fb;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--green);
+    color: var(--white);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .header-left { display: flex; align-items: center; gap: 10px; }
+  .header-logo { font-size: 11px; letter-spacing: 2px; opacity: 0.75; }
+  .header-title { font-size: 16px; font-weight: 700; }
+  .header-date { font-size: 12px; opacity: 0.85; text-align: right; line-height: 1.5; }
+
+  /* ── NAV TABS ── */
+  .nav-wrap {
+    background: var(--white);
+    border-bottom: 2px solid var(--border);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-tabs {
+    display: flex;
+    min-width: 380px;
+  }
+  .nav-tab {
+    flex: 1;
+    padding: 12px 8px 10px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-soft);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all .2s;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .nav-tab .tab-emoji { display: block; font-size: 16px; margin-bottom: 2px; }
+  .nav-tab:hover { color: var(--green); background: var(--green-light); }
+  .nav-tab.active {
+    color: var(--green);
+    border-bottom-color: var(--green);
+    background: var(--green-light);
+  }
+  .nav-tab .tab-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--white);
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 8px;
+    margin-left: 3px;
+    vertical-align: middle;
+  }
+
+  /* ── PAGES ── */
+  .page { display: none; padding: 16px; max-width: 680px; margin: 0 auto; }
+  .page.active { display: block; }
+
+  /* ── DATE BAR ── */
+  .date-bar {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .date-bar label { font-size: 12px; color: var(--text-soft); font-weight: 600; }
+  .date-bar input, .date-bar select {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 13px;
+    color: var(--text);
+    background: var(--cream);
+    font-family: inherit;
+  }
+  .date-bar input:focus, .date-bar select:focus {
+    outline: none;
+    border-color: var(--green);
+  }
+
+  /* ── SECTION CARD ── */
+  .section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .section-head {
+    background: var(--green-light);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-head .icon { font-size: 16px; }
+  .section-head .title { font-size: 14px; font-weight: 700; color: var(--green-dark); }
+  .section-head .sub { font-size: 11px; color: var(--text-soft); margin-left: auto; }
+  .section-body { padding: 14px 16px; }
+
+  /* ── FIELD ROWS ── */
+  .field-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .field-row:last-child { border-bottom: none; }
+  .field-label {
+    font-size: 13px;
+    color: var(--text);
+    min-width: 130px;
+    flex-shrink: 0;
+    line-height: 1.4;
+  }
+  .field-label .required { color: var(--red); margin-left: 2px; }
+  .field-input { flex: 1; }
+  .field-input input[type="text"],
+  .field-input input[type="number"],
+  .field-input textarea,
+  .field-input select {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 7px 10px;
+    font-size: 13px;
+    color: var(--text);
+    background: var(--cream);
+    font-family: inherit;
+    transition: border-color .2s;
+  }
+  .field-input textarea { resize: vertical; min-height: 56px; }
+  .field-input input:focus,
+  .field-input textarea:focus,
+  .field-input select:focus {
+    outline: none;
+    border-color: var(--green);
+    background: var(--white);
+  }
+
+  /* ── MONEY ROW ── */
+  .money-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .money-row:last-child { border-bottom: none; }
+  .money-label {
+    font-size: 13px;
+    min-width: 130px;
+    flex-shrink: 0;
+    color: var(--text);
+  }
+  .money-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .money-wrap input {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 7px 10px;
+    font-size: 13px;
+    text-align: right;
+    color: var(--text);
+    background: var(--cream);
+    font-family: inherit;
+  }
+  .money-wrap input:focus { outline: none; border-color: var(--green); background: var(--white); }
+  .money-unit { font-size: 12px; color: var(--text-soft); white-space: nowrap; }
+  .money-total {
+    background: var(--gold-light);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 6px;
+  }
+  .money-total .t-label { font-size: 13px; font-weight: 700; color: var(--text); }
+  .money-total .t-val { font-size: 15px; font-weight: 700; color: var(--green-dark); }
+
+  /* ── CHECK GRID ── */
+  .check-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 4px 0;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .15s;
+    user-select: none;
+  }
+  .check-item:hover { border-color: var(--green); background: var(--green-light); }
+  .check-item.checked { border-color: var(--green); background: var(--green-light); }
+  .check-box {
+    width: 18px; height: 18px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .15s;
+  }
+  .check-item.checked .check-box {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+    font-size: 11px;
+  }
+  .check-item.checked .check-box::after { content: '✓'; }
+  .check-text { font-size: 12px; color: var(--text); line-height: 1.3; }
+
+  /* ── STATUS SELECT ── */
+  .status-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding: 6px 0;
+  }
+  .status-btn {
+    padding: 5px 12px;
+    border-radius: 16px;
+    border: 1.5px solid var(--border);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all .15s;
+    background: var(--white);
+    color: var(--text-soft);
+    user-select: none;
+  }
+  .status-btn:hover { border-color: var(--green); color: var(--green); }
+  .status-btn.sel-green { background: var(--green); border-color: var(--green); color: white; }
+  .status-btn.sel-gold { background: var(--gold); border-color: var(--gold); color: white; }
+  .status-btn.sel-red { background: var(--red); border-color: var(--red); color: white; }
+
+  /* ── NUMBER INPUTS ── */
+  .num-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .num-item {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    background: var(--cream);
+  }
+  .num-item label { font-size: 11px; color: var(--text-soft); display: block; margin-bottom: 4px; }
+  .num-item input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--green-dark);
+    text-align: center;
+    font-family: inherit;
+  }
+  .num-item input:focus { outline: none; }
+  .num-item .num-unit { text-align: center; font-size: 11px; color: var(--text-soft); }
+
+  /* ── SUBMIT BUTTON ── */
+  .submit-wrap {
+    padding: 16px 0 24px;
+    text-align: center;
+  }
+  .btn-submit {
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    padding: 14px 40px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    width: 100%;
+    max-width: 320px;
+    transition: background .2s;
+    box-shadow: 0 3px 10px rgba(0,122,84,0.3);
+  }
+  .btn-submit:hover { background: var(--green-dark); }
+  .btn-submit:disabled { background: #aaa; cursor: not-allowed; box-shadow: none; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--green-dark);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all .3s;
+    z-index: 999;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.error { background: var(--red); }
+
+  /* ── PERIOD BADGE ── */
+  .period-tag {
+    display: inline-block;
+    background: var(--gold);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    background: var(--blue-light);
+    border: 1px solid #b8d4e8;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--blue);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--border); margin: 8px 0; }
+
+  /* RESPONSIVE */
+  @media (max-width: 480px) {
+    .field-row { flex-wrap: wrap; }
+    .field-label { min-width: 100%; margin-bottom: 2px; }
+    .money-label { min-width: 100%; }
+    .money-row { flex-wrap: wrap; }
+    .check-grid { grid-template-columns: 1fr; }
+    .num-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-left">
+    <div>
+      <div class="header-logo">PETIT DENTAL</div>
+      <div class="header-title">📋 업무 보고</div>
+    </div>
+  </div>
+  <div class="header-date" id="headerDate"></div>
+</header>
+
+<!-- NAV TABS -->
+<div class="nav-wrap">
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="switchTab('daily')" id="tab-daily">
+      <span class="tab-emoji">📅</span>일일 결산
+    </div>
+    <div class="nav-tab" onclick="switchTab('weekly')" id="tab-weekly">
+      <span class="tab-emoji">📊</span>주간 점검
+      <span class="tab-badge">수금토</span>
+    </div>
+    <div class="nav-tab" onclick="switchTab('monthly')" id="tab-monthly">
+      <span class="tab-emoji">📆</span>월말 보고
+    </div>
+    <div class="nav-tab" onclick="switchTab('mgmt')" id="tab-mgmt">
+      <span class="tab-emoji">🏢</span>경영보고
+      <span class="tab-badge">20일</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 1: 일일 결산
+════════════════════════════════════════ -->
+<div class="page active" id="page-daily">
+
+  <!-- 오늘 알람 배너 -->
+  <div id="day-banner" style="background:var(--green);color:var(--white);border-radius:12px;padding:14px 18px;margin-bottom:14px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+      <div>
+        <div style="font-size:10px;opacity:.7;letter-spacing:1.5px;margin-bottom:2px;">TODAY</div>
+        <div id="banner-date" style="font-size:20px;font-weight:800;"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end;"><div id="banner-day-pill" style="font-size:12px;font-weight:700;background:rgba(255,255,255,.18);border-radius:20px;padding:5px 14px;white-space:nowrap;"></div></div>
+    </div>
+    <!-- 오늘의 할일 알람 -->
+    <div id="today-tasks"></div>
+  </div>
+
+  <!-- 주간점검 체크리스트 (수/금/토) -->
+  <div id="weekly-addon"></div>
+
+  <!-- 날짜·담당 (숨김 input — 제출용) -->
+  <div class="date-bar" style="margin-bottom:14px;">
+    <label>📅 날짜</label>
+    <input type="date" id="d-date" />
+    <label>👤 담당자</label>
+    <select id="d-staff">
+      <option value="">선택</option>
+      <option>데스크 1번</option>
+      <option>데스크 2번</option>
+      <option>총괄</option>
+      <option>a팀</option>
+      <option>b팀</option>
+      <option>c팀</option>
+    </select>
+  </div>
+
+  <!-- 마감 체크리스트 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">✅</span>
+      <span class="title">마감 체크리스트</span>
+      <span class="sub" id="d-check-count">0 / 10</span>
+      <button onclick="toggleAllChecks()" id="check-all-btn" style="margin-left:8px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);background:white;color:var(--text-soft);font-size:11px;cursor:pointer;font-family:inherit;">전체선택</button>
+    </div>
+    <div class="section-body">
+      <div class="check-grid" id="daily-checks">
+        <div class="check-item" onclick="toggleCheck(this,'d-check-count',10)">
+          <div class="check-box"></div>
+          <span class="check-text">당일 CC 해결 여부 확인</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this,'d-check-count',10)">
+          <div class="check-box"></div>
+          <span class="check-text">챠팅·청구 완료</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this,'d-check-count',10)">
+          <div class="check-box"></div>
+          <span class="check-text">미내원·해피콜 처리</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this,'d-check-count',10)">
+          <div class="check-box"></div>
+          <span class="check-text">웰컴콜·부재중콜 처리</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this,'d-check-count',10)">
+          <div class="check-box"></div>
+          <span class="check-text">내일 일정 확인</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this,'d-check-count',10)">
+          <div class="check-box"></div>
+          <span class="check-text">수술환자 저녁 약 안내</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this,'d-check-count',10)">
+          <div class="check-box"></div>
+          <span class="check-text">카카오톡 메시지 확인</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this,'d-check-count',10)">
+          <div class="check-box"></div>
+          <span class="check-text">네이버 예약 확인</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this,'d-check-count',10)">
+          <div class="check-box"></div>
+          <span class="check-text">진료실 환기·소등</span>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this,'d-check-count',10)">
+          <div class="check-box"></div>
+          <span class="check-text">중복예약 여부 확인</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 진료 현황 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">🦷</span>
+      <span class="title">진료 현황</span>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:5px;">
+        <span style="font-size:11px;color:var(--text-soft);">직원</span>
+        <input id="v-staff-count" type="number" min="0" placeholder="0"
+          style="width:36px;border:1px solid var(--border);border-radius:6px;padding:3px 4px;font-size:13px;font-weight:700;color:var(--green-dark);text-align:center;background:var(--cream);font-family:inherit;outline:none;">
+        <span style="font-size:11px;color:var(--text-soft);">명</span>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <!-- 내원 -->
+      <div style="display:flex;gap:10px;margin-bottom:14px;">
+        <div style="flex:1;background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:10px 12px;text-align:center;">
+          <div style="font-size:10px;color:var(--text-soft);margin-bottom:4px;">총 내원수</div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+            <input id="v-total" type="number" min="0" placeholder="0"
+              style="width:52px;border:none;background:transparent;font-size:22px;font-weight:700;color:var(--green-dark);text-align:center;font-family:inherit;outline:none;">
+            <span style="font-size:13px;color:var(--text-soft);">명</span>
+          </div>
+        </div>
+        <div style="flex:1;background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:10px 12px;text-align:center;">
+          <div style="font-size:10px;color:var(--text-soft);margin-bottom:4px;">신환</div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+            <input id="v-new" type="number" min="0" placeholder="0"
+              style="width:52px;border:none;background:transparent;font-size:22px;font-weight:700;color:var(--gold);text-align:center;font-family:inherit;outline:none;">
+            <span style="font-size:13px;color:var(--text-soft);">명</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 상담 현황 -->
+      <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px;">💬 상담 현황</div>
+
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:9px 12px;margin-bottom:8px;">
+        <div style="font-size:11px;color:var(--text-soft);font-weight:600;margin-bottom:7px;">임플란트</div>
+        <div style="display:flex;gap:8px;">
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:10px;color:#888;margin-bottom:3px;">A</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+              <button onclick="cntAdj('v-impl-a',-1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:white;color:var(--text-soft);font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">−</button>
+              <span id="v-impl-a-disp" style="min-width:22px;font-size:16px;font-weight:700;color:var(--green-dark);text-align:center;">0</span>
+              <input id="v-impl-a" type="hidden" value="0">
+              <button onclick="cntAdj('v-impl-a',1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:var(--green);color:white;font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">+</button>
+            </div>
+            <input id="v-impl-a-name" type="text" placeholder="이름 입력" style="width:100%;margin-top:5px;border:none;border-bottom:1.5px dashed var(--border);background:transparent;font-size:11px;color:var(--text);text-align:center;font-family:inherit;outline:none;padding:2px 0;" onfocus="this.style.borderBottomColor='var(--green)';this.style.borderBottomStyle='solid'" onblur="this.style.borderBottomColor='var(--border)';this.style.borderBottomStyle='dashed'">
+          </div>
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:10px;color:#888;margin-bottom:3px;">B</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+              <button onclick="cntAdj('v-impl-b',-1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:white;color:var(--text-soft);font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">−</button>
+              <span id="v-impl-b-disp" style="min-width:22px;font-size:16px;font-weight:700;color:var(--green-dark);text-align:center;">0</span>
+              <input id="v-impl-b" type="hidden" value="0">
+              <button onclick="cntAdj('v-impl-b',1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:var(--green);color:white;font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">+</button>
+            </div>
+            <input id="v-impl-b-name" type="text" placeholder="이름 입력" style="width:100%;margin-top:5px;border:none;border-bottom:1.5px dashed var(--border);background:transparent;font-size:11px;color:var(--text);text-align:center;font-family:inherit;outline:none;padding:2px 0;" onfocus="this.style.borderBottomColor='var(--green)';this.style.borderBottomStyle='solid'" onblur="this.style.borderBottomColor='var(--border)';this.style.borderBottomStyle='dashed'">
+          </div>
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:10px;color:#888;margin-bottom:3px;">C</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+              <button onclick="cntAdj('v-impl-c',-1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:white;color:var(--text-soft);font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">−</button>
+              <span id="v-impl-c-disp" style="min-width:22px;font-size:16px;font-weight:700;color:var(--green-dark);text-align:center;">0</span>
+              <input id="v-impl-c" type="hidden" value="0">
+              <button onclick="cntAdj('v-impl-c',1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:var(--green);color:white;font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">+</button>
+            </div>
+            <input id="v-impl-c-name" type="text" placeholder="이름 입력" style="width:100%;margin-top:5px;border:none;border-bottom:1.5px dashed var(--border);background:transparent;font-size:11px;color:var(--text);text-align:center;font-family:inherit;outline:none;padding:2px 0;" onfocus="this.style.borderBottomColor='var(--green)';this.style.borderBottomStyle='solid'" onblur="this.style.borderBottomColor='var(--border)';this.style.borderBottomStyle='dashed'">
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:9px 12px;margin-bottom:8px;">
+        <div style="font-size:11px;color:var(--text-soft);font-weight:600;margin-bottom:7px;">교합진단</div>
+        <div style="display:flex;gap:8px;">
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:10px;color:#888;margin-bottom:3px;">A</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+              <button onclick="cntAdj('v-occlusion-a',-1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:white;color:var(--text-soft);font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">−</button>
+              <span id="v-occlusion-a-disp" style="min-width:22px;font-size:16px;font-weight:700;color:var(--green-dark);text-align:center;">0</span>
+              <input id="v-occlusion-a" type="hidden" value="0">
+              <button onclick="cntAdj('v-occlusion-a',1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:var(--green);color:white;font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">+</button>
+            </div>
+            <input id="v-occlusion-a-name" type="text" placeholder="이름 입력" style="width:100%;margin-top:5px;border:none;border-bottom:1.5px dashed var(--border);background:transparent;font-size:11px;color:var(--text);text-align:center;font-family:inherit;outline:none;padding:2px 0;" onfocus="this.style.borderBottomColor='var(--green)';this.style.borderBottomStyle='solid'" onblur="this.style.borderBottomColor='var(--border)';this.style.borderBottomStyle='dashed'">
+          </div>
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:10px;color:#888;margin-bottom:3px;">B</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+              <button onclick="cntAdj('v-occlusion-b',-1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:white;color:var(--text-soft);font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">−</button>
+              <span id="v-occlusion-b-disp" style="min-width:22px;font-size:16px;font-weight:700;color:var(--green-dark);text-align:center;">0</span>
+              <input id="v-occlusion-b" type="hidden" value="0">
+              <button onclick="cntAdj('v-occlusion-b',1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:var(--green);color:white;font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">+</button>
+            </div>
+            <input id="v-occlusion-b-name" type="text" placeholder="이름 입력" style="width:100%;margin-top:5px;border:none;border-bottom:1.5px dashed var(--border);background:transparent;font-size:11px;color:var(--text);text-align:center;font-family:inherit;outline:none;padding:2px 0;" onfocus="this.style.borderBottomColor='var(--green)';this.style.borderBottomStyle='solid'" onblur="this.style.borderBottomColor='var(--border)';this.style.borderBottomStyle='dashed'">
+          </div>
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:10px;color:#888;margin-bottom:3px;">C</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+              <button onclick="cntAdj('v-occlusion-c',-1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:white;color:var(--text-soft);font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">−</button>
+              <span id="v-occlusion-c-disp" style="min-width:22px;font-size:16px;font-weight:700;color:var(--green-dark);text-align:center;">0</span>
+              <input id="v-occlusion-c" type="hidden" value="0">
+              <button onclick="cntAdj('v-occlusion-c',1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:var(--green);color:white;font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">+</button>
+            </div>
+            <input id="v-occlusion-c-name" type="text" placeholder="이름 입력" style="width:100%;margin-top:5px;border:none;border-bottom:1.5px dashed var(--border);background:transparent;font-size:11px;color:var(--text);text-align:center;font-family:inherit;outline:none;padding:2px 0;" onfocus="this.style.borderBottomColor='var(--green)';this.style.borderBottomStyle='solid'" onblur="this.style.borderBottomColor='var(--border)';this.style.borderBottomStyle='dashed'">
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:9px 12px;margin-bottom:8px;">
+        <div style="font-size:11px;color:var(--text-soft);font-weight:600;margin-bottom:7px;">보철</div>
+        <div style="display:flex;gap:8px;">
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:10px;color:#888;margin-bottom:3px;">A</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+              <button onclick="cntAdj('v-prosth-a',-1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:white;color:var(--text-soft);font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">−</button>
+              <span id="v-prosth-a-disp" style="min-width:22px;font-size:16px;font-weight:700;color:var(--green-dark);text-align:center;">0</span>
+              <input id="v-prosth-a" type="hidden" value="0">
+              <button onclick="cntAdj('v-prosth-a',1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:var(--green);color:white;font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">+</button>
+            </div>
+            <input id="v-prosth-a-name" type="text" placeholder="이름 입력" style="width:100%;margin-top:5px;border:none;border-bottom:1.5px dashed var(--border);background:transparent;font-size:11px;color:var(--text);text-align:center;font-family:inherit;outline:none;padding:2px 0;" onfocus="this.style.borderBottomColor='var(--green)';this.style.borderBottomStyle='solid'" onblur="this.style.borderBottomColor='var(--border)';this.style.borderBottomStyle='dashed'">
+          </div>
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:10px;color:#888;margin-bottom:3px;">B</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+              <button onclick="cntAdj('v-prosth-b',-1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:white;color:var(--text-soft);font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">−</button>
+              <span id="v-prosth-b-disp" style="min-width:22px;font-size:16px;font-weight:700;color:var(--green-dark);text-align:center;">0</span>
+              <input id="v-prosth-b" type="hidden" value="0">
+              <button onclick="cntAdj('v-prosth-b',1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:var(--green);color:white;font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">+</button>
+            </div>
+            <input id="v-prosth-b-name" type="text" placeholder="이름 입력" style="width:100%;margin-top:5px;border:none;border-bottom:1.5px dashed var(--border);background:transparent;font-size:11px;color:var(--text);text-align:center;font-family:inherit;outline:none;padding:2px 0;" onfocus="this.style.borderBottomColor='var(--green)';this.style.borderBottomStyle='solid'" onblur="this.style.borderBottomColor='var(--border)';this.style.borderBottomStyle='dashed'">
+          </div>
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:10px;color:#888;margin-bottom:3px;">C</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+              <button onclick="cntAdj('v-prosth-c',-1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:white;color:var(--text-soft);font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">−</button>
+              <span id="v-prosth-c-disp" style="min-width:22px;font-size:16px;font-weight:700;color:var(--green-dark);text-align:center;">0</span>
+              <input id="v-prosth-c" type="hidden" value="0">
+              <button onclick="cntAdj('v-prosth-c',1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:var(--green);color:white;font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">+</button>
+            </div>
+            <input id="v-prosth-c-name" type="text" placeholder="이름 입력" style="width:100%;margin-top:5px;border:none;border-bottom:1.5px dashed var(--border);background:transparent;font-size:11px;color:var(--text);text-align:center;font-family:inherit;outline:none;padding:2px 0;" onfocus="this.style.borderBottomColor='var(--green)';this.style.borderBottomStyle='solid'" onblur="this.style.borderBottomColor='var(--border)';this.style.borderBottomStyle='dashed'">
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:9px 12px;margin-bottom:8px;">
+        <div style="font-size:11px;color:var(--text-soft);font-weight:600;margin-bottom:7px;">엠도게인</div>
+        <div style="display:flex;gap:8px;">
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:10px;color:#888;margin-bottom:3px;">A</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+              <button onclick="cntAdj('v-emdogain-a',-1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:white;color:var(--text-soft);font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">−</button>
+              <span id="v-emdogain-a-disp" style="min-width:22px;font-size:16px;font-weight:700;color:var(--green-dark);text-align:center;">0</span>
+              <input id="v-emdogain-a" type="hidden" value="0">
+              <button onclick="cntAdj('v-emdogain-a',1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:var(--green);color:white;font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">+</button>
+            </div>
+            <input id="v-emdogain-a-name" type="text" placeholder="이름 입력" style="width:100%;margin-top:5px;border:none;border-bottom:1.5px dashed var(--border);background:transparent;font-size:11px;color:var(--text);text-align:center;font-family:inherit;outline:none;padding:2px 0;" onfocus="this.style.borderBottomColor='var(--green)';this.style.borderBottomStyle='solid'" onblur="this.style.borderBottomColor='var(--border)';this.style.borderBottomStyle='dashed'">
+          </div>
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:10px;color:#888;margin-bottom:3px;">B</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+              <button onclick="cntAdj('v-emdogain-b',-1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:white;color:var(--text-soft);font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">−</button>
+              <span id="v-emdogain-b-disp" style="min-width:22px;font-size:16px;font-weight:700;color:var(--green-dark);text-align:center;">0</span>
+              <input id="v-emdogain-b" type="hidden" value="0">
+              <button onclick="cntAdj('v-emdogain-b',1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:var(--green);color:white;font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">+</button>
+            </div>
+            <input id="v-emdogain-b-name" type="text" placeholder="이름 입력" style="width:100%;margin-top:5px;border:none;border-bottom:1.5px dashed var(--border);background:transparent;font-size:11px;color:var(--text);text-align:center;font-family:inherit;outline:none;padding:2px 0;" onfocus="this.style.borderBottomColor='var(--green)';this.style.borderBottomStyle='solid'" onblur="this.style.borderBottomColor='var(--border)';this.style.borderBottomStyle='dashed'">
+          </div>
+          <div style="flex:1;text-align:center;">
+            <div style="font-size:10px;color:#888;margin-bottom:3px;">C</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+              <button onclick="cntAdj('v-emdogain-c',-1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:white;color:var(--text-soft);font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">−</button>
+              <span id="v-emdogain-c-disp" style="min-width:22px;font-size:16px;font-weight:700;color:var(--green-dark);text-align:center;">0</span>
+              <input id="v-emdogain-c" type="hidden" value="0">
+              <button onclick="cntAdj('v-emdogain-c',1)" style="width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:var(--green);color:white;font-size:16px;line-height:1;cursor:pointer;font-family:inherit;flex-shrink:0;">+</button>
+            </div>
+            <input id="v-emdogain-c-name" type="text" placeholder="이름 입력" style="width:100%;margin-top:5px;border:none;border-bottom:1.5px dashed var(--border);background:transparent;font-size:11px;color:var(--text);text-align:center;font-family:inherit;outline:none;padding:2px 0;" onfocus="this.style.borderBottomColor='var(--green)';this.style.borderBottomStyle='solid'" onblur="this.style.borderBottomColor='var(--border)';this.style.borderBottomStyle='dashed'">
+          </div>
+        </div>
+      </div>
+
+
+      <!-- 교합진단 상담환자 -->
+      <div style="border-top:1px solid var(--border);padding-top:12px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <span style="font-size:12px;font-weight:700;color:var(--green);">🔍 교합진단 상담환자</span>
+          <div style="display:flex;gap:6px;">
+            <div id="v-consult-no" onclick="setConsult('no')"
+              style="padding:4px 14px;border-radius:20px;border:1.5px solid var(--green);font-size:12px;font-weight:600;cursor:pointer;background:var(--green);color:white;">무</div>
+            <div id="v-consult-yes" onclick="setConsult('yes')"
+              style="padding:4px 14px;border-radius:20px;border:1.5px solid var(--border);font-size:12px;font-weight:600;cursor:pointer;background:var(--cream);color:var(--text-soft);">유</div>
+          </div>
+        </div>
+
+        <!-- 유 선택시 상담 입력 -->
+        <div id="v-consult-detail" style="display:none;">
+          <div id="v-consult-list"></div>
+          <button onclick="addConsultRow()"
+            style="width:100%;padding:7px;border:1.5px dashed var(--border);border-radius:8px;background:transparent;color:var(--text-soft);font-size:12px;cursor:pointer;font-family:inherit;margin-top:4px;">
+            + 상담환자 추가
+          </button>
+        </div>
+      </div>
+
+      <!-- 임플란트 수술환자 -->
+      <div style="border-top:1px solid var(--border);padding-top:12px;margin-top:4px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <span style="font-size:12px;font-weight:700;color:var(--green);">🦴 임플란트 수술환자</span>
+          <div style="display:flex;gap:6px;">
+            <div id="v-surgery-no" onclick="setSurgery('no')"
+              style="padding:4px 16px;border-radius:20px;border:1.5px solid var(--border);font-size:12px;font-weight:600;cursor:pointer;background:var(--green);color:white;">무</div>
+            <div id="v-surgery-yes" onclick="setSurgery('yes')"
+              style="padding:4px 16px;border-radius:20px;border:1.5px solid var(--border);font-size:12px;font-weight:600;cursor:pointer;background:var(--cream);color:var(--text-soft);">유</div>
+          </div>
+        </div>
+        <div id="v-surgery-detail" style="display:none;">
+          <div id="v-surgery-list"></div>
+          <button onclick="addSurgeryRow()" style="width:100%;padding:7px;border:1.5px dashed var(--border);border-radius:8px;background:transparent;color:var(--text-soft);font-size:12px;cursor:pointer;font-family:inherit;margin-top:4px;">+ 수술환자 추가</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- 특이사항 메모 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">📝</span>
+      <span class="title">특이사항 메모</span>
+    </div>
+    <div class="section-body">
+      <textarea id="d-memo" style="width:100%;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--text);background:var(--cream);font-family:inherit;resize:vertical;min-height:90px;line-height:1.7;" placeholder="불만환자 / 원장 전달사항 / 기타 공유 내용을 자유롭게 입력하세요"></textarea>
+    </div>
+  </div>
+
+  <!-- 보험서류 신청현황 — 통합 -->
+  <div class="section" id="doc-section">
+    <div class="section-head">
+      <span class="icon">📄</span>
+      <span class="title">보험서류 신청현황</span>
+      <div style="margin-left:auto;display:flex;gap:6px;align-items:center;">
+        <div class="dr-tab-btn dr-act" onclick="drShowTab('list',this)" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);cursor:pointer;background:var(--green);color:white;">목록</div>
+        <div class="dr-tab-btn" onclick="drShowTab('new',this)" style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border);cursor:pointer;background:white;color:var(--text-soft);">+ 신규</div>
+      </div>
+    </div>
+
+    <!-- 요약 바 -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 14px 0;">
+      <div style="background:#fff;border:1px solid #fdecea;border-radius:10px;padding:10px;text-align:center;">
+        <div id="dr-sum-urgent" style="font-size:22px;font-weight:700;color:#E05050;">0</div>
+        <div style="font-size:10px;color:#888;margin-top:2px;">오늘 마감</div>
+      </div>
+      <div style="background:#fff;border:1px solid #fdf6e3;border-radius:10px;padding:10px;text-align:center;">
+        <div id="dr-sum-wait" style="font-size:22px;font-weight:700;color:#C8A84B;">0</div>
+        <div style="font-size:10px;color:#888;margin-top:2px;">승인 대기</div>
+      </div>
+      <div style="background:#fff;border:1px solid #e8f4ef;border-radius:10px;padding:10px;text-align:center;">
+        <div id="dr-sum-done" style="font-size:22px;font-weight:700;color:#007A54;">0</div>
+        <div style="font-size:10px;color:#888;margin-top:2px;">완료</div>
+      </div>
+    </div>
+
+    <!-- 목록 패널 -->
+    <div id="dr-panel-list" style="padding:12px 14px;">
+      <div style="display:flex;gap:6px;margin-bottom:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;">
+        <div class="dr-filter act" onclick="drFilter('all',this)" style="padding:5px 11px;border-radius:100px;border:1px solid var(--border);background:var(--green);color:white;font-size:11px;white-space:nowrap;cursor:pointer;">전체</div>
+        <div class="dr-filter" onclick="drFilter('wait',this)" style="padding:5px 11px;border-radius:100px;border:1px solid var(--border);background:white;color:#888;font-size:11px;white-space:nowrap;cursor:pointer;">승인 대기</div>
+        <div class="dr-filter" onclick="drFilter('approved',this)" style="padding:5px 11px;border-radius:100px;border:1px solid var(--border);background:white;color:#888;font-size:11px;white-space:nowrap;cursor:pointer;">승인 완료</div>
+        <div class="dr-filter" onclick="drFilter('done',this)" style="padding:5px 11px;border-radius:100px;border:1px solid var(--border);background:white;color:#888;font-size:11px;white-space:nowrap;cursor:pointer;">발급 완료</div>
+        <div class="dr-filter" onclick="drFilter('urgent',this)" style="padding:5px 11px;border-radius:100px;border:1px solid var(--border);background:white;color:#888;font-size:11px;white-space:nowrap;cursor:pointer;">오늘 마감</div>
+      </div>
+      <div id="dr-req-list"></div>
+    </div>
+
+    <!-- 신규 신청 패널 -->
+    <div id="dr-panel-new" style="display:none;padding:12px 14px;">
+
+      <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;">
+        <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:10px;">환자 정보</div>
+        <div style="margin-bottom:8px;">
+          <div style="font-size:11px;color:var(--gold);font-weight:600;margin-bottom:4px;">환자명 *</div>
+          <input id="dr-f-patient" type="text" placeholder="환자명 입력" style="width:100%;padding:9px 11px;border:1px solid var(--gold);border-radius:7px;font-size:13px;background:#FFFBEF;font-family:inherit;outline:none;">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+          <div>
+            <div style="font-size:11px;color:var(--gold);font-weight:600;margin-bottom:4px;">신청일 *</div>
+            <input id="dr-f-date" type="date" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:7px;font-size:13px;background:var(--cream);font-family:inherit;outline:none;">
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--gold);font-weight:600;margin-bottom:4px;">마감일 *</div>
+            <input id="dr-f-due" type="date" style="width:100%;padding:9px 11px;border:1px solid var(--gold);border-radius:7px;font-size:13px;background:#FFFBEF;font-family:inherit;outline:none;">
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--text-soft);font-weight:600;margin-bottom:4px;">특이사항</div>
+          <input id="dr-f-memo" type="text" placeholder="예: 보험사 제출용, 급하게 필요" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:7px;font-size:13px;background:var(--cream);font-family:inherit;outline:none;">
+        </div>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;">
+        <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:10px;">서류 선택 (복수 가능)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;" id="dr-doc-grid">
+          <div class="dr-doc-chip" data-name="일반진단서/소견서" data-price="10000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">일반진단서/소견서<span style="font-size:10px;color:#aaa;display:block;">1만원/장</span></div>
+          <div class="dr-doc-chip" data-name="병무용 진단서" data-price="20000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">병무용 진단서<span style="font-size:10px;color:#aaa;display:block;">2만원/장</span></div>
+          <div class="dr-doc-chip" data-name="영수증" data-price="0" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">영수증<span style="font-size:10px;color:#aaa;display:block;">무료</span></div>
+          <div class="dr-doc-chip" data-name="진료비 세부내역서" data-price="0" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">진료비 세부내역서<span style="font-size:10px;color:#aaa;display:block;">무료</span></div>
+          <div class="dr-doc-chip" data-name="치료확인서" data-price="10000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">치료확인서<span style="font-size:10px;color:#aaa;display:block;">1만원/장</span></div>
+          <div class="dr-doc-chip" data-name="차트사본 1~5매" data-price="1000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">차트사본 1~5매<span style="font-size:10px;color:#aaa;display:block;">1천원/장</span></div>
+          <div class="dr-doc-chip" data-name="차트사본 6매↑" data-price="100" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">차트사본 6매↑<span style="font-size:10px;color:#aaa;display:block;">100원/장</span></div>
+          <div class="dr-doc-chip" data-name="엑스레이" data-price="1000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">엑스레이<span style="font-size:10px;color:#aaa;display:block;">1천원/장</span></div>
+          <div class="dr-doc-chip" data-name="상해진단서 3주미만" data-price="50000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">상해진단서 3주미만<span style="font-size:10px;color:#aaa;display:block;">5만원</span></div>
+          <div class="dr-doc-chip" data-name="상해진단서 3주이상" data-price="100000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">상해진단서 3주이상<span style="font-size:10px;color:#aaa;display:block;">10만원</span></div>
+        </div>
+        <div style="margin-bottom:8px;">
+          <div style="font-size:11px;color:var(--text-soft);font-weight:600;margin-bottom:4px;">수량</div>
+          <input id="dr-f-qty" type="number" value="1" min="1" oninput="drUpdateTotal()" style="width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:7px;font-size:13px;background:var(--cream);font-family:inherit;outline:none;">
+        </div>
+        <div style="background:var(--green-light);border:1px solid var(--border);border-radius:8px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:12px;color:var(--green);font-weight:600;">예상 총금액</span>
+          <span id="dr-f-total" style="font-size:18px;font-weight:700;color:var(--green);">0원</span>
+        </div>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;">
+        <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:10px;">원장 승인 상태</div>
+        <div style="display:flex;gap:8px;margin-bottom:10px;">
+          <div id="dr-st-wait" onclick="drSetStatus('wait')" style="flex:1;padding:9px;border-radius:8px;border:1.5px solid var(--gold);background:#FFFBEF;color:#8A6820;font-size:12px;font-weight:600;cursor:pointer;text-align:center;">⏳ 승인 대기</div>
+          <div id="dr-st-ok" onclick="drSetStatus('approved')" style="flex:1;padding:9px;border-radius:8px;border:1.5px solid var(--border);background:var(--cream);color:#888;font-size:12px;font-weight:600;cursor:pointer;text-align:center;">✓ 원장 승인</div>
+        </div>
+        <textarea id="dr-f-docmemo" placeholder="원장 지시사항 또는 메모" rows="2" style="width:100%;border:1px solid var(--gold);border-radius:7px;padding:9px 11px;font-size:12px;background:#FFFBEF;font-family:inherit;resize:none;outline:none;"></textarea>
+      </div>
+
+      <button onclick="drSubmitReq()" style="width:100%;padding:13px;background:var(--green);color:white;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">신청 등록하기</button>
+    </div>
+  </div>
+  <div class="submit-wrap">
+    <button class="btn-submit" onclick="submitReport('daily')" style="background:#FEE500;color:#1a1a1a;box-shadow:0 3px 10px rgba(254,229,0,.4);">💬 카카오톡으로 보고 전송</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 2: 주간 점검 (수/금/토)
+════════════════════════════════════════ -->
+<div class="page" id="page-weekly">
+
+  <div class="date-bar">
+    <label>📅 기준일</label>
+    <input type="date" id="w-date" />
+    <label>👤 담당자</label>
+    <select id="w-staff">
+      <option value="">선택</option>
+      <option>데스크 1번</option>
+      <option>데스크 2번</option>
+      <option>총괄</option>
+    </select>
+  </div>
+
+  <div class="info-box">
+    💡 <strong>수요일</strong> — 중간 체크 (리콜·해피콜·이슈) &nbsp;|&nbsp;
+    <strong>금요일</strong> — 청구 오류 확인 &nbsp;|&nbsp;
+    <strong>토요일</strong> — 각 주별 보고 + 기계실 이슈
+  </div>
+
+  <!-- 치료중단 리콜 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">📞</span>
+      <span class="title">치료중단환자 리콜 현황</span>
+    </div>
+    <div class="section-body">
+      <div class="num-grid">
+        <div class="num-item">
+          <label>치주 리콜 대상</label>
+          <input type="number" id="w-rc-perio" min="0" placeholder="0">
+          <div class="num-unit">명</div>
+        </div>
+        <div class="num-item">
+          <label>신경치료 중단</label>
+          <input type="number" id="w-rc-endo" min="0" placeholder="0">
+          <div class="num-unit">명</div>
+        </div>
+        <div class="num-item">
+          <label>교정 중단</label>
+          <input type="number" id="w-rc-ortho" min="0" placeholder="0">
+          <div class="num-unit">명</div>
+        </div>
+        <div class="num-item">
+          <label>임플란트 중단</label>
+          <input type="number" id="w-rc-impl" min="0" placeholder="0">
+          <div class="num-unit">명</div>
+        </div>
+      </div>
+      <div class="field-row" style="margin-top:10px;">
+        <div class="field-label">리콜 완료 내용</div>
+        <div class="field-input"><textarea id="w-rc-note" placeholder="연락 완료 환자 및 예약 잡힌 현황"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 내원 통계 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">📈</span>
+      <span class="title">내원 통계 · 추이</span>
+    </div>
+    <div class="section-body">
+      <div class="num-grid">
+        <div class="num-item">
+          <label>이번 주 총 내원</label>
+          <input type="number" id="w-total" min="0" placeholder="0">
+          <div class="num-unit">명</div>
+        </div>
+        <div class="num-item">
+          <label>신환</label>
+          <input type="number" id="w-new" min="0" placeholder="0">
+          <div class="num-unit">명</div>
+        </div>
+      </div>
+      <div class="field-row" style="margin-top:10px;">
+        <div class="field-label">치료별 현황</div>
+        <div class="field-input"><textarea id="w-stat" placeholder="교정/교합/자연치아/일반 각 치료 내원수 기록"></textarea></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">상담 성공률</div>
+        <div class="field-input">
+          <input type="text" id="w-consult-rate" placeholder="예: 치주재건 3건 중 2건 동의 (67%)">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 미납자 관리 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">💳</span>
+      <span class="title">미납자 관리</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field-label">미납 현황</div>
+        <div class="field-input"><textarea id="w-unpaid" placeholder="환자명 / 미납금액 / 처리 계획"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 청구 점검 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">🧾</span>
+      <span class="title">청구 점검</span>
+      <span class="sub">금요일 집중 확인</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field-label">청구 오류 사항</div>
+        <div class="field-input"><textarea id="w-claim-err" placeholder="오류 항목 및 수정 내용"></textarea></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">심사 재요청</div>
+        <div class="field-input"><input type="text" id="w-claim-rq" placeholder="재요청 건수 및 항목"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIP·해피콜 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">⭐</span>
+      <span class="title">VIP 관리 · 해피콜</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field-label">VIP 해피콜 완료</div>
+        <div class="field-input"><textarea id="w-vip" placeholder="연락한 VIP 환자 및 내용 기록"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이슈 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">🔧</span>
+      <span class="title">이슈 · 기계실</span>
+      <span class="sub">토요일 필수</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field-label">기계·장비 이슈</div>
+        <div class="field-input"><textarea id="w-machine" placeholder="고장·점검 필요 장비 및 조치 내용"></textarea></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">기타 이슈</div>
+        <div class="field-input"><textarea id="w-issue" placeholder="그 외 공유할 이슈"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="submit-wrap">
+    <button class="btn-submit" onclick="submitReport('weekly')">✉️ 주간 보고 제출</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 3: 월말 보고
+════════════════════════════════════════ -->
+<div class="page" id="page-monthly">
+
+  <div class="date-bar">
+    <label>📅 기준월</label>
+    <input type="month" id="m-month" />
+    <label>👤 담당자</label>
+    <select id="m-staff">
+      <option value="">선택</option>
+      <option>데스크 1번</option>
+      <option>데스크 2번</option>
+      <option>총괄</option>
+    </select>
+  </div>
+
+  <div class="info-box">
+    📌 마지막 주에 작성합니다. <strong>총괄 직원</strong>이 주요 항목을 취합하여 원장님께 보고.
+  </div>
+
+  <!-- 청구 결과 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">📋</span>
+      <span class="title">당월 청구 결과</span>
+    </div>
+    <div class="section-body">
+      <div class="money-row">
+        <div class="money-label">청구 결정액</div>
+        <div class="money-wrap">
+          <input type="number" id="m-claim" min="0" placeholder="0">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">조정 여부</div>
+        <div class="field-input">
+          <div class="status-row">
+            <span class="status-btn" onclick="selectStatus(this,'sel-green')">이상없음</span>
+            <span class="status-btn" onclick="selectStatus(this,'sel-gold')">일부 조정</span>
+            <span class="status-btn" onclick="selectStatus(this,'sel-red')">재심사 필요</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">조정 내용</div>
+        <div class="field-input"><textarea id="m-claim-note" placeholder="조정된 항목 및 사유"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 비보험 통계 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">📊</span>
+      <span class="title">당월 비보험 통계</span>
+    </div>
+    <div class="section-body">
+      <div class="money-row">
+        <div class="money-label">비보험 총 수납</div>
+        <div class="money-wrap">
+          <input type="number" id="m-priv" min="0" placeholder="0">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">치료별 통계</div>
+        <div class="field-input"><textarea id="m-priv-stat" placeholder="교정 / 교합재건 / 임플란트 / MFT 등 각 치료별 금액"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 미수·선수 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">💳</span>
+      <span class="title">미수 · 선수 내역</span>
+    </div>
+    <div class="section-body">
+      <div class="money-row">
+        <div class="money-label">당월 미수 총액</div>
+        <div class="money-wrap">
+          <input type="number" id="m-unpaid" min="0" placeholder="0">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">미납자 관리</div>
+        <div class="field-input"><textarea id="m-unpaid-note" placeholder="환자별 미납 현황 및 환불 내역"></textarea></div>
+      </div>
+      <div class="money-row">
+        <div class="money-label">당월 선수금</div>
+        <div class="money-wrap">
+          <input type="number" id="m-prepay" min="0" placeholder="0">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 지출 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">🧾</span>
+      <span class="title">당월 지출 내역</span>
+    </div>
+    <div class="section-body">
+      <div class="money-row">
+        <div class="money-label">식대</div>
+        <div class="money-wrap">
+          <input type="number" id="m-food" min="0" placeholder="0">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label">세금·공과금</div>
+        <div class="money-wrap">
+          <input type="number" id="m-tax" min="0" placeholder="0">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label">재료·잡비</div>
+        <div class="money-wrap">
+          <input type="number" id="m-misc" min="0" placeholder="0">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">지출 메모</div>
+        <div class="field-input"><textarea id="m-expense-note" placeholder="주요 지출 항목 상세"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 다음달 목표 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">🎯</span>
+      <span class="title">다음달 목표</span>
+    </div>
+    <div class="section-body">
+      <div class="money-row">
+        <div class="money-label">다음달 매출 목표</div>
+        <div class="money-wrap">
+          <input type="number" id="m-next-target" min="0" placeholder="0">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">중점 과제</div>
+        <div class="field-input"><textarea id="m-next-task" placeholder="다음달 집중할 업무·목표"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="submit-wrap">
+    <button class="btn-submit" onclick="submitReport('monthly')">✉️ 월말 보고 제출</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 4: 경영보고 (20일)
+════════════════════════════════════════ -->
+<div class="page" id="page-mgmt">
+
+  <div class="date-bar">
+    <label>📅 기준월</label>
+    <input type="month" id="g-month" />
+    <label>👤 담당</label>
+    <select id="g-staff">
+      <option>총괄 (데스크)</option>
+      <option>원장</option>
+    </select>
+  </div>
+
+  <div class="info-box">
+    📌 매월 <strong>20일</strong>, 총괄 직원이 데스크 기준으로 작성합니다. 교정·임보·재료 현황 포함.
+  </div>
+
+  <!-- 교정 현황 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">🦷</span>
+      <span class="title">교정 현황 (2번 항목)</span>
+    </div>
+    <div class="section-body">
+      <div class="num-grid">
+        <div class="num-item">
+          <label>교정 진행 환자</label>
+          <input type="number" id="g-ortho-active" min="0" placeholder="0">
+          <div class="num-unit">명</div>
+        </div>
+        <div class="num-item">
+          <label>이번달 신규</label>
+          <input type="number" id="g-ortho-new" min="0" placeholder="0">
+          <div class="num-unit">명</div>
+        </div>
+      </div>
+      <div class="field-row" style="margin-top:10px;">
+        <div class="field-label">특이 케이스</div>
+        <div class="field-input"><textarea id="g-ortho-note" placeholder="주요 케이스·이슈"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 임플란트·보철 관리 (4번 항목) -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">⚙️</span>
+      <span class="title">임플란트 · 보철 관리 (4번 항목)</span>
+    </div>
+    <div class="section-body">
+      <div class="num-grid">
+        <div class="num-item">
+          <label>임플란트 진행</label>
+          <input type="number" id="g-impl-active" min="0" placeholder="0">
+          <div class="num-unit">명</div>
+        </div>
+        <div class="num-item">
+          <label>보철 제작 중</label>
+          <input type="number" id="g-prosth" min="0" placeholder="0">
+          <div class="num-unit">건</div>
+        </div>
+      </div>
+      <div class="field-row" style="margin-top:10px;">
+        <div class="field-label">기공의뢰 현황</div>
+        <div class="field-input"><textarea id="g-lab" placeholder="기공소 의뢰 중인 케이스 및 납기"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 재료·멸균기 (4번 항목) -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">🧪</span>
+      <span class="title">재료 · 멸균기 관리</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field-label">재료 소모 현황</div>
+        <div class="field-input"><textarea id="g-material" placeholder="부족 또는 발주 필요 재료"></textarea></div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">멸균기 상태</div>
+        <div class="field-input">
+          <div class="status-row">
+            <span class="status-btn" onclick="selectStatus(this,'sel-green')">정상</span>
+            <span class="status-btn" onclick="selectStatus(this,'sel-gold')">점검 필요</span>
+            <span class="status-btn" onclick="selectStatus(this,'sel-red')">수리 필요</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">멸균기 메모</div>
+        <div class="field-input"><input type="text" id="g-steril-note" placeholder="점검 내용 또는 수리 요청 사항"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 경영 현황 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">📊</span>
+      <span class="title">20일 기준 경영 현황</span>
+    </div>
+    <div class="section-body">
+      <div class="money-row">
+        <div class="money-label">20일까지 누적 수납</div>
+        <div class="money-wrap">
+          <input type="number" id="g-revenue" min="0" placeholder="0">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label">월 목표 대비</div>
+        <div class="money-wrap">
+          <input type="number" id="g-target-pct" min="0" max="200" placeholder="0">
+          <span class="money-unit">%</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">경영 이슈 · 특이사항</div>
+        <div class="field-input"><textarea id="g-issue" placeholder="원장님께 보고할 경영 관련 이슈"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 청구 1차 준비 (총괄 항목) -->
+  <div class="section">
+    <div class="section-head">
+      <span class="icon">🧾</span>
+      <span class="title">청구 1차 준비 (총괄 항목)</span>
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field-label">청구 준비 상태</div>
+        <div class="field-input">
+          <div class="status-row">
+            <span class="status-btn" onclick="selectStatus(this,'sel-green')">완료</span>
+            <span class="status-btn" onclick="selectStatus(this,'sel-gold')">진행 중</span>
+            <span class="status-btn" onclick="selectStatus(this,'sel-red')">미완료</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">청구 메모</div>
+        <div class="field-input"><textarea id="g-claim-note" placeholder="청구 준비 중 확인 사항"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="submit-wrap">
+    <button class="btn-submit" onclick="submitReport('mgmt')">✉️ 경영보고 제출</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Apps Script URL
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_0G8R5Umor5AS627oGpujFr5nDtNMGAYOkwAVw3MpNPpGKYIhz5m6AWOLkAT149Mk/exec';
+
+// ── 날짜·요일·주차 계산 및 오늘의 할일 알람
+(function(){
+  const today = new Date();
+  const ymd   = today.toISOString().slice(0,10);
+  const ym    = today.toISOString().slice(0,7);
+  const DAYS  = ['일','월','화','수','목','금','토'];
+  const dow   = today.getDay();   // 0=일 3=수 5=금 6=토
+  const date  = today.getDate();
+
+  // 주차 계산 (해당 월 몇 번째 주인지)
+  const firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
+  const week = Math.ceil((date + firstDay) / 7); // 1~5주차
+
+  // 20일 체크
+  const is20 = date === 20;
+  // 마지막주 체크
+  const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth()+1, 0).getDate();
+  const isLastWeek = date > lastDayOfMonth - 7;
+
+  document.getElementById('d-date').value  = ymd;
+  document.getElementById('w-date').value  = ymd;
+  document.getElementById('m-month').value = ym;
+  document.getElementById('g-month').value = ym;
+
+  // 헤더 날짜
+  document.getElementById('headerDate').innerHTML =
+    today.toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric'})
+    + '<br>' + DAYS[dow] + '요일';
+
+  // 배너 날짜
+  document.getElementById('banner-date').textContent =
+    today.toLocaleDateString('ko-KR',{month:'long',day:'numeric'}) + ' (' + DAYS[dow] + ')';
+
+  // ── 오늘의 할일 데이터 ──────────────────────
+  const tasks = [];
+
+  // 매일 공통
+  tasks.push({ tag:'매일', color:'#ffffff30', required:true, items:[
+    '당일 CC 그날 해결',
+    '10분 이상 대기 → 환자 안내',
+    '챠팅·청구 확인',
+    '수납 후 다음 치료계획 안내 (덴트웹 next 치료계획 입력, 다음 내원일 입력)',
+  ]});
+
+  // 요일별
+  const DOW_TASKS = {
+    1: { label:'월요일', items:['전체 일정 리뷰 · 주요 케이스 · 이슈 확인'] },
+    3: { label:'수요일', items:['치료중단환자 리콜 중간 체크 (치주·신경·충치·보철·임플·교정)', '해피콜·이슈 중간 점검', '타구대 거름망 청소'] },
+    5: { label:'금요일', items:['청구 오류 사항 확인', '청구 결과 관리 · 심사 재요청', '주기적 관리환자 내원·예약 확인'] },
+    6: { label:'토요일', items:['VIP 리스트 확인 · 해피콜(문자)', '각 주별 보고 취합', '기계실 이슈 점검'] },
+  };
+  if (DOW_TASKS[dow]) {
+    tasks.push({ tag: DOW_TASKS[dow].label, color:'#C8A84B40', items: DOW_TASKS[dow].items });
+  }
+
+  // 주차별
+  const WEEK_TASKS = {
+    1: { label:'1주차', items:['치료중단환자 리콜 (치주/신경/충치/보철/임플/교정)', '각 치료별 통계·내원 추이 확인'] },
+    2: { label:'2주차', items:['미납자 관리', '치료계획 상담 성공률 확인 (상담자별)'] },
+    3: { label:'3주차', items:['청구 전 오류 확인 · 심사 재요청', '주기적 관리환자 예약 확인'] },
+    4: { label:'4주차', items:['VIP 리스트 해피콜(문자)', '각 치료별 주간 통계 기록'] },
+  };
+  if (WEEK_TASKS[week]) {
+    tasks.push({ tag: week + '주차', color:'#ffffff20', items: WEEK_TASKS[week].items, showProgress: true });
+  }
+
+  // 월 특정일
+  if (is20) {
+    tasks.push({ tag:'📊 20일', color:'#E8D09040', items:[
+      '경영보고 — 총괄 직원 작성',
+      '교정 현황 (2번 항목)',
+      '임보·재료·멸균기 관리 (4번 항목)',
+      '청구 1차 준비 (총괄 항목)',
+      '20일 기준 누적 수납 보고',
+    ]});
+  }
+  if (isLastWeek) {
+    tasks.push({ tag:'📆 마지막주', color:'#C8A84B40', items:[
+      '월말 보고 작성',
+      '당월 청구 결과 확인',
+      '미수·선수 내역 정리',
+      '당월 지출 내역 취합',
+      '다음달 목표 설정',
+    ], showProgress: true });
+  }
+
+  // 배너 pill
+  const pill = document.getElementById('banner-day-pill');
+  const extras = [];
+  if (DOW_TASKS[dow]) extras.push({ icon:'🗂️', label:'주간점검', color:'#C8A84B' });
+  if (is20)           extras.push({ icon:'📊', label:'경영보고', color:'#2471a3' });
+  if (isLastWeek)     extras.push({ icon:'📆', label:'월말보고', color:'#c0392b' });
+
+  // 요일 표시
+  pill.textContent = DAYS[dow] + '요일';
+
+  // 추가 태그들 — 각각 별도 배지로 렌더링
+  if (extras.length) {
+    const container = pill.parentElement;
+    pill.style.background = 'rgba(255,255,255,.18)';
+
+    extras.forEach(ex => {
+      const badge = document.createElement('div');
+      badge.style.cssText = `
+        display:inline-flex;align-items:center;gap:4px;
+        font-size:12px;font-weight:700;
+        background:${ex.color};
+        color:white;
+        border-radius:20px;padding:5px 12px;
+        white-space:nowrap;
+        box-shadow:0 2px 6px rgba(0,0,0,.2);
+      `;
+      badge.textContent = ex.icon + ' ' + ex.label;
+      container.appendChild(badge);
+    });
+  }
+
+  // 할일 렌더링
+  const container = document.getElementById('today-tasks');
+  container.innerHTML = tasks.map((g, gi) => {
+    const itemsHTML = g.items.map((item, ii) => {
+      if (g.required) {
+        const cid = 'daily-required-' + ii;
+        return `<div onclick="drToggleRequired('${cid}')" id="${cid}-wrap"
+          style="display:flex;align-items:flex-start;gap:8px;padding:7px 8px;border-radius:8px;border:1.5px solid rgba(255,255,255,.25);margin-bottom:5px;cursor:pointer;background:rgba(255,255,255,.08);">
+          <div id="${cid}-box" style="flex-shrink:0;width:20px;height:20px;border-radius:5px;border:2px solid rgba(255,255,255,.6);background:transparent;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;"></div>
+          <span style="font-size:12px;opacity:.95;line-height:1.5;">${item}</span>
+        </div>`;
+      }
+      if (!g.showProgress) {
+        return `<div style="font-size:12px;opacity:.95;line-height:1.8;">· ${item}</div>`;
+      }
+      const sid = 'prog-' + gi + '-' + ii;
+      const vid = 'progv-' + gi + '-' + ii;
+      return `
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;" data-tag="${g.tag}">
+          <span style="font-size:11px;opacity:.9;flex:0 0 110px;line-height:1.3;word-break:keep-all;">· ${item}</span>
+          <input type="range" id="${sid}" min="0" max="100" value="0" step="5"
+            oninput="drUpdateSlider('${sid}','${vid}')"
+            style="flex:1;min-width:0;max-width:100px;height:3px;accent-color:#C8A84B;cursor:pointer;">
+          <span id="${vid}" style="font-size:11px;font-weight:700;width:28px;text-align:right;flex-shrink:0;">0%</span>
+        </div>`;
+    }).join('');
+    return `
+      <div style="background:${g.color};border-radius:8px;padding:8px 10px;margin-top:6px;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:1px;opacity:.8;margin-bottom:6px;">${g.tag}</div>
+        ${itemsHTML}
+      </div>`;
+  }).join('');
+
+  // 주간 체크리스트 (수/금/토만)
+  const WEEKLY_CONFIG = {
+    3: { label:'수요일 — 중간 점검', items:['치료중단환자 리콜 확인 (치주·신경·충치·보철·임플·교정)', '해피콜·미내원 중간 체크', '이번 주 이슈 정리', '타구대 거름망 청소'] },
+    5: { label:'금요일 — 청구 점검', items:['청구 오류 사항 확인', '심사 재요청 건 처리', '청구 결과 관리', '미납자 현황 체크', '주기적 관리 환자 예약 확인'] },
+    6: { label:'토요일 — 주별 마무리', items:['VIP 리스트 확인 · 해피콜(문자)', '각 주별 보고 취합', '기계실 이슈 점검', '다음 주 일정 프리뷰', '치료별 주간 통계 기록'] },
+  };
+  const cfg = WEEKLY_CONFIG[dow];
+  if (cfg) {
+    const total = cfg.items.length;
+    const wId   = 'weekly-extra-count';
+    document.getElementById('weekly-addon').innerHTML = `
+      <div class="section" style="border-color:var(--gold);margin-bottom:14px;">
+        <div class="section-head" style="background:var(--gold-light);">
+          <span class="icon">🗂️</span>
+          <span class="title" style="color:var(--green-dark);">${cfg.label}</span>
+          <span class="sub" id="${wId}">0 / ${total}</span>
+        </div>
+        <div class="section-body">
+          <div class="check-grid" id="weekly-extra-checks">
+            ${cfg.items.map(item=>`
+              <div class="check-item" onclick="toggleCheck(this,'${wId}',${total})">
+                <div class="check-box"></div>
+                <span class="check-text">${item}</span>
+              </div>`).join('')}
+          </div>
+        </div>
+      </div>`;
+  }
+})();
+// ── 탭 전환
+function switchTab(id){
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.getElementById('page-' + id).classList.add('active');
+}
+
+// ── 교합진단 상담환자 유/무
+function cntAdj(id, delta) {
+  const input = document.getElementById(id);
+  const disp  = document.getElementById(id + '-disp');
+  if (!input || !disp) return;
+  const val = Math.max(0, (parseInt(input.value) || 0) + delta);
+  input.value       = val;
+  disp.textContent  = val;
+  disp.style.color  = val > 0 ? 'var(--green-dark)' : '#bbb';
+}
+
+function setSurgery(val) {
+  const no  = document.getElementById('v-surgery-no');
+  const yes = document.getElementById('v-surgery-yes');
+  const det = document.getElementById('v-surgery-detail');
+  if (val === 'yes') {
+    yes.style.background = 'var(--green)'; yes.style.color = 'white'; yes.style.borderColor = 'var(--green)';
+    no.style.background  = 'var(--cream)'; no.style.color  = 'var(--text-soft)'; no.style.borderColor = 'var(--border)';
+    det.style.display = 'block';
+    if (!document.getElementById('v-surgery-list').children.length) addSurgeryRow();
+  } else {
+    no.style.background  = 'var(--green)'; no.style.color  = 'white'; no.style.borderColor = 'var(--green)';
+    yes.style.background = 'var(--cream)'; yes.style.color = 'var(--text-soft)'; yes.style.borderColor = 'var(--border)';
+    det.style.display = 'none';
+  }
+}
+
+function addSurgeryRow() {
+  const list = document.getElementById('v-surgery-list');
+  const row  = document.createElement('div');
+  row.style.cssText = 'background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:10px;margin-bottom:8px;';
+  row.innerHTML = `
+    <div style="display:flex;gap:6px;margin-bottom:8px;align-items:center;">
+      <input type="text" placeholder="환자 이름" style="flex:1;border:1px solid var(--border);border-radius:7px;padding:7px 9px;font-size:13px;font-family:inherit;background:white;outline:none;color:var(--text);">
+      <input type="text" placeholder="수술 부위 (예: #36)" style="flex:1;border:1px solid var(--border);border-radius:7px;padding:7px 9px;font-size:13px;font-family:inherit;background:white;outline:none;color:var(--text);">
+      <button onclick="this.closest('div[style]').remove()" style="flex:0 0 26px;height:30px;border:none;background:transparent;color:#bbb;font-size:18px;cursor:pointer;line-height:1;">×</button>
+    </div>
+    <div style="font-size:10px;color:var(--text-soft);margin-bottom:6px;">해피콜 결과</div>
+    <div style="display:flex;gap:6px;margin-bottom:8px;" class="surgery-status-btns">
+      <div onclick="setSurgeryStatus(this,'굿')" style="flex:1;padding:7px 4px;border-radius:8px;border:1.5px solid var(--border);text-align:center;font-size:12px;font-weight:600;cursor:pointer;background:var(--cream);color:var(--text-soft);">😊 굿</div>
+      <div onclick="setSurgeryStatus(this,'아프다')" style="flex:1;padding:7px 4px;border-radius:8px;border:1.5px solid var(--border);text-align:center;font-size:12px;font-weight:600;cursor:pointer;background:var(--cream);color:var(--text-soft);">😣 아프다</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:8px;background:#FFFBEF;border:1.5px solid var(--gold);margin-bottom:8px;">
+      <span style="font-size:13px;">📋</span>
+      <span style="font-size:12px;font-weight:700;color:#8A6820;">주의사항 안내 — 필수</span>
+      <span style="margin-left:auto;font-size:11px;color:var(--gold);font-weight:600;">항상 포함</span>
+    </div>
+    <textarea placeholder="추가 메모 (통화 내용 등)" rows="2" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:7px 9px;font-size:12px;font-family:inherit;background:white;outline:none;resize:none;color:var(--text);box-sizing:border-box;"></textarea>
+  `;
+  list.appendChild(row);
+}
+
+function setSurgeryStatus(el, val) {
+  el.closest('.surgery-status-btns').querySelectorAll('div').forEach(b => {
+    b.style.background  = 'var(--cream)';
+    b.style.color       = 'var(--text-soft)';
+    b.style.borderColor = 'var(--border)';
+  });
+  const colors = { '굿': 'var(--green)', '아프다': '#c0392b', '주의사항안내': 'var(--gold)' };
+  el.style.background  = colors[val] || 'var(--green)';
+  el.style.color       = 'white';
+  el.style.borderColor = colors[val] || 'var(--green)';
+}
+
+function getSurgeryData() {
+  const rows = document.querySelectorAll('#v-surgery-list > div');
+  return Array.from(rows).map(row => {
+    const inputs = row.querySelectorAll('input[type="text"]');
+    const name   = inputs[0]?.value?.trim() || '';
+    const site   = inputs[1]?.value?.trim() || '';
+    const memo   = row.querySelector('textarea')?.value?.trim() || '';
+    let status   = '';
+    row.querySelectorAll('.surgery-status-btns div').forEach(b => {
+      if (b.style.color === 'white') status = b.textContent.replace(/[😊😣📋]/g,'').trim();
+    });
+    return { name, site, status, memo };
+  }).filter(r => r.name);
+}
+
+function cntAdj(id, delta) {
+  const input = document.getElementById(id);
+  const disp  = document.getElementById(id + '-disp');
+  if (!input || !disp) return;
+  const val = Math.max(0, (parseInt(input.value) || 0) + delta);
+  input.value       = val;
+  disp.textContent  = val;
+  disp.style.color  = val > 0 ? 'var(--green-dark)' : '#bbb';
+}
+
+function setSurgery(val) {
+  const no  = document.getElementById('v-surgery-no');
+  const yes = document.getElementById('v-surgery-yes');
+  const det = document.getElementById('v-surgery-detail');
+  if (val === 'yes') {
+    yes.style.background = 'var(--green)'; yes.style.color = 'white'; yes.style.borderColor = 'var(--green)';
+    no.style.background  = 'var(--cream)'; no.style.color  = 'var(--text-soft)'; no.style.borderColor = 'var(--border)';
+    det.style.display = 'block';
+    if (!document.getElementById('v-surgery-list').children.length) addSurgeryRow();
+  } else {
+    no.style.background  = 'var(--green)'; no.style.color  = 'white'; no.style.borderColor = 'var(--green)';
+    yes.style.background = 'var(--cream)'; yes.style.color = 'var(--text-soft)'; yes.style.borderColor = 'var(--border)';
+    det.style.display = 'none';
+  }
+}
+
+function addSurgeryRow() {
+  const list = document.getElementById('v-surgery-list');
+  const row  = document.createElement('div');
+  row.style.cssText = 'background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:10px;margin-bottom:8px;';
+  row.innerHTML = `
+    <div style="display:flex;gap:6px;margin-bottom:8px;align-items:center;">
+      <input type="text" placeholder="환자 이름" style="flex:1;border:1px solid var(--border);border-radius:7px;padding:7px 9px;font-size:13px;font-family:inherit;background:white;outline:none;color:var(--text);">
+      <input type="text" placeholder="수술 부위 (예: #36)" style="flex:1;border:1px solid var(--border);border-radius:7px;padding:7px 9px;font-size:13px;font-family:inherit;background:white;outline:none;color:var(--text);">
+      <button onclick="this.closest('div[style]').remove()" style="flex:0 0 26px;height:30px;border:none;background:transparent;color:#bbb;font-size:18px;cursor:pointer;line-height:1;">×</button>
+    </div>
+    <div style="font-size:10px;color:var(--text-soft);margin-bottom:6px;">해피콜 결과</div>
+    <div style="display:flex;gap:6px;margin-bottom:8px;" class="surgery-status-btns">
+      <div onclick="setSurgeryStatus(this,'굿')" style="flex:1;padding:7px 4px;border-radius:8px;border:1.5px solid var(--border);text-align:center;font-size:12px;font-weight:600;cursor:pointer;background:var(--cream);color:var(--text-soft);">😊 굿</div>
+      <div onclick="setSurgeryStatus(this,'아프다')" style="flex:1;padding:7px 4px;border-radius:8px;border:1.5px solid var(--border);text-align:center;font-size:12px;font-weight:600;cursor:pointer;background:var(--cream);color:var(--text-soft);">😣 아프다</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:8px;background:#FFFBEF;border:1.5px solid var(--gold);margin-bottom:8px;">
+      <span style="font-size:13px;">📋</span>
+      <span style="font-size:12px;font-weight:700;color:#8A6820;">주의사항 안내 — 필수</span>
+      <span style="margin-left:auto;font-size:11px;color:var(--gold);font-weight:600;">항상 포함</span>
+    </div>
+    <textarea placeholder="추가 메모 (통화 내용 등)" rows="2" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:7px 9px;font-size:12px;font-family:inherit;background:white;outline:none;resize:none;color:var(--text);box-sizing:border-box;"></textarea>
+  `;
+  list.appendChild(row);
+}
+
+function setSurgeryStatus(el, val) {
+  // 굿/아프다 양자택일
+  el.closest('.surgery-status-btns').querySelectorAll('div').forEach(b => {
+    b.style.background  = 'var(--cream)';
+    b.style.color       = 'var(--text-soft)';
+    b.style.borderColor = 'var(--border)';
+  });
+  const colors = { '굿':'var(--green)', '아프다':'#c0392b' };
+  el.style.background  = colors[val];
+  el.style.color       = 'white';
+  el.style.borderColor = colors[val];
+}
+
+function getSurgeryData() {
+  const rows = document.querySelectorAll('#v-surgery-list > div');
+  return Array.from(rows).map(row => {
+    const inputs = row.querySelectorAll('input[type="text"]');
+    const name   = inputs[0]?.value?.trim() || '';
+    const site   = inputs[1]?.value?.trim() || '';
+    const memo   = row.querySelector('textarea')?.value?.trim() || '';
+    let status   = '';
+    row.querySelectorAll('.surgery-status-btns div').forEach(b => {
+      if (b.style.color === 'white') status = b.textContent.replace('😊','').replace('😣','').trim();
+    });
+    return { name, site, status, memo };
+  }).filter(r => r.name);
+}
+
+function setConsult(val) {
+  const no  = document.getElementById('v-consult-no');
+  const yes = document.getElementById('v-consult-yes');
+  const det = document.getElementById('v-consult-detail');
+  if (val === 'yes') {
+    yes.style.background = 'var(--green)'; yes.style.color = 'white'; yes.style.borderColor = 'var(--green)';
+    no.style.background  = 'var(--cream)'; no.style.color  = 'var(--text-soft)'; no.style.borderColor = 'var(--border)';
+    det.style.display = 'block';
+    if (!document.getElementById('v-consult-list').children.length) addConsultRow();
+  } else {
+    no.style.background  = 'var(--green)'; no.style.color  = 'white'; no.style.borderColor = 'var(--green)';
+    yes.style.background = 'var(--cream)'; yes.style.color = 'var(--text-soft)'; yes.style.borderColor = 'var(--border)';
+    det.style.display = 'none';
+  }
+}
+
+function addConsultRow() {
+  const list = document.getElementById('v-consult-list');
+  const row  = document.createElement('div');
+  row.style.cssText = 'background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:10px;margin-bottom:8px;';
+  row.innerHTML = `
+    <div style="display:flex;gap:6px;margin-bottom:8px;align-items:center;">
+      <input type="text" placeholder="환자 이름" style="flex:1;border:1px solid var(--border);border-radius:7px;padding:7px 9px;font-size:13px;font-family:inherit;background:white;outline:none;color:var(--text);">
+      <button onclick="this.closest('div[style]').remove()" style="flex:0 0 26px;height:30px;border:none;background:transparent;color:#bbb;font-size:18px;cursor:pointer;line-height:1;">×</button>
+    </div>
+    <div style="margin-bottom:8px;">
+      <div style="font-size:10px;color:var(--text-soft);margin-bottom:4px;">상담 결과</div>
+      <textarea placeholder="상담 내용 기록" rows="2" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:7px 9px;font-size:12px;font-family:inherit;background:white;outline:none;resize:none;color:var(--text);"></textarea>
+    </div>
+    <div style="font-size:10px;color:var(--text-soft);margin-bottom:6px;">진행 여부</div>
+    <div style="display:flex;gap:6px;">
+      <div onclick="setConsultResult(this,'진행')" style="flex:1;padding:6px;border-radius:8px;border:1.5px solid var(--border);text-align:center;font-size:12px;font-weight:600;cursor:pointer;background:var(--cream);color:var(--text-soft);">✅ 진행</div>
+      <div onclick="setConsultResult(this,'고민중')" style="flex:1;padding:6px;border-radius:8px;border:1.5px solid var(--border);text-align:center;font-size:12px;font-weight:600;cursor:pointer;background:var(--cream);color:var(--text-soft);">🤔 고민중</div>
+      <div onclick="setConsultResult(this,'보류')" style="flex:1;padding:6px;border-radius:8px;border:1.5px solid var(--border);text-align:center;font-size:12px;font-weight:600;cursor:pointer;background:var(--cream);color:var(--text-soft);">⏸ 보류</div>
+    </div>
+  `;
+  list.appendChild(row);
+}
+
+function setConsultResult(el, val) {
+  const btns = el.parentElement.querySelectorAll('div');
+  btns.forEach(b => {
+    b.style.background   = 'var(--cream)';
+    b.style.color        = 'var(--text-soft)';
+    b.style.borderColor  = 'var(--border)';
+  });
+  el.style.background  = 'var(--green)';
+  el.style.color       = 'white';
+  el.style.borderColor = 'var(--green)';
+}
+
+function getConsultData() {
+  const rows = document.querySelectorAll('#v-consult-list > div');
+  return Array.from(rows).map(row => {
+    const name   = row.querySelector('input[type="text"]')?.value?.trim() || '';
+    const result = row.querySelector('textarea')?.value?.trim() || '';
+    const btns   = row.querySelectorAll('div[onclick*="setConsultResult"]');
+    let status   = '';
+    btns.forEach(b => { if(b.style.color === 'white') status = b.textContent.replace(/[✅🤔⏸]/g,'').trim(); });
+    return { name, result, status };
+  }).filter(r => r.name);
+}
+
+// ── 교합진단 상담환자 유/무
+function cntAdj(id, delta) {
+  const input = document.getElementById(id);
+  const disp  = document.getElementById(id + '-disp');
+  if (!input || !disp) return;
+  const val = Math.max(0, (parseInt(input.value) || 0) + delta);
+  input.value       = val;
+  disp.textContent  = val;
+  disp.style.color  = val > 0 ? 'var(--green-dark)' : '#bbb';
+}
+
+function setSurgery(val) {
+  const no  = document.getElementById('v-surgery-no');
+  const yes = document.getElementById('v-surgery-yes');
+  const det = document.getElementById('v-surgery-detail');
+  if (val === 'yes') {
+    yes.style.background = 'var(--green)'; yes.style.color = 'white'; yes.style.borderColor = 'var(--green)';
+    no.style.background  = 'var(--cream)'; no.style.color  = 'var(--text-soft)'; no.style.borderColor = 'var(--border)';
+    det.style.display = 'block';
+    if (!document.getElementById('v-surgery-list').children.length) addSurgeryRow();
+  } else {
+    no.style.background  = 'var(--green)'; no.style.color  = 'white'; no.style.borderColor = 'var(--green)';
+    yes.style.background = 'var(--cream)'; yes.style.color = 'var(--text-soft)'; yes.style.borderColor = 'var(--border)';
+    det.style.display = 'none';
+  }
+}
+
+function addSurgeryRow() {
+  const list = document.getElementById('v-surgery-list');
+  const row  = document.createElement('div');
+  row.style.cssText = 'background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:10px;margin-bottom:8px;';
+  row.innerHTML = `
+    <div style="display:flex;gap:6px;margin-bottom:8px;align-items:center;">
+      <input type="text" placeholder="환자 이름" style="flex:1;border:1px solid var(--border);border-radius:7px;padding:7px 9px;font-size:13px;font-family:inherit;background:white;outline:none;color:var(--text);">
+      <input type="text" placeholder="수술 부위 (예: #36)" style="flex:1;border:1px solid var(--border);border-radius:7px;padding:7px 9px;font-size:13px;font-family:inherit;background:white;outline:none;color:var(--text);">
+      <button onclick="this.closest('div[style]').remove()" style="flex:0 0 26px;height:30px;border:none;background:transparent;color:#bbb;font-size:18px;cursor:pointer;line-height:1;">×</button>
+    </div>
+    <div style="font-size:10px;color:var(--text-soft);margin-bottom:6px;">해피콜 결과</div>
+    <div style="display:flex;gap:6px;margin-bottom:8px;" class="surgery-status-btns">
+      <div onclick="setSurgeryStatus(this,'굿')" style="flex:1;padding:7px 4px;border-radius:8px;border:1.5px solid var(--border);text-align:center;font-size:12px;font-weight:600;cursor:pointer;background:var(--cream);color:var(--text-soft);">😊 굿</div>
+      <div onclick="setSurgeryStatus(this,'아프다')" style="flex:1;padding:7px 4px;border-radius:8px;border:1.5px solid var(--border);text-align:center;font-size:12px;font-weight:600;cursor:pointer;background:var(--cream);color:var(--text-soft);">😣 아프다</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:8px;background:#FFFBEF;border:1.5px solid var(--gold);margin-bottom:8px;">
+      <span style="font-size:13px;">📋</span>
+      <span style="font-size:12px;font-weight:700;color:#8A6820;">주의사항 안내 — 필수</span>
+      <span style="margin-left:auto;font-size:11px;color:var(--gold);font-weight:600;">항상 포함</span>
+    </div>
+    <textarea placeholder="추가 메모 (통화 내용 등)" rows="2" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:7px 9px;font-size:12px;font-family:inherit;background:white;outline:none;resize:none;color:var(--text);box-sizing:border-box;"></textarea>
+  `;
+  list.appendChild(row);
+}
+
+function setSurgeryStatus(el, val) {
+  el.closest('.surgery-status-btns').querySelectorAll('div').forEach(b => {
+    b.style.background  = 'var(--cream)';
+    b.style.color       = 'var(--text-soft)';
+    b.style.borderColor = 'var(--border)';
+  });
+  const colors = { '굿': 'var(--green)', '아프다': '#c0392b', '주의사항안내': 'var(--gold)' };
+  el.style.background  = colors[val] || 'var(--green)';
+  el.style.color       = 'white';
+  el.style.borderColor = colors[val] || 'var(--green)';
+}
+
+function getSurgeryData() {
+  const rows = document.querySelectorAll('#v-surgery-list > div');
+  return Array.from(rows).map(row => {
+    const inputs = row.querySelectorAll('input[type="text"]');
+    const name   = inputs[0]?.value?.trim() || '';
+    const site   = inputs[1]?.value?.trim() || '';
+    const memo   = row.querySelector('textarea')?.value?.trim() || '';
+    let status   = '';
+    row.querySelectorAll('.surgery-status-btns div').forEach(b => {
+      if (b.style.color === 'white') status = b.textContent.replace(/[😊😣📋]/g,'').trim();
+    });
+    return { name, site, status, memo };
+  }).filter(r => r.name);
+}
+
+function setConsult(val) {
+  const no  = document.getElementById('v-consult-no');
+  const yes = document.getElementById('v-consult-yes');
+  const det = document.getElementById('v-consult-detail');
+  if (val === 'yes') {
+    yes.style.background = 'var(--green)'; yes.style.color = 'white'; yes.style.borderColor = 'var(--green)';
+    no.style.background  = 'var(--cream)'; no.style.color  = 'var(--text-soft)'; no.style.borderColor = 'var(--border)';
+    det.style.display = 'block';
+    if (!document.getElementById('v-consult-list').children.length) addConsultRow();
+  } else {
+    no.style.background  = 'var(--green)'; no.style.color  = 'white'; no.style.borderColor = 'var(--green)';
+    yes.style.background = 'var(--cream)'; yes.style.color = 'var(--text-soft)'; yes.style.borderColor = 'var(--border)';
+    det.style.display = 'none';
+  }
+}
+
+function addConsultRow() {
+  const list = document.getElementById('v-consult-list');
+  const row  = document.createElement('div');
+  row.style.cssText = 'background:var(--cream);border:1px solid var(--border);border-radius:9px;padding:10px;margin-bottom:8px;';
+  row.innerHTML = `
+    <div style="display:flex;gap:6px;margin-bottom:8px;align-items:center;">
+      <input type="text" placeholder="환자 이름" style="flex:1;border:1px solid var(--border);border-radius:7px;padding:7px 9px;font-size:13px;font-family:inherit;background:white;outline:none;color:var(--text);">
+      <button onclick="this.closest('div[style]').remove()" style="flex:0 0 26px;height:30px;border:none;background:transparent;color:#bbb;font-size:18px;cursor:pointer;line-height:1;">×</button>
+    </div>
+    <div style="margin-bottom:8px;">
+      <div style="font-size:10px;color:var(--text-soft);margin-bottom:4px;">상담 결과</div>
+      <textarea placeholder="상담 내용 기록" rows="2" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:7px 9px;font-size:12px;font-family:inherit;background:white;outline:none;resize:none;color:var(--text);box-sizing:border-box;"></textarea>
+    </div>
+    <div style="font-size:10px;color:var(--text-soft);margin-bottom:6px;">진행 여부</div>
+    <div style="display:flex;gap:6px;" class="consult-status-btns">
+      <div onclick="setConsultResult(this,'진행')" style="flex:1;padding:6px;border-radius:8px;border:1.5px solid var(--border);text-align:center;font-size:12px;font-weight:600;cursor:pointer;background:var(--cream);color:var(--text-soft);">✅ 진행</div>
+      <div onclick="setConsultResult(this,'고민중')" style="flex:1;padding:6px;border-radius:8px;border:1.5px solid var(--border);text-align:center;font-size:12px;font-weight:600;cursor:pointer;background:var(--cream);color:var(--text-soft);">🤔 고민중</div>
+      <div onclick="setConsultResult(this,'보류')" style="flex:1;padding:6px;border-radius:8px;border:1.5px solid var(--border);text-align:center;font-size:12px;font-weight:600;cursor:pointer;background:var(--cream);color:var(--text-soft);">⏸ 보류</div>
+    </div>
+  `;
+  list.appendChild(row);
+}
+
+function setConsultResult(el, val) {
+  el.closest('.consult-status-btns').querySelectorAll('div').forEach(b => {
+    b.style.background  = 'var(--cream)';
+    b.style.color       = 'var(--text-soft)';
+    b.style.borderColor = 'var(--border)';
+  });
+  el.style.background  = 'var(--green)';
+  el.style.color       = 'white';
+  el.style.borderColor = 'var(--green)';
+}
+
+function getConsultData() {
+  const rows = document.querySelectorAll('#v-consult-list > div');
+  return Array.from(rows).map(row => {
+    const name   = row.querySelector('input[type="text"]')?.value?.trim() || '';
+    const result = row.querySelector('textarea')?.value?.trim() || '';
+    let status   = '';
+    row.querySelectorAll('.consult-status-btns div').forEach(b => {
+      if (b.style.background.includes('var(--green)') || b.style.background === 'rgb(0, 122, 84)') status = b.textContent.replace(/[✅🤔⏸\s]/g,'').trim();
+    });
+    return { name, result, status };
+  }).filter(r => r.name);
+}
+
+
+// ── 전체 체크 토글
+function toggleAllChecks() {
+  const items  = document.querySelectorAll('#daily-checks .check-item');
+  const btn    = document.getElementById('check-all-btn');
+  const allOn  = [...items].every(el => el.classList.contains('checked'));
+
+  items.forEach(el => {
+    if (allOn) el.classList.remove('checked');
+    else       el.classList.add('checked');
+  });
+
+  const checked = allOn ? 0 : items.length;
+  const badge   = document.getElementById('d-check-count');
+  if (badge) {
+    badge.textContent = checked + ' / ' + items.length;
+    badge.style.color      = checked === items.length ? 'var(--green)' : 'var(--text-soft)';
+    badge.style.fontWeight = checked === items.length ? '700' : '400';
+  }
+  btn.textContent  = allOn ? '전체선택' : '전체해제';
+  btn.style.background    = allOn ? 'white' : 'var(--green-light)';
+  btn.style.color         = allOn ? 'var(--text-soft)' : 'var(--green)';
+  btn.style.borderColor   = allOn ? 'var(--border)' : 'var(--green)';
+}
+
+// ── 체크 토글 (카운터 업데이트 포함)
+function toggleCheck(el, counterId, total){
+  el.classList.toggle('checked');
+  if(counterId){
+    const container = el.closest('.check-grid');
+    const checked = container.querySelectorAll('.check-item.checked').length;
+    const badge = document.getElementById(counterId);
+    if(badge){
+      badge.textContent = checked + ' / ' + total;
+      badge.style.color      = checked === total ? 'var(--green)' : 'var(--text-soft)';
+      badge.style.fontWeight = checked === total ? '700' : '400';
+    }
+    // 전체선택 버튼 상태 동기화
+    if(counterId === 'd-check-count'){
+      const btn = document.getElementById('check-all-btn');
+      if(btn){
+        const allOn = checked === total;
+        btn.textContent      = allOn ? '전체해제' : '전체선택';
+        btn.style.background = allOn ? 'var(--green-light)' : 'white';
+        btn.style.color      = allOn ? 'var(--green)' : 'var(--text-soft)';
+        btn.style.borderColor= allOn ? 'var(--green)' : 'var(--border)';
+      }
+    }
+  }
+}
+
+// ── 서류발급 통합 기능 ──────────────────────────────
+let drRequests = [];
+let drCurrentFilter = 'all';
+let drCurrentStatus = 'wait';
+let drSelectedDocs = [];
+const drToday = new Date();
+const drTodayStr = drToday.toISOString().split('T')[0];
+
+// 탭 전환
+function drShowTab(id, el) {
+  document.getElementById('dr-panel-list').style.display = id === 'list' ? 'block' : 'none';
+  document.getElementById('dr-panel-new').style.display  = id === 'new'  ? 'block' : 'none';
+  document.querySelectorAll('.dr-tab-btn').forEach(b => {
+    b.style.background = 'white';
+    b.style.color      = 'var(--text-soft)';
+  });
+  el.style.background = 'var(--green)';
+  el.style.color      = 'white';
+  if (id === 'list') drRenderList();
+}
+
+// 서류 선택
+function drToggleDoc(el) {
+  const sel = el.classList.toggle('dr-sel');
+  if (sel) {
+    el.style.borderColor = 'var(--green)';
+    el.style.background  = 'var(--green-light)';
+    el.style.color       = 'var(--green)';
+    el.style.fontWeight  = '600';
+  } else {
+    el.style.borderColor = 'var(--border)';
+    el.style.background  = 'var(--cream)';
+    el.style.color       = '#555';
+    el.style.fontWeight  = '400';
+  }
+  drSelectedDocs = Array.from(document.querySelectorAll('.dr-doc-chip.dr-sel'))
+    .map(d => ({ name: d.dataset.name, price: parseInt(d.dataset.price) }));
+  drUpdateTotal();
+}
+function drUpdateTotal() {
+  const qty   = parseInt(document.getElementById('dr-f-qty').value) || 1;
+  const total = drSelectedDocs.reduce((s, d) => s + d.price * qty, 0);
+  document.getElementById('dr-f-total').textContent = total.toLocaleString() + '원';
+}
+
+// 승인 상태
+function drSetStatus(st) {
+  drCurrentStatus = st;
+  const w = document.getElementById('dr-st-wait');
+  const o = document.getElementById('dr-st-ok');
+  if (st === 'wait') {
+    w.style.cssText += 'border-color:var(--gold);background:#FFFBEF;color:#8A6820;';
+    o.style.cssText += 'border-color:var(--border);background:var(--cream);color:#888;';
+  } else {
+    w.style.cssText += 'border-color:var(--border);background:var(--cream);color:#888;';
+    o.style.cssText += 'border-color:var(--green);background:var(--green-light);color:var(--green);';
+  }
+}
+
+// JSONP API
+function drApiGet(params) {
+  return new Promise(async (resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error('timeout')), 10000);
+    try {
+      // fetch 시도 (Apps Script CORS 지원)
+      const url = SCRIPT_URL + '?' + new URLSearchParams(params);
+      const res  = await fetch(url);
+      clearTimeout(timer);
+      const json = await res.json();
+      resolve(json);
+    } catch(fetchErr) {
+      // fetch 실패 시 JSONP 폴백
+      clearTimeout(timer);
+      const cbName = 'drCb_' + Date.now();
+      params.callback = cbName;
+      const script = document.createElement('script');
+      const timer2 = setTimeout(() => { cleanup(); reject(new Error('timeout')); }, 10000);
+      function cleanup() {
+        clearTimeout(timer2);
+        delete window[cbName];
+        if (script.parentNode) script.parentNode.removeChild(script);
+      }
+      window[cbName] = (data) => { cleanup(); resolve(data); };
+      script.onerror = () => { cleanup(); reject(new Error('script error')); };
+      script.src = SCRIPT_URL + '?' + new URLSearchParams(params);
+      document.head.appendChild(script);
+    }
+  });
+}
+
+// 데이터 로드
+async function drLoadData() {
+  document.getElementById('dr-req-list').innerHTML =
+    '<div style="text-align:center;padding:24px;color:var(--text-soft);font-size:13px;">⏳ 불러오는 중...</div>';
+  try {
+    const res = await drApiGet({ action: 'getAll' });
+    if (res.ok) {
+      drRequests = res.data || [];
+      drRenderList();
+    } else {
+      document.getElementById('dr-req-list').innerHTML =
+        `<div style="padding:16px;color:var(--red);font-size:12px;line-height:1.8;">
+          ⚠️ 시트 오류: ${res.msg || '알 수 없는 오류'}<br>
+          <span style="color:var(--text-soft);">Apps Script 시트명(요청목록) 확인 후 재배포해주세요</span><br>
+          <button onclick="drLoadData()" style="margin-top:8px;padding:6px 14px;border:1px solid var(--border);border-radius:6px;background:white;font-size:12px;cursor:pointer;font-family:inherit;">↻ 다시 시도</button>
+        </div>`;
+    }
+  } catch(e) {
+    const isTimeout = e.message === 'timeout';
+    document.getElementById('dr-req-list').innerHTML =
+      `<div style="padding:16px;color:var(--red);font-size:12px;line-height:1.8;">
+        ⚠️ ${isTimeout ? '응답 시간 초과 (8초)' : '스크립트 로드 실패'}<br>
+        <span style="color:var(--text-soft);">
+          ${isTimeout
+            ? 'Apps Script가 응답하지 않습니다. doGet 함수가 있는지 확인하고 재배포해주세요.'
+            : 'Apps Script URL이 올바른지, doGet 함수가 배포됐는지 확인해주세요.'
+          }
+        </span><br>
+        <a href="${SCRIPT_URL}?action=getAll&callback=test" target="_blank"
+          style="font-size:11px;color:var(--blue);text-decoration:underline;">
+          🔗 URL 직접 테스트 (새 탭)
+        </a>
+        <button onclick="drLoadData()" style="margin-top:8px;margin-left:8px;padding:6px 14px;border:1px solid var(--border);border-radius:6px;background:white;font-size:12px;cursor:pointer;font-family:inherit;">↻ 다시 시도</button>
+      </div>`;
+  }
+}
+
+// 필터
+function drFilter(f, el) {
+  drCurrentFilter = f;
+  document.querySelectorAll('.dr-filter').forEach(b => {
+    b.style.background = 'white';
+    b.style.color      = '#888';
+    b.style.borderColor = 'var(--border)';
+  });
+  el.style.background  = 'var(--green)';
+  el.style.color       = 'white';
+  el.style.borderColor = 'var(--green)';
+  drRenderList();
+}
+
+function drNormDate(s) {
+  if (!s && s !== 0) return null;
+  const str = String(s).trim();
+
+  // ISO 형식: 2026-05-25T15:00:00.000Z → 로컬 날짜 기준으로 변환
+  if (/^\d{4}-\d{2}-\d{2}T/.test(str)) {
+    const d = new Date(str);
+    if (isNaN(d)) return null;
+    // 로컬 날짜로 변환 (시간대 보정)
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  }
+
+  // YYYY-MM-DD
+  if (/^\d{4}-\d{2}-\d{2}/.test(str))
+    return new Date(str.slice(0,10) + 'T00:00:00');
+
+  // Google Sheets 날짜 시리얼 (숫자)
+  if (/^\d{4,6}$/.test(str)) {
+    const serial = parseInt(str);
+    if (serial > 1000 && serial < 100000) {
+      const base = new Date(1899, 11, 30);
+      return new Date(base.getTime() + serial * 86400000);
+    }
+  }
+
+  // 그 외
+  const d = new Date(str);
+  return isNaN(d) ? null : d;
+}
+
+function drFmtDate(s) {
+  const d = drNormDate(s);
+  if (!d) return '-';
+  return (d.getMonth()+1) + '/' + d.getDate();
+}
+
+function drDday(dueStr) {
+  const due = drNormDate(dueStr);
+  if (!due) return { txt: '-', urgent: false };
+  const today = new Date(drTodayStr + 'T00:00:00');
+  const diff  = Math.ceil((due - today) / 86400000);
+  if (diff < 0)  return { txt: 'D+' + Math.abs(diff), urgent: true };
+  if (diff === 0) return { txt: 'D-Day', urgent: true };
+  return { txt: 'D-' + diff, urgent: diff <= 2 };
+}
+
+// 목록 렌더링
+function drRenderList() {
+  const todayLocal = new Date(drTodayStr + 'T00:00:00');
+  let filtered = drRequests;
+  if (drCurrentFilter === 'wait')     filtered = drRequests.filter(r => r.status === 'wait');
+  else if (drCurrentFilter === 'approved') filtered = drRequests.filter(r => r.status === 'approved');
+  else if (drCurrentFilter === 'done')    filtered = drRequests.filter(r => r.status === 'done');
+  else if (drCurrentFilter === 'urgent')  filtered = drRequests.filter(r => {
+    const d = drNormDate(r.due);
+    if (!d) return false;
+    return Math.ceil((d - todayLocal) / 86400000) <= 0 && r.status !== 'done';
+  });
+
+  // 요약
+  const urgent = drRequests.filter(r => {
+    if (r.status === 'done') return false;
+    const d = drNormDate(r.due);
+    if (!d) return false;
+    return Math.ceil((d - todayLocal) / 86400000) <= 0;
+  }).length;
+  document.getElementById('dr-sum-urgent').textContent = urgent;
+  document.getElementById('dr-sum-wait').textContent   = drRequests.filter(r => r.status === 'wait').length;
+  document.getElementById('dr-sum-done').textContent   = drRequests.filter(r => r.status === 'done').length;
+
+  const container = document.getElementById('dr-req-list');
+  if (!filtered.length) {
+    container.innerHTML = '<div style="text-align:center;padding:32px 16px;color:#aaa;"><div style="font-size:32px;margin-bottom:8px;">📋</div><div style="font-size:13px;">요청 없음</div></div>';
+    return;
+  }
+
+  container.innerHTML = filtered.map(r => {
+    const dd  = drDday(r.due || '');
+    const stBadge = r.status === 'wait'
+      ? '<span style="font-size:11px;padding:3px 8px;border-radius:100px;background:#FFFBEF;color:#8A6820;border:1px solid #E8D090;font-weight:600;white-space:nowrap;">승인 대기</span>'
+      : r.status === 'approved'
+      ? '<span style="font-size:11px;padding:3px 8px;border-radius:100px;background:#E8F5F0;color:#007A54;border:1px solid #C5E8DC;font-weight:600;white-space:nowrap;">원장 승인</span>'
+      : '<span style="font-size:11px;padding:3px 8px;border-radius:100px;background:#f5f5f5;color:#888;border:1px solid #ddd;font-weight:600;white-space:nowrap;">발급 완료</span>';
+
+    const docs = Array.isArray(r.docs) ? r.docs.join(' · ') : (r.docs || '-');
+    const approveBtn = r.status === 'wait'
+      ? `<div onclick="drApprove('${r.id}')" style="flex:1;padding:7px;border-radius:6px;border:1px solid #C5E8DC;background:#E8F5F0;font-size:11px;font-weight:600;cursor:pointer;text-align:center;color:#007A54;">✓ 원장승인</div>` : '';
+    const doneBtn = r.status === 'approved'
+      ? `<div onclick="drDone('${r.id}')" style="flex:1;padding:7px;border-radius:6px;border:1px solid #007A54;background:#007A54;font-size:11px;font-weight:600;cursor:pointer;text-align:center;color:white;">발급완료</div>`
+      : r.status === 'wait'
+      ? `<div style="flex:1;padding:7px;border-radius:6px;border:1px solid #ddd;background:#f5f5f5;font-size:11px;font-weight:600;text-align:center;color:#bbb;cursor:not-allowed;" title="원장 승인 후 발급 가능">🔒 발급완료</div>`
+      : '';
+    const delBtn  = `<div onclick="drDel('${r.id}')" style="flex:1;padding:7px;border-radius:6px;border:1px solid #FAEAE0;background:#FAEAE0;font-size:11px;font-weight:600;cursor:pointer;text-align:center;color:#E05050;">삭제</div>`;
+
+    return `<div style="background:#fff;border-radius:10px;border:1px solid var(--border);${dd.urgent&&r.status!=='done'?'border-left:3px solid #E05050;':''}padding:12px;margin-bottom:8px;${r.status==='done'?'opacity:.65;':''}">
+      <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;">
+        <div style="font-size:14px;font-weight:700;color:var(--text);flex:1;">👤 ${r.patient||r.patientName||'-'}</div>
+        ${stBadge}
+      </div>
+      <div style="font-size:12px;color:#555;margin-bottom:5px;">📄 ${docs} × ${r.qty||1}장</div>
+      ${(r.memo||r.specialNote)?`<div style="font-size:11px;color:#888;margin-bottom:4px;">💬 ${r.memo||r.specialNote}</div>`:''}
+      ${r.docMemo?`<div style="font-size:11px;color:#8A6820;background:#FFFBEF;padding:4px 8px;border-radius:5px;margin-bottom:5px;">📝 원장: ${r.docMemo}</div>`:''}
+      <div style="display:flex;gap:10px;flex-wrap:wrap;font-size:11px;color:#888;">
+        <span>📅 신청 <strong style="color:#555;">${drFmtDate(r.date||r.requestDate||'')}</strong></span>
+        <span style="${dd.urgent?'color:#E05050;':''}">🗓 마감 <strong>${drFmtDate(r.due||'')} (${dd.txt})</strong></span>
+        ${r.total>0?`<span>💰 <strong>${Number(r.total).toLocaleString()}원</strong></span>`:''}
+      </div>
+      <div style="display:flex;gap:6px;margin-top:8px;padding-top:8px;border-top:1px solid #f0f0f0;">
+        ${approveBtn}${doneBtn}${delBtn}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// 등록
+async function drSubmitReq() {
+  const patient = document.getElementById('dr-f-patient').value.trim();
+  const date    = document.getElementById('dr-f-date').value;
+  const due     = document.getElementById('dr-f-due').value;
+  const memo    = document.getElementById('dr-f-memo').value.trim();
+  const docMemo = document.getElementById('dr-f-docmemo').value.trim();
+  const qty     = parseInt(document.getElementById('dr-f-qty').value) || 1;
+
+  if (!patient) { showToast('환자명을 입력해주세요', 'error'); return; }
+  if (!due)     { showToast('마감일을 입력해주세요', 'error'); return; }
+  if (!drSelectedDocs.length) { showToast('서류를 선택해주세요', 'error'); return; }
+
+  const total = drSelectedDocs.reduce((s, d) => s + d.price * qty, 0);
+  const btn   = document.querySelector('#dr-panel-new button');
+  btn.textContent = '저장 중...';
+  btn.disabled    = true;
+
+  try {
+    const res = await drApiGet({
+      action: 'add', patient, date, due, memo, docMemo,
+      docs: drSelectedDocs.map(d => d.name).join(' / '),
+      qty, total, status: drCurrentStatus
+    });
+    btn.textContent = '신청 등록하기';
+    btn.disabled    = false;
+    if (res.ok) {
+      showToast('✅ 등록되었습니다');
+      drResetForm();
+      drShowTab('list', document.querySelector('.dr-tab-btn'));
+      drLoadData();
+    } else {
+      showToast('오류: ' + (res.msg || '다시 시도'), 'error');
+    }
+  } catch(e) {
+    btn.textContent = '신청 등록하기';
+    btn.disabled    = false;
+    showToast('네트워크 오류', 'error');
+  }
+}
+
+function drResetForm() {
+  document.getElementById('dr-f-patient').value  = '';
+  document.getElementById('dr-f-date').value     = drTodayStr;
+  document.getElementById('dr-f-due').value      = '';
+  document.getElementById('dr-f-memo').value     = '';
+  document.getElementById('dr-f-docmemo').value  = '';
+  document.getElementById('dr-f-qty').value      = '1';
+  document.getElementById('dr-f-total').textContent = '0원';
+  document.querySelectorAll('.dr-doc-chip.dr-sel').forEach(el => {
+    el.classList.remove('dr-sel');
+    el.style.borderColor = 'var(--border)';
+    el.style.background  = 'var(--cream)';
+    el.style.color       = '#555';
+    el.style.fontWeight  = '400';
+  });
+  drSelectedDocs = [];
+  drSetStatus('wait');
+}
+
+async function drApprove(id) {
+  try { await drApiGet({ action: 'updateStatus', id, status: 'approved' }); await drLoadData(); }
+  catch(e) { showToast('오류', 'error'); }
+}
+async function drDone(id) {
+  // 원장 승인 여부 재확인
+  const req = drRequests.find(r => String(r.id) === String(id));
+  if (req && req.status !== 'approved') {
+    showToast('⚠️ 원장 승인 후 발급 처리할 수 있습니다', 'error');
+    return;
+  }
+  if (!confirm('발급 완료 처리할까요?')) return;
+  try { await drApiGet({ action: 'updateStatus', id, status: 'done' }); await drLoadData(); }
+  catch(e) { showToast('오류', 'error'); }
+}
+async function drDel(id) {
+  if (!confirm('삭제하시겠습니까?')) return;
+  try { await drApiGet({ action: 'delete', id }); await drLoadData(); }
+  catch(e) { showToast('오류', 'error'); }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('dr-f-date').value = drTodayStr;
+  drLoadData();
+});
+
+// ── 상태 버튼 선택
+function selectStatus(el, cls){
+  const parent = el.closest('.status-row');
+  parent.querySelectorAll('.status-btn').forEach(b => {
+    b.classList.remove('sel-green','sel-gold','sel-red');
+  });
+  el.classList.add(cls);
+}
+
+
+
+// ── 체크리스트 텍스트 수집
+function getChecks(containerId){
+  const items = document.querySelectorAll('#'+containerId+' .check-item.checked .check-text');
+  return Array.from(items).map(i => i.textContent.trim()).join(', ') || '없음';
+}
+
+// ── 상태 버튼 값 수집
+function getStatus(containerEl){
+  if(!containerEl) return '';
+  const sel = containerEl.querySelector('.status-btn.sel-green, .status-btn.sel-gold, .status-btn.sel-red');
+  return sel ? sel.textContent.trim() : '';
+}
+
+// ── 토스트
+function showToast(msg, type=''){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (type ? ' '+type : '');
+  setTimeout(() => t.className = 'toast', 2800);
+}
+
+// ── 제출
+// ── 일일보고 카카오톡 전송 ──────────────────────────
+
+function drUpdateSlider(sid, vid) {
+  const slider = document.getElementById(sid);
+  const valEl  = document.getElementById(vid);
+  if (!slider || !valEl) return;
+  const val = parseInt(slider.value);
+  valEl.textContent = val + '%';
+  slider.style.accentColor = val === 100 ? '#007A54' : val >= 50 ? '#C8A84B' : 'rgba(255,255,255,.8)';
+}
+
+function getProgressItems() {
+  // 항목별 진척률 수집
+  const results = [];
+  document.querySelectorAll('[id^="prog-"][id*="-"]').forEach(slider => {
+    if (!slider.id.match(/^prog-\d+-\d+$/)) return;
+    const parts  = slider.id.split('-');
+    const vid    = 'progv-' + parts[1] + '-' + parts[2];
+    const valEl  = document.getElementById(vid);
+    const pct    = valEl ? valEl.textContent : '0%';
+    // 항목 텍스트
+    const wrap   = slider.closest('[data-tag]');
+    const itemEl = wrap ? wrap.querySelector('div') : null;
+    const item   = itemEl ? itemEl.textContent.replace(/^·\s*/, '').trim() : '';
+    if (item && pct !== '0%') results.push({ item, pct });
+  });
+  return results;
+}
+
+function formatDailyReport() {
+  const date  = document.getElementById('d-date').value;
+  const staff = document.getElementById('d-staff').value || '(미선택)';
+  const memo  = document.getElementById('d-memo').value.trim();
+
+  // 날짜·요일·주차
+  const d     = new Date(date);
+  const days  = ['일','월','화','수','목','금','토'];
+  const dateStr = `${d.getMonth()+1}/${d.getDate()}(${days[d.getDay()]})`;
+  const firstDay = new Date(d.getFullYear(), d.getMonth(), 1).getDay();
+  const week  = Math.ceil((d.getDate() + firstDay) / 7);
+
+  // 진료 현황
+  const vTotal      = document.getElementById('v-total')?.value || '';
+  const vNew        = document.getElementById('v-new')?.value || '';
+  const vStaffCount = document.getElementById('v-staff-count')?.value || '';
+  const g = (id) => document.getElementById(id)?.value || '0';
+  const consultYes  = document.getElementById('v-consult-detail')?.style.display !== 'none';
+  const consultRows = consultYes ? getConsultData() : [];
+  const surgeryYes  = document.getElementById('v-surgery-detail')?.style.display !== 'none';
+  const surgeryRows = surgeryYes ? getSurgeryData() : [];
+
+  // 마감 체크리스트
+  const checked = Array.from(
+    document.querySelectorAll('#daily-checks .check-item.checked .check-text')
+  ).map(el => el.textContent.trim());
+  const total = document.querySelectorAll('#daily-checks .check-item').length;
+
+  // 주간 체크 (수/금/토)
+  const weeklyChecked = Array.from(
+    document.querySelectorAll('#weekly-extra-checks .check-item.checked .check-text')
+  ).map(el => el.textContent.trim());
+
+  // 항목별 진척률
+  const progressItems = getProgressItems();
+
+  // 서류 현황
+  const docCards = document.querySelectorAll('#dr-req-list > div');
+  const docLines = [];
+  docCards.forEach(card => {
+    const patient = card.querySelector('div[style*="font-weight:700"]');
+    const status  = card.querySelector('span[style*="border-radius:12px"]');
+    if (patient && status) {
+      docLines.push(`  · ${patient.textContent.replace('👤','').trim()} [${status.textContent.trim()}]`);
+    }
+  });
+
+  // ── 메시지 조립 ──
+  let msg = `[쁘띠치과 일일보고]\n`;
+  msg += `📅 ${dateStr}  ${week}주차  담당: ${staff}\n`;
+  msg += `${'─'.repeat(24)}\n`;
+
+  // 진척률 (있을 때만)
+  if (progressItems.length) {
+    msg += `\n📊 진척률 (${week}주차)\n`;
+    progressItems.forEach(p => {
+      const filled = Math.round(parseInt(p.pct) / 10);
+      const bar = '█'.repeat(filled) + '░'.repeat(10 - filled);
+      msg += `  · ${p.item}: ${bar} ${p.pct}\n`;
+    });
+  }
+
+  // 마감 체크리스트
+  // 진료현황 블록
+  const hasVisit = vTotal || vNew;
+  const hasConsult = ['v-impl','v-occlusion','v-prosth','v-emdogain'].some(p=>g(p+'-a')!=='0'||g(p+'-b')!=='0'||g(p+'-c')!=='0');
+  if (hasVisit || hasConsult) {
+    msg += `\n🦷 진료 현황\n`;
+    if (hasVisit) msg += `  내원 ${vTotal||0}명  신환 ${vNew||0}명${vStaffCount ? '  직원 '+vStaffCount+'명' : ''}\n`;
+    const ITEMS = [
+      { label:'임플란트',  p:'v-impl'      },
+      { label:'교합진단',  p:'v-occlusion' },
+      { label:'보철',      p:'v-prosth'    },
+      { label:'엠도게인',  p:'v-emdogain'  },
+    ];
+    const hasConsultData = ITEMS.some(it => g(it.p+'-a')!=='0'||g(it.p+'-b')!=='0'||g(it.p+'-c')!=='0');
+    if (hasConsultData) {
+      msg += `  상담\n`;
+      ITEMS.forEach(it => {
+        const a=g(it.p+'-a'), b=g(it.p+'-b'), c=g(it.p+'-c');
+        if(a!=='0'||b!=='0'||c!=='0') {
+          const na=document.getElementById(it.p+'-a-name')?.value?.trim()||'';
+          const nb=document.getElementById(it.p+'-b-name')?.value?.trim()||'';
+          const nc=document.getElementById(it.p+'-c-name')?.value?.trim()||'';
+          msg += `  · ${it.label}  A:${a}${na?' ('+na+')':''} B:${b}${nb?' ('+nb+')':''} C:${c}${nc?' ('+nc+')':''}
+`;
+        }
+      });
+    }
+    if (consultRows.length) {
+      msg += `  교합진단 상담\n`;
+      consultRows.forEach(r => {
+        msg += `  · ${r.name} — ${r.status||'미결정'}${r.result ? ' / ' + r.result : ''}\n`;
+      });
+    }
+  }
+
+  msg += `\n✅ 마감 체크 (${checked.length}/${total})\n`;
+  if (checked.length) {
+    checked.forEach(c => { msg += `  · ${c}\n`; });
+  } else {
+    msg += `  미완료\n`;
+  }
+
+  // 주간 점검 체크 (수/금/토)
+  if (weeklyChecked.length) {
+    msg += `\n🗂️ 주간 점검\n`;
+    weeklyChecked.forEach(c => { msg += `  · ${c}\n`; });
+  }
+
+  // 특이사항
+  if (memo) {
+    msg += `\n📝 특이사항\n${memo}\n`;
+  }
+
+  // 서류 신청현황
+  if (docLines.length) {
+    msg += `\n📄 서류 신청현황 (${docLines.length}건)\n`;
+    docLines.forEach(l => { msg += l + '\n'; });
+  } else {
+    msg += `\n📄 서류 신청현황: 없음\n`;
+  }
+
+  msg += `${'─'.repeat(24)}\n`;
+  msg += `🏥 쁘띠치과`;
+
+  return msg;
+}
+
+function drToggleRequired(cid) {
+  const wrap = document.getElementById(cid + '-wrap');
+  const box  = document.getElementById(cid + '-box');
+  if (!wrap || !box) return;
+  const on = box.textContent === '✓';
+  if (on) {
+    box.textContent = '';
+    box.style.background   = 'transparent';
+    box.style.borderColor  = 'rgba(255,255,255,.6)';
+    box.style.color        = 'transparent';
+    wrap.style.background  = 'rgba(255,255,255,.08)';
+    wrap.style.borderColor = 'rgba(255,255,255,.25)';
+  } else {
+    box.textContent = '✓';
+    box.style.background   = 'rgba(255,255,255,.9)';
+    box.style.color        = 'var(--green-dark)';
+    box.style.borderColor  = 'white';
+    wrap.style.background  = 'rgba(255,255,255,.18)';
+    wrap.style.borderColor = 'rgba(255,255,255,.7)';
+  }
+}
+
+function checkRequiredDaily() {
+  const missing = [];
+  for (let i = 0; i < 4; i++) {
+    const box = document.getElementById('daily-required-' + i + '-box');
+    if (!box || box.textContent !== '✓') missing.push(i);
+  }
+  return missing;
+}
+
+async function submitReport(type) {
+  const btn = document.querySelector('#page-' + type + ' .btn-submit');
+
+  if (type === 'daily') {
+    const missing = checkRequiredDaily();
+    if (missing.length > 0) {
+      const LABELS = ['당일 CC 그날 해결','10분 이상 대기 → 환자 안내','챠팅·청구 확인','수납 후 다음 치료계획 안내'];
+      showToast('⚠️ 필수 체크: ' + missing.map(i => LABELS[i]).join(', '), 'error');
+      missing.forEach(i => {
+        const wrap = document.getElementById('daily-required-' + i + '-wrap');
+        if (wrap) {
+          wrap.style.borderColor = '#ff8888';
+          wrap.style.background  = 'rgba(255,80,80,.25)';
+          setTimeout(() => {
+            wrap.style.borderColor = 'rgba(255,255,255,.25)';
+            wrap.style.background  = 'rgba(255,255,255,.08)';
+          }, 2500);
+        }
+      });
+      return;
+    }
+    // ── 일일보고: 카카오톡 전송
+    const msg = formatDailyReport();
+
+    // 1) 클립보드 복사
+    try {
+      await navigator.clipboard.writeText(msg);
+    } catch(e) {
+      // fallback
+      const ta = document.createElement('textarea');
+      ta.value = msg;
+      ta.style.cssText = 'position:fixed;opacity:0;';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+
+    // 2) 미리보기 모달 띄우기
+    showKakaoModal(msg);
+    return;
+  }
+
+  // ── 그 외 탭: 구글시트 저장
+  btn.disabled    = true;
+  btn.textContent = '전송 중...';
+
+  let data = { reportType: type, submittedAt: new Date().toLocaleString('ko-KR') };
+
+  if (type === 'weekly') {
+    data = { ...data,
+      date: document.getElementById('w-date').value,
+      staff: document.getElementById('w-staff').value,
+      rcPerio: document.getElementById('w-rc-perio').value,
+      rcEndo: document.getElementById('w-rc-endo').value,
+      rcOrtho: document.getElementById('w-rc-ortho').value,
+      rcImpl: document.getElementById('w-rc-impl').value,
+      rcNote: document.getElementById('w-rc-note').value,
+      totalVisit: document.getElementById('w-total').value,
+      newPt: document.getElementById('w-new').value,
+      statNote: document.getElementById('w-stat').value,
+      consultRate: document.getElementById('w-consult-rate').value,
+      unpaidNote: document.getElementById('w-unpaid').value,
+      claimErr: document.getElementById('w-claim-err').value,
+      claimRq: document.getElementById('w-claim-rq').value,
+      vipNote: document.getElementById('w-vip').value,
+      machineNote: document.getElementById('w-machine').value,
+      issueNote: document.getElementById('w-issue').value,
+    };
+  } else if (type === 'monthly') {
+    data = { ...data,
+      month: document.getElementById('m-month').value,
+      staff: document.getElementById('m-staff').value,
+      claimAmt: document.getElementById('m-claim').value,
+      claimNote: document.getElementById('m-claim-note').value,
+      privAmt: document.getElementById('m-priv').value,
+      privStat: document.getElementById('m-priv-stat').value,
+      unpaidAmt: document.getElementById('m-unpaid').value,
+      unpaidNote: document.getElementById('m-unpaid-note').value,
+      prepayAmt: document.getElementById('m-prepay').value,
+      foodExp: document.getElementById('m-food').value,
+      taxExp: document.getElementById('m-tax').value,
+      miscExp: document.getElementById('m-misc').value,
+      expenseNote: document.getElementById('m-expense-note').value,
+      nextTarget: document.getElementById('m-next-target').value,
+      nextTask: document.getElementById('m-next-task').value,
+    };
+  } else if (type === 'mgmt') {
+    data = { ...data,
+      month: document.getElementById('g-month').value,
+      staff: document.getElementById('g-staff').value,
+      orthoActive: document.getElementById('g-ortho-active').value,
+      orthoNew: document.getElementById('g-ortho-new').value,
+      orthoNote: document.getElementById('g-ortho-note').value,
+      implActive: document.getElementById('g-impl-active').value,
+      prosthCount: document.getElementById('g-prosth').value,
+      labNote: document.getElementById('g-lab').value,
+      materialNote: document.getElementById('g-material').value,
+      sterilNote: document.getElementById('g-steril-note').value,
+      revenue20: document.getElementById('g-revenue').value,
+      targetPct: document.getElementById('g-target-pct').value,
+      issueNote: document.getElementById('g-issue').value,
+      claimNote: document.getElementById('g-claim-note').value,
+    };
+  }
+
+  const labels = { weekly:'주간 점검', monthly:'월말 보고', mgmt:'경영보고' };
+  try {
+    const formData = new FormData();
+    formData.append('action', 'report');
+    Object.entries(data).forEach(([k,v]) => formData.append(k, v ?? ''));
+    await fetch(SCRIPT_URL, { method:'POST', body:formData, mode:'no-cors' });
+    showToast('✅ ' + labels[type] + ' 제출 완료');
+    btn.textContent = '✅ 제출 완료';
+    setTimeout(() => { btn.disabled = false; btn.textContent = '✉️ ' + labels[type] + ' 제출'; }, 3000);
+  } catch(e) {
+    showToast('⚠️ 네트워크 오류', 'error');
+    btn.disabled = false;
+    btn.textContent = '✉️ ' + labels[type] + ' 제출';
+  }
+}
+
+// ── 카카오톡 전송 모달
+function showKakaoModal(msg) {
+  // 기존 모달 제거
+  const prev = document.getElementById('kakao-modal');
+  if (prev) prev.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'kakao-modal';
+  modal.style.cssText = `
+    position:fixed;inset:0;z-index:9999;
+    background:rgba(0,0,0,.55);
+    display:flex;align-items:flex-end;justify-content:center;
+    padding:0;
+  `;
+  modal.innerHTML = `
+    <div style="
+      background:white;width:100%;max-width:480px;
+      border-radius:20px 20px 0 0;
+      padding:20px 20px 32px;
+      box-shadow:0 -4px 24px rgba(0,0,0,.15);
+      animation: slideUp .25s ease;
+    ">
+      <div style="text-align:center;margin-bottom:14px;">
+        <div style="width:36px;height:4px;background:#ddd;border-radius:2px;margin:0 auto 16px;"></div>
+        <div style="font-size:16px;font-weight:700;color:#1a2e25;">📋 일일보고 전송</div>
+        <div style="font-size:12px;color:#888;margin-top:4px;">메시지가 클립보드에 복사되었습니다</div>
+      </div>
+
+      <!-- 미리보기 -->
+      <div style="
+        background:#f7f7f7;border-radius:12px;
+        padding:14px;margin-bottom:16px;
+        font-size:12px;line-height:1.8;color:#333;
+        white-space:pre-wrap;max-height:220px;overflow-y:auto;
+        font-family:monospace;
+      ">${msg.replace(/</g,'&lt;')}</div>
+
+      <!-- 버튼 -->
+      <div style="display:flex;gap:8px;">
+        <button onclick="openKakaoTalk()" style="
+          flex:1;padding:14px;border:none;border-radius:12px;
+          background:#FEE500;color:#1a1a1a;
+          font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;
+          display:flex;align-items:center;justify-content:center;gap:6px;
+        ">
+          <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+               style="width:22px;height:22px;border-radius:50%;" onerror="this.style.display='none'">
+          카카오톡 열기
+        </button>
+        <button onclick="document.getElementById('kakao-modal').remove()" style="
+          flex:0 0 80px;padding:14px;border:1px solid #ddd;border-radius:12px;
+          background:white;color:#888;font-size:13px;cursor:pointer;font-family:inherit;
+        ">닫기</button>
+      </div>
+      <div style="text-align:center;font-size:11px;color:#aaa;margin-top:10px;">
+        카카오톡 열린 후 원장님께 붙여넣기(길게 누르기)하세요
+      </div>
+    </div>
+  `;
+
+  // 배경 클릭 시 닫기
+  modal.addEventListener('click', e => { if(e.target === modal) modal.remove(); });
+  document.body.appendChild(modal);
+}
+
+function openKakaoTalk() {
+  // 모바일: 카카오톡 앱 열기
+  const isIOS     = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  const isAndroid = /Android/.test(navigator.userAgent);
+
+  if (isIOS) {
+    window.location.href = 'kakaotalk://';
+    setTimeout(() => {
+      window.location.href = 'https://apps.apple.com/kr/app/kakaotalk/id362057947';
+    }, 1500);
+  } else if (isAndroid) {
+    window.location.href = 'intent://talk/#Intent;scheme=kakaotalk;package=com.kakao.talk;end';
+  } else {
+    // PC: 카카오톡 PC 버전 열기
+    window.open('kakaotalk://', '_blank');
+    showToast('✅ 복사 완료 — 카카오톡에 붙여넣기 하세요');
+  }
+}
+</script>
+
+</body>
+</html>

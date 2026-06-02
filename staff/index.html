@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>쁘띠치과 직원 시스템</title>
+<style>
+@font-face{font-family:'TmonMonsori';src:url('../fonts/TmonMonsori_otf.otf') format('opentype')}
+@font-face{font-family:'Pretendard';src:url('../fonts/pretendard-variable.woff2') format('woff2-variations');font-weight:100 900}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:#FAFAF9;min-height:100vh}
+body{font-family:'Pretendard',sans-serif;color:#1A1A18;-webkit-font-smoothing:antialiased}
+
+/* HEADER */
+.header{background:#1E3D30;padding:18px 20px;border-bottom:2px solid #C8A84B}
+.header-inner{max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.header-logo{font-family:'TmonMonsori',serif;font-size:15px;color:#FAF8F0}
+.header-logo em{color:#C8A84B;font-style:normal}
+.header-date{font-size:12px;color:rgba(250,248,240,.5)}
+
+/* HERO */
+.hero{background:#007A54;padding:32px 20px;border-bottom:3px solid #C8A84B}
+.hero-inner{max-width:720px;margin:0 auto}
+.hero-tag{font-size:10px;font-weight:700;letter-spacing:.16em;color:#C8A84B;margin-bottom:8px}
+.hero-title{font-family:'TmonMonsori',serif;font-size:24px;font-weight:600;color:#FAF8F0;line-height:1.35;margin-bottom:6px}
+.hero-sub{font-size:13px;color:rgba(250,248,240,.65);line-height:1.7}
+
+/* SECTION */
+.section{max-width:720px;margin:0 auto;padding:24px 20px 0}
+.sec-label{font-size:10px;font-weight:700;letter-spacing:.16em;color:#C8A84B;margin-bottom:6px}
+.sec-title{font-family:'TmonMonsori',serif;font-size:18px;font-weight:600;color:#111110;margin-bottom:4px}
+.sec-sub{font-size:12.5px;color:#888880;margin-bottom:14px;line-height:1.6}
+
+/* CARD GRID */
+.card-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:28px}
+.card{border-radius:12px;border:1.5px solid #E4E4DE;background:#fff;padding:15px 16px;cursor:pointer;text-decoration:none;display:block;transition:all .15s}
+.card:hover{border-color:#C5E8DC;transform:translateY(-1px)}
+.card.primary{background:#007A54;border-color:#007A54}
+.card.dark{background:#1E3D30;border-color:#1E3D30}
+.card.gold{background:#FFFBEF;border-color:#E8D090}
+.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.card-badge{font-size:10px;font-weight:700;letter-spacing:.08em;padding:3px 8px;border-radius:100px}
+.card.primary .card-badge,.card.dark .card-badge{background:rgba(200,168,75,.25);color:#C8A84B}
+.card:not(.primary):not(.dark):not(.gold) .card-badge{background:#E8F5F0;color:#007A54}
+.card.gold .card-badge{background:#FFD580;color:#5A4010}
+.card-arr{font-size:13px;color:#C8A84B}
+.card:not(.primary):not(.dark) .card-arr{color:#CCCCCC}
+.card-title{font-family:'TmonMonsori',serif;font-size:15px;font-weight:600;margin-bottom:3px}
+.card.primary .card-title,.card.dark .card-title{color:#FAF8F0}
+.card:not(.primary):not(.dark) .card-title{color:#111110}
+.card.gold .card-title{color:#5A4010}
+.card-desc{font-size:12px;line-height:1.55}
+.card.primary .card-desc,.card.dark .card-desc{color:rgba(250,248,240,.65)}
+.card:not(.primary):not(.dark):not(.gold) .card-desc{color:#555550}
+.card.gold .card-desc{color:#8A6820}
+
+/* DIVIDER */
+.divider{height:1px;background:#EAEAE4;max-width:720px;margin:4px 20px 24px}
+
+/* 2열 그리드 */
+.card-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:28px}
+.card-sm{border-radius:10px;border:1.5px solid #E4E4DE;background:#fff;padding:13px 14px;cursor:pointer;text-decoration:none;display:block;transition:all .15s}
+.card-sm:hover{border-color:#C5E8DC}
+.card-sm-badge{font-size:10px;font-weight:700;color:#007A54;letter-spacing:.06em;margin-bottom:4px}
+.card-sm-title{font-size:13px;font-weight:600;color:#111110;margin-bottom:2px;line-height:1.4}
+.card-sm-desc{font-size:11px;color:#888880;line-height:1.5}
+
+/* FOOTER */
+.footer{max-width:720px;margin:0 auto;padding:24px 20px 40px;border-top:1px solid #EAEAE4;margin-top:8px}
+.footer-txt{font-size:12px;color:#888880;line-height:1.8;text-align:center}
+.footer-txt strong{color:#007A54}
+
+@media(min-width:640px){
+  .header-inner,.hero-inner,.section,.divider,.footer{max-width:720px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="header-logo">쁘띠치과 · <em>직원 시스템</em></div>
+    <div class="header-date" id="dateLabel"></div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">STAFF SYSTEM · 직원 전용</div>
+    <div class="hero-title">기본이 기적이다.<br>Basic is Magic.</div>
+    <div class="hero-sub">매일 업무 · 환자 안내 · 교육 — 세 가지 시스템으로 구성됩니다</div>
+  </div>
+</div>
+
+<!-- 즐겨찾기 -->
+<div class="section" style="padding-top:20px;padding-bottom:0">
+  <div class="sec-label">DAILY</div>
+  <div class="sec-title">매일 쓰는 것</div>
+  <div class="card-grid-2" style="margin-bottom:0;margin-top:10px">
+    <a class="card-sm" href="petit_daily_report.html" style="background:#1E3D30;border-color:#1E3D30">
+      <div class="card-sm-badge" style="color:#C8A84B">업무 보고</div>
+      <div class="card-sm-title" style="color:#FAF8F0">일일 보고</div>
+      <div class="card-sm-desc" style="color:rgba(250,248,240,.6)">결산·체크리스트·보험서류</div>
+    </a>
+    <a class="card-sm" href="petit_doc_request.html" style="background:#1E3D30;border-color:#1E3D30">
+      <div class="card-sm-badge" style="color:#C8A84B">서류 발급</div>
+      <div class="card-sm-title" style="color:#FAF8F0">서류발급 요청</div>
+      <div class="card-sm-desc" style="color:rgba(250,248,240,.6)">진단서·소견서·확인서</div>
+    </a>
+  </div>
+</div>
+
+<div class="divider" style="margin-top:20px"></div>
+
+<!-- 1. 매일 업무 시스템 -->
+<div class="section">
+  <div class="sec-label">SYSTEM 01</div>
+  <div class="sec-title">매일 업무를 위한 시스템</div>
+  <div class="sec-sub">보고·상담·운영 — 진료실에서 매일 사용합니다</div>
+  <div class="card-grid">
+    <a class="card primary" href="petit_staff_guide.html">
+      <div class="card-top">
+        <div class="card-badge">상담 가이드</div>
+        <div class="card-arr">→</div>
+      </div>
+      <div class="card-title">환자 유형별 상담 가이드</div>
+      <div class="card-desc">00 충치 부모 · 01 성장 · 02 턱관절 · 03 발치 · 04 잇몸 · 05 임플란트</div>
+    </a>
+    <a class="card dark" href="petit_consultation_widget.html">
+      <div class="card-top">
+        <div class="card-badge">상담 위젯</div>
+        <div class="card-arr">→</div>
+      </div>
+      <div class="card-title">교합재건 상담 위젯</div>
+      <div class="card-desc">증상 선택 → 원인 파악 → 치료 방향 · 체어사이드 활용</div>
+    </a>
+    <div class="card-grid-2">
+      <a class="card-sm" href="petit_clinic_guide.html">
+        <div class="card-sm-badge">신환 도식도</div>
+        <div class="card-sm-title">신환 진료 중 연결</div>
+        <div class="card-sm-desc">도식도 · 흐름 안내</div>
+      </a>
+      <a class="card-sm" href="petit_staff_unified.html">
+        <div class="card-sm-badge">직원 도구</div>
+        <div class="card-sm-title">통합 직원 도구</div>
+        <div class="card-sm-desc">상담·분류·연결</div>
+      </a>
+      <a class="card-sm" href="petit_flowchart.html">
+        <div class="card-sm-badge">관계도</div>
+        <div class="card-sm-title">페이지 관계도</div>
+        <div class="card-sm-desc">30개 페이지 구조</div>
+      </a>
+      <a class="card-sm" href="petit_save_tooth_guide.html">
+        <div class="card-sm-badge">안내 자료</div>
+        <div class="card-sm-title">자연치아살리기</div>
+        <div class="card-sm-desc">직원용 안내</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 2. 진료 안내 시스템 -->
+<div class="section">
+  <div class="sec-label">SYSTEM 02</div>
+  <div class="sec-title">진료안내를 위한 시스템</div>
+  <div class="sec-sub">환자 설명 · 진료실 참고 — 화면을 돌려 환자와 함께 보세요</div>
+
+  <div style="font-size:11px;font-weight:700;letter-spacing:.08em;color:#007A54;margin-bottom:8px">진료 참고</div>
+  <div class="card-grid-2" style="margin-bottom:16px">
+    <a class="card-sm" href="../petit_diagnosis.html">
+      <div class="card-sm-badge">교합진단</div>
+      <div class="card-sm-title">교합진단</div>
+      <div class="card-sm-desc">정밀 분석 · 치료 방향</div>
+    </a>
+    <a class="card-sm" href="../petit_splint.html">
+      <div class="card-sm-badge">안정장치</div>
+      <div class="card-sm-title">교합안정장치</div>
+      <div class="card-sm-desc">턱관절 · 이갈이 보호</div>
+    </a>
+    <a class="card-sm" href="../petit_muscle_relax.html">
+      <div class="card-sm-badge">근이완</div>
+      <div class="card-sm-title">근이완치료</div>
+      <div class="card-sm-desc">물리치료 · 보험 인증</div>
+    </a>
+    <a class="card-sm" href="../petit_occlusion_selfcheck.html">
+      <div class="card-sm-badge">자가체크</div>
+      <div class="card-sm-title">교합 자가체크</div>
+      <div class="card-sm-desc">환자 자기진단 도구</div>
+    </a>
+    <a class="card-sm" href="../petit_lifecycle_occlusion.html">
+      <div class="card-sm-badge">생애주기</div>
+      <div class="card-sm-title">생애주기와 교합</div>
+      <div class="card-sm-desc">노화·교합 연결 설명</div>
+    </a>
+  </div>
+
+  <div style="font-size:11px;font-weight:700;letter-spacing:.08em;color:#007A54;margin-bottom:8px">치료 안내</div>
+  <div class="card-grid-2" style="margin-bottom:16px">
+    <a class="card-sm" href="../petit_treatment_by_age.html">
+      <div class="card-sm-badge">교합치료</div>
+      <div class="card-sm-title">바른턱얼굴 교합치료</div>
+      <div class="card-sm-desc">연령별 치료 흐름</div>
+    </a>
+    <a class="card-sm" href="../petit_4d_ortho.html">
+      <div class="card-sm-badge">4D교정</div>
+      <div class="card-sm-title">4D 입체교정</div>
+      <div class="card-sm-desc">장치 안내 · 비발치</div>
+    </a>
+    <a class="card-sm" href="../petit_pediatric.html">
+      <div class="card-sm-badge">어린이</div>
+      <div class="card-sm-title">어린이 성장교정</div>
+      <div class="card-sm-desc">골든타임 · 부정교합</div>
+    </a>
+    <a class="card-sm" href="../petit_natural_tooth.html">
+      <div class="card-sm-badge">자연치아</div>
+      <div class="card-sm-title">자연치아살리기</div>
+      <div class="card-sm-desc">MTA · 치주재생</div>
+    </a>
+    <a class="card-sm" href="../petit_smile_design.html">
+      <div class="card-sm-badge">기능훈련</div>
+      <div class="card-sm-title">바른미소디자인</div>
+      <div class="card-sm-desc">혀·호흡·자세 훈련</div>
+    </a>
+    <a class="card-sm" href="../petit_prevention.html">
+      <div class="card-sm-badge">예방</div>
+      <div class="card-sm-title">예방·습관치료</div>
+      <div class="card-sm-desc">구강 습관 개선</div>
+    </a>
+    <a class="card-sm" href="../petit_tongue_tie.html">
+      <div class="card-sm-badge">설소대</div>
+      <div class="card-sm-title">설소대단축증</div>
+      <div class="card-sm-desc">혀 기능 · 발음</div>
+    </a>
+    <a class="card-sm" href="../petit_prenatal.html">
+      <div class="card-sm-badge">치과수첩</div>
+      <div class="card-sm-title">우리 아이 치과수첩</div>
+      <div class="card-sm-desc">임산부 · 신생아</div>
+    </a>
+  </div>
+
+  <div style="font-size:11px;font-weight:700;letter-spacing:.08em;color:#007A54;margin-bottom:8px">증상·치료</div>
+  <div class="card-grid-2" style="margin-bottom:8px">
+    <a class="card-sm" href="../petit_cavity.html">
+      <div class="card-sm-badge">충치</div>
+      <div class="card-sm-title">충치의 원인</div>
+      <div class="card-sm-desc">교합·습관과의 연결</div>
+    </a>
+    <a class="card-sm" href="../petit_sensitive.html">
+      <div class="card-sm-badge">시림</div>
+      <div class="card-sm-title">치아 시림</div>
+      <div class="card-sm-desc">치경부 마모 · 원인</div>
+    </a>
+    <a class="card-sm" href="../petit_nerve.html">
+      <div class="card-sm-badge">신경</div>
+      <div class="card-sm-title">신경치료</div>
+      <div class="card-sm-desc">자연치아 보존</div>
+    </a>
+    <a class="card-sm" href="../petit_whitening.html">
+      <div class="card-sm-badge">미백</div>
+      <div class="card-sm-title">치아미백</div>
+      <div class="card-sm-desc">RECOVERY 프로그램</div>
+    </a>
+    <a class="card-sm" href="../petit_periodontitis.html">
+      <div class="card-sm-badge">치주</div>
+      <div class="card-sm-title">만성복합치주염</div>
+      <div class="card-sm-desc">잇몸 · 치주재생</div>
+    </a>
+    <a class="card-sm" href="../petit_resin_oneday.html">
+      <div class="card-sm-badge">레진</div>
+      <div class="card-sm-title">무삭제 레진 원데이</div>
+      <div class="card-sm-desc">당일 보철</div>
+    </a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 3. 교육 시스템 -->
+<div class="section">
+  <div class="sec-label">SYSTEM 03</div>
+  <div class="sec-title">교육을 위한 시스템</div>
+  <div class="sec-sub">단계별 자기주도 학습 — 순서대로 완료하세요</div>
+
+  <div style="font-size:11px;font-weight:700;letter-spacing:.08em;color:#007A54;margin-bottom:8px">전 직원 기초 과정</div>
+  <div class="card-grid" style="margin-bottom:16px">
+    <a class="card primary" href="petit_staff_training.html">
+      <div class="card-top">
+        <div class="card-badge">STEP 1 · 전 직원</div>
+        <div class="card-arr">→</div>
+      </div>
+      <div class="card-title">기초 교육 시스템</div>
+      <div class="card-desc">BTB 철학 · 교합 이해 · 장치 · 진단 흐름 · 리더 역량 — 5레벨 1,000 XP</div>
+    </a>
+    <a class="card gold" href="petit_staff_training_up03.html">
+      <div class="card-top">
+        <div class="card-badge">STEP 2 · 전 직원</div>
+        <div class="card-arr">→</div>
+      </div>
+      <div class="card-title">진단비 가치 설명 교육</div>
+      <div class="card-desc">"비싸다"에서 "왜 필요한지 설명하기"로 — 10단계 프로그램</div>
+    </a>
+  </div>
+
+  <div style="font-size:11px;font-weight:700;letter-spacing:.08em;color:#C8A84B;margin-bottom:8px">리더 심화 과정</div>
+  <div class="card-grid">
+    <a class="card dark" href="petit_staff_training_up01.html">
+      <div class="card-top">
+        <div class="card-badge">STEP 3 · 리더</div>
+        <div class="card-arr">→</div>
+      </div>
+      <div class="card-title">리더 트레이닝 v1</div>
+      <div class="card-desc">철학 · 교합 분류 · 장치 안내 · 상담 설계 · 코칭 · 케이스 · 평가 — 7레벨 1,320 XP</div>
+    </a>
+    <a class="card dark" href="petit_staff_training_up02.html">
+      <div class="card-top">
+        <div class="card-badge">STEP 4 · 리더</div>
+        <div class="card-arr">→</div>
+      </div>
+      <div class="card-title">리더 트레이닝 v2</div>
+      <div class="card-desc">v1 + 리더 상담 점검 4가지 추가 — 7레벨 29모듈 심화</div>
+    </a>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-txt">
+    <strong>쁘띠치과 직원 전용 시스템</strong><br>
+    이 페이지는 직원만 접근할 수 있습니다<br>
+    대구시 남구 대봉로 66 2층 · 053-472-2828
+  </div>
+</div>
+
+<script>
+const d=new Date();
+const days=['일','월','화','수','목','금','토'];
+document.getElementById('dateLabel').textContent=
+  d.getFullYear()+'.'+(d.getMonth()+1).toString().padStart(2,'0')+'.'+
+  d.getDate().toString().padStart(2,'0')+' ('+days[d.getDay()]+')';
+</script>
+</body>
+</html>

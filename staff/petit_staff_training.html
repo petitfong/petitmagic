@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>직원 교육 시스템 | 쁘띠치과</title>
+<style>
+@font-face{font-family:'TmonMonsori';src:url('fonts/TmonMonsori_otf.otf') format('opentype')}
+@font-face{font-family:'Pretendard';src:url('fonts/pretendard-variable.woff2') format('woff2-variations');font-weight:100 900}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:#FAFAF9;min-height:100vh}
+body{font-family:'Pretendard',sans-serif;color:#1A1A18;-webkit-font-smoothing:antialiased}
+
+/* ── HEADER ── */
+.header{background:#007A54;padding:16px 20px;position:sticky;top:0;z-index:100;border-bottom:2px solid #C8A84B}
+.header-inner{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.header-logo{font-family:'TmonMonsori',serif;font-size:14px;color:#FAF8F0;flex:1}
+.header-logo em{color:#C8A84B;font-style:normal}
+.xp-wrap{display:flex;align-items:center;gap:8px}
+.xp-bar-bg{width:80px;height:6px;background:rgba(255,255,255,.2);border-radius:100px;overflow:hidden}
+.xp-bar-fill{height:100%;background:#C8A84B;border-radius:100px;transition:width .5s ease}
+.xp-label{font-size:11px;color:rgba(250,248,240,.7);white-space:nowrap}
+
+/* ── SCREENS ── */
+.screen{display:none;animation:fadeIn .2s ease}
+.screen.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ── MAP ── */
+.map-wrap{max-width:720px;margin:0 auto;padding:24px 20px}
+.map-hero{margin-bottom:24px}
+.map-tag{font-size:11px;font-weight:700;letter-spacing:.14em;color:#C8A84B;margin-bottom:8px}
+.map-title{font-family:'TmonMonsori',serif;font-size:26px;font-weight:600;color:#111110;line-height:1.3;margin-bottom:8px}
+.map-sub{font-size:14px;color:#555550;line-height:1.75}
+.total-xp{display:inline-flex;align-items:center;gap:8px;background:#1E3D30;border-radius:10px;padding:10px 16px;margin-top:14px}
+.total-xp-num{font-family:'TmonMonsori',serif;font-size:22px;font-weight:600;color:#C8A84B}
+.total-xp-label{font-size:12px;color:rgba(250,248,240,.7)}
+
+.level-card{border-radius:14px;border:1.5px solid #E4E4DE;background:#fff;padding:18px;margin-bottom:12px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.level-card:hover:not(.locked){border-color:#C5E8DC;transform:translateY(-2px)}
+.level-card.locked{opacity:.55;cursor:not-allowed}
+.level-card.done{border-color:#007A54;background:#F7FCF9}
+.level-card.active-level{border-color:#C8A84B}
+.lc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.lc-badge{font-size:10px;font-weight:700;letter-spacing:.1em;padding:4px 10px;border-radius:100px}
+.lc-badge.unlocked{background:#E8F5F0;color:#007A54}
+.lc-badge.locked{background:#F0F0EC;color:#888880}
+.lc-badge.done{background:#007A54;color:#FAF8F0}
+.lc-xp{font-size:11px;color:#C8A84B;font-weight:600}
+.lc-title{font-family:'TmonMonsori',serif;font-size:17px;font-weight:600;color:#111110;margin-bottom:4px}
+.lc-sub{font-size:12.5px;color:#555550;line-height:1.55;margin-bottom:10px}
+.lc-prog{background:#F0F0EC;border-radius:100px;height:5px;overflow:hidden}
+.lc-prog-fill{height:100%;background:#007A54;border-radius:100px;transition:width .4s}
+.lc-prog-txt{font-size:11px;color:#888880;margin-top:5px}
+.lc-done-mark{position:absolute;right:18px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;background:#007A54;display:flex;align-items:center;justify-content:center;color:#FAF8F0;font-size:14px}
+.lc-lock{display:flex;align-items:center;gap:5px;font-size:11px;color:#888880;margin-top:8px}
+
+/* ── LEARN ── */
+.learn-wrap{max-width:720px;margin:0 auto;padding:20px}
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#555550;background:none;border:1px solid #E4E4DE;border-radius:100px;padding:6px 14px;cursor:pointer;margin-bottom:18px;transition:all .15s}
+.back-btn:hover{border-color:#C5E8DC;color:#007A54}
+.learn-tag{font-size:10px;font-weight:700;letter-spacing:.14em;color:#C8A84B;margin-bottom:6px}
+.learn-title{font-family:'TmonMonsori',serif;font-size:22px;font-weight:600;color:#111110;margin-bottom:16px;line-height:1.35}
+
+.mod-card{border-radius:12px;border:1.5px solid #E4E4DE;background:#fff;padding:16px;margin-bottom:10px;cursor:pointer;transition:all .15s}
+.mod-card:hover{border-color:#C5E8DC}
+.mod-card.done{border-color:#007A54;background:#F7FCF9}
+.mod-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.mod-num{font-size:10px;font-weight:700;letter-spacing:.1em;color:#888880}
+.mod-check{width:20px;height:20px;border-radius:50%;background:#007A54;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;display:none}
+.mod-card.done .mod-check{display:flex}
+.mod-title{font-size:14px;font-weight:600;color:#111110;margin-bottom:3px}
+.mod-desc{font-size:12px;color:#555550;line-height:1.5}
+
+.quiz-start-btn{width:100%;padding:14px;border-radius:12px;background:#007A54;color:#FAF8F0;border:none;font-family:'TmonMonsori',serif;font-size:16px;font-weight:600;cursor:pointer;margin-top:6px;transition:opacity .15s}
+.quiz-start-btn:hover:not(:disabled){opacity:.9}
+.quiz-start-btn:disabled{background:#E4E4DE;color:#888880;cursor:not-allowed}
+
+/* ── READ ── */
+.read-wrap{max-width:720px;margin:0 auto;padding:20px}
+.read-tag{font-size:10px;font-weight:700;letter-spacing:.14em;color:#C8A84B;margin-bottom:6px}
+.read-title{font-family:'TmonMonsori',serif;font-size:20px;font-weight:600;color:#111110;margin-bottom:16px;line-height:1.35}
+.read-body{font-size:14px;color:#444440;line-height:1.85}
+.read-body p{margin-bottom:12px}
+.read-body strong{color:#111110;font-weight:600}
+.key-box{border-radius:0 10px 10px 0;padding:13px 15px;margin:14px 0;font-size:13px;line-height:1.75;border-left:3px solid}
+.key-box.green{background:#E8F5F0;border-color:#007A54;color:#1A5C3A}
+.key-box.green strong{color:#005C3A}
+.key-box.gold{background:#FFFBEF;border-color:#C8A84B;color:#5A4010}
+.key-box.gold strong{color:#3A2000}
+.done-btn{width:100%;padding:14px;border-radius:12px;background:#007A54;color:#FAF8F0;border:none;font-family:'TmonMonsori',serif;font-size:15px;font-weight:600;cursor:pointer;margin-top:20px;transition:opacity .15s}
+.done-btn:hover{opacity:.9}
+
+/* ── QUIZ ── */
+.quiz-wrap{max-width:720px;margin:0 auto;padding:20px}
+.quiz-prog{display:flex;gap:6px;margin-bottom:20px}
+.quiz-prog-dot{flex:1;height:4px;border-radius:100px;background:#E4E4DE;transition:background .3s}
+.quiz-prog-dot.done{background:#007A54}
+.quiz-prog-dot.active{background:#C8A84B}
+.quiz-q-num{font-size:11px;font-weight:700;letter-spacing:.1em;color:#888880;margin-bottom:8px}
+.quiz-q-text{font-family:'TmonMonsori',serif;font-size:18px;font-weight:600;color:#111110;line-height:1.5;margin-bottom:18px}
+.quiz-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.quiz-opt{border-radius:10px;border:1.5px solid #E4E4DE;background:#fff;padding:13px 16px;cursor:pointer;font-size:14px;color:#111110;text-align:left;transition:all .15s;line-height:1.55}
+.quiz-opt:hover:not(:disabled){border-color:#C5E8DC;background:#F7FCF9}
+.quiz-opt.correct{border-color:#007A54;background:#E8F5F0;color:#1A5C3A}
+.quiz-opt.wrong{border-color:#B04040;background:#FDE8E8;color:#5A1A1A}
+.quiz-fb{border-radius:10px;padding:13px 15px;font-size:13px;line-height:1.7;margin-bottom:12px;display:none}
+.quiz-fb.show{display:block}
+.quiz-fb.ok{background:#E8F5F0;color:#1A5C3A}
+.quiz-fb.ok::before{content:'✓ ';font-weight:700}
+.quiz-fb.ng{background:#FDE8E8;color:#5A1A1A}
+.quiz-fb.ng::before{content:'✕ ';font-weight:700}
+.next-btn{width:100%;padding:14px;border-radius:12px;background:#007A54;color:#FAF8F0;border:none;font-family:'TmonMonsori',serif;font-size:15px;font-weight:600;cursor:pointer;display:none;transition:opacity .15s}
+.next-btn.show{display:block}
+.next-btn:hover{opacity:.9}
+
+/* ── COMPLETE ── */
+.complete-wrap{max-width:720px;margin:0 auto;padding:40px 20px;text-align:center}
+.complete-icon{font-size:60px;margin-bottom:16px}
+.complete-tag{font-size:11px;font-weight:700;letter-spacing:.14em;color:#C8A84B;margin-bottom:8px}
+.complete-title{font-family:'TmonMonsori',serif;font-size:26px;font-weight:600;color:#111110;margin-bottom:10px;line-height:1.3}
+.complete-sub{font-size:14px;color:#555550;line-height:1.75;margin-bottom:24px}
+.complete-xp-box{display:inline-flex;align-items:center;gap:10px;background:#1E3D30;border-radius:12px;padding:14px 24px;margin-bottom:24px}
+.complete-xp-num{font-family:'TmonMonsori',serif;font-size:28px;font-weight:600;color:#C8A84B}
+.complete-xp-label{font-size:13px;color:rgba(250,248,240,.7);text-align:left}
+.complete-btn{display:block;width:100%;padding:14px;border-radius:12px;background:#007A54;color:#FAF8F0;border:none;font-family:'TmonMonsori',serif;font-size:16px;font-weight:600;cursor:pointer;transition:opacity .15s}
+.complete-btn:hover{opacity:.9}
+.fail-btn{display:block;width:100%;padding:14px;border-radius:12px;background:#fff;color:#555550;border:1.5px solid #E4E4DE;font-size:14px;cursor:pointer;margin-top:10px;transition:all .15s}
+.fail-btn:hover{border-color:#C5E8DC;color:#007A54}
+
+@media(min-width:640px){
+  .header-inner,.map-wrap,.learn-wrap,.read-wrap,.quiz-wrap,.complete-wrap{max-width:720px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-logo">쁘띠치과 · <em>직원 교육 시스템</em></div>
+    <div class="xp-wrap">
+      <div class="xp-bar-bg"><div class="xp-bar-fill" id="xpBarFill" style="width:0%"></div></div>
+      <div class="xp-label" id="xpLabel">0 XP</div>
+    </div>
+  </div>
+</header>
+
+<!-- MAP -->
+<div class="screen active" id="screenMap">
+  <div class="map-wrap">
+    <div class="map-hero">
+      <div class="map-tag">PETIT DENTAL · 직원 교육</div>
+      <div class="map-title">스스로 성장하는<br>학습 로드맵</div>
+      <div class="map-sub">레벨을 순서대로 완료하며 쁘띠치과를 깊이 이해합니다.<br>각 레벨은 학습 → 퀴즈 → 완료 순서로 진행됩니다.</div>
+      <div class="total-xp">
+        <div>
+          <div class="total-xp-num" id="totalXpNum">0</div>
+          <div class="total-xp-label">XP 획득</div>
+        </div>
+        <div style="width:1px;height:32px;background:rgba(250,248,240,.15);margin:0 8px"></div>
+        <div>
+          <div class="total-xp-num" id="totalLvNum">0</div>
+          <div class="total-xp-label">레벨 완료</div>
+        </div>
+      </div>
+    </div>
+    <div id="levelList"></div>
+  </div>
+</div>
+
+<!-- LEARN -->
+<div class="screen" id="screenLearn">
+  <div class="learn-wrap">
+    <button class="back-btn" onclick="showMap()">← 로드맵으로</button>
+    <div class="learn-tag" id="learnTag"></div>
+    <div class="learn-title" id="learnTitle"></div>
+    <div id="modList"></div>
+    <button class="quiz-start-btn" id="quizStartBtn" onclick="startQuiz()">퀴즈 풀기 →</button>
+  </div>
+</div>
+
+<!-- READ -->
+<div class="screen" id="screenRead">
+  <div class="read-wrap">
+    <button class="back-btn" onclick="showLearn()">← 목록으로</button>
+    <div class="read-tag" id="readTag"></div>
+    <div class="read-title" id="readTitle"></div>
+    <div class="read-body" id="readBody"></div>
+    <button class="done-btn" onclick="markDone()">학습 완료 ✓</button>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="screen" id="screenQuiz">
+  <div class="quiz-wrap">
+    <button class="back-btn" onclick="showLearn()">← 돌아가기</button>
+    <div class="quiz-prog" id="quizProg"></div>
+    <div class="quiz-q-num" id="quizNum"></div>
+    <div class="quiz-q-text" id="quizText"></div>
+    <div class="quiz-opts" id="quizOpts"></div>
+    <div class="quiz-fb" id="quizFb"></div>
+    <button class="next-btn" id="nextBtn" onclick="nextQ()">다음 →</button>
+  </div>
+</div>
+
+<!-- COMPLETE -->
+<div class="screen" id="screenComplete">
+  <div class="complete-wrap">
+    <div class="complete-icon" id="completeIcon">🎉</div>
+    <div class="complete-tag" id="completeTag"></div>
+    <div class="complete-title" id="completeTitle"></div>
+    <div class="complete-sub" id="completeSub"></div>
+    <div class="complete-xp-box">
+      <div class="complete-xp-num" id="completeXpNum"></div>
+      <div class="complete-xp-label" id="completeXpLabel"></div>
+    </div>
+    <button class="complete-btn" id="completeBtn" onclick="showMap()">로드맵으로 돌아가기</button>
+    <button class="fail-btn" id="failBtn" style="display:none" onclick="showLearn()">모듈 다시 읽기</button>
+  </div>
+</div>
+
+<script>
+const LEVELS=[
+  {id:0,title:'쁘띠치과란 어떤 곳인가',sub:'철학·브랜드·기본 마인드',xp:100,
+   modules:[
+    {id:'0-0',title:'BTB 철학 — 기본이 기적이다',tag:'LEVEL 1 · 기초',
+     body:`<p><strong>BTB(Born To Be)</strong>는 쁘띠치과의 핵심 철학입니다. "기본이 기적이다"는 말처럼, 호흡·혀·자세·씹기·삼키기라는 기본 기능이 올바르게 작동할 때 교합이 유지되고 몸의 균형이 만들어진다는 생각입니다.</p>
+     <div class="key-box green">치아만 고치는 것이 아닙니다. 치아가 왜 망가졌는지, 어떤 기능이 문제인지를 함께 찾습니다.</div>
+     <p>쁘띠치과는 충치가 생겨서 오든, 교정을 하러 오든, 항상 같은 질문을 합니다. <strong>"이 분의 기능은 어떤가요?"</strong></p>
+     <div class="key-box gold">BTB = Breathing(호흡) · Tongue(혀) · Body posture(자세) — 이 세 가지가 교합을 만들고, 무너뜨리고, 다시 완성합니다.</div>`},
+    {id:'0-1',title:'쁘띠치과 진료 철학 3가지',tag:'LEVEL 1 · 기초',
+     body:`<p>쁘띠치과가 다른 치과와 다른 이유는 세 가지 원칙 때문입니다.</p>
+     <div class="key-box green"><strong>1. 자연치아 최우선</strong><br>뽑기 전에 살릴 수 있는지 먼저 확인합니다. MTA 신경재생, 엠도게인 치주재생으로 발치를 최대한 피합니다.</div>
+     <div class="key-box green"><strong>2. 비발치·비수술 원칙</strong><br>4D 입체교정 장치로 턱뼈를 이동·확장해 발치 없이 공간을 만듭니다. 수술은 최후 수단입니다.</div>
+     <div class="key-box green"><strong>3. 기능 회복이 완성</strong><br>장치가 끝난 후 혀·호흡·자세가 바뀌지 않으면 재발합니다. 바른미소디자인 훈련이 진짜 마무리입니다.</div>`},
+    {id:'0-2',title:'쁘띠치과 환자는 어떤 분들인가',tag:'LEVEL 1 · 기초',
+     body:`<p>쁘띠치과에 오시는 분들은 크게 세 유형입니다.</p>
+     <p><strong>어린이·부모</strong> — 충치 때문에 왔다가 성장 방향 이야기를 처음 듣는 경우가 많습니다. 골든타임을 놓치지 않는 것이 중요합니다.</p>
+     <p><strong>청소년·청년</strong> — "교정을 두 번 했는데 재발했어요"가 가장 많은 호소입니다. 원인을 찾지 못하고 치료했기 때문입니다.</p>
+     <p><strong>중장년·인생2기</strong> — "세 군데서 뽑아야 한다고 했는데 여기서 다른 이야기를 들었습니다." 자연치아를 살릴 수 있는지 확인하러 오십니다.</p>
+     <div class="key-box gold">어떤 분이 오시든 — 기능을 확인하고, 원인을 찾고, 기본부터 바로잡는 것이 쁘띠치과의 방식입니다.</div>`}
+   ],
+   quiz:[
+    {q:'BTB에서 B·T·B가 각각 의미하는 것은?',opts:['발치·치료·보철','호흡·혀·자세','뼈·치아·기능','브라켓·트레이·바이트'],ans:1,fb:'BTB = Breathing(호흡)·Tongue(혀)·Body posture(자세). 이 세 가지 기능이 올바를 때 교합이 유지됩니다.'},
+    {q:'쁘띠치과에서 수술은?',opts:['절대 하지 않는다','처음부터 권유한다','최후 수단으로만 고려한다','비용이 많이 드는 경우에만'],ans:2,fb:'비발치·비수술을 원칙으로 하되, 필요한 경우에만 최후 수단으로 고려합니다.'},
+    {q:'교정 치료 후 재발하는 가장 큰 이유는?',opts:['유지장치 미착용','장치 품질 문제','기능(혀·호흡·자세)이 바뀌지 않아서','치아 개수 문제'],ans:2,fb:'장치가 끝나도 기능 습관이 바뀌지 않으면 턱은 원래 위치로 돌아갑니다. 기능 회복이 진짜 완성입니다.'}
+   ]},
+  {id:1,title:'교합이란 무엇인가',sub:'교합·부정교합·교합질환의 이해',xp:150,
+   modules:[
+    {id:'1-0',title:'교합의 정의와 중요성',tag:'LEVEL 2 · 교합',
+     body:`<p><strong>교합(咬合)</strong>이란 위아래 치아가 맞물리는 상태를 말합니다. 단순히 치아 문제가 아닙니다. 교합이 불안정하면 턱관절, 근육, 경추, 자세까지 영향을 줍니다.</p>
+     <div class="key-box green"><strong>교합이 무너지는 3단계</strong><br>1. 교합 간섭 → 한쪽으로만 씹게 됨<br>2. 근육 긴장·이갈이 → 치아 마모·파절<br>3. 턱관절 손상·안면 비대칭</div>
+     <p>쁘띠치과는 교합을 <strong>"기능이 만들고, 기능 이상이 무너뜨리며, 기능 회복이 다시 완성한다"</strong>고 봅니다.</p>
+     <div class="key-box gold">환자가 "치아가 시려요"라고 올 때, 교합 간섭이 원인일 수 있습니다. 증상만 보지 않고 원인을 봅니다.</div>`},
+    {id:'1-1',title:'부정교합 분류 — 기본',tag:'LEVEL 2 · 교합',
+     body:`<p>부정교합은 크게 골격성과 치성으로 나뉩니다. 직원이 알아야 할 기본 분류입니다.</p>
+     <p><strong>Class I</strong> — 상하악 관계는 정상, 치아 배열만 문제 (덧니, 돌출, 총생)</p>
+     <p><strong>Class II</strong> — 위턱이 앞으로 나온 상태. 무턱·돌출입. 아래턱 성장 부족인 경우가 많음</p>
+     <p><strong>Class III</strong> — 아래턱이 앞으로 나온 상태. 주걱턱. 위턱 성장 부족이 원인인 경우도 많음</p>
+     <div class="key-box green">Class II = 무턱·돌출 → Twin Block 장치<br>Class III = 주걱턱 → Han's 3-Way 장치</div>
+     <div class="key-box gold">"주걱턱처럼 보여도" 위턱이 덜 자란 것일 수 있습니다. 정밀 진단이 중요한 이유입니다.</div>`},
+    {id:'1-2',title:'교합질환 증상 — 환자 응대용',tag:'LEVEL 2 · 교합',
+     body:`<p>환자가 이런 증상으로 오면 교합을 함께 확인해야 합니다.</p>
+     <p><strong>구조적 원인</strong> — 치아시림, 치아파절, 치아흔들림 → #자연치아살리기</p>
+     <p><strong>기능적 원인</strong> — 턱관절통증, 이갈이, 목·어깨통증, 두통 → #턱관절안정장치</p>
+     <p><strong>발육적 원인</strong> — 안면비대칭, 주걱턱, 돌출, 무턱, 덧니 → #4D입체교정</p>
+     <div class="key-box green">환자가 "치아 때문에 왔는데 목도 아파요"라고 하면 교합 문제일 가능성이 높습니다. 원장님께 연결합니다.</div>`}
+   ],
+   quiz:[
+    {q:'Class III 부정교합(주걱턱)의 특징은?',opts:['위턱이 앞으로 나온 상태','치아 배열만 문제인 상태','아래턱이 앞으로 나온 상태','개구교합'],ans:2,fb:'Class III는 아래턱이 앞으로 나온 주걱턱입니다. 단, 위턱이 덜 자란 것이 원인인 경우도 많습니다.'},
+    {q:'턱관절 통증·이갈이 증상의 치료 방향은?',opts:['#4D입체교정','#자연치아살리기','#턱관절안정장치','#성장교정'],ans:2,fb:'이갈이·이악물기·턱관절 통증은 교합안정장치(스플린트)로 먼저 안정을 찾습니다.'},
+    {q:'교합에 대한 쁘띠치과의 핵심 철학은?',opts:['치아 배열이 전부다','수술로만 해결된다','기능이 만들고 기능 이상이 무너뜨리며 기능 회복이 완성한다','유지장치가 최선이다'],ans:2,fb:'교합은 기능이 만들고, 기능 이상이 무너뜨리며, 기능 회복이 다시 완성합니다. 쁘띠치과 핵심 철학입니다.'}
+   ]},
+  {id:2,title:'장치의 이해',sub:'교합안정장치 vs 4D 입체교정',xp:200,
+   modules:[
+    {id:'2-0',title:'교합안정장치 — 보호하는 장치',tag:'LEVEL 3 · 장치',
+     body:`<p>교합안정장치(스플린트)는 <strong>보호하는 장치</strong>입니다. 뼈나 치아를 변화시키지 않습니다.</p>
+     <div class="key-box green"><strong>역할</strong> — 턱관절·근육 안정 · 이갈이·이악물기 차단<br><strong>착용 시간</strong> — 8시간 내외<br><strong>바른미소디자인</strong> — 기본 10회 제공</div>
+     <p>안정장치는 현재 위치를 보호하면서 "이 분의 올바른 교합 위치가 어디인지" 찾아가는 과정이기도 합니다.</p>
+     <div class="key-box gold">순서가 중요합니다 — 턱관절이 불안정한 상태에서 4D 교정을 시작하면 효과가 줄어듭니다. 먼저 안정을 찾습니다.</div>`},
+    {id:'2-1',title:'4D 입체교정 — 변화시키는 장치',tag:'LEVEL 3 · 장치',
+     body:`<p>4D 입체교정 장치는 <strong>변화시키는 장치</strong>입니다. 뼈를 변화시키고 치아도 크게 함께 움직입니다.</p>
+     <div class="key-box green"><strong>역할</strong> — 턱뼈 위치·크기 변화 · 치아 이동<br><strong>착용 시간</strong> — 10시간 이상 (수면 포함)<br><strong>바른미소디자인</strong> — 기본 제공 + 치아배열 후 + 완료 후 반복</div>
+     <p><strong>껴야 변화됩니다.</strong> 착용 시간이 치료 결과를 결정합니다.</p>
+     <div class="key-box gold">공통점 — 두 장치 모두 바른미소디자인 훈련이 병행됩니다. 기능이 바뀌어야 유지됩니다.</div>`},
+    {id:'2-2',title:'장치 분류 — 성장교정 vs 4D',tag:'LEVEL 3 · 장치',
+     body:`<p>4D 입체교정 장치는 두 그룹으로 나뉩니다.</p>
+     <p><strong>분류 1 · 성장교정 장치</strong> (유아~어린이)<br>Biobloc · EFLine(Functional Education Line) · 프리올소(Pre-Orthodontic Myofunctional Trainer)</p>
+     <div class="key-box green">성장 방향을 바꿉니다. 호흡·혀 훈련이 반드시 병행되어야 효과가 유지됩니다.</div>
+     <p><strong>분류 2 · 4D 입체교정 장치</strong> (청소년~성인)<br>Twin Block(C2·안면비대칭) · Han's 3-Way(C3) · RPE(Rapid Palatal Expander, 성장기) · MARPE(Miniscrew-Assisted Rapid Palatal Expander, 성인) · TA(Transverse Appliance, 측방확장)</p>
+     <div class="key-box gold">교합안정장치 필요 여부 → 성장교정 or 4D교정 → 바른미소디자인 — 이 흐름을 항상 기억합니다.</div>`}
+   ],
+   quiz:[
+    {q:'4D 입체교정 장치의 착용 시간 기준은?',opts:['4시간 이상','8시간 내외','10시간 이상, 수면 포함','착용 시간 무관'],ans:2,fb:'4D 입체교정 장치는 10시간 이상, 수면 시간까지 포함해야 뼈와 치아의 변화가 일어납니다.'},
+    {q:'Class II(무턱·돌출)에 적용하는 대표 4D 장치는?',opts:["Han's 3-Way",'MARPE','Twin Block','RPE'],ans:2,fb:'Twin Block은 아래턱을 앞으로 유도하는 장치로 Class II(무턱·돌출) 케이스에 적용합니다.'},
+    {q:'교합안정장치와 4D 입체교정 장치의 공통점은?',opts:['착용 시간이 같다','뼈를 변화시킨다','바른미소디자인 훈련이 병행된다','모두 고정식이다'],ans:2,fb:'두 장치 모두 바른미소디자인 훈련이 병행됩니다. 기능이 바뀌어야 효과가 유지됩니다.'}
+   ]},
+  {id:3,title:'진단과 치료 흐름',sub:'교합진단·치료 3단계·케이스 연결',xp:250,
+   modules:[
+    {id:'3-0',title:'교합진단 — 쁘띠치과의 진단 방식',tag:'LEVEL 4 · 임상',
+     body:`<p>쁘띠치과의 진단은 치아 배열만 보지 않습니다.</p>
+     <div class="key-box green">두개골·턱 성장 분석 / 기도·혀·설골 분석 / 얼굴 대칭·경추 정렬 / 턱관절 상태 / 구강 내 스캔·교합 스캔·세팔로·3D CT</div>
+     <p>진단비 60만원은 검사 자체의 비용입니다. 치료를 시작하면 치료비에 포함됩니다.</p>
+     <div class="key-box gold">"왜 진단을 먼저 해야 하나요?" → "원인을 모르고 치료하면 재발합니다. 어떤 장치가 맞는지, 어떤 순서로 해야 하는지 진단이 결정합니다."</div>`},
+    {id:'3-1',title:'치료 3단계 — 뼈→치아→기능',tag:'LEVEL 4 · 임상',
+     body:`<p>쁘띠치과의 치료는 항상 이 순서입니다.</p>
+     <div class="key-box green"><strong>1단계 · 뼈</strong> — 4D 입체교정으로 턱뼈 위치·크기 조정 (약 6개월)<br><strong>2단계 · 치아</strong> — 바로잡힌 턱 위에서 치아 정렬·교합 완성 (1년 내외)<br><strong>3단계 · 기능</strong> — 바른미소디자인 · 호흡·혀·자세·삼키기 (함께 진행, 평생 유지)</div>
+     <p>이 순서를 지켜야 오래 유지됩니다. 치아만 먼저 움직이면 뼈 구조가 맞지 않아 재발합니다.</p>
+     <div class="key-box gold">"내 몸이 유지장치가 됩니다" — 기능이 완성되면 장치 없이도 교합이 유지됩니다.</div>`},
+    {id:'3-2',title:'환자 유형별 연결 — 실전',tag:'LEVEL 4 · 임상',
+     body:`<p>환자가 어떤 증상으로 오든, 아래 흐름으로 연결합니다.</p>
+     <p><strong>충치·검진 → 성장 설명</strong><br>어린이 충치 치료 시 성장 방향 검진을 함께. 골든타임 설명 후 성장교정 또는 4D 교정으로 연결</p>
+     <p><strong>턱관절·이갈이 → 안정장치</strong><br>먼저 안정장치로 보호. 필요 시 4D 교정으로 연결</p>
+     <p><strong>교정 재발 → 원인 진단</strong><br>"왜 재발했는지" 진단이 먼저. 기능 문제인지, 골격 문제인지 파악</p>
+     <p><strong>발치 권유 → 자연치아살리기</strong><br>뽑기 전에 살릴 수 있는지 확인. MTA·엠도게인 설명</p>
+     <div class="key-box green">어느 유형이든 마지막 질문은 같습니다. "이 분의 기능은 어떤가요?"</div>`}
+   ],
+   quiz:[
+    {q:'쁘띠치과 치료 3단계의 올바른 순서는?',opts:['치아→뼈→기능','기능→치아→뼈','뼈→치아→기능','진단→보철→교정'],ans:2,fb:'뼈(4D교정) → 치아(정렬·교합) → 기능(바른미소디자인). 이 순서를 지켜야 재발하지 않습니다.'},
+    {q:'교합진단비에 대한 설명으로 맞는 것은?',opts:['치료와 별도로 추가된다','검사 비용이며 치료 시작 시 포함된다','선택 사항이다','보험이 적용된다'],ans:1,fb:'진단비 60만원은 검사 자체의 비용이며, 치료를 시작하면 치료비에 포함됩니다.'},
+    {q:'"발치 권유를 받고 왔어요" 환자에게 먼저 할 말은?',opts:['바로 임플란트 상담','살릴 수 있는지 먼저 확인합니다','원장님은 발치 안 합니다','치주 치료부터 시작합니다'],ans:1,fb:'"뽑기 전에 살릴 수 있는지 먼저 확인합니다" — 자연치아살리기 철학 설명 후 상담을 연결합니다.'}
+   ]},
+  {id:4,title:'리더 역량',sub:'환자 상담 흐름·직원 교육·클리닉 철학',xp:300,
+   modules:[
+    {id:'4-0',title:'환자 상담 마스터 — 유형별 흐름',tag:'LEVEL 5 · 리더',
+     body:`<p>리더는 어떤 환자가 와도 상담 흐름을 설계할 수 있어야 합니다.</p>
+     <div class="key-box green"><strong>충치 걱정 부모</strong> — 충치 원인(교합·습관) 설명 → 성장 방향 체크 → 골든타임 안내<br><br><strong>교정 재발</strong> — 공감 → 원인 진단 설명 → 4D 교정 차이점 안내<br><br><strong>발치 권유</strong> — 자연치아 우선 철학 → 진단 권유<br><br><strong>첫 방문</strong> — 쁘띠치과 소개 → 교합 중심 진료 설명</div>
+     <div class="key-box gold">상담의 시작은 항상 <strong>"듣는 것"</strong>입니다. 환자가 무엇을 두려워하는지, 무엇을 원하는지 먼저 파악합니다.</div>`},
+    {id:'4-1',title:'신입 직원 교육 — 리더의 역할',tag:'LEVEL 5 · 리더',
+     body:`<p>리더는 신입이 이 교육 시스템을 완료하도록 도와주는 역할을 합니다.</p>
+     <p><strong>확인할 것들</strong><br>· Level 1~4 완료 여부 체크<br>· 모르는 부분 함께 복습<br>· 실제 진료실 상황과 연결해서 설명</p>
+     <div class="key-box green">교육은 "외우게 하는 것"이 아닙니다. <strong>"왜 그런가"를 이해하면</strong> 어떤 상황에서도 응용할 수 있습니다.</div>
+     <p><strong>핵심 체크 포인트</strong><br>· BTB 철학을 자기 말로 설명할 수 있는가?<br>· 교합안정장치와 4D 교정의 차이를 설명할 수 있는가?<br>· 환자 유형별 상담 흐름을 아는가?</p>`},
+    {id:'4-2',title:'쁘띠치과 비전 — 나는 여기서 무엇을 할 것인가',tag:'LEVEL 5 · 리더',
+     body:`<p>리더로서 쁘띠치과에서 일한다는 것은 무엇을 의미하는지 생각합니다.</p>
+     <div class="key-box green">"치과는 맛집과 같습니다. 똑같은 재료와 방식을 써도 어떤 집만 맛집이듯, 쁘띠치과는 기본에 집중합니다."</div>
+     <p>기술보다 먼저 필요한 것은 <strong>환자를 사랑하는 마음</strong>입니다. 최고의 지식과 기술도 그 마음 위에 있을 때 좋은 결과가 납니다.</p>
+     <div class="key-box gold">리더로서의 다음 목표를 스스로 정해보세요. 이 시스템을 완료한 것은 시작입니다.<br>총 1000 XP를 달성했다면, 당신은 쁘띠치과를 깊이 이해한 사람입니다.</div>`}
+   ],
+   quiz:[
+    {q:'환자 상담에서 가장 먼저 해야 할 것은?',opts:['치료비 안내','장치 설명','환자가 무엇을 원하는지 듣는 것','교합진단 권유'],ans:2,fb:'상담의 시작은 듣는 것입니다. 무엇을 두려워하는지, 무엇을 원하는지 먼저 파악해야 올바른 안내가 가능합니다.'},
+    {q:'"교합안정장치와 4D 교정의 차이가 뭔가요?" 핵심 답변은?',opts:['가격이 다릅니다','안정장치는 보호, 4D 교정은 변화시킵니다','두 가지는 같은 장치입니다','착용 시간만 다릅니다'],ans:1,fb:'교합안정장치는 보호(변화 없음), 4D 입체교정은 뼈와 치아를 변화시킵니다. 둘 다 필요한 시기가 있고 순서가 있습니다.'},
+    {q:'좋은 치료 결과를 만드는 가장 중요한 기반은?',opts:['최신 장비','환자를 사랑하는 마음 위에 지식과 기술','높은 치료비','긴 진료 시간'],ans:1,fb:'술자는 환자를 사랑하는 마음과 최고의 지식·기술을 항상 연마하고 환자를 위해 사용할 때 좋은 결과가 있습니다.'}
+   ]}
+];
+
+const MAX_XP=LEVELS.reduce((s,l)=>s+l.xp,0);
+let S={xp:0,done:[],modDone:[],curLv:0,curMod:0,qIdx:0,qScore:0,answered:false};
+
+function save(){try{sessionStorage.setItem('ps',JSON.stringify(S));}catch(e){}}
+function load(){try{const d=sessionStorage.getItem('ps');if(d)S=JSON.parse(d);}catch(e){}}
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function updateHeader(){
+  const pct=Math.min(100,Math.round(S.xp/MAX_XP*100));
+  document.getElementById('xpBarFill').style.width=pct+'%';
+  document.getElementById('xpLabel').textContent=S.xp+' XP';
+}
+
+function showMap(){
+  updateHeader();
+  const list=document.getElementById('levelList');
+  list.innerHTML='';
+  document.getElementById('totalXpNum').textContent=S.xp;
+  document.getElementById('totalLvNum').textContent=S.done.length;
+  LEVELS.forEach((lv,i)=>{
+    const locked=i>0&&!S.done.includes(i-1);
+    const done=S.done.includes(i);
+    const modsDone=lv.modules.filter(m=>S.modDone.includes(m.id)).length;
+    const pct=Math.round(modsDone/lv.modules.length*100);
+    const c=document.createElement('div');
+    c.className='level-card'+(locked?' locked':'')+(done?' done':'');
+    c.innerHTML=`
+      <div class="lc-top">
+        <div class="lc-badge ${done?'done':locked?'locked':'unlocked'}">${done?'완료':'LEVEL '+(i+1)}</div>
+        <div class="lc-xp">+${lv.xp} XP</div>
+      </div>
+      <div class="lc-title">${lv.title}</div>
+      <div class="lc-sub">${lv.sub}</div>
+      ${!done?`<div class="lc-prog"><div class="lc-prog-fill" style="width:${pct}%"></div></div><div class="lc-prog-txt">${modsDone}/${lv.modules.length} 모듈 완료</div>`:''}
+      ${locked?`<div class="lc-lock">🔒 이전 레벨 완료 후 열립니다</div>`:''}
+      ${done?`<div class="lc-done-mark">✓</div>`:''}`;
+    if(!locked)c.onclick=()=>showLearn(i);
+    list.appendChild(c);
+  });
+  show('screenMap');
+}
+
+function showLearn(idx){
+  if(idx!==undefined)S.curLv=idx;
+  const lv=LEVELS[S.curLv];
+  document.getElementById('learnTag').textContent='LEVEL '+(S.curLv+1);
+  document.getElementById('learnTitle').textContent=lv.title;
+  const list=document.getElementById('modList');
+  list.innerHTML='';
+  lv.modules.forEach((mod,i)=>{
+    const done=S.modDone.includes(mod.id);
+    const c=document.createElement('div');
+    c.className='mod-card'+(done?' done':'');
+    c.innerHTML=`
+      <div class="mod-top">
+        <div class="mod-num">모듈 ${i+1}</div>
+        <div class="mod-check">✓</div>
+      </div>
+      <div class="mod-title">${mod.title}</div>`;
+    c.onclick=()=>showRead(i);
+    list.appendChild(c);
+  });
+  const allDone=lv.modules.every(m=>S.modDone.includes(m.id));
+  const lvDone=S.done.includes(S.curLv);
+  const btn=document.getElementById('quizStartBtn');
+  btn.disabled=!allDone||lvDone;
+  btn.textContent=lvDone?'완료됨 ✓':'퀴즈 풀기 →';
+  show('screenLearn');
+}
+
+function showRead(idx){
+  S.curMod=idx;
+  const mod=LEVELS[S.curLv].modules[idx];
+  document.getElementById('readTag').textContent=mod.tag;
+  document.getElementById('readTitle').textContent=mod.title;
+  document.getElementById('readBody').innerHTML=mod.body;
+  show('screenRead');
+}
+
+function markDone(){
+  const mod=LEVELS[S.curLv].modules[S.curMod];
+  if(!S.modDone.includes(mod.id))S.modDone.push(mod.id);
+  save();showLearn();
+}
+
+function startQuiz(){
+  S.qIdx=0;S.qScore=0;S.answered=false;
+  renderQ();show('screenQuiz');
+}
+
+function renderQ(){
+  const quiz=LEVELS[S.curLv].quiz;
+  const q=quiz[S.qIdx];
+  const dots=document.getElementById('quizProg');
+  dots.innerHTML='';
+  quiz.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='quiz-prog-dot'+(i<S.qIdx?' done':i===S.qIdx?' active':'');
+    dots.appendChild(d);
+  });
+  document.getElementById('quizNum').textContent='문제 '+(S.qIdx+1)+' / '+quiz.length;
+  document.getElementById('quizText').textContent=q.q;
+  const opts=document.getElementById('quizOpts');
+  opts.innerHTML='';
+  q.opts.forEach((opt,i)=>{
+    const b=document.createElement('button');
+    b.className='quiz-opt';
+    b.textContent=opt;
+    b.onclick=()=>answerQ(i);
+    opts.appendChild(b);
+  });
+  document.getElementById('quizFb').className='quiz-fb';
+  document.getElementById('nextBtn').className='next-btn';
+  S.answered=false;
+}
+
+function answerQ(idx){
+  if(S.answered)return;
+  S.answered=true;
+  const q=LEVELS[S.curLv].quiz[S.qIdx];
+  const btns=document.querySelectorAll('.quiz-opt');
+  btns.forEach(b=>b.disabled=true);
+  const correct=idx===q.ans;
+  btns[idx].classList.add(correct?'correct':'wrong');
+  if(!correct)btns[q.ans].classList.add('correct');
+  if(correct)S.qScore++;
+  const fb=document.getElementById('quizFb');
+  fb.className='quiz-fb '+(correct?'ok':'ng')+' show';
+  fb.textContent=q.fb;
+  const nb=document.getElementById('nextBtn');
+  nb.className='next-btn show';
+  nb.textContent=S.qIdx===LEVELS[S.curLv].quiz.length-1?'결과 보기 →':'다음 →';
+}
+
+function nextQ(){
+  const quiz=LEVELS[S.curLv].quiz;
+  if(S.qIdx<quiz.length-1){S.qIdx++;renderQ();}
+  else showResult();
+}
+
+function showResult(){
+  const lv=LEVELS[S.curLv];
+  const pass=S.qScore>=Math.ceil(lv.quiz.length*0.7);
+  if(pass&&!S.done.includes(S.curLv)){
+    S.done.push(S.curLv);
+    S.xp+=lv.xp;
+    save();
+  }
+  document.getElementById('completeIcon').textContent=pass?'🎉':'📚';
+  document.getElementById('completeTag').textContent='LEVEL '+(S.curLv+1)+' · '+(pass?'통과':'미통과');
+  document.getElementById('completeTitle').textContent=pass?'레벨 완료!':'다시 도전해보세요';
+  document.getElementById('completeSub').textContent=pass
+    ?`${S.qScore}/${lv.quiz.length} 정답. +${lv.xp} XP 획득했습니다!`
+    :`${S.qScore}/${lv.quiz.length} 정답. 70% 이상 맞아야 통과입니다. 모듈을 다시 읽고 도전해보세요.`;
+  document.getElementById('completeXpNum').textContent=S.xp;
+  document.getElementById('completeXpLabel').textContent='XP 누적\n(목표 '+MAX_XP+' XP)';
+  document.getElementById('failBtn').style.display=pass?'none':'block';
+  updateHeader();
+  show('screenComplete');
+}
+
+load();showMap();
+</script>
+</body>
+</html>

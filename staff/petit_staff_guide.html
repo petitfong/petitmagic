@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>쁘띠치과 상담 가이드 | 직원용</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* 헤더 */
+.hd{padding:20px 20px 0;display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border-bottom:1px solid #E0E0DA}
+.hd-title{font-family:'Noto Serif KR',serif;font-size:18px;font-weight:400;color:#111110}
+.hd-badge{font-size:11px;background:#E8F5F0;color:#007A54;padding:4px 10px;border-radius:100px;border:1px solid #C5E8DC;white-space:nowrap;font-weight:600}
+.hd-sub{font-size:12px;color:#555550;margin-top:0;padding:8px 20px 14px;background:#fff;border-bottom:1px solid #E0E0DA}
+
+/* 탭 */
+.sticky-header{position:sticky;top:0;z-index:50;background:#fff}
+.tab-wrap{overflow-x:auto;padding:0 20px;scrollbar-width:none;background:#fff;border-bottom:1px solid #E0E0DA}
+.tab-wrap::-webkit-scrollbar{display:none}
+.tabs{display:flex;gap:6px;min-width:max-content;padding:12px 0}
+.tab{padding:7px 15px;border-radius:100px;font-size:12.5px;cursor:pointer;border:1px solid #E0E0DA;color:#555550;background:#fff;transition:all .2s;font-family:'Noto Sans KR',sans-serif;white-space:nowrap}
+.tab:hover{border-color:#007A54;color:#007A54}
+.tab.act{background:#007A54;color:#FAF8F0;border-color:#007A54;font-weight:600}
+
+/* 메인 */
+.main{padding:16px 20px 60px}
+.panel{display:none}
+.panel.show{display:block}
+
+/* 유형 헤더 */
+.type-head{background:#fff;border:1px solid #E0E0DA;border-radius:12px;padding:16px 18px;margin-bottom:16px}
+.type-num{font-size:11px;letter-spacing:.16em;color:#C8A84B;text-transform:uppercase;font-weight:600;margin-bottom:6px}
+.type-title{font-family:'Noto Serif KR',serif;font-size:20px;font-weight:600;color:#111110;margin-bottom:6px;line-height:1.35}
+.type-keywords{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.kw{font-size:11.5px;background:#F5EFD8;color:#8A6820;border:1px solid #E8D898;padding:3px 10px;border-radius:100px}
+
+/* 흐름 단계 */
+.flow{display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:14px;align-items:stretch}
+.step-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:28px}
+.step-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:15px}
+.step-connector{width:2px;flex:1;margin:4px 0}
+.step-body{flex:1;padding:13px 0 16px}
+.step-tag{font-size:10.5px;letter-spacing:.12em;color:#888880;text-transform:uppercase;margin-bottom:5px}
+.step-name{font-size:15px;font-weight:500;color:#111110;margin-bottom:4px;font-family:'Noto Serif KR',serif}
+.step-desc{font-size:13px;color:#555550;line-height:1.65}
+.step-link{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:12px;color:#007A54;text-decoration:none;border:1px solid #C5E8DC;padding:5px 12px;border-radius:100px;background:#E8F5F0;transition:all .15s;font-weight:500}
+.step-link:hover{background:#C5E8DC}
+
+/* 색상 유형 */
+.dot-entry{background:#CCCCCA}.conn-entry{background:#EAEAE4}
+.dot-hub{background:#C8A84B}.conn-hub{background:#F5EFD8}
+.dot-page{background:#009B6B}.conn-page{background:#E0EDEA}
+.dot-warn{background:#D06030}.conn-warn{background:#FAEAE0}
+.dot-action{background:#007A54}.conn-action{background:#E8F5F0}
+
+/* 스크립트 박스 */
+.script-box{background:#FFFBEF;border:1px solid #E8D898;border-radius:10px;padding:14px 16px;margin:4px 0 8px 42px}
+.script-label{font-size:10.5px;letter-spacing:.1em;color:#8A6820;margin-bottom:7px;font-weight:600}
+.script-text{font-size:13px;color:#5A4010;line-height:1.75;font-style:italic}
+
+/* 요점 카드 */
+.tips{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.tip{background:#F5F5F1;border:1px solid #E0E0DA;border-radius:10px;padding:13px 15px;display:flex;gap:12px;align-items:flex-start}
+.tip-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.tip-title{font-size:13.5px;font-weight:500;color:#111110;margin-bottom:3px}
+.tip-desc{font-size:12.5px;color:#555550;line-height:1.6}
+
+/* 전체 개요 */
+.sym-card{border-radius:8px;border:1px solid #E0E0DA;background:#fff;overflow:hidden;cursor:pointer;transition:border-color .15s}
+.sym-card.open{border-color:#007A54}
+.sym-head{padding:9px 11px}
+.sym-name{font-size:13px;font-weight:600;color:#111110;margin-bottom:2px}
+.sym-kw{font-size:11px;color:#888880}
+.sym-links{display:none;flex-direction:column;gap:4px;padding:0 11px 10px;border-top:1px solid #EAEAE4}
+.sym-card.open .sym-links{display:flex}
+.sym-links a{font-size:11.5px;color:#007A54;text-decoration:none;padding:3px 0;line-height:1.5}
+.sym-links a:hover{text-decoration:underline}
+.ov-card{background:#fff;border:1px solid #E0E0DA;border-radius:12px;padding:14px 16px;cursor:pointer;transition:all .2s}
+.ov-card:hover{border-color:#007A54;background:#F5F9F7}
+.ov-num{font-size:11px;letter-spacing:.14em;color:#C8A84B;font-weight:600;margin-bottom:5px}
+.ov-title{font-size:15px;font-weight:500;color:#111110;margin-bottom:4px}
+.ov-kws{font-size:12px;color:#888880;margin-bottom:8px}
+.ov-flow{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.ov-node{font-size:11.5px;padding:3px 9px;border-radius:100px;background:#F5F5F1;color:#555550;border:1px solid #E0E0DA;white-space:nowrap}
+.ov-arr{font-size:11px;color:#C8A84B;font-weight:700}
+
+/* 범례 */
+.legend{display:flex;flex-wrap:wrap;gap:10px;padding:12px 20px;border-bottom:1px solid #E0E0DA;background:#FAFAF9;margin-bottom:0}
+.leg{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#555550}
+.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* 진료중 연결 케이스 헤더 */
+.case-head-green{background:#E8F5F0;border-bottom:1px solid #C5E8DC;padding:14px 16px}
+.case-head-blue{background:#E8EEF5;border-bottom:1px solid #B8CCE0;padding:14px 16px}
+.case-head-orange{background:#FAEAE0;border-bottom:1px solid #E8C0A0;padding:14px 16px}
+.case-head-teal{background:#E0F0EC;border-bottom:1px solid #A8D8CC;padding:14px 16px}
+
+@media(min-width:640px){
+  .hd,.hd-sub,.tab-wrap,.main{max-width:720px;margin-left:auto;margin-right:auto}
+  .tab-wrap{padding:0 32px}
+  .main{padding:16px 32px 60px}
+  .hd{padding:24px 32px 12px}
+  .hd-sub{padding:0 32px 14px}
+}
+</style>
+<link rel="stylesheet" href="petit-design.css">
+
+</head>
+<body>
+
+<div class="sticky-header">
+<div class="hd">
+  <div>
+    <div class="hd-title">쁘띠치과 상담 가이드</div>
+  </div>
+  <div class="hd-badge">직원 전용</div>
+</div>
+<div class="hd-sub">환자 유형별 상담 흐름 · 페이지 연결 · 권장 멘트</div>
+
+<div class="legend">
+  <div class="leg"><div class="leg-dot" style="background:#888880"></div>접속 경로</div>
+  <div class="leg"><div class="leg-dot" style="background:#C8A84B"></div>메인 허브</div>
+  <div class="leg"><div class="leg-dot" style="background:#4A9A7A"></div>안내 페이지</div>
+  <div class="leg"><div class="leg-dot" style="background:#2D7A5A"></div>목표(예약)</div>
+  <div class="leg"><div class="leg-dot" style="background:#D06030"></div>단절 주의</div>
+</div>
+
+<div class="tab-wrap">
+  <div class="tabs">
+    <div class="tab act" onclick="show('overview',this)">전체 요약</div>
+    <div class="tab" onclick="show('p0',this)" style="background:#FFF0D8;border-color:#E8C878;color:#8A6820;font-weight:600">00 충치 걱정 부모</div>
+    <div class="tab" onclick="show('p1',this)">01 아이 성장</div>
+    <div class="tab" onclick="show('p2',this)">02 턱관절·이갈이</div>
+    <div class="tab" onclick="show('p3',this)">03 발치 권유</div>
+    <div class="tab" onclick="show('p4',this)">04 잇몸·치주</div>
+    <div class="tab" onclick="show('p5',this)">05 임플란트</div>
+    <div class="tab" onclick="show('p6',this)">06 처음 방문</div>
+    <div class="tab" onclick="show('p7',this)">07 교합 재발</div>
+    <div class="tab" onclick="show('clinic',this)">진료 중 연결</div>
+  </div>
+</div>
+</div><!-- /sticky-header -->
+
+<div class="main">
+
+<!-- 충치 걱정 부모 — 가장 흔한 유형 -->
+<div class="panel" id="panel-p0">
+  <div style="background:#FFFBEF;border:1.5px solid #E8D090;border-radius:12px;padding:16px 18px;margin-bottom:16px">
+    <div style="font-size:11px;letter-spacing:.16em;color:#8A6820;font-weight:600;margin-bottom:6px;text-transform:uppercase">가장 흔한 유형 · 핵심 과제</div>
+    <div style="font-family:'Noto Serif KR',serif;font-size:20px;font-weight:600;color:#111110;margin-bottom:8px;line-height:1.35">충치 걱정하는 부모</div>
+    <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px">
+      <span class="kw">"충치 치료"</span><span class="kw">"아이 충치"</span><span class="kw">"충치 예방"</span>
+      <span class="kw">"불소도포"</span><span class="kw">"충치가 자꾸 생겨요"</span>
+    </div>
+    <div style="background:#FFF8E8;border-radius:8px;padding:12px 14px;border:1px solid #E8D090">
+      <div style="font-size:12px;font-weight:600;color:#8A6820;margin-bottom:6px">심리 구조 이해</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="font-size:13px;background:#E8F5F0;color:#1E5C38;padding:3px 10px;border-radius:100px;font-weight:600;white-space:nowrap">충치 걱정</div>
+          <div style="font-size:13px;color:#8A6820;font-weight:700">높음</div>
+          <div style="font-size:12px;color:#555550">→ 치과 내원 동기</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="font-size:13px;background:#FAEAE0;color:#B04020;padding:3px 10px;border-radius:100px;font-weight:600;white-space:nowrap">교합치료 거부</div>
+          <div style="font-size:13px;color:#B04020;font-weight:700">높음</div>
+          <div style="font-size:12px;color:#555550">→ "우리 아이는 아직 괜찮아요"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 핵심 전략 -->
+  <div style="background:#007A54;border-radius:12px;padding:16px 18px;margin-bottom:16px;border-top:3px solid #C8A84B">
+    <div style="font-size:11px;letter-spacing:.1em;color:#C8A84B;font-weight:600;margin-bottom:10px">상담 핵심 전략</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(208,80,48,.15);border-radius:8px;border:1px solid rgba(208,80,48,.25)">
+        <div style="font-size:13px;color:#FFB090;font-weight:600;flex-shrink:0">✗ 금지</div>
+        <div style="font-size:13px;color:#888880;line-height:1.6">"교합치료 받으세요" → 부모가 바로 거부감을 느낍니다</div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(74,154,122,.15);border-radius:8px;border:1px solid rgba(74,154,122,.25)">
+        <div style="font-size:13px;color:#80E0B0;font-weight:600;flex-shrink:0">✓ 핵심</div>
+        <div style="font-size:13px;color:#555550;line-height:1.6;font-weight:500">"충치가 왜 반복되는지 원인이 있어요" → 교합을 자연스럽게 연결</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 흐름도 -->
+  <div class="flow">
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-entry"></div><div class="step-connector conn-entry"></div></div>
+      <div class="step-body">
+        <div class="step-tag">접속 경로</div>
+        <div class="step-name">검색·카카오·지인 소개</div>
+        <div class="step-desc">"아이 충치 어떻게 해요?" "충치가 자꾸 생겨요" "불소도포 하러 왔어요"</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-hub"></div><div class="step-connector conn-hub"></div></div>
+      <div class="step-body">
+        <div class="step-tag">1단계 — 충치 원인 공감</div>
+        <div class="step-name">충치 원인 페이지 안내</div>
+        <div class="step-desc">충치가 왜 생기는지 — 당 컨트롤, 세균, 씹고 삼키기의 연결 구조를 먼저 이해시킵니다. "양치질만의 문제가 아닙니다"부터 시작합니다.</div>
+        <a class="step-link" href="petit_cavity.html" target="_blank">충치 원인 페이지 열기</a>
+      </div>
+    </div>
+
+    <div style="background:#FFFBEF;border:1px solid #E8D090;border-radius:8px;padding:12px 14px;margin:0 0 0 42px">
+      <div style="font-size:10.5px;color:#8A6820;font-weight:600;letter-spacing:.06em;margin-bottom:6px">상담 멘트 ①</div>
+      <div style="font-size:13px;color:#5A4010;line-height:1.75;font-style:italic">"충치가 반복되는 건 단순히 단 걸 좋아해서가 아닙니다. 음식이 치아에 오래 남는 환경이 문제인 경우가 많아요. 왜 이 아이에게 이 자리에 충치가 계속 생기는지 원인을 같이 보면 좋겠어요."</div>
+    </div>
+
+    <div class="step" style="margin-top:14px">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">2단계 — 자연스러운 연결</div>
+        <div class="step-name">씹고 삼키기 → 입술·혀·호흡 → 교합</div>
+        <div class="step-desc">충치 원인을 설명하다 보면 자연스럽게 "바르게 씹고 삼키기"가 나옵니다. 여기서 교합과 성장교정으로 연결합니다. 강요가 아닌 <strong style="color:#007A54">원인 설명</strong>입니다.</div>
+        <a class="step-link" href="petit_smile_design.html" target="_blank">바른미소디자인</a>
+        <a class="step-link" href="petit_treatment_by_age.html" target="_blank">성장교정</a>
+      </div>
+    </div>
+
+    <div style="background:#FFFBEF;border:1px solid #E8D090;border-radius:8px;padding:12px 14px;margin:0 0 0 42px">
+      <div style="font-size:10.5px;color:#8A6820;font-weight:600;letter-spacing:.06em;margin-bottom:6px">상담 멘트 ②</div>
+      <div style="font-size:13px;color:#5A4010;line-height:1.75;font-style:italic">"아이가 입을 자주 벌리고 있거나, 밥을 오래 씹지 않거나, 한쪽으로만 씹는다면 — 씹고 삼키기가 제대로 안 되고 있는 거예요. 이게 교합 문제와 연결됩니다."</div>
+    </div>
+
+    <div class="step" style="margin-top:14px">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">3단계 — 예방 + 교합 병행 안내</div>
+        <div class="step-name">예방과 습관 + 충치 치료 + 교합 확인</div>
+        <div class="step-desc">충치 치료는 하되, 양치질 교육과 함께 교합 상태를 확인합니다. 부모에게는 "충치 예방의 근본"으로 접근합니다.</div>
+        <a class="step-link" href="petit_prevention.html" target="_blank">기본은 예방과 습관</a>
+        <a class="step-link" href="petit_cavity.html" target="_blank">충치 원인</a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-action"></div></div>
+      <div class="step-body">
+        <div class="step-tag">목표</div>
+        <div class="step-name">충치 치료 + 교합진단 예약</div>
+        <div class="step-desc">충치 치료로 시작해서 교합진단으로 자연스럽게 연결. 강요 없이 원인 설명으로 이어집니다.</div>
+        <a class="step-link" href="petit_diagnosis.html" target="_blank">교합진단</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="tips">
+    <div class="tip">
+      <div class="tip-icon">💡</div>
+      <div>
+        <div class="tip-title">부모 거부감 줄이는 핵심 표현</div>
+        <div class="tip-desc">"교정 이야기가 아니에요. 충치가 왜 이 자리에 계속 생기는지 — 원인을 찾는 겁니다." 교합치료·성장교정 단어보다 <strong>원인 설명</strong>으로 접근하세요.</div>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">💡</div>
+      <div>
+        <div class="tip-title">관찰 질문으로 공감 먼저</div>
+        <div class="tip-desc">"아이가 밥 먹을 때 한쪽으로만 씹나요?" "입을 자주 벌리고 있나요?" "삼킨 후에 혀에 음식이 남아있는 편인가요?" — 부모가 "맞아요"라고 하는 순간 연결됩니다.</div>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">💡</div>
+      <div>
+        <div class="tip-title">충치 원인 페이지를 먼저 보여주세요</div>
+        <div class="tip-desc">진료실에서 직접 설명하기 어려울 때 — 카카오톡으로 링크 전송하거나 대기실에서 미리 읽게 합니다. 읽고 나면 부모가 먼저 "그래서 교합이 문제인가요?"라고 묻게 됩니다.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 전체 요약 -->
+<div class="panel show" id="panel-overview">
+
+  <!-- 나이 기반 -->
+  <div style="padding:14px 20px 6px">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.14em;color:#007A54;margin-bottom:8px">나이 기반 내원 → <a href="petit_treatment_by_age.html" target="_blank" style="color:#007A54;text-decoration:underline">연령별치료 페이지</a></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
+
+      <div style="border-radius:8px;padding:10px 11px;background:#F0F8F4;border:1px solid #C5E8DC">
+        <div style="font-size:10px;font-weight:700;color:#007A54;margin-bottom:3px">유아 · 0~4세</div>
+        <div style="font-size:12px;font-weight:600;color:#111110;margin-bottom:5px">호흡·수유 기반</div>
+        <div style="font-size:11px;color:#555550;line-height:1.55">구강호흡·설소대·수유 자세 → petit_prenatal / petit_tongue_tie</div>
+      </div>
+
+      <div style="border-radius:8px;padding:10px 11px;background:#E8F5F0;border:1px solid #C5E8DC">
+        <div style="font-size:10px;font-weight:700;color:#007A54;margin-bottom:3px">어린이 · 5~12세</div>
+        <div style="font-size:12px;font-weight:600;color:#111110;margin-bottom:5px">성장교정 골든타임</div>
+        <div style="font-size:11px;color:#555550;line-height:1.55">MARPE·4D장치로 턱 크기·위치 유도 → 충치걱정부모(00) · 아이성장(01) 유형</div>
+      </div>
+
+      <div style="border-radius:8px;padding:10px 11px;background:#FFFBEF;border:1px solid #E8D090">
+        <div style="font-size:10px;font-weight:700;color:#8A6820;margin-bottom:3px">청소년 · 13~17세</div>
+        <div style="font-size:12px;font-weight:600;color:#111110;margin-bottom:5px">4D 입체교정</div>
+        <div style="font-size:11px;color:#555550;line-height:1.55">골격 거의 완료 · 비발치·비수술 우선 → treatment_by_age</div>
+      </div>
+
+      <div style="border-radius:8px;padding:10px 11px;background:#FFFBEF;border:1px solid #E8D090">
+        <div style="font-size:10px;font-weight:700;color:#8A6820;margin-bottom:3px">청년 · 18~40대</div>
+        <div style="font-size:12px;font-weight:600;color:#111110;margin-bottom:5px">4D 교정·재건</div>
+        <div style="font-size:11px;color:#555550;line-height:1.55">교합치료 3단계 · 자연치아살리기 → 유형 02·03·06·07</div>
+      </div>
+
+      <div style="border-radius:8px;padding:10px 11px;background:#F5F0FC;border:1px solid #D0B8E8">
+        <div style="font-size:10px;font-weight:700;color:#6A3A9A;margin-bottom:3px">중장년 · 50대~</div>
+        <div style="font-size:12px;font-weight:600;color:#111110;margin-bottom:5px">교합 재건</div>
+        <div style="font-size:11px;color:#555550;line-height:1.55">닳고 빠진 치아 · 전체 교합 균형 설계 → 유형 04·05</div>
+      </div>
+
+      <div style="border-radius:8px;padding:10px 11px;background:#F5F0FC;border:1px solid #D0B8E8">
+        <div style="font-size:10px;font-weight:700;color:#6A3A9A;margin-bottom:3px">인생 2기 · 60대~</div>
+        <div style="font-size:12px;font-weight:600;color:#111110;margin-bottom:5px">임플란트·틀니·보존</div>
+        <div style="font-size:11px;color:#555550;line-height:1.55">남은 자연치아 최대 보존 · 기능 회복 → 유형 04·05</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 증상 기반 -->
+  <div style="padding:10px 20px 16px">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.14em;color:#C8A84B;margin-bottom:8px">증상 기반 내원 — 클릭하면 연결 페이지</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px" id="sym-grid">
+
+      <!-- 01 신환 -->
+      <div class="sym-card" onclick="toggleSym(this)">
+        <div class="sym-head">
+          <div class="sym-name">신환</div>
+          <div class="sym-kw">처음 방문</div>
+        </div>
+        <div class="sym-links">
+          <a href="petit_about.html" target="_blank">쁘띠치과 소개</a>
+          <a href="petit_guide.html" target="_blank">온라인 진료안내</a>
+          <a href="petit_occlusion_selfcheck.html" target="_blank">교합 자가체크</a>
+          <a href="petit_clinic_guide.html" target="_blank">내원안내</a>
+        </div>
+      </div>
+
+      <!-- 02 충치 -->
+      <div class="sym-card" onclick="toggleSym(this)">
+        <div class="sym-head">
+          <div class="sym-name">충치</div>
+          <div class="sym-kw">반복·통증</div>
+        </div>
+        <div class="sym-links">
+          <a href="petit_cavity.html" target="_blank">충치의 원인</a>
+          <a href="petit_resin_oneday.html" target="_blank">무삭제레진 원데이</a>
+          <a href="petit_nerve.html" target="_blank">신경치료</a>
+          <a href="petit_prevention.html" target="_blank">예방과 습관치료</a>
+        </div>
+      </div>
+
+      <!-- 03 잇몸·치주 -->
+      <div class="sym-card" onclick="toggleSym(this)">
+        <div class="sym-head">
+          <div class="sym-name">잇몸·치주</div>
+          <div class="sym-kw">붓기·피·냄새</div>
+        </div>
+        <div class="sym-links">
+          <a href="petit_periodontitis.html" target="_blank">만성복합치주염</a>
+          <a href="petit_natural_tooth.html" target="_blank">자연치아살리기</a>
+          <a href="petit_dental_spa.html" target="_blank">바른미소스파</a>
+        </div>
+      </div>
+
+      <!-- 04 시림·파짐 -->
+      <div class="sym-card" onclick="toggleSym(this)">
+        <div class="sym-head">
+          <div class="sym-name">시림·파짐</div>
+          <div class="sym-kw">찌릿·치아목 파임</div>
+        </div>
+        <div class="sym-links">
+          <a href="petit_sensitive.html" target="_blank">치아 시림·목파임</a>
+          <a href="petit_resin_oneday.html" target="_blank">무삭제레진 재건</a>
+          <a href="petit_nerve.html" target="_blank">신경치료</a>
+          <a href="petit_muscle_relax.html" target="_blank">근이완치료</a>
+        </div>
+      </div>
+
+      <!-- 05 자연치아 -->
+      <div class="sym-card" onclick="toggleSym(this)">
+        <div class="sym-head">
+          <div class="sym-name">자연치아</div>
+          <div class="sym-kw">흔들림·부러짐</div>
+        </div>
+        <div class="sym-links">
+          <a href="petit_natural_tooth.html" target="_blank">자연치아살리기</a>
+          <a href="petit_save_tooth_guide.html" target="_blank">MTA 치수보존술</a>
+          <a href="petit_periodontitis.html" target="_blank">치주재생 (흔들림)</a>
+          <a href="petit_nerve.html" target="_blank">신경치료 (부러짐)</a>
+        </div>
+      </div>
+
+      <!-- 06 심미·구취 -->
+      <div class="sym-card" onclick="toggleSym(this)">
+        <div class="sym-head">
+          <div class="sym-name">심미·구취</div>
+          <div class="sym-kw">색상·벌어짐·냄새</div>
+        </div>
+        <div class="sym-links">
+          <a href="petit_whitening.html" target="_blank">치아미백</a>
+          <a href="petit_resin_oneday.html" target="_blank">무삭제레진</a>
+          <a href="petit_smile_design.html" target="_blank">바른미소디자인</a>
+          <a href="petit_beautiful_treatment.html" target="_blank">심미치료</a>
+          <a href="petit_dental_spa.html" target="_blank">바른미소스파</a>
+        </div>
+      </div>
+
+      <!-- 07 임플란트 -->
+      <div class="sym-card" onclick="toggleSym(this)">
+        <div class="sym-head">
+          <div class="sym-name">임플란트</div>
+          <div class="sym-kw">결손·뼈 부족</div>
+        </div>
+        <div class="sym-links">
+          <a href="petit_implant.html" target="_blank">편안한 임플란트</a>
+          <a href="petit_natural_tooth.html" target="_blank">발치 전 보존 확인</a>
+          <a href="petit_diagnosis.html" target="_blank">교합진단 후 계획</a>
+        </div>
+      </div>
+
+      <!-- 08 틀니 -->
+      <div class="sym-card" onclick="toggleSym(this)">
+        <div class="sym-head">
+          <div class="sym-name">틀니</div>
+          <div class="sym-kw">불편·교체</div>
+        </div>
+        <div class="sym-links">
+          <a href="petit_denture.html" target="_blank">틀니</a>
+          <a href="petit_implant.html" target="_blank">임플란트 비교</a>
+          <a href="petit_diagnosis.html" target="_blank">교합진단</a>
+        </div>
+      </div>
+
+      <!-- 09 교합 재발 -->
+      <div class="sym-card" onclick="toggleSym(this)">
+        <div class="sym-head">
+          <div class="sym-name">교합 재발</div>
+          <div class="sym-kw">치료 후 재발</div>
+        </div>
+        <div class="sym-links">
+          <a href="petit_consultation_widget.html" target="_blank">교합재건 위젯</a>
+          <a href="petit_diagnosis.html" target="_blank">교합진단</a>
+          <a href="petit_lifecycle_occlusion.html" target="_blank">생애주기 교합</a>
+          <a href="petit_occlusion_selfcheck.html" target="_blank">교합 자가체크</a>
+        </div>
+      </div>
+
+      <!-- 10 부정교합·성장 -->
+      <div class="sym-card" onclick="toggleSym(this)">
+        <div class="sym-head">
+          <div class="sym-name">부정교합·성장</div>
+          <div class="sym-kw">주걱턱·무턱·비대칭</div>
+        </div>
+        <div class="sym-links">
+          <a href="petit_treatment_by_age.html" target="_blank">바른턱얼굴 교합치료</a>
+          <a href="petit_diagnosis.html" target="_blank">교합진단</a>
+          <a href="petit_foana_brand.html" target="_blank">FöANa 브랜드</a>
+        </div>
+      </div>
+
+      <!-- 11 턱관절·이갈이 -->
+      <div class="sym-card" onclick="toggleSym(this)">
+        <div class="sym-head">
+          <div class="sym-name">턱관절·이갈이</div>
+          <div class="sym-kw">통증·코골이·수면</div>
+        </div>
+        <div class="sym-links">
+          <a href="petit_muscle_relax.html" target="_blank">근이완치료 (보험)</a>
+          <a href="petit_diagnosis.html" target="_blank">교합진단</a>
+          <a href="petit_consultation_widget.html" target="_blank">교합재건 위젯</a>
+          <a href="petit_dental_spa.html" target="_blank">바른미소스파 RECOVERY</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- 유형 01: 아이 성장 -->
+<div class="panel" id="panel-p1">
+  <div class="type-head">
+    <div class="type-num">유형 01</div>
+    <div class="type-title">아이 성장 걱정하는 부모</div>
+    <div class="type-keywords">
+      <span class="kw">아이 교정</span><span class="kw">소아 치과</span><span class="kw">성장교정</span>
+      <span class="kw">턱 틀어짐</span><span class="kw">골반 틀어짐</span><span class="kw">입으로 숨쉼</span>
+    </div>
+  </div>
+  <div class="flow">
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-entry"></div><div class="step-connector conn-entry"></div></div>
+      <div class="step-body">
+        <div class="step-tag">접속 경로</div>
+        <div class="step-name">네이버·카카오·지인 소개</div>
+        <div class="step-desc">"아이 교정 어디서 해요?" "성장교정 잘 하는 치과"</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-hub"></div><div class="step-connector conn-hub"></div></div>
+      <div class="step-body">
+        <div class="step-tag">메인 페이지</div>
+        <div class="step-name">바른턱얼굴 교합치료 — 성장교정 탭</div>
+        <div class="step-desc">유치열기·혼합치열기 내용 확인. 골든타임 강조.</div>
+        <a class="step-link" href="petit_treatment_by_age.html" target="_blank">페이지 열기</a>
+      </div>
+    </div>
+    <div class="script-box">
+      <div class="script-label">상담 멘트</div>
+      <div class="script-text">"아이의 턱과 치아 상태를 제대로 보려면 진단이 먼저입니다. 지금 어떤 상태인지, 언제 치료를 시작해야 하는지 — 진단을 통해 정확하게 안내해 드릴 수 있습니다."</div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">핵심 연결</div>
+        <div class="step-name">교합진단</div>
+        <div class="step-desc">유치열기·혼합치열기·본교정 시기 설명 + 타임라인 케이스. 60만원 근거 + 상담비 0원 강조.</div>
+        <a class="step-link" href="petit_diagnosis.html" target="_blank">페이지 열기</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-action"></div></div>
+      <div class="step-body">
+        <div class="step-tag">목표</div>
+        <div class="step-name">네이버 예약 · 카카오 상담</div>
+        <div class="step-desc">성장교정 진단 예약으로 연결</div>
+      </div>
+    </div>
+  </div>
+  <div class="tips">
+    <div class="tip">
+      <div class="tip-icon">💡</div>
+      <div><div class="tip-title">부모가 가장 많이 묻는 질문</div><div class="tip-desc">"언제 시작해야 하나요?" → "유치열기부터 부정교합이 시작됩니다. 6~12세가 골든타임이지만, 유치열기 관찰도 중요합니다."</div></div>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">⚠️</div>
+      <div><div class="tip-title">진단비 60만원 질문 대응</div><div class="tip-desc">"진단비는 검사 비용입니다. 원장님이 직접 1.5주 분석하고 30분~1시간 상담해 드리는데 상담비는 따로 없습니다."</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 유형 02: 턱관절 이갈이 -->
+<div class="panel" id="panel-p2">
+  <div class="type-head">
+    <div class="type-num">유형 02</div>
+    <div class="type-title">턱관절 통증 · 이갈이</div>
+    <div class="type-keywords">
+      <span class="kw">턱관절</span><span class="kw">이갈이</span><span class="kw">아침에 턱 아픔</span>
+      <span class="kw">수면 장애</span><span class="kw">이악물기</span><span class="kw">뺨 자국</span>
+    </div>
+  </div>
+  <div class="flow">
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-entry"></div><div class="step-connector conn-entry"></div></div>
+      <div class="step-body"><div class="step-tag">접속</div><div class="step-name">검색·카카오 문의</div><div class="step-desc">"턱이 아파요" "이를 간대요" "아침마다 턱이 더 아파요"</div></div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-hub"></div><div class="step-connector conn-hub"></div></div>
+      <div class="step-body">
+        <div class="step-tag">자가체크</div>
+        <div class="step-name">교합질환 자가체크</div>
+        <div class="step-desc">수면 증상 체크 5가지 포함. 아침 자가체크 강조.</div>
+        <a class="step-link" href="petit_occlusion_selfcheck.html" target="_blank">페이지 열기</a>
+      </div>
+    </div>
+    <div class="script-box">
+      <div class="script-label">상담 멘트</div>
+      <div class="script-text">"이갈이는 나쁜 버릇이 아닙니다. 교합이 불안정할 때 몸이 안정점을 찾으려는 반응입니다. 원인을 찾아야 해결됩니다."</div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">핵심 안내</div>
+        <div class="step-name">근이완치료</div>
+        <div class="step-desc">수면과 턱관절 연결 설명. <strong style="color:#C8A84B">턱관절 물리치료 보험 인증기관</strong> 강조. 특수 엑스레이·물리치료 건강보험 적용.</div>
+        <a class="step-link" href="petit_muscle_relax.html" target="_blank">페이지 열기</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">심화 연결</div>
+        <div class="step-name">교합진단</div>
+        <div class="step-desc">이갈이·턱관절의 근본 원인 파악. 교합 분석 필요 시 안내.</div>
+        <a class="step-link" href="petit_diagnosis.html" target="_blank">페이지 열기</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-action"></div></div>
+      <div class="step-body"><div class="step-tag">목표</div><div class="step-name">예약</div><div class="step-desc">턱관절 물리치료 보험 적용 → 부담 낮춤 → 예약</div></div>
+    </div>
+  </div>
+  <div class="tips">
+    <div class="tip">
+      <div class="tip-icon">💡</div>
+      <div><div class="tip-title">보험 강조 포인트</div><div class="tip-desc">턱관절 전문 특수 엑스레이 + 물리치료 모두 건강보험 적용. 인증기관이라 가능한 것.</div></div>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">💡</div>
+      <div><div class="tip-title">수면 연결 질문</div><div class="tip-desc">"자고 일어나도 피곤하신가요?" "코로 숨을 쉬시나요?" → 수면과 턱관절 연결 설명으로 자연스럽게 이어짐.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 유형 03: 발치 권유 -->
+<div class="panel" id="panel-p3">
+  <div class="type-head">
+    <div class="type-num">유형 03</div>
+    <div class="type-title">발치 권유 받은 환자</div>
+    <div class="type-keywords">
+      <span class="kw">발치 대신</span><span class="kw">자연치아 살리기</span>
+      <span class="kw">뽑지 않고</span><span class="kw">MTA</span><span class="kw">신경치료</span>
+    </div>
+  </div>
+  <div class="flow">
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-entry"></div><div class="step-connector conn-entry"></div></div>
+      <div class="step-body"><div class="step-tag">접속</div><div class="step-name">검색·카카오</div><div class="step-desc">"다른 치과에서 뽑으라고 했어요" "자연치아 살릴 수 있나요?"</div></div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-hub"></div><div class="step-connector conn-hub"></div></div>
+      <div class="step-body">
+        <div class="step-tag">메인 안내</div>
+        <div class="step-name">온라인 진료 안내 → 자연치아살리기</div>
+        <div class="step-desc">Q&A "발치 권유를 받았어요" 항목 확인 후 자연치아 페이지로.</div>
+        <a class="step-link" href="petit_guide.html" target="_blank">진료 안내 열기</a>
+        <a class="step-link" href="petit_natural_tooth.html" target="_blank">자연치아살리기</a>
+      </div>
+    </div>
+    <div class="script-box">
+      <div class="script-label">상담 멘트</div>
+      <div class="script-text">"다른 곳에서 발치 권유를 받으셨더라도 먼저 확인해 드립니다. MTA 치료, 치근단 절제술, 의도적 재식술까지 가능한 방법을 모두 검토한 뒤에 결정합니다."</div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">상세 안내</div>
+        <div class="step-name">MTA · 엠도게인 상세</div>
+        <div class="step-desc">치료 원리 · 적응증 · 단계 설명.</div>
+        <a class="step-link" href="petit_save_tooth_guide.html" target="_blank">페이지 열기</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-warn"></div><div class="step-connector conn-warn"></div></div>
+      <div class="step-body">
+        <div class="step-tag">정말 불가능하다면</div>
+        <div class="step-name">편안한 임플란트</div>
+        <div class="step-desc">자연치아 보존이 불가능할 때 → 교합을 함께 설계하는 임플란트로 안내.</div>
+        <a class="step-link" href="petit_implant.html" target="_blank">페이지 열기</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-action"></div></div>
+      <div class="step-body"><div class="step-tag">목표</div><div class="step-name">예약</div></div>
+    </div>
+  </div>
+  <div class="tips">
+    <div class="tip">
+      <div class="tip-icon">💡</div>
+      <div><div class="tip-title">1년 보증 책임제 안내 기회</div><div class="tip-desc">자연치아 보존 치료 후 실패 시 → 다음 치료비 이관. 환자 신뢰를 높이는 핵심 포인트.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 유형 04: 잇몸 치주 -->
+<div class="panel" id="panel-p4">
+  <div class="type-head">
+    <div class="type-num">유형 04</div>
+    <div class="type-title">잇몸 · 치주 환자</div>
+    <div class="type-keywords">
+      <span class="kw">잇몸 치료</span><span class="kw">치주염</span><span class="kw">잇몸 무너짐</span><span class="kw">흔들리는 치아</span>
+    </div>
+  </div>
+  <div class="flow">
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-entry"></div><div class="step-connector conn-entry"></div></div>
+      <div class="step-body"><div class="step-tag">접속</div><div class="step-name">검색</div><div class="step-desc">"잇몸이 자꾸 내려가요" "치주염이 재발해요"</div></div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">안내</div>
+        <div class="step-name">만성복합치주염</div>
+        <div class="step-desc">세균 + 교합 + 전신 — 3가지 원인 설명. "왜 반복되는지"를 설명하는 것이 핵심.</div>
+        <a class="step-link" href="petit_periodontitis.html" target="_blank">페이지 열기</a>
+      </div>
+    </div>
+    <div class="script-box">
+      <div class="script-label">상담 멘트</div>
+      <div class="script-text">"잇몸 치료를 받으셨는데 계속 재발하신다면 교합 불균형이 원인일 수 있습니다. 쁘띠치과에서는 잇몸 치료와 교합 분석을 반드시 함께 봅니다."</div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">연결</div>
+        <div class="step-name">자연치아살리기 또는 교합재건 상담 위젯</div>
+        <div class="step-desc">흔들리는 치아 → 자연치아 보존 시도. 교합 재건이 필요하면 위젯으로 안내.</div>
+        <a class="step-link" href="petit_natural_tooth.html" target="_blank">자연치아살리기</a>
+        <a class="step-link" href="petit_consultation_widget.html" target="_blank">상담 위젯</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-action"></div></div>
+      <div class="step-body"><div class="step-tag">목표</div><div class="step-name">예약</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 유형 05: 임플란트 -->
+<div class="panel" id="panel-p5">
+  <div class="type-head">
+    <div class="type-num">유형 05</div>
+    <div class="type-title">임플란트 고려 환자</div>
+    <div class="type-keywords">
+      <span class="kw">임플란트</span><span class="kw">뼈 부족</span><span class="kw">Flapless</span>
+      <span class="kw">상악동거상</span><span class="kw">칼 안 대는</span>
+    </div>
+  </div>
+  <div class="flow">
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-entry"></div><div class="step-connector conn-entry"></div></div>
+      <div class="step-body"><div class="step-tag">접속</div><div class="step-name">검색</div><div class="step-desc">"뼈 부족이라 임플란트 못 한다고 했어요" "칼 안 대는 임플란트"</div></div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">확인 먼저</div>
+        <div class="step-name">자연치아살리기</div>
+        <div class="step-desc">임플란트 전 자연치아 보존 가능 여부 먼저 확인. "자연치아 먼저"가 쁘띠치과 원칙.</div>
+        <a class="step-link" href="petit_natural_tooth.html" target="_blank">페이지 열기</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">임플란트 안내</div>
+        <div class="step-name">편안한 임플란트</div>
+        <div class="step-desc">Flapless · 자가혈재생인자(PRF) · 피에조 상악동거상 3가지 강점. "인공치아가 자연치아를 보호합니다".</div>
+        <a class="step-link" href="petit_implant.html" target="_blank">페이지 열기</a>
+      </div>
+    </div>
+    <div class="script-box">
+      <div class="script-label">상담 멘트</div>
+      <div class="script-text">"뼈가 부족하다는 말을 들으셨더라도 먼저 확인해 드립니다. 자가혈(PRF)과 피에조를 활용한 상악동거상으로 뼈 부족 케이스도 가능한 경우가 많습니다."</div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">진단 연결</div>
+        <div class="step-name">교합진단</div>
+        <div class="step-desc">임플란트 전 교합 분석 필수. 교합 불안정 상태에서 임플란트 → 조기 실패 위험.</div>
+        <a class="step-link" href="petit_diagnosis.html" target="_blank">페이지 열기</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-action"></div></div>
+      <div class="step-body"><div class="step-tag">목표</div><div class="step-name">예약</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 유형 06: 처음 방문 -->
+<div class="panel" id="panel-p6">
+  <div class="type-head">
+    <div class="type-num">유형 06</div>
+    <div class="type-title">처음 방문 고려하는 신환</div>
+    <div class="type-keywords">
+      <span class="kw">지인 소개</span><span class="kw">블로그</span><span class="kw">카카오 검색</span><span class="kw">네이버</span>
+    </div>
+  </div>
+  <div class="flow">
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-entry"></div><div class="step-connector conn-entry"></div></div>
+      <div class="step-body"><div class="step-tag">접속</div><div class="step-name">지인 소개 또는 검색</div><div class="step-desc">"쁘띠치과 어떤 치과예요?" "교합치료 전문 치과"</div></div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">소개</div>
+        <div class="step-name">쁘띠치과 소개 · 치료 원칙</div>
+        <div class="step-desc">BTB 철학 · 예방부터 재생까지 · 1년 보증 책임제.</div>
+        <a class="step-link" href="petit_about.html" target="_blank">소개 페이지</a>
+        <a class="step-link" href="petit_treatment_philosophy.html" target="_blank">치료 원칙</a>
+      </div>
+    </div>
+    <div class="script-box">
+      <div class="script-label">상담 멘트</div>
+      <div class="script-text">"쁘띠치과는 '왜 반복되는지'를 먼저 찾는 치과입니다. 치료보다 원인이 먼저입니다. 자가체크로 지금 상태를 먼저 확인해 보시겠어요?"</div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">다음 단계</div>
+        <div class="step-name">교합질환 자가체크</div>
+        <div class="step-desc">증상 체크 → 결과 확인 → 어떤 치료가 필요한지 방향 제시.</div>
+        <a class="step-link" href="petit_occlusion_selfcheck.html" target="_blank">자가체크 열기</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">Q&A</div>
+        <div class="step-name">온라인 진료 안내</div>
+        <div class="step-desc">처음 내원하면 어떻게 되나요? 항목 안내.</div>
+        <a class="step-link" href="petit_guide.html" target="_blank">진료 안내 열기</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-action"></div></div>
+      <div class="step-body"><div class="step-tag">목표</div><div class="step-name">예약</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 유형 07: 교합 재발 -->
+<div class="panel" id="panel-p7">
+  <div class="type-head">
+    <div class="type-num">유형 07</div>
+    <div class="type-title">교정 재발 · 교합 불균형</div>
+    <div class="type-keywords">
+      <span class="kw">교정 재발</span><span class="kw">교합 안 맞음</span><span class="kw">어금니 안 닿음</span>
+      <span class="kw">치료 후 재발</span><span class="kw">교합 불균형</span>
+    </div>
+  </div>
+  <div class="flow">
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-entry"></div><div class="step-connector conn-entry"></div></div>
+      <div class="step-body"><div class="step-tag">접속</div><div class="step-name">검색·카카오</div><div class="step-desc">"교정을 했는데 다시 벌어졌어요" "어금니가 안 닿아요"</div></div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-hub"></div><div class="step-connector conn-hub"></div></div>
+      <div class="step-body">
+        <div class="step-tag">자가체크</div>
+        <div class="step-name">교합질환 자가체크</div>
+        <div class="step-desc">재발 증상 체크. 결과 → 교합재건 방향 안내.</div>
+        <a class="step-link" href="petit_occlusion_selfcheck.html" target="_blank">자가체크 열기</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">원인 이해</div>
+        <div class="step-name">생애주기별 교합 노화</div>
+        <div class="step-desc">"왜 재발하는지" — 교합이 무너지는 흐름 이해.</div>
+        <a class="step-link" href="petit_lifecycle_occlusion.html" target="_blank">페이지 열기</a>
+      </div>
+    </div>
+    <div class="script-box">
+      <div class="script-label">상담 멘트</div>
+      <div class="script-text">"교정 후 재발하는 이유는 구조(골격)·치아·기능, 세 가지가 함께 바뀌지 않았기 때문입니다. 쁘띠치과에서는 이 세 가지를 함께 봅니다."</div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">치료 방향</div>
+        <div class="step-name">교합재건 상담 위젯</div>
+        <div class="step-desc">증상 입력 → 교합 타입 확인 → 치료 계획 안내.</div>
+        <a class="step-link" href="petit_consultation_widget.html" target="_blank">위젯 열기</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
+      <div class="step-body">
+        <div class="step-tag">확정</div>
+        <div class="step-name">교합진단</div>
+        <div class="step-desc">정밀 진단 후 치료 계획 확정.</div>
+        <a class="step-link" href="petit_diagnosis.html" target="_blank">페이지 열기</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"><div class="step-dot dot-action"></div></div>
+      <div class="step-body"><div class="step-tag">목표</div><div class="step-name">예약</div></div>
+    </div>
+  </div>
+  <div class="tips">
+    <div class="tip">
+      <div class="tip-icon">💡</div>
+      <div><div class="tip-title">재발 환자 핵심 메시지</div><div class="tip-desc">"치료가 잘못된 게 아닙니다. 원인이 남아있었기 때문입니다. 지금부터라도 찾을 수 있습니다."</div></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- main end -->
+
+<!-- 진료 중 연결 패널 -->
+<div class="panel" id="panel-clinic" style="display:none">
+  <div style="background:#FFFBEF;border:1px solid #E8D898;border-radius:12px;padding:14px 16px;margin-bottom:20px">
+    <div style="font-size:11px;letter-spacing:.12em;color:#8A6820;font-weight:600;margin-bottom:5px">CHAIRSIDE GUIDE</div>
+    <div style="font-size:14px;color:#555550;line-height:1.7">신환 첫 내원 후 진료 중에 자연스럽게 연결할 수 있는 흐름입니다. 결과 설명 시 활용하세요.</div>
+  </div>
+
+  <!-- 1. 아이 신환 -->
+  신환 02 · 청소년</div>
+      <div style="font-family:'Noto Serif KR',serif;font-size:17px;font-weight:600;color:#111110">구강검진 · 충치 — 부정교합 늦게 발견</div>
+    </div>
+    <div style="padding:16px 16px">
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#555550"><span style="color:#C8A84B;font-weight:700;flex-shrink:0">→</span>충치·검진 내원 중 심한 충치·부정교합 발견</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#555550"><span style="color:#C8A84B;font-weight:700;flex-shrink:0">→</span>왜 이렇게 됐는지 원인 설명하면서 연결</div>
+      </div>
+      <div style="background:#FFFBEF;border:1px solid #E8D898;border-radius:8px;padding:12px 14px;margin-bottom:12px">
+        <div style="font-size:11px;color:#8A6820;font-weight:600;letter-spacing:.06em;margin-bottom:7px">상담 멘트</div>
+        <div style="font-size:13px;color:#5A4010;line-height:1.75;font-style:italic">"충치가 생긴 게 교합이랑도 관련이 있어요. 특정 치아에 힘이 많이 실려서 깨지거나 충치가 반복되는 거거든요. 교합을 같이 보면 재발을 줄일 수 있습니다."</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <div style="font-size:11px;letter-spacing:.1em;color:#AAAAAA;font-weight:600;margin-bottom:2px">연결 페이지</div>
+        <a class="step-link" href="petit_treatment_by_age.html" target="_blank">바른턱얼굴 교합치료 — 청소년·청년 (12~40대)</a>
+        <a class="step-link" href="petit_occlusion_selfcheck.html" target="_blank">교합질환 자가체크</a>
+        <a class="step-link" href="petit_lifecycle_occlusion.html" target="_blank">생애주기별 교합 노화 — 원인 이해</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 성인 치주염 -->
+  <div style="background:#fff;border:1px solid #E0E0DA;border-radius:12px;overflow:hidden;margin-bottom:12px">
+    <div style="background:#E8EEF5;border-bottom:1px solid #B8C8DC;padding:14px 16px">
+      <div style="font-size:11px;letter-spacing:.12em;color:#2A5A8A;font-weight:600;margin-bottom:4px">신환 03 · 성인</div>
+      <div style="font-family:'Noto Serif KR',serif;font-size:17px;font-weight:600;color:#111110">치주염 치료 — 만성복합치주염 원인 3가지</div>
+    </div>
+    <div style="padding:16px 16px">
+      <div style="background:#EEF3F8;border-radius:8px;padding:11px 13px;margin-bottom:14px;border:1px solid #C8D8E8">
+        <div style="font-size:12px;color:#3A6A9A;font-weight:600;margin-bottom:7px">만성복합치주염 원인 3가지</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;gap:9px;font-size:13px;color:#888880"><span style="color:#C8A84B;flex-shrink:0;font-weight:700">01</span>세균 — 구강 위생, 양치질</div>
+          <div style="display:flex;gap:9px;font-size:13px;color:#888880"><span style="color:#C8A84B;flex-shrink:0;font-weight:700">02</span>교합 불균형 — 특정 치아 과부하</div>
+          <div style="display:flex;gap:9px;font-size:13px;color:#888880"><span style="color:#C8A84B;flex-shrink:0;font-weight:700">03</span>전신 — 당뇨, 면역, 스트레스</div>
+        </div>
+      </div>
+      <div style="background:#FFFBEF;border:1px solid #E8D898;border-radius:8px;padding:12px 14px;margin-bottom:12px">
+        <div style="font-size:11px;color:#8A6820;font-weight:600;letter-spacing:.06em;margin-bottom:7px">상담 멘트</div>
+        <div style="font-size:13px;color:#5A4010;line-height:1.75;font-style:italic">"잇몸 치료를 받으셨는데 재발하신다면 세균만의 문제가 아닐 수 있어요. 교합이 불균형하면 특정 치아에 힘이 집중돼서 잇몸뼈가 빠르게 녹습니다. 양치질과 교합을 같이 잡아야 재발이 줄어요."</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <div style="font-size:11px;letter-spacing:.1em;color:#AAAAAA;font-weight:600;margin-bottom:2px">연결 페이지</div>
+        <a class="step-link" href="petit_periodontitis.html" target="_blank">만성복합치주염 — 원인 3가지 상세</a>
+        <a class="step-link" href="petit_prevention.html" target="_blank">기본은 예방과 습관 — 양치질 교육</a>
+        <a class="step-link" href="petit_consultation_widget.html" target="_blank">교합재건 상담 위젯</a>
+        <a class="step-link" href="petit_diagnosis.html" target="_blank">교합진단 — 원인 분석</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. 발치 환자 -->
+  <div style="background:#fff;border:1px solid #E0E0DA;border-radius:12px;overflow:hidden;margin-bottom:12px">
+    <div style="background:#FAEAE0;border-bottom:1px solid #E8C0A0;padding:14px 16px">
+      <div style="font-size:11px;letter-spacing:.12em;color:#B04020;font-weight:600;margin-bottom:4px">신환 04 · 발치 환자</div>
+      <div style="font-family:'Noto Serif KR',serif;font-size:17px;font-weight:600;color:#111110">발치 → 임플란트 또는 뼈이식 후 치료</div>
+    </div>
+    <div style="padding:16px 16px">
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px">
+        <div style="padding:11px 13px;background:#F5F5F1;border-radius:8px;border:1px solid #E0E0DA">
+          <div style="font-size:12px;color:#555550;margin-bottom:6px;font-weight:500">CASE A — 발치 + 임플란트 바로 가능</div>
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+            <div style="font-size:12px;padding:3px 9px;background:#F5EFD8;color:#8A6820;border-radius:100px;border:1px solid rgba(200,168,75,.2)">발치</div>
+            <div style="font-size:12px;color:#AAAAAA">→</div>
+            <div style="font-size:12px;padding:3px 9px;background:#F5EFD8;color:#8A6820;border-radius:100px;border:1px solid rgba(200,168,75,.2)">편안한 임플란트</div>
+            <div style="font-size:12px;color:#AAAAAA">→</div>
+            <div style="font-size:12px;padding:3px 9px;background:#F5EFD8;color:#8A6820;border-radius:100px;border:1px solid rgba(200,168,75,.2)">교합설계</div>
+          </div>
+        </div>
+        <div style="padding:11px 13px;background:#F5F5F1;border-radius:8px;border:1px solid #E0E0DA">
+          <div style="font-size:12px;color:#555550;margin-bottom:6px;font-weight:500">CASE B — 뼈 많이 녹은 경우</div>
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+            <div style="font-size:12px;padding:3px 9px;background:#F5EFD8;color:#8A6820;border-radius:100px;border:1px solid rgba(200,168,75,.2)">발치 + 뼈이식</div>
+            <div style="font-size:12px;color:#AAAAAA">→</div>
+            <div style="font-size:12px;padding:3px 9px;background:#F5EFD8;color:#8A6820;border-radius:100px;border:1px solid rgba(200,168,75,.2)">치주염 병행치료</div>
+            <div style="font-size:12px;color:#AAAAAA">→</div>
+            <div style="font-size:12px;padding:3px 9px;background:#F5EFD8;color:#8A6820;border-radius:100px;border:1px solid rgba(200,168,75,.2)">교합치료</div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#FFFBEF;border:1px solid #E8D898;border-radius:8px;padding:12px 14px;margin-bottom:12px">
+        <div style="font-size:11px;color:#8A6820;font-weight:600;letter-spacing:.06em;margin-bottom:7px">상담 멘트</div>
+        <div style="font-size:13px;color:#5A4010;line-height:1.75;font-style:italic">"발치 후 그 자리를 임플란트로 채우는 것이 주변 자연치아를 지키는 방법이기도 합니다. 빈 자리를 그냥 두면 옆 치아들이 기울어지고 교합이 무너집니다."</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <div style="font-size:11px;letter-spacing:.1em;color:#AAAAAA;font-weight:600;margin-bottom:2px">연결 페이지</div>
+        <a class="step-link" href="petit_implant.html" target="_blank">편안한 임플란트 — Flapless·PRF·피에조</a>
+        <a class="step-link" href="petit_periodontitis.html" target="_blank">만성복합치주염 — 병행 치료</a>
+        <a class="step-link" href="petit_consultation_widget.html" target="_blank">교합재건 상담 위젯 — 전체 계획</a>
+        <a class="step-link" href="petit_diagnosis.html" target="_blank">교합진단 — 치료 방향 설계</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. 자연치아살리기 환자 -->
+  <div style="background:#fff;border:1px solid #E0E0DA;border-radius:12px;overflow:hidden;margin-bottom:12px">
+    <div style="background:#E0F0E8;border-bottom:1px solid #A8D0B8;padding:14px 16px">
+      <div style="font-size:11px;letter-spacing:.12em;color:#1E6040;font-weight:600;margin-bottom:4px">신환 05 · 자연치아살리기</div>
+      <div style="font-family:'Noto Serif KR',serif;font-size:17px;font-weight:600;color:#111110">MTA·엠도게인 → 교합치료 연결</div>
+    </div>
+    <div style="padding:16px 16px">
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#555550"><span style="color:#C8A84B;font-weight:700;flex-shrink:0">→</span>자연치아 보존 치료 진행 중</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#555550"><span style="color:#C8A84B;font-weight:700;flex-shrink:0">→</span>치아가 살아났을 때 재발 방지로 연결</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#555550"><span style="color:#C8A84B;font-weight:700;flex-shrink:0">→</span>교합이 원인이었다면 반드시 교합 치료 병행</div>
+      </div>
+      <div style="background:#FFFBEF;border:1px solid #E8D898;border-radius:8px;padding:12px 14px;margin-bottom:12px">
+        <div style="font-size:11px;color:#8A6820;font-weight:600;letter-spacing:.06em;margin-bottom:7px">상담 멘트</div>
+        <div style="font-size:13px;color:#5A4010;line-height:1.75;font-style:italic">"치아를 살렸는데 교합이 그대로면 또 같은 문제가 생깁니다. 왜 이 치아에만 반복적으로 문제가 생기는지 — 교합에서 원인을 찾아야 재발하지 않습니다."</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <div style="font-size:11px;letter-spacing:.1em;color:#AAAAAA;font-weight:600;margin-bottom:2px">연결 페이지</div>
+        <a class="step-link" href="petit_consultation_widget.html" target="_blank">교합재건 상담 위젯 — 교합 타입 확인</a>
+        <a class="step-link" href="petit_treatment_by_age.html" target="_blank">바른턱얼굴 교합치료 — 교합재건</a>
+        <a class="step-link" href="petit_muscle_relax.html" target="_blank">근이완치료 — 교합안정장치</a>
+        <a class="step-link" href="petit_diagnosis.html" target="_blank">교합진단 — 원인 정밀 분석</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. 시린이·미백 신환 -->
+  <div style="background:#fff;border:1px solid #E0E0DA;border-radius:12px;overflow:hidden;margin-bottom:12px">
+    <div style="background:#E8F5F0;border-bottom:1px solid #C5E8DC;padding:14px 16px">
+      <div style="font-size:11px;letter-spacing:.12em;color:#007A54;font-weight:600;margin-bottom:4px">신환 06 · 시린이·미백</div>
+      <div style="font-family:'Noto Serif KR',serif;font-size:17px;font-weight:600;color:#111110">이가 시려요 · 미백하고 싶어요</div>
+    </div>
+    <div style="padding:16px 16px">
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#555550"><span style="color:#C8A84B;font-weight:700;flex-shrink:0">→</span>시림 또는 미백 목적 내원</div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#555550"><span style="color:#C8A84B;font-weight:700;flex-shrink:0">→</span>단순 증상 치료가 아닌 원인부터 파악</div>
+      </div>
+      <div style="background:#FFFBEF;border:1px solid #E8D898;border-radius:8px;padding:12px 14px;margin-bottom:12px">
+        <div style="font-size:11px;color:#8A6820;font-weight:600;letter-spacing:.06em;margin-bottom:7px">상담 멘트 — 시린이</div>
+        <div style="font-size:13px;color:#5A4010;line-height:1.75;font-style:italic">"같은 부위에 시림이 반복된다면 코팅이나 레진만 계속 해서는 해결이 안 됩니다. 교합에서 힘이 집중되는 원인을 같이 보면 좋겠어요."</div>
+      </div>
+      <div style="background:#FFFBEF;border:1px solid #E8D898;border-radius:8px;padding:12px 14px;margin-bottom:12px">
+        <div style="font-size:11px;color:#8A6820;font-weight:600;letter-spacing:.06em;margin-bottom:7px">상담 멘트 — 미백</div>
+        <div style="font-size:13px;color:#5A4010;line-height:1.75;font-style:italic">"미백 전에 먼저 확인해 드릴 것이 있어요. 착색인지 변색인지에 따라 방법이 달라집니다. 잇몸 건강도 함께 확인한 뒤에 진행합니다."</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <div style="font-size:11px;letter-spacing:.1em;color:#AAAAAA;font-weight:600;margin-bottom:2px">연결 페이지</div>
+        <a class="step-link" href="petit_sensitive.html" target="_blank">치아 시림 · 치아목 파임</a>
+        <a class="step-link" href="petit_whitening.html" target="_blank">치아미백 — 착색·변색 구분</a>
+        <a class="step-link" href="petit_dental_spa.html" target="_blank">바른미소스파 RECOVERY — 미백 포함</a>
+        <a class="step-link" href="petit_nerve.html" target="_blank">신경치료 — 시림 심화 시</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 교합 교육 자료 -->
+  <div style="background:#fff;border:1px solid #E0E0DA;border-radius:12px;overflow:hidden;margin-bottom:12px">
+    <div style="background:#E8F5F0;border-bottom:1px solid #C5E8DC;padding:14px 16px">
+      <div style="font-size:11px;letter-spacing:.12em;color:#007A54;font-weight:600;margin-bottom:4px">교육 자료</div>
+      <div style="font-family:'Noto Serif KR',serif;font-size:17px;font-weight:600;color:#111110">교합 개념 · 안정장치 안내</div>
+    </div>
+    <div style="padding:16px 16px;display:flex;flex-direction:column;gap:7px">
+      <a class="step-link" href="petit_occlusion_edu.html" target="_blank">교합이란 무엇인가 — 환자 교육용</a>
+      <a class="step-link" href="petit_splint.html" target="_blank">교합안정장치 — 사용·관리 안내</a>
+    </div>
+  </div>
+
+</div><!-- panel-clinic end -->
+
+<script>
+function toggleSym(el){
+  const isOpen=el.classList.contains('open');
+  document.querySelectorAll('.sym-card').forEach(c=>c.classList.remove('open'));
+  if(!isOpen) el.classList.add('open');
+}
+function show(id, tabEl){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('show'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('act'));
+  document.getElementById('panel-'+id).classList.add('show');
+  if(tabEl) tabEl.classList.add('act');
+}
+</script>
+</body>
+</html>

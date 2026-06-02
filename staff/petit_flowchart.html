@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>쁘띠치과 페이지 관계도</title>
+<style>
+.hd{padding:20px 20px 0;margin-bottom:16px}
+.hd h1{font-size:18px;font-weight:500;color:#1A1A18;margin-bottom:4px}
+.hd-sub{font-size:12px;color:#888880}
+.stat-bar{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.stat{font-size:11px;background:#EAEAE4;color:#555550;padding:4px 10px;border-radius:100px;border:1px solid #DCDCD6}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;padding:0 20px;margin-bottom:16px}
+.tab{padding:7px 14px;border-radius:100px;font-size:12px;cursor:pointer;border:1px solid #DCDCD6;color:#555550;background:transparent;transition:all .15s;white-space:nowrap}
+.tab.act{background:#C8A84B;color:#1A1A10;border-color:#C8A84B;font-weight:600}
+.panel{display:none;padding:0 20px 60px}
+.panel.show{display:block}
+.group-sec{margin-bottom:20px}
+.group-label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;margin-bottom:8px;padding-left:4px}
+.page-grid{display:flex;flex-direction:column;gap:6px}
+.pc{background:#F5F5F1;border:1px solid #E0E0DA;border-radius:10px;padding:12px 14px;cursor:pointer;transition:all .2s}
+.pc:hover{background:rgba(200,168,75,.08);border-color:rgba(200,168,75,.3)}
+.pc.selected{background:rgba(200,168,75,.12);border-color:#C8A84B}
+.pc-name{font-size:14px;font-weight:500;color:#111110;margin-bottom:4px}
+.pc-meta{display:flex;gap:6px;flex-wrap:wrap}
+.pc-cnt{font-size:11px;background:#F0F0EC;color:#555550;padding:2px 8px;border-radius:100px;border:1px solid #E0E0DA}
+.detail{background:#F7F7F3;border:1px solid #E4E4DE;border-radius:12px;padding:14px 16px;margin-top:8px}
+.detail-title{font-size:13px;font-weight:600;color:#C8A84B;margin-bottom:10px}
+.link-group{margin-bottom:10px}
+.link-label{font-size:10.5px;color:#555550;letter-spacing:.06em;margin-bottom:6px;text-transform:uppercase}
+.link-items{display:flex;flex-direction:column;gap:5px}
+.link-item{display:flex;align-items:center;gap:8px;font-size:12.5px}
+.link-arr{font-size:11px;font-weight:700;flex-shrink:0}
+.link-name{color:#555550;flex:1}
+.link-open{font-size:11px;color:#C8A84B;text-decoration:none;flex-shrink:0;padding:2px 8px;border:1px solid rgba(200,168,75,.25);border-radius:100px;white-space:nowrap}
+.legend{display:flex;flex-wrap:wrap;gap:8px;padding:12px 14px;background:#F7F7F3;border-radius:10px;border:1px solid #E4E4DE;margin-bottom:16px}
+.leg{display:flex;align-items:center;gap:6px;font-size:11px;color:#888880}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.flow-row{display:flex;flex-direction:column;gap:0;margin-bottom:20px}
+.flow-step{display:flex;gap:10px;align-items:flex-start}
+.step-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.step-body{flex:1;padding-bottom:4px}
+.step-name{font-size:14px;font-weight:500;color:#111110;margin-bottom:4px}
+.step-links{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.step-link{font-size:11.5px;background:#F0F0EC;color:#555550;border-radius:100px;padding:3px 10px;border:1px solid #DCDCD6;text-decoration:none;transition:all .15s}
+.step-link:hover{background:rgba(200,168,75,.15);color:#C8A84B;border-color:rgba(200,168,75,.3)}
+.v-conn{padding:4px 0 4px 14px;color:rgba(200,168,75,.8);font-size:13px;font-weight:700}
+.flow-section{padding:16px 0;border-top:1px solid #E4E4DE}
+.flow-section:first-child{border-top:none;padding-top:0}
+.flow-label{font-size:11px;letter-spacing:.14em;font-weight:600;margin-bottom:12px;text-transform:uppercase}
+.mx-wrap{overflow-x:auto}
+.mx{min-width:560px;border:1px solid #E0E0DA;border-radius:10px;overflow:hidden}
+.mx-row{display:flex;border-bottom:1px solid #EAEAE4;cursor:pointer;transition:background .15s}
+.mx-row:last-child{border-bottom:none}
+.mx-row:hover{background:#F5F5F1}
+.mx-head-row{background:#EAEAE4}
+.mx-cell{padding:9px 10px;font-size:12px}
+.mx-name{flex:3;color:#555550;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mx-num{flex:.6;text-align:center;color:rgba(200,168,75,.8);font-weight:600}
+.mx-bar-cell{flex:3;display:flex;align-items:center;gap:6px}
+.mx-bar{height:5px;background:#C8A84B;border-radius:100px;min-width:2px;transition:width .3s}
+.mx-tot{font-size:11px;color:#AAAAAA}
+.mx-head{color:#555550;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+@media(min-width:640px){body{max-width:720px;margin:0 auto}}
+</style>
+<link rel="stylesheet" href="petit-design.css">
+</head>
+<body>
+
+<div class="hd">
+  <h1>쁘띠치과 페이지 관계도</h1>
+  <div class="hd-sub">2025년 5월 · 25개 페이지</div>
+  <div class="stat-bar">
+    <span class="stat">총 30페이지</span>
+    <span class="stat">155+ 내부링크</span>
+    <span class="stat">10개 그룹</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab act" onclick="show('map',this)">전체 구조</div>
+  <div class="tab" onclick="show('flow',this)">환자 흐름</div>
+  <div class="tab" onclick="show('matrix',this)">연결 강도</div>
+</div>
+
+<!-- 전체 구조 -->
+<div class="panel show" id="panel-map">
+  <div class="legend">
+    <div class="leg"><div class="leg-dot" style="background:#C8A84B"></div>허브</div>
+    <div class="leg"><div class="leg-dot" style="background:#7ABAA0"></div>소개</div>
+    <div class="leg"><div class="leg-dot" style="background:#FAF8F0"></div>교합진단</div>
+    <div class="leg"><div class="leg-dot" style="background:#80A8C8"></div>교합치료</div>
+    <div class="leg"><div class="leg-dot" style="background:#A8C880"></div>예방·습관</div>
+    <div class="leg"><div class="leg-dot" style="background:#C8A880"></div>자연치아</div>
+    <div class="leg"><div class="leg-dot" style="background:#C880A8"></div>스파</div>
+    <div class="leg"><div class="leg-dot" style="background:#A8A8C8"></div>일반진료</div>
+    <div class="leg"><div class="leg-dot" style="background:#80C8C8"></div>자가체크·안내</div>
+  </div>
+  <div id="page-list"></div>
+  <div id="page-detail"></div>
+</div>
+
+<!-- 환자 흐름 -->
+<div class="panel" id="panel-flow">
+  <div class="flow-section">
+    <div class="flow-label" style="color:#C8A84B">가장 흔한 유형 · 충치 걱정 부모</div>
+    <div class="flow-row">
+      <div class="flow-step"><div class="step-dot" style="background:#888880"></div><div class="step-body"><div class="step-name">검진·충치·불소로 내원</div></div></div>
+      <div class="v-conn">▼</div>
+      <div class="flow-step"><div class="step-dot" style="background:#C8A84B"></div><div class="step-body"><div class="step-name">충치 원인 설명</div><div class="step-links"><a class="step-link" href="petit_cavity.html" target="_blank">충치 원인</a><a class="step-link" href="petit_prenatal.html" target="_blank">치과수첩</a></div></div></div>
+      <div class="v-conn">▼</div>
+      <div class="flow-step"><div class="step-dot" style="background:#A8C880"></div><div class="step-body"><div class="step-name">씹고삼키기 → 교합 연결</div><div class="step-links"><a class="step-link" href="petit_smile_design.html" target="_blank">바른미소디자인</a><a class="step-link" href="petit_treatment_by_age.html" target="_blank">성장교정</a></div></div></div>
+      <div class="v-conn">▼</div>
+      <div class="flow-step"><div class="step-dot" style="background:#007A54"></div><div class="step-body"><div class="step-name">교합진단 예약</div><div class="step-links"><a class="step-link" href="petit_diagnosis.html" target="_blank">교합진단</a></div></div></div>
+    </div>
+  </div>
+  <div class="flow-section">
+    <div class="flow-label" style="color:#80A8C8">아이 성장 걱정</div>
+    <div class="flow-row">
+      <div class="flow-step"><div class="step-dot" style="background:#888880"></div><div class="step-body"><div class="step-name">성장교정·턱 틀어짐으로 내원</div></div></div>
+      <div class="v-conn">▼</div>
+      <div class="flow-step"><div class="step-dot" style="background:#80A8C8"></div><div class="step-body"><div class="step-name">성장교정·골든타임 안내</div><div class="step-links"><a class="step-link" href="petit_treatment_by_age.html" target="_blank">교합치료</a><a class="step-link" href="petit_prenatal.html" target="_blank">치과수첩</a></div></div></div>
+      <div class="v-conn">▼</div>
+      <div class="flow-step"><div class="step-dot" style="background:#007A54"></div><div class="step-body"><div class="step-name">교합진단 예약</div><div class="step-links"><a class="step-link" href="petit_diagnosis.html" target="_blank">교합진단</a></div></div></div>
+    </div>
+  </div>
+  <div class="flow-section">
+    <div class="flow-label" style="color:#80C8C8">턱관절 · 이갈이</div>
+    <div class="flow-row">
+      <div class="flow-step"><div class="step-dot" style="background:#888880"></div><div class="step-body"><div class="step-name">턱관절 통증·이갈이로 내원</div></div></div>
+      <div class="v-conn">▼</div>
+      <div class="flow-step"><div class="step-dot" style="background:#80C8C8"></div><div class="step-body"><div class="step-name">자가체크 → 근이완치료</div><div class="step-links"><a class="step-link" href="petit_occlusion_selfcheck.html" target="_blank">자가체크</a><a class="step-link" href="petit_muscle_relax.html" target="_blank">근이완치료</a></div></div></div>
+      <div class="v-conn">▼</div>
+      <div class="flow-step"><div class="step-dot" style="background:#007A54"></div><div class="step-body"><div class="step-name">교합진단 예약</div><div class="step-links"><a class="step-link" href="petit_diagnosis.html" target="_blank">교합진단</a></div></div></div>
+    </div>
+  </div>
+  <div class="flow-section">
+    <div class="flow-label" style="color:#C8A880">발치 권유 · 자연치아</div>
+    <div class="flow-row">
+      <div class="flow-step"><div class="step-dot" style="background:#888880"></div><div class="step-body"><div class="step-name">"뽑으라고 했어요" 내원</div></div></div>
+      <div class="v-conn">▼</div>
+      <div class="flow-step"><div class="step-dot" style="background:#C8A880"></div><div class="step-body"><div class="step-name">자연치아살리기 검토</div><div class="step-links"><a class="step-link" href="petit_natural_tooth.html" target="_blank">자연치아살리기</a><a class="step-link" href="petit_save_tooth_guide.html" target="_blank">MTA·엠도게인</a></div></div></div>
+      <div class="v-conn">▼</div>
+      <div class="flow-step"><div class="step-dot" style="background:#A8A8C8"></div><div class="step-body"><div class="step-name">불가능하다면 임플란트</div><div class="step-links"><a class="step-link" href="petit_implant.html" target="_blank">편안한 임플란트</a></div></div></div>
+    </div>
+  </div>
+  <div class="flow-section">
+    <div class="flow-label" style="color:#C880A8">잇몸 · 치주염</div>
+    <div class="flow-row">
+      <div class="flow-step"><div class="step-dot" style="background:#888880"></div><div class="step-body"><div class="step-name">잇몸 치료 재발로 내원</div></div></div>
+      <div class="v-conn">▼</div>
+      <div class="flow-step"><div class="step-dot" style="background:#C880A8"></div><div class="step-body"><div class="step-name">원인 3가지 설명</div><div class="step-links"><a class="step-link" href="petit_periodontitis.html" target="_blank">만성복합치주염</a><a class="step-link" href="petit_prevention.html" target="_blank">예방과 습관</a></div></div></div>
+      <div class="v-conn">▼</div>
+      <div class="flow-step"><div class="step-dot" style="background:#007A54"></div><div class="step-body"><div class="step-name">교합재건 예약</div><div class="step-links"><a class="step-link" href="petit_consultation_widget.html" target="_blank">교합재건 위젯</a><a class="step-link" href="petit_diagnosis.html" target="_blank">교합진단</a></div></div></div>
+    </div>
+  </div>
+  <div class="flow-section">
+    <div class="flow-label" style="color:#7ABAA0">임산부 · 신생아 · 유아</div>
+    <div class="flow-row">
+      <div class="flow-step"><div class="step-dot" style="background:#888880"></div><div class="step-body"><div class="step-name">임산부 구강 관리 / 아기 첫 치과</div></div></div>
+      <div class="v-conn">▼</div>
+      <div class="flow-step"><div class="step-dot" style="background:#7ABAA0"></div><div class="step-body"><div class="step-name">우리 아이 치과수첩</div><div class="step-links"><a class="step-link" href="petit_prenatal.html" target="_blank">치과수첩</a><a class="step-link" href="petit_cavity.html" target="_blank">충치 원인</a></div></div></div>
+      <div class="v-conn">▼</div>
+      <div class="flow-step"><div class="step-dot" style="background:#80A8C8"></div><div class="step-body"><div class="step-name">성장교정 시작 검토</div><div class="step-links"><a class="step-link" href="petit_treatment_by_age.html" target="_blank">성장교정</a><a class="step-link" href="petit_diagnosis.html" target="_blank">교합진단</a></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 연결 강도 -->
+<div class="panel" id="panel-matrix">
+  <div style="font-size:12px;color:#888880;margin-bottom:12px">총 연결 수 기준 정렬 · 카드 클릭 시 상세 보기</div>
+  <div class="mx-wrap">
+    <div class="mx">
+      <div class="mx-row mx-head-row">
+        <div class="mx-cell mx-head" style="flex:3">페이지</div>
+        <div class="mx-cell mx-head mx-num" style="flex:.6">↑받음</div>
+        <div class="mx-cell mx-head mx-num" style="flex:.6">↓보냄</div>
+        <div class="mx-cell mx-head" style="flex:3">연결 강도</div>
+      </div>
+      <div id="matrix-rows"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const P = {
+  'index.html':{n:'메인',g:'hub',o:['petit_occlusion_selfcheck.html','petit_diagnosis.html','petit_about.html','petit_treatment_philosophy.html','petit_beautiful_treatment.html','petit_guide.html','petit_treatment_by_age.html','petit_smile_design.html','petit_consultation_widget.html','petit_natural_tooth.html','petit_save_tooth_guide.html','petit_resin_oneday.html','petit_periodontitis.html','petit_prevention.html','petit_tongue_tie.html','petit_muscle_relax.html','petit_lifecycle_occlusion.html','petit_dental_spa.html','petit_general.html','petit_implant.html','petit_denture.html','petit_foana_brand.html'],i:['petit_about.html','petit_treatment_philosophy.html','petit_beautiful_treatment.html','petit_diagnosis.html','petit_smile_design.html','petit_occlusion_selfcheck.html','petit_cavity.html','petit_prevention.html','petit_tongue_tie.html','petit_muscle_relax.html','petit_prenatal.html','petit_natural_tooth.html','petit_save_tooth_guide.html','petit_resin_oneday.html','petit_periodontitis.html','petit_dental_spa.html','petit_general.html','petit_implant.html','petit_denture.html','petit_guide.html']},
+  'petit_diagnosis.html':{n:'교합진단',g:'core',o:['petit_smile_design.html','petit_treatment_by_age.html','petit_consultation_widget.html','petit_occlusion_selfcheck.html','index.html'],i:['index.html','petit_about.html','petit_treatment_philosophy.html','petit_treatment_by_age.html','petit_smile_design.html','petit_consultation_widget.html','petit_occlusion_selfcheck.html','petit_lifecycle_occlusion.html','petit_muscle_relax.html','petit_periodontitis.html','petit_implant.html','petit_guide.html']},
+  'petit_dental_spa.html':{n:'바른미소스파',g:'spa',o:['index.html','petit_cavity.html','petit_treatment_by_age.html','petit_prevention.html','petit_tongue_tie.html','petit_smile_design.html','petit_muscle_relax.html','petit_resin_oneday.html','petit_periodontitis.html','petit_natural_tooth.html','petit_consultation_widget.html','petit_treatment_philosophy.html'],i:['index.html','petit_beautiful_treatment.html','petit_smile_design.html','petit_prevention.html']},
+  'petit_treatment_by_age.html':{n:'바른턱얼굴 교합치료',g:'ortho',o:['petit_prenatal.html','petit_diagnosis.html','petit_occlusion_selfcheck.html','petit_smile_design.html'],i:['index.html','petit_diagnosis.html','petit_smile_design.html','petit_consultation_widget.html','petit_occlusion_selfcheck.html','petit_cavity.html','petit_tongue_tie.html','petit_muscle_relax.html','petit_prenatal.html','petit_natural_tooth.html','petit_dental_spa.html']},
+  'petit_consultation_widget.html':{n:'교합재건 위젯',g:'ortho',o:['petit_cavity.html','petit_treatment_by_age.html','petit_lifecycle_occlusion.html','petit_diagnosis.html'],i:['index.html','petit_diagnosis.html','petit_lifecycle_occlusion.html','petit_natural_tooth.html','petit_save_tooth_guide.html','petit_resin_oneday.html','petit_periodontitis.html','petit_dental_spa.html','petit_implant.html']},
+  'petit_smile_design.html':{n:'바른미소디자인',g:'ortho',o:['index.html','petit_treatment_by_age.html','petit_diagnosis.html','petit_dental_spa.html'],i:['index.html','petit_diagnosis.html','petit_treatment_by_age.html','petit_cavity.html','petit_prevention.html','petit_tongue_tie.html','petit_prenatal.html','petit_dental_spa.html']},
+  'petit_natural_tooth.html':{n:'자연치아살리기',g:'save',o:['index.html','petit_consultation_widget.html','petit_treatment_by_age.html','petit_lifecycle_occlusion.html','petit_save_tooth_guide.html'],i:['index.html','petit_cavity.html','petit_save_tooth_guide.html','petit_resin_oneday.html','petit_periodontitis.html','petit_dental_spa.html','petit_implant.html']},
+  'petit_periodontitis.html':{n:'만성복합치주염',g:'save',o:['index.html','petit_natural_tooth.html','petit_consultation_widget.html','petit_prevention.html','petit_diagnosis.html'],i:['index.html','petit_dental_spa.html','petit_general.html']},
+  'petit_cavity.html':{n:'충치 원인',g:'prev',o:['index.html','petit_prenatal.html','petit_prevention.html','petit_resin_oneday.html','petit_natural_tooth.html','petit_smile_design.html','petit_treatment_by_age.html'],i:['petit_consultation_widget.html','petit_prenatal.html','petit_dental_spa.html','petit_general.html']},
+  'petit_prevention.html':{n:'기본은 예방과 습관',g:'prev',o:['index.html','petit_dental_spa.html','petit_tongue_tie.html','petit_general.html','petit_smile_design.html'],i:['index.html','petit_cavity.html','petit_tongue_tie.html','petit_prenatal.html','petit_periodontitis.html','petit_dental_spa.html','petit_general.html']},
+  'petit_occlusion_selfcheck.html':{n:'교합 자가체크',g:'tool',o:['index.html','petit_muscle_relax.html','petit_diagnosis.html','petit_treatment_by_age.html'],i:['index.html','petit_about.html','petit_treatment_philosophy.html','petit_diagnosis.html','petit_treatment_by_age.html','petit_lifecycle_occlusion.html','petit_muscle_relax.html','petit_guide.html']},
+  'petit_implant.html':{n:'편안한 임플란트',g:'general',o:['index.html','petit_general.html','petit_natural_tooth.html','petit_consultation_widget.html','petit_diagnosis.html','petit_denture.html'],i:['index.html','petit_beautiful_treatment.html','petit_save_tooth_guide.html','petit_general.html']},
+  'petit_general.html':{n:'일반진료',g:'general',o:['index.html','petit_prevention.html','petit_cavity.html','petit_periodontitis.html','petit_resin_oneday.html','petit_implant.html','petit_denture.html'],i:['index.html','petit_cavity.html','petit_prevention.html','petit_implant.html','petit_denture.html']},
+  'petit_about.html':{n:'쁘띠치과 소개',g:'intro',o:['index.html','petit_occlusion_selfcheck.html','petit_guide.html','petit_diagnosis.html'],i:['index.html','petit_treatment_philosophy.html','petit_guide.html']},
+  'petit_treatment_philosophy.html':{n:'건강한 치료',g:'intro',o:['index.html','petit_about.html','petit_occlusion_selfcheck.html','petit_diagnosis.html','petit_guide.html'],i:['index.html','petit_beautiful_treatment.html','petit_dental_spa.html']},
+  'petit_save_tooth_guide.html':{n:'MTA·엠도게인',g:'save',o:['index.html','petit_natural_tooth.html','petit_implant.html','petit_consultation_widget.html'],i:['index.html','petit_natural_tooth.html']},
+  'petit_resin_oneday.html':{n:'무삭제레진 원데이',g:'save',o:['index.html','petit_natural_tooth.html','petit_consultation_widget.html'],i:['index.html','petit_cavity.html','petit_dental_spa.html','petit_general.html']},
+  'petit_prenatal.html':{n:'우리 아이 치과수첩',g:'prev',o:['index.html','petit_cavity.html','petit_treatment_by_age.html','petit_smile_design.html','petit_tongue_tie.html','petit_prevention.html'],i:['petit_treatment_by_age.html','petit_cavity.html']},
+  'petit_lifecycle_occlusion.html':{n:'생애주기 교합',g:'tool',o:['petit_occlusion_selfcheck.html','petit_diagnosis.html','petit_consultation_widget.html'],i:['index.html','petit_consultation_widget.html','petit_natural_tooth.html']},
+  'petit_beautiful_treatment.html':{n:'아름다운 치료',g:'intro',o:['index.html','petit_implant.html','petit_dental_spa.html','petit_treatment_philosophy.html'],i:['index.html']},
+  'petit_muscle_relax.html':{n:'근이완치료',g:'prev',o:['index.html','petit_diagnosis.html','petit_occlusion_selfcheck.html','petit_treatment_by_age.html'],i:['index.html','petit_occlusion_selfcheck.html','petit_dental_spa.html']},
+  'petit_tongue_tie.html':{n:'설소대단축증',g:'prev',o:['index.html','petit_smile_design.html','petit_prevention.html','petit_treatment_by_age.html'],i:['index.html','petit_prevention.html','petit_prenatal.html','petit_dental_spa.html']},
+  'petit_guide.html':{n:'온라인 진료 안내',g:'tool',o:['index.html','petit_occlusion_selfcheck.html','petit_diagnosis.html','petit_about.html'],i:['index.html','petit_about.html','petit_treatment_philosophy.html']},
+  'petit_denture.html':{n:'아름다운 틀니',g:'general',o:['index.html','petit_general.html'],i:['index.html','petit_general.html','petit_implant.html']},
+  'petit_splint.html':{n:'교합안정장치',g:'tool',o:['petit_muscle_relax.html','petit_diagnosis.html','petit_periodontitis.html','petit_sensitive.html','petit_consultation_widget.html'],i:['petit_muscle_relax.html','petit_occlusion_edu.html','petit_consultation_widget.html']},
+  'petit_occlusion_edu.html':{n:'교합이란 무엇인가',g:'tool',o:['petit_occlusion_selfcheck.html','petit_diagnosis.html','petit_treatment_by_age.html','petit_lifecycle_occlusion.html','petit_consultation_widget.html','petit_splint.html'],i:['index.html']},
+  'petit_sensitive.html':{n:'치아 시림·목파임',g:'prev',o:['petit_natural_tooth.html','petit_cavity.html','petit_prevention.html','petit_muscle_relax.html','petit_dental_spa.html'],i:['petit_general.html','petit_consultation_widget.html']},
+  'petit_whitening.html':{n:'치아미백',g:'spa',o:['petit_dental_spa.html','petit_natural_tooth.html','petit_prevention.html'],i:['petit_general.html','petit_dental_spa.html']},
+  'petit_nerve.html':{n:'신경치료',g:'save',o:['petit_natural_tooth.html','petit_save_tooth_guide.html','petit_resin_oneday.html','petit_sensitive.html','petit_cavity.html'],i:['petit_general.html','petit_consultation_widget.html']},
+  'petit_foana_brand.html':{n:'FöANa',g:'brand',o:[],i:['index.html']},
+};
+
+const GC={'hub':'#C8A84B','intro':'#7ABAA0','core':'#FFFFFF','ortho':'#80A8C8','prev':'#A8C880','save':'#C8A880','spa':'#C880A8','general':'#A8A8C8','tool':'#80C8C8','brand':'#C8C880'};
+const GL={'hub':'메인 허브','intro':'쁘띠치과 소개','core':'교합진단 (핵심)','ortho':'교합치료','prev':'예방·습관치료','save':'자연치아살리기','spa':'바른미소스파','general':'일반진료','tool':'자가체크·안내','brand':'FöANa 브랜드'};
+
+function buildMap(){
+  const container=document.getElementById('page-list');
+  const grouped={};
+  Object.entries(P).forEach(([f,d])=>{if(!grouped[d.g])grouped[d.g]=[];grouped[d.g].push({f,...d})});
+  Object.entries(GL).forEach(([gk,gl])=>{
+    if(!grouped[gk])return;
+    const sec=document.createElement('div');
+    sec.className='group-sec';
+    sec.innerHTML=`<div class="group-label" style="color:${GC[gk]}">${gl}</div><div class="page-grid" id="g-${gk}"></div>`;
+    container.appendChild(sec);
+    const grid=sec.querySelector(`#g-${gk}`);
+    grouped[gk].forEach(({f,n,o,i})=>{
+      const card=document.createElement('div');
+      card.className='pc';
+      const oc=o.filter(x=>x!=='index.html').length;
+      const ic=i.filter(x=>x!=='index.html').length;
+      card.innerHTML=`<div class="pc-name">${n}</div><div class="pc-meta"><span class="pc-cnt">↑ 받음 ${ic}</span><span class="pc-cnt">↓ 보냄 ${oc}</span></div>`;
+      card.onclick=()=>showDetail(f);
+      grid.appendChild(card);
+    });
+  });
+}
+
+function showDetail(file){
+  document.querySelectorAll('.pc').forEach(c=>c.classList.remove('selected'));
+  const d=P[file];if(!d)return;
+  document.querySelectorAll('.pc').forEach(c=>{if(c.querySelector('.pc-name')?.textContent===d.n)c.classList.add('selected')});
+  const oc=d.o.filter(p=>P[p]&&p!=='index.html');
+  const ic=d.i.filter(p=>P[p]&&p!=='index.html');
+  const det=document.getElementById('page-detail');
+  det.innerHTML=`<div class="detail">
+    <div class="detail-title">${d.n}</div>
+    ${oc.length?`<div class="link-group"><div class="link-label">이 페이지에서 연결 →</div><div class="link-items">${oc.map(p=>`<div class="link-item"><span class="link-arr" style="color:#C8A84B">→</span><span class="link-name">${P[p].n}</span><a class="link-open" href="${p}" target="_blank">열기</a></div>`).join('')}</div></div>`:''}
+    ${ic.length?`<div class="link-group"><div class="link-label">← 이 페이지로 연결</div><div class="link-items">${ic.map(p=>`<div class="link-item"><span class="link-arr" style="color:#80C880">←</span><span class="link-name">${P[p].n}</span><a class="link-open" href="${p}" target="_blank">열기</a></div>`).join('')}</div></div>`:''}
+    <div style="margin-top:10px"><a href="${file}" target="_blank" style="font-size:12px;color:#C8A84B;text-decoration:none;border:1px solid rgba(200,168,75,.3);padding:5px 14px;border-radius:100px;background:rgba(200,168,75,.08)">페이지 열기 →</a></div>
+  </div>`;
+  det.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function buildMatrix(){
+  const rows=document.getElementById('matrix-rows');
+  const sorted=Object.entries(P).map(([f,d])=>({
+    f,n:d.n,
+    oc:d.o.filter(p=>p!=='index.html').length,
+    ic:d.i.filter(p=>p!=='index.html').length,
+    tot:d.o.filter(p=>p!=='index.html').length+d.i.filter(p=>p!=='index.html').length
+  })).sort((a,b)=>b.tot-a.tot);
+  const max=Math.max(...sorted.map(s=>s.tot));
+  sorted.forEach(({f,n,oc,ic,tot})=>{
+    const row=document.createElement('div');
+    row.className='mx-row';
+    const bw=Math.max(4,Math.round((tot/max)*100));
+    row.innerHTML=`<div class="mx-cell mx-name" style="flex:3" title="${f}">${n}</div><div class="mx-cell mx-num" style="flex:.6">${ic}</div><div class="mx-cell mx-num" style="flex:.6">${oc}</div><div class="mx-cell mx-bar-cell" style="flex:3"><div class="mx-bar" style="width:${bw}px"></div><span class="mx-tot">${tot}</span></div>`;
+    row.onclick=()=>{show('map',document.querySelector('.tab'));setTimeout(()=>showDetail(f),50)};
+    rows.appendChild(row);
+  });
+}
+
+function show(id,tabEl){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('show'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('act'));
+  document.getElementById('panel-'+id).classList.add('show');
+  if(tabEl)tabEl.classList.add('act');
+}
+
+buildMap();
+
+// tool 그룹에 교합재건 위젯 중복 표시
+(function(){
+  const grid=document.getElementById('g-tool');
+  if(!grid)return;
+  // splint
+  (function(){
+    const grid=document.getElementById('g-tool');
+    if(!grid)return;
+    ['petit_splint.html','petit_occlusion_edu.html'].forEach(function(fn){
+      const d=P[fn]; if(!d||d.g==='tool') return;
+      const card=document.createElement('div');
+      card.className='pc';
+      const oc=d.o.filter(x=>x!=='index.html').length;
+      const ic=d.i.filter(x=>x!=='index.html').length;
+      card.innerHTML='<div class="pc-name">'+d.n+'</div><div class="pc-meta"><span class="pc-cnt">↑ 받음 '+ic+'</span><span class="pc-cnt">↓ 보냄 '+oc+'</span></div>';
+      card.onclick=function(){showDetail(fn)};
+      grid.appendChild(card);
+    });
+  })();
+
+  const f='petit_consultation_widget.html';
+  const d=P[f];
+  const card=document.createElement('div');
+  card.className='pc';
+  const oc=d.o.filter(x=>x!=='index.html').length;
+  const ic=d.i.filter(x=>x!=='index.html').length;
+  card.innerHTML=`<div class="pc-name">${d.n}</div><div class="pc-meta"><span class="pc-cnt">↑ 받음 ${ic}</span><span class="pc-cnt">↓ 보냄 ${oc}</span></div>`;
+  card.onclick=()=>showDetail(f);
+  grid.appendChild(card);
+})();
+
+buildMatrix();
+</script>
+</body>
+</html>

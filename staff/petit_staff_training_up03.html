@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>쁘띠치과 진단비 가치 설명 교육 프로그램</title>
+<style>
+:root{
+  --green:#007A54;
+  --deep:#173D30;
+  --mint:#E8F5F0;
+  --mint2:#F4FBF8;
+  --gold:#C8A84B;
+  --cream:#FAF8F0;
+  --paper:#FFFFFF;
+  --ink:#1A1A18;
+  --muted:#66665F;
+  --line:#E4E4DE;
+  --red:#B84A3A;
+  --red-bg:#FFF1EE;
+  --blue:#315C8A;
+  --blue-bg:#EEF5FF;
+  --shadow:0 14px 40px rgba(23,61,48,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Noto Sans KR",Segoe UI,sans-serif;
+  color:var(--ink);
+  background:linear-gradient(180deg,#FAFAF9 0%,#F5F3EC 100%);
+  line-height:1.75;
+  word-break:keep-all;
+}
+.header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(0,122,84,.96);
+  backdrop-filter:blur(10px);
+  color:var(--cream);
+  border-bottom:3px solid var(--gold);
+}
+.header-inner{max-width:1160px;margin:0 auto;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-weight:800;letter-spacing:-.02em;font-size:17px}
+.brand span{color:var(--gold)}
+.nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.nav a{color:rgba(250,248,240,.88);text-decoration:none;font-size:12px;border:1px solid rgba(250,248,240,.24);padding:5px 10px;border-radius:999px}
+.nav a:hover{background:rgba(255,255,255,.12)}
+.hero{background:radial-gradient(circle at top right,rgba(200,168,75,.22),transparent 32%),linear-gradient(135deg,var(--deep),#005B3F);color:var(--cream)}
+.hero-inner{max-width:1160px;margin:0 auto;padding:64px 22px 56px;display:grid;grid-template-columns:1.35fr .65fr;gap:32px;align-items:end}
+.kicker{font-size:12px;font-weight:800;color:var(--gold);letter-spacing:.18em;margin-bottom:14px}
+h1{font-size:42px;line-height:1.18;letter-spacing:-.045em;margin-bottom:18px}
+.hero p{font-size:17px;color:rgba(250,248,240,.85);max-width:760px}
+.hero-card{background:rgba(255,255,255,.10);border:1px solid rgba(250,248,240,.22);border-radius:24px;padding:24px;box-shadow:var(--shadow)}
+.hero-card strong{display:block;font-size:15px;color:var(--gold);margin-bottom:8px}
+.hero-card div{font-size:14px;color:rgba(250,248,240,.88)}
+.container{max-width:1160px;margin:0 auto;padding:34px 22px 80px;display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:start}
+.sidebar{position:sticky;top:76px;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 8px 22px rgba(0,0,0,.04)}
+.sidebar h2{font-size:14px;margin-bottom:10px;color:var(--deep)}
+.sidebar a{display:block;color:var(--muted);text-decoration:none;font-size:13px;padding:8px 8px;border-radius:10px;line-height:1.35}
+.sidebar a:hover{background:var(--mint);color:var(--green)}
+.main{min-width:0}
+.section{background:var(--paper);border:1px solid var(--line);border-radius:24px;margin-bottom:20px;padding:28px;box-shadow:0 10px 28px rgba(0,0,0,.045)}
+.section-title{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+.badge{flex:0 0 auto;background:var(--green);color:#fff;border-radius:14px;padding:7px 12px;font-size:12px;font-weight:800;letter-spacing:.05em}
+h2{font-size:25px;line-height:1.35;letter-spacing:-.035em;color:#111;margin-bottom:6px}
+.lead{color:var(--muted);font-size:15px;margin-bottom:18px}
+h3{font-size:18px;margin:24px 0 10px;color:var(--deep);letter-spacing:-.02em}
+p{margin:8px 0 12px}
+ul{padding-left:20px;margin:10px 0 12px}
+li{margin:4px 0}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+.card{border:1px solid var(--line);border-radius:18px;padding:18px;background:#fff}
+.card.green{background:var(--mint2);border-color:#CFE7DC}
+.card.gold{background:#FFFBEF;border-color:#EBD990}
+.card.blue{background:var(--blue-bg);border-color:#C9DDF5}
+.card.red{background:var(--red-bg);border-color:#F0C7BF}
+.card-title{font-weight:800;color:var(--deep);margin-bottom:6px}
+.box{border-left:5px solid var(--green);background:var(--mint2);padding:16px 18px;border-radius:0 16px 16px 0;margin:16px 0}
+.box.gold{border-color:var(--gold);background:#FFFBEF}
+.box.red{border-color:var(--red);background:var(--red-bg)}
+.box.blue{border-color:var(--blue);background:var(--blue-bg)}
+.read-aloud{border:2px solid var(--gold);background:linear-gradient(180deg,#FFFBEF,#FFF8E4);border-radius:20px;padding:20px;margin:22px 0;position:relative}
+.read-aloud .label{display:inline-block;background:var(--gold);color:#fff;font-weight:900;font-size:12px;letter-spacing:.08em;border-radius:999px;padding:5px 12px;margin-bottom:10px}
+.read-aloud p{font-size:15px;color:#3B2C08}
+.script{background:#F9F9F7;border:1px solid var(--line);border-radius:18px;padding:18px;margin:12px 0}
+.script .speaker{font-weight:900;color:var(--green);font-size:13px;margin-bottom:4px}
+.script blockquote{margin:0;border-left:4px solid var(--green);padding-left:14px;color:#333}
+.bad{border-left:5px solid var(--red);background:var(--red-bg);padding:14px 16px;border-radius:0 14px 14px 0;margin:12px 0}
+.good{border-left:5px solid var(--green);background:var(--mint2);padding:14px 16px;border-radius:0 14px 14px 0;margin:12px 0}
+table{width:100%;border-collapse:separate;border-spacing:0;margin:14px 0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
+th,td{padding:13px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:14px}
+th{background:var(--deep);color:#fff;font-weight:800}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:#FCFCFA}
+.tagline{font-size:22px;font-weight:900;color:var(--green);letter-spacing:-.04em;margin:10px 0 18px}
+.checklist{display:grid;gap:8px;margin:12px 0}
+.check{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:14px}
+.check::before{content:"□";color:var(--green);font-weight:900;font-size:17px;line-height:1.3}
+.exam-q{border:1px solid var(--line);border-radius:18px;padding:18px;margin:12px 0;background:#fff}
+.exam-q strong{display:block;color:var(--deep);margin-bottom:8px}
+.answer{margin-top:10px;background:var(--mint2);border-radius:14px;padding:12px 14px;color:#24503E;font-size:14px}
+.footer{max-width:1160px;margin:0 auto 40px;padding:0 22px;color:var(--muted);font-size:13px;text-align:center}
+.print-btn{position:fixed;right:18px;bottom:18px;background:var(--green);color:#fff;border:none;border-radius:999px;padding:13px 18px;font-weight:900;box-shadow:0 10px 24px rgba(0,122,84,.28);cursor:pointer}
+.print-btn:hover{filter:brightness(.95)}
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;padding:44px 18px}
+  h1{font-size:32px}
+  .container{grid-template-columns:1fr;padding:24px 16px 60px}
+  .sidebar{position:relative;top:auto}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .section{padding:22px 18px;border-radius:20px}
+  .header-inner{display:block}.nav{justify-content:flex-start;margin-top:10px}
+}
+@media print{
+  .header,.sidebar,.print-btn{display:none}
+  body{background:white}
+  .hero{background:white;color:#111;border-bottom:2px solid #ddd}
+  .hero p,.hero-card div{color:#333}.hero-card{border:1px solid #ddd;background:#fff}
+  .hero-inner,.container{max-width:none;display:block;padding:20px}
+  .section{page-break-inside:avoid;box-shadow:none;border:1px solid #ddd}
+}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">PETIT DENTAL CLINIC <span>| 기본이 기적이다</span></div>
+    <nav class="nav">
+      <a href="#purpose">목적</a><a href="#step1">1단계</a><a href="#step4">진단 내용</a><a href="#roleplay">롤플레이</a><a href="#exam">최종 테스트</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="kicker">PETIT STAFF TRAINING · DIAGNOSIS VALUE</div>
+      <h1>진단비 가치 설명<br>직원 교육 프로그램</h1>
+      <p>“비싸다”에서 멈추지 않고, “왜 필요한지 설명할 수 있는 직원”으로 성장하기 위한 단계별 교육 자료입니다.</p>
+    </div>
+    <div class="hero-card">
+      <strong>교육 핵심</strong>
+      <div>진단비는 비싼 상담비가 아니라, 정확한 판단을 위한 검사비입니다. 상담은 이야기이고, 진단은 분석입니다.</div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <aside class="sidebar">
+    <h2>교육 목차</h2>
+    <a href="#purpose">교육 목적과 목표</a>
+    <a href="#structure">전체 교육 구성</a>
+    <a href="#step1">1단계 · 감정 열기</a>
+    <a href="#step2">2단계 · 비용과 가치 구분</a>
+    <a href="#step3">3단계 · 상담과 진단의 차이</a>
+    <a href="#step4">4단계 · 교합진단 내용</a>
+    <a href="#step5">5단계 · 진단을 먼저 하는 이유</a>
+    <a href="#step6">6단계 · 환자 응대법</a>
+    <a href="#step7">7단계 · 내부 교육법</a>
+    <a href="#step8">8단계 · 금지/권장 표현</a>
+    <a href="#roleplay">9단계 · 롤플레이</a>
+    <a href="#exam">10단계 · 최종 테스트</a>
+    <a href="#summary">최종 암기 문장</a>
+  </aside>
+
+  <main class="main">
+    <section class="section" id="purpose">
+      <div class="section-title"><span class="badge">INTRO</span><div><h2>교육 목적</h2><div class="lead">진단비를 방어하는 직원이 아니라, 진단의 가치를 설명할 수 있는 직원으로 훈련합니다.</div></div></div>
+      <p>쁘띠치과의 교합진단비는 단순 상담비가 아닙니다. 아이의 성장 방향, 턱 위치, 치아 맹출, 혀와 호흡, 자세, 교합 상태를 종합적으로 분석하기 위한 진단검사 비용입니다.</p>
+      <p>하지만 직원이 이 가치를 충분히 이해하지 못하면 환자에게도 자신 있게 설명할 수 없습니다. 직원이 먼저 “비싸다”는 프레임을 가지면, 환자에게도 그 불안이 전달됩니다.</p>
+      <div class="tagline">목표는 “비싸다고 생각하지 않기”가 아니라, “왜 필요한지 설명할 수 있기”입니다.</div>
+      <div class="grid-2">
+        <div class="card green"><div class="card-title">교육 전 상태</div><p>“진단비가 좀 비싼 것 같아요.”<br>“환자들이 부담스러워할 것 같아요.”</p></div>
+        <div class="card gold"><div class="card-title">교육 후 상태</div><p>“부담되실 수 있지만, 정확한 치료 판단을 위한 검사입니다.”<br>“상담은 이야기이고, 진단은 분석입니다.”</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="structure">
+      <div class="section-title"><span class="badge">MAP</span><div><h2>전체 교육 구성</h2><div class="lead">감정 수용에서 시작해 이해, 설명, 실습, 평가까지 이어지는 10단계 프로그램입니다.</div></div></div>
+      <table>
+        <thead><tr><th>단계</th><th>주제</th><th>교육 목표</th></tr></thead>
+        <tbody>
+          <tr><td>1단계</td><td>감정 열기</td><td>직원이 왜 비싸다고 느끼는지 안전하게 말하게 하기</td></tr>
+          <tr><td>2단계</td><td>비용과 가치 구분</td><td>금액이 큰 것과 가치가 설명되지 않은 것을 구분하기</td></tr>
+          <tr><td>3단계</td><td>상담과 진단의 차이</td><td>무료 상담과 유료 진단의 차이 이해하기</td></tr>
+          <tr><td>4단계</td><td>교합진단의 내용</td><td>진단비에 포함된 검사와 분석 이해하기</td></tr>
+          <tr><td>5단계</td><td>진단의 임상적 의미</td><td>왜 먼저 진단해야 하는지 이해하기</td></tr>
+          <tr><td>6단계</td><td>환자 응대 문장 훈련</td><td>비용 부담 환자에게 말하는 법</td></tr>
+          <tr><td>7단계</td><td>내부 교육법</td><td>직원이 “비싼 것 같다”고 말할 때 사고 전환시키기</td></tr>
+          <tr><td>8단계</td><td>금지 표현 교정</td><td>환자의 불안을 키우는 말 줄이기</td></tr>
+          <tr><td>9단계</td><td>실전 롤플레이</td><td>환자 질문에 답변 연습하기</td></tr>
+          <tr><td>10단계</td><td>최종 테스트</td><td>설명 가능 여부 평가하기</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section" id="step1">
+      <div class="section-title"><span class="badge">STEP 1</span><div><h2>직원의 감정 열기</h2><div class="lead">직원의 “비싸다”는 감정을 혼내지 말고, 설명 능력으로 전환합니다.</div></div></div>
+      <div class="box blue"><strong>교육 목표</strong><br>직원이 “진단비가 비싸다”고 느끼는 것을 숨기지 않고 말할 수 있게 합니다. 이 단계에서 원장이나 리더가 바로 반박하면 직원은 배우는 것이 아니라 방어하게 됩니다.</div>
+      <h3>리더 교육 문장</h3>
+      <div class="script"><div class="speaker">리더</div><blockquote>“선생님이 진단비가 비싸다고 느낀 것은 잘못이 아닙니다. 환자 입장에서도 당연히 부담스럽게 느껴질 수 있습니다. 중요한 것은 우리가 그 생각에서 멈추지 않는 것입니다. 비싸다고 느꼈다면, 이제 ‘왜 이 비용이 필요한지 설명할 수 있는가?’로 넘어가야 합니다.”</blockquote></div>
+      <h3>직원에게 물어볼 질문</h3>
+      <div class="checklist">
+        <div class="check">진단비가 비싸다고 느낀 이유는 무엇인가요?</div>
+        <div class="check">환자가 어떤 부분에서 부담을 느낄 것 같나요?</div>
+        <div class="check">상담과 진단이 같다고 느껴지나요, 다르다고 느껴지나요?</div>
+        <div class="check">진단비에 어떤 검사와 분석이 포함되는지 알고 있나요?</div>
+        <div class="check">환자에게 이 비용을 한 문장으로 설명할 수 있나요?</div>
+      </div>
+    </section>
+
+    <section class="section" id="step2">
+      <div class="section-title"><span class="badge">STEP 2</span><div><h2>“비싸다”와 “가치가 설명되지 않았다” 구분하기</h2><div class="lead">비용 저항은 거절이 아니라 설명이 더 필요하다는 신호일 수 있습니다.</div></div></div>
+      <p>비싸다는 것은 금액이 크게 느껴진다는 뜻입니다. 하지만 환자가 실제로 궁금해하는 것은 대부분 “이 비용으로 무엇을 알 수 있는가?”입니다.</p>
+      <table>
+        <thead><tr><th>표현</th><th>의미</th><th>직원이 해야 할 일</th></tr></thead>
+        <tbody>
+          <tr><td>비싸다</td><td>금액이 크게 느껴진다</td><td>공감한다</td></tr>
+          <tr><td>부담된다</td><td>결정이 어렵다</td><td>충분히 이해하도록 돕는다</td></tr>
+          <tr><td>왜 필요하냐</td><td>가치가 궁금하다</td><td>진단의 목적을 설명한다</td></tr>
+          <tr><td>상담이랑 뭐가 다르냐</td><td>과정 차이를 모른다</td><td>상담과 진단을 구분해준다</td></tr>
+          <tr><td>환불해달라</td><td>이해 부족 또는 결정 후회</td><td>사실관계와 원칙을 차분히 설명한다</td></tr>
+        </tbody>
+      </table>
+      <div class="box gold"><strong>직원 암기 문장</strong><br>“비싸다는 말은 거절이 아니라, 설명이 더 필요하다는 신호일 수 있습니다.”</div>
+    </section>
+
+    <section class="section" id="step3">
+      <div class="section-title"><span class="badge">STEP 3</span><div><h2>상담과 진단의 차이 이해하기</h2><div class="lead">상담은 방향 안내이고, 진단은 검사자료 기반 분석입니다.</div></div></div>
+      <div class="grid-2">
+        <div class="card green"><div class="card-title">상담이란?</div><p>환자의 불편을 듣고, 대략적인 가능성과 방향을 안내하는 과정입니다. 환자가 왜 왔는지, 무엇을 걱정하는지, 정밀검사가 필요한지 확인합니다.</p></div>
+        <div class="card gold"><div class="card-title">진단이란?</div><p>검사 자료를 바탕으로 원인을 분석하고 치료 방향을 판단하는 과정입니다. 치료 필요성, 시기, 순서, 예후와 유지 가능성을 판단합니다.</p></div>
+      </div>
+      <table>
+        <thead><tr><th>구분</th><th>상담</th><th>진단</th></tr></thead>
+        <tbody>
+          <tr><td>목적</td><td>불편사항 듣기, 가능성 안내</td><td>원인 분석, 치료 방향 판단</td></tr>
+          <tr><td>자료</td><td>문진, 간단 확인</td><td>사진, 스캔, X-ray, CT, 교합자료 등</td></tr>
+          <tr><td>깊이</td><td>대략적인 설명</td><td>개별 환자 맞춤 분석</td></tr>
+          <tr><td>결과</td><td>진단 필요 여부 안내</td><td>치료 필요성, 시기, 순서 판단</td></tr>
+          <tr><td>직원 설명</td><td>“상담은 방향 안내입니다.”</td><td>“진단은 정확한 판단을 위한 검사입니다.”</td></tr>
+        </tbody>
+      </table>
+      <div class="box gold"><strong>직원 암기 문장</strong><br>“상담은 이야기이고, 진단은 분석입니다.”</div>
+    </section>
+
+    <section class="section" id="step4">
+      <div class="section-title"><span class="badge">STEP 4</span><div><h2>쁘띠치과 교합진단에 포함되는 것</h2><div class="lead">교합진단은 치아 배열만 보는 검사가 아니라 성장 방향과 원인을 분석하는 과정입니다.</div></div></div>
+      <div class="grid-3">
+        <div class="card green"><div class="card-title">골격·성장</div><ul><li>얼굴과 턱의 성장 방향</li><li>위턱과 아래턱의 균형</li><li>Class I, Class II/C2, Class III/C3</li><li>앞으로의 성장 예측</li></ul></div>
+        <div class="card green"><div class="card-title">치아·교합</div><ul><li>치아 맹출 상태</li><li>공간 부족 여부</li><li>한쪽 미맹출·비대칭 맹출</li><li>교합 간섭과 교합 힘</li></ul></div>
+        <div class="card green"><div class="card-title">기능·습관</div><ul><li>혀 위치</li><li>입술 폐쇄력</li><li>입호흡 여부</li><li>삼키는 습관, 자세와 몸의 균형</li></ul></div>
+      </div>
+      <div class="box"><strong>리더 설명 문장</strong><br>“쁘띠치과의 교합진단은 치아만 보는 검사가 아닙니다. 아이의 골격 성장 방향, 턱 위치, 치아 맹출, 혀와 호흡, 자세, 교합 힘을 종합적으로 확인해서 지금 치료가 필요한지, 기다려도 되는지, 무엇을 예방할 수 있는지 판단하는 과정입니다.”</div>
+      <div class="read-aloud"><div class="label">중요 · 소리내서 읽어주세요</div><p>진단비는 치아만 보는 비용이 아니라, 아이의 성장 방향과 원인을 분석하는 비용입니다. 어린이는 앞으로 성장하기 때문에 현재 모습만 보는 것이 아니라 앞으로 어떻게 자랄지 예측하는 것이 중요합니다.</p></div>
+    </section>
+
+    <section class="section" id="step5">
+      <div class="section-title"><span class="badge">STEP 5</span><div><h2>왜 진단을 먼저 해야 하는가?</h2><div class="lead">진단은 치료를 팔기 위한 과정이 아니라, 필요한 치료인지 판단하기 위한 과정입니다.</div></div></div>
+      <h3>진단 없이 치료하면 생길 수 있는 문제</h3>
+      <div class="grid-2">
+        <div class="card red"><div class="card-title">놓칠 수 있는 것</div><ul><li>원인</li><li>성장 방향</li><li>치료 시기</li><li>장치 선택</li></ul></div>
+        <div class="card red"><div class="card-title">생길 수 있는 결과</div><ul><li>치아만 배열하고 재발</li><li>발치·수술 예방 타이밍 놓침</li><li>환자가 치료 이유를 이해하지 못함</li><li>비용만 부담한다고 느낌</li></ul></div>
+      </div>
+      <div class="good"><strong>직원 설명 문장</strong><br>“진단을 먼저 하는 이유는 바로 치료를 권하기 위해서가 아닙니다. 아이의 현재 상태와 성장 방향을 정확히 보고, 치료가 필요한지, 언제 시작하는 것이 좋은지, 어떤 장치가 맞는지 판단하기 위해서입니다.”</div>
+      <div class="box gold"><strong>직원 암기 문장</strong><br>“진단은 치료를 팔기 위한 과정이 아니라, 필요한 치료인지 판단하기 위한 과정입니다.”</div>
+    </section>
+
+    <section class="section" id="step6">
+      <div class="section-title"><span class="badge">STEP 6</span><div><h2>환자가 “진단비가 비싸요”라고 할 때 응대법</h2><div class="lead">비용 질문에는 방어하지 말고, 비용의 성격을 설명합니다.</div></div></div>
+      <h3>좋은 응대의 4단계</h3>
+      <table>
+        <thead><tr><th>순서</th><th>핵심</th><th>직원 문장</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>공감 먼저</td><td>“네, 진단비가 부담스럽게 느껴지실 수 있습니다.”</td></tr>
+          <tr><td>2</td><td>비용 성격 설명</td><td>“다만 이 비용은 단순 상담비가 아니라, 현재 상태를 정확히 분석하기 위한 진단검사 비용입니다.”</td></tr>
+          <tr><td>3</td><td>진단 내용 설명</td><td>“아이의 골격 성장 방향, 치아 맹출, 턱 위치, 혀와 호흡, 교합 상태를 함께 확인합니다.”</td></tr>
+          <tr><td>4</td><td>판단 목적 설명</td><td>“진단을 통해 치료가 필요한지, 언제 시작하는 것이 좋은지, 무엇을 예방할 수 있는지를 판단합니다.”</td></tr>
+        </tbody>
+      </table>
+      <div class="script"><div class="speaker">전체 응대문</div><blockquote>“네, 진단비가 부담스럽게 느껴지실 수 있습니다. 다만 이 비용은 단순 상담비가 아니라, 현재 상태를 정확히 분석하기 위한 진단검사 비용입니다. 아이의 골격 성장 방향, 치아 맹출, 턱 위치, 혀와 호흡, 교합 상태를 함께 확인합니다. 진단을 통해 치료가 필요한지, 언제 시작하는 것이 좋은지, 무엇을 예방할 수 있는지를 판단합니다.”</blockquote></div>
+      <div class="box gold"><strong>직원 암기 문장</strong><br>“부담되실 수 있지만, 정확한 치료 판단을 위한 검사입니다.”</div>
+    </section>
+
+    <section class="section" id="step7">
+      <div class="section-title"><span class="badge">STEP 7</span><div><h2>직원이 내부에서 “비싼 것 같아요”라고 말할 때 교육법</h2><div class="lead">그 말을 금지시키는 것이 아니라, 비용 판단에서 가치 설명 능력으로 전환시킵니다.</div></div></div>
+      <div class="script"><div class="speaker">원장 또는 리더</div><blockquote>“그렇게 느낄 수 있어요. 환자도 처음에는 부담스럽게 느낄 수 있습니다. 그런데 우리가 해야 할 일은 진단비가 비싸다, 싸다를 판단하는 것이 아니라 이 진단이 왜 필요한지 설명할 수 있는 것입니다. 이 진단은 단순 상담비가 아니라 아이의 성장 방향, 턱 위치, 치아 맹출, 혀와 호흡, 교합 상태를 종합적으로 확인하는 검사 비용입니다. 환자에게는 ‘부담되실 수 있지만, 정확한 치료 판단을 위한 검사입니다’라고 설명해야 합니다.”</blockquote></div>
+      <h3>직원 사고 전환표</h3>
+      <table>
+        <thead><tr><th>기존 생각</th><th>전환 후 생각</th></tr></thead>
+        <tbody>
+          <tr><td>진단비가 비싸다</td><td>환자에게 가치 설명이 필요하다</td></tr>
+          <tr><td>환자가 부담스러워할 것이다</td><td>부담을 인정하고 목적을 설명해야 한다</td></tr>
+          <tr><td>상담인데 왜 비용이 있지?</td><td>상담은 이야기, 진단은 분석이다</td></tr>
+          <tr><td>환자가 거절하면 어쩌지?</td><td>결정은 환자의 몫, 설명은 우리의 역할이다</td></tr>
+          <tr><td>직원인 나도 부담스럽다</td><td>먼저 내가 내용을 이해해야 환자도 이해시킬 수 있다</td></tr>
+        </tbody>
+      </table>
+      <div class="box gold"><strong>직원 암기 문장</strong><br>“비싸다고 느끼는 건 괜찮지만, 직원은 거기서 멈추면 안 됩니다.”</div>
+    </section>
+
+    <section class="section" id="step8">
+      <div class="section-title"><span class="badge">STEP 8</span><div><h2>환자 앞 금지 표현과 권장 표현</h2><div class="lead">환자의 불안을 키우는 말을 줄이고, 안전한 표현으로 바꿉니다.</div></div></div>
+      <div class="grid-2">
+        <div class="bad"><strong>금지 표현</strong><br>“진단비가 좀 비싸긴 해요.”<br>“저도 비싸다고 생각해요.”<br>“원장님 진단비가 원래 높아요.”<br>“부담되시면 안 하셔도 돼요.”<br>“검사비라서 어쩔 수 없어요.”<br>“일단 해보셔야 알아요.”<br>“안 하면 나중에 더 큰일 날 수 있어요.”</div>
+        <div class="good"><strong>권장 표현</strong><br>“부담스럽게 느껴지실 수 있습니다.”<br>“이 비용은 단순 상담비가 아니라 정확한 판단을 위한 검사 비용입니다.”<br>“아이의 성장 방향과 교합 상태를 종합적으로 확인하는 과정입니다.”<br>“진단 후 치료가 필요한지, 언제 시작하는 것이 좋은지 판단합니다.”<br>“지금은 바로 치료를 결정하는 단계가 아니라 정확히 확인하는 단계입니다.”</div>
+      </div>
+    </section>
+
+    <section class="section" id="roleplay">
+      <div class="section-title"><span class="badge">STEP 9</span><div><h2>롤플레이 훈련</h2><div class="lead">실제 환자 질문에 답하는 방식으로 말 훈련을 합니다.</div></div></div>
+      <div class="exam-q"><strong>롤플레이 1. 환자가 진단비를 묻는 경우</strong><p><b>환자:</b> “진단비가 왜 이렇게 비싸요?”</p><div class="answer"><b>직원 답변:</b> “네, 부담스럽게 느껴지실 수 있습니다. 다만 이 비용은 단순 상담비가 아니라, 현재 상태를 정확히 분석하기 위한 진단검사 비용입니다. 아이의 골격 성장 방향, 치아 맹출, 턱 위치, 혀와 호흡, 교합 상태를 함께 확인해서 치료가 필요한지, 언제 시작하는 것이 좋은지 판단합니다.”</div></div>
+      <div class="exam-q"><strong>롤플레이 2. 상담과 진단 차이를 묻는 경우</strong><p><b>환자:</b> “상담이랑 진단이 뭐가 달라요?”</p><div class="answer"><b>직원 답변:</b> “상담은 현재 불편하신 점을 듣고 가능한 방향을 안내드리는 과정입니다. 진단은 검사 자료를 바탕으로 원인을 분석하고 치료 필요성과 순서를 판단하는 과정입니다. 쉽게 말하면 상담은 이야기이고, 진단은 분석입니다.”</div></div>
+      <div class="exam-q"><strong>롤플레이 3. 직원이 내부에서 비싸다고 말하는 경우</strong><p><b>직원:</b> “원장님, 솔직히 진단비가 좀 비싼 것 같아요.”</p><div class="answer"><b>리더 답변:</b> “그렇게 느낄 수 있어요. 환자도 처음에는 부담스럽게 느낄 수 있습니다. 다만 우리는 비싸다, 싸다에서 멈추면 안 됩니다. 이 비용이 어떤 분석을 위한 비용인지 설명할 수 있어야 합니다. 진단비는 단순 상담비가 아니라 정확한 치료 판단을 위한 검사비입니다.”</div></div>
+    </section>
+
+    <section class="section" id="exam">
+      <div class="section-title"><span class="badge">STEP 10</span><div><h2>최종 테스트</h2><div class="lead">직원이 진단비의 가치를 실제로 설명할 수 있는지 평가합니다.</div></div></div>
+      <h3>객관식</h3>
+      <div class="exam-q"><strong>1. CC, 즉 주호소의 의미로 맞는 것은?</strong><p>① 병원의 치료 철학 ② 환자가 치과에 온 가장 큰 불편사항 ③ 원장이 정한 치료 계획 ④ 비용 상담 내용</p><div class="answer">정답: ②</div></div>
+      <div class="exam-q"><strong>2. 상담과 진단의 차이로 가장 적절한 것은?</strong><p>① 상담은 분석이고 진단은 예약이다. ② 상담과 진단은 같다. ③ 상담은 방향 안내이고, 진단은 검사자료 기반 분석이다. ④ 진단은 치료비 결제를 위한 절차이다.</p><div class="answer">정답: ③</div></div>
+      <div class="exam-q"><strong>3. 진단비 설명으로 가장 적절한 것은?</strong><p>① 원장님이 정한 비용이라 어쩔 수 없습니다. ② 부담되시면 안 하셔도 됩니다. ③ 단순 상담비가 아니라 정확한 판단을 위한 검사비입니다. ④ 다른 병원보다 비싸지만 더 좋습니다.</p><div class="answer">정답: ③</div></div>
+      <h3>단답형</h3>
+      <div class="exam-q"><strong>1. “상담은 이야기이고, 진단은 ________입니다.”</strong><div class="answer">모범답안: 분석</div></div>
+      <div class="exam-q"><strong>2. 진단비는 치료를 권하기 위한 비용이 아니라, 필요한 치료인지 ________하기 위한 비용입니다.</strong><div class="answer">모범답안: 판단</div></div>
+      <div class="exam-q"><strong>3. 환자가 비용을 부담스러워할 때 처음 해야 할 말은?</strong><div class="answer">모범답안: “부담스럽게 느껴지실 수 있습니다.”</div></div>
+      <h3>서술형</h3>
+      <div class="exam-q"><strong>환자가 “진단비가 왜 이렇게 비싸요?”라고 물었을 때 답변을 작성하세요.</strong><div class="answer">모범답안: “네, 진단비가 부담스럽게 느껴지실 수 있습니다. 다만 이 비용은 단순 상담비가 아니라, 현재 상태를 정확히 분석하기 위한 진단검사 비용입니다. 아이의 골격 성장 방향, 치아 맹출, 턱 위치, 혀와 호흡, 교합 상태를 함께 확인합니다. 진단을 통해 치료가 필요한지, 언제 시작하는 것이 좋은지, 무엇을 예방할 수 있는지를 판단합니다.”</div></div>
+    </section>
+
+    <section class="section" id="summary">
+      <div class="section-title"><span class="badge">SUMMARY</span><div><h2>최종 암기 문장</h2><div class="lead">직원이 반복해서 말할 수 있어야 하는 핵심 문장입니다.</div></div></div>
+      <div class="checklist">
+        <div class="check">진단비는 비싼 상담비가 아니라, 정확한 판단을 위한 검사비입니다.</div>
+        <div class="check">상담은 이야기이고, 진단은 분석입니다.</div>
+        <div class="check">진단은 치료를 권하기 위한 과정이 아니라, 필요한 치료인지 판단하기 위한 과정입니다.</div>
+        <div class="check">환자가 부담을 느낄 수는 있지만, 직원이 먼저 비싸다는 프레임을 가지면 안 됩니다.</div>
+        <div class="check">비용을 방어하지 말고, 비용의 성격을 설명합니다.</div>
+        <div class="check">진단비는 아이의 성장 방향과 원인을 분석하는 비용입니다.</div>
+        <div class="check">비싸다는 말은 거절이 아니라, 설명이 더 필요하다는 신호일 수 있습니다.</div>
+        <div class="check">직원은 비용을 판단하는 사람이 아니라, 진단의 가치를 설명하는 사람입니다.</div>
+      </div>
+      <div class="read-aloud"><div class="label">중요 · 소리내서 읽어주세요</div><p>진단비가 비싸게 느껴질 수 있습니다. 하지만 리더와 직원은 “비싸다”에서 멈추면 안 됩니다. 진단비는 단순 상담비가 아니라, 정확한 판단을 위한 검사비입니다. 아이의 성장 방향, 턱 위치, 치아 맹출, 혀와 호흡, 교합 상태를 종합적으로 분석하는 과정입니다. 환자가 부담을 느낄 수는 있지만, 직원이 먼저 비싸다는 프레임을 가지면 환자에게도 불안이 전달됩니다. 우리는 비용을 방어하는 사람이 아니라, 왜 이 진단이 필요한지 정확히 설명하는 사람입니다.</p></div>
+    </section>
+  </main>
+</div>
+
+<button class="print-btn" onclick="window.print()">인쇄 / PDF 저장</button>
+<footer class="footer">PETIT DENTAL CLINIC · Diagnosis Fee Value Training · Basic is Magic</footer>
+</body>
+</html>
