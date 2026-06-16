@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>보고 통계 대시보드 | 쁘띠치과</title>
+<style>
+@font-face{font-family:'TmonMonsori';src:url('../fonts/TmonMonsori_otf.otf') format('opentype')}
+@font-face{font-family:'Pretendard';src:url('../fonts/pretendard-variable.woff2') format('woff2-variations');font-weight:100 900}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#FAFAF9;min-height:100vh}
+body{font-family:'Pretendard',sans-serif;color:#1A1A18;-webkit-font-smoothing:antialiased}
+
+.header{background:#1E3D30;padding:16px 20px;border-bottom:2px solid #C8A84B;position:sticky;top:0;z-index:100}
+.header-inner{max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.header-logo{font-family:'TmonMonsori',serif;font-size:14px;color:#FAF8F0}
+.header-logo em{color:#C8A84B;font-style:normal}
+.back-btn{font-size:12px;color:rgba(250,248,240,.6);text-decoration:none;border:1px solid rgba(250,248,240,.2);padding:5px 12px;border-radius:100px}
+
+.wrap{max-width:720px;margin:0 auto;padding:20px}
+
+/* 기간 선택 */
+.period-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.period-btn{padding:8px 16px;border-radius:100px;border:1.5px solid #E4E4DE;background:#fff;font-size:13px;color:#555550;cursor:pointer;transition:all .15s}
+.period-btn.active{background:#007A54;border-color:#007A54;color:#FAF8F0;font-weight:600}
+.period-custom{display:flex;align-items:center;gap:6px;font-size:12px;color:#555550}
+.period-custom input{border:1.5px solid #E4E4DE;border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit}
+
+/* 저장 데이터 없을 때 */
+.empty{text-align:center;padding:60px 20px}
+.empty-icon{font-size:48px;margin-bottom:12px}
+.empty-title{font-family:'TmonMonsori',serif;font-size:18px;color:#111110;margin-bottom:8px}
+.empty-sub{font-size:13px;color:#888880;line-height:1.7}
+
+/* 섹션 */
+.dash-sec{margin-bottom:24px}
+.dash-sec-title{font-family:'TmonMonsori',serif;font-size:16px;font-weight:600;color:#111110;margin-bottom:12px;padding-bottom:8px;border-bottom:1.5px solid #E4E4DE}
+
+/* 숫자 카드 그리드 */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.stat-card{background:#fff;border:1.5px solid #E4E4DE;border-radius:12px;padding:14px 16px}
+.stat-card.green{border-color:#C5E8DC;background:#F7FCF9}
+.stat-card.gold{border-color:#E8D090;background:#FFFBEF}
+.stat-card.red{border-color:#F0C4C4;background:#FDE8E8}
+.stat-label{font-size:11px;color:#888880;margin-bottom:6px;letter-spacing:.04em}
+.stat-num{font-family:'TmonMonsori',serif;font-size:28px;font-weight:600;color:#111110;line-height:1}
+.stat-unit{font-size:12px;color:#888880;margin-top:4px}
+.stat-card.green .stat-num{color:#007A54}
+.stat-card.gold .stat-num{color:#8A6820}
+.stat-card.red .stat-num{color:#B04040}
+
+/* 일별 테이블 */
+.day-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.day-table th{background:#007A54;color:#FAF8F0;padding:8px 10px;text-align:left;font-weight:500}
+.day-table td{padding:8px 10px;border-bottom:1px solid #EAEAE4;color:#444440;vertical-align:top}
+.day-table tr:nth-child(even) td{background:#F7F7F3}
+.day-table tr:last-child td{border-bottom:none}
+.badge{display:inline-flex;align-items:center;font-size:10px;padding:2px 7px;border-radius:100px;font-weight:600}
+.badge.done{background:#E8F5F0;color:#007A54}
+.badge.pend{background:#FFFBEF;color:#8A6820}
+.badge.miss{background:#FDE8E8;color:#B04040}
+
+/* 해피콜 목록 */
+.happy-list{display:flex;flex-direction:column;gap:6px}
+.happy-item{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#fff;border:1px solid #E4E4DE;border-radius:8px;font-size:13px}
+.happy-type{font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;flex-shrink:0}
+.happy-type.수술{background:#E8F5F0;color:#007A54}
+.happy-type.발치{background:#FFFBEF;color:#8A6820}
+.happy-type.불편{background:#FDE8E8;color:#B04040}
+.happy-date{font-size:11px;color:#888880;margin-left:auto}
+
+/* 카카오 추이 */
+.kakao-bars{display:flex;flex-direction:column;gap:6px}
+.kakao-bar-row{display:flex;align-items:center;gap:10px}
+.kakao-bar-label{font-size:11px;color:#555550;width:50px;flex-shrink:0}
+.kakao-bar-wrap{flex:1;background:#F0F0EC;border-radius:100px;height:8px;overflow:hidden}
+.kakao-bar-fill{height:100%;background:#C8A84B;border-radius:100px;transition:width .4s}
+.kakao-bar-num{font-size:11px;font-weight:700;color:#8A6820;width:24px;text-align:right;flex-shrink:0}
+
+/* 내보내기 버튼 */
+.export-row{display:flex;gap:8px;margin-top:16px}
+.export-btn{flex:1;padding:12px;border-radius:10px;border:none;font-size:13px;font-weight:600;cursor:pointer}
+.export-btn.primary{background:#007A54;color:#FAF8F0}
+.export-btn.secondary{background:#E8F5F0;color:#007A54;border:1px solid #C5E8DC}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-logo">쁘띠치과 · <em>보고 통계</em></div>
+    <a class="back-btn" href="index.html">← 직원 메인</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- 기간 선택 -->
+  <div class="period-bar">
+    <button class="period-btn active" onclick="setPeriod('week',this)">이번 주</button>
+    <button class="period-btn" onclick="setPeriod('lastweek',this)">지난 주</button>
+    <button class="period-btn" onclick="setPeriod('month',this)">이번 달</button>
+    <button class="period-btn" onclick="setPeriod('lastmonth',this)">지난 달</button>
+  </div>
+  <div class="period-custom">
+    <input type="date" id="dateFrom">
+    <span>~</span>
+    <input type="date" id="dateTo">
+    <button class="period-btn" style="padding:6px 14px;font-size:12px" onclick="setPeriodCustom()">조회</button>
+  </div>
+
+  <div id="dashContent" style="margin-top:20px"></div>
+</div>
+
+<script>
+let currentData = [];
+
+function getRange(period){
+  const now = new Date();
+  let from, to;
+  if(period==='week'){
+    const day = now.getDay();
+    from = new Date(now); from.setDate(now.getDate()-day+(day===0?-6:1));
+    to = new Date(now);
+  } else if(period==='lastweek'){
+    const day = now.getDay();
+    from = new Date(now); from.setDate(now.getDate()-day+(day===0?-6:1)-7);
+    to = new Date(from); to.setDate(from.getDate()+6);
+  } else if(period==='month'){
+    from = new Date(now.getFullYear(), now.getMonth(), 1);
+    to = new Date(now);
+  } else if(period==='lastmonth'){
+    from = new Date(now.getFullYear(), now.getMonth()-1, 1);
+    to = new Date(now.getFullYear(), now.getMonth(), 0);
+  }
+  return {from: fmt(from), to: fmt(to)};
+}
+
+function fmt(d){ return d.toISOString().slice(0,10); }
+
+function setPeriod(period, btn){
+  document.querySelectorAll('.period-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const {from,to} = getRange(period);
+  document.getElementById('dateFrom').value = from;
+  document.getElementById('dateTo').value = to;
+  loadData(from, to);
+}
+
+function setPeriodCustom(){
+  const from = document.getElementById('dateFrom').value;
+  const to = document.getElementById('dateTo').value;
+  if(!from||!to){ alert('날짜를 선택하세요'); return; }
+  loadData(from, to);
+}
+
+function loadData(from, to){
+  const keys = Object.keys(localStorage).filter(k=>k.startsWith('petit_daily_'));
+  const data = keys
+    .filter(k=>{ const d=k.replace('petit_daily_',''); return d>=from && d<=to; })
+    .map(k=>JSON.parse(localStorage.getItem(k)))
+    .sort((a,b)=>a.date.localeCompare(b.date));
+  currentData = data;
+  renderDash(data, from, to);
+}
+
+function renderDash(data, from, to){
+  const el = document.getElementById('dashContent');
+  if(!data.length){
+    el.innerHTML = `<div class="empty">
+      <div class="empty-icon">📭</div>
+      <div class="empty-title">${from} ~ ${to}</div>
+      <div class="empty-sub">이 기간에 저장된 보고가 없습니다.<br>일일 보고 저장 후 다시 확인하세요.</div>
+    </div>`;
+    return;
+  }
+
+  // ── 집계 ──
+  const totalDays = data.length;
+  
+  // 신환 합계
+  const totalNew = data.reduce((s,d)=> s + (d.daily?.welcomeCalls?.length||0), 0);
+  
+  // 카카오
+  const totalKakao = data.reduce((s,d)=> s + (d.daily?.kakao?.count||0), 0);
+  const maxKakao = Math.max(...data.map(d=>d.daily?.kakao?.count||0), 1);
+  
+  // 해피콜 전체
+  const allHappy = data.flatMap(d=>(d.daily?.happyCalls||[]).map(h=>({...h, date:d.date})));
+  const happyDone = allHappy.filter(h=>h.status==='완료').length;
+  const happyPend = allHappy.filter(h=>h.status!=='완료').length;
+  
+  // 미납
+  const unpaidEntries = data.filter(d=>d.weekly?.unpaid).map(d=>({date:d.date, note:d.weekly.unpaid}));
+
+  el.innerHTML = `
+    <!-- 요약 -->
+    <div class="dash-sec">
+      <div class="dash-sec-title">📊 ${from} ~ ${to} 요약 (${totalDays}일)</div>
+      <div class="stat-grid">
+        <div class="stat-card green">
+          <div class="stat-label">신환 내원</div>
+          <div class="stat-num">${totalNew}</div>
+          <div class="stat-unit">명 (일평균 ${(totalNew/totalDays).toFixed(1)}명)</div>
+        </div>
+        <div class="stat-card gold">
+          <div class="stat-label">카카오 미해결 누적</div>
+          <div class="stat-num">${totalKakao}</div>
+          <div class="stat-unit">건 (일평균 ${(totalKakao/totalDays).toFixed(1)}건)</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-label">해피콜 완료</div>
+          <div class="stat-num">${happyDone}</div>
+          <div class="stat-unit">건 / 전체 ${allHappy.length}건</div>
+        </div>
+        <div class="stat-card ${happyPend>0?'red':'green'}">
+          <div class="stat-label">해피콜 미완료</div>
+          <div class="stat-num">${happyPend}</div>
+          <div class="stat-unit">건</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 카카오 일별 추이 -->
+    <div class="dash-sec">
+      <div class="dash-sec-title">📱 카카오 미해결 추이</div>
+      <div class="kakao-bars">
+        ${data.map(d=>`
+          <div class="kakao-bar-row">
+            <div class="kakao-bar-label">${d.date.slice(5)}</div>
+            <div class="kakao-bar-wrap">
+              <div class="kakao-bar-fill" style="width:${Math.round((d.daily?.kakao?.count||0)/maxKakao*100)}%"></div>
+            </div>
+            <div class="kakao-bar-num">${d.daily?.kakao?.count||0}</div>
+          </div>
+          ${d.daily?.kakao?.memo ? `<div style="font-size:11px;color:#888880;padding:0 0 4px 60px">${d.daily.kakao.memo}</div>` : ''}
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- 신환 목록 -->
+    <div class="dash-sec">
+      <div class="dash-sec-title">🆕 신환 웰컴콜 목록</div>
+      ${data.some(d=>d.daily?.welcomeCalls?.length) ? `
+        <table class="day-table">
+          <tr><th>날짜</th><th>환자명</th><th>치료계획</th></tr>
+          ${data.flatMap(d=>(d.daily?.welcomeCalls||[]).map(w=>`
+            <tr>
+              <td>${d.date.slice(5)}</td>
+              <td>${w.name}</td>
+              <td style="color:#555550">${w.plan||'-'}</td>
+            </tr>`)).join('')}
+        </table>
+      ` : '<div style="font-size:13px;color:#888880;padding:8px">이 기간 신환 없음</div>'}
+    </div>
+
+    <!-- 해피콜 목록 -->
+    <div class="dash-sec">
+      <div class="dash-sec-title">📞 해피콜 현황</div>
+      ${allHappy.length ? `
+        <div class="happy-list">
+          ${allHappy.map(h=>`
+            <div class="happy-item">
+              <span class="happy-type ${h.type}">${h.type}</span>
+              <span>${h.name}</span>
+              <span class="badge ${h.status==='완료'?'done':h.status.includes('내일')?'pend':'miss'}">${h.status}</span>
+              <span class="happy-date">${h.date.slice(5)}</span>
+            </div>`).join('')}
+        </div>
+      ` : '<div style="font-size:13px;color:#888880;padding:8px">이 기간 해피콜 없음</div>'}
+    </div>
+
+    <!-- 미납 현황 (주간 입력된 경우) -->
+    ${unpaidEntries.length ? `
+      <div class="dash-sec">
+        <div class="dash-sec-title">⚠ 미납 현황</div>
+        <table class="day-table">
+          <tr><th>날짜</th><th>내용</th></tr>
+          ${unpaidEntries.map(u=>`<tr><td>${u.date.slice(5)}</td><td>${u.note}</td></tr>`).join('')}
+        </table>
+      </div>
+    ` : ''}
+
+    <!-- 내보내기 -->
+    <div class="export-row">
+      <button class="export-btn primary" onclick="exportJSON()">⬇ JSON 다운로드</button>
+      <button class="export-btn secondary" onclick="copyReport()">📋 보고 텍스트 복사</button>
+    </div>
+    <div id="copy-done" style="text-align:center;font-size:12px;color:#007A54;margin-top:8px;display:none">복사됐습니다</div>
+  `;
+}
+
+function exportJSON(){
+  const from = document.getElementById('dateFrom').value;
+  const to = document.getElementById('dateTo').value;
+  const blob = new Blob([JSON.stringify({period:{from,to}, days:currentData}, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `petit_report_${from}_${to}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function copyReport(){
+  const from = document.getElementById('dateFrom').value;
+  const to = document.getElementById('dateTo').value;
+  const data = currentData;
+  if(!data.length){ alert('데이터 없음'); return; }
+
+  const totalNew = data.reduce((s,d)=> s + (d.daily?.welcomeCalls?.length||0), 0);
+  const totalKakao = data.reduce((s,d)=> s + (d.daily?.kakao?.count||0), 0);
+  const allHappy = data.flatMap(d=>(d.daily?.happyCalls||[]).map(h=>({...h, date:d.date})));
+
+  let txt = `[쁘띠치과 보고] ${from} ~ ${to}\n`;
+  txt += `\n📊 요약\n`;
+  txt += `· 신환 ${totalNew}명\n`;
+  txt += `· 카카오 미해결 누적 ${totalKakao}건\n`;
+  txt += `· 해피콜 완료 ${allHappy.filter(h=>h.status==='완료').length}/${allHappy.length}건\n`;
+
+  if(totalNew){
+    txt += `\n🆕 신환\n`;
+    data.forEach(d=>(d.daily?.welcomeCalls||[]).forEach(w=>{
+      txt += `· ${d.date.slice(5)} ${w.name} / ${w.plan||'-'}\n`;
+    }));
+  }
+  if(allHappy.length){
+    txt += `\n📞 해피콜\n`;
+    allHappy.forEach(h=>{ txt += `· ${h.date.slice(5)} ${h.type} ${h.name} — ${h.status}\n`; });
+  }
+
+  navigator.clipboard.writeText(txt).then(()=>{
+    const d = document.getElementById('copy-done');
+    d.style.display='block';
+    setTimeout(()=>d.style.display='none', 2000);
+  });
+}
+
+// 초기 로드 — 이번 주
+window.addEventListener('load', ()=>{
+  const {from,to} = getRange('week');
+  document.getElementById('dateFrom').value = from;
+  document.getElementById('dateTo').value = to;
+  loadData(from, to);
+});
+</script>
+</body>
+</html>

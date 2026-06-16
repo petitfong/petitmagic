@@ -1004,6 +1004,113 @@
     setTimeout(()=>{ t.style.opacity='0'; }, 2500);
   }
 
+  // ── 자동 집계 함수 ──────────────────────────────
+  function getDateRange(type){
+    const now = new Date();
+    let from, to;
+    if(type==='week'){
+      const day = now.getDay();
+      from = new Date(now); from.setDate(now.getDate()-day+(day===0?-6:1));
+      to = new Date(now);
+    } else {
+      from = new Date(now.getFullYear(), now.getMonth(), 1);
+      to = new Date(now);
+    }
+    const fmt = d => d.toISOString().slice(0,10);
+    return {from: fmt(from), to: fmt(to)};
+  }
+
+  function loadPeriodData(type){
+    const {from, to} = getDateRange(type);
+    const keys = Object.keys(localStorage).filter(k=>k.startsWith('petit_daily_'));
+    return keys
+      .filter(k=>{ const d=k.replace('petit_daily_',''); return d>=from && d<=to; })
+      .map(k=>JSON.parse(localStorage.getItem(k)))
+      .sort((a,b)=>a.date.localeCompare(b.date));
+  }
+
+  function autoFillWeekly(){
+    const data = loadPeriodData('week');
+    if(!data.length){ alert('이번 주 저장된 일일 보고가 없습니다.'); return; }
+
+    // 신환 합계
+    const totalNew = data.reduce((s,d)=> s + (d.daily?.welcomeCalls?.length||0), 0);
+    const el = document.getElementById('w-new');
+    if(el) el.value = totalNew;
+
+    // 해피콜 미완료 목록 → 이슈 필드에
+    const pendHappy = data.flatMap(d=>(d.daily?.happyCalls||[])
+      .filter(h=>h.status!=='완료')
+      .map(h=>`${d.date.slice(5)} ${h.type} ${h.name} — ${h.status}`));
+    if(pendHappy.length){
+      const iss = document.getElementById('w-issue');
+      if(iss) iss.value = (iss.value ? iss.value+'\n' : '') + '[해피콜 미완료]\n' + pendHappy.join('\n');
+    }
+
+    // 카카오 미해결 요약
+    const kakaoSummary = data
+      .filter(d=>d.daily?.kakao?.count>0)
+      .map(d=>`${d.date.slice(5)} ${d.daily.kakao.count}건${d.daily.kakao.memo?' ('+d.daily.kakao.memo+')':''}`)
+      .join('\n');
+    if(kakaoSummary){
+      const iss = document.getElementById('w-issue');
+      if(iss) iss.value = (iss.value ? iss.value+'\n' : '') + '\n[카카오 미해결]\n' + kakaoSummary;
+    }
+
+    // 신환 목록 → stat 필드에
+    const newList = data.flatMap(d=>(d.daily?.welcomeCalls||[])
+      .map(w=>`${d.date.slice(5)} ${w.name} / ${w.plan||'-'}`));
+    if(newList.length){
+      const st = document.getElementById('w-stat');
+      if(st) st.value = '[신환 목록]\n' + newList.join('\n');
+    }
+
+    showFillToast('✅ 주간 데이터 집계 완료 (' + data.length + '일치)');
+  }
+
+  function autoFillMonthly(){
+    const data = loadPeriodData('month');
+    if(!data.length){ alert('이번 달 저장된 일일 보고가 없습니다.'); return; }
+
+    // 신환 합계 → 비고에
+    const totalNew = data.reduce((s,d)=> s + (d.daily?.welcomeCalls?.length||0), 0);
+    const allHappy = data.flatMap(d=>(d.daily?.happyCalls||[]).map(h=>({...h, date:d.date})));
+    const happyDone = allHappy.filter(h=>h.status==='완료').length;
+    const totalKakao = data.reduce((s,d)=> s + (d.daily?.kakao?.count||0), 0);
+
+    const taskEl = document.getElementById('m-next-task');
+    if(taskEl){
+      taskEl.value =
+        `[월간 집계]\n` +
+        `· 신환 ${totalNew}명\n` +
+        `· 해피콜 완료 ${happyDone}/${allHappy.length}건\n` +
+        `· 카카오 미해결 누적 ${totalKakao}건\n`;
+    }
+
+    // 신환 상세 목록
+    const newList = data.flatMap(d=>(d.daily?.welcomeCalls||[])
+      .map(w=>`${d.date.slice(5)} ${w.name} / ${w.plan||'-'}`));
+    if(newList.length){
+      const note = document.getElementById('m-priv-stat');
+      if(note) note.value = '[신환 목록]\n' + newList.join('\n');
+    }
+
+    showFillToast('✅ 월말 데이터 집계 완료 (' + data.length + '일치)');
+  }
+
+  function showFillToast(msg){
+    let t = document.getElementById('fill-toast');
+    if(!t){
+      t = document.createElement('div');
+      t.id = 'fill-toast';
+      t.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#007A54;color:#FAF8F0;font-size:13px;padding:10px 20px;border-radius:100px;z-index:9999;opacity:0;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.2)';
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    t.style.opacity = '1';
+    setTimeout(()=>{ t.style.opacity='0'; }, 3000);
+  }
+
   // 5분마다 자동 저장
   setInterval(saveReportJSON, 300000);
 
@@ -1153,6 +1260,12 @@
     💡 <strong>수요일</strong> — 중간 체크 (리콜·해피콜·이슈) &nbsp;|&nbsp;
     <strong>금요일</strong> — 청구 오류 확인 &nbsp;|&nbsp;
     <strong>토요일</strong> — 각 주별 보고 + 기계실 이슈
+  </div>
+
+  <!-- 자동 집계 버튼 -->
+  <div style="display:flex;gap:8px;margin:12px 0">
+    <button onclick="autoFillWeekly()" style="flex:1;padding:11px;border-radius:10px;background:#1E3D30;color:#FAF8F0;border:none;font-size:13px;font-weight:600;cursor:pointer">📊 이번 주 데이터 자동 집계</button>
+    <a href="petit_staff_dashboard.html" style="display:flex;align-items:center;padding:11px 16px;border-radius:10px;background:#E8F5F0;color:#007A54;border:1px solid #C5E8DC;font-size:13px;font-weight:600;text-decoration:none">통계 보기</a>
   </div>
 
   <!-- 치료중단 리콜 -->
@@ -1315,7 +1428,11 @@
     📌 마지막 주에 작성합니다. <strong>총괄 직원</strong>이 주요 항목을 취합하여 원장님께 보고.
   </div>
 
-  <!-- 청구 결과 -->
+  <!-- 자동 집계 버튼 -->
+  <div style="display:flex;gap:8px;margin:12px 0">
+    <button onclick="autoFillMonthly()" style="flex:1;padding:11px;border-radius:10px;background:#1E3D30;color:#FAF8F0;border:none;font-size:13px;font-weight:600;cursor:pointer">📊 이번 달 데이터 자동 집계</button>
+    <a href="petit_staff_dashboard.html" style="display:flex;align-items:center;padding:11px 16px;border-radius:10px;background:#E8F5F0;color:#007A54;border:1px solid #C5E8DC;font-size:13px;font-weight:600;text-decoration:none">통계 보기</a>
+  </div>
   <div class="section">
     <div class="section-head">
       <span class="icon">📋</span>
