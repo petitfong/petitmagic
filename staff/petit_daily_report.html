@@ -1163,154 +1163,7 @@
   setInterval(saveReportJSON, 300000);
 
   // 저장 버튼을 특이사항 섹션 하단에 추가
-  // ── 페이지 열릴 때 오늘 데이터 자동 복원 ──────────
-  function loadTodayData(){
-    const today = new Date().toISOString().slice(0,10);
-    const key = 'petit_daily_' + today;
-    let saved;
-    try { saved = JSON.parse(localStorage.getItem(key)); } catch(e){}
-    if(!saved) return;
-
-    const s = (id, val) => { const el=document.getElementById(id); if(el&&val!==undefined) el.value=val; };
-
-    // 일일
-    const d = saved.daily || {};
-    s('d-date', d.date);
-    s('d-staff', d.staff);
-    s('d-kakao-cnt', d.kakao?.count||0);
-    s('d-kakao-memo', d.kakao?.memo||'');
-    s('d-memo', d.otherMemo||'');
-
-    // 웰컴콜 복원
-    if(d.welcomeCalls?.length){
-      const wl = document.getElementById('welcome-list');
-      if(wl){ wl.innerHTML='';
-        d.welcomeCalls.forEach(w=>{
-          addWelcome();
-          const rows=wl.querySelectorAll('div');
-          const last=rows[rows.length-1];
-          const inputs=last.querySelectorAll('input');
-          if(inputs[0]) inputs[0].value=w.name||'';
-          if(inputs[1]) inputs[1].value=w.plan||'';
-        });
-      }
-    }
-
-    // 해피콜 복원
-    if(d.happyCalls?.length){
-      const hl = document.getElementById('happy-list');
-      if(hl){ hl.innerHTML='';
-        d.happyCalls.forEach(h=>{
-          addHappy();
-          const rows=hl.querySelectorAll('div');
-          const last=rows[rows.length-1];
-          const sels=last.querySelectorAll('select');
-          const inp=last.querySelector('input');
-          if(sels[0]) sels[0].value=h.type||'수술';
-          if(inp) inp.value=h.name||'';
-          if(sels[1]) sels[1].value=h.status||'완료';
-        });
-      }
-    }
-
-    // 주간
-    const w = saved.weekly || {};
-    s('w-date', w.date); s('w-staff', w.staff);
-    s('w-rc-perio', w.recall?.perio); s('w-rc-endo', w.recall?.endo);
-    s('w-rc-ortho', w.recall?.ortho); s('w-rc-impl', w.recall?.impl);
-    s('w-rc-note', w.recall?.note);
-    s('w-total', w.stats?.total); s('w-new', w.stats?.newPt);
-    s('w-stat', w.stats?.detail); s('w-consult-rate', w.stats?.consultRate);
-    s('w-unpaid', w.unpaid); s('w-claim-err', w.claimError);
-    s('w-claim-rq', w.claimRequest); s('w-vip', w.vip);
-    s('w-machine', w.machine); s('w-issue', w.issue);
-
-    // 월말
-    const m = saved.monthly || {};
-    s('m-month', m.month); s('m-staff', m.staff);
-    s('m-claim', m.claim); s('m-claim-note', m.claimNote);
-    s('m-priv', m.revenue?.private); s('m-priv-stat', m.revenue?.detail);
-    s('m-unpaid', m.unpaid?.amount); s('m-unpaid-note', m.unpaid?.note);
-    s('m-prepay', m.prepay);
-    s('m-food', m.expense?.food); s('m-tax', m.expense?.tax);
-    s('m-misc', m.expense?.misc); s('m-expense-note', m.expense?.note);
-    s('m-next-target', m.nextMonth?.target); s('m-next-task', m.nextMonth?.task);
-
-    // 경영
-    const g = saved.management || {};
-    s('g-month', g.month); s('g-staff', g.staff);
-    s('g-ortho-active', g.ortho?.active); s('g-ortho-new', g.ortho?.newPt);
-    s('g-ortho-note', g.ortho?.note);
-    s('g-impl-active', g.implant?.active); s('g-prosth', g.implant?.prosth);
-    s('g-lab', g.implant?.lab);
-    s('g-material', g.material); s('g-steril-note', g.steril);
-    s('g-revenue', g.revenue); s('g-target-pct', g.targetPct);
-    s('g-issue', g.issue); s('g-claim-note', g.claimNote);
-
-    showSaveToast('📂 오늘(' + today + ') 저장 데이터 복원됨');
-
-    // 내원 현황 복원
-    const st = d.stats || {};
-    s('v-total', st.total); s('v-new', st.newPt); s('v-staff-count', st.staffCount);
-    s('v-consult-yes', st.consultYes); s('v-consult-no', st.consultNo);
-    s('v-consult-detail', st.consultDetail); s('v-consult-list', st.consultList);
-    s('v-surgery-yes', st.surgeryYes); s('v-surgery-no', st.surgeryNo);
-    s('v-surgery-detail', st.surgeryDetail); s('v-surgery-list', st.surgeryList);
-
-    // 임플란트·교합·보철·엠도게인 복원
-    const restoreGroup = (prefix, group) => {
-      if(!group) return;
-      ['a','b','c'].forEach(k=>{
-        if(!group[k]) return;
-        const inp  = document.getElementById(`v-${prefix}-${k}`);
-        const disp = document.getElementById(`v-${prefix}-${k}-disp`);
-        const name = document.getElementById(`v-${prefix}-${k}-name`);
-        if(inp)  inp.value = group[k].count || 0;
-        if(disp) disp.textContent = group[k].count || 0;
-        if(name) name.value = group[k].name || '';
-      });
-    };
-    restoreGroup('impl',      d.implant);
-    restoreGroup('occlusion', d.occlusion);
-    restoreGroup('prosth',    d.prosth);
-    restoreGroup('emdogain',  d.emdogain);
-
-    // 체크리스트 복원
-    const restoreChecks = (gridId, checks) => {
-      if(!checks?.length) return;
-      const items = document.querySelectorAll(`#${gridId} .check-item`);
-      checks.forEach(c => {
-        if(items[c.idx]){
-          if(c.checked) items[c.idx].classList.add('checked');
-          else items[c.idx].classList.remove('checked');
-        }
-      });
-      const badge = document.getElementById(gridId==='daily-checks'?'d-check-count':'w-check-count');
-      if(badge){
-        const done = document.querySelectorAll(`#${gridId} .check-item.checked`).length;
-        badge.textContent = done + ' / ' + items.length;
-      }
-    };
-    restoreChecks('daily-checks', d.checklist);
-  }
-
-  document.addEventListener('DOMContentLoaded', function(){
-    // 저장 버튼 추가
-    const sec = document.querySelector('#welcome-list')?.closest('.section-body');
-    if(sec){
-      const btnWrap = document.createElement('div');
-      btnWrap.style.cssText = 'display:flex;gap:8px;margin-top:4px;padding-top:12px;border-top:1px solid #EAEAE4';
-      btnWrap.innerHTML = `
-        <button onclick="saveReportJSON()" style="flex:1;padding:10px;border-radius:8px;background:#1E3D30;color:#FAF8F0;border:none;font-size:13px;font-weight:600;cursor:pointer">💾 지금 저장</button>
-        <button onclick="downloadTodayJSON()" style="flex:1;padding:10px;border-radius:8px;background:#E8F5F0;color:#007A54;border:1px solid #C5E8DC;font-size:13px;font-weight:600;cursor:pointer">⬇ JSON 다운로드</button>`;
-      sec.appendChild(btnWrap);
-    }
-
-    // 초기 행 추가 후 약간 지연해서 복원 (DOM 생성 타이밍 보장)
-    setTimeout(loadTodayData, 100);
-  });
-
-  </script>
+</script>
 
   <!-- 보험서류 신청현황 — 통합 -->
   <div class="section" id="doc-section">
@@ -3288,6 +3141,156 @@ function openKakaoTalk() {
     showToast('✅ 복사 완료 — 카카오톡에 붙여넣기 하세요');
   }
 }
+
+// ── 저장·복원 시스템 ──────────────────────────────
+// ── 페이지 열릴 때 오늘 데이터 자동 복원 ──────────
+  function loadTodayData(){
+    const today = new Date().toISOString().slice(0,10);
+    const key = 'petit_daily_' + today;
+    let saved;
+    try { saved = JSON.parse(localStorage.getItem(key)); } catch(e){}
+    if(!saved) return;
+
+    const s = (id, val) => { const el=document.getElementById(id); if(el&&val!==undefined) el.value=val; };
+
+    // 일일
+    const d = saved.daily || {};
+    s('d-date', d.date);
+    s('d-staff', d.staff);
+    s('d-kakao-cnt', d.kakao?.count||0);
+    s('d-kakao-memo', d.kakao?.memo||'');
+    s('d-memo', d.otherMemo||'');
+
+    // 웰컴콜 복원
+    if(d.welcomeCalls?.length){
+      const wl = document.getElementById('welcome-list');
+      if(wl){ wl.innerHTML='';
+        d.welcomeCalls.forEach(w=>{
+          addWelcome();
+          const rows=wl.querySelectorAll('div');
+          const last=rows[rows.length-1];
+          const inputs=last.querySelectorAll('input');
+          if(inputs[0]) inputs[0].value=w.name||'';
+          if(inputs[1]) inputs[1].value=w.plan||'';
+        });
+      }
+    }
+
+    // 해피콜 복원
+    if(d.happyCalls?.length){
+      const hl = document.getElementById('happy-list');
+      if(hl){ hl.innerHTML='';
+        d.happyCalls.forEach(h=>{
+          addHappy();
+          const rows=hl.querySelectorAll('div');
+          const last=rows[rows.length-1];
+          const sels=last.querySelectorAll('select');
+          const inp=last.querySelector('input');
+          if(sels[0]) sels[0].value=h.type||'수술';
+          if(inp) inp.value=h.name||'';
+          if(sels[1]) sels[1].value=h.status||'완료';
+        });
+      }
+    }
+
+    // 주간
+    const w = saved.weekly || {};
+    s('w-date', w.date); s('w-staff', w.staff);
+    s('w-rc-perio', w.recall?.perio); s('w-rc-endo', w.recall?.endo);
+    s('w-rc-ortho', w.recall?.ortho); s('w-rc-impl', w.recall?.impl);
+    s('w-rc-note', w.recall?.note);
+    s('w-total', w.stats?.total); s('w-new', w.stats?.newPt);
+    s('w-stat', w.stats?.detail); s('w-consult-rate', w.stats?.consultRate);
+    s('w-unpaid', w.unpaid); s('w-claim-err', w.claimError);
+    s('w-claim-rq', w.claimRequest); s('w-vip', w.vip);
+    s('w-machine', w.machine); s('w-issue', w.issue);
+
+    // 월말
+    const m = saved.monthly || {};
+    s('m-month', m.month); s('m-staff', m.staff);
+    s('m-claim', m.claim); s('m-claim-note', m.claimNote);
+    s('m-priv', m.revenue?.private); s('m-priv-stat', m.revenue?.detail);
+    s('m-unpaid', m.unpaid?.amount); s('m-unpaid-note', m.unpaid?.note);
+    s('m-prepay', m.prepay);
+    s('m-food', m.expense?.food); s('m-tax', m.expense?.tax);
+    s('m-misc', m.expense?.misc); s('m-expense-note', m.expense?.note);
+    s('m-next-target', m.nextMonth?.target); s('m-next-task', m.nextMonth?.task);
+
+    // 경영
+    const g = saved.management || {};
+    s('g-month', g.month); s('g-staff', g.staff);
+    s('g-ortho-active', g.ortho?.active); s('g-ortho-new', g.ortho?.newPt);
+    s('g-ortho-note', g.ortho?.note);
+    s('g-impl-active', g.implant?.active); s('g-prosth', g.implant?.prosth);
+    s('g-lab', g.implant?.lab);
+    s('g-material', g.material); s('g-steril-note', g.steril);
+    s('g-revenue', g.revenue); s('g-target-pct', g.targetPct);
+    s('g-issue', g.issue); s('g-claim-note', g.claimNote);
+
+    showSaveToast('📂 오늘(' + today + ') 저장 데이터 복원됨');
+
+    // 내원 현황 복원
+    const st = d.stats || {};
+    s('v-total', st.total); s('v-new', st.newPt); s('v-staff-count', st.staffCount);
+    s('v-consult-yes', st.consultYes); s('v-consult-no', st.consultNo);
+    s('v-consult-detail', st.consultDetail); s('v-consult-list', st.consultList);
+    s('v-surgery-yes', st.surgeryYes); s('v-surgery-no', st.surgeryNo);
+    s('v-surgery-detail', st.surgeryDetail); s('v-surgery-list', st.surgeryList);
+
+    // 임플란트·교합·보철·엠도게인 복원
+    const restoreGroup = (prefix, group) => {
+      if(!group) return;
+      ['a','b','c'].forEach(k=>{
+        if(!group[k]) return;
+        const inp  = document.getElementById(`v-${prefix}-${k}`);
+        const disp = document.getElementById(`v-${prefix}-${k}-disp`);
+        const name = document.getElementById(`v-${prefix}-${k}-name`);
+        if(inp)  inp.value = group[k].count || 0;
+        if(disp) disp.textContent = group[k].count || 0;
+        if(name) name.value = group[k].name || '';
+      });
+    };
+    restoreGroup('impl',      d.implant);
+    restoreGroup('occlusion', d.occlusion);
+    restoreGroup('prosth',    d.prosth);
+    restoreGroup('emdogain',  d.emdogain);
+
+    // 체크리스트 복원
+    const restoreChecks = (gridId, checks) => {
+      if(!checks?.length) return;
+      const items = document.querySelectorAll(`#${gridId} .check-item`);
+      checks.forEach(c => {
+        if(items[c.idx]){
+          if(c.checked) items[c.idx].classList.add('checked');
+          else items[c.idx].classList.remove('checked');
+        }
+      });
+      const badge = document.getElementById(gridId==='daily-checks'?'d-check-count':'w-check-count');
+      if(badge){
+        const done = document.querySelectorAll(`#${gridId} .check-item.checked`).length;
+        badge.textContent = done + ' / ' + items.length;
+      }
+    };
+    restoreChecks('daily-checks', d.checklist);
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    // 저장 버튼 추가
+    const sec = document.querySelector('#welcome-list')?.closest('.section-body');
+    if(sec){
+      const btnWrap = document.createElement('div');
+      btnWrap.style.cssText = 'display:flex;gap:8px;margin-top:4px;padding-top:12px;border-top:1px solid #EAEAE4';
+      btnWrap.innerHTML = `
+        <button onclick="saveReportJSON()" style="flex:1;padding:10px;border-radius:8px;background:#1E3D30;color:#FAF8F0;border:none;font-size:13px;font-weight:600;cursor:pointer">💾 지금 저장</button>
+        <button onclick="downloadTodayJSON()" style="flex:1;padding:10px;border-radius:8px;background:#E8F5F0;color:#007A54;border:1px solid #C5E8DC;font-size:13px;font-weight:600;cursor:pointer">⬇ JSON 다운로드</button>`;
+      sec.appendChild(btnWrap);
+    }
+
+    // 초기 행 추가 후 약간 지연해서 복원 (DOM 생성 타이밍 보장)
+    setTimeout(loadTodayData, 100);
+  });
+
+  
 </script>
 
 </body>
