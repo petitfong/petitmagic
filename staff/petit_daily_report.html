@@ -1115,7 +1115,95 @@
   setInterval(saveReportJSON, 300000);
 
   // 저장 버튼을 특이사항 섹션 하단에 추가
+  // ── 페이지 열릴 때 오늘 데이터 자동 복원 ──────────
+  function loadTodayData(){
+    const today = new Date().toISOString().slice(0,10);
+    const key = 'petit_daily_' + today;
+    let saved;
+    try { saved = JSON.parse(localStorage.getItem(key)); } catch(e){}
+    if(!saved) return;
+
+    const s = (id, val) => { const el=document.getElementById(id); if(el&&val!==undefined) el.value=val; };
+
+    // 일일
+    const d = saved.daily || {};
+    s('d-date', d.date);
+    s('d-staff', d.staff);
+    s('d-kakao-cnt', d.kakao?.count||0);
+    s('d-kakao-memo', d.kakao?.memo||'');
+    s('d-memo', d.otherMemo||'');
+
+    // 웰컴콜 복원
+    if(d.welcomeCalls?.length){
+      const wl = document.getElementById('welcome-list');
+      if(wl){ wl.innerHTML='';
+        d.welcomeCalls.forEach(w=>{
+          addWelcome();
+          const rows=wl.querySelectorAll('div');
+          const last=rows[rows.length-1];
+          const inputs=last.querySelectorAll('input');
+          if(inputs[0]) inputs[0].value=w.name||'';
+          if(inputs[1]) inputs[1].value=w.plan||'';
+        });
+      }
+    }
+
+    // 해피콜 복원
+    if(d.happyCalls?.length){
+      const hl = document.getElementById('happy-list');
+      if(hl){ hl.innerHTML='';
+        d.happyCalls.forEach(h=>{
+          addHappy();
+          const rows=hl.querySelectorAll('div');
+          const last=rows[rows.length-1];
+          const sels=last.querySelectorAll('select');
+          const inp=last.querySelector('input');
+          if(sels[0]) sels[0].value=h.type||'수술';
+          if(inp) inp.value=h.name||'';
+          if(sels[1]) sels[1].value=h.status||'완료';
+        });
+      }
+    }
+
+    // 주간
+    const w = saved.weekly || {};
+    s('w-date', w.date); s('w-staff', w.staff);
+    s('w-rc-perio', w.recall?.perio); s('w-rc-endo', w.recall?.endo);
+    s('w-rc-ortho', w.recall?.ortho); s('w-rc-impl', w.recall?.impl);
+    s('w-rc-note', w.recall?.note);
+    s('w-total', w.stats?.total); s('w-new', w.stats?.newPt);
+    s('w-stat', w.stats?.detail); s('w-consult-rate', w.stats?.consultRate);
+    s('w-unpaid', w.unpaid); s('w-claim-err', w.claimError);
+    s('w-claim-rq', w.claimRequest); s('w-vip', w.vip);
+    s('w-machine', w.machine); s('w-issue', w.issue);
+
+    // 월말
+    const m = saved.monthly || {};
+    s('m-month', m.month); s('m-staff', m.staff);
+    s('m-claim', m.claim); s('m-claim-note', m.claimNote);
+    s('m-priv', m.revenue?.private); s('m-priv-stat', m.revenue?.detail);
+    s('m-unpaid', m.unpaid?.amount); s('m-unpaid-note', m.unpaid?.note);
+    s('m-prepay', m.prepay);
+    s('m-food', m.expense?.food); s('m-tax', m.expense?.tax);
+    s('m-misc', m.expense?.misc); s('m-expense-note', m.expense?.note);
+    s('m-next-target', m.nextMonth?.target); s('m-next-task', m.nextMonth?.task);
+
+    // 경영
+    const g = saved.management || {};
+    s('g-month', g.month); s('g-staff', g.staff);
+    s('g-ortho-active', g.ortho?.active); s('g-ortho-new', g.ortho?.newPt);
+    s('g-ortho-note', g.ortho?.note);
+    s('g-impl-active', g.implant?.active); s('g-prosth', g.implant?.prosth);
+    s('g-lab', g.implant?.lab);
+    s('g-material', g.material); s('g-steril-note', g.steril);
+    s('g-revenue', g.revenue); s('g-target-pct', g.targetPct);
+    s('g-issue', g.issue); s('g-claim-note', g.claimNote);
+
+    showSaveToast('📂 오늘(' + today + ') 저장 데이터 복원됨');
+  }
+
   document.addEventListener('DOMContentLoaded', function(){
+    // 저장 버튼 추가
     const sec = document.querySelector('#welcome-list')?.closest('.section-body');
     if(sec){
       const btnWrap = document.createElement('div');
@@ -1125,6 +1213,9 @@
         <button onclick="downloadTodayJSON()" style="flex:1;padding:10px;border-radius:8px;background:#E8F5F0;color:#007A54;border:1px solid #C5E8DC;font-size:13px;font-weight:600;cursor:pointer">⬇ JSON 다운로드</button>`;
       sec.appendChild(btnWrap);
     }
+
+    // 초기 행 추가 후 약간 지연해서 복원 (DOM 생성 타이밍 보장)
+    setTimeout(loadTodayData, 100);
   });
 
   </script>
