@@ -751,10 +751,276 @@
       <span class="icon">📝</span>
       <span class="title">특이사항 메모</span>
     </div>
-    <div class="section-body">
-      <textarea id="d-memo" style="width:100%;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--text);background:var(--cream);font-family:inherit;resize:vertical;min-height:90px;line-height:1.7;" placeholder="불만환자 / 원장 전달사항 / 기타 공유 내용을 자유롭게 입력하세요"></textarea>
+    <div class="section-body" style="display:flex;flex-direction:column;gap:14px">
+
+      <!-- 카카오 미해결 -->
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#555550;letter-spacing:.06em;margin-bottom:6px">📱 카카오톡 미해결 문의</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <input type="number" id="d-kakao-cnt" min="0" value="0"
+            style="width:70px;border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:15px;font-weight:700;text-align:center;background:var(--cream);color:var(--text)">
+          <span style="font-size:13px;color:var(--text-soft)">건 미해결</span>
+        </div>
+        <textarea id="d-kakao-memo" rows="2"
+          style="width:100%;border:1px solid var(--border);border-radius:8px;padding:9px 11px;font-size:12.5px;color:var(--text);background:var(--cream);font-family:inherit;resize:none;line-height:1.65;"
+          placeholder="미해결 문의 간략 요약 (예: 김○○-가격문의 미답, 박○○-예약변경 대기)"></textarea>
+      </div>
+
+      <!-- 웰컴콜 -->
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#555550;letter-spacing:.06em;margin-bottom:6px">📞 웰컴콜 <span style="font-weight:400;color:#888880">(신환 — 문자로 대체)</span></div>
+        <div id="welcome-list" style="display:flex;flex-direction:column;gap:6px"></div>
+        <button onclick="addWelcome()" style="margin-top:6px;font-size:12px;color:#007A54;background:#E8F5F0;border:none;border-radius:6px;padding:5px 12px;cursor:pointer">+ 신환 추가</button>
+      </div>
+
+      <!-- 해피콜 -->
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#555550;letter-spacing:.06em;margin-bottom:6px">📞 해피콜 <span style="font-weight:400;color:#888880">(수술·발치·불편 환자)</span></div>
+        <div id="happy-list" style="display:flex;flex-direction:column;gap:6px"></div>
+        <button onclick="addHappy()" style="margin-top:6px;font-size:12px;color:#C8A84B;background:#FFFBEF;border:none;border-radius:6px;padding:5px 12px;cursor:pointer">+ 해피콜 환자 추가</button>
+      </div>
+
+      <!-- 기타 전달사항 -->
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#555550;letter-spacing:.06em;margin-bottom:6px">📌 기타 전달사항</div>
+        <textarea id="d-memo" style="width:100%;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--text);background:var(--cream);font-family:inherit;resize:vertical;min-height:60px;line-height:1.7;" placeholder="원장 전달사항 / 불만환자 / 기타 공유 내용"></textarea>
+      </div>
+
     </div>
   </div>
+
+  <script>
+  // 웰컴콜 행 추가
+  function addWelcome(){
+    const row=document.createElement('div');
+    row.style.cssText='display:flex;align-items:center;gap:6px;';
+    row.innerHTML=`
+      <input type="text" placeholder="환자명" style="flex:1;border:1px solid #E0E0DA;border-radius:7px;padding:7px 10px;font-size:13px;font-family:inherit;background:#FAFAF9">
+      <input type="text" placeholder="치료계획 간략히" style="flex:2;border:1px solid #E0E0DA;border-radius:7px;padding:7px 10px;font-size:13px;font-family:inherit;background:#FAFAF9">
+      <button onclick="this.parentNode.remove()" style="font-size:16px;background:none;border:none;color:#AAAAAA;cursor:pointer;line-height:1">×</button>`;
+    document.getElementById('welcome-list').appendChild(row);
+  }
+
+  // 해피콜 행 추가
+  function addHappy(){
+    const row=document.createElement('div');
+    row.style.cssText='display:flex;align-items:center;gap:6px;flex-wrap:wrap;';
+    row.innerHTML=`
+      <select style="border:1px solid #E0E0DA;border-radius:7px;padding:7px 8px;font-size:13px;font-family:inherit;background:#FAFAF9;color:#333">
+        <option value="수술">수술</option>
+        <option value="발치">발치</option>
+        <option value="불편">불편</option>
+      </select>
+      <input type="text" placeholder="환자명" style="flex:1;min-width:80px;border:1px solid #E0E0DA;border-radius:7px;padding:7px 10px;font-size:13px;font-family:inherit;background:#FAFAF9">
+      <select style="border:1px solid #E0E0DA;border-radius:7px;padding:7px 8px;font-size:13px;font-family:inherit;background:#FAFAF9;color:#333">
+        <option value="완료">완료</option>
+        <option value="저녁수술-내일아침콜">저녁수술 → 내일아침콜</option>
+        <option value="미완료">미완료</option>
+      </select>
+      <button onclick="this.parentNode.remove()" style="font-size:16px;background:none;border:none;color:#AAAAAA;cursor:pointer;line-height:1">×</button>`;
+    document.getElementById('happy-list').appendChild(row);
+  }
+
+  // 초기 행 1개씩
+  addWelcome();
+  addHappy();
+
+  // 기존 getMemo 함수가 있다면 새 구조도 포함하도록 오버라이드
+  const _origGetMemo = window.getMemoText;
+  window.getMemoText = function(){
+    const kakao = document.getElementById('d-kakao-cnt')?.value || '0';
+    const kakaoMemo = document.getElementById('d-kakao-memo')?.value.trim() || '';
+    let txt = `[카카오 미해결] ${kakao}건`;
+    if(kakaoMemo) txt += ` — ${kakaoMemo}`;
+    txt += '\n';
+
+    // 웰컴콜
+    const wRows = document.querySelectorAll('#welcome-list > div');
+    if(wRows.length){
+      txt += `\n[웰컴콜-신환]\n`;
+      wRows.forEach(r=>{
+        const inputs=r.querySelectorAll('input');
+        const name=inputs[0]?.value.trim();
+        const plan=inputs[1]?.value.trim();
+        if(name) txt += `· ${name} / ${plan||'치료계획 미기입'}\n`;
+      });
+    }
+
+    // 해피콜
+    const hRows = document.querySelectorAll('#happy-list > div');
+    if(hRows.length){
+      txt += `\n[해피콜]\n`;
+      hRows.forEach(r=>{
+        const sels=r.querySelectorAll('select');
+        const inp=r.querySelector('input');
+        const type=sels[0]?.value;
+        const name=inp?.value.trim();
+        const status=sels[1]?.value;
+        if(name) txt += `· ${type} - ${name} - ${status}\n`;
+      });
+    }
+
+    const memo = document.getElementById('d-memo')?.value.trim();
+    if(memo) txt += `\n[기타] ${memo}`;
+    return txt;
+  };
+
+  // ── JSON 자동 저장 ──────────────────────────────
+  function buildReportJSON(){
+    const today = new Date().toISOString().slice(0,10);
+    const kakaoMemo = document.getElementById('d-kakao-memo')?.value.trim() || '';
+
+    const welcomes = [];
+    document.querySelectorAll('#welcome-list > div').forEach(r=>{
+      const inputs=r.querySelectorAll('input');
+      const name=inputs[0]?.value.trim();
+      const plan=inputs[1]?.value.trim();
+      if(name) welcomes.push({name, plan});
+    });
+
+    const happies = [];
+    document.querySelectorAll('#happy-list > div').forEach(r=>{
+      const sels=r.querySelectorAll('select');
+      const inp=r.querySelector('input');
+      const name=inp?.value.trim();
+      if(name) happies.push({type:sels[0]?.value, name, status:sels[1]?.value});
+    });
+
+    const getVal = id => document.getElementById(id)?.value?.trim() || '';
+
+    return {
+      date: today,
+      savedAt: new Date().toLocaleTimeString('ko-KR'),
+
+      // 일일 보고
+      daily: {
+        date: getVal('d-date'),
+        staff: getVal('d-staff'),
+        kakao: { count: parseInt(getVal('d-kakao-cnt')||'0'), memo: kakaoMemo },
+        welcomeCalls: welcomes,
+        happyCalls: happies,
+        otherMemo: getVal('d-memo')
+      },
+
+      // 주간 점검
+      weekly: {
+        date: getVal('w-date'),
+        staff: getVal('w-staff'),
+        recall: {
+          perio: getVal('w-rc-perio'),
+          endo: getVal('w-rc-endo'),
+          ortho: getVal('w-rc-ortho'),
+          impl: getVal('w-rc-impl'),
+          note: getVal('w-rc-note')
+        },
+        stats: {
+          total: getVal('w-total'),
+          newPt: getVal('w-new'),
+          detail: getVal('w-stat'),
+          consultRate: getVal('w-consult-rate')
+        },
+        unpaid: getVal('w-unpaid'),
+        claimError: getVal('w-claim-err'),
+        claimRequest: getVal('w-claim-rq'),
+        vip: getVal('w-vip'),
+        machine: getVal('w-machine'),
+        issue: getVal('w-issue')
+      },
+
+      // 월말 보고
+      monthly: {
+        month: getVal('m-month'),
+        staff: getVal('m-staff'),
+        claim: getVal('m-claim'),
+        claimNote: getVal('m-claim-note'),
+        revenue: { private: getVal('m-priv'), detail: getVal('m-priv-stat') },
+        unpaid: { amount: getVal('m-unpaid'), note: getVal('m-unpaid-note') },
+        prepay: getVal('m-prepay'),
+        expense: {
+          food: getVal('m-food'),
+          tax: getVal('m-tax'),
+          misc: getVal('m-misc'),
+          note: getVal('m-expense-note')
+        },
+        nextMonth: { target: getVal('m-next-target'), task: getVal('m-next-task') }
+      },
+
+      // 경영보고
+      management: {
+        month: getVal('g-month'),
+        staff: getVal('g-staff'),
+        ortho: {
+          active: getVal('g-ortho-active'),
+          newPt: getVal('g-ortho-new'),
+          note: getVal('g-ortho-note')
+        },
+        implant: {
+          active: getVal('g-impl-active'),
+          prosth: getVal('g-prosth'),
+          lab: getVal('g-lab')
+        },
+        material: getVal('g-material'),
+        steril: getVal('g-steril-note'),
+        revenue: getVal('g-revenue'),
+        targetPct: getVal('g-target-pct'),
+        issue: getVal('g-issue'),
+        claimNote: getVal('g-claim-note')
+      }
+    };
+  }
+
+  function saveReportJSON(){
+    const data = buildReportJSON();
+    const key = 'petit_daily_' + data.date;
+    try {
+      localStorage.setItem(key, JSON.stringify(data, null, 2));
+      showSaveToast('💾 오늘 보고 저장됨 (' + data.savedAt + ')');
+    } catch(e){
+      console.warn('localStorage 저장 실패:', e);
+    }
+    return data;
+  }
+
+  function downloadTodayJSON(){
+    const data = buildReportJSON();
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'daily_report_' + data.date + '.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  function showSaveToast(msg){
+    let t = document.getElementById('save-toast');
+    if(!t){
+      t = document.createElement('div');
+      t.id = 'save-toast';
+      t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1E3D30;color:#FAF8F0;font-size:12px;padding:8px 18px;border-radius:100px;z-index:9999;opacity:0;transition:opacity .3s;white-space:nowrap';
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    t.style.opacity = '1';
+    setTimeout(()=>{ t.style.opacity='0'; }, 2500);
+  }
+
+  // 5분마다 자동 저장
+  setInterval(saveReportJSON, 300000);
+
+  // 저장 버튼을 특이사항 섹션 하단에 추가
+  document.addEventListener('DOMContentLoaded', function(){
+    const sec = document.querySelector('#welcome-list')?.closest('.section-body');
+    if(sec){
+      const btnWrap = document.createElement('div');
+      btnWrap.style.cssText = 'display:flex;gap:8px;margin-top:4px;padding-top:12px;border-top:1px solid #EAEAE4';
+      btnWrap.innerHTML = `
+        <button onclick="saveReportJSON()" style="flex:1;padding:10px;border-radius:8px;background:#1E3D30;color:#FAF8F0;border:none;font-size:13px;font-weight:600;cursor:pointer">💾 지금 저장</button>
+        <button onclick="downloadTodayJSON()" style="flex:1;padding:10px;border-radius:8px;background:#E8F5F0;color:#007A54;border:1px solid #C5E8DC;font-size:13px;font-weight:600;cursor:pointer">⬇ JSON 다운로드</button>`;
+      sec.appendChild(btnWrap);
+    }
+  });
+
+  </script>
 
   <!-- 보험서류 신청현황 — 통합 -->
   <div class="section" id="doc-section">
@@ -823,16 +1089,21 @@
       <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;">
         <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:10px;">서류 선택 (복수 가능)</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;" id="dr-doc-grid">
-          <div class="dr-doc-chip" data-name="일반진단서/소견서" data-price="10000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">일반진단서/소견서<span style="font-size:10px;color:#aaa;display:block;">1만원/장</span></div>
+          <div class="dr-doc-chip" data-name="일반진단서/소견서" data-price="20000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">일반진단서/소견서<span style="font-size:10px;color:#aaa;display:block;">2만원/장</span></div>
           <div class="dr-doc-chip" data-name="병무용 진단서" data-price="20000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">병무용 진단서<span style="font-size:10px;color:#aaa;display:block;">2만원/장</span></div>
           <div class="dr-doc-chip" data-name="영수증" data-price="0" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">영수증<span style="font-size:10px;color:#aaa;display:block;">무료</span></div>
           <div class="dr-doc-chip" data-name="진료비 세부내역서" data-price="0" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">진료비 세부내역서<span style="font-size:10px;color:#aaa;display:block;">무료</span></div>
-          <div class="dr-doc-chip" data-name="치료확인서" data-price="10000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">치료확인서<span style="font-size:10px;color:#aaa;display:block;">1만원/장</span></div>
+          <div class="dr-doc-chip" data-name="치료확인서" data-price="3000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">치료확인서<span style="font-size:10px;color:#aaa;display:block;">3천원/장</span></div>
           <div class="dr-doc-chip" data-name="차트사본 1~5매" data-price="1000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">차트사본 1~5매<span style="font-size:10px;color:#aaa;display:block;">1천원/장</span></div>
           <div class="dr-doc-chip" data-name="차트사본 6매↑" data-price="100" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">차트사본 6매↑<span style="font-size:10px;color:#aaa;display:block;">100원/장</span></div>
-          <div class="dr-doc-chip" data-name="엑스레이" data-price="1000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">엑스레이<span style="font-size:10px;color:#aaa;display:block;">1천원/장</span></div>
-          <div class="dr-doc-chip" data-name="상해진단서 3주미만" data-price="50000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">상해진단서 3주미만<span style="font-size:10px;color:#aaa;display:block;">5만원</span></div>
-          <div class="dr-doc-chip" data-name="상해진단서 3주이상" data-price="100000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">상해진단서 3주이상<span style="font-size:10px;color:#aaa;display:block;">10만원</span></div>
+          <div class="dr-doc-chip" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#aaa;cursor:not-allowed;background:#F5F5F1;text-align:center;line-height:1.4;opacity:.5;pointer-events:none;">영상 필름<span style="font-size:10px;color:#aaa;display:block;">5천원 · 본원 미시행</span></div>
+          <div class="dr-doc-chip" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#aaa;cursor:not-allowed;background:#F5F5F1;text-align:center;line-height:1.4;opacity:.5;pointer-events:none;">영상 CD<span style="font-size:10px;color:#aaa;display:block;">1만원 · 본원 미시행</span></div>
+          <div class="dr-doc-chip" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#aaa;cursor:not-allowed;background:#F5F5F1;text-align:center;line-height:1.4;opacity:.5;pointer-events:none;">영상 DVD<span style="font-size:10px;color:#aaa;display:block;">2만원 · 본원 미시행</span></div>
+          <div class="dr-doc-chip" data-name="향후진료비 추정서(소)" data-price="50000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">향후진료비 추정서(소)<span style="font-size:10px;color:#aaa;display:block;">5만원</span></div>
+          <div class="dr-doc-chip" data-name="향후진료비 추정서(대)" data-price="100000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">향후진료비 추정서(대)<span style="font-size:10px;color:#aaa;display:block;">10만원</span></div>
+          <div class="dr-doc-chip" data-name="제증명서 사본" data-price="1000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">제증명서 사본<span style="font-size:10px;color:#aaa;display:block;">1천원</span></div>
+          <div class="dr-doc-chip" data-name="상해진단서 3주미만" data-price="100000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">상해진단서 3주미만<span style="font-size:10px;color:#aaa;display:block;">10만원</span></div>
+          <div class="dr-doc-chip" data-name="상해진단서 3주이상" data-price="150000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">상해진단서 3주이상<span style="font-size:10px;color:#aaa;display:block;">15만원</span></div>
         </div>
         <div style="margin-bottom:8px;">
           <div style="font-size:11px;color:var(--text-soft);font-weight:600;margin-bottom:4px;">수량</div>
@@ -1346,7 +1617,7 @@
 
 <script>
 // ── Apps Script URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_0G8R5Umor5AS627oGpujFr5nDtNMGAYOkwAVw3MpNPpGKYIhz5m6AWOLkAT149Mk/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz24LFBERcL0ta-CnEXSxXe8n7HI6v-LYzOjIdDYBmgBr7HiP09_Qy2rinqI9aFT19Z/exec';
 
 // ── 날짜·요일·주차 계산 및 오늘의 할일 알람
 (function(){
