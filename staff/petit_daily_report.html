@@ -866,303 +866,6 @@
   };
 
   // ── JSON 자동 저장 ──────────────────────────────
-  function buildReportJSON(){
-    const today = new Date().toISOString().slice(0,10);
-    const kakaoMemo = document.getElementById('d-kakao-memo')?.value.trim() || '';
-
-    const welcomes = [];
-    document.querySelectorAll('#welcome-list > div').forEach(r=>{
-      const inputs=r.querySelectorAll('input');
-      const name=inputs[0]?.value.trim();
-      const plan=inputs[1]?.value.trim();
-      if(name) welcomes.push({name, plan});
-    });
-
-    const happies = [];
-    document.querySelectorAll('#happy-list > div').forEach(r=>{
-      const sels=r.querySelectorAll('select');
-      const inp=r.querySelector('input');
-      const name=inp?.value.trim();
-      if(name) happies.push({type:sels[0]?.value, name, status:sels[1]?.value});
-    });
-
-    const getVal = id => document.getElementById(id)?.value?.trim() || '';
-
-    // 체크리스트 저장 — 체크된 항목 인덱스 배열로
-    const getChecks = gridId => {
-      const checks = [];
-      document.querySelectorAll(`#${gridId} .check-item`).forEach((el,i)=>{
-        checks.push({ idx:i, text: el.querySelector('.check-label,.check-text,span:last-child')?.textContent?.trim()||'', checked: el.classList.contains('checked') });
-      });
-      return checks;
-    };
-
-    return {
-      date: today,
-      savedAt: new Date().toLocaleTimeString('ko-KR'),
-
-      // 일일 보고
-      daily: {
-        date: getVal('d-date'),
-        staff: getVal('d-staff'),
-        kakao: { count: parseInt(getVal('d-kakao-cnt')||'0'), memo: kakaoMemo },
-        welcomeCalls: welcomes,
-        happyCalls: happies,
-        otherMemo: getVal('d-memo'),
-        checklist: getChecks('daily-checks'),
-        // 내원 현황
-        stats: {
-          total:       getVal('v-total'),
-          newPt:       getVal('v-new'),
-          staffCount:  getVal('v-staff-count'),
-          consultYes:  getVal('v-consult-yes'),
-          consultNo:   getVal('v-consult-no'),
-          consultDetail: getVal('v-consult-detail'),
-          consultList: getVal('v-consult-list'),
-          surgeryYes:  getVal('v-surgery-yes'),
-          surgeryNo:   getVal('v-surgery-no'),
-          surgeryDetail: getVal('v-surgery-detail'),
-          surgeryList: getVal('v-surgery-list'),
-        },
-        // 임플란트
-        implant: {
-          a: { count: getVal('v-impl-a'), name: getVal('v-impl-a-name') },
-          b: { count: getVal('v-impl-b'), name: getVal('v-impl-b-name') },
-          c: { count: getVal('v-impl-c'), name: getVal('v-impl-c-name') },
-        },
-        // 교합교정
-        occlusion: {
-          a: { count: getVal('v-occlusion-a'), name: getVal('v-occlusion-a-name') },
-          b: { count: getVal('v-occlusion-b'), name: getVal('v-occlusion-b-name') },
-          c: { count: getVal('v-occlusion-c'), name: getVal('v-occlusion-c-name') },
-        },
-        // 보철
-        prosth: {
-          a: { count: getVal('v-prosth-a'), name: getVal('v-prosth-a-name') },
-          b: { count: getVal('v-prosth-b'), name: getVal('v-prosth-b-name') },
-          c: { count: getVal('v-prosth-c'), name: getVal('v-prosth-c-name') },
-        },
-        // 엠도게인
-        emdogain: {
-          a: { count: getVal('v-emdogain-a'), name: getVal('v-emdogain-a-name') },
-          b: { count: getVal('v-emdogain-b'), name: getVal('v-emdogain-b-name') },
-          c: { count: getVal('v-emdogain-c'), name: getVal('v-emdogain-c-name') },
-        }
-      },
-
-      // 주간 점검
-      weekly: {
-        date: getVal('w-date'),
-        staff: getVal('w-staff'),
-        recall: {
-          perio: getVal('w-rc-perio'),
-          endo: getVal('w-rc-endo'),
-          ortho: getVal('w-rc-ortho'),
-          impl: getVal('w-rc-impl'),
-          note: getVal('w-rc-note')
-        },
-        stats: {
-          total: getVal('w-total'),
-          newPt: getVal('w-new'),
-          detail: getVal('w-stat'),
-          consultRate: getVal('w-consult-rate')
-        },
-        unpaid: getVal('w-unpaid'),
-        claimError: getVal('w-claim-err'),
-        claimRequest: getVal('w-claim-rq'),
-        vip: getVal('w-vip'),
-        machine: getVal('w-machine'),
-        issue: getVal('w-issue')
-      },
-
-      // 월말 보고
-      monthly: {
-        month: getVal('m-month'),
-        staff: getVal('m-staff'),
-        claim: getVal('m-claim'),
-        claimNote: getVal('m-claim-note'),
-        revenue: { private: getVal('m-priv'), detail: getVal('m-priv-stat') },
-        unpaid: { amount: getVal('m-unpaid'), note: getVal('m-unpaid-note') },
-        prepay: getVal('m-prepay'),
-        expense: {
-          food: getVal('m-food'),
-          tax: getVal('m-tax'),
-          misc: getVal('m-misc'),
-          note: getVal('m-expense-note')
-        },
-        nextMonth: { target: getVal('m-next-target'), task: getVal('m-next-task') }
-      },
-
-      // 경영보고
-      management: {
-        month: getVal('g-month'),
-        staff: getVal('g-staff'),
-        ortho: {
-          active: getVal('g-ortho-active'),
-          newPt: getVal('g-ortho-new'),
-          note: getVal('g-ortho-note')
-        },
-        implant: {
-          active: getVal('g-impl-active'),
-          prosth: getVal('g-prosth'),
-          lab: getVal('g-lab')
-        },
-        material: getVal('g-material'),
-        steril: getVal('g-steril-note'),
-        revenue: getVal('g-revenue'),
-        targetPct: getVal('g-target-pct'),
-        issue: getVal('g-issue'),
-        claimNote: getVal('g-claim-note')
-      }
-    };
-  }
-
-  function saveReportJSON(){
-    const data = buildReportJSON();
-    const key = 'petit_daily_' + data.date;
-    try {
-      localStorage.setItem(key, JSON.stringify(data, null, 2));
-      showSaveToast('💾 오늘 보고 저장됨 (' + data.savedAt + ')');
-    } catch(e){
-      console.warn('localStorage 저장 실패:', e);
-    }
-    return data;
-  }
-
-  function downloadTodayJSON(){
-    const data = buildReportJSON();
-    const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'daily_report_' + data.date + '.json';
-    a.click();
-    URL.revokeObjectURL(a.href);
-  }
-
-  function showSaveToast(msg){
-    let t = document.getElementById('save-toast');
-    if(!t){
-      t = document.createElement('div');
-      t.id = 'save-toast';
-      t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1E3D30;color:#FAF8F0;font-size:12px;padding:8px 18px;border-radius:100px;z-index:9999;opacity:0;transition:opacity .3s;white-space:nowrap';
-      document.body.appendChild(t);
-    }
-    t.textContent = msg;
-    t.style.opacity = '1';
-    setTimeout(()=>{ t.style.opacity='0'; }, 2500);
-  }
-
-  // ── 자동 집계 함수 ──────────────────────────────
-  function getDateRange(type){
-    const now = new Date();
-    let from, to;
-    if(type==='week'){
-      const day = now.getDay();
-      from = new Date(now); from.setDate(now.getDate()-day+(day===0?-6:1));
-      to = new Date(now);
-    } else {
-      from = new Date(now.getFullYear(), now.getMonth(), 1);
-      to = new Date(now);
-    }
-    const fmt = d => d.toISOString().slice(0,10);
-    return {from: fmt(from), to: fmt(to)};
-  }
-
-  function loadPeriodData(type){
-    const {from, to} = getDateRange(type);
-    const keys = Object.keys(localStorage).filter(k=>k.startsWith('petit_daily_'));
-    return keys
-      .filter(k=>{ const d=k.replace('petit_daily_',''); return d>=from && d<=to; })
-      .map(k=>JSON.parse(localStorage.getItem(k)))
-      .sort((a,b)=>a.date.localeCompare(b.date));
-  }
-
-  function autoFillWeekly(){
-    const data = loadPeriodData('week');
-    if(!data.length){ alert('이번 주 저장된 일일 보고가 없습니다.'); return; }
-
-    // 신환 합계
-    const totalNew = data.reduce((s,d)=> s + (d.daily?.welcomeCalls?.length||0), 0);
-    const el = document.getElementById('w-new');
-    if(el) el.value = totalNew;
-
-    // 해피콜 미완료 목록 → 이슈 필드에
-    const pendHappy = data.flatMap(d=>(d.daily?.happyCalls||[])
-      .filter(h=>h.status!=='완료')
-      .map(h=>`${d.date.slice(5)} ${h.type} ${h.name} — ${h.status}`));
-    if(pendHappy.length){
-      const iss = document.getElementById('w-issue');
-      if(iss) iss.value = (iss.value ? iss.value+'\n' : '') + '[해피콜 미완료]\n' + pendHappy.join('\n');
-    }
-
-    // 카카오 미해결 요약
-    const kakaoSummary = data
-      .filter(d=>d.daily?.kakao?.count>0)
-      .map(d=>`${d.date.slice(5)} ${d.daily.kakao.count}건${d.daily.kakao.memo?' ('+d.daily.kakao.memo+')':''}`)
-      .join('\n');
-    if(kakaoSummary){
-      const iss = document.getElementById('w-issue');
-      if(iss) iss.value = (iss.value ? iss.value+'\n' : '') + '\n[카카오 미해결]\n' + kakaoSummary;
-    }
-
-    // 신환 목록 → stat 필드에
-    const newList = data.flatMap(d=>(d.daily?.welcomeCalls||[])
-      .map(w=>`${d.date.slice(5)} ${w.name} / ${w.plan||'-'}`));
-    if(newList.length){
-      const st = document.getElementById('w-stat');
-      if(st) st.value = '[신환 목록]\n' + newList.join('\n');
-    }
-
-    showFillToast('✅ 주간 데이터 집계 완료 (' + data.length + '일치)');
-  }
-
-  function autoFillMonthly(){
-    const data = loadPeriodData('month');
-    if(!data.length){ alert('이번 달 저장된 일일 보고가 없습니다.'); return; }
-
-    // 신환 합계 → 비고에
-    const totalNew = data.reduce((s,d)=> s + (d.daily?.welcomeCalls?.length||0), 0);
-    const allHappy = data.flatMap(d=>(d.daily?.happyCalls||[]).map(h=>({...h, date:d.date})));
-    const happyDone = allHappy.filter(h=>h.status==='완료').length;
-    const totalKakao = data.reduce((s,d)=> s + (d.daily?.kakao?.count||0), 0);
-
-    const taskEl = document.getElementById('m-next-task');
-    if(taskEl){
-      taskEl.value =
-        `[월간 집계]\n` +
-        `· 신환 ${totalNew}명\n` +
-        `· 해피콜 완료 ${happyDone}/${allHappy.length}건\n` +
-        `· 카카오 미해결 누적 ${totalKakao}건\n`;
-    }
-
-    // 신환 상세 목록
-    const newList = data.flatMap(d=>(d.daily?.welcomeCalls||[])
-      .map(w=>`${d.date.slice(5)} ${w.name} / ${w.plan||'-'}`));
-    if(newList.length){
-      const note = document.getElementById('m-priv-stat');
-      if(note) note.value = '[신환 목록]\n' + newList.join('\n');
-    }
-
-    showFillToast('✅ 월말 데이터 집계 완료 (' + data.length + '일치)');
-  }
-
-  function showFillToast(msg){
-    let t = document.getElementById('fill-toast');
-    if(!t){
-      t = document.createElement('div');
-      t.id = 'fill-toast';
-      t.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#007A54;color:#FAF8F0;font-size:13px;padding:10px 20px;border-radius:100px;z-index:9999;opacity:0;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.2)';
-      document.body.appendChild(t);
-    }
-    t.textContent = msg;
-    t.style.opacity = '1';
-    setTimeout(()=>{ t.style.opacity='0'; }, 3000);
-  }
-
-  // 5분마다 자동 저장
-  setInterval(saveReportJSON, 300000);
-
-  // 저장 버튼을 특이사항 섹션 하단에 추가
 </script>
 
   <!-- 보험서류 신청현황 — 통합 -->
@@ -3289,8 +2992,203 @@ function openKakaoTalk() {
     // 초기 행 추가 후 약간 지연해서 복원 (DOM 생성 타이밍 보장)
     setTimeout(loadTodayData, 100);
   });
+// ── 저장·복원 시스템 ──────────────────────────────
+function buildReportJSON(){
+  const today = new Date().toISOString().slice(0,10);
+  const getVal = id => document.getElementById(id)?.value?.trim() || '';
 
-  
+  const welcomes = [];
+  document.querySelectorAll('#welcome-list > div').forEach(r=>{
+    const inputs=r.querySelectorAll('input');
+    const name=inputs[0]?.value.trim();
+    const plan=inputs[1]?.value.trim();
+    if(name) welcomes.push({name, plan});
+  });
+
+  const happies = [];
+  document.querySelectorAll('#happy-list > div').forEach(r=>{
+    const sels=r.querySelectorAll('select');
+    const inp=r.querySelector('input');
+    const name=inp?.value.trim();
+    if(name) happies.push({type:sels[0]?.value, name, status:sels[1]?.value});
+  });
+
+  const getChecks = gridId => {
+    const checks = [];
+    document.querySelectorAll('#'+gridId+' .check-item').forEach((el,i)=>{
+      checks.push({idx:i, checked: el.classList.contains('checked')});
+    });
+    return checks;
+  };
+
+  return {
+    date: today,
+    savedAt: new Date().toLocaleTimeString('ko-KR'),
+    daily: {
+      date: getVal('d-date'),
+      staff: getVal('d-staff'),
+      kakao: { count: parseInt(getVal('d-kakao-cnt')||'0'), memo: getVal('d-kakao-memo') },
+      welcomeCalls: welcomes,
+      happyCalls: happies,
+      otherMemo: getVal('d-memo'),
+      checklist: getChecks('daily-checks'),
+      stats: {
+        total: getVal('v-total'), newPt: getVal('v-new'),
+        staffCount: getVal('v-staff-count'),
+        consultYes: getVal('v-consult-yes'), consultNo: getVal('v-consult-no'),
+        consultDetail: getVal('v-consult-detail'), consultList: getVal('v-consult-list'),
+        surgeryYes: getVal('v-surgery-yes'), surgeryNo: getVal('v-surgery-no'),
+        surgeryDetail: getVal('v-surgery-detail'), surgeryList: getVal('v-surgery-list'),
+      },
+      implant: {
+        a:{count:document.getElementById('v-impl-a')?.value||'0', name:getVal('v-impl-a-name')},
+        b:{count:document.getElementById('v-impl-b')?.value||'0', name:getVal('v-impl-b-name')},
+        c:{count:document.getElementById('v-impl-c')?.value||'0', name:getVal('v-impl-c-name')},
+      },
+      occlusion: {
+        a:{count:document.getElementById('v-occlusion-a')?.value||'0', name:getVal('v-occlusion-a-name')},
+        b:{count:document.getElementById('v-occlusion-b')?.value||'0', name:getVal('v-occlusion-b-name')},
+        c:{count:document.getElementById('v-occlusion-c')?.value||'0', name:getVal('v-occlusion-c-name')},
+      },
+      prosth: {
+        a:{count:document.getElementById('v-prosth-a')?.value||'0', name:getVal('v-prosth-a-name')},
+        b:{count:document.getElementById('v-prosth-b')?.value||'0', name:getVal('v-prosth-b-name')},
+        c:{count:document.getElementById('v-prosth-c')?.value||'0', name:getVal('v-prosth-c-name')},
+      },
+      emdogain: {
+        a:{count:document.getElementById('v-emdogain-a')?.value||'0', name:getVal('v-emdogain-a-name')},
+        b:{count:document.getElementById('v-emdogain-b')?.value||'0', name:getVal('v-emdogain-b-name')},
+        c:{count:document.getElementById('v-emdogain-c')?.value||'0', name:getVal('v-emdogain-c-name')},
+      }
+    },
+    weekly: {
+      date:getVal('w-date'), staff:getVal('w-staff'),
+      recall:{perio:getVal('w-rc-perio'),endo:getVal('w-rc-endo'),ortho:getVal('w-rc-ortho'),impl:getVal('w-rc-impl'),note:getVal('w-rc-note')},
+      stats:{total:getVal('w-total'),newPt:getVal('w-new'),detail:getVal('w-stat'),consultRate:getVal('w-consult-rate')},
+      unpaid:getVal('w-unpaid'), claimError:getVal('w-claim-err'), claimRequest:getVal('w-claim-rq'),
+      vip:getVal('w-vip'), machine:getVal('w-machine'), issue:getVal('w-issue')
+    },
+    monthly: {
+      month:getVal('m-month'), staff:getVal('m-staff'),
+      claim:getVal('m-claim'), claimNote:getVal('m-claim-note'),
+      revenue:{private:getVal('m-priv'),detail:getVal('m-priv-stat')},
+      unpaid:{amount:getVal('m-unpaid'),note:getVal('m-unpaid-note')},
+      prepay:getVal('m-prepay'),
+      expense:{food:getVal('m-food'),tax:getVal('m-tax'),misc:getVal('m-misc'),note:getVal('m-expense-note')},
+      nextMonth:{target:getVal('m-next-target'),task:getVal('m-next-task')}
+    },
+    management: {
+      month:getVal('g-month'), staff:getVal('g-staff'),
+      ortho:{active:getVal('g-ortho-active'),newPt:getVal('g-ortho-new'),note:getVal('g-ortho-note')},
+      implant:{active:getVal('g-impl-active'),prosth:getVal('g-prosth'),lab:getVal('g-lab')},
+      material:getVal('g-material'), steril:getVal('g-steril-note'),
+      revenue:getVal('g-revenue'), targetPct:getVal('g-target-pct'),
+      issue:getVal('g-issue'), claimNote:getVal('g-claim-note')
+    }
+  };
+}
+
+function saveReportJSON(){
+  const data = buildReportJSON();
+  const key = 'petit_daily_' + data.date;
+  try {
+    localStorage.setItem(key, JSON.stringify(data, null, 2));
+    showSaveToast('\ud83d\udcbe \uc800\uc7a5 \uc644\ub8cc (' + data.savedAt + ')');
+  } catch(e){ console.warn('저장 오류:', e); }
+  return data;
+}
+
+function downloadTodayJSON(){
+  const data = buildReportJSON();
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'daily_report_' + data.date + '.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function showSaveToast(msg){
+  let t = document.getElementById('save-toast');
+  if(!t){
+    t = document.createElement('div');
+    t.id = 'save-toast';
+    t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1E3D30;color:#FAF8F0;font-size:12px;padding:8px 18px;border-radius:100px;z-index:9999;opacity:0;transition:opacity .3s;white-space:nowrap';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  setTimeout(()=>{ t.style.opacity='0'; }, 2500);
+}
+
+function loadTodayReport(){
+  const today = new Date().toISOString().slice(0,10);
+  const key = 'petit_daily_' + today;
+  let saved;
+  try { saved = JSON.parse(localStorage.getItem(key)); } catch(e){}
+  if(!saved) return;
+  const s = (id, val) => { const el=document.getElementById(id); if(el&&val!=null&&val!=='') el.value=val; };
+  const d = saved.daily || {};
+  s('d-date',d.date); s('d-staff',d.staff);
+  s('d-kakao-cnt',d.kakao?.count); s('d-kakao-memo',d.kakao?.memo);
+  s('d-memo',d.otherMemo);
+  const st = d.stats||{};
+  s('v-total',st.total); s('v-new',st.newPt); s('v-staff-count',st.staffCount);
+  s('v-consult-yes',st.consultYes); s('v-consult-no',st.consultNo);
+  s('v-consult-detail',st.consultDetail); s('v-consult-list',st.consultList);
+  s('v-surgery-yes',st.surgeryYes); s('v-surgery-no',st.surgeryNo);
+  s('v-surgery-detail',st.surgeryDetail); s('v-surgery-list',st.surgeryList);
+  ['impl','occlusion','prosth','emdogain'].forEach(prefix=>{
+    const g = d[prefix]||{};
+    ['a','b','c'].forEach(k=>{
+      if(!g[k]) return;
+      const inp=document.getElementById('v-'+prefix+'-'+k);
+      const disp=document.getElementById('v-'+prefix+'-'+k+'-disp');
+      const nm=document.getElementById('v-'+prefix+'-'+k+'-name');
+      if(inp) inp.value=g[k].count||'0';
+      if(disp) disp.textContent=g[k].count||'0';
+      if(nm) nm.value=g[k].name||'';
+    });
+  });
+  if(d.checklist?.length){
+    const items=document.querySelectorAll('#daily-checks .check-item');
+    d.checklist.forEach(c=>{ if(items[c.idx]){ if(c.checked) items[c.idx].classList.add('checked'); else items[c.idx].classList.remove('checked'); }});
+    const badge=document.getElementById('d-check-count');
+    if(badge){ const done=document.querySelectorAll('#daily-checks .check-item.checked').length; badge.textContent=done+' / '+items.length; }
+  }
+  if(d.welcomeCalls?.length){
+    const wl=document.getElementById('welcome-list'); if(wl){ wl.innerHTML='';
+      d.welcomeCalls.forEach(w=>{ addWelcome(); const rows=wl.querySelectorAll('div'); const last=rows[rows.length-1]; const inputs=last.querySelectorAll('input'); if(inputs[0]) inputs[0].value=w.name||''; if(inputs[1]) inputs[1].value=w.plan||''; }); }
+  }
+  if(d.happyCalls?.length){
+    const hl=document.getElementById('happy-list'); if(hl){ hl.innerHTML='';
+      d.happyCalls.forEach(h=>{ addHappy(); const rows=hl.querySelectorAll('div'); const last=rows[rows.length-1]; const sels=last.querySelectorAll('select'); const inp=last.querySelector('input'); if(sels[0]) sels[0].value=h.type||'수술'; if(inp) inp.value=h.name||''; if(sels[1]) sels[1].value=h.status||'완료'; }); }
+  }
+  const w=saved.weekly||{};
+  s('w-date',w.date); s('w-staff',w.staff);
+  s('w-rc-perio',w.recall?.perio); s('w-rc-endo',w.recall?.endo);
+  s('w-rc-ortho',w.recall?.ortho); s('w-rc-impl',w.recall?.impl); s('w-rc-note',w.recall?.note);
+  s('w-total',w.stats?.total); s('w-new',w.stats?.newPt); s('w-stat',w.stats?.detail); s('w-consult-rate',w.stats?.consultRate);
+  s('w-unpaid',w.unpaid); s('w-claim-err',w.claimError); s('w-claim-rq',w.claimRequest);
+  s('w-vip',w.vip); s('w-machine',w.machine); s('w-issue',w.issue);
+  const m=saved.monthly||{};
+  s('m-month',m.month); s('m-staff',m.staff); s('m-claim',m.claim); s('m-claim-note',m.claimNote);
+  s('m-priv',m.revenue?.private); s('m-priv-stat',m.revenue?.detail);
+  s('m-unpaid',m.unpaid?.amount); s('m-unpaid-note',m.unpaid?.note); s('m-prepay',m.prepay);
+  s('m-food',m.expense?.food); s('m-tax',m.expense?.tax); s('m-misc',m.expense?.misc); s('m-expense-note',m.expense?.note);
+  s('m-next-target',m.nextMonth?.target); s('m-next-task',m.nextMonth?.task);
+  const g=saved.management||{};
+  s('g-month',g.month); s('g-staff',g.staff);
+  s('g-ortho-active',g.ortho?.active); s('g-ortho-new',g.ortho?.newPt); s('g-ortho-note',g.ortho?.note);
+  s('g-impl-active',g.implant?.active); s('g-prosth',g.implant?.prosth); s('g-lab',g.implant?.lab);
+  s('g-material',g.material); s('g-steril-note',g.steril);
+  s('g-revenue',g.revenue); s('g-target-pct',g.targetPct); s('g-issue',g.issue); s('g-claim-note',g.claimNote);
+  showSaveToast('\ud83d\udcc2 \uc624\ub298 \ub370\uc774\ud130 \ubcf5\uc6d0\ub428 (' + today + ')');
+}
+
+// 5분 자동저장
+setInterval(saveReportJSON, 300000);
+
 </script>
 
 </body>
