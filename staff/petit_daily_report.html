@@ -888,6 +888,15 @@
 
     const getVal = id => document.getElementById(id)?.value?.trim() || '';
 
+    // 체크리스트 저장 — 체크된 항목 인덱스 배열로
+    const getChecks = gridId => {
+      const checks = [];
+      document.querySelectorAll(`#${gridId} .check-item`).forEach((el,i)=>{
+        checks.push({ idx:i, text: el.querySelector('.check-label,.check-text,span:last-child')?.textContent?.trim()||'', checked: el.classList.contains('checked') });
+      });
+      return checks;
+    };
+
     return {
       date: today,
       savedAt: new Date().toLocaleTimeString('ko-KR'),
@@ -899,7 +908,46 @@
         kakao: { count: parseInt(getVal('d-kakao-cnt')||'0'), memo: kakaoMemo },
         welcomeCalls: welcomes,
         happyCalls: happies,
-        otherMemo: getVal('d-memo')
+        otherMemo: getVal('d-memo'),
+        checklist: getChecks('daily-checks'),
+        // 내원 현황
+        stats: {
+          total:       getVal('v-total'),
+          newPt:       getVal('v-new'),
+          staffCount:  getVal('v-staff-count'),
+          consultYes:  getVal('v-consult-yes'),
+          consultNo:   getVal('v-consult-no'),
+          consultDetail: getVal('v-consult-detail'),
+          consultList: getVal('v-consult-list'),
+          surgeryYes:  getVal('v-surgery-yes'),
+          surgeryNo:   getVal('v-surgery-no'),
+          surgeryDetail: getVal('v-surgery-detail'),
+          surgeryList: getVal('v-surgery-list'),
+        },
+        // 임플란트
+        implant: {
+          a: { count: getVal('v-impl-a'), name: getVal('v-impl-a-name') },
+          b: { count: getVal('v-impl-b'), name: getVal('v-impl-b-name') },
+          c: { count: getVal('v-impl-c'), name: getVal('v-impl-c-name') },
+        },
+        // 교합교정
+        occlusion: {
+          a: { count: getVal('v-occlusion-a'), name: getVal('v-occlusion-a-name') },
+          b: { count: getVal('v-occlusion-b'), name: getVal('v-occlusion-b-name') },
+          c: { count: getVal('v-occlusion-c'), name: getVal('v-occlusion-c-name') },
+        },
+        // 보철
+        prosth: {
+          a: { count: getVal('v-prosth-a'), name: getVal('v-prosth-a-name') },
+          b: { count: getVal('v-prosth-b'), name: getVal('v-prosth-b-name') },
+          c: { count: getVal('v-prosth-c'), name: getVal('v-prosth-c-name') },
+        },
+        // 엠도게인
+        emdogain: {
+          a: { count: getVal('v-emdogain-a'), name: getVal('v-emdogain-a-name') },
+          b: { count: getVal('v-emdogain-b'), name: getVal('v-emdogain-b-name') },
+          c: { count: getVal('v-emdogain-c'), name: getVal('v-emdogain-c-name') },
+        }
       },
 
       // 주간 점검
@@ -1200,6 +1248,50 @@
     s('g-issue', g.issue); s('g-claim-note', g.claimNote);
 
     showSaveToast('📂 오늘(' + today + ') 저장 데이터 복원됨');
+
+    // 내원 현황 복원
+    const st = d.stats || {};
+    s('v-total', st.total); s('v-new', st.newPt); s('v-staff-count', st.staffCount);
+    s('v-consult-yes', st.consultYes); s('v-consult-no', st.consultNo);
+    s('v-consult-detail', st.consultDetail); s('v-consult-list', st.consultList);
+    s('v-surgery-yes', st.surgeryYes); s('v-surgery-no', st.surgeryNo);
+    s('v-surgery-detail', st.surgeryDetail); s('v-surgery-list', st.surgeryList);
+
+    // 임플란트·교합·보철·엠도게인 복원
+    const restoreGroup = (prefix, group) => {
+      if(!group) return;
+      ['a','b','c'].forEach(k=>{
+        if(!group[k]) return;
+        const inp  = document.getElementById(`v-${prefix}-${k}`);
+        const disp = document.getElementById(`v-${prefix}-${k}-disp`);
+        const name = document.getElementById(`v-${prefix}-${k}-name`);
+        if(inp)  inp.value = group[k].count || 0;
+        if(disp) disp.textContent = group[k].count || 0;
+        if(name) name.value = group[k].name || '';
+      });
+    };
+    restoreGroup('impl',      d.implant);
+    restoreGroup('occlusion', d.occlusion);
+    restoreGroup('prosth',    d.prosth);
+    restoreGroup('emdogain',  d.emdogain);
+
+    // 체크리스트 복원
+    const restoreChecks = (gridId, checks) => {
+      if(!checks?.length) return;
+      const items = document.querySelectorAll(`#${gridId} .check-item`);
+      checks.forEach(c => {
+        if(items[c.idx]){
+          if(c.checked) items[c.idx].classList.add('checked');
+          else items[c.idx].classList.remove('checked');
+        }
+      });
+      const badge = document.getElementById(gridId==='daily-checks'?'d-check-count':'w-check-count');
+      if(badge){
+        const done = document.querySelectorAll(`#${gridId} .check-item.checked`).length;
+        badge.textContent = done + ' / ' + items.length;
+      }
+    };
+    restoreChecks('daily-checks', d.checklist);
   }
 
   document.addEventListener('DOMContentLoaded', function(){
