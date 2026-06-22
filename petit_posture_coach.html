@@ -293,6 +293,28 @@ header{padding:18px 20px 0;display:flex;align-items:center;justify-content:space
   background:var(--accent);color:#0a1a10;font-size:15px;font-weight:700;
   font-family:inherit;cursor:pointer;}
 .ob-foot{text-align:center;font-size:11px;color:var(--text3);margin-top:8px;line-height:1.6;}
+/* BTB 자세 단계 */
+.btb-step {
+  display:flex; align-items:flex-start; gap:12px;
+  padding:12px; border-radius:var(--r-sm);
+  background:var(--surface2); border:1.5px solid var(--border);
+  cursor:pointer; transition:all .2s;
+}
+.btb-step:hover { border-color:var(--accent2); }
+.btb-step.checked { background:var(--accent-dim); border-color:rgba(184,240,200,.4); }
+.bs-num {
+  width:24px; height:24px; border-radius:50%; flex-shrink:0;
+  background:var(--border); color:var(--text2);
+  font-size:11px; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
+}
+.btb-step.checked .bs-num { background:var(--accent); color:#0a1a10; }
+.bs-body { flex:1; }
+.bs-title { font-size:13px; font-weight:700; margin-bottom:3px; }
+.bs-desc { font-size:11px; color:var(--text3); line-height:1.55; }
+.btb-step.checked .bs-desc { color:var(--text2); }
+.bs-check { font-size:18px; flex-shrink:0; color:var(--text3); line-height:1; }
+.btb-step.checked .bs-check { color:var(--accent); }
 </style>
 </head>
 <body>
@@ -504,20 +526,66 @@ header{padding:18px 20px 0;display:flex;align-items:center;justify-content:space
       <!-- 정면 평가 결과 -->
       <div class="assess-guide" id="assessFront" style="display:none;"></div>
 
-      <!-- 측면 마커 -->
-      <div class="marker-guide" id="assessSide" style="display:none;">
-        <div class="marker-step active" id="mStep1">
-          <div class="ms-num">1</div>
-          <div><div class="ms-text">귀 위치 탭하기</div><div class="ms-sub">화면 위 카메라 영상에서 귀 위치를 탭하세요</div></div>
+      <!-- 측면 BTB 자세 가이드 -->
+      <div id="assessSide" style="display:none;">
+
+        <!-- BTB 3단계 자세 체크 -->
+        <div style="padding:12px 16px 0;">
+          <div style="font-size:11px;color:var(--accent2);letter-spacing:.08em;margin-bottom:8px;">BTB · 바른 자세 3단계</div>
+          <div style="display:flex;flex-direction:column;gap:6px;" id="btbSteps">
+
+            <div class="btb-step" id="bStep1" onclick="toggleBtbStep(1)">
+              <div class="bs-num">1</div>
+              <div class="bs-body">
+                <div class="bs-title">골반 세우기 — 좌골로 앉기</div>
+                <div class="bs-desc">골반을 앞으로 기울여 좌골(엉덩이 뼈)이 의자에 닿도록 앉으세요.<br>허리가 자연스럽게 살짝 앞으로 휩니다.</div>
+              </div>
+              <div class="bs-check" id="bc1">○</div>
+            </div>
+
+            <div class="btb-step" id="bStep2" onclick="toggleBtbStep(2)">
+              <div class="bs-num">2</div>
+              <div class="bs-body">
+                <div class="bs-title">귀–어깨 일직선</div>
+                <div class="bs-desc">귀가 어깨 바로 위에 위치해야 합니다.<br>턱이 앞으로 나오지 않도록 살짝 당겨주세요.</div>
+              </div>
+              <div class="bs-check" id="bc2">○</div>
+            </div>
+
+            <div class="btb-step" id="bStep3" onclick="toggleBtbStep(3)">
+              <div class="bs-num">3</div>
+              <div class="bs-body">
+                <div class="bs-title">턱 위치 — 쇄골 위 자연스러운 위치</div>
+                <div class="bs-desc">턱 아래 주먹 하나가 들어갈 공간을 확보하세요.<br>턱이 쇄골 위에 자연스럽게 떨어지는 위치입니다.</div>
+              </div>
+              <div class="bs-check" id="bc3">○</div>
+            </div>
+
+          </div>
+          <div style="font-size:11px;color:var(--text3);margin-top:8px;padding:8px;background:var(--surface2);border-radius:6px;line-height:1.6;">
+            💡 3단계를 모두 체크하면 카메라에 귀와 어깨 위치를 마킹합니다
+          </div>
         </div>
-        <div class="marker-step" id="mStep2">
-          <div class="ms-num">2</div>
-          <div><div class="ms-text">어깨 위치 탭하기</div><div class="ms-sub">귀와 같은 쪽 어깨 끝을 탭하세요</div></div>
+
+        <!-- 마커 설정 (체크 완료 후 표시) -->
+        <div id="markerSection" style="display:none;padding:12px 16px 0;">
+          <div style="font-size:11px;color:var(--accent2);letter-spacing:.08em;margin-bottom:8px;">카메라 마킹 — 기준선 설정</div>
+          <div class="marker-guide">
+            <div class="marker-step active" id="mStep1">
+              <div class="ms-num">1</div>
+              <div><div class="ms-text">귀 위치 탭하기</div><div class="ms-sub">카메라 영상에서 귀 위치를 탭하세요</div></div>
+            </div>
+            <div class="marker-step" id="mStep2">
+              <div class="ms-num">2</div>
+              <div><div class="ms-text">어깨 위치 탭하기</div><div class="ms-sub">같은 쪽 어깨 끝을 탭하세요</div></div>
+            </div>
+            <div class="marker-step" id="mStep3">
+              <div class="ms-num">3</div>
+              <div><div class="ms-text">기준선 저장</div><div class="ms-sub">귀–어깨 수직 기준선이 저장됩니다</div></div>
+            </div>
+          </div>
         </div>
-        <div class="marker-step" id="mStep3">
-          <div class="ms-num">3</div>
-          <div><div class="ms-text">기준선 확인 및 저장</div><div class="ms-sub">귀–어깨 기준선이 표시됩니다</div></div>
-        </div>
+
       </div>
 
       <div style="padding:0 16px 14px;">
@@ -554,8 +622,33 @@ header{padding:18px 20px 0;display:flex;align-items:center;justify-content:space
           <div class="ind-val" id="valTilt" style="color:var(--accent2)">기준</div>
         </div>
       </div>
-      <div style="padding:0 14px 12px;">
-        <button class="btn btn-o" style="font-size:12px;padding:9px;" onclick="reCalibrate()">🔄 기준 자세 다시 저장</button>
+      <div style="padding:0 14px 12px;display:flex;flex-direction:column;gap:7px;">
+        <!-- 측면 모드: 각도 현황 + 재설정 -->
+        <div id="sideAngleCard" style="display:none;background:var(--surface2);border-radius:var(--r-sm);padding:11px 14px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+            <div style="font-size:11px;color:var(--text3);letter-spacing:.06em;">두부전방 각도</div>
+            <div style="font-size:10px;color:var(--text3);">참고용 수치</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div style="font-size:32px;font-weight:700;font-variant-numeric:tabular-nums;" id="angleDisplay">—°</div>
+            <div style="flex:1;">
+              <div style="font-size:13px;font-weight:700;" id="angleGrade">—</div>
+              <div style="font-size:11px;color:var(--text3);margin-top:2px;" id="angleDesc">—</div>
+            </div>
+          </div>
+          <!-- 각도 기준 바 -->
+          <div style="position:relative;height:6px;background:linear-gradient(to right,#b8f0c8 0%,#b8f0c8 33%,#f5c842 33%,#f5c842 66%,#f0706a 66%,#f0706a 100%);border-radius:3px;">
+            <div id="angleCursor" style="position:absolute;top:-3px;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid #0b0c0e;transform:translateX(-50%);transition:left .5s;left:0%;"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:4px;font-size:9px;color:var(--text3);">
+            <span>✅ 0~5° 정상</span><span>⚠️ 6~15° 경계</span><span>🔴 16°+ 위험</span>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:7px;">
+          <button class="btn btn-o" style="font-size:12px;padding:9px;flex:1;" onclick="reCalibrate()">🔄 기준 자세 다시 저장</button>
+          <button class="btn btn-o" id="remarkerBtn" style="font-size:12px;padding:9px;flex:1;display:none;" onclick="reMarker()">📍 마커 재설정</button>
+        </div>
       </div>
     </div>
 
@@ -829,22 +922,60 @@ function drawFrontGuidelines(fb) {
 }
 
 // ════════════════════════════════════
+//  BTB 자세 단계 체크
+// ════════════════════════════════════
+const btbChecked = { 1:false, 2:false, 3:false };
+
+function toggleBtbStep(n) {
+  btbChecked[n] = !btbChecked[n];
+  const step = document.getElementById('bStep'+n);
+  const check = document.getElementById('bc'+n);
+  step.classList.toggle('checked', btbChecked[n]);
+  check.textContent = btbChecked[n] ? '✓' : '○';
+
+  // 3개 모두 체크되면 마커 섹션 표시
+  if (btbChecked[1] && btbChecked[2] && btbChecked[3]) {
+    document.getElementById('markerSection').style.display = 'block';
+    document.getElementById('markerSection').scrollIntoView({ behavior:'smooth', block:'nearest' });
+    // 마커 캔버스 활성화
+    markerCvs.style.display = 'block';
+    markerCvs.width = markerCvs.offsetWidth;
+    markerCvs.height = markerCvs.offsetHeight;
+    S.markers = []; S.markerStep = 0;
+    markerCvs.onclick = handleMarkerTap;
+    drawMarkerCanvas();
+    showToast('👆 마킹 시작', '카메라 영상에서 귀 위치를 탭하세요', 'ok');
+  } else {
+    // 체크 해제 시 마커 숨김
+    if (!(btbChecked[1] && btbChecked[2] && btbChecked[3])) {
+      document.getElementById('markerSection').style.display = 'none';
+      markerCvs.style.display = 'none';
+      markerCvs.onclick = null;
+      S.markers = []; S.markerStep = 0;
+      document.getElementById('mStep1').className = 'marker-step active';
+      document.getElementById('mStep2').className = 'marker-step';
+      document.getElementById('mStep3').className = 'marker-step';
+      document.getElementById('assessBtn').style.display = 'none';
+      mctx.clearRect(0,0,markerCvs.width,markerCvs.height);
+    }
+  }
+}
+
+// ════════════════════════════════════
 //  PHASE 2B: 측면 마킹
 // ════════════════════════════════════
 function startSideMarking() {
-  document.getElementById('assessTitle').textContent = '측면 마커 설정';
-  document.getElementById('assessSub').textContent = '카메라 영상에서 귀와 어깨 위치를 탭하세요';
-  document.getElementById('assessSide').style.display = 'flex';
-
-  // 마커 캔버스 활성화
-  markerCvs.style.display = 'block';
-  markerCvs.width = markerCvs.offsetWidth;
-  markerCvs.height = markerCvs.offsetHeight;
-  S.markers = [];
-  S.markerStep = 0;
-
-  markerCvs.onclick = handleMarkerTap;
-  drawMarkerCanvas();
+  document.getElementById('assessTitle').textContent = '측면 자세 설정';
+  document.getElementById('assessSub').textContent = '3단계 자세를 순서대로 체크해주세요';
+  document.getElementById('assessSide').style.display = 'block';
+  // 체크 초기화
+  [1,2,3].forEach(n=>{
+    btbChecked[n]=false;
+    document.getElementById('bStep'+n).classList.remove('checked');
+    document.getElementById('bc'+n).textContent='○';
+  });
+  document.getElementById('markerSection').style.display='none';
+  markerCvs.style.display='none';
 }
 
 function handleMarkerTap(e) {
@@ -1099,11 +1230,13 @@ function startMonitoring() {
   document.getElementById('ringWrap').style.display='flex';
   document.getElementById('scoreBadge').style.display='flex';
 
-  // 측면 라벨
+  // 측면 라벨 + 각도 카드
   if (S.camMode==='side') {
     document.getElementById('lblHead').textContent='📐 두부전방';
     document.getElementById('tiltRow').style.display='none';
     document.getElementById('indSub').textContent='귀–어깨 기준선 대비 변화량';
+    document.getElementById('sideAngleCard').style.display='block';
+    document.getElementById('remarkerBtn').style.display='block';
   }
 
   // 세션 바
@@ -1117,6 +1250,7 @@ function startMonitoring() {
   setCamStatus('감지 중','ok');
   const txt=S.sessionMin>0?`${S.sessionMin}분 세션 시작!`:'자동 모니터링 시작!';
   showToast('✅ '+txt,'10분마다 자세를 체크합니다','ok');
+  if (S.camMode==='side') updateAngleDisplay();
 
   monitorLoop();
 
@@ -1149,6 +1283,7 @@ function monitorLoop() {
     updateIndicators(m);
     updateLiveScore(m.score);
     drawMonitorGuide(m);
+    if (S.camMode==='side' && S.frameCount%60===0) updateAngleDisplay();
     if (S.monMode==='realtime') checkRealtimeAlert(m.score,m);
   } else {
     S.noFaceCount++;
@@ -1164,6 +1299,38 @@ function isFacePresent(d) {
 }
 
 // ════════════════════════════════════
+//  BTB 리마인더 텍스트 (순환)
+// ════════════════════════════════════
+const BTB_REMIND = [
+  { num:'①', text:'골반 세우기 — 좌골로 앉기' },
+  { num:'②', text:'귀–어깨 일직선 — 턱 당기기' },
+  { num:'③', text:'턱 위치 — 쇄골 위, 주먹 하나 공간' },
+];
+let btbRemindIdx = 0;
+let btbRemindAlpha = 0;
+let btbRemindDir = 1; // 1=fade in, -1=fade out
+let btbRemindFrames = 0;
+
+function tickBtbRemind() {
+  btbRemindFrames++;
+  // 60fps 기준: 60프레임=1초
+  const HOLD = 120, FADE = 30; // 2초 유지, 0.5초 전환
+  const cycle = HOLD + FADE;
+  const pos = btbRemindFrames % (cycle * 3); // 3개 순환
+  const itemIdx = Math.floor(pos / cycle);
+  const frameInItem = pos % cycle;
+
+  btbRemindIdx = itemIdx;
+  if (frameInItem < FADE) {
+    btbRemindAlpha = frameInItem / FADE;
+  } else if (frameInItem < HOLD) {
+    btbRemindAlpha = 1;
+  } else {
+    btbRemindAlpha = 1 - (frameInItem - HOLD) / FADE;
+  }
+}
+
+// ════════════════════════════════════
 //  모니터링 가이드 그리기
 // ════════════════════════════════════
 function drawMonitorGuide(m) {
@@ -1175,37 +1342,113 @@ function drawMonitorGuide(m) {
   const color=m.score>=70?'#b8f0c8':m.score>=45?'#f5c842':'#f0706a';
 
   octx.save();
-  octx.strokeStyle=color; octx.lineWidth=2; octx.globalAlpha=.7;
-  const bx=w*.18,by=h*.06,bw=w*.64,bh=h*.72,len=bw*.18;
-  octx.beginPath();
-  octx.moveTo(bx,by+len);     octx.lineTo(bx,by);     octx.lineTo(bx+len,by);
-  octx.moveTo(bx+bw-len,by);  octx.lineTo(bx+bw,by);  octx.lineTo(bx+bw,by+len);
-  octx.moveTo(bx,by+bh-len);  octx.lineTo(bx,by+bh);  octx.lineTo(bx+len,by+bh);
-  octx.moveTo(bx+bw-len,by+bh);octx.lineTo(bx+bw,by+bh);octx.lineTo(bx+bw,by+bh-len);
-  octx.stroke();
 
-  if (m.score<60) {
-    octx.globalAlpha=.85;
-    octx.fillStyle=color;
-    octx.font=`bold ${Math.round(w*.037)}px sans-serif`;
-    octx.textAlign='center';
-    const msg=m.distScore<60?'📏 너무 가까워요':m.headScore<60?'⬆️ 고개를 들어주세요':'↔️ 정면을 봐주세요';
-    octx.fillText(msg,w/2,by+bh+22);
-  }
+  if (S.camMode === 'side') {
+    // ── 측면 모드: 귀-어깨 기준선 + 마커 ──
+    if (S.baseline?.sideMarkers) {
+      const mk = S.baseline.sideMarkers;
+      // markerCvs 좌표 → overlay 좌표 변환
+      const sx = overlay.width  / (markerCvs.width  || overlay.width);
+      const sy = overlay.height / (markerCvs.height || overlay.height);
+      const earX  = mk[0].x * sx, earY  = mk[0].y * sy;
+      const shX   = mk[1].x * sx, shY   = mk[1].y * sy;
 
-  // 측면 모드: 기준선 표시
-  if (S.camMode==='side' && S.baseline?.sideMarkers) {
-    const markers=S.baseline.sideMarkers;
-    const scaleX=overlay.width/markerCvs.width;
-    const scaleY=overlay.height/markerCvs.height;
-    octx.setLineDash([6,4]);
-    octx.strokeStyle='#b8f0c8'; octx.lineWidth=1.5; octx.globalAlpha=.5;
+      // 이상적 수직선 (어깨에서 귀 높이까지)
+      octx.strokeStyle = '#b8f0c8';
+      octx.lineWidth = 2;
+      octx.setLineDash([8, 5]);
+      octx.globalAlpha = 0.6;
+      octx.beginPath();
+      octx.moveTo(shX, shY);
+      octx.lineTo(shX, earY);
+      octx.stroke();
+      octx.setLineDash([]);
+
+      // 귀 마커
+      octx.globalAlpha = 0.9;
+      octx.beginPath();
+      octx.arc(earX, earY, 10, 0, Math.PI*2);
+      octx.fillStyle = '#b8f0c820';
+      octx.fill();
+      octx.strokeStyle = '#b8f0c8';
+      octx.lineWidth = 2;
+      octx.stroke();
+      octx.fillStyle = '#b8f0c8';
+      octx.font = `bold ${Math.round(w*.03)}px sans-serif`;
+      octx.textAlign = 'left';
+      octx.fillText('귀', earX + 14, earY + 4);
+
+      // 어깨 마커
+      octx.beginPath();
+      octx.arc(shX, shY, 10, 0, Math.PI*2);
+      octx.fillStyle = '#f5c84220';
+      octx.fill();
+      octx.strokeStyle = '#f5c842';
+      octx.lineWidth = 2;
+      octx.stroke();
+      octx.fillStyle = '#f5c842';
+      octx.fillText('어깨', shX + 14, shY + 4);
+
+      // 현재 귀-어깨 연결선 (실선, 색상 = 점수)
+      octx.strokeStyle = color;
+      octx.lineWidth = 2;
+      octx.globalAlpha = 0.5;
+      octx.beginPath();
+      octx.moveTo(earX, earY);
+      octx.lineTo(shX, shY);
+      octx.stroke();
+
+      // 각도 표시
+      const dx = earX - shX, dy = earY - shY;
+      const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+      const lean = Math.round(-angle - 90);
+      const leanColor = Math.abs(lean) > 10 ? '#f0706a' : '#b8f0c8';
+      octx.fillStyle = leanColor;
+      octx.globalAlpha = 0.95;
+      octx.font = `bold ${Math.round(w*.032)}px sans-serif`;
+      octx.textAlign = 'center';
+      octx.fillText(`두부전방 ${lean>0?'+':''}${lean}°`, (earX+shX)/2 + 30, (earY+shY)/2 - 12);
+    }
+
+  } else {
+    // ── 정면 모드: 박스 가이드 ──
+    octx.strokeStyle=color; octx.lineWidth=2; octx.globalAlpha=.65;
+    const bx=w*.18,by=h*.06,bw=w*.64,bh=h*.72,len=bw*.18;
     octx.beginPath();
-    octx.moveTo(markers[1].x*scaleX, markers[1].y*scaleY);
-    octx.lineTo(markers[1].x*scaleX, markers[0].y*scaleY);
+    octx.moveTo(bx,by+len);     octx.lineTo(bx,by);     octx.lineTo(bx+len,by);
+    octx.moveTo(bx+bw-len,by);  octx.lineTo(bx+bw,by);  octx.lineTo(bx+bw,by+len);
+    octx.moveTo(bx,by+bh-len);  octx.lineTo(bx,by+bh);  octx.lineTo(bx+len,by+bh);
+    octx.moveTo(bx+bw-len,by+bh);octx.lineTo(bx+bw,by+bh);octx.lineTo(bx+bw,by+bh-len);
     octx.stroke();
-    octx.setLineDash([]);
+    if (m.score<60) {
+      octx.globalAlpha=.85; octx.fillStyle=color;
+      octx.font=`bold ${Math.round(w*.037)}px sans-serif`;
+      octx.textAlign='center';
+      const msg=m.distScore<60?'📏 너무 가까워요':m.headScore<60?'⬆️ 고개를 들어주세요':'↔️ 정면을 봐주세요';
+      octx.fillText(msg,w/2,by+bh+22);
+    }
   }
+
+  // ── BTB 리마인더 텍스트 (공통) ──
+  tickBtbRemind();
+  const remind = BTB_REMIND[btbRemindIdx];
+  const fSize = Math.round(w * 0.034);
+  const txtY = h - 14;
+
+  // 배경 바
+  octx.globalAlpha = btbRemindAlpha * 0.65;
+  octx.fillStyle = '#000';
+  octx.fillRect(0, txtY - fSize - 4, w, fSize + 14);
+
+  // 텍스트
+  octx.globalAlpha = btbRemindAlpha;
+  octx.font = `bold ${fSize}px 'Apple SD Gothic Neo', sans-serif`;
+  octx.textAlign = 'center';
+  octx.fillStyle = '#b8f0c8';
+  octx.fillText(remind.num, w * 0.12, txtY);
+  octx.fillStyle = '#e8eaf0';
+  octx.fillText(remind.text, w * 0.58, txtY);
+
   octx.restore();
 }
 
@@ -1573,8 +1816,93 @@ function closeReport(){document.getElementById('reportModal').classList.remove('
 function restartSession(){document.getElementById('reportModal').classList.remove('show');S.records=[];reCalibrate();}
 
 // ════════════════════════════════════
-//  기타
+//  두부전방 각도 표시 업데이트
 // ════════════════════════════════════
+function updateAngleDisplay() {
+  if (S.camMode !== 'side' || !S.baseline?.sideMarkers) return;
+  const mk = S.baseline.sideMarkers;
+  const sx = overlay.width  / (markerCvs.width  || overlay.width);
+  const sy = overlay.height / (markerCvs.height || overlay.height);
+  const earX = mk[0].x*sx, earY = mk[0].y*sy;
+  const shX  = mk[1].x*sx, shY  = mk[1].y*sy;
+  const dx = earX - shX, dy = earY - shY;
+  const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+  const lean = Math.round(-angle - 90); // 양수 = 앞으로
+
+  const aEl = document.getElementById('angleDisplay');
+  const gEl = document.getElementById('angleGrade');
+  const dEl = document.getElementById('angleDesc');
+  const cEl = document.getElementById('angleCursor');
+
+  aEl.textContent = `${lean > 0 ? '+' : ''}${lean}°`;
+
+  if (lean <= 5) {
+    aEl.style.color = '#b8f0c8';
+    gEl.textContent = '✅ 정상';
+    gEl.style.color = '#b8f0c8';
+    dEl.textContent = '귀가 어깨 바로 위 — 이상적인 자세입니다';
+    cEl.style.left = Math.min(33, Math.max(0, lean/5*33)) + '%';
+  } else if (lean <= 15) {
+    aEl.style.color = '#f5c842';
+    gEl.textContent = '⚠️ 경계';
+    gEl.style.color = '#f5c842';
+    dEl.textContent = '두부전방자세 시작 — 교정이 필요합니다';
+    cEl.style.left = (33 + (lean-5)/10*33) + '%';
+  } else {
+    aEl.style.color = '#f0706a';
+    gEl.textContent = '🔴 위험';
+    gEl.style.color = '#f0706a';
+    dEl.textContent = `${lean}° 두부전방 — 교합·호흡에 영향을 줄 수 있습니다`;
+    cEl.style.left = Math.min(99, 66 + (lean-15)/15*33) + '%';
+  }
+}
+
+// ════════════════════════════════════
+//  마커 재설정
+// ════════════════════════════════════
+function reMarker() {
+  // 모니터링 일시정지
+  cancelAnimationFrame(S.loopId);
+  clearInterval(S.checkTimer);
+  S.phase = 'assess';
+
+  // 마커 캔버스 재활성화
+  markerCvs.style.display = 'block';
+  markerCvs.width = markerCvs.offsetWidth;
+  markerCvs.height = markerCvs.offsetHeight;
+  S.markers = []; S.markerStep = 0;
+  mctx.clearRect(0,0,markerCvs.width,markerCvs.height);
+
+  // 단계 초기화
+  document.getElementById('mStep1').className = 'marker-step active';
+  document.getElementById('mStep2').className = 'marker-step';
+  document.getElementById('mStep3').className = 'marker-step';
+
+  // BTB 체크 초기화
+  [1,2,3].forEach(n=>{
+    btbChecked[n]=true; // 이미 했으므로 체크 유지
+    document.getElementById('bStep'+n).classList.add('checked');
+    document.getElementById('bc'+n).textContent='✓';
+  });
+
+  // 마커 섹션만 다시 활성화
+  document.getElementById('markerSection').style.display = 'block';
+  markerCvs.onclick = handleMarkerTap;
+  drawMarkerCanvas();
+
+  // 모니터링 UI 숨기고 평가 화면 표시
+  document.getElementById('phaseMonitor').style.display = 'none';
+  document.getElementById('stopBtn').style.display = 'none';
+  document.getElementById('ringWrap').style.display = 'none';
+  document.getElementById('scoreBadge').style.display = 'none';
+  document.getElementById('assessTitle').textContent = '마커 재설정';
+  document.getElementById('assessSub').textContent = '귀와 어깨 위치를 다시 탭해주세요';
+  document.getElementById('assessSide').style.display = 'block';
+  document.getElementById('assessBtn').style.display = 'none';
+  document.getElementById('phaseAssess').style.display = 'block';
+
+  showToast('📍 마커 재설정', '귀 → 어깨 순서로 탭해주세요', 'ok');
+}
 function reCalibrate(){
   cancelAnimationFrame(S.loopId);clearInterval(S.checkTimer);
   S.phase='assess';S.records=[];S.elapsed=0;S.sessionElapsed=0;
