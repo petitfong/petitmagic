@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>쁘띠 자세코치</title>
+<style>
+:root {
+  --bg: #0b0c0e;
+  --surface: #13151a;
+  --surface2: #1a1d24;
+  --border: #252830;
+  --accent: #b8f0c8;
+  --accent2: #7dd4a0;
+  --accent-dim: rgba(184,240,200,0.10);
+  --warn: #f5c842;
+  --warn-dim: rgba(245,200,66,0.10);
+  --danger: #f0706a;
+  --danger-dim: rgba(240,112,106,0.10);
+  --text: #e8eaf0;
+  --text2: #8b8f9a;
+  --text3: #4a4e5a;
+  --r: 14px; --r-sm: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); color: var(--text); font-family: 'Apple SD Gothic Neo','Noto Sans KR',sans-serif; }
+.app { max-width: 480px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; }
+
+header { padding: 20px 20px 0; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-size: 11px; letter-spacing: 0.14em; color: var(--accent); opacity: 0.7; }
+.version { font-size: 10px; color: var(--text3); border: 1px solid var(--border); border-radius: 20px; padding: 3px 9px; }
+
+/* 카메라 */
+.camera-wrap {
+  position: relative; margin: 16px 20px 0;
+  border-radius: var(--r); overflow: hidden;
+  background: #000; aspect-ratio: 3/4;
+  border: 1px solid var(--border);
+}
+#video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); display: block; }
+#overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+.cam-overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: space-between; padding: 14px;
+  pointer-events: none;
+}
+.cam-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.cam-bottom { display: flex; justify-content: center; }
+
+.cam-badge {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
+  border-radius: 20px; padding: 6px 12px; font-size: 12px; font-weight: 600;
+}
+.cam-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text3); }
+.cam-dot.ok { background: var(--accent); animation: blink 2s infinite; }
+.cam-dot.warn { background: var(--warn); }
+.cam-dot.bad { background: var(--danger); }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+/* 캘리브레이션 카운트다운 오버레이 */
+.calib-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: none; flex-direction: column;
+  align-items: center; justify-content: center; gap: 12px;
+}
+.calib-overlay.show { display: flex; }
+.calib-count {
+  font-size: 72px; font-weight: 700; color: var(--accent);
+  line-height: 1;
+  animation: pop 0.3s ease;
+}
+@keyframes pop { 0%{transform:scale(1.4)} 100%{transform:scale(1)} }
+.calib-guide { font-size: 15px; color: #fff; text-align: center; line-height: 1.6; }
+
+/* 타이머 링 */
+.timer-ring-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.timer-ring { position: relative; width: 72px; height: 72px; }
+.timer-ring svg { transform: rotate(-90deg); }
+.timer-ring circle { fill: none; stroke-width: 4; }
+.ring-bg { stroke: rgba(255,255,255,0.1); }
+.ring-fill { stroke: var(--accent); stroke-linecap: round; transition: stroke-dashoffset 1s linear; }
+.timer-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.timer-min { font-size: 18px; font-weight: 700; line-height: 1; }
+.timer-lbl { font-size: 8px; color: var(--text2); letter-spacing: 0.06em; }
+
+.cam-start-screen {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  background: var(--surface2);
+}
+.cam-start-icon { font-size: 48px; }
+.cam-start-text { font-size: 14px; color: var(--text2); text-align: center; line-height: 1.6; }
+
+/* 스크롤 */
+.scroll-area { flex: 1; overflow-y: auto; padding: 16px 20px 40px; display: flex; flex-direction: column; gap: 14px; }
+
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+.card-header { padding: 14px 16px; border-bottom: 1px solid var(--border); }
+.card-header .title { font-size: 13px; font-weight: 700; }
+.card-header .sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+/* 단계 */
+.calib-steps { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
+.calib-step {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 12px; border-radius: var(--r-sm);
+  background: var(--surface2); transition: all 0.3s;
+}
+.calib-step.active { background: var(--accent-dim); border: 1px solid rgba(184,240,200,0.2); }
+.calib-step.done { opacity: 0.45; }
+.step-num {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--border); color: var(--text2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; flex-shrink: 0;
+}
+.calib-step.active .step-num { background: var(--accent); color: #0a1a10; }
+.calib-step.done .step-num { background: var(--accent-dim); color: var(--accent2); }
+.step-text { font-size: 13px; font-weight: 500; }
+.step-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+/* 진행바 */
+.progress-wrap { height: 4px; background: var(--border); margin: 0 16px 14px; border-radius: 2px; display: none; }
+.progress-bar { height: 100%; background: var(--accent); border-radius: 2px; width: 0%; transition: width 0.1s linear; }
+
+/* 버튼 */
+.btn { width: 100%; padding: 16px; border-radius: var(--r-sm); border: none; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+.btn-green { background: var(--accent); color: #0a1a10; }
+.btn-green:hover { background: var(--accent2); }
+.btn-green:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-outline { background: transparent; color: var(--text2); border: 1px solid var(--border); }
+.btn-outline:hover { border-color: var(--accent2); color: var(--text); }
+
+/* 지표 */
+.indicators { padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; }
+.ind-row { display: flex; align-items: center; gap: 10px; }
+.ind-label { font-size: 12px; color: var(--text2); width: 80px; flex-shrink: 0; }
+.ind-bar-wrap { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.ind-bar { height: 100%; border-radius: 4px; transition: width 0.5s, background 0.5s; }
+.ind-val { font-size: 11px; width: 52px; text-align: right; }
+
+/* 점수 */
+.score-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); }
+.score-cell { background: var(--surface); padding: 14px 10px; text-align: center; }
+.score-num { font-size: 26px; font-weight: 700; line-height: 1; }
+.score-lbl { font-size: 10px; color: var(--text3); margin-top: 4px; }
+
+/* 히스토리 */
+.h-item { display: flex; align-items: center; gap: 12px; padding: 11px 16px; border-top: 1px solid var(--border); }
+.h-time { font-size: 11px; color: var(--text3); min-width: 42px; }
+.h-bar-wrap { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.h-bar { height: 100%; border-radius: 3px; }
+.h-score { font-size: 12px; font-weight: 600; min-width: 36px; text-align: right; }
+
+/* BTB */
+.btb-card { background: var(--accent-dim); border: 1px solid rgba(184,240,200,0.12); border-radius: var(--r); padding: 18px 20px; }
+.btb-eye { font-size: 10px; color: var(--accent2); letter-spacing: 0.12em; margin-bottom: 8px; }
+.btb-msg { font-size: 14px; line-height: 1.7; }
+.btb-msg em { color: var(--accent); font-style: normal; }
+
+/* 토스트 */
+.toast {
+  position: fixed; top: 12px; left: 50%; transform: translateX(-50%) translateY(-140%);
+  width: calc(100% - 40px); max-width: 440px;
+  background: var(--surface); border: 1px solid var(--warn);
+  border-radius: var(--r); padding: 14px 18px 14px 14px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5); z-index: 999;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast-title { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+.toast-body { font-size: 12px; color: var(--text2); }
+.toast-close { position: absolute; top: 10px; right: 12px; background: none; border: none; color: var(--text3); font-size: 20px; cursor: pointer; line-height: 1; }
+
+.kakao-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 13px; border-radius: var(--r-sm); border: 1px solid var(--border);
+  background: transparent; color: var(--text2); font-size: 13px;
+  font-family: inherit; cursor: pointer; text-decoration: none; transition: all 0.2s;
+}
+.kakao-btn:hover { border-color: var(--accent2); color: var(--text); }
+
+/* ── 온보딩 모달 ── */
+.onboard {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-start;
+  overflow-y: auto;
+  padding: 0 0 40px;
+}
+.onboard.hidden { display: none; }
+
+.ob-hero {
+  width: 100%; max-width: 480px;
+  background: linear-gradient(160deg, #0f1f14 0%, #0b0c0e 60%);
+  padding: 48px 28px 36px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.ob-icon { font-size: 56px; margin-bottom: 16px; display: block; }
+.ob-title { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; line-height: 1.3; }
+.ob-title em { color: var(--accent); font-style: normal; }
+.ob-sub { font-size: 14px; color: var(--text2); line-height: 1.7; }
+
+.ob-body { width: 100%; max-width: 480px; padding: 24px 20px 0; display: flex; flex-direction: column; gap: 12px; }
+
+/* 사용법 스텝 */
+.ob-steps { display: flex; flex-direction: column; gap: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+.ob-step { display: flex; align-items: flex-start; gap: 14px; padding: 16px; border-bottom: 1px solid var(--border); }
+.ob-step:last-child { border-bottom: none; }
+.ob-step-num {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: var(--accent-dim); border: 1.5px solid rgba(184,240,200,0.3);
+  color: var(--accent); font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.ob-step-content .name { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+.ob-step-content .desc { font-size: 12px; color: var(--text2); line-height: 1.55; }
+
+/* 포지션 가이드 */
+.ob-position {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 16px;
+}
+.ob-pos-title { font-size: 12px; font-weight: 700; color: var(--accent2); letter-spacing: 0.06em; margin-bottom: 12px; }
+.ob-pos-img {
+  background: var(--surface2); border-radius: var(--r-sm);
+  padding: 20px; display: flex; justify-content: center; margin-bottom: 12px;
+}
+/* SVG 자세 일러스트 */
+.ob-pos-list { display: flex; flex-direction: column; gap: 7px; }
+.ob-pos-item { display: flex; align-items: center; gap: 9px; font-size: 12px; color: var(--text2); }
+.ob-pos-item .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+/* 보안 카드 */
+.ob-security {
+  background: var(--accent-dim); border: 1px solid rgba(184,240,200,0.15);
+  border-radius: var(--r); padding: 16px;
+}
+.ob-sec-title { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 10px; }
+.ob-sec-items { display: flex; flex-direction: column; gap: 8px; }
+.ob-sec-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--text); line-height: 1.5; }
+.ob-sec-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+.ob-btn {
+  width: 100%; padding: 17px; border-radius: var(--r-sm); border: none;
+  background: var(--accent); color: #0a1a10;
+  font-size: 16px; font-weight: 700; font-family: inherit;
+  cursor: pointer; transition: background 0.2s;
+  margin-top: 4px;
+}
+.ob-btn:hover { background: var(--accent2); }
+.ob-footnote { text-align: center; font-size: 11px; color: var(--text3); margin-top: 10px; line-height: 1.6; }
+
+/* 세션 버튼 */
+.sess-btn {
+  padding: 9px 4px; border-radius: var(--r-sm);
+  border: 1px solid var(--border); background: var(--surface2);
+  color: var(--text2); font-size: 13px; font-weight: 600;
+  font-family: inherit; cursor: pointer; transition: all 0.15s;
+}
+.sess-btn:hover { border-color: var(--accent2); color: var(--text); }
+.sess-btn.selected { background: var(--accent-dim); border-color: rgba(184,240,200,0.4); color: var(--accent); }
+
+/* 세션 진행 바 */
+.session-progress {
+  margin: 10px 20px 0;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-sm); padding: 12px 16px; display: none;
+}
+.sp-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.sp-label { font-size: 12px; color: var(--text2); }
+.sp-time { font-size: 13px; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+.sp-bar-wrap { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.sp-bar { height: 100%; background: var(--accent); border-radius: 3px; transition: width 1s linear; width: 0%; }
+.sp-checks { display: flex; gap: 6px; margin-top: 10px; }
+.sp-dot { flex: 1; height: 6px; border-radius: 3px; background: var(--border); transition: background 0.4s; }
+.sp-dot.good { background: var(--accent); }
+.sp-dot.mid  { background: var(--warn); }
+.sp-dot.bad  { background: var(--danger); }
+.sp-dot.cur  { background: var(--border); outline: 1.5px solid var(--accent2); }
+
+/* 최종 리포트 모달 */
+.report-modal {
+  position: fixed; inset: 0; z-index: 9998;
+  background: rgba(0,0,0,0.88);
+  display: none; align-items: flex-end; justify-content: center;
+  padding: 0;
+}
+.report-modal.show { display: flex; }
+.report-box {
+  background: var(--surface); border-top: 1px solid var(--border);
+  border-radius: var(--r) var(--r) 0 0;
+  width: 100%; max-width: 480px; max-height: 88vh; overflow-y: auto;
+  animation: slideUp 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
+.report-header { padding: 24px 24px 0; text-align: center; }
+.report-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+.report-sub { font-size: 12px; color: var(--text3); }
+.report-score-big { font-size: 72px; font-weight: 700; line-height: 1; margin: 16px 0 4px; display: block; text-align: center; }
+.report-grade { font-size: 14px; color: var(--text2); margin-bottom: 4px; text-align: center; }
+.report-divider { height: 1px; background: var(--border); margin: 16px 0; }
+.report-checks { padding: 0 24px; display: flex; flex-direction: column; gap: 9px; margin-bottom: 16px; }
+.rc-item { display: flex; align-items: center; gap: 12px; }
+.rc-time { font-size: 11px; color: var(--text3); min-width: 42px; }
+.rc-bar-wrap { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.rc-bar { height: 100%; border-radius: 4px; }
+.rc-score { font-size: 13px; font-weight: 700; min-width: 36px; text-align: right; }
+.report-msg { padding: 14px 24px 0; font-size: 13px; color: var(--text2); line-height: 1.7; background: var(--surface2); margin: 0 16px; border-radius: var(--r-sm); }
+.report-msg strong { color: var(--accent); }
+.report-btns { padding: 16px 24px 32px; display: flex; flex-direction: column; gap: 8px; }
+/* 모드 버튼 */
+.mode-btn {
+  padding: 12px 8px; border-radius: var(--r-sm);
+  border: 1.5px solid var(--border); background: var(--surface2);
+  color: var(--text2); font-family: inherit; cursor: pointer;
+  transition: all 0.15s; text-align: center;
+}
+.mode-btn:hover { border-color: var(--accent2); color: var(--text); }
+.mode-btn.selected { background: var(--accent-dim); border-color: rgba(184,240,200,0.5); color: var(--accent); }
+
+/* 알람 옵션 */
+.alert-option {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: var(--r-sm);
+  background: var(--surface2); cursor: pointer;
+  border: 1px solid var(--border); transition: border-color 0.15s;
+}
+.alert-option input { display: none; }
+.alert-option:has(input:checked) { border-color: rgba(184,240,200,0.3); background: var(--accent-dim); }
+.ao-icon { font-size: 18px; flex-shrink: 0; }
+.ao-text { flex: 1; }
+.ao-name { font-size: 13px; font-weight: 600; }
+.ao-sub { font-size: 11px; color: var(--text3); margin-top: 1px; }
+.ao-check { font-size: 12px; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+/* 화면 플래시 */
+.screen-flash {
+  position: fixed; inset: 0; pointer-events: none; z-index: 9990;
+  border: 4px solid transparent; border-radius: 0;
+  transition: border-color 0.1s;
+}
+.screen-flash.alert { border-color: var(--danger); animation: flashBorder 0.5s ease 3; }
+@keyframes flashBorder {
+  0%,100% { border-color: transparent; }
+  50% { border-color: #f0706a; box-shadow: inset 0 0 30px rgba(240,112,106,0.3); }
+}
+
+/* 자세 경고 배너 (실시간 모드) */
+.posture-alert-bar {
+  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%) translateY(100%);
+  width: 100%; max-width: 480px;
+  background: var(--danger); color: #fff;
+  padding: 14px 20px; text-align: center;
+  font-size: 14px; font-weight: 700;
+  z-index: 9989; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  border-radius: var(--r) var(--r) 0 0;
+}
+.posture-alert-bar.show { transform: translateX(-50%) translateY(0); }
+.posture-alert-bar .sub { font-size: 11px; font-weight: 400; opacity: 0.85; margin-top: 3px; }
+
+/* 자리 비움 오버레이 */
+.absence-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.82);
+  display: none; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
+  backdrop-filter: blur(4px);
+}
+.absence-overlay.show { display: flex; }
+.absence-icon { font-size: 44px; animation: float 2s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+.absence-title { font-size: 17px; font-weight: 700; color: #fff; }
+.absence-sub { font-size: 13px; color: rgba(255,255,255,0.6); text-align: center; line-height: 1.6; }
+.absence-timer-wrap { margin-top: 8px; text-align: center; }
+.absence-timer { font-size: 32px; font-weight: 700; color: var(--warn); font-variant-numeric: tabular-nums; font-family: monospace; }
+.absence-timer-lbl { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+/* 복귀 감지 오버레이 */
+.return-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: none; flex-direction: column;
+  align-items: center; justify-content: center; gap: 12px;
+}
+.return-overlay.show { display: flex; }
+.return-count { font-size: 72px; font-weight: 700; color: var(--accent); line-height: 1; animation: pop 0.3s ease; }
+.return-guide { font-size: 14px; color: #fff; text-align: center; line-height: 1.6; }
+
+/* 복귀 후 선택 팝업 */
+.resume-popup {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(19,21,26,0.96);
+  border-top: 1px solid var(--border);
+  padding: 16px;
+  display: none; flex-direction: column; gap: 10px;
+  backdrop-filter: blur(8px);
+}
+.resume-popup.show { display: flex; }
+.resume-title { font-size: 14px; font-weight: 700; color: var(--accent); }
+.resume-sub { font-size: 12px; color: var(--text2); }
+.resume-btns { display: flex; gap: 8px; }
+.resume-btn-yes {
+  flex: 1; padding: 11px; border-radius: var(--r-sm); border: none;
+  background: var(--accent); color: #0a1a10; font-size: 13px; font-weight: 700;
+  font-family: inherit; cursor: pointer;
+}
+.resume-btn-no {
+  flex: 1; padding: 11px; border-radius: var(--r-sm);
+  border: 1px solid var(--border); background: transparent;
+  color: var(--text2); font-size: 13px; font-family: inherit; cursor: pointer;
+}
+</style>
+</head>
+<body>
+<!-- ── 온보딩 모달 ── -->
+<div class="onboard" id="onboard">
+  <div class="ob-hero">
+    <span class="ob-icon">🪑</span>
+    <div class="ob-title">쁘띠 <em>자세코치</em></div>
+    <div class="ob-sub">카메라로 거북목을 자동 감지하고<br>10분마다 자세 알림을 드립니다</div>
+  </div>
+
+  <div class="ob-body">
+
+    <!-- 사용법 -->
+    <div class="ob-steps">
+      <div class="ob-step">
+        <div class="ob-step-num">1</div>
+        <div class="ob-step-content">
+          <div class="name">카메라를 화면에 세워두기</div>
+          <div class="desc">노트북 화면 위 웹캠이나 폰을 거치대에 세워두세요. 얼굴 전체가 보이도록 거리를 조절합니다.</div>
+        </div>
+      </div>
+      <div class="ob-step">
+        <div class="ob-step-num">2</div>
+        <div class="ob-step-content">
+          <div class="name">박스 안에 얼굴 맞추기</div>
+          <div class="desc">화면의 초록 박스 안에 얼굴과 상체가 들어오도록 위치를 잡아주세요.</div>
+        </div>
+      </div>
+      <div class="ob-step">
+        <div class="ob-step-num">3</div>
+        <div class="ob-step-content">
+          <div class="name">바른 자세로 기준 저장</div>
+          <div class="desc">귀–어깨 일직선, 턱 살짝 당기기, 코로 호흡하는 상태로 3초 유지하면 자동 저장됩니다.</div>
+        </div>
+      </div>
+      <div class="ob-step">
+        <div class="ob-step-num">4</div>
+        <div class="ob-step-content">
+          <div class="name">10분마다 자동 체크</div>
+          <div class="desc">기준 자세 대비 변화를 감지해 자세가 무너지면 알림을 드립니다. 1시간 단위 리포트도 확인하세요.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 바른 자세 포인트 -->
+    <div class="ob-position">
+      <div class="ob-pos-title">✅ 바른 자세 체크포인트</div>
+      <div style="display:flex;justify-content:center;margin-bottom:14px;">
+        <svg width="140" height="160" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- 머리 -->
+          <circle cx="70" cy="30" r="22" stroke="#b8f0c8" stroke-width="2" fill="none"/>
+          <!-- 목 -->
+          <line x1="70" y1="52" x2="70" y2="72" stroke="#b8f0c8" stroke-width="2"/>
+          <!-- 어깨 -->
+          <line x1="30" y1="72" x2="110" y2="72" stroke="#b8f0c8" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- 상체 -->
+          <line x1="70" y1="72" x2="70" y2="130" stroke="#b8f0c8" stroke-width="2"/>
+          <!-- 팔 -->
+          <line x1="30" y1="72" x2="20" y2="110" stroke="#b8f0c8" stroke-width="2" stroke-linecap="round"/>
+          <line x1="110" y1="72" x2="120" y2="110" stroke="#b8f0c8" stroke-width="2" stroke-linecap="round"/>
+          <!-- 다리 -->
+          <line x1="70" y1="130" x2="50" y2="158" stroke="#b8f0c8" stroke-width="2" stroke-linecap="round"/>
+          <line x1="70" y1="130" x2="90" y2="158" stroke="#b8f0c8" stroke-width="2" stroke-linecap="round"/>
+          <!-- 귀-어깨 수직선 -->
+          <line x1="70" y1="30" x2="70" y2="72" stroke="#f5c842" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.7"/>
+          <!-- 라벨 -->
+          <text x="100" y="28" font-size="10" fill="#7dd4a0" font-family="sans-serif">턱 당기기</text>
+          <text x="100" y="74" font-size="10" fill="#7dd4a0" font-family="sans-serif">어깨 수평</text>
+          <text x="4" y="74" font-size="9" fill="#f5c842" font-family="sans-serif">일직선</text>
+        </svg>
+      </div>
+      <div class="ob-pos-list">
+        <div class="ob-pos-item"><div class="dot"></div>귀와 어깨가 수직으로 일직선</div>
+        <div class="ob-pos-item"><div class="dot"></div>턱을 살짝 당겨 목 뒤를 길게</div>
+        <div class="ob-pos-item"><div class="dot"></div>입을 다물고 코로 호흡</div>
+        <div class="ob-pos-item"><div class="dot"></div>혀끝이 윗 입천장에 가볍게 닿기</div>
+        <div class="ob-pos-item"><div class="dot"></div>화면과 눈 거리 40cm 이상</div>
+      </div>
+    </div>
+
+    <!-- 보안/개인정보 -->
+    <div class="ob-security">
+      <div class="ob-sec-title">🔒 개인정보 보호 안내</div>
+      <div class="ob-sec-items">
+        <div class="ob-sec-item">
+          <div class="ob-sec-icon">📵</div>
+          <div>카메라 영상은 <strong>외부 서버로 전송되지 않습니다.</strong> 인터넷 연결 없이도 작동합니다.</div>
+        </div>
+        <div class="ob-sec-item">
+          <div class="ob-sec-icon">💾</div>
+          <div>모든 데이터는 <strong>사용 중인 이 기기 안에서만</strong> 처리되며, 앱을 닫으면 사라집니다.</div>
+        </div>
+        <div class="ob-sec-item">
+          <div class="ob-sec-icon">🎥</div>
+          <div>영상·사진은 <strong>저장되지 않습니다.</strong> 거리 변화만 숫자로 계산합니다.</div>
+        </div>
+        <div class="ob-sec-item">
+          <div class="ob-sec-icon">🏥</div>
+          <div>쁘띠치과 제작 도구입니다. 의료 진단이 아닌 자세 습관 보조용입니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="ob-btn" onclick="closeOnboard()">시작하기 →</button>
+    <div class="ob-footnote">쁘띠치과의원 · 대구 남구 대봉로 66, 2층 · 053-472-2828</div>
+
+  </div>
+</div>
+<!-- ── /온보딩 ── -->
+
+<!-- 화면 플래시 오버레이 -->
+<div class="screen-flash" id="screenFlash"></div>
+<!-- 자세 경고 배너 -->
+<div class="posture-alert-bar" id="postureAlertBar">
+  <div id="postureAlertMsg">⚠️ 자세가 무너지고 있어요!</div>
+  <div class="sub" id="postureAlertSub">바른 자세로 돌아와주세요</div>
+</div>
+
+<!-- ── 최종 리포트 모달 ── -->
+<div class="report-modal" id="reportModal">
+  <div class="report-box">
+    <div style="padding:16px 20px 8px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border);">
+      <div>
+        <div style="font-size:14px;font-weight:700;">📊 세션 리포트</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:2px;">이미지로 저장하거나 공유할 수 있어요</div>
+      </div>
+      <button onclick="closeReport()" style="background:none;border:none;color:var(--text3);font-size:22px;cursor:pointer;line-height:1;">×</button>
+    </div>
+    <!-- 리포트 이미지 -->
+    <div style="padding:12px;overflow-x:auto;">
+      <img id="reportImg" style="width:100%;border-radius:10px;display:block;" alt="자세 리포트">
+    </div>
+    <div style="padding:0 12px 20px;display:flex;flex-direction:column;gap:8px;">
+      <button class="btn btn-green" onclick="downloadReport()">⬇️ 이미지 저장</button>
+      <button class="btn btn-outline" onclick="restartSession()">🔄 다시 시작</button>
+      <button class="btn btn-outline" onclick="closeReport()">닫기</button>
+    </div>
+  </div>
+</div>
+
+<div class="app">
+
+<div class="toast" id="toast">
+  <button class="toast-close" onclick="closeToast()">×</button>
+  <div class="toast-title" id="toastTitle"></div>
+  <div class="toast-body" id="toastBody"></div>
+</div>
+
+<header>
+  <div class="logo">PETIT · POSTURE COACH</div>
+  <div class="version">v0.4</div>
+</header>
+
+<div class="camera-wrap">
+  <div class="cam-start-screen" id="startScreen">
+    <div class="cam-start-icon">📷</div>
+    <div class="cam-start-text">카메라를 켜서<br>자세 감지를 시작하세요</div>
+  </div>
+
+  <video id="video" autoplay playsinline muted></video>
+  <canvas id="overlay"></canvas>
+
+  <!-- 캘리브레이션 카운트다운 -->
+  <div class="calib-overlay" id="calibOverlay">
+    <div class="calib-count" id="calibCount">3</div>
+    <div class="calib-guide">얼굴을 박스 안에 맞추고<br>정면을 봐주세요 👤<br><span style="font-size:12px;opacity:0.7">귀–어깨 일직선, 턱 당기기</span></div>
+  </div>
+
+  <!-- 자리 비움 오버레이 -->
+  <div class="absence-overlay" id="absenceOverlay">
+    <div class="absence-icon">🪑</div>
+    <div class="absence-title">자리를 비우셨나요?</div>
+    <div class="absence-sub">얼굴이 감지되지 않아<br>자동으로 일시정지했습니다</div>
+    <div class="absence-timer-wrap">
+      <div class="absence-timer" id="absenceTimer">00:00</div>
+      <div class="absence-timer-lbl">자리 비운 시간</div>
+    </div>
+  </div>
+
+  <!-- 복귀 감지 오버레이 -->
+  <div class="return-overlay" id="returnOverlay">
+    <div class="return-count" id="returnCount">3</div>
+    <div class="return-guide">돌아오셨네요! 👋<br>기준 자세를 다시 저장합니다</div>
+  </div>
+
+  <!-- 복귀 후 선택 팝업 -->
+  <div class="resume-popup" id="resumePopup">
+    <div class="resume-title">✅ 기준 자세 저장 완료</div>
+    <div class="resume-sub" id="resumeSub">자리 비움 00:00 · 세션 계속할까요?</div>
+    <div class="resume-btns">
+      <button class="resume-btn-yes" onclick="resumeSession()">계속하기</button>
+      <button class="resume-btn-no" onclick="stopWithReport()">종료 · 리포트 보기</button>
+    </div>
+  </div>
+
+  <div class="cam-overlay">
+    <div class="cam-top">
+      <div class="cam-badge">
+        <div class="cam-dot" id="camDot"></div>
+        <span id="camStatus">대기 중</span>
+      </div>
+      <div class="cam-badge" id="scoreBadge" style="display:none">
+        <span id="liveScore">—</span>
+      </div>
+    </div>
+    <div class="cam-bottom">
+      <div class="timer-ring-wrap" id="ringWrap" style="display:none">
+        <div class="timer-ring">
+          <svg width="72" height="72" viewBox="0 0 72 72">
+            <circle class="ring-bg" cx="36" cy="36" r="30"></circle>
+            <circle class="ring-fill" id="ringFill" cx="36" cy="36" r="30"
+              stroke-dasharray="188.5" stroke-dashoffset="0"></circle>
+          </svg>
+          <div class="timer-inner">
+            <div class="timer-min" id="timerMin">10</div>
+            <div class="timer-lbl">분 후 체크</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 세션 진행 바 -->
+<div class="session-progress" id="sessionProgress">
+  <div class="sp-top">
+    <div class="sp-label" id="spLabel">세션 진행 중</div>
+    <div class="sp-time" id="spTime">30:00 남음</div>
+  </div>
+  <div class="sp-bar-wrap"><div class="sp-bar" id="spBar"></div></div>
+  <div class="sp-checks" id="spDots"></div>
+</div>
+
+<div class="scroll-area">
+
+  <!-- 셋업 카드 -->
+  <div class="card" id="setupCard">
+    <div class="card-header">
+      <div class="title">시작하기</div>
+      <div class="sub">카메라를 켜면 3초 후 자동으로 기준 자세를 저장합니다</div>
+    </div>
+    <div class="calib-steps">
+      <div class="calib-step active" id="step1">
+        <div class="step-num">1</div>
+        <div><div class="step-text">카메라 켜기</div><div class="step-sub">버튼을 누르면 권한 팝업이 뜹니다</div></div>
+      </div>
+      <div class="calib-step" id="step2">
+        <div class="step-num">2</div>
+        <div><div class="step-text">바른 자세로 정면 보기</div><div class="step-sub">귀–어깨 일직선, 턱 당기기, 코 호흡</div></div>
+      </div>
+      <div class="calib-step" id="step3">
+        <div class="step-num">3</div>
+        <div><div class="step-text">기준 자세 저장 완료</div><div class="step-sub">3초 카운트다운 후 자동 저장</div></div>
+      </div>
+    </div>
+
+    <!-- 세션 시간 선택 -->
+    <div style="padding: 0 16px 14px;">
+      <div style="font-size:11px;color:var(--text3);letter-spacing:0.06em;margin-bottom:8px;">⏱ 모니터링 모드</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">
+        <button class="mode-btn selected" id="modeInterval" onclick="selectMode('interval')">
+          <div style="font-size:15px;margin-bottom:2px;">⏰</div>
+          <div style="font-size:12px;font-weight:700;">주기 체크</div>
+          <div style="font-size:10px;opacity:0.6;margin-top:2px;">10분마다 자동 측정</div>
+        </button>
+        <button class="mode-btn" id="modeRealtime" onclick="selectMode('realtime')">
+          <div style="font-size:15px;margin-bottom:2px;">🔴</div>
+          <div style="font-size:12px;font-weight:700;">실시간 감지</div>
+          <div style="font-size:10px;opacity:0.6;margin-top:2px;">기준 벗어나면 즉시 알람</div>
+        </button>
+      </div>
+
+      <!-- 주기 체크 옵션 -->
+      <div id="optInterval">
+        <div style="font-size:11px;color:var(--text3);letter-spacing:0.06em;margin-bottom:6px;">세션 시간</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
+          <button class="sess-btn" onclick="selectSession(this,30)">30분</button>
+          <button class="sess-btn" onclick="selectSession(this,60)">1시간</button>
+          <button class="sess-btn" onclick="selectSession(this,120)">2시간</button>
+          <button class="sess-btn selected" onclick="selectSession(this,0)">무제한</button>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-top:6px;line-height:1.5;" id="sessionDesc">
+          세션 없이 계속 감지합니다. 수동으로 중지할 때까지 10분마다 체크합니다.
+        </div>
+      </div>
+
+      <!-- 실시간 감지 옵션 -->
+      <div id="optRealtime" style="display:none;">
+        <div style="font-size:11px;color:var(--text3);letter-spacing:0.06em;margin-bottom:6px;">알람 방식 <span style="color:var(--text3)">(복수 선택 가능)</span></div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <label class="alert-option" id="optSound">
+            <input type="checkbox" id="chkSound" checked onchange="updateAlertOpts()">
+            <span class="ao-icon">🔔</span>
+            <div class="ao-text">
+              <div class="ao-name">소리 알람</div>
+              <div class="ao-sub">부드러운 알림음 (Web Audio)</div>
+            </div>
+            <div class="ao-check" id="aoCheckSound">✓</div>
+          </label>
+          <label class="alert-option" id="optFlash">
+            <input type="checkbox" id="chkFlash" checked onchange="updateAlertOpts()">
+            <span class="ao-icon">🔴</span>
+            <div class="ao-text">
+              <div class="ao-name">화면 테두리 알람</div>
+              <div class="ao-sub">빨간 테두리 깜빡임</div>
+            </div>
+            <div class="ao-check" id="aoCheckFlash">✓</div>
+          </label>
+          <label class="alert-option" id="optVibrate">
+            <input type="checkbox" id="chkVibrate" onchange="updateAlertOpts()">
+            <span class="ao-icon">📳</span>
+            <div class="ao-text">
+              <div class="ao-name">진동 (모바일)</div>
+              <div class="ao-sub">스마트폰에서만 작동</div>
+            </div>
+            <div class="ao-check" id="aoCheckVibrate" style="opacity:0.2">✓</div>
+          </label>
+        </div>
+        <div style="margin-top:10px;">
+          <div style="font-size:11px;color:var(--text3);letter-spacing:0.06em;margin-bottom:6px;">알람 민감도 — 기준 점수 이하일 때</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+            <button class="sess-btn" onclick="selectThreshold(this,80)">민감 <span style="font-size:10px;display:block;opacity:0.6">80점 이하</span></button>
+            <button class="sess-btn selected" onclick="selectThreshold(this,65)">보통 <span style="font-size:10px;display:block;opacity:0.6">65점 이하</span></button>
+            <button class="sess-btn" onclick="selectThreshold(this,50)">느슨 <span style="font-size:10px;display:block;opacity:0.6">50점 이하</span></button>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-top:8px;line-height:1.5;padding:8px;background:var(--surface2);border-radius:6px;">
+          💡 자세가 기준에서 벗어난 상태가 <strong style="color:var(--text)">3초 이상</strong> 지속될 때 알람이 울립니다
+        </div>
+      </div>
+    </div>
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div style="padding: 0 16px 16px;">
+      <button class="btn btn-green" id="mainBtn" onclick="handleBtn()">카메라 켜기</button>
+    </div>
+  </div>
+
+  <!-- 실시간 지표 -->
+  <div class="card" id="indCard" style="display:none">
+    <div class="card-header">
+      <div class="title">실시간 자세 지표</div>
+      <div class="sub">기준 자세 대비 변화량</div>
+    </div>
+    <div class="indicators">
+      <div class="ind-row">
+        <div class="ind-label">📏 거리</div>
+        <div class="ind-bar-wrap"><div class="ind-bar" id="barDist" style="width:100%;background:var(--accent)"></div></div>
+        <div class="ind-val" id="valDist" style="color:var(--accent2)">기준</div>
+      </div>
+      <div class="ind-row">
+        <div class="ind-label">⬆️ 두부위치</div>
+        <div class="ind-bar-wrap"><div class="ind-bar" id="barHead" style="width:100%;background:var(--accent)"></div></div>
+        <div class="ind-val" id="valHead" style="color:var(--accent2)">기준</div>
+      </div>
+      <div class="ind-row">
+        <div class="ind-label">↔️ 기울기</div>
+        <div class="ind-bar-wrap"><div class="ind-bar" id="barTilt" style="width:100%;background:var(--accent)"></div></div>
+        <div class="ind-val" id="valTilt" style="color:var(--accent2)">기준</div>
+      </div>
+    </div>
+    <div style="padding:0 16px 14px; display:flex; gap:8px;">
+      <button class="btn btn-green" style="font-size:13px;padding:10px;" onclick="reCalibrate()">🔄 기준 자세 다시 저장</button>
+    </div>
+  </div>
+
+  <!-- 점수 카드 -->
+  <div class="card" id="scoreCard" style="display:none">
+    <div class="card-header">
+      <div class="title">오늘 자세 기록</div>
+      <div class="sub">10분 단위 자동 측정</div>
+    </div>
+    <div class="score-grid">
+      <div class="score-cell">
+        <div class="score-num" id="avgScore" style="color:var(--accent)">—</div>
+        <div class="score-lbl">평균 점수</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-num" id="cntScore" style="color:var(--text)">0</div>
+        <div class="score-lbl">측정 횟수</div>
+      </div>
+      <div class="score-cell">
+        <div class="score-num" id="bestScore" style="color:var(--accent)">—</div>
+        <div class="score-lbl">최고 점수</div>
+      </div>
+    </div>
+    <div id="historyList"></div>
+  </div>
+
+  <div class="btb-card">
+    <div class="btb-eye">BTB · 기본이 기적이다</div>
+    <div class="btb-msg" id="btbMsg">자세는 <em>의지</em>가 아니라 <em>알림</em>으로 바뀝니다.<br>무너진 자세를 알아채는 것이 먼저입니다.</div>
+  </div>
+
+  <button class="btn btn-outline" id="stopBtn" style="display:none" onclick="stopWithReport()">자세코치 중지</button>
+
+  <a href="https://pf.kakao.com/_xbhXYb" target="_blank" class="kakao-btn">
+    💬 쁘띠치과 카카오채널 — 자세·교합 상담
+  </a>
+</div>
+</div>
+
+<script>
+// ══════════════════════════════
+//  상태
+// ══════════════════════════════
+const S = {
+  phase: 'idle',   // idle | cam | calib | monitoring | absent | returning | paused
+  stream: null,
+  baseline: null,
+  baselineSnap: null,
+  lastSnap: null,
+  reportImageUrl: null,
+  checkMin: 10,
+  absenceSecs: 0,       // 자리 비운 누적 초
+  absenceTimer: null,   // 자리 비움 타이머
+  noFaceCount: 0,       // 연속 얼굴 미감지 횟수
+  NO_FACE_THRESHOLD: 5, // 5초 연속 미감지 시 자리 비움 처리
+  sessionMin: 0,      // 0 = 무제한
+  sessionSecs: 0,     // 전체 세션 초
+  sessionElapsed: 0,  // 세션 경과 초
+  elapsed: 0,
+  totalSecs: 600,
+  checkTimer: null,
+  loopId: null,
+  records: [],
+  // 실시간 모드
+  mode: 'interval',
+  alertThreshold: 65,
+  alertSound: true,
+  alertFlash: true,
+  alertVibrate: false,
+  badPostureSecs: 0,
+  BAD_POSTURE_TRIGGER: 3,
+  lastAlarmTime: 0,
+  audioCtx: null,
+  absenceSecs: 0,
+  absenceTimer: null,
+  noFaceCount: 0,
+  NO_FACE_THRESHOLD: 5,
+};
+
+const BTB = [
+  '자세는 <em>의지</em>가 아니라 <em>알림</em>으로 바뀝니다.<br>무너진 자세를 알아채는 것이 먼저입니다.',
+  '혀가 입천장에 붙어있을 때,<br>우리 몸은 가장 <em>자연스러운 교합 위치</em>를 찾습니다.',
+  '거북목은 턱을 앞으로 당기고<br>아랫니가 <em>앞으로 나오게</em> 만듭니다.',
+  '코 호흡 → 혀 위치 → 턱 위치 → 치아 위치.<br>이 연결이 <em>바른미소의 시작</em>입니다.',
+  '지금 입이 살짝 열려있다면,<br><em>혀를 입천장에</em> 살며시 붙여보세요.',
+];
+let btbIdx = 0;
+
+const video = document.getElementById('video');
+const cvs = document.getElementById('overlay');
+const ctx = cvs.getContext('2d');
+
+// ══════════════════════════════
+//  카메라
+// ══════════════════════════════
+async function startCamera() {
+  try {
+    S.stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: 'user', width: { ideal: 320 }, height: { ideal: 240 } }
+    });
+    video.srcObject = S.stream;
+    await new Promise(res => { video.onloadedmetadata = res; });
+    await video.play();
+    document.getElementById('startScreen').style.display = 'none';
+    setCamStatus('카메라 ON', 'ok');
+    return true;
+  } catch(e) {
+    showToast('카메라 오류', '카메라 권한을 허용해주세요', 'warn');
+    return false;
+  }
+}
+
+// ══════════════════════════════
+//  프레임 분석 (canvas 없이 video 크기만)
+//  — file:// 환경에서도 안전하게 작동
+// ══════════════════════════════
+function getFrameData() {
+  // video.videoWidth/Height 는 카메라가 켜지면 항상 있음
+  const vw = video.videoWidth || 320;
+  const vh = video.videoHeight || 240;
+
+  // offscreen canvas에 그려서 픽셀 샘플링
+  // CORS/taint 오류 방지: try-catch로 감쌈
+  try {
+    const oc = document.createElement('canvas');
+    oc.width = 32; oc.height = 24; // 저해상도로 빠르게
+    const oc2 = oc.getContext('2d');
+    oc2.drawImage(video, 0, 0, 32, 24);
+    const d = oc2.getImageData(0, 0, 32, 24).data;
+
+    let sumR=0, sumG=0, sumB=0, sumX=0, sumY=0, cnt=0;
+    for (let y=0; y<24; y++) {
+      for (let x=0; x<32; x++) {
+        const i = (y*32+x)*4;
+        const r=d[i], g=d[i+1], b=d[i+2];
+        const bright = (r+g+b)/3;
+        sumR+=r; sumG+=g; sumB+=b;
+        sumX += x * bright; sumY += y * bright;
+        cnt++;
+      }
+    }
+    const avgBright = (sumR+sumG+sumB)/(cnt*3);
+    const cx = sumX / (sumR+sumG+sumB) * 3 / 32; // 0~1 정규화
+    const cy = sumY / (sumR+sumG+sumB) * 3 / 24;
+    // 상단 영역 밝기 (얼굴 위치 추정)
+    let topBright = 0;
+    for (let y=0; y<8; y++)
+      for (let x=8; x<24; x++) {
+        const i=(y*32+x)*4;
+        topBright += (d[i]+d[i+1]+d[i+2])/3;
+      }
+    topBright /= (8*16);
+
+    return { avgBright, cx, cy, topBright, vw, vh };
+  } catch(e) {
+    // getImageData 차단된 경우 (file://) → 시간 기반 더미 데이터
+    return { avgBright: 128, cx: 0.5, cy: 0.4, topBright: 130, vw, vh };
+  }
+}
+
+// ══════════════════════════════
+//  캘리브레이션 (3초 카운트다운)
+// ══════════════════════════════
+function startCalibration() {
+  S.phase = 'calib';
+  setStep(2, 'active');
+  document.getElementById('mainBtn').disabled = true;
+  document.getElementById('mainBtn').textContent = '캘리브레이션 중…';
+  document.getElementById('calibOverlay').classList.add('show');
+  document.getElementById('progressWrap').style.display = 'block';
+
+  let count = 3;
+  document.getElementById('calibCount').textContent = count;
+  document.getElementById('progressBar').style.width = '0%';
+
+  const tick = setInterval(() => {
+    count--;
+    document.getElementById('progressBar').style.width = ((3-count)/3*100) + '%';
+    if (count > 0) {
+      document.getElementById('calibCount').textContent = count;
+    } else {
+      clearInterval(tick);
+      // 기준 저장
+      S.baseline = getFrameData();
+      saveBaselineSnapshot();  // 스냅샷 저장
+      document.getElementById('calibOverlay').classList.remove('show');
+      document.getElementById('progressBar').style.width = '100%';
+      setStep(2, 'done');
+      setStep(3, 'active');
+      setTimeout(() => {
+        setStep(3, 'done');
+        startMonitoring();
+      }, 500);
+    }
+  }, 1000);
+}
+
+// ══════════════════════════════
+//  모니터링 루프
+// ══════════════════════════════
+function startMonitoring() {
+  S.phase = 'monitoring';
+  S.elapsed = 0;
+  S.sessionElapsed = 0;
+  S.totalSecs = S.checkMin * 60;
+  S.sessionSecs = S.sessionMin > 0 ? S.sessionMin * 60 : 0;
+
+  // 세션 체크 횟수 (무제한이면 dots 3개만)
+  const totalChecks = S.sessionMin > 0 ? Math.floor(S.sessionMin / S.checkMin) : 3;
+
+  document.getElementById('setupCard').style.display = 'none';
+  document.getElementById('indCard').style.display = 'block';
+  document.getElementById('scoreCard').style.display = 'block';
+  document.getElementById('stopBtn').style.display = 'block';
+  document.getElementById('ringWrap').style.display = 'flex';
+  document.getElementById('scoreBadge').style.display = 'flex';
+
+  // 세션 진행바 (무제한이면 숨김)
+  if (S.sessionMin > 0) {
+    document.getElementById('sessionProgress').style.display = 'block';
+    document.getElementById('spLabel').textContent = `${S.sessionMin}분 세션 · 10분마다 자동 체크`;
+    // 도트 생성
+    const dots = document.getElementById('spDots');
+    dots.innerHTML = Array.from({length: totalChecks}, (_,i) =>
+      `<div class="sp-dot" id="spDot${i}"></div>`
+    ).join('');
+    updateSessionBar();
+  }
+
+  setCamStatus('감지 중', 'ok');
+  const sessionTxt = S.sessionMin > 0 ? `${S.sessionMin}분 세션 시작 · 10분마다 자동 체크` : '10분마다 자동 체크 (무제한)';
+  showToast('✅ 자세 감지 시작!', sessionTxt, 'ok');
+
+  startMonitoringTimers();
+
+  if ('Notification' in window && Notification.permission === 'default') {
+    Notification.requestPermission();
+  }
+}
+
+// ══════════════════════════════
+//  자세 계산
+// ══════════════════════════════
+function calcMetrics(d) {
+  const b = S.baseline;
+  if (!b) return { distScore:100, headScore:100, tiltScore:100, score:100 };
+
+  // 거리: 밝기가 증가 = 얼굴이 가까워짐
+  const brightDiff = (d.avgBright - b.avgBright) / 255;
+  const distScore = Math.max(0, Math.min(100, Math.round(100 - brightDiff * 200)));
+
+  // 두부: 상단 밝기 감소 = 고개 숙임
+  const headDiff = (b.topBright - d.topBright) / 255;
+  const headScore = Math.max(0, Math.min(100, Math.round(100 - headDiff * 180)));
+
+  // 기울기: cx 이동
+  const tiltDiff = Math.abs(d.cx - b.cx);
+  const tiltScore = Math.max(0, Math.min(100, Math.round(100 - tiltDiff * 150)));
+
+  const score = Math.round(distScore * 0.45 + headScore * 0.35 + tiltScore * 0.20);
+  return { distScore, headScore, tiltScore, score, brightDiff, headDiff, tiltDiff };
+}
+
+function updateIndicators(m) {
+  setBar('barDist','valDist', m.distScore,
+    m.distScore < 70 ? `가까워짐` : '정상');
+  setBar('barHead','valHead', m.headScore,
+    m.headScore < 70 ? `고개 숙임` : '정상');
+  setBar('barTilt','valTilt', m.tiltScore,
+    m.tiltScore < 70 ? `기울기` : '정상');
+}
+
+function setBar(bid, vid, score, label) {
+  const c = score>=70?'var(--accent)':score>=45?'var(--warn)':'var(--danger)';
+  const tc = score>=70?'var(--accent2)':score>=45?'var(--warn)':'var(--danger)';
+  document.getElementById(bid).style.width = score+'%';
+  document.getElementById(bid).style.background = c;
+  document.getElementById(vid).textContent = label;
+  document.getElementById(vid).style.color = tc;
+}
+
+function updateLiveScore(score) {
+  const el = document.getElementById('liveScore');
+  el.textContent = score+'점';
+  el.style.color = score>=70?'var(--accent)':score>=45?'var(--warn)':'var(--danger)';
+}
+
+// canvas 가이드라인 그리기
+function drawGuide(m) {
+  if (cvs.width !== video.offsetWidth) {
+    cvs.width = video.offsetWidth;
+    cvs.height = video.offsetHeight;
+  }
+  ctx.clearRect(0,0,cvs.width,cvs.height);
+  const w=cvs.width, h=cvs.height;
+  const color = m.score>=70?'#b8f0c8':m.score>=45?'#f5c842':'#f0706a';
+
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2.5;
+  ctx.globalAlpha = 0.75;
+
+  // 박스: 가로 60%, 세로 70%, 상단 8% 여백 — 실제 셀카 얼굴+상체 위치
+  const bx = w*0.20, by = h*0.08, bw = w*0.60, bh = h*0.70;
+  const len = bw * 0.20;
+
+  ctx.beginPath();
+  ctx.moveTo(bx, by+len);        ctx.lineTo(bx, by);        ctx.lineTo(bx+len, by);
+  ctx.moveTo(bx+bw-len, by);     ctx.lineTo(bx+bw, by);     ctx.lineTo(bx+bw, by+len);
+  ctx.moveTo(bx, by+bh-len);     ctx.lineTo(bx, by+bh);     ctx.lineTo(bx+len, by+bh);
+  ctx.moveTo(bx+bw-len, by+bh);  ctx.lineTo(bx+bw, by+bh);  ctx.lineTo(bx+bw, by+bh-len);
+  ctx.stroke();
+
+  // 캘리브레이션 중 안내 텍스트
+  if (S.phase !== 'monitoring') {
+    ctx.globalAlpha = 0.9;
+    ctx.fillStyle = '#b8f0c8';
+    ctx.font = `bold ${Math.round(w*0.038)}px Apple SD Gothic Neo, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillText('얼굴을 박스 안에 맞춰주세요', w/2, by - 10);
+  }
+
+  // 모니터링 중 점수 낮을 때 경고
+  if (S.phase === 'monitoring' && m.score < 60) {
+    ctx.globalAlpha = 0.85;
+    ctx.fillStyle = color;
+    ctx.font = `bold ${Math.round(w*0.038)}px Apple SD Gothic Neo, sans-serif`;
+    ctx.textAlign = 'center';
+    const msg = m.distScore < 60 ? '📏 너무 가까워요!' :
+                m.headScore < 60 ? '⬆️ 고개를 들어주세요' : '↔️ 정면을 봐주세요';
+    ctx.fillText(msg, w/2, by + bh + 24);
+  }
+
+  ctx.restore();
+}
+
+// ══════════════════════════════
+//  10분 체크
+// ══════════════════════════════
+function doTenMinCheck() {
+  const d = getFrameData();
+  const m = calcMetrics(d);
+  const now = new Date();
+  const t = now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
+  S.records.push({ time:t, score:m.score });
+  updateScoreCard();
+
+  btbIdx = (btbIdx+1) % BTB.length;
+  document.getElementById('btbMsg').innerHTML = BTB[btbIdx];
+
+  const emoji = m.score>=80?'👍':m.score>=60?'😐':'⚠️';
+  const msg = m.score>=80?'좋아요!':m.score>=60?'조금 더 펴볼까요':'거북목 주의!';
+  showToast(`${emoji} 10분 자세 체크`, `현재 점수: ${m.score}점 — ${msg}`, m.score>=60?'ok':'warn');
+  if (navigator.vibrate) navigator.vibrate([150,80,150]);
+  if (Notification.permission==='granted')
+    new Notification('🪑 쁘띠 자세코치', { body: `${t} 자세 점수: ${m.score}점` });
+}
+
+function doHourReport() {
+  if (!S.records.length) return;
+  const avg = Math.round(S.records.reduce((s,r)=>s+r.score,0)/S.records.length);
+  const trend = S.records.length>=2 ? S.records.at(-1).score - S.records[0].score : 0;
+  const trendTxt = trend>5?'📈 점점 좋아지고 있어요!':trend<-5?'📉 자세가 무너지고 있어요':'➡️ 비슷하게 유지 중';
+  showToast('📊 1시간 리포트', `평균 ${avg}점 · ${trendTxt}`, avg>=70?'ok':'warn');
+  if (navigator.vibrate) navigator.vibrate([200,100,200,100,200]);
+}
+
+// ══════════════════════════════
+//  얼굴 존재 여부 판단
+// ══════════════════════════════
+function isFacePresent(d) {
+  if (!S.baseline) return true;
+  // 밝기가 기준 대비 너무 낮거나 (화면이 어두워짐 = 아무도 없음)
+  // 또는 dummy data인 경우 항상 present로 처리
+  if (d.avgBright === 128 && d.cx === 0.5) return true; // file:// 더미
+  const brightRatio = d.avgBright / S.baseline.avgBright;
+  // 밝기가 기준의 40% 미만이면 자리 비움으로 판단
+  return brightRatio > 0.40;
+}
+
+// ══════════════════════════════
+//  자리 비움 처리
+// ══════════════════════════════
+function triggerAbsence() {
+  if (S.phase !== 'monitoring') return;
+  S.phase = 'absent';
+  S.absenceSecs = 0;
+  cancelAnimationFrame(S.loopId);
+  clearInterval(S.checkTimer);
+
+  document.getElementById('absenceOverlay').classList.add('show');
+  setCamStatus('자리 비움', 'warn');
+  document.getElementById('scoreBadge').style.display = 'none';
+
+  if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+  if (Notification.permission === 'granted')
+    new Notification('⏸ 쁘띠 자세코치', { body: '자리를 비우셨나요? 자동 일시정지됩니다.' });
+
+  // 자리 비움 타이머
+  S.absenceTimer = setInterval(() => {
+    S.absenceSecs++;
+    const m = Math.floor(S.absenceSecs / 60);
+    const s = String(S.absenceSecs % 60).padStart(2,'0');
+    document.getElementById('absenceTimer').textContent = `${String(m).padStart(2,'0')}:${s}`;
+
+    // 얼굴 다시 잡히는지 확인
+    const d = getFrameData();
+    if (isFacePresent(d)) {
+      clearInterval(S.absenceTimer);
+      startReturnCalib();
+    }
+  }, 1000);
+}
+
+// ══════════════════════════════
+//  복귀 감지 → 자동 재캘리브레이션
+// ══════════════════════════════
+function startReturnCalib() {
+  S.phase = 'returning';
+  document.getElementById('absenceOverlay').classList.remove('show');
+  document.getElementById('returnOverlay').classList.add('show');
+  setCamStatus('복귀 감지', 'ok');
+
+  let count = 3;
+  document.getElementById('returnCount').textContent = count;
+
+  const tick = setInterval(() => {
+    count--;
+    if (count > 0) {
+      document.getElementById('returnCount').textContent = count;
+    } else {
+      clearInterval(tick);
+      // 기준 자세 자동 재저장
+      S.baseline = getFrameData();
+      saveBaselineSnapshot();
+      document.getElementById('returnOverlay').classList.remove('show');
+
+      // 복귀 팝업
+      const absMin = Math.floor(S.absenceSecs / 60);
+      const absSec = String(S.absenceSecs % 60).padStart(2,'0');
+      document.getElementById('resumeSub').textContent =
+        `자리 비움 ${absMin}:${absSec} · 세션을 계속할까요?`;
+      document.getElementById('resumePopup').classList.add('show');
+      setCamStatus('일시정지', 'warn');
+
+      if (navigator.vibrate) navigator.vibrate([150, 80, 150]);
+      if (Notification.permission === 'granted')
+        new Notification('👋 쁘띠 자세코치', { body: `돌아오셨네요! 기준 자세 재저장 완료. 계속할까요?` });
+    }
+  }, 1000);
+}
+
+function resumeSession() {
+  document.getElementById('resumePopup').classList.remove('show');
+  S.noFaceCount = 0;
+  S.absenceSecs = 0;
+  // 세션 타이머 재시작
+  startMonitoringTimers();
+  setCamStatus('감지 중', 'ok');
+  document.getElementById('scoreBadge').style.display = 'flex';
+  showToast('▶ 세션 재개', '기준 자세가 다시 저장됐어요!', 'ok');
+}
+
+// 타이머만 따로 시작 (루프 + 인터벌)
+function startMonitoringTimers() {
+  S.phase = 'monitoring';
+  S.badPostureSecs = 0;
+
+  function loop() {
+    if (S.phase !== 'monitoring') return;
+    const d = getFrameData();
+    const m = calcMetrics(d);
+    const facePresent = isFacePresent(d);
+
+    if (facePresent) {
+      S.noFaceCount = 0;
+      updateIndicators(m);
+      updateLiveScore(m.score);
+      drawGuide(m);
+
+      // 실시간 모드 알람 체크
+      if (S.mode === 'realtime') {
+        checkRealtimeAlert(m.score, m);
+      }
+    } else {
+      S.noFaceCount++;
+      if (S.noFaceCount >= S.NO_FACE_THRESHOLD) {
+        triggerAbsence(); return;
+      }
+    }
+    S.loopId = requestAnimationFrame(loop);
+  }
+  loop();
+
+  S.checkTimer = setInterval(() => {
+    S.elapsed++;
+    S.sessionElapsed++;
+    updateRing();
+    if (S.sessionMin > 0) updateSessionBar();
+    if (S.mode === 'interval' && S.elapsed >= S.totalSecs) {
+      S.elapsed = 0;
+      doTenMinCheck();
+    }
+    if (S.sessionMin > 0 && S.sessionElapsed >= S.sessionSecs) {
+      clearInterval(S.checkTimer);
+      S.phase = 'done';
+      showFinalReport();
+    }
+  }, 1000);
+}
+
+// ══════════════════════════════
+//  실시간 알람
+// ══════════════════════════════
+function checkRealtimeAlert(score, m) {
+  if (score < S.alertThreshold) {
+    S.badPostureSecs++;
+    if (S.badPostureSecs >= S.BAD_POSTURE_TRIGGER) {
+      const now = Date.now();
+      if (now - S.lastAlarmTime > 10000) { // 10초 쿨다운
+        S.lastAlarmTime = now;
+        S.badPostureSecs = 0;
+        fireAlert(score, m);
+      }
+    }
+  } else {
+    // 자세 돌아오면 배너 숨김
+    if (S.badPostureSecs > 0) {
+      S.badPostureSecs = 0;
+      hidePostureAlert();
+    }
+  }
+}
+
+function fireAlert(score, m) {
+  // 원인 메시지
+  const cause = m.distScore < S.alertThreshold ? '📏 화면에 너무 가까워요!' :
+                m.headScore < S.alertThreshold ? '⬆️ 고개가 앞으로 나왔어요' : '↔️ 자세가 기울었어요';
+  const sub = `현재 ${score}점 · 바른 자세로 돌아와주세요`;
+
+  // 소리
+  if (S.alertSound) playAlertSound();
+  // 화면 테두리
+  if (S.alertFlash) flashScreen();
+  // 진동
+  if (S.alertVibrate && navigator.vibrate) navigator.vibrate([200, 100, 200]);
+  // 배너
+  showPostureAlert(cause, sub);
+}
+
+function playAlertSound() {
+  try {
+    if (!S.audioCtx) S.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const ctx = S.audioCtx;
+    // 부드러운 2음 알림음
+    [440, 550].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      const t = ctx.currentTime + i * 0.18;
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(0.25, t + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+      osc.start(t); osc.stop(t + 0.35);
+    });
+  } catch(e) { console.log('Audio error:', e); }
+}
+
+function flashScreen() {
+  const el = document.getElementById('screenFlash');
+  el.classList.remove('alert');
+  void el.offsetWidth; // reflow
+  el.classList.add('alert');
+  setTimeout(() => el.classList.remove('alert'), 1600);
+}
+
+let alertHideTimer;
+function showPostureAlert(msg, sub) {
+  document.getElementById('postureAlertMsg').textContent = msg;
+  document.getElementById('postureAlertSub').textContent = sub;
+  const bar = document.getElementById('postureAlertBar');
+  bar.classList.add('show');
+  clearTimeout(alertHideTimer);
+  alertHideTimer = setTimeout(hidePostureAlert, 4000);
+}
+
+function hidePostureAlert() {
+  document.getElementById('postureAlertBar').classList.remove('show');
+}
+
+// ══════════════════════════════
+//  모드 / 옵션 선택
+// ══════════════════════════════
+function selectMode(mode) {
+  S.mode = mode;
+  document.getElementById('modeInterval').classList.toggle('selected', mode === 'interval');
+  document.getElementById('modeRealtime').classList.toggle('selected', mode === 'realtime');
+  document.getElementById('optInterval').style.display = mode === 'interval' ? 'block' : 'none';
+  document.getElementById('optRealtime').style.display = mode === 'realtime' ? 'block' : 'none';
+  // 실시간 모드면 타이머 링 숨김
+  if (mode === 'realtime') {
+    document.getElementById('ringWrap').style.display = 'none';
+  }
+}
+
+function selectThreshold(btn, val) {
+  S.alertThreshold = val;
+  btn.closest('div').querySelectorAll('.sess-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function updateAlertOpts() {
+  S.alertSound   = document.getElementById('chkSound').checked;
+  S.alertFlash   = document.getElementById('chkFlash').checked;
+  S.alertVibrate = document.getElementById('chkVibrate').checked;
+  document.getElementById('aoCheckSound').style.opacity   = S.alertSound   ? '1' : '0.2';
+  document.getElementById('aoCheckFlash').style.opacity   = S.alertFlash   ? '1' : '0.2';
+  document.getElementById('aoCheckVibrate').style.opacity = S.alertVibrate ? '1' : '0.2';
+}
+function updateSessionBar() {
+  if (S.sessionSecs === 0) return;
+  const pct = Math.min(100, (S.sessionElapsed / S.sessionSecs) * 100);
+  document.getElementById('spBar').style.width = pct + '%';
+
+  const remaining = Math.max(0, S.sessionSecs - S.sessionElapsed);
+  const m = Math.floor(remaining / 60);
+  const s = String(remaining % 60).padStart(2,'0');
+  document.getElementById('spTime').textContent = `${m}:${s} 남음`;
+
+  // 도트 업데이트
+  const totalChecks = Math.floor(S.sessionMin / S.checkMin);
+  const doneChecks = S.records.length;
+  for (let i = 0; i < totalChecks; i++) {
+    const dot = document.getElementById('spDot'+i);
+    if (!dot) continue;
+    if (i < doneChecks) {
+      const score = S.records[i].score;
+      dot.className = 'sp-dot ' + (score>=70?'good':score>=50?'mid':'bad');
+    } else if (i === doneChecks) {
+      dot.className = 'sp-dot cur';
+    } else {
+      dot.className = 'sp-dot';
+    }
+  }
+}
+
+// ══════════════════════════════
+//  최종 리포트 — 캔버스 이미지 생성
+// ══════════════════════════════
+
+// 기준 자세 스냅샷 저장 (캘리브레이션 완료 시 호출)
+function saveBaselineSnapshot() {
+  try {
+    const snap = document.createElement('canvas');
+    snap.width = video.videoWidth || 320;
+    snap.height = video.videoHeight || 240;
+    snap.getContext('2d').drawImage(video, 0, 0, snap.width, snap.height);
+    S.baselineSnap = snap;
+  } catch(e) { S.baselineSnap = null; }
+}
+
+// 현재 프레임 스냅샷
+function captureCurrentSnap() {
+  try {
+    const snap = document.createElement('canvas');
+    snap.width = video.videoWidth || 320;
+    snap.height = video.videoHeight || 240;
+    snap.getContext('2d').drawImage(video, 0, 0, snap.width, snap.height);
+    return snap;
+  } catch(e) { return null; }
+}
+
+function showFinalReport() {
+  cancelAnimationFrame(S.loopId);
+  setCamStatus('세션 완료', 'warn');
+
+  // 마지막 스냅샷 저장
+  S.lastSnap = captureCurrentSnap();
+
+  const r = S.records;
+  const avg = r.length ? Math.round(r.reduce((s,x)=>s+x.score,0)/r.length) : 0;
+  const grade = avg>=85?'매우 좋음':avg>=70?'좋음':avg>=55?'보통':'주의 필요';
+  const gradeEmoji = avg>=85?'🏆':avg>=70?'😊':avg>=55?'😐':'⚠️';
+
+  // 리포트 캔버스 생성
+  const W = 720, PAD = 36;
+  const hasSnap = S.baselineSnap && S.lastSnap;
+
+  // 높이 계산
+  const snapH = hasSnap ? 260 : 0;
+  const graphH = 180;
+  const checksH = r.length * 44 + 20;
+  const H = 120 + snapH + 40 + graphH + 40 + checksH + 200;
+
+  const rc = document.createElement('canvas');
+  rc.width = W; rc.height = H;
+  const g = rc.getContext('2d');
+
+  // ── 배경 ──
+  g.fillStyle = '#0e0f11';
+  g.fillRect(0, 0, W, H);
+
+  // ── 헤더 그라데이션 ──
+  const grad = g.createLinearGradient(0,0,W,0);
+  grad.addColorStop(0,'#0f1f14'); grad.addColorStop(1,'#0e0f11');
+  g.fillStyle = grad;
+  g.fillRect(0, 0, W, 110);
+
+  // 로고
+  g.fillStyle = '#7dd4a0';
+  g.font = 'bold 11px monospace';
+  g.letterSpacing = '0.12em';
+  g.fillText('PETIT · POSTURE COACH', PAD, 34);
+
+  // 날짜
+  const now = new Date();
+  const dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}  ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  g.fillStyle = '#4a4e5a';
+  g.font = '11px monospace';
+  g.fillText(dateStr, PAD, 52);
+
+  // 평균 점수
+  const scoreColor = avg>=70?'#b8f0c8':avg>=50?'#f5c842':'#f0706a';
+  g.fillStyle = scoreColor;
+  g.font = 'bold 64px sans-serif';
+  g.fillText(avg+'점', W - PAD - 130, 88);
+
+  g.fillStyle = '#8b8f9a';
+  g.font = '13px sans-serif';
+  g.fillText(gradeEmoji + ' ' + grade, W - PAD - 110, 106);
+
+  // 세션 정보
+  g.fillStyle = '#e8eaf0';
+  g.font = 'bold 22px sans-serif';
+  const sessionLabel = S.sessionMin > 0 ? `${S.sessionMin}분 세션` : '자유 세션';
+  g.fillText(`${sessionLabel} · ${r.length}회 측정 결과`, PAD, 88);
+
+  // 구분선
+  g.strokeStyle = '#252830'; g.lineWidth = 1;
+  g.beginPath(); g.moveTo(PAD, 110); g.lineTo(W-PAD, 110); g.stroke();
+
+  let y = 126;
+
+  // ── 스냅샷 비교 ──
+  if (hasSnap) {
+    g.fillStyle = '#8b8f9a';
+    g.font = 'bold 11px monospace';
+    g.fillText('POSTURE COMPARISON', PAD, y);
+    y += 14;
+
+    const snapW = (W - PAD*2 - 20) / 2;
+    const snapDispH = 200;
+
+    // 기준 자세
+    drawSnapCard(g, S.baselineSnap, PAD, y, snapW, snapDispH, '기준 자세 (세션 시작)', '#b8f0c8');
+    // 마지막 자세
+    const lastScore = r.length ? r[r.length-1].score : avg;
+    const lastColor = lastScore>=70?'#b8f0c8':lastScore>=50?'#f5c842':'#f0706a';
+    drawSnapCard(g, S.lastSnap, PAD + snapW + 20, y, snapW, snapDispH, `마지막 체크 (${r.length?r[r.length-1].time:'—'})`, lastColor);
+
+    // 화살표 + 거리 변화 표시
+    const distChange = r.length >= 2
+      ? (r[r.length-1].score - r[0].score)
+      : 0;
+    const changeLabel = distChange > 5 ? '✓ 자세 유지됨' : distChange < -10 ? '▼ 자세 변화 감지' : '→ 비슷하게 유지';
+    const changeColor = distChange > 5 ? '#b8f0c8' : distChange < -10 ? '#f0706a' : '#f5c842';
+    g.fillStyle = changeColor;
+    g.font = 'bold 13px sans-serif';
+    g.textAlign = 'center';
+    g.fillText(changeLabel, W/2, y + snapDispH/2 + 6);
+    g.textAlign = 'left';
+
+    y += snapDispH + 28;
+
+    // 거북목 안내
+    const infoBox = { x: PAD, y, w: W - PAD*2, h: 44 };
+    g.fillStyle = '#1a1d24';
+    roundRect(g, infoBox.x, infoBox.y, infoBox.w, infoBox.h, 8);
+    g.fillStyle = '#f5c842';
+    g.font = 'bold 11px sans-serif';
+    g.fillText('📏 거리 변화와 거북목', PAD + 14, y + 17);
+    g.fillStyle = '#8b8f9a';
+    g.font = '11px sans-serif';
+    g.fillText('카메라에 얼굴이 가까워질수록 두부전방자세(거북목) 가능성이 높습니다.', PAD + 14, y + 33);
+    y += 60;
+  }
+
+  // ── 시간별 점수 그래프 ──
+  g.fillStyle = '#8b8f9a';
+  g.font = 'bold 11px monospace';
+  g.fillText('SESSION TIMELINE', PAD, y);
+  y += 14;
+
+  if (r.length > 0) {
+    const gx = PAD, gw = W - PAD*2, gh = graphH - 30;
+    const gy = y;
+
+    // 그래프 배경
+    g.fillStyle = '#13151a';
+    roundRect(g, gx, gy, gw, gh, 10);
+
+    // 기준선 (70점)
+    g.strokeStyle = '#252830'; g.lineWidth = 1; g.setLineDash([4,4]);
+    const y70 = gy + gh - (70/100)*gh;
+    g.beginPath(); g.moveTo(gx+20, y70); g.lineTo(gx+gw-20, y70); g.stroke();
+    g.setLineDash([]);
+    g.fillStyle = '#3a3e4a'; g.font = '10px monospace';
+    g.fillText('70점', gx + gw - 50, y70 - 4);
+
+    // 점수 바들
+    const barW = Math.min(60, (gw - 60) / Math.max(r.length, 1));
+    const spacing = (gw - 40) / Math.max(r.length, 1);
+
+    r.forEach((rec, i) => {
+      const bx = gx + 20 + i * spacing + spacing/2 - barW/2;
+      const barH = (rec.score / 100) * (gh - 20);
+      const by = gy + gh - barH - 10;
+      const bc = rec.score>=70?'#b8f0c8':rec.score>=50?'#f5c842':'#f0706a';
+
+      // 바 배경
+      g.fillStyle = '#252830';
+      roundRect(g, bx, gy+10, barW, gh-20, 4);
+      // 실제 바
+      g.fillStyle = bc + '33';
+      roundRect(g, bx, by, barW, barH, 4);
+      g.fillStyle = bc;
+      roundRect(g, bx, by, barW, 4, 2);
+
+      // 점수
+      g.fillStyle = bc;
+      g.font = 'bold 13px sans-serif';
+      g.textAlign = 'center';
+      g.fillText(rec.score, bx + barW/2, by - 6);
+
+      // 시간
+      g.fillStyle = '#4a4e5a';
+      g.font = '10px monospace';
+      g.fillText(rec.time, bx + barW/2, gy + gh + 14);
+      g.textAlign = 'left';
+    });
+
+    y += gh + 30;
+  } else {
+    y += 20;
+  }
+
+  // ── 체크 기록 테이블 ──
+  g.fillStyle = '#8b8f9a';
+  g.font = 'bold 11px monospace';
+  g.fillText('CHECK RECORDS', PAD, y);
+  y += 14;
+
+  r.forEach((rec, i) => {
+    const rowY = y + i * 44;
+    g.fillStyle = '#13151a';
+    roundRect(g, PAD, rowY, W - PAD*2, 36, 6);
+
+    const sc = rec.score>=70?'#b8f0c8':rec.score>=50?'#f5c842':'#f0706a';
+
+    // 체크 번호
+    g.fillStyle = '#4a4e5a';
+    g.font = '11px monospace';
+    g.fillText(`#${String(i+1).padStart(2,'0')}`, PAD+12, rowY+22);
+
+    // 시간
+    g.fillStyle = '#8b8f9a';
+    g.font = '12px sans-serif';
+    g.fillText(rec.time, PAD+52, rowY+22);
+
+    // 바
+    const bStart = PAD + 110, bEnd = W - PAD - 70;
+    const bLen = bEnd - bStart;
+    g.fillStyle = '#252830';
+    roundRect(g, bStart, rowY+14, bLen, 8, 4);
+    g.fillStyle = sc + '88';
+    roundRect(g, bStart, rowY+14, bLen*(rec.score/100), 8, 4);
+    g.fillStyle = sc;
+    roundRect(g, bStart, rowY+14, Math.min(6, bLen*(rec.score/100)), 8, 3);
+
+    // 점수
+    g.fillStyle = sc;
+    g.font = 'bold 14px sans-serif';
+    g.textAlign = 'right';
+    g.fillText(rec.score+'점', W-PAD-12, rowY+23);
+    g.textAlign = 'left';
+  });
+
+  y += r.length * 44 + 20;
+
+  // ── 면책 / 참고 안내 ──
+  g.fillStyle = '#1a1d24';
+  roundRect(g, PAD, y, W-PAD*2, 80, 10);
+  g.fillStyle = '#f5c842';
+  g.font = 'bold 11px sans-serif';
+  g.fillText('⚠️  참고용 자료 안내', PAD+16, y+22);
+  g.fillStyle = '#5a5e6a';
+  g.font = '11px sans-serif';
+  const notices = [
+    '본 결과는 카메라 밝기·거리 변화를 기반으로 한 단순 추정치이며, 의료 진단이 아닙니다.',
+    '영상 데이터는 외부로 전송되지 않으며, 이 기기 내에서만 처리됩니다.',
+    '자세 이상이 지속될 경우 쁘띠치과 교합 전문 진료를 받으시길 권장합니다.',
+  ];
+  notices.forEach((n, i) => g.fillText(n, PAD+16, y+38+(i*14)));
+
+  // 하단 브랜드
+  y += 96;
+  g.strokeStyle = '#252830'; g.lineWidth = 1;
+  g.beginPath(); g.moveTo(PAD, y); g.lineTo(W-PAD, y); g.stroke();
+  g.fillStyle = '#3a3e4a';
+  g.font = '11px monospace';
+  g.fillText('쁘띠치과의원  ·  053-472-2828  ·  pf.kakao.com/_xbhXYb', PAD, y+20);
+  g.textAlign = 'right';
+  g.fillText('Basic is Magic', W-PAD, y+20);
+  g.textAlign = 'left';
+
+  // ── 이미지로 변환해서 모달에 표시 ──
+  const imgUrl = rc.toDataURL('image/png');
+  S.reportImageUrl = imgUrl;
+
+  document.getElementById('reportImg').src = imgUrl;
+  document.getElementById('reportModal').classList.add('show');
+
+  if (navigator.vibrate) navigator.vibrate([300,150,300]);
+  if (Notification.permission==='granted')
+    new Notification('📊 쁘띠 세션 완료!', { body: `평균 자세 점수 ${avg}점 · ${gradeEmoji} ${grade}` });
+}
+
+// 스냅 카드 그리기
+function drawSnapCard(g, snap, x, y, w, h, label, borderColor) {
+  // 테두리
+  g.strokeStyle = borderColor;
+  g.lineWidth = 2;
+  g.fillStyle = '#000';
+  roundRect(g, x, y, w, h, 8, true);
+  g.strokeRect(x, y, w, h);
+
+  // 이미지 (미러 반전)
+  g.save();
+  g.translate(x + w, y);
+  g.scale(-1, 1);
+  g.drawImage(snap, 0, 0, w, h);
+  g.restore();
+
+  // 라벨 배경
+  g.fillStyle = 'rgba(0,0,0,0.6)';
+  g.fillRect(x, y+h-28, w, 28);
+  g.fillStyle = borderColor;
+  g.font = 'bold 11px sans-serif';
+  g.textAlign = 'center';
+  g.fillText(label, x+w/2, y+h-10);
+  g.textAlign = 'left';
+}
+
+// 라운드 rect 헬퍼
+function roundRect(g, x, y, w, h, r, fill=true) {
+  g.beginPath();
+  g.moveTo(x+r, y);
+  g.lineTo(x+w-r, y); g.arcTo(x+w,y,x+w,y+r,r);
+  g.lineTo(x+w,y+h-r); g.arcTo(x+w,y+h,x+w-r,y+h,r);
+  g.lineTo(x+r,y+h); g.arcTo(x,y+h,x,y+h-r,r);
+  g.lineTo(x,y+r); g.arcTo(x,y,x+r,y,r);
+  g.closePath();
+  if (fill) g.fill(); else g.stroke();
+}
+
+function downloadReport() {
+  if (!S.reportImageUrl) return;
+  const a = document.createElement('a');
+  const now = new Date();
+  a.download = `petit_posture_${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}_${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}.png`;
+  a.href = S.reportImageUrl;
+  a.click();
+}
+
+function stopWithReport() {
+  // 측정 기록이 있으면 리포트, 없으면 그냥 종료
+  if (S.records.length > 0) {
+    clearInterval(S.checkTimer);
+    S.phase = 'done';
+    showFinalReport();
+  } else {
+    stopAll();
+  }
+}
+
+function closeReport() {
+  document.getElementById('reportModal').classList.remove('show');
+  stopAll();
+}
+
+function restartSession() {
+  document.getElementById('reportModal').classList.remove('show');
+  S.records = [];
+  S.elapsed = 0;
+  S.sessionElapsed = 0;
+  document.getElementById('sessionProgress').style.display = 'none';
+  reCalibrate();
+}
+
+// ══════════════════════════════
+//  세션 선택
+// ══════════════════════════════
+function selectSession(btn, min) {
+  document.querySelectorAll('.sess-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  S.sessionMin = min;
+  const descs = {
+    30: '30분 동안 10분 간격으로 3번 자동 체크합니다.',
+    60: '1시간 동안 10분 간격으로 6번 자동 체크합니다.',
+    120: '2시간 동안 10분 간격으로 12번 자동 체크합니다.',
+    0: '세션 없이 계속 감지합니다. 수동으로 중지할 때까지 10분마다 체크합니다.',
+  };
+  document.getElementById('sessionDesc').textContent = descs[min] || '';
+}
+
+// ══════════════════════════════
+//  UI
+// ══════════════════════════════
+function updateRing() {
+  const pct = 1 - S.elapsed/S.totalSecs;
+  document.getElementById('ringFill').style.strokeDashoffset = 188.5*(1-pct);
+  document.getElementById('timerMin').textContent = Math.ceil((S.totalSecs-S.elapsed)/60);
+}
+
+function updateScoreCard() {
+  const r = S.records;
+  if (!r.length) return;
+  const avg = Math.round(r.reduce((s,x)=>s+x.score,0)/r.length);
+  const best = Math.max(...r.map(x=>x.score));
+  const sc = v => v>=70?'var(--accent)':v>=50?'var(--warn)':'var(--danger)';
+  const avgEl = document.getElementById('avgScore');
+  avgEl.textContent = avg+'점'; avgEl.style.color = sc(avg);
+  document.getElementById('cntScore').textContent = r.length;
+  const bestEl = document.getElementById('bestScore');
+  bestEl.textContent = best+'점'; bestEl.style.color = sc(best);
+
+  document.getElementById('historyList').innerHTML =
+    r.slice(-6).reverse().map(x => {
+      const c = sc(x.score);
+      return `<div class="h-item">
+        <div class="h-time">${x.time}</div>
+        <div class="h-bar-wrap"><div class="h-bar" style="width:${x.score}%;background:${c}"></div></div>
+        <div class="h-score" style="color:${c}">${x.score}점</div>
+      </div>`;
+    }).join('');
+}
+
+function setCamStatus(txt, type) {
+  document.getElementById('camStatus').textContent = txt;
+  document.getElementById('camDot').className = 'cam-dot'+(type?' '+type:'');
+}
+
+function setStep(n, cls) {
+  document.getElementById('step'+n).className = 'calib-step'+(cls?' '+cls:'');
+}
+
+// ══════════════════════════════
+//  토스트
+// ══════════════════════════════
+// ══════════════════════════════
+//  온보딩
+// ══════════════════════════════
+function closeOnboard() {
+  document.getElementById('onboard').classList.add('hidden');
+}
+
+let toastTimer;
+function showToast(title, body, type) {
+  document.getElementById('toastTitle').textContent = title;
+  document.getElementById('toastBody').textContent = body;
+  const t = document.getElementById('toast');
+  t.style.borderColor = type==='ok'?'var(--accent)':type==='warn'?'var(--warn)':'var(--danger)';
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(closeToast, 5000);
+}
+function closeToast() { document.getElementById('toast').classList.remove('show'); }
+
+// ══════════════════════════════
+//  버튼
+// ══════════════════════════════
+async function handleBtn() {
+  if (S.phase === 'idle') {
+    const ok = await startCamera();
+    if (!ok) return;
+    S.phase = 'cam';
+    setStep(1,'done');
+    setStep(2,'active');
+    document.getElementById('mainBtn').textContent = '기준 자세 저장하기';
+  } else if (S.phase === 'cam') {
+    startCalibration();
+  }
+}
+
+function reCalibrate() {
+  cancelAnimationFrame(S.loopId);
+  clearInterval(S.checkTimer);
+  clearInterval(S.hourTimer);
+  S.phase = 'cam';
+  document.getElementById('indCard').style.display = 'none';
+  document.getElementById('scoreCard').style.display = 'none';
+  document.getElementById('stopBtn').style.display = 'none';
+  document.getElementById('ringWrap').style.display = 'none';
+  document.getElementById('scoreBadge').style.display = 'none';
+  document.getElementById('setupCard').style.display = 'block';
+  document.getElementById('mainBtn').disabled = false;
+  document.getElementById('mainBtn').textContent = '기준 자세 저장하기';
+  document.getElementById('progressWrap').style.display = 'none';
+  document.getElementById('progressBar').style.width = '0%';
+  setStep(1,'done'); setStep(2,'active'); setStep(3,'');
+  startCalibration();
+}
+
+function stopAll() {
+  S.phase = 'idle';
+  cancelAnimationFrame(S.loopId);
+  clearInterval(S.checkTimer);
+  clearInterval(S.absenceTimer);
+  if (S.stream) S.stream.getTracks().forEach(t=>t.stop());
+  S.stream = null; S.baseline = null; S.records = [];
+  S.elapsed = 0; S.sessionElapsed = 0; S.absenceSecs = 0; S.noFaceCount = 0;
+  video.srcObject = null;
+  ctx.clearRect(0,0,cvs.width,cvs.height);
+  document.getElementById('startScreen').style.display = 'flex';
+  document.getElementById('absenceOverlay').classList.remove('show');
+  document.getElementById('returnOverlay').classList.remove('show');
+  document.getElementById('resumePopup').classList.remove('show');
+  document.getElementById('screenFlash').classList.remove('alert');
+  document.getElementById('postureAlertBar').classList.remove('show');
+  document.getElementById('indCard').style.display = 'none';
+  document.getElementById('scoreCard').style.display = 'none';
+  document.getElementById('stopBtn').style.display = 'none';
+  document.getElementById('ringWrap').style.display = 'none';
+  document.getElementById('scoreBadge').style.display = 'none';
+  document.getElementById('sessionProgress').style.display = 'none';
+  document.getElementById('setupCard').style.display = 'block';
+  document.getElementById('mainBtn').disabled = false;
+  document.getElementById('mainBtn').textContent = '카메라 켜기';
+  document.getElementById('progressWrap').style.display = 'none';
+  document.getElementById('calibOverlay').classList.remove('show');
+  setStep(1,'active'); setStep(2,''); setStep(3,'');
+  setCamStatus('대기 중','');
+}
+</script>
+</div><!-- /.app -->
+</body>
+</html>
