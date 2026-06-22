@@ -894,24 +894,29 @@ async function startCamera() {
 }
 
 // ══════════════════════════════
-//  프레임 분석 (canvas 없이 video 크기만)
-//  — file:// 환경에서도 안전하게 작동
+//  프레임 분석 — iOS 호환 방식
+//  overlay canvas(이미 DOM에 있음)를 재활용
 // ══════════════════════════════
+let _analysisCvs = null;
+let _analysisCtx = null;
+
 function getFrameData() {
-  // video.videoWidth/Height 는 카메라가 켜지면 항상 있음
   const vw = video.videoWidth || 320;
   const vh = video.videoHeight || 240;
+  if (!vw || !vh) return { avgBright:128, cx:0.5, cy:0.4, topBright:130, vw, vh, dummy:true };
 
-  // offscreen canvas에 그려서 픽셀 샘플링
-  // CORS/taint 오류 방지: try-catch로 감쌈
   try {
-    const oc = document.createElement('canvas');
-    oc.width = 32; oc.height = 24; // 저해상도로 빠르게
-    const oc2 = oc.getContext('2d');
-    oc2.drawImage(video, 0, 0, 32, 24);
-    const d = oc2.getImageData(0, 0, 32, 24).data;
+    // 분석 전용 캔버스 (32x24 저해상도) — 한 번만 만들고 재사용
+    if (!_analysisCvs) {
+      _analysisCvs = document.createElement('canvas');
+      _analysisCvs.width = 32; _analysisCvs.height = 24;
+      _analysisCtx = _analysisCvs.getContext('2d', { willReadFrequently: true });
+    }
+    _analysisCtx.drawImage(video, 0, 0, 32, 24);
+    const d = _analysisCtx.getImageData(0, 0, 32, 24).data;
 
-    let sumR=0, sumG=0, sumB=0, sumX=0, sumY=0, cnt=0;
+    let sumR=0, sumG=0, sumB=0, sumX=0, sumY=0;
+    const cnt = 32 * 24;
     for (let y=0; y<24; y++) {
       for (let x=0; x<32; x++) {
         const i = (y*32+x)*4;
@@ -919,25 +924,34 @@ function getFrameData() {
         const bright = (r+g+b)/3;
         sumR+=r; sumG+=g; sumB+=b;
         sumX += x * bright; sumY += y * bright;
-        cnt++;
       }
     }
-    const avgBright = (sumR+sumG+sumB)/(cnt*3);
-    const cx = sumX / (sumR+sumG+sumB) * 3 / 32; // 0~1 정규화
-    const cy = sumY / (sumR+sumG+sumB) * 3 / 24;
-    // 상단 영역 밝기 (얼굴 위치 추정)
+    const total = sumR+sumG+sumB;
+    const avgBright = total / (cnt*3);
+    const cx = total > 0 ? (sumX/total)*3/32 : 0.5;
+    const cy = total > 0 ? (sumY/total)*3/24 : 0.4;
+
+    // 상단 1/3 영역 밝기 (얼굴 위치)
     let topBright = 0;
     for (let y=0; y<8; y++)
-      for (let x=8; x<24; x++) {
+      for (let x=6; x<26; x++) {
         const i=(y*32+x)*4;
         topBright += (d[i]+d[i+1]+d[i+2])/3;
       }
-    topBright /= (8*16);
+    topBright /= (8*20);
 
-    return { avgBright, cx, cy, topBright, vw, vh };
+    // 중앙 영역 밝기 (얼굴 크기 추정 — 가까울수록 밝고 큼)
+    let centerBright = 0;
+    for (let y=6; y<18; y++)
+      for (let x=8; x<24; x++) {
+        const i=(y*32+x)*4;
+        centerBright += (d[i]+d[i+1]+d[i+2])/3;
+      }
+    centerBright /= (12*16);
+
+    return { avgBright, cx, cy, topBright, centerBright, vw, vh, dummy:false };
   } catch(e) {
-    // getImageData 차단된 경우 (file://) → 시간 기반 더미 데이터
-    return { avgBright: 128, cx: 0.5, cy: 0.4, topBright: 130, vw, vh };
+    return { avgBright:128, cx:0.5, cy:0.4, topBright:130, centerBright:128, vw, vh, dummy:true };
   }
 }
 
@@ -1026,22 +1040,26 @@ function startMonitoring() {
 // ══════════════════════════════
 function calcMetrics(d) {
   const b = S.baseline;
-  if (!b) return { distScore:100, headScore:100, tiltScore:100, score:100 };
+  if (!b || d.dummy) return { distScore:100, headScore:100, tiltScore:100, score:100 };
 
-  // 거리: 밝기가 증가 = 얼굴이 가까워짐
-  const brightDiff = (d.avgBright - b.avgBright) / 255;
-  const distScore = Math.max(0, Math.min(100, Math.round(100 - brightDiff * 200)));
+  // 거리: 중앙 밝기 증가 = 얼굴이 가까워짐
+  const cBase = b.centerBright || b.avgBright;
+  const cNow  = d.centerBright || d.avgBright;
+  const centerRatio = cNow / (cBase || 1);
+  const distDelta = centerRatio - 1.0; // 양수 = 가까워짐
+  const distScore = Math.max(0, Math.min(100, Math.round(100 - distDelta * 250)));
 
   // 두부: 상단 밝기 감소 = 고개 숙임
-  const headDiff = (b.topBright - d.topBright) / 255;
-  const headScore = Math.max(0, Math.min(100, Math.round(100 - headDiff * 180)));
+  const headRatio = d.topBright / (b.topBright || 1);
+  const headDelta = 1.0 - headRatio; // 양수 = 상단 어두워짐
+  const headScore = Math.max(0, Math.min(100, Math.round(100 - headDelta * 250)));
 
   // 기울기: cx 이동
-  const tiltDiff = Math.abs(d.cx - b.cx);
-  const tiltScore = Math.max(0, Math.min(100, Math.round(100 - tiltDiff * 150)));
+  const tiltDelta = Math.abs(d.cx - b.cx);
+  const tiltScore = Math.max(0, Math.min(100, Math.round(100 - tiltDelta * 200)));
 
-  const score = Math.round(distScore * 0.45 + headScore * 0.35 + tiltScore * 0.20);
-  return { distScore, headScore, tiltScore, score, brightDiff, headDiff, tiltDiff };
+  const score = Math.round(distScore*0.50 + headScore*0.35 + tiltScore*0.15);
+  return { distScore, headScore, tiltScore, score, centerRatio, headRatio, tiltDelta };
 }
 
 function updateIndicators(m) {
@@ -1152,13 +1170,11 @@ function doHourReport() {
 //  얼굴 존재 여부 판단
 // ══════════════════════════════
 function isFacePresent(d) {
+  if (d.dummy) return true;
   if (!S.baseline) return true;
-  // 밝기가 기준 대비 너무 낮거나 (화면이 어두워짐 = 아무도 없음)
-  // 또는 dummy data인 경우 항상 present로 처리
-  if (d.avgBright === 128 && d.cx === 0.5) return true; // file:// 더미
-  const brightRatio = d.avgBright / S.baseline.avgBright;
-  // 밝기가 기준의 40% 미만이면 자리 비움으로 판단
-  return brightRatio > 0.40;
+  // 전체 밝기가 기준의 35% 미만 = 아무도 없음
+  const ratio = d.avgBright / (S.baseline.avgBright || 1);
+  return ratio > 0.35;
 }
 
 // ══════════════════════════════
@@ -1235,9 +1251,11 @@ function startReturnCalib() {
 
 function resumeSession() {
   document.getElementById('resumePopup').classList.remove('show');
+  document.getElementById('absenceOverlay').classList.remove('show');
+  document.getElementById('returnOverlay').classList.remove('show');
   S.noFaceCount = 0;
   S.absenceSecs = 0;
-  // 세션 타이머 재시작
+  clearInterval(S.absenceTimer);
   startMonitoringTimers();
   setCamStatus('감지 중', 'ok');
   document.getElementById('scoreBadge').style.display = 'flex';
