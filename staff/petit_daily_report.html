@@ -523,6 +523,34 @@
     </div>
   </div>
 
+<script>
+(function(){
+  const dow = new Date().getDay();
+  const TRASH = {
+    1: { icon:'🗑️', text:'야간 — 일반 쓰레기 배출' },
+    2: { icon:'♻️', text:'재활용 쓰레기 배출' },
+    4: { icon:'♻️', text:'재활용 쓰레기 배출' },
+  };
+  const item = TRASH[dow];
+  if (!item) return;
+
+  const grid  = document.getElementById('daily-checks');
+  const total = grid.querySelectorAll('.check-item').length + 1;
+
+  grid.querySelectorAll('.check-item').forEach(el => {
+    el.onclick = function(){ toggleCheck(this,'d-check-count',total); };
+  });
+  document.getElementById('d-check-count').textContent = '0 / ' + total;
+
+  const div = document.createElement('div');
+  div.className = 'check-item';
+  div.onclick = function(){ toggleCheck(this,'d-check-count',total); };
+  div.style.cssText = 'border-color:var(--gold);background:var(--gold-light);grid-column:1/-1;';
+  div.innerHTML = '<div class="check-box"></div><span class="check-text">' + item.icon + ' ' + item.text + '</span>';
+  grid.appendChild(div);
+})();
+</script>
+
   <!-- 진료 현황 -->
   <div class="section">
     <div class="section-head">
@@ -751,122 +779,10 @@
       <span class="icon">📝</span>
       <span class="title">특이사항 메모</span>
     </div>
-    <div class="section-body" style="display:flex;flex-direction:column;gap:14px">
-
-      <!-- 카카오 미해결 -->
-      <div>
-        <div style="font-size:11px;font-weight:700;color:#555550;letter-spacing:.06em;margin-bottom:6px">📱 카카오톡 미해결 문의</div>
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <input type="number" id="d-kakao-cnt" min="0" value="0"
-            style="width:70px;border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:15px;font-weight:700;text-align:center;background:var(--cream);color:var(--text)">
-          <span style="font-size:13px;color:var(--text-soft)">건 미해결</span>
-        </div>
-        <textarea id="d-kakao-memo" rows="2"
-          style="width:100%;border:1px solid var(--border);border-radius:8px;padding:9px 11px;font-size:12.5px;color:var(--text);background:var(--cream);font-family:inherit;resize:none;line-height:1.65;"
-          placeholder="미해결 문의 간략 요약 (예: 김○○-가격문의 미답, 박○○-예약변경 대기)"></textarea>
-      </div>
-
-      <!-- 웰컴콜 -->
-      <div>
-        <div style="font-size:11px;font-weight:700;color:#555550;letter-spacing:.06em;margin-bottom:6px">📞 웰컴콜 <span style="font-weight:400;color:#888880">(신환 — 문자로 대체)</span></div>
-        <div id="welcome-list" style="display:flex;flex-direction:column;gap:6px"></div>
-        <button onclick="addWelcome()" style="margin-top:6px;font-size:12px;color:#007A54;background:#E8F5F0;border:none;border-radius:6px;padding:5px 12px;cursor:pointer">+ 신환 추가</button>
-      </div>
-
-      <!-- 해피콜 -->
-      <div>
-        <div style="font-size:11px;font-weight:700;color:#555550;letter-spacing:.06em;margin-bottom:6px">📞 해피콜 <span style="font-weight:400;color:#888880">(수술·발치·불편 환자)</span></div>
-        <div id="happy-list" style="display:flex;flex-direction:column;gap:6px"></div>
-        <button onclick="addHappy()" style="margin-top:6px;font-size:12px;color:#C8A84B;background:#FFFBEF;border:none;border-radius:6px;padding:5px 12px;cursor:pointer">+ 해피콜 환자 추가</button>
-      </div>
-
-      <!-- 기타 전달사항 -->
-      <div>
-        <div style="font-size:11px;font-weight:700;color:#555550;letter-spacing:.06em;margin-bottom:6px">📌 기타 전달사항</div>
-        <textarea id="d-memo" style="width:100%;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--text);background:var(--cream);font-family:inherit;resize:vertical;min-height:60px;line-height:1.7;" placeholder="원장 전달사항 / 불만환자 / 기타 공유 내용"></textarea>
-      </div>
-
+    <div class="section-body">
+      <textarea id="d-memo" style="width:100%;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--text);background:var(--cream);font-family:inherit;resize:vertical;min-height:90px;line-height:1.7;" placeholder="불만환자 / 원장 전달사항 / 기타 공유 내용을 자유롭게 입력하세요"></textarea>
     </div>
   </div>
-
-  <script>
-  // 웰컴콜 행 추가
-  function addWelcome(){
-    const row=document.createElement('div');
-    row.style.cssText='display:flex;align-items:center;gap:6px;';
-    row.innerHTML=`
-      <input type="text" placeholder="환자명" style="flex:1;border:1px solid #E0E0DA;border-radius:7px;padding:7px 10px;font-size:13px;font-family:inherit;background:#FAFAF9">
-      <input type="text" placeholder="치료계획 간략히" style="flex:2;border:1px solid #E0E0DA;border-radius:7px;padding:7px 10px;font-size:13px;font-family:inherit;background:#FAFAF9">
-      <button onclick="this.parentNode.remove()" style="font-size:16px;background:none;border:none;color:#AAAAAA;cursor:pointer;line-height:1">×</button>`;
-    document.getElementById('welcome-list').appendChild(row);
-  }
-
-  // 해피콜 행 추가
-  function addHappy(){
-    const row=document.createElement('div');
-    row.style.cssText='display:flex;align-items:center;gap:6px;flex-wrap:wrap;';
-    row.innerHTML=`
-      <select style="border:1px solid #E0E0DA;border-radius:7px;padding:7px 8px;font-size:13px;font-family:inherit;background:#FAFAF9;color:#333">
-        <option value="수술">수술</option>
-        <option value="발치">발치</option>
-        <option value="불편">불편</option>
-      </select>
-      <input type="text" placeholder="환자명" style="flex:1;min-width:80px;border:1px solid #E0E0DA;border-radius:7px;padding:7px 10px;font-size:13px;font-family:inherit;background:#FAFAF9">
-      <select style="border:1px solid #E0E0DA;border-radius:7px;padding:7px 8px;font-size:13px;font-family:inherit;background:#FAFAF9;color:#333">
-        <option value="완료">완료</option>
-        <option value="저녁수술-내일아침콜">저녁수술 → 내일아침콜</option>
-        <option value="미완료">미완료</option>
-      </select>
-      <button onclick="this.parentNode.remove()" style="font-size:16px;background:none;border:none;color:#AAAAAA;cursor:pointer;line-height:1">×</button>`;
-    document.getElementById('happy-list').appendChild(row);
-  }
-
-  // 초기 행 1개씩
-  addWelcome();
-  addHappy();
-
-  // 기존 getMemo 함수가 있다면 새 구조도 포함하도록 오버라이드
-  const _origGetMemo = window.getMemoText;
-  window.getMemoText = function(){
-    const kakao = document.getElementById('d-kakao-cnt')?.value || '0';
-    const kakaoMemo = document.getElementById('d-kakao-memo')?.value.trim() || '';
-    let txt = `[카카오 미해결] ${kakao}건`;
-    if(kakaoMemo) txt += ` — ${kakaoMemo}`;
-    txt += '\n';
-
-    // 웰컴콜
-    const wRows = document.querySelectorAll('#welcome-list > div');
-    if(wRows.length){
-      txt += `\n[웰컴콜-신환]\n`;
-      wRows.forEach(r=>{
-        const inputs=r.querySelectorAll('input');
-        const name=inputs[0]?.value.trim();
-        const plan=inputs[1]?.value.trim();
-        if(name) txt += `· ${name} / ${plan||'치료계획 미기입'}\n`;
-      });
-    }
-
-    // 해피콜
-    const hRows = document.querySelectorAll('#happy-list > div');
-    if(hRows.length){
-      txt += `\n[해피콜]\n`;
-      hRows.forEach(r=>{
-        const sels=r.querySelectorAll('select');
-        const inp=r.querySelector('input');
-        const type=sels[0]?.value;
-        const name=inp?.value.trim();
-        const status=sels[1]?.value;
-        if(name) txt += `· ${type} - ${name} - ${status}\n`;
-      });
-    }
-
-    const memo = document.getElementById('d-memo')?.value.trim();
-    if(memo) txt += `\n[기타] ${memo}`;
-    return txt;
-  };
-
-  // ── JSON 자동 저장 ──────────────────────────────
-</script>
 
   <!-- 보험서류 신청현황 — 통합 -->
   <div class="section" id="doc-section">
@@ -935,21 +851,16 @@
       <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;">
         <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:10px;">서류 선택 (복수 가능)</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;" id="dr-doc-grid">
-          <div class="dr-doc-chip" data-name="일반진단서/소견서" data-price="20000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">일반진단서/소견서<span style="font-size:10px;color:#aaa;display:block;">2만원/장</span></div>
+          <div class="dr-doc-chip" data-name="일반진단서/소견서" data-price="10000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">일반진단서/소견서<span style="font-size:10px;color:#aaa;display:block;">1만원/장</span></div>
           <div class="dr-doc-chip" data-name="병무용 진단서" data-price="20000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">병무용 진단서<span style="font-size:10px;color:#aaa;display:block;">2만원/장</span></div>
           <div class="dr-doc-chip" data-name="영수증" data-price="0" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">영수증<span style="font-size:10px;color:#aaa;display:block;">무료</span></div>
           <div class="dr-doc-chip" data-name="진료비 세부내역서" data-price="0" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">진료비 세부내역서<span style="font-size:10px;color:#aaa;display:block;">무료</span></div>
-          <div class="dr-doc-chip" data-name="치료확인서" data-price="3000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">치료확인서<span style="font-size:10px;color:#aaa;display:block;">3천원/장</span></div>
+          <div class="dr-doc-chip" data-name="치료확인서" data-price="10000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">치료확인서<span style="font-size:10px;color:#aaa;display:block;">1만원/장</span></div>
           <div class="dr-doc-chip" data-name="차트사본 1~5매" data-price="1000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">차트사본 1~5매<span style="font-size:10px;color:#aaa;display:block;">1천원/장</span></div>
           <div class="dr-doc-chip" data-name="차트사본 6매↑" data-price="100" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">차트사본 6매↑<span style="font-size:10px;color:#aaa;display:block;">100원/장</span></div>
-          <div class="dr-doc-chip" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#aaa;cursor:not-allowed;background:#F5F5F1;text-align:center;line-height:1.4;opacity:.5;pointer-events:none;">영상 필름<span style="font-size:10px;color:#aaa;display:block;">5천원 · 본원 미시행</span></div>
-          <div class="dr-doc-chip" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#aaa;cursor:not-allowed;background:#F5F5F1;text-align:center;line-height:1.4;opacity:.5;pointer-events:none;">영상 CD<span style="font-size:10px;color:#aaa;display:block;">1만원 · 본원 미시행</span></div>
-          <div class="dr-doc-chip" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#aaa;cursor:not-allowed;background:#F5F5F1;text-align:center;line-height:1.4;opacity:.5;pointer-events:none;">영상 DVD<span style="font-size:10px;color:#aaa;display:block;">2만원 · 본원 미시행</span></div>
-          <div class="dr-doc-chip" data-name="향후진료비 추정서(소)" data-price="50000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">향후진료비 추정서(소)<span style="font-size:10px;color:#aaa;display:block;">5만원</span></div>
-          <div class="dr-doc-chip" data-name="향후진료비 추정서(대)" data-price="100000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">향후진료비 추정서(대)<span style="font-size:10px;color:#aaa;display:block;">10만원</span></div>
-          <div class="dr-doc-chip" data-name="제증명서 사본" data-price="1000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">제증명서 사본<span style="font-size:10px;color:#aaa;display:block;">1천원</span></div>
-          <div class="dr-doc-chip" data-name="상해진단서 3주미만" data-price="100000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">상해진단서 3주미만<span style="font-size:10px;color:#aaa;display:block;">10만원</span></div>
-          <div class="dr-doc-chip" data-name="상해진단서 3주이상" data-price="150000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">상해진단서 3주이상<span style="font-size:10px;color:#aaa;display:block;">15만원</span></div>
+          <div class="dr-doc-chip" data-name="엑스레이" data-price="1000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">엑스레이<span style="font-size:10px;color:#aaa;display:block;">1천원/장</span></div>
+          <div class="dr-doc-chip" data-name="상해진단서 3주미만" data-price="50000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">상해진단서 3주미만<span style="font-size:10px;color:#aaa;display:block;">5만원</span></div>
+          <div class="dr-doc-chip" data-name="상해진단서 3주이상" data-price="100000" onclick="drToggleDoc(this)" style="padding:8px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:#555;cursor:pointer;background:var(--cream);text-align:center;line-height:1.4;">상해진단서 3주이상<span style="font-size:10px;color:#aaa;display:block;">10만원</span></div>
         </div>
         <div style="margin-bottom:8px;">
           <div style="font-size:11px;color:var(--text-soft);font-weight:600;margin-bottom:4px;">수량</div>
@@ -999,12 +910,6 @@
     💡 <strong>수요일</strong> — 중간 체크 (리콜·해피콜·이슈) &nbsp;|&nbsp;
     <strong>금요일</strong> — 청구 오류 확인 &nbsp;|&nbsp;
     <strong>토요일</strong> — 각 주별 보고 + 기계실 이슈
-  </div>
-
-  <!-- 자동 집계 버튼 -->
-  <div style="display:flex;gap:8px;margin:12px 0">
-    <button onclick="autoFillWeekly()" style="flex:1;padding:11px;border-radius:10px;background:#1E3D30;color:#FAF8F0;border:none;font-size:13px;font-weight:600;cursor:pointer">📊 이번 주 데이터 자동 집계</button>
-    <a href="petit_staff_dashboard.html" style="display:flex;align-items:center;padding:11px 16px;border-radius:10px;background:#E8F5F0;color:#007A54;border:1px solid #C5E8DC;font-size:13px;font-weight:600;text-decoration:none">통계 보기</a>
   </div>
 
   <!-- 치료중단 리콜 -->
@@ -1167,11 +1072,7 @@
     📌 마지막 주에 작성합니다. <strong>총괄 직원</strong>이 주요 항목을 취합하여 원장님께 보고.
   </div>
 
-  <!-- 자동 집계 버튼 -->
-  <div style="display:flex;gap:8px;margin:12px 0">
-    <button onclick="autoFillMonthly()" style="flex:1;padding:11px;border-radius:10px;background:#1E3D30;color:#FAF8F0;border:none;font-size:13px;font-weight:600;cursor:pointer">📊 이번 달 데이터 자동 집계</button>
-    <a href="petit_staff_dashboard.html" style="display:flex;align-items:center;padding:11px 16px;border-radius:10px;background:#E8F5F0;color:#007A54;border:1px solid #C5E8DC;font-size:13px;font-weight:600;text-decoration:none">통계 보기</a>
-  </div>
+  <!-- 청구 결과 -->
   <div class="section">
     <div class="section-head">
       <span class="icon">📋</span>
@@ -1181,7 +1082,7 @@
       <div class="money-row">
         <div class="money-label">청구 결정액</div>
         <div class="money-wrap">
-          <input type="number" id="m-claim" min="0" placeholder="0">
+          <input type="number" id="m-claim" min="0" placeholder="0" oninput="syncClaim(this.value)">
           <span class="money-unit">원</span>
         </div>
       </div>
@@ -1212,14 +1113,13 @@
       <div class="money-row">
         <div class="money-label">비보험 총 수납</div>
         <div class="money-wrap">
-          <input type="number" id="m-priv" min="0" placeholder="0">
+          <input type="number" id="m-priv" min="0" placeholder="0" readonly
+            style="background:#f5f5f5;color:var(--green-dark);font-weight:700;">
           <span class="money-unit">원</span>
+          <span style="font-size:10px;color:var(--text-soft);white-space:nowrap;">자동계산</span>
         </div>
       </div>
-      <div class="field-row">
-        <div class="field-label">치료별 통계</div>
-        <div class="field-input"><textarea id="m-priv-stat" placeholder="교정 / 교합재건 / 임플란트 / MFT 등 각 치료별 금액"></textarea></div>
-      </div>
+
     </div>
   </div>
 
@@ -1261,22 +1161,96 @@
       <div class="money-row">
         <div class="money-label">식대</div>
         <div class="money-wrap">
-          <input type="number" id="m-food" min="0" placeholder="0">
+          <input type="number" id="m-food" min="0" placeholder="0" oninput="calcMonthly()">
           <span class="money-unit">원</span>
         </div>
       </div>
       <div class="money-row">
-        <div class="money-label">세금·공과금</div>
+        <div class="money-label">인건비</div>
         <div class="money-wrap">
-          <input type="number" id="m-tax" min="0" placeholder="0">
+          <input type="number" id="m-labor" min="0" placeholder="0" oninput="calcMonthly()">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label">교육비</div>
+        <div class="money-wrap">
+          <input type="number" id="m-edu" min="0" placeholder="0" oninput="calcMonthly()">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label">회식비</div>
+        <div class="money-wrap">
+          <input type="number" id="m-dining" min="0" placeholder="0" oninput="calcMonthly()">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div style="padding:8px 0 2px;">
+        <div style="font-size:12px;color:var(--text-soft);font-weight:600;margin-bottom:6px;">세금·공과금</div>
+        <div class="money-row" style="padding-left:8px;">
+          <div class="money-label" style="font-size:12px;">· 전기</div>
+          <div class="money-wrap"><input type="number" id="m-tax-elec" min="0" placeholder="0" style="font-size:13px;" oninput="calcMonthly()"><span class="money-unit">원</span></div>
+        </div>
+        <div class="money-row" style="padding-left:8px;">
+          <div class="money-label" style="font-size:12px;">· 수돗세</div>
+          <div class="money-wrap"><input type="number" id="m-tax-water" min="0" placeholder="0" style="font-size:13px;" oninput="calcMonthly()"><span class="money-unit">원</span></div>
+        </div>
+        <div class="money-row" style="padding-left:8px;">
+          <div class="money-label" style="font-size:12px;">· 가스</div>
+          <div class="money-wrap"><input type="number" id="m-tax-gas" min="0" placeholder="0" style="font-size:13px;" oninput="calcMonthly()"><span class="money-unit">원</span></div>
+        </div>
+        <div class="money-row" style="padding-left:8px;">
+          <div class="money-label" style="font-size:12px;">· 기타</div>
+          <div class="money-wrap"><input type="number" id="m-tax-etc" min="0" placeholder="0" style="font-size:13px;" oninput="calcMonthly()"><span class="money-unit">원</span></div>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label">전기안전관리비</div>
+        <div class="money-wrap">
+          <input type="number" id="m-elec-safety" min="0" placeholder="0" oninput="calcMonthly()">
           <span class="money-unit">원</span>
         </div>
       </div>
       <div class="money-row">
         <div class="money-label">재료·잡비</div>
         <div class="money-wrap">
-          <input type="number" id="m-misc" min="0" placeholder="0">
+          <input type="number" id="m-misc" min="0" placeholder="0" oninput="calcMonthly()">
           <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div style="padding:8px 0 2px;">
+        <div style="font-size:12px;color:var(--text-soft);font-weight:600;margin-bottom:6px;">기공료</div>
+        <div class="money-row" style="padding-left:8px;">
+          <div class="money-label" style="font-size:12px;">· 에나멜기공소</div>
+          <div class="money-wrap"><input type="number" id="m-lab-enamel" min="0" placeholder="0" oninput="calcMonthly()" style="font-size:13px;"><span class="money-unit">원</span></div>
+        </div>
+        <div class="money-row" style="padding-left:8px;">
+          <div class="money-label" style="font-size:12px;">· 오디엘기공소</div>
+          <div class="money-wrap"><input type="number" id="m-lab-odl" min="0" placeholder="0" oninput="calcMonthly()" style="font-size:13px;"><span class="money-unit">원</span></div>
+        </div>
+        <div class="money-row" style="padding-left:8px;">
+          <div class="money-label" style="font-size:12px;">· 티피기공소</div>
+          <div class="money-wrap"><input type="number" id="m-lab-tp" min="0" placeholder="0" oninput="calcMonthly()" style="font-size:13px;"><span class="money-unit">원</span></div>
+        </div>
+        <div class="money-row" style="padding-left:8px;">
+          <div class="money-label" style="font-size:12px;">· 인비절라인</div>
+          <div class="money-wrap"><input type="number" id="m-lab-invisalign" min="0" placeholder="0" oninput="calcMonthly()" style="font-size:13px;"><span class="money-unit">원</span></div>
+        </div>
+        <div class="money-row" style="padding-left:8px;">
+          <div class="money-label" style="font-size:12px;">· 기타</div>
+          <div class="money-wrap"><input type="number" id="m-lab-etc" min="0" placeholder="0" oninput="calcMonthly()" style="font-size:13px;"><span class="money-unit">원</span></div>
+        </div>
+      </div>
+      <div style="padding:8px 0 2px;">
+        <div style="font-size:12px;color:var(--text-soft);font-weight:600;margin-bottom:6px;">재료비</div>
+        <div class="money-row" style="padding-left:8px;">
+          <div class="money-label" style="font-size:12px;">· 보험재료</div>
+          <div class="money-wrap"><input type="number" id="m-material-ins" min="0" placeholder="0" oninput="calcMonthly()" style="font-size:13px;"><span class="money-unit">원</span></div>
+        </div>
+        <div class="money-row" style="padding-left:8px;">
+          <div class="money-label" style="font-size:12px;">· 비보험재료</div>
+          <div class="money-wrap"><input type="number" id="m-material-priv" min="0" placeholder="0" oninput="calcMonthly()" style="font-size:13px;"><span class="money-unit">원</span></div>
         </div>
       </div>
       <div class="field-row">
@@ -1286,23 +1260,252 @@
     </div>
   </div>
 
-  <!-- 다음달 목표 -->
+  <!-- 이번달 매출 상세분석 — 보험청구 -->
   <div class="section">
-    <div class="section-head">
-      <span class="icon">🎯</span>
-      <span class="title">다음달 목표</span>
-    </div>
+    <div class="section-head"><span class="icon">📊</span><span class="title">이번달 매출 상세분석 — 보험청구</span></div>
     <div class="section-body">
       <div class="money-row">
-        <div class="money-label">다음달 매출 목표</div>
+        <div class="money-label" style="font-size:12px;">총 청구</div>
         <div class="money-wrap">
-          <input type="number" id="m-next-target" min="0" placeholder="0">
+          <input type="number" id="m-eval-ins-total" min="0" placeholder="0" oninput="calcMonthly()" style="font-size:13px;">
           <span class="money-unit">원</span>
         </div>
       </div>
-      <div class="field-row">
-        <div class="field-label">중점 과제</div>
-        <div class="field-input"><textarea id="m-next-task" placeholder="다음달 집중할 업무·목표"></textarea></div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">치주</div>
+        <div class="money-wrap">
+          <input type="number" id="m-eval-ins-perio" min="0" placeholder="0" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">엠도게인</div>
+        <div class="money-wrap">
+          <input type="number" id="m-eval-ins-emdogain" min="0" placeholder="0" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">보험임플란트</div>
+        <div class="money-wrap">
+          <input type="number" id="m-eval-ins-impl" min="0" placeholder="0" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">보험틀니</div>
+        <div class="money-wrap">
+          <input type="number" id="m-eval-ins-denture" min="0" placeholder="0" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">어린이치료</div>
+        <div class="money-wrap">
+          <input type="number" id="m-eval-ins-child" min="0" placeholder="0" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div style="margin-top:10px;">
+        <div style="font-size:11px;color:var(--text-soft);font-weight:600;margin-bottom:5px;">평가내용</div>
+        <textarea id="m-eval-ins-note" style="width:100%;border:1px solid var(--border);border-radius:8px;padding:9px 11px;font-size:12px;background:var(--cream);font-family:inherit;resize:vertical;min-height:70px;" placeholder="보험청구 매출 분석 및 평가내용 작성"></textarea>
+      </div>
+    </div>
+  </div>
+  <!-- 이번달 매출 상세분석 — 비보험 -->
+  <div class="section">
+    <div class="section-head"><span class="icon">📊</span><span class="title">이번달 매출 상세분석 — 비보험</span></div>
+    <div class="section-body">
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">보철</div>
+        <div class="money-wrap">
+          <input type="number" id="m-eval-priv-prosth" min="0" placeholder="0" oninput="calcMonthly()" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">보존치료</div>
+        <div class="money-wrap">
+          <input type="number" id="m-eval-priv-conserv" min="0" placeholder="0" oninput="calcMonthly()" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">임플란트</div>
+        <div class="money-wrap">
+          <input type="number" id="m-eval-priv-impl" min="0" placeholder="0" oninput="calcMonthly()" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">교합진단</div>
+        <div class="money-wrap">
+          <input type="number" id="m-eval-priv-occl-diag" min="0" placeholder="0" oninput="calcMonthly()" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">교합치료</div>
+        <div class="money-wrap">
+          <input type="number" id="m-eval-priv-occl-treat" min="0" placeholder="0" oninput="calcMonthly()" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div style="background:var(--green-light);border:1px solid var(--border);border-radius:8px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;margin-top:8px;margin-bottom:4px;">
+        <span style="font-size:12px;font-weight:700;color:var(--green-dark);">비보험 합계</span>
+        <span id="m-eval-priv-total" style="font-size:16px;font-weight:700;color:var(--green-dark);">0 원</span>
+      </div>
+      <div style="margin-top:10px;">
+        <div style="font-size:11px;color:var(--text-soft);font-weight:600;margin-bottom:5px;">평가내용</div>
+        <textarea id="m-eval-priv-note" style="width:100%;border:1px solid var(--border);border-radius:8px;padding:9px 11px;font-size:12px;background:var(--cream);font-family:inherit;resize:vertical;min-height:70px;" placeholder="비보험 매출 분석 및 평가내용 작성"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-head"><span class="icon">📊</span><span class="title">이번달 매출 상세분석 — 기타판매</span></div>
+    <div class="section-body">
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">칫솔/바른미소훈련도구</div>
+        <div class="money-wrap">
+          <input type="number" id="m-eval-goods" min="0" placeholder="0" oninput="calcMonthly()" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 다음달 목표 — 보험청구 -->
+  <div class="section">
+    <div class="section-head"><span class="icon">🎯</span><span class="title">다음달 목표 — 보험청구</span></div>
+    <div class="section-body">
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">총 청구</div>
+        <div class="money-wrap">
+          <input type="number" id="m-tgt-ins-total" min="0" placeholder="0" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">치주</div>
+        <div class="money-wrap">
+          <input type="number" id="m-tgt-ins-perio" min="0" placeholder="0" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">엠도게인</div>
+        <div class="money-wrap">
+          <input type="number" id="m-tgt-ins-emdogain" min="0" placeholder="0" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">보험임플란트</div>
+        <div class="money-wrap">
+          <input type="number" id="m-tgt-ins-impl" min="0" placeholder="0" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">보험틀니</div>
+        <div class="money-wrap">
+          <input type="number" id="m-tgt-ins-denture" min="0" placeholder="0" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">어린이치료</div>
+        <div class="money-wrap">
+          <input type="number" id="m-tgt-ins-child" min="0" placeholder="0" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 다음달 목표 — 비보험 -->
+  <div class="section">
+    <div class="section-head"><span class="icon">🎯</span><span class="title">다음달 목표 — 비보험</span></div>
+    <div class="section-body">
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">보철</div>
+        <div class="money-wrap">
+          <input type="number" id="m-tgt-priv-prosth" min="0" placeholder="0" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">임플란트</div>
+        <div class="money-wrap">
+          <input type="number" id="m-tgt-priv-impl" min="0" placeholder="0" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">교합진단</div>
+        <div class="money-wrap">
+          <input type="number" id="m-tgt-priv-occl-diag" min="0" placeholder="0" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">교합치료</div>
+        <div class="money-wrap">
+          <input type="number" id="m-tgt-priv-occl-treat" min="0" placeholder="0" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-head"><span class="icon">🎯</span><span class="title">다음달 목표 — 기타판매</span></div>
+    <div class="section-body">
+      <div class="money-row">
+        <div class="money-label" style="font-size:12px;">칫솔/바른미소훈련도구</div>
+        <div class="money-wrap">
+          <input type="number" id="m-tgt-goods" min="0" placeholder="0" style="font-size:13px;">
+          <span class="money-unit">원</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-head"><span class="icon">📝</span><span class="title">중점 과제</span></div>
+    <div class="section-body">
+      <textarea id="m-next-task" style="width:100%;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13px;background:var(--cream);font-family:inherit;resize:vertical;min-height:80px;" placeholder="다음달 집중할 업무·목표"></textarea>
+    </div>
+  </div>
+
+  <!-- 자동계산 요약 -->
+  <div class="section" style="border-color:var(--green);">
+    <div class="section-head" style="background:var(--green);color:white;">
+      <span class="icon">💹</span>
+      <span class="title" style="color:white;">매출·지출·순수익 요약</span>
+    </div>
+    <div class="section-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px;">
+        <div style="background:var(--green-light);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;">
+          <div style="font-size:10px;color:var(--text-soft);margin-bottom:4px;">총 매출</div>
+          <div id="m-total-revenue" style="font-size:16px;font-weight:700;color:var(--green-dark);">0</div>
+          <div style="font-size:10px;color:var(--text-soft);">원</div>
+        </div>
+        <div style="background:#fdecea;border:1px solid #f5c6cb;border-radius:10px;padding:12px;text-align:center;">
+          <div style="font-size:10px;color:var(--text-soft);margin-bottom:4px;">총 지출</div>
+          <div id="m-total-expense" style="font-size:16px;font-weight:700;color:var(--red);">0</div>
+          <div style="font-size:10px;color:var(--text-soft);">원</div>
+        </div>
+        <div style="background:var(--gold-light);border:1px solid var(--gold);border-radius:10px;padding:12px;text-align:center;">
+          <div style="font-size:10px;color:var(--text-soft);margin-bottom:4px;">순수익</div>
+          <div id="m-net-profit" style="font-size:16px;font-weight:700;color:var(--green-dark);">0</div>
+          <div style="font-size:10px;color:var(--text-soft);">원</div>
+        </div>
+      </div>
+      <div style="background:#f8f8f8;border-radius:8px;padding:10px 12px;font-size:11px;color:var(--text-soft);line-height:2;">
+        <div style="display:flex;justify-content:space-between;"><span>보험청구</span><span id="m-sum-ins" style="font-weight:600;color:var(--text);">0원</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>비보험</span><span id="m-sum-priv" style="font-weight:600;color:var(--text);">0원</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>기타판매</span><span id="m-sum-goods" style="font-weight:600;color:var(--text);">0원</span></div>
+        <div style="height:1px;background:var(--border);margin:4px 0;"></div>
+        <div style="display:flex;justify-content:space-between;"><span>기공료 합계</span><span id="m-sum-lab" style="font-weight:600;color:var(--red);">0원</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>재료비 합계</span><span id="m-sum-mat" style="font-weight:600;color:var(--red);">0원</span></div>
+        <div style="display:flex;justify-content:space-between;"><span>식대·세금·잡비</span><span id="m-sum-misc" style="font-weight:600;color:var(--red);">0원</span></div>
       </div>
     </div>
   </div>
@@ -1331,37 +1534,37 @@
     📌 매월 <strong>20일</strong>, 총괄 직원이 데스크 기준으로 작성합니다. 교정·임보·재료 현황 포함.
   </div>
 
-  <!-- 교정 현황 -->
+  <!-- 교합치료 현황 -->
   <div class="section">
     <div class="section-head">
       <span class="icon">🦷</span>
-      <span class="title">교정 현황 (2번 항목)</span>
+      <span class="title">교합치료 현황</span>
     </div>
     <div class="section-body">
       <div class="num-grid">
         <div class="num-item">
-          <label>교정 진행 환자</label>
-          <input type="number" id="g-ortho-active" min="0" placeholder="0">
+          <label>교합치료 진행 환자</label>
+          <input type="number" id="g-occlusal-active" min="0" placeholder="0">
           <div class="num-unit">명</div>
         </div>
         <div class="num-item">
           <label>이번달 신규</label>
-          <input type="number" id="g-ortho-new" min="0" placeholder="0">
+          <input type="number" id="g-occlusal-new" min="0" placeholder="0">
           <div class="num-unit">명</div>
         </div>
       </div>
       <div class="field-row" style="margin-top:10px;">
         <div class="field-label">특이 케이스</div>
-        <div class="field-input"><textarea id="g-ortho-note" placeholder="주요 케이스·이슈"></textarea></div>
+        <div class="field-input"><textarea id="g-occlusal-note" placeholder="주요 케이스·이슈"></textarea></div>
       </div>
     </div>
   </div>
 
-  <!-- 임플란트·보철 관리 (4번 항목) -->
+  <!-- 임플란트·보철 관리 -->
   <div class="section">
     <div class="section-head">
       <span class="icon">⚙️</span>
-      <span class="title">임플란트 · 보철 관리 (4번 항목)</span>
+      <span class="title">임플란트 · 보철 관리</span>
     </div>
     <div class="section-body">
       <div class="num-grid">
@@ -1383,7 +1586,7 @@
     </div>
   </div>
 
-  <!-- 재료·멸균기 (4번 항목) -->
+  <!-- 재료·멸균기 -->
   <div class="section">
     <div class="section-head">
       <span class="icon">🧪</span>
@@ -1439,11 +1642,11 @@
     </div>
   </div>
 
-  <!-- 청구 1차 준비 (총괄 항목) -->
+  <!-- 청구 1차 준비 -->
   <div class="section">
     <div class="section-head">
       <span class="icon">🧾</span>
-      <span class="title">청구 1차 준비 (총괄 항목)</span>
+      <span class="title">청구 1차 준비</span>
     </div>
     <div class="section-body">
       <div class="field-row">
@@ -1473,7 +1676,7 @@
 
 <script>
 // ── Apps Script URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz24LFBERcL0ta-CnEXSxXe8n7HI6v-LYzOjIdDYBmgBr7HiP09_Qy2rinqI9aFT19Z/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_0G8R5Umor5AS627oGpujFr5nDtNMGAYOkwAVw3MpNPpGKYIhz5m6AWOLkAT149Mk/exec';
 
 // ── 날짜·요일·주차 계산 및 오늘의 할일 알람
 (function(){
@@ -1521,8 +1724,10 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz24LFBERcL0ta-CnEXS
 
   // 요일별
   const DOW_TASKS = {
-    1: { label:'월요일', items:['전체 일정 리뷰 · 주요 케이스 · 이슈 확인'] },
+    1: { label:'월요일', items:['전체 일정 리뷰 · 주요 케이스 · 이슈 확인', '🗑️ 야간 — 일반 쓰레기 버리기'] },
+    2: { label:'화요일', items:['♻️ 재활용 쓰레기 버리기'] },
     3: { label:'수요일', items:['치료중단환자 리콜 중간 체크 (치주·신경·충치·보철·임플·교정)', '해피콜·이슈 중간 점검', '타구대 거름망 청소'] },
+    4: { label:'목요일', items:['♻️ 재활용 쓰레기 버리기'] },
     5: { label:'금요일', items:['청구 오류 사항 확인', '청구 결과 관리 · 심사 재요청', '주기적 관리환자 내원·예약 확인'] },
     6: { label:'토요일', items:['VIP 리스트 확인 · 해피콜(문자)', '각 주별 보고 취합', '기계실 이슈 점검'] },
   };
@@ -1532,22 +1737,22 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz24LFBERcL0ta-CnEXS
 
   // 주차별
   const WEEK_TASKS = {
-    1: { label:'1주차', items:['치료중단환자 리콜 (치주/신경/충치/보철/임플/교정)', '각 치료별 통계·내원 추이 확인'] },
+    1: { label:'1주차', items:['치료중단환자 리콜 (치주/신경/충치/보철/임플/교정)', '각 치료별 통계·내원 추이 확인'], treatProgress:true },
     2: { label:'2주차', items:['미납자 관리', '치료계획 상담 성공률 확인 (상담자별)'] },
     3: { label:'3주차', items:['청구 전 오류 확인 · 심사 재요청', '주기적 관리환자 예약 확인'] },
     4: { label:'4주차', items:['VIP 리스트 해피콜(문자)', '각 치료별 주간 통계 기록'] },
   };
   if (WEEK_TASKS[week]) {
-    tasks.push({ tag: week + '주차', color:'#ffffff20', items: WEEK_TASKS[week].items, showProgress: true });
+    tasks.push({ tag: week + '주차', color:'#ffffff20', items: WEEK_TASKS[week].items, showProgress: true, treatProgress: WEEK_TASKS[week].treatProgress || false });
   }
 
   // 월 특정일
   if (is20) {
     tasks.push({ tag:'📊 20일', color:'#E8D09040', items:[
       '경영보고 — 총괄 직원 작성',
-      '교정 현황 (2번 항목)',
-      '임보·재료·멸균기 관리 (4번 항목)',
-      '청구 1차 준비 (총괄 항목)',
+      '교합치료 현황',
+      '임플란트·재료·멸균기 관리',
+      '청구 1차 준비',
       '20일 기준 누적 수납 보고',
     ]});
   }
@@ -1607,27 +1812,50 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz24LFBERcL0ta-CnEXS
       if (!g.showProgress) {
         return `<div style="font-size:12px;opacity:.95;line-height:1.8;">· ${item}</div>`;
       }
-      const sid = 'prog-' + gi + '-' + ii;
-      const vid = 'progv-' + gi + '-' + ii;
+      // 주차별/마지막주 항목 — 체크박스
+      const cid      = 'wk-' + gi + '-' + ii;
+      const wCountId = 'wk-count-' + gi;
+      const wTotal   = g.items.length;
       return `
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;" data-tag="${g.tag}">
-          <span style="font-size:11px;opacity:.9;flex:0 0 110px;line-height:1.3;word-break:keep-all;">· ${item}</span>
-          <input type="range" id="${sid}" min="0" max="100" value="0" step="5"
-            oninput="drUpdateSlider('${sid}','${vid}')"
-            style="flex:1;min-width:0;max-width:100px;height:3px;accent-color:#C8A84B;cursor:pointer;">
-          <span id="${vid}" style="font-size:11px;font-weight:700;width:28px;text-align:right;flex-shrink:0;">0%</span>
+        <div id="${cid}-wrap" onclick="toggleWeekCheck('${cid}','${wCountId}',${wTotal})"
+          style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:8px;
+                 border:1.5px solid rgba(255,255,255,.25);margin-bottom:4px;cursor:pointer;
+                 background:rgba(255,255,255,.08);">
+          <div id="${cid}-box" style="flex-shrink:0;width:18px;height:18px;border-radius:4px;
+               border:2px solid rgba(255,255,255,.5);display:flex;align-items:center;
+               justify-content:center;font-size:11px;font-weight:700;color:transparent;"></div>
+          <span style="font-size:12px;opacity:.95;line-height:1.4;">${item}</span>
         </div>`;
     }).join('');
     return `
       <div style="background:${g.color};border-radius:8px;padding:8px 10px;margin-top:6px;">
-        <div style="font-size:10px;font-weight:700;letter-spacing:1px;opacity:.8;margin-bottom:6px;">${g.tag}</div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:1px;opacity:.8;margin-bottom:6px;">${g.tag}${g.showProgress ? ` <span id="wk-count-${gi}" style="font-size:10px;opacity:.7;font-weight:400;">0/${g.items.length}</span>` : ''}</div>
         ${itemsHTML}
+        ${g.treatProgress ? `
+        <div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.2);">
+          <div style="font-size:10px;opacity:.7;margin-bottom:6px;">리콜 진척률 (%)</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+            ${['치주','보철','임플','교합'].map(t => `
+              <div style="display:flex;align-items:center;gap:5px;">
+                <span style="font-size:11px;opacity:.85;flex:0 0 28px;">${t}</span>
+                <input type="number" min="0" max="100" placeholder="0"
+                  id="treat-${gi}-${t}"
+                  style="width:46px;border:none;border-bottom:1px solid rgba(255,255,255,.4);
+                         background:transparent;color:white;font-size:13px;font-weight:700;
+                         text-align:center;font-family:inherit;outline:none;padding:2px 0;">
+                <span style="font-size:10px;opacity:.6;">%</span>
+              </div>`).join('')}
+          </div>
+        </div>` : ''}
       </div>`;
   }).join('');
 
   // 주간 체크리스트 (수/금/토만)
   const WEEKLY_CONFIG = {
+    1: { label:'월요일 — 쓰레기', items:['🗑️ 야간 일반 쓰레기 배출'] },
+    2: { label:'화요일 — 재활용', items:['♻️ 재활용 쓰레기 배출'] },
     3: { label:'수요일 — 중간 점검', items:['치료중단환자 리콜 확인 (치주·신경·충치·보철·임플·교정)', '해피콜·미내원 중간 체크', '이번 주 이슈 정리', '타구대 거름망 청소'] },
+    4: { label:'목요일 — 재활용', items:['♻️ 재활용 쓰레기 배출'] },
     5: { label:'금요일 — 청구 점검', items:['청구 오류 사항 확인', '심사 재요청 건 처리', '청구 결과 관리', '미납자 현황 체크', '주기적 관리 환자 예약 확인'] },
     6: { label:'토요일 — 주별 마무리', items:['VIP 리스트 확인 · 해피콜(문자)', '각 주별 보고 취합', '기계실 이슈 점검', '다음 주 일정 프리뷰', '치료별 주간 통계 기록'] },
   };
@@ -2418,6 +2646,88 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // ── 상태 버튼 선택
+// ── 당월 청구↔보험 상세 연동
+function syncClaim(v) {
+  const el = document.getElementById('m-eval-ins-total');
+  if (el && el.value !== v) { el.value = v; calcMonthly(); }
+}
+function syncIns(v) {
+  const el = document.getElementById('m-claim');
+  if (el && el.value !== v) el.value = v;
+}
+
+// ── 비보험 상세 합산 → 당월 비보험 통계 연동
+function calcPrivTotal() {
+  const g = (id) => parseInt(document.getElementById(id)?.value) || 0;
+  const total = g('m-eval-priv-prosth') + g('m-eval-priv-conserv') +
+                g('m-eval-priv-impl') + g('m-eval-priv-occl-diag') + g('m-eval-priv-occl-treat');
+  // 비보험 총합 표시
+  const dispEl = document.getElementById('m-eval-priv-total');
+  if (dispEl) dispEl.textContent = total.toLocaleString('ko-KR') + ' 원';
+  // 당월 비보험 통계 자동 반영
+  const privEl = document.getElementById('m-priv');
+  if (privEl) privEl.value = total;
+}
+
+// ── 당월 청구↔보험 상세 연동
+function syncClaim(v) {
+  const el = document.getElementById('m-eval-ins-total');
+  if (el && el.value !== v) { el.value = v; calcMonthly(); }
+}
+function syncIns(v) {
+  const el = document.getElementById('m-claim');
+  if (el && el.value !== v) el.value = v;
+}
+
+// ── 비보험 상세 합산 → 당월 비보험 통계 연동
+function calcPrivTotal() {
+  const g = (id) => parseInt(document.getElementById(id)?.value) || 0;
+  const total = g('m-eval-priv-prosth') + g('m-eval-priv-conserv') +
+                g('m-eval-priv-impl') + g('m-eval-priv-occl-diag') + g('m-eval-priv-occl-treat');
+  const dispEl = document.getElementById('m-eval-priv-total');
+  if (dispEl) dispEl.textContent = total.toLocaleString('ko-KR') + ' 원';
+  const privEl = document.getElementById('m-priv');
+  if (privEl) privEl.value = total;
+}
+
+// ── 월말 보고 자동계산
+function calcMonthly() {
+  const g = (id) => parseInt(document.getElementById(id)?.value) || 0;
+  const fmt = (n) => n.toLocaleString('ko-KR') + '원';
+
+  // 매출
+  const ins   = g('m-eval-ins-total');
+  const priv  = g('m-eval-priv-prosth') + g('m-eval-priv-conserv') +
+                g('m-eval-priv-impl') + g('m-eval-priv-occl-diag') + g('m-eval-priv-occl-treat');
+  const goods = g('m-eval-goods');
+  const totalRev = ins + priv + goods;
+
+  // 지출
+  const lab   = g('m-lab-enamel') + g('m-lab-odl') + g('m-lab-tp') +
+                g('m-lab-invisalign') + g('m-lab-etc');
+  const mat   = g('m-material-ins') + g('m-material-priv');
+  const misc  = g('m-food') + g('m-misc') +
+                g('m-labor') + g('m-edu') + g('m-dining') +
+                g('m-tax-elec') + g('m-tax-water') + g('m-tax-gas') + g('m-tax-etc') +
+                g('m-elec-safety');
+  const totalExp = lab + mat + misc;
+
+  const net = totalRev - totalExp;
+
+  // 업데이트
+  document.getElementById('m-total-revenue').textContent = totalRev.toLocaleString('ko-KR');
+  document.getElementById('m-total-expense').textContent = totalExp.toLocaleString('ko-KR');
+  document.getElementById('m-net-profit').textContent    = net.toLocaleString('ko-KR');
+  document.getElementById('m-net-profit').style.color    = net >= 0 ? 'var(--green-dark)' : 'var(--red)';
+
+  document.getElementById('m-sum-ins').textContent   = fmt(ins);
+  document.getElementById('m-sum-priv').textContent  = fmt(priv);
+  document.getElementById('m-sum-goods').textContent = fmt(goods);
+  document.getElementById('m-sum-lab').textContent   = fmt(lab);
+  document.getElementById('m-sum-mat').textContent   = fmt(mat);
+  document.getElementById('m-sum-misc').textContent  = fmt(misc);
+}
+
 function selectStatus(el, cls){
   const parent = el.closest('.status-row');
   parent.querySelectorAll('.status-btn').forEach(b => {
@@ -2462,19 +2772,21 @@ function drUpdateSlider(sid, vid) {
 }
 
 function getProgressItems() {
-  // 항목별 진척률 수집
   const results = [];
-  document.querySelectorAll('[id^="prog-"][id*="-"]').forEach(slider => {
-    if (!slider.id.match(/^prog-\d+-\d+$/)) return;
-    const parts  = slider.id.split('-');
-    const vid    = 'progv-' + parts[1] + '-' + parts[2];
-    const valEl  = document.getElementById(vid);
-    const pct    = valEl ? valEl.textContent : '0%';
-    // 항목 텍스트
-    const wrap   = slider.closest('[data-tag]');
-    const itemEl = wrap ? wrap.querySelector('div') : null;
-    const item   = itemEl ? itemEl.textContent.replace(/^·\s*/, '').trim() : '';
-    if (item && pct !== '0%') results.push({ item, pct });
+  // 체크박스 완료 항목
+  document.querySelectorAll('[id^="wk-"][id$="-box"]').forEach(box => {
+    if (box.textContent !== '✓') return;
+    const wrap = box.closest('[id$="-wrap"]');
+    const span = wrap ? wrap.querySelector('span') : null;
+    const item = span ? span.textContent.trim() : '';
+    if (item) results.push({ item, pct: '완료' });
+  });
+  // 치료별 % 항목
+  ['치주','보철','임플','교합'].forEach(t => {
+    document.querySelectorAll(`[id^="treat-"][id$="-${t}"]`).forEach(el => {
+      const v = el.value.trim();
+      if (v && v !== '0') results.push({ item: '리콜 ' + t, pct: v + '%' });
+    });
   });
   return results;
 }
@@ -2608,6 +2920,38 @@ function formatDailyReport() {
   return msg;
 }
 
+function toggleWeekCheck(cid, countId, total) {
+  const wrap = document.getElementById(cid + '-wrap');
+  const box  = document.getElementById(cid + '-box');
+  if (!wrap || !box) return;
+  const on = box.textContent === '✓';
+  if (on) {
+    box.textContent     = '';
+    box.style.color     = 'transparent';
+    box.style.background   = 'transparent';
+    box.style.borderColor  = 'rgba(255,255,255,.5)';
+    wrap.style.background  = 'rgba(255,255,255,.08)';
+    wrap.style.borderColor = 'rgba(255,255,255,.25)';
+  } else {
+    box.textContent     = '✓';
+    box.style.color        = 'var(--green-dark)';
+    box.style.background   = 'rgba(255,255,255,.9)';
+    box.style.borderColor  = 'white';
+    wrap.style.background  = 'rgba(255,255,255,.18)';
+    wrap.style.borderColor = 'rgba(255,255,255,.7)';
+  }
+  // 카운터 업데이트
+  const countEl = document.getElementById(countId);
+  if (countEl) {
+    const gi = cid.split('-')[1];
+    const checked = document.querySelectorAll(`[id^="wk-${gi}-"][id$="-box"]`);
+    const done = Array.from(checked).filter(b => b.textContent === '✓').length;
+    countEl.textContent = done + '/' + total;
+    countEl.style.opacity = done === total ? '1' : '.7';
+    countEl.style.fontWeight = done === total ? '700' : '400';
+  }
+}
+
 function drToggleRequired(cid) {
   const wrap = document.getElementById(cid + '-wrap');
   const box  = document.getElementById(cid + '-box');
@@ -2730,9 +3074,9 @@ async function submitReport(type) {
     data = { ...data,
       month: document.getElementById('g-month').value,
       staff: document.getElementById('g-staff').value,
-      orthoActive: document.getElementById('g-ortho-active').value,
-      orthoNew: document.getElementById('g-ortho-new').value,
-      orthoNote: document.getElementById('g-ortho-note').value,
+      orthoActive: document.getElementById('g-occlusal-active').value,
+      orthoNew: document.getElementById('g-occlusal-new').value,
+      orthoNote: document.getElementById('g-occlusal-note').value,
       implActive: document.getElementById('g-impl-active').value,
       prosthCount: document.getElementById('g-prosth').value,
       labNote: document.getElementById('g-lab').value,
@@ -2844,351 +3188,6 @@ function openKakaoTalk() {
     showToast('✅ 복사 완료 — 카카오톡에 붙여넣기 하세요');
   }
 }
-
-// ── 저장·복원 시스템 ──────────────────────────────
-// ── 페이지 열릴 때 오늘 데이터 자동 복원 ──────────
-  function loadTodayData(){
-    const today = new Date().toISOString().slice(0,10);
-    const key = 'petit_daily_' + today;
-    let saved;
-    try { saved = JSON.parse(localStorage.getItem(key)); } catch(e){}
-    if(!saved) return;
-
-    const s = (id, val) => { const el=document.getElementById(id); if(el&&val!==undefined) el.value=val; };
-
-    // 일일
-    const d = saved.daily || {};
-    s('d-date', d.date);
-    s('d-staff', d.staff);
-    s('d-kakao-cnt', d.kakao?.count||0);
-    s('d-kakao-memo', d.kakao?.memo||'');
-    s('d-memo', d.otherMemo||'');
-
-    // 웰컴콜 복원
-    if(d.welcomeCalls?.length){
-      const wl = document.getElementById('welcome-list');
-      if(wl){ wl.innerHTML='';
-        d.welcomeCalls.forEach(w=>{
-          addWelcome();
-          const rows=wl.querySelectorAll('div');
-          const last=rows[rows.length-1];
-          const inputs=last.querySelectorAll('input');
-          if(inputs[0]) inputs[0].value=w.name||'';
-          if(inputs[1]) inputs[1].value=w.plan||'';
-        });
-      }
-    }
-
-    // 해피콜 복원
-    if(d.happyCalls?.length){
-      const hl = document.getElementById('happy-list');
-      if(hl){ hl.innerHTML='';
-        d.happyCalls.forEach(h=>{
-          addHappy();
-          const rows=hl.querySelectorAll('div');
-          const last=rows[rows.length-1];
-          const sels=last.querySelectorAll('select');
-          const inp=last.querySelector('input');
-          if(sels[0]) sels[0].value=h.type||'수술';
-          if(inp) inp.value=h.name||'';
-          if(sels[1]) sels[1].value=h.status||'완료';
-        });
-      }
-    }
-
-    // 주간
-    const w = saved.weekly || {};
-    s('w-date', w.date); s('w-staff', w.staff);
-    s('w-rc-perio', w.recall?.perio); s('w-rc-endo', w.recall?.endo);
-    s('w-rc-ortho', w.recall?.ortho); s('w-rc-impl', w.recall?.impl);
-    s('w-rc-note', w.recall?.note);
-    s('w-total', w.stats?.total); s('w-new', w.stats?.newPt);
-    s('w-stat', w.stats?.detail); s('w-consult-rate', w.stats?.consultRate);
-    s('w-unpaid', w.unpaid); s('w-claim-err', w.claimError);
-    s('w-claim-rq', w.claimRequest); s('w-vip', w.vip);
-    s('w-machine', w.machine); s('w-issue', w.issue);
-
-    // 월말
-    const m = saved.monthly || {};
-    s('m-month', m.month); s('m-staff', m.staff);
-    s('m-claim', m.claim); s('m-claim-note', m.claimNote);
-    s('m-priv', m.revenue?.private); s('m-priv-stat', m.revenue?.detail);
-    s('m-unpaid', m.unpaid?.amount); s('m-unpaid-note', m.unpaid?.note);
-    s('m-prepay', m.prepay);
-    s('m-food', m.expense?.food); s('m-tax', m.expense?.tax);
-    s('m-misc', m.expense?.misc); s('m-expense-note', m.expense?.note);
-    s('m-next-target', m.nextMonth?.target); s('m-next-task', m.nextMonth?.task);
-
-    // 경영
-    const g = saved.management || {};
-    s('g-month', g.month); s('g-staff', g.staff);
-    s('g-ortho-active', g.ortho?.active); s('g-ortho-new', g.ortho?.newPt);
-    s('g-ortho-note', g.ortho?.note);
-    s('g-impl-active', g.implant?.active); s('g-prosth', g.implant?.prosth);
-    s('g-lab', g.implant?.lab);
-    s('g-material', g.material); s('g-steril-note', g.steril);
-    s('g-revenue', g.revenue); s('g-target-pct', g.targetPct);
-    s('g-issue', g.issue); s('g-claim-note', g.claimNote);
-
-    showSaveToast('📂 오늘(' + today + ') 저장 데이터 복원됨');
-
-    // 내원 현황 복원
-    const st = d.stats || {};
-    s('v-total', st.total); s('v-new', st.newPt); s('v-staff-count', st.staffCount);
-    s('v-consult-yes', st.consultYes); s('v-consult-no', st.consultNo);
-    s('v-consult-detail', st.consultDetail); s('v-consult-list', st.consultList);
-    s('v-surgery-yes', st.surgeryYes); s('v-surgery-no', st.surgeryNo);
-    s('v-surgery-detail', st.surgeryDetail); s('v-surgery-list', st.surgeryList);
-
-    // 임플란트·교합·보철·엠도게인 복원
-    const restoreGroup = (prefix, group) => {
-      if(!group) return;
-      ['a','b','c'].forEach(k=>{
-        if(!group[k]) return;
-        const inp  = document.getElementById(`v-${prefix}-${k}`);
-        const disp = document.getElementById(`v-${prefix}-${k}-disp`);
-        const name = document.getElementById(`v-${prefix}-${k}-name`);
-        if(inp)  inp.value = group[k].count || 0;
-        if(disp) disp.textContent = group[k].count || 0;
-        if(name) name.value = group[k].name || '';
-      });
-    };
-    restoreGroup('impl',      d.implant);
-    restoreGroup('occlusion', d.occlusion);
-    restoreGroup('prosth',    d.prosth);
-    restoreGroup('emdogain',  d.emdogain);
-
-    // 체크리스트 복원
-    const restoreChecks = (gridId, checks) => {
-      if(!checks?.length) return;
-      const items = document.querySelectorAll(`#${gridId} .check-item`);
-      checks.forEach(c => {
-        if(items[c.idx]){
-          if(c.checked) items[c.idx].classList.add('checked');
-          else items[c.idx].classList.remove('checked');
-        }
-      });
-      const badge = document.getElementById(gridId==='daily-checks'?'d-check-count':'w-check-count');
-      if(badge){
-        const done = document.querySelectorAll(`#${gridId} .check-item.checked`).length;
-        badge.textContent = done + ' / ' + items.length;
-      }
-    };
-    restoreChecks('daily-checks', d.checklist);
-  }
-
-  document.addEventListener('DOMContentLoaded', function(){
-    // 저장 버튼 추가
-    const sec = document.querySelector('#welcome-list')?.closest('.section-body');
-    if(sec){
-      const btnWrap = document.createElement('div');
-      btnWrap.style.cssText = 'display:flex;gap:8px;margin-top:4px;padding-top:12px;border-top:1px solid #EAEAE4';
-      btnWrap.innerHTML = `
-        <button onclick="saveReportJSON()" style="flex:1;padding:10px;border-radius:8px;background:#1E3D30;color:#FAF8F0;border:none;font-size:13px;font-weight:600;cursor:pointer">💾 지금 저장</button>
-        <button onclick="downloadTodayJSON()" style="flex:1;padding:10px;border-radius:8px;background:#E8F5F0;color:#007A54;border:1px solid #C5E8DC;font-size:13px;font-weight:600;cursor:pointer">⬇ JSON 다운로드</button>`;
-      sec.appendChild(btnWrap);
-    }
-
-    // 초기 행 추가 후 약간 지연해서 복원 (DOM 생성 타이밍 보장)
-    setTimeout(loadTodayData, 100);
-  });
-// ── 저장·복원 시스템 ──────────────────────────────
-function buildReportJSON(){
-  const today = new Date().toISOString().slice(0,10);
-  const getVal = id => document.getElementById(id)?.value?.trim() || '';
-
-  const welcomes = [];
-  document.querySelectorAll('#welcome-list > div').forEach(r=>{
-    const inputs=r.querySelectorAll('input');
-    const name=inputs[0]?.value.trim();
-    const plan=inputs[1]?.value.trim();
-    if(name) welcomes.push({name, plan});
-  });
-
-  const happies = [];
-  document.querySelectorAll('#happy-list > div').forEach(r=>{
-    const sels=r.querySelectorAll('select');
-    const inp=r.querySelector('input');
-    const name=inp?.value.trim();
-    if(name) happies.push({type:sels[0]?.value, name, status:sels[1]?.value});
-  });
-
-  const getChecks = gridId => {
-    const checks = [];
-    document.querySelectorAll('#'+gridId+' .check-item').forEach((el,i)=>{
-      checks.push({idx:i, checked: el.classList.contains('checked')});
-    });
-    return checks;
-  };
-
-  return {
-    date: today,
-    savedAt: new Date().toLocaleTimeString('ko-KR'),
-    daily: {
-      date: getVal('d-date'),
-      staff: getVal('d-staff'),
-      kakao: { count: parseInt(getVal('d-kakao-cnt')||'0'), memo: getVal('d-kakao-memo') },
-      welcomeCalls: welcomes,
-      happyCalls: happies,
-      otherMemo: getVal('d-memo'),
-      checklist: getChecks('daily-checks'),
-      stats: {
-        total: getVal('v-total'), newPt: getVal('v-new'),
-        staffCount: getVal('v-staff-count'),
-        consultYes: getVal('v-consult-yes'), consultNo: getVal('v-consult-no'),
-        consultDetail: getVal('v-consult-detail'), consultList: getVal('v-consult-list'),
-        surgeryYes: getVal('v-surgery-yes'), surgeryNo: getVal('v-surgery-no'),
-        surgeryDetail: getVal('v-surgery-detail'), surgeryList: getVal('v-surgery-list'),
-      },
-      implant: {
-        a:{count:document.getElementById('v-impl-a')?.value||'0', name:getVal('v-impl-a-name')},
-        b:{count:document.getElementById('v-impl-b')?.value||'0', name:getVal('v-impl-b-name')},
-        c:{count:document.getElementById('v-impl-c')?.value||'0', name:getVal('v-impl-c-name')},
-      },
-      occlusion: {
-        a:{count:document.getElementById('v-occlusion-a')?.value||'0', name:getVal('v-occlusion-a-name')},
-        b:{count:document.getElementById('v-occlusion-b')?.value||'0', name:getVal('v-occlusion-b-name')},
-        c:{count:document.getElementById('v-occlusion-c')?.value||'0', name:getVal('v-occlusion-c-name')},
-      },
-      prosth: {
-        a:{count:document.getElementById('v-prosth-a')?.value||'0', name:getVal('v-prosth-a-name')},
-        b:{count:document.getElementById('v-prosth-b')?.value||'0', name:getVal('v-prosth-b-name')},
-        c:{count:document.getElementById('v-prosth-c')?.value||'0', name:getVal('v-prosth-c-name')},
-      },
-      emdogain: {
-        a:{count:document.getElementById('v-emdogain-a')?.value||'0', name:getVal('v-emdogain-a-name')},
-        b:{count:document.getElementById('v-emdogain-b')?.value||'0', name:getVal('v-emdogain-b-name')},
-        c:{count:document.getElementById('v-emdogain-c')?.value||'0', name:getVal('v-emdogain-c-name')},
-      }
-    },
-    weekly: {
-      date:getVal('w-date'), staff:getVal('w-staff'),
-      recall:{perio:getVal('w-rc-perio'),endo:getVal('w-rc-endo'),ortho:getVal('w-rc-ortho'),impl:getVal('w-rc-impl'),note:getVal('w-rc-note')},
-      stats:{total:getVal('w-total'),newPt:getVal('w-new'),detail:getVal('w-stat'),consultRate:getVal('w-consult-rate')},
-      unpaid:getVal('w-unpaid'), claimError:getVal('w-claim-err'), claimRequest:getVal('w-claim-rq'),
-      vip:getVal('w-vip'), machine:getVal('w-machine'), issue:getVal('w-issue')
-    },
-    monthly: {
-      month:getVal('m-month'), staff:getVal('m-staff'),
-      claim:getVal('m-claim'), claimNote:getVal('m-claim-note'),
-      revenue:{private:getVal('m-priv'),detail:getVal('m-priv-stat')},
-      unpaid:{amount:getVal('m-unpaid'),note:getVal('m-unpaid-note')},
-      prepay:getVal('m-prepay'),
-      expense:{food:getVal('m-food'),tax:getVal('m-tax'),misc:getVal('m-misc'),note:getVal('m-expense-note')},
-      nextMonth:{target:getVal('m-next-target'),task:getVal('m-next-task')}
-    },
-    management: {
-      month:getVal('g-month'), staff:getVal('g-staff'),
-      ortho:{active:getVal('g-ortho-active'),newPt:getVal('g-ortho-new'),note:getVal('g-ortho-note')},
-      implant:{active:getVal('g-impl-active'),prosth:getVal('g-prosth'),lab:getVal('g-lab')},
-      material:getVal('g-material'), steril:getVal('g-steril-note'),
-      revenue:getVal('g-revenue'), targetPct:getVal('g-target-pct'),
-      issue:getVal('g-issue'), claimNote:getVal('g-claim-note')
-    }
-  };
-}
-
-function saveReportJSON(){
-  const data = buildReportJSON();
-  const key = 'petit_daily_' + data.date;
-  try {
-    localStorage.setItem(key, JSON.stringify(data, null, 2));
-    showSaveToast('\ud83d\udcbe \uc800\uc7a5 \uc644\ub8cc (' + data.savedAt + ')');
-  } catch(e){ console.warn('저장 오류:', e); }
-  return data;
-}
-
-function downloadTodayJSON(){
-  const data = buildReportJSON();
-  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'daily_report_' + data.date + '.json';
-  a.click();
-  URL.revokeObjectURL(a.href);
-}
-
-function showSaveToast(msg){
-  let t = document.getElementById('save-toast');
-  if(!t){
-    t = document.createElement('div');
-    t.id = 'save-toast';
-    t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1E3D30;color:#FAF8F0;font-size:12px;padding:8px 18px;border-radius:100px;z-index:9999;opacity:0;transition:opacity .3s;white-space:nowrap';
-    document.body.appendChild(t);
-  }
-  t.textContent = msg;
-  t.style.opacity = '1';
-  setTimeout(()=>{ t.style.opacity='0'; }, 2500);
-}
-
-function loadTodayReport(){
-  const today = new Date().toISOString().slice(0,10);
-  const key = 'petit_daily_' + today;
-  let saved;
-  try { saved = JSON.parse(localStorage.getItem(key)); } catch(e){}
-  if(!saved) return;
-  const s = (id, val) => { const el=document.getElementById(id); if(el&&val!=null&&val!=='') el.value=val; };
-  const d = saved.daily || {};
-  s('d-date',d.date); s('d-staff',d.staff);
-  s('d-kakao-cnt',d.kakao?.count); s('d-kakao-memo',d.kakao?.memo);
-  s('d-memo',d.otherMemo);
-  const st = d.stats||{};
-  s('v-total',st.total); s('v-new',st.newPt); s('v-staff-count',st.staffCount);
-  s('v-consult-yes',st.consultYes); s('v-consult-no',st.consultNo);
-  s('v-consult-detail',st.consultDetail); s('v-consult-list',st.consultList);
-  s('v-surgery-yes',st.surgeryYes); s('v-surgery-no',st.surgeryNo);
-  s('v-surgery-detail',st.surgeryDetail); s('v-surgery-list',st.surgeryList);
-  ['impl','occlusion','prosth','emdogain'].forEach(prefix=>{
-    const g = d[prefix]||{};
-    ['a','b','c'].forEach(k=>{
-      if(!g[k]) return;
-      const inp=document.getElementById('v-'+prefix+'-'+k);
-      const disp=document.getElementById('v-'+prefix+'-'+k+'-disp');
-      const nm=document.getElementById('v-'+prefix+'-'+k+'-name');
-      if(inp) inp.value=g[k].count||'0';
-      if(disp) disp.textContent=g[k].count||'0';
-      if(nm) nm.value=g[k].name||'';
-    });
-  });
-  if(d.checklist?.length){
-    const items=document.querySelectorAll('#daily-checks .check-item');
-    d.checklist.forEach(c=>{ if(items[c.idx]){ if(c.checked) items[c.idx].classList.add('checked'); else items[c.idx].classList.remove('checked'); }});
-    const badge=document.getElementById('d-check-count');
-    if(badge){ const done=document.querySelectorAll('#daily-checks .check-item.checked').length; badge.textContent=done+' / '+items.length; }
-  }
-  if(d.welcomeCalls?.length){
-    const wl=document.getElementById('welcome-list'); if(wl){ wl.innerHTML='';
-      d.welcomeCalls.forEach(w=>{ addWelcome(); const rows=wl.querySelectorAll('div'); const last=rows[rows.length-1]; const inputs=last.querySelectorAll('input'); if(inputs[0]) inputs[0].value=w.name||''; if(inputs[1]) inputs[1].value=w.plan||''; }); }
-  }
-  if(d.happyCalls?.length){
-    const hl=document.getElementById('happy-list'); if(hl){ hl.innerHTML='';
-      d.happyCalls.forEach(h=>{ addHappy(); const rows=hl.querySelectorAll('div'); const last=rows[rows.length-1]; const sels=last.querySelectorAll('select'); const inp=last.querySelector('input'); if(sels[0]) sels[0].value=h.type||'수술'; if(inp) inp.value=h.name||''; if(sels[1]) sels[1].value=h.status||'완료'; }); }
-  }
-  const w=saved.weekly||{};
-  s('w-date',w.date); s('w-staff',w.staff);
-  s('w-rc-perio',w.recall?.perio); s('w-rc-endo',w.recall?.endo);
-  s('w-rc-ortho',w.recall?.ortho); s('w-rc-impl',w.recall?.impl); s('w-rc-note',w.recall?.note);
-  s('w-total',w.stats?.total); s('w-new',w.stats?.newPt); s('w-stat',w.stats?.detail); s('w-consult-rate',w.stats?.consultRate);
-  s('w-unpaid',w.unpaid); s('w-claim-err',w.claimError); s('w-claim-rq',w.claimRequest);
-  s('w-vip',w.vip); s('w-machine',w.machine); s('w-issue',w.issue);
-  const m=saved.monthly||{};
-  s('m-month',m.month); s('m-staff',m.staff); s('m-claim',m.claim); s('m-claim-note',m.claimNote);
-  s('m-priv',m.revenue?.private); s('m-priv-stat',m.revenue?.detail);
-  s('m-unpaid',m.unpaid?.amount); s('m-unpaid-note',m.unpaid?.note); s('m-prepay',m.prepay);
-  s('m-food',m.expense?.food); s('m-tax',m.expense?.tax); s('m-misc',m.expense?.misc); s('m-expense-note',m.expense?.note);
-  s('m-next-target',m.nextMonth?.target); s('m-next-task',m.nextMonth?.task);
-  const g=saved.management||{};
-  s('g-month',g.month); s('g-staff',g.staff);
-  s('g-ortho-active',g.ortho?.active); s('g-ortho-new',g.ortho?.newPt); s('g-ortho-note',g.ortho?.note);
-  s('g-impl-active',g.implant?.active); s('g-prosth',g.implant?.prosth); s('g-lab',g.implant?.lab);
-  s('g-material',g.material); s('g-steril-note',g.steril);
-  s('g-revenue',g.revenue); s('g-target-pct',g.targetPct); s('g-issue',g.issue); s('g-claim-note',g.claimNote);
-  showSaveToast('\ud83d\udcc2 \uc624\ub298 \ub370\uc774\ud130 \ubcf5\uc6d0\ub428 (' + today + ')');
-}
-
-// 5분 자동저장
-setInterval(saveReportJSON, 300000);
-
 </script>
 
 </body>
