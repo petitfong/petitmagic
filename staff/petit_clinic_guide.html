@@ -8,85 +8,85 @@
 <style>
 .hd{margin-bottom:6px}
 .hd-label{font-size:11px;letter-spacing:.16em;color:#C8A84B;text-transform:uppercase;font-weight:600;margin-bottom:6px}
-.hd-title{font-family:'Noto Serif KR',serif;font-size:20px;font-weight:600;color:#FAF8F0;margin-bottom:4px}
-.hd-sub{font-size:13px;color:#888880;margin-bottom:20px;line-height:1.6}
+.hd-title{font-family:'Noto Serif KR',serif;font-size:20px;font-weight:600;color:#111110;margin-bottom:4px}
+.hd-sub{font-size:13px;color:#555550;margin-bottom:20px;line-height:1.6}
 
 /* 탭 */
 .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
-.tab{padding:8px 16px;border-radius:100px;font-size:12.5px;cursor:pointer;border:1px solid #F5F5F1;color:#888880;background:transparent;transition:all .2s;font-family:'Noto Sans KR',sans-serif}
+.tab{padding:8px 16px;border-radius:100px;font-size:12.5px;cursor:pointer;border:1px solid #E0E0DA;color:#555550;background:transparent;transition:all .2s;font-family:'Noto Sans KR',sans-serif}
 .tab.act{background:#C8A84B;color:#1A1A10;border-color:#C8A84B;font-weight:600}
 
 .panel{display:none}
 .panel.show{display:block}
 
 /* 도식도 카드 */
-.case-card{background:#F5F5F1;border:1px solid #F5F5F1;border-radius:14px;overflow:hidden;margin-bottom:14px}
+.case-card{background:#FFFFFF;border:1px solid #E0E0DA;border-radius:14px;overflow:hidden;margin-bottom:14px}
 
 /* 케이스 헤더 */
 .case-head{padding:14px 18px;display:flex;align-items:center;gap:12px}
 .case-num{font-family:'Noto Serif KR',serif;font-size:28px;font-weight:300;color:#C8A84B;flex-shrink:0;line-height:1;width:36px}
 .case-info{}
 .case-tag{font-size:10.5px;letter-spacing:.12em;font-weight:600;text-transform:uppercase;margin-bottom:3px}
-.case-name{font-family:'Noto Serif KR',serif;font-size:16px;font-weight:600;color:#FAF8F0;line-height:1.35}
+.case-name{font-family:'Noto Serif KR',serif;font-size:16px;font-weight:600;color:#111110;line-height:1.35}
 
 /* 흐름 도식 */
 .flow-diagram{padding:0 16px 16px}
 .flow-row{display:flex;align-items:stretch;gap:0;margin-bottom:0}
 .flow-node{flex:1;min-width:0}
 .fn-box{padding:10px 12px;border-radius:8px;height:100%}
-.fn-label{font-size:10px;letter-spacing:.1em;font-weight:600;text-transform:uppercase;margin-bottom:4px;opacity:.7}
-.fn-text{font-size:13px;font-weight:500;color:#FAF8F0;line-height:1.4}
-.fn-sub{font-size:11.5px;color:#888880;margin-top:3px;line-height:1.5}
+.fn-label{font-size:10px;letter-spacing:.1em;font-weight:600;text-transform:uppercase;margin-bottom:4px}
+.fn-text{font-size:13px;font-weight:500;color:#1A1A18;line-height:1.4}
+.fn-sub{font-size:11.5px;color:#555550;margin-top:3px;line-height:1.5}
 
 /* 화살표 */
 .flow-arr{display:flex;align-items:center;justify-content:center;padding:0 6px;flex-shrink:0;color:#C8A84B;font-size:16px;font-weight:700}
 
 /* 세로 화살표 */
-.v-arr{display:flex;align-items:center;justify-content:center;padding:5px 0 5px 36px;color:rgba(200,168,75,.5);font-size:14px}
+.v-arr{display:flex;align-items:center;justify-content:center;padding:5px 0 5px 36px;color:#C8A84B;font-size:14px}
 
 /* 노드 색상 */
-.n-entry{background:rgba(136,136,120,.15);border:1px solid rgba(136,136,120,.2)}
+.n-entry{background:#F0F0EC;border:1px solid #D8D8D0}
 .n-entry .fn-label{color:#555550}
-.n-hub{background:#FFFBEF;border:1px solid rgba(200,168,75,.2)}
-.n-hub .fn-label{color:#C8A84B}
-.n-page{background:rgba(74,154,122,.12);border:1px solid rgba(74,154,122,.2)}
-.n-page .fn-label{color:#4A9A7A}
-.n-warn{background:rgba(208,96,48,.1);border:1px solid rgba(208,96,48,.2)}
-.n-warn .fn-label{color:#D06030}
-.n-goal{background:rgba(45,122,90,.15);border:1px solid rgba(45,122,90,.25)}
-.n-goal .fn-label{color:#4AAA80}
-.n-branch{background:rgba(100,120,200,.1);border:1px solid rgba(100,120,200,.2)}
-.n-branch .fn-label{color:#8A9ADA}
+.n-hub{background:#FFFBEF;border:1px solid #E8D090}
+.n-hub .fn-label{color:#8A6820}
+.n-page{background:#E8F5F0;border:1px solid #C5E8DC}
+.n-page .fn-label{color:#2D7A5A}
+.n-warn{background:#FBEEE8;border:1px solid #E8C0A8}
+.n-warn .fn-label{color:#A84818}
+.n-goal{background:#E0F0E8;border:1px solid #B8DCC8}
+.n-goal .fn-label{color:#1E6B48}
+.n-branch{background:#EAEEF8;border:1px solid #C8D4EC}
+.n-branch .fn-label{color:#4A5FA8}
 
 /* 멘트 박스 */
-.ment-box{background:#FFFBEF;border:1px solid rgba(200,168,75,.15);border-radius:8px;padding:11px 13px;margin:8px 16px 0}
-.ment-label{font-size:10px;letter-spacing:.1em;color:#C8A84B;font-weight:600;margin-bottom:5px}
-.ment-text{font-size:12.5px;color:#888880;line-height:1.7;font-style:italic}
+.ment-box{background:#FFFBEF;border:1px solid #E8D090;border-radius:8px;padding:11px 13px;margin:8px 16px 0}
+.ment-label{font-size:10px;letter-spacing:.1em;color:#8A6820;font-weight:600;margin-bottom:5px}
+.ment-text{font-size:12.5px;color:#5A4010;line-height:1.7;font-style:italic}
 
 /* 링크 */
 .link-row{display:flex;flex-wrap:wrap;gap:6px;padding:10px 16px 14px}
-.page-link{font-size:11.5px;padding:5px 11px;border-radius:100px;border:1px solid rgba(200,168,75,.25);color:rgba(200,168,75,.8);text-decoration:none;background:#FFFBEF;transition:all .15s;white-space:nowrap}
+.page-link{font-size:11.5px;padding:5px 11px;border-radius:100px;border:1px solid #E8D090;color:#8A6820;text-decoration:none;background:#FFFBEF;transition:all .15s;white-space:nowrap}
 .page-link:hover{background:rgba(200,168,75,.15)}
 
 /* 분기 */
 .branch-wrap{display:flex;gap:8px;padding:0 16px;margin-bottom:0}
 .branch-col{flex:1;display:flex;flex-direction:column;gap:0}
-.branch-label{font-size:10px;letter-spacing:.06em;color:#AAAAAA;font-weight:600;padding:6px 0;text-align:center}
+.branch-label{font-size:10px;letter-spacing:.06em;color:#555550;font-weight:600;padding:6px 0;text-align:center}
 
 /* 범례 */
-.legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;padding:12px 14px;background:#F5F5F1;border-radius:10px;border:1px solid #F5F5F1}
-.leg{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#888880}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;padding:12px 14px;background:#FFFFFF;border-radius:10px;border:1px solid #E0E0DA}
+.leg{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#555550}
 .leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 
 /* 전체 */
 .all-grid{display:flex;flex-direction:column;gap:10px}
-.all-item{background:#F5F5F1;border:1px solid #F5F5F1;border-radius:12px;padding:14px 16px;cursor:pointer;transition:all .2s}
-.all-item:hover{border-color:rgba(200,168,75,.3);background:#FFFBEF}
+.all-item{background:#FFFFFF;border:1px solid #E0E0DA;border-radius:12px;padding:14px 16px;cursor:pointer;transition:all .2s}
+.all-item:hover{border-color:#C8A84B;background:#FFFBEF}
 .all-num{font-size:11px;letter-spacing:.14em;color:#C8A84B;font-weight:600;margin-bottom:4px}
-.all-title{font-size:15px;font-weight:500;color:#FAF8F0;margin-bottom:6px}
+.all-title{font-size:15px;font-weight:500;color:#111110;margin-bottom:6px}
 .all-flow{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
-.all-node{font-size:11.5px;padding:3px 9px;border-radius:100px;background:#F5F5F1;color:#888880;border:1px solid rgba(250,248,240,.1)}
-.all-arr{font-size:11px;color:rgba(200,168,75,.4)}
+.all-node{font-size:11.5px;padding:3px 9px;border-radius:100px;background:#F5F5F1;color:#555550;border:1px solid #E0E0DA}
+.all-arr{font-size:11px;color:#C8A84B}
 
 @media(min-width:640px){
   body{max-width:720px;margin:0 auto}
@@ -104,11 +104,11 @@
 </div>
 
 <div class="legend">
-  <div class="leg"><div class="leg-dot" style="background:#888880"></div>진입</div>
-  <div class="leg"><div class="leg-dot" style="background:#C8A84B"></div>진료 중 발견</div>
-  <div class="leg"><div class="leg-dot" style="background:#4A9A7A"></div>연결 페이지</div>
-  <div class="leg"><div class="leg-dot" style="background:#4AAA80"></div>목표(예약)</div>
-  <div class="leg"><div class="leg-dot" style="background:#8A9ADA"></div>분기</div>
+  <div class="leg"><div class="leg-dot" style="background:#555550"></div>진입</div>
+  <div class="leg"><div class="leg-dot" style="background:#8A6820"></div>진료 중 발견</div>
+  <div class="leg"><div class="leg-dot" style="background:#2D7A5A"></div>연결 페이지</div>
+  <div class="leg"><div class="leg-dot" style="background:#1E6B48"></div>목표(예약)</div>
+  <div class="leg"><div class="leg-dot" style="background:#4A5FA8"></div>분기</div>
 </div>
 
 <div class="tabs">
@@ -197,7 +197,7 @@
     <div class="case-head" style="background:rgba(74,154,122,.1);border-bottom:1px solid rgba(74,154,122,.15)">
       <div class="case-num">01</div>
       <div class="case-info">
-        <div class="case-tag" style="color:#4A9A7A">아이 신환</div>
+        <div class="case-tag" style="color:#2D7A5A">아이 신환</div>
         <div class="case-name">구강검진 · 충치 · 불소도포</div>
       </div>
     </div>
@@ -240,7 +240,7 @@
     <div class="case-head" style="background:#E8F5F0;border-bottom:1px solid rgba(74,154,122,.12)">
       <div class="case-num">02</div>
       <div class="case-info">
-        <div class="case-tag" style="color:#4A9A7A">청소년 신환</div>
+        <div class="case-tag" style="color:#2D7A5A">청소년 신환</div>
         <div class="case-name">구강검진·충치 — 부정교합 발견</div>
       </div>
     </div>
@@ -285,7 +285,7 @@
     <div class="case-head" style="background:rgba(74,122,154,.1);border-bottom:1px solid rgba(74,122,154,.15)">
       <div class="case-num">03</div>
       <div class="case-info">
-        <div class="case-tag" style="color:#6A9ACA">성인 신환</div>
+        <div class="case-tag" style="color:#4A5FA8">성인 신환</div>
         <div class="case-name">치주염 치료 — 원인 3가지 설명</div>
       </div>
     </div>
@@ -329,7 +329,7 @@
     <div class="case-head" style="background:rgba(208,96,48,.1);border-bottom:1px solid rgba(208,96,48,.15)">
       <div class="case-num">04</div>
       <div class="case-info">
-        <div class="case-tag" style="color:#D06030">발치 신환</div>
+        <div class="case-tag" style="color:#A84818">발치 신환</div>
         <div class="case-name">발치 → 임플란트 또는 뼈이식</div>
       </div>
     </div>
@@ -380,7 +380,7 @@
     <div class="case-head" style="background:rgba(45,122,90,.12);border-bottom:1px solid rgba(45,122,90,.18)">
       <div class="case-num">05</div>
       <div class="case-info">
-        <div class="case-tag" style="color:#4AAA80">자연치아살리기</div>
+        <div class="case-tag" style="color:#1E6B48">자연치아살리기</div>
         <div class="case-name">MTA·엠도게인 → 교합치료 연결</div>
       </div>
     </div>
