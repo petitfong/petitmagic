@@ -21,7 +21,7 @@
 .q-item{display:flex;align-items:center;gap:14px;padding:17px 18px;border-bottom:1px solid #EEEEE8;cursor:pointer;transition:background .12s;text-decoration:none;color:inherit}
 .q-item:last-child{border-bottom:none}
 .q-item:hover{background:#F9F9F7}
-.q-num{font-family:'TmonMonsori',serif;font-size:18px;font-weight:300;color:#DDDDDA;min-width:28px;flex-shrink:0}
+.q-num{font-family:'TmonMonsori',serif;font-size:18px;font-weight:400;color:#007A54;min-width:28px;flex-shrink:0}
 .q-body{flex:1}
 .q-title{font-family:'TmonMonsori',serif;font-size:16px;font-weight:400;color:#111110;margin-bottom:3px;line-height:1.4}
 .q-sub{font-size:12px;color:#888880;letter-spacing:.04em}
@@ -457,7 +457,7 @@ const list = document.getElementById('qList');
 QUESTIONS.forEach((q,i)=>{
   const a = document.createElement('div');
   a.className='q-item';
-  a.innerHTML=`<div class="q-num">0${i+1}</div><div class="q-body"><div class="q-title">${q.title}</div><div class="q-sub">${q.sub}</div></div><div class="q-arr">→</div>`;
+  a.innerHTML=`<div class="q-num">${String(i+1).padStart(2,'0')}</div><div class="q-body"><div class="q-title">${q.title}</div><div class="q-sub">${q.sub}</div></div><div class="q-arr">→</div>`;
   a.onclick=()=>show(i);
   list.appendChild(a);
 });
