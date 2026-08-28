@@ -80,6 +80,20 @@ h3::before{content:"";width:16px;height:2px;background:var(--gold);flex:0 0 auto
 .grid{display:grid;gap:14px}
 .xlink{display:inline-block;font-size:.84rem;font-weight:600;color:var(--green);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:1px;transition:.15s}
 .xlink:hover{color:var(--green-d);border-bottom-color:var(--green)}
+.linkbox{margin-top:26px;padding:18px 20px;background:var(--tint);border:1px solid var(--line);border-radius:12px}
+.linkbox h3{margin:0 0 12px;font-size:1rem}
+.lk-group{margin-bottom:14px}
+.lk-group:last-child{margin-bottom:0}
+.lk-label{font-size:.72rem;letter-spacing:.08em;font-weight:700;color:var(--green);text-transform:uppercase;margin-bottom:8px}
+.lk-label small{font-weight:400;letter-spacing:0;text-transform:none;color:var(--muted);margin-left:6px}
+.lk-list{display:grid;gap:6px}
+.lk{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--card);border:1px solid var(--line);border-radius:8px;text-decoration:none;transition:.15s}
+.lk:hover{border-color:var(--green);transform:translateX(2px)}
+.lk-name{font-size:.86rem;font-weight:600;color:var(--ink)}
+.lk-desc{font-size:.78rem;color:var(--muted)}
+.lk-arr{margin-left:auto;font-size:.8rem;color:var(--gold)}
+.lk.pt .lk-arr{color:var(--green-l)}
+@media print{.linkbox{display:none}}
 .g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
 .g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
 .g4{grid-template-columns:repeat(auto-fit,minmax(185px,1fr))}
@@ -433,6 +447,15 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:.78rem;col
 
     </ul>
   </section>
+
+  <section class="linkbox">
+    <h3>연결 자료</h3>
+    <div class="lk-group"><div class="lk-label">직원 문서</div><div class="lk-list">
+      <a class="lk" href="petit_daily_report.html"><span class="lk-name">일일 보고</span><span class="lk-desc">결산 · 해피콜 · 웰컴콜 기록</span><span class="lk-arr">→</span></a>
+      <a class="lk" href="petit_staff_dashboard.html"><span class="lk-name">통계 대시보드</span><span class="lk-desc">기간별 누적 데이터 확인</span><span class="lk-arr">→</span></a>
+      <a class="lk" href="petit_clinic_guide.html"><span class="lk-name">신환 진료 도식도</span><span class="lk-desc">진료 중 환자에게 보여줄 페이지</span><span class="lk-arr">→</span></a>
+    </div></div>
+  </section>
 </div>
 
 <!-- ══════════ 02 신환 ══════════ -->
@@ -545,6 +568,19 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:.78rem;col
         </div>
       </div>
     </div>
+  </section>
+
+  <section class="linkbox">
+    <h3>연결 자료</h3>
+    <div class="lk-group"><div class="lk-label">직원 문서</div><div class="lk-list">
+      <a class="lk" href="petit_doc_request.html"><span class="lk-name">서류 발급 신청</span><span class="lk-desc">진단서 · 소견서 · 확인서</span><span class="lk-arr">→</span></a>
+      <a class="lk" href="petit_staff_guide.html"><span class="lk-name">유형별 상담 가이드</span><span class="lk-desc">환자 유형별 화법</span><span class="lk-arr">→</span></a>
+      <a class="lk" href="petit_clinic_guide.html"><span class="lk-name">신환 진료 도식도</span><span class="lk-desc">케이스별 진료 흐름</span><span class="lk-arr">→</span></a>
+    </div></div>
+    <div class="lk-group"><div class="lk-label">환자 페이지 <small>체어사이드에서 바로 보여주기</small></div><div class="lk-list">
+      <a class="lk pt" href="../petit_guide.html" target="_blank" rel="noopener"><span class="lk-name">온라인 진료 안내</span><span class="lk-desc">환자에게 보내는 사전 안내</span><span class="lk-arr">↗</span></a>
+      <a class="lk pt" href="../petit_diagnosis.html" target="_blank" rel="noopener"><span class="lk-name">교합진단</span><span class="lk-desc">진단 항목과 비용</span><span class="lk-arr">↗</span></a>
+    </div></div>
   </section>
 </div>
 
@@ -696,6 +732,20 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:.78rem;col
       <span class="chip">정기체크</span>
     </div>
   </section>
+
+  <section class="linkbox">
+    <h3>연결 자료</h3>
+    <div class="lk-group"><div class="lk-label">직원 문서</div><div class="lk-list">
+      <a class="lk" href="petit_staff_guide.html"><span class="lk-name">유형별 상담 가이드</span><span class="lk-desc">치료 권유 화법</span><span class="lk-arr">→</span></a>
+    </div></div>
+    <div class="lk-group"><div class="lk-label">환자 페이지 <small>체어사이드에서 바로 보여주기</small></div><div class="lk-list">
+      <a class="lk pt" href="../petit_cavity.html" target="_blank" rel="noopener"><span class="lk-name">충치의 원인</span><span class="lk-arr">↗</span></a>
+      <a class="lk pt" href="../petit_nerve.html" target="_blank" rel="noopener"><span class="lk-name">신경치료</span><span class="lk-arr">↗</span></a>
+      <a class="lk pt" href="../petit_resin_oneday.html" target="_blank" rel="noopener"><span class="lk-name">무삭제레진 원데이보철</span><span class="lk-arr">↗</span></a>
+      <a class="lk pt" href="../petit_denture.html" target="_blank" rel="noopener"><span class="lk-name">아름다운 틀니</span><span class="lk-arr">↗</span></a>
+      <a class="lk pt" href="../petit_sensitive.html" target="_blank" rel="noopener"><span class="lk-name">치아 시림</span><span class="lk-arr">↗</span></a>
+    </div></div>
+  </section>
 </div>
 
 <!-- ══════════ 04 자연치아살리기 ══════════ -->
@@ -763,6 +813,18 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:.78rem;col
       <div class="card gold"><h4>교합치료</h4><p style="margin:0;font-size:.86rem">교합진단 동의서</p></div>
     </div>
   </section>
+
+  <section class="linkbox">
+    <h3>연결 자료</h3>
+    <div class="lk-group"><div class="lk-label">직원 문서</div><div class="lk-list">
+      <a class="lk" href="petit_staff_guide.html"><span class="lk-name">유형별 상담 가이드</span><span class="lk-desc">자연치아살리기 화법</span><span class="lk-arr">→</span></a>
+    </div></div>
+    <div class="lk-group"><div class="lk-label">환자 페이지 <small>체어사이드에서 바로 보여주기</small></div><div class="lk-list">
+      <a class="lk pt" href="../petit_natural_tooth.html" target="_blank" rel="noopener"><span class="lk-name">자연치아살리기</span><span class="lk-arr">↗</span></a>
+      <a class="lk pt" href="../petit_save_tooth_guide.html" target="_blank" rel="noopener"><span class="lk-name">자연치아살리기 안내</span><span class="lk-desc">환자용 요약</span><span class="lk-arr">↗</span></a>
+      <a class="lk pt" href="../petit_periodontitis.html" target="_blank" rel="noopener"><span class="lk-name">만성복합치주염</span><span class="lk-arr">↗</span></a>
+    </div></div>
+  </section>
 </div>
 
 <!-- ══════════ 05 임플란트 ══════════ -->
@@ -808,6 +870,16 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:.78rem;col
       <li><div class="when">6개월 체크</div><div class="what">뼈가 붙는 시기에 따라 6개월째 들어가는 경우도 있음</div></li>
     </ul>
     <div class="note">치주 · 충치 · 보철과 병행하거나 교합치료도 함께 진행할 수 있습니다.</div>
+  </section>
+
+  <section class="linkbox">
+    <h3>연결 자료</h3>
+    <div class="lk-group"><div class="lk-label">직원 문서</div><div class="lk-list">
+      <a class="lk" href="petit_staff_guide.html"><span class="lk-name">유형별 상담 가이드</span><span class="lk-desc">임플란트 상담 화법</span><span class="lk-arr">→</span></a>
+    </div></div>
+    <div class="lk-group"><div class="lk-label">환자 페이지 <small>체어사이드에서 바로 보여주기</small></div><div class="lk-list">
+      <a class="lk pt" href="../petit_implant.html" target="_blank" rel="noopener"><span class="lk-name">편안한 임플란트</span><span class="lk-arr">↗</span></a>
+    </div></div>
   </section>
 </div>
 
@@ -989,6 +1061,24 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:.78rem;col
       </div>
 
     </div>
+  </section>
+
+  <section class="linkbox">
+    <h3>연결 자료</h3>
+    <div class="lk-group"><div class="lk-label">직원 문서</div><div class="lk-list">
+      <a class="lk" href="../petit_consultation_widget.html"><span class="lk-name">교합재건 상담 위젯</span><span class="lk-desc">증상 체크 → 치료 방향 안내</span><span class="lk-arr">→</span></a>
+      <a class="lk" href="petit_staff_guide.html"><span class="lk-name">유형별 상담 가이드</span><span class="lk-desc">교정 · 교합 상담 화법</span><span class="lk-arr">→</span></a>
+    </div></div>
+    <div class="lk-group"><div class="lk-label">환자 페이지 <small>체어사이드에서 바로 보여주기</small></div><div class="lk-list">
+      <a class="lk pt" href="../petit_4d_ortho.html" target="_blank" rel="noopener"><span class="lk-name">4D 입체교정</span><span class="lk-desc">장치별 원리와 적용 기준</span><span class="lk-arr">↗</span></a>
+      <a class="lk pt" href="../petit_treatment_by_age.html" target="_blank" rel="noopener"><span class="lk-name">바른턱얼굴 교합치료</span><span class="lk-desc">연령별 치료 흐름</span><span class="lk-arr">↗</span></a>
+      <a class="lk pt" href="../petit_diagnosis.html" target="_blank" rel="noopener"><span class="lk-name">교합진단</span><span class="lk-arr">↗</span></a>
+      <a class="lk pt" href="../petit_splint.html" target="_blank" rel="noopener"><span class="lk-name">교합안정장치</span><span class="lk-arr">↗</span></a>
+      <a class="lk pt" href="../petit_smile_design.html" target="_blank" rel="noopener"><span class="lk-name">바른미소디자인</span><span class="lk-arr">↗</span></a>
+      <a class="lk pt" href="../petit_occlusion_selfcheck.html" target="_blank" rel="noopener"><span class="lk-name">교합질환 자가체크</span><span class="lk-arr">↗</span></a>
+      <a class="lk pt" href="../petit_tongue_tie.html" target="_blank" rel="noopener"><span class="lk-name">설소대단축증 치료</span><span class="lk-arr">↗</span></a>
+      <a class="lk pt" href="../petit_muscle_relax.html" target="_blank" rel="noopener"><span class="lk-name">근이완치료</span><span class="lk-arr">↗</span></a>
+    </div></div>
   </section>
 </div>
 
