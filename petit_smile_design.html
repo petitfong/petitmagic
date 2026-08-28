@@ -364,6 +364,23 @@ h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-
   font-style: normal;
   font-display: swap;
 }
+
+/* 자세코치 배너 */
+.pc-banner{display:block;margin-top:16px;background:#13151a;border:1px solid #252830;border-radius:14px;overflow:hidden;text-decoration:none;transition:border-color .15s,transform .15s}
+.pc-banner:hover{border-color:#7dd4a0;transform:translateY(-2px)}
+.pc-img{background:#0b0c0e;display:flex;justify-content:center}
+.pc-img img{display:block;width:100%;max-width:425px;height:auto}
+.pc-body{padding:16px 18px 18px}
+.pc-tag{font-size:10px;letter-spacing:.14em;color:#7dd4a0;text-transform:uppercase;font-weight:600;margin-bottom:7px}
+.pc-title{font-family:'TmonMonsori',serif;font-size:19px;font-weight:400;color:#b8f0c8;margin-bottom:7px}
+.pc-sub{font-size:13px;color:#c8ccd4;line-height:1.75;margin-bottom:8px}
+.pc-note{font-size:11.5px;color:#8a909c;margin-bottom:11px}
+.pc-more{font-size:12.5px;font-weight:600;color:#7dd4a0}
+@media(min-width:640px){
+  .pc-banner{display:flex;align-items:center}
+  .pc-img{flex:0 0 300px}
+  .pc-body{flex:1}
+}
 </style>
 <link rel="stylesheet" href="petit-design.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -572,6 +589,17 @@ h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-
         바른미소디자인 치료는 <strong>습관치료</strong>입니다.<br>
         교합과 전신의 균형을 위해 <strong>평생 가장 필요한 습관</strong>을 건강하고 올바르게 만들어주는 치료입니다.
       </div>
+
+      <a class="pc-banner" href="petit_posture_coach.html" target="_blank" rel="noopener">
+        <div class="pc-img"><img src="posture_coach.jpg" alt="쁘띠 자세코치 — 자세를 평가하고 가이드라인을 제시합니다" loading="lazy" width="425" height="288"></div>
+        <div class="pc-body">
+          <div class="pc-tag">훈련 도구</div>
+          <div class="pc-title">쁘띠 자세코치</div>
+          <div class="pc-sub">웹캠으로 지금 자세를 확인해 보세요. 귀와 어깨가 일직선인지, 턱이 앞으로 나와 있는지 바로 알 수 있습니다.</div>
+          <div class="pc-note">영상은 저장되지 않고 기기 안에서만 처리됩니다</div>
+          <div class="pc-more">자세코치 열기 &#8599;</div>
+        </div>
+      </a>
     </div>
   </section>
 

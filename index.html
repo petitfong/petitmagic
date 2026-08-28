@@ -107,6 +107,22 @@
   font-style: normal;
   font-display: swap;
 }
+
+/* ── 메인 배너 ── */
+.banners{max-width:720px;margin:0 auto;padding:24px 20px 8px;display:grid;gap:14px}
+@media(min-width:640px){.banners{grid-template-columns:1fr 1fr;padding:28px 32px 10px}}
+.bn{display:block;text-decoration:none;background:#fff;border:1px solid #E0E0DA;border-radius:14px;overflow:hidden;transition:border-color .15s,transform .15s}
+.bn:hover{border-color:#007A54;transform:translateY(-2px)}
+.bn img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:#F5F5F1}
+.bn-cover{aspect-ratio:16/9;background:#007A54;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16px}
+.bn-cover-sm{font-size:11px;letter-spacing:.14em;color:rgba(250,248,240,.75)}
+.bn-cover-lg{font-family:'TmonMonsori',serif;font-size:clamp(24px,5vw,32px);font-weight:400;color:#FAF8F0;margin:8px 0}
+.bn-cover-line{width:36px;height:2px;background:#C8A84B;margin:0 0 10px}
+.bn-body{padding:14px 16px 16px}
+.bn-tag{font-size:10px;letter-spacing:.14em;color:#8A6820;text-transform:uppercase;font-weight:600;margin-bottom:6px}
+.bn-title{font-family:'TmonMonsori',serif;font-size:16px;font-weight:400;color:#111110;margin-bottom:5px;line-height:1.4}
+.bn-sub{font-size:12.5px;color:#555550;line-height:1.6;margin-bottom:9px}
+.bn-more{font-size:12px;font-weight:600;color:#007A54}
 </style>
 <link rel="stylesheet" href="petit-design.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -136,6 +152,33 @@
   <div class="sc-sub">나이 · 증상 선택 → 원인 파악 → 치료 방향 안내</div>
   <div class="sc-btn">교합질환 자가체크 →</div>
 </a>
+</div>
+
+<div class="banners">
+  <a class="bn bn-img" href="petit_occlusion_edu.html" target="_blank">
+    <img src="img3_banner.jpg" alt="원인 모르는 치료 — 입안에 계속 치료하는 치아만 늘어나요" loading="lazy" width="1200" height="675">
+    <div class="bn-body">
+      <div class="bn-tag">교합 이해</div>
+      <div class="bn-title">교합이란 무엇인가</div>
+      <div class="bn-sub">왜 같은 치아에 같은 문제가 반복될까요</div>
+      <div class="bn-more">읽어보기 →</div>
+    </div>
+  </a>
+
+  <a class="bn bn-text" href="petit_baby_dental_handbook.html" target="_blank">
+    <div class="bn-cover">
+      <div class="bn-cover-sm">엄마와 아기</div>
+      <div class="bn-cover-lg">치과수첩</div>
+      <div class="bn-cover-line"></div>
+      <div class="bn-cover-sm">임신 준비 · 첫 치아 · 기록</div>
+    </div>
+    <div class="bn-body">
+      <div class="bn-tag">임신 · 육아</div>
+      <div class="bn-title">쁘띠 엄마와 아기 치과수첩</div>
+      <div class="bn-sub">아이의 얼굴과 교합은 태어나기 전부터 시작됩니다</div>
+      <div class="bn-more">열어보기 →</div>
+    </div>
+  </a>
 </div>
 
 <div class="sh" id="sec-diagnosis-head" onclick="toggle('sec-diagnosis')">
@@ -254,7 +297,7 @@
 </div>
 <div class="sh" id="sec-natural-head" onclick="toggle('sec-natural')">
   <div class="sh-title">자연치아살리기</div>
-  <div class="sh-arr">▼</div><div class="sh-count">4</div></div>
+  <div class="sh-arr">▼</div><div class="sh-count">5</div></div>
 <div class="sh-line"></div>
 <div class="acc-body" id="sec-natural">
 <div class="cards">
@@ -297,6 +340,16 @@
       <div class="card-more">자세히 보기 →</div>
     </div>
     <div class="card-cover c-clay"><div class="cc-txt">치주<br>염</div></div>
+  </a>
+  <a class="card" href="petit_nerve.html" target="_blank">
+    <div class="card-num">05</div>
+    <div class="card-body">
+      <div class="card-cat">MTA 보존 우선 · 오해 바로잡기</div>
+      <div class="card-title">신경치료</div>
+      <div class="card-sub">치아를 살리는 치료 · 발치를 막기 위한 치료</div>
+      <div class="card-more">자세히 보기 →</div>
+    </div>
+    <div class="card-cover c-pine"><div class="cc-txt">신경<br>치료</div></div>
   </a>
 </div>
 
@@ -346,20 +399,20 @@
 <div class="sh-line"></div>
 <div class="acc-body" id="sec-edu">
 <div class="articles">
-  <a class="article" href="petit_lifecycle_occlusion.html" target="_blank">
+  <a class="article" href="petit_occlusion_edu.html" target="_blank">
     <div class="art-num">01</div>
+    <div>
+      <div class="art-series">교합 이해</div>
+      <div class="art-title">교합이란 무엇인가</div>
+      <div class="art-sub">왜 같은 치아에 같은 문제가 반복될까요</div>
+    </div>
+  </a>
+  <a class="article" href="petit_lifecycle_occlusion.html" target="_blank">
+    <div class="art-num">02</div>
     <div>
       <div class="art-series">생애주기별 교합 노화</div>
       <div class="art-title">태어남부터 노년까지</div>
       <div class="art-sub">교합이 무너지는 이유 · 각 시기별 변화</div>
-    </div>
-  </a>
-  <a class="article" href="petit_occlusion_selfcheck.html" target="_blank">
-    <div class="art-num">02</div>
-    <div>
-      <div class="art-series">교합질환 원인</div>
-      <div class="art-title">치아가 안 좋아지는 이유</div>
-      <div class="art-sub">구조적·기능적·발육적 원인과 부정교합</div>
     </div>
   </a>
 </div>
