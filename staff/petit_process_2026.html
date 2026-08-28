@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>2026 쁘띠치과 업무 프로세스</title>
+<style>
+@font-face{font-family:'TmonMonsori';src:url('../fonts/TmonMonsori_otf.otf') format('opentype')}
+@font-face{font-family:'Pretendard';src:url('../fonts/pretendard-variable.woff2') format('woff2-variations');font-weight:100 900}
+:root{
+  --green:#007A54; --green-d:#00553B; --green-l:#3D9E7C;
+  --gold:#C8A84B; --gold-l:#E8DCB4;
+  --cream:#FAF8F0; --card:#FFFFFF; --tint:#F1F7F4;
+  --ink:#22302A; --muted:#6E7C74; --line:#E6E0D0;
+  --sans:'Pretendard','Noto Sans KR',-apple-system,BlinkMacSystemFont,sans-serif;
+  --serif:'TmonMonsori','Noto Serif KR',serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* ── header ─────────────────────────────── */
+header{background:var(--green);color:#fff;padding:34px 0 30px;border-bottom:4px solid var(--gold)}
+.home-link{display:inline-block;font-size:.78rem;letter-spacing:.04em;color:var(--gold-l);text-decoration:none;margin-bottom:14px}
+.home-link:hover{color:#fff}
+.eyebrow{font-size:.74rem;letter-spacing:.28em;color:var(--gold-l);margin-bottom:10px;font-weight:500}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(1.55rem,4.4vw,2.5rem);margin:0 0 10px;letter-spacing:-.01em}
+.tagline{font-family:var(--serif);font-size:.98rem;color:var(--gold-l);margin:0}
+.head-meta{margin-top:16px;font-size:.8rem;color:rgba(255,255,255,.72)}
+
+/* ── tabs ───────────────────────────────── */
+nav{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(0,0,0,.02)}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;background:none;border:0;border-bottom:3px solid transparent;padding:15px 16px 12px;font-family:var(--sans);font-size:.88rem;font-weight:500;color:var(--muted);cursor:pointer;white-space:nowrap;transition:color .16s,border-color .16s}
+.tab:hover{color:var(--green)}
+.tab[aria-selected="true"]{color:var(--green-d);font-weight:700;border-bottom-color:var(--gold)}
+.tab:focus-visible{outline:2px solid var(--green);outline-offset:-3px}
+.tab .num{font-family:var(--serif);font-size:.76rem;color:var(--gold);margin-right:6px}
+
+/* ── panels ─────────────────────────────── */
+main{padding:36px 0 70px}
+.panel{display:none;animation:fade .28s ease}
+.panel.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.panel{animation:none}*{transition:none!important}}
+
+.panel-head{margin-bottom:26px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.panel-head h2{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--green-d);margin:0 0 6px}
+.panel-head p{margin:0;color:var(--muted);font-size:.88rem}
+
+section{margin-bottom:38px}
+h3{font-family:var(--serif);font-size:1.08rem;font-weight:600;color:var(--green-d);margin:0 0 4px;display:flex;align-items:center;gap:9px}
+h3::before{content:"";width:16px;height:2px;background:var(--gold);flex:0 0 auto}
+.sec-note{margin:0 0 16px 25px;font-size:.82rem;color:var(--muted)}
+
+/* ── signature: stage rail ──────────────── */
+.rail{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;position:relative}
+.rail::before{content:"";position:absolute;top:34px;left:6%;right:6%;height:1px;background:var(--gold-l);z-index:0}
+.stage{position:relative;z-index:1;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 16px 20px}
+.stage-n{font-family:var(--serif);font-size:1.9rem;font-weight:700;color:var(--gold);line-height:1;display:block}
+.stage-t{font-family:var(--serif);font-size:1.12rem;font-weight:700;color:var(--green-d);margin:6px 0 14px;padding-bottom:12px;border-bottom:1px dotted var(--line)}
+@media(max-width:900px){.rail{grid-template-columns:repeat(2,1fr)}.rail::before{display:none}}
+@media(max-width:560px){.rail{grid-template-columns:1fr}}
+
+/* ── lists ──────────────────────────────── */
+.list{list-style:none;margin:0;padding:0}
+.list>li{padding:7px 0;border-bottom:1px solid #F3EFE4;font-size:.875rem}
+.list>li:last-child{border-bottom:0}
+.list .t{display:block;font-weight:500}
+.list .n{display:block;font-size:.78rem;color:var(--muted);margin-top:3px;padding-left:9px;border-left:2px solid var(--gold-l)}
+.sub{list-style:none;margin:6px 0 0;padding:0 0 0 12px;border-left:1px solid var(--gold-l)}
+.sub li{font-size:.8rem;color:#4A5A52;padding:3px 0}
+.sub li::before{content:"·";color:var(--gold);margin-right:6px;font-weight:700}
+.sub li b{color:var(--green-d);font-weight:500}
+
+/* ── cards & grids ──────────────────────── */
+.grid{display:grid;gap:14px}
+.xlink{display:inline-block;font-size:.84rem;font-weight:600;color:var(--green);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:1px;transition:.15s}
+.xlink:hover{color:var(--green-d);border-bottom-color:var(--green)}
+.g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(185px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.card h4{font-family:var(--serif);font-size:.98rem;font-weight:600;color:var(--green);margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.card.tinted{background:var(--tint);border-color:#D6E7DE}
+.card.gold{background:#FDFBF3;border-color:var(--gold-l)}
+.card.gold h4{color:#8A6F16}
+
+/* ── flow chips ─────────────────────────── */
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 14px}
+.chip{background:var(--green);color:#fff;font-size:.82rem;font-weight:500;padding:7px 15px;border-radius:999px}
+.chip.alt{background:var(--card);color:var(--green-d);border:1px solid var(--green-l)}
+.arrow{color:var(--gold);font-weight:700}
+
+/* ── branch tree ────────────────────────── */
+.branch{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:0;overflow:hidden}
+.branch>.bh{background:var(--tint);border-bottom:1px solid var(--line);padding:11px 18px;font-family:var(--serif);font-weight:600;color:var(--green-d);font-size:.98rem}
+.branch>.bb{padding:14px 18px}
+.path{display:grid;grid-template-columns:130px 1fr;gap:14px;padding:11px 0;border-bottom:1px dotted var(--line);align-items:start}
+.path:last-child{border-bottom:0}
+.path .cond{font-size:.83rem;font-weight:500;color:var(--green-d);background:#EEF6F2;border-radius:6px;padding:5px 10px;text-align:center}
+.path .act{font-size:.85rem}
+.path .act small{display:block;color:var(--muted);font-size:.78rem;margin-top:3px}
+@media(max-width:520px){.path{grid-template-columns:1fr}.path .cond{text-align:left}}
+
+/* ── timeline ───────────────────────────── */
+.tl{list-style:none;margin:0;padding:0 0 0 22px;border-left:2px solid var(--gold-l)}
+.tl li{position:relative;padding:0 0 18px 16px}
+.tl li::before{content:"";position:absolute;left:-25px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--gold);border:2px solid var(--cream)}
+.tl .when{font-family:var(--serif);font-weight:600;color:var(--green-d);font-size:.92rem}
+.tl .what{font-size:.82rem;color:var(--muted);margin-top:2px}
+
+/* ── rules / callouts ───────────────────── */
+.rules{list-style:none;margin:0;padding:0;counter-reset:r}
+.rules li{counter-increment:r;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--green);border-radius:8px;padding:13px 16px 13px 46px;margin-bottom:9px;font-size:.88rem;position:relative}
+.rules li::before{content:counter(r,decimal-leading-zero);position:absolute;left:15px;top:12px;font-family:var(--serif);font-size:.86rem;font-weight:700;color:var(--gold)}
+.note{background:#FDFBF3;border:1px solid var(--gold-l);border-radius:8px;padding:13px 16px;font-size:.84rem;color:#5C4E22}
+.note b{color:#8A6F16}
+
+/* ── tags ───────────────────────────────── */
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.tag{font-size:.78rem;background:#EEF6F2;color:var(--green-d);border:1px solid #D6E7DE;border-radius:5px;padding:4px 10px}
+.tag.g{background:#FBF7E9;color:#8A6F16;border-color:var(--gold-l)}
+
+/* ── table ──────────────────────────────── */
+table{width:100%;border-collapse:collapse;font-size:.85rem;background:var(--card)}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--tint);font-weight:600;color:var(--green-d);font-size:.82rem;white-space:nowrap}
+td.step{font-weight:500;white-space:nowrap}
+td small{color:var(--muted)}
+.tbl-wrap{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+
+/* ── principles (기본 상담 시스템) ───────── */
+.principles{list-style:none;margin:0;padding:0}
+.principles>li{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px;padding:13px 16px 13px 38px;margin-bottom:9px;font-size:.88rem;position:relative}
+.principles>li::before{content:"◆";position:absolute;left:15px;top:14px;color:var(--gold);font-size:.68rem}
+.principles b{color:var(--green-d);font-weight:700}
+.principles .add{display:block;margin-top:8px;padding-left:10px;border-left:2px solid var(--gold-l);font-size:.8rem;color:var(--muted)}
+.principles .add.warn{color:#8A6F16;border-left-color:var(--gold)}
+.principles .add.warn b{color:#7A6112}
+
+/* ── treatment goal pyramid ─────────────── */
+.pyramid{position:relative;width:100%;max-width:820px;margin:0 auto;aspect-ratio:1.3;font-size:clamp(10.5px,1.2vw,14px)}
+.pyr-lines{position:absolute;inset:0;width:100%;height:100%}
+.pyr-lines polygon{fill:none;stroke:var(--gold-l);stroke-width:2;vector-effect:non-scaling-stroke}
+.node{border-radius:12px;padding:.8em .6em;text-align:center;border:1px solid var(--line);background:var(--card);box-shadow:0 1px 3px rgba(34,48,42,.07)}
+.pyramid .node{position:absolute;left:calc(var(--x)*1%);top:calc(var(--y)*1%);width:calc(var(--w)*1%);transform:translate(-50%,-50%)}
+.node .nt{font-family:var(--serif);font-weight:700;font-size:1.02em;display:block;line-height:1.35}
+.node .ns{display:block;font-size:.86em;margin-top:.3em;line-height:1.4}
+.node.axis{background:#EAF3FA;border-color:#C3DBEC;color:#14486B}
+.node.axis .ns{color:#3E7096}
+.node.goal{background:var(--green);border-color:var(--green);color:#fff}
+.node.goal .ns{color:var(--gold-l);font-weight:700;font-size:.94em}
+.node.hub{background:#1E3A5F;border-color:#1E3A5F;color:#fff}
+.node.hub .nt{font-size:1.1em}
+.node.hub .ns{color:#B9CDE3}
+.node.mod{background:var(--tint);border-color:#D3E5DC;color:var(--green-d)}
+.node.mod .ns{color:#5C7A6C}
+.node.close{background:#F4F1E7;border-color:var(--gold-l);color:#6B5A1E}
+@media(max-width:720px){
+  .pyramid{aspect-ratio:auto;display:grid;gap:10px;font-size:14px}
+  .pyr-lines{display:none}
+  .pyramid .node{position:static;transform:none;width:auto;padding:14px 12px}
+}
+
+/* ── footer ─────────────────────────────── */
+footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:.78rem;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.print-btn{background:none;border:1px solid var(--green);color:var(--green);border-radius:6px;padding:7px 15px;font-family:var(--sans);font-size:.8rem;cursor:pointer}
+.print-btn:hover{background:var(--green);color:#fff}
+
+/* ── print ──────────────────────────────── */
+@media print{
+  nav,footer,.home-link{display:none}
+  body{background:#fff}
+  header{padding:16px 0;border-bottom:2px solid #007A54}
+  .panel{display:block!important;page-break-before:always;animation:none}
+  .panel:first-of-type{page-break-before:avoid}
+  .card,.stage,.branch,.rules li,.principles li{break-inside:avoid}
+  .rail{grid-template-columns:repeat(5,1fr)}
+  .pyramid{break-inside:avoid;max-width:640px;font-size:10px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .node{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="home-link" href="index.html">← 직원 시스템 홈</a>
+    <div class="eyebrow">PETIT DENTAL CLINIC · 2026</div>
+    <h1>쁘띠치과 업무 프로세스</h1>
+    <p class="tagline">기본이 기적이다 — Basic is Magic</p>
+    <p class="head-meta">접수부터 수납까지, 그리고 진료별 상세 프로토콜</p>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" data-p="p1"><span class="num">01</span>업무시스템</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p2"><span class="num">02</span>신환 등록·상담</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p3"><span class="num">03</span>건강한 치료</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p4"><span class="num">04</span>자연치아살리기</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p5"><span class="num">05</span>편안한 임플란트</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p6"><span class="num">06</span>아름다운 치료·교합</button>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ══════════ 01 업무시스템 ══════════ -->
+<div class="panel on" id="p1" role="tabpanel">
+  <div class="panel-head">
+    <h2>쁘띠치과 업무시스템</h2>
+    <p>모든 환자가 지나가는 다섯 단계와, 하루·주·월 단위로 반복되는 관리 업무</p>
+  </div>
+
+  <section>
+    <h3>환자 동선 5단계</h3>
+    <p class="sec-note">각 단계에서 확인할 항목과 담당 업무</p>
+    <div class="rail">
+
+      <div class="stage">
+        <span class="stage-n">1</span>
+        <div class="stage-t">접수</div>
+        <ul class="list">
+          <li><span class="t">환자정보확인</span></li>
+          <li><span class="t">내원경로</span>
+            <ul class="sub">
+              <li>인터넷 <b>(검색어 확인)</b></li>
+              <li>블로그</li>
+              <li>유튜브</li>
+              <li>소개 <b>(소개자 확인)</b></li>
+              <li>주변치과 확인</li>
+            </ul>
+          </li>
+          <li><span class="t">CC 확인</span><span class="n">환자의 용어 그대로 · 전체 / 아픈 곳만 체크</span></li>
+          <li><span class="t">관심사 확인</span><span class="n">CC 외에 원하는 치료</span></li>
+          <li><span class="t">전신질환여부</span>
+            <ul class="sub">
+              <li>처방된 약 상세</li>
+              <li>다니는 병원 상세</li>
+              <li>전신질환 병력 상세</li>
+            </ul>
+          </li>
+          <li><span class="t">개인치아보험여부</span></li>
+          <li><span class="t">신환 안내 동의서</span><span class="n">일반 / 미성년자 구분 — 02 신환 등록·상담 탭 참조</span></li>
+        </ul>
+      </div>
+
+      <div class="stage">
+        <span class="stage-n">2</span>
+        <div class="stage-t">진료</div>
+        <ul class="list">
+          <li><span class="t">구강검진</span>
+            <ul class="sub">
+              <li>엑스레이</li>
+              <li>구강촬영</li>
+              <li>시진, 촉진</li>
+            </ul>
+          </li>
+          <li><span class="t">치료계획</span>
+            <ul class="sub">
+              <li>예방 / 습관</li>
+              <li>건강한 치료</li>
+              <li>아름다운 치료</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="stage">
+        <span class="stage-n">3</span>
+        <div class="stage-t">동의</div>
+        <ul class="list">
+          <li><span class="t">동의서 작성</span><span class="n">담당자 결정</span>
+            <ul class="sub">
+              <li>치료방식 단계별</li>
+              <li>시각적 자료 예시 설명</li>
+              <li>주의사항 설명</li>
+            </ul>
+          </li>
+          <li><span class="t">비용안내</span>
+            <ul class="sub">
+              <li>수납계획 — 비용협상</li>
+              <li>동의 사인</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="stage">
+        <span class="stage-n">4</span>
+        <div class="stage-t">치료</div>
+        <ul class="list">
+          <li><span class="t">건강한 치료 / 아름다운 치료</span><span class="n">치료계획에 따라</span></li>
+          <li><span class="t">환자교육</span><span class="n">예방 / 습관 교육</span></li>
+          <li><span class="t">당일 치료 결과설명</span><span class="n">직접 눈으로 보고 설명</span></li>
+          <li><span class="t">주의사항 설명</span></li>
+          <li><span class="t">다음 치료 안내</span></li>
+        </ul>
+      </div>
+
+      <div class="stage">
+        <span class="stage-n">5</span>
+        <div class="stage-t">수납</div>
+        <ul class="list">
+          <li><span class="t">수납</span><span class="n">당일 CC 해결 여부 확인</span></li>
+          <li><span class="t">수납 후 예약</span>
+            <ul class="sub">
+              <li>다음 치료계획 안내</li>
+              <li>예상시간, 예상비용 안내</li>
+            </ul>
+          </li>
+          <li><span class="t">다음 예약 안내</span><span class="n">해피콜 · 웰컴콜은 마감 업무 — 아래 참조</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h3>하루의 시작과 끝</h3>
+    <p class="sec-note">환자 동선 밖에서 매일 반복되는 업무 — 아침에 열고 마감에 닫는다</p>
+    <div class="grid g2">
+      <div class="card tinted">
+        <h4>아침 — 금일 예약확인</h4>
+        <ul class="list">
+          <li><span class="t">금일 주요 이슈 확인</span><span class="n">큰 치료계획 환자 / 불만환자 / 어려운 환자</span></li>
+          <li><span class="t">챠팅 재리뷰</span><span class="n">입력 후 청구 관련 관점으로</span></li>
+          <li><span class="t">수술환자 확인</span><span class="n">당일 아침 해피콜</span></li>
+        </ul>
+      </div>
+      <div class="card tinted">
+        <h4>마감 — 콜 · 리콜 · 결산</h4>
+        <ul class="list">
+          <li><span class="t">해피콜 (구환)</span>
+            <ul class="sub">
+              <li>수술환자</li>
+              <li>발치환자</li>
+              <li>불만환자, 민감환자</li>
+            </ul>
+          </li>
+          <li><span class="t">웰컴콜 (신환)</span><span class="n">당일 신환 웰컴</span></li>
+          <li><span class="t">미내원자 확인</span><span class="n">리콜</span></li>
+          <li><span class="t">결산</span><span class="n">당일 수입 / 지출 확인 보고</span></li>
+          <li><span class="t">내일 일정확인</span><span class="n">중복예약 여부 등</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>당일관리 원칙</h3>
+    <p class="sec-note">매일 지켜야 하는 여섯 가지</p>
+    <ol class="rules">
+      <li>그날 CC는 그날 해결한다.</li>
+      <li>10분 이상 대기 시 확인 후 환자에게 양해를 구하고 대기시간을 안내한다.</li>
+      <li>원장 설명 시 메모 후 꼭 스텝이 다시 설명하거나 챠팅에 기록한다.</li>
+      <li>상담자는 상담내용을 환자상담 및 치료계획에 기록하고 관리한다.</li>
+      <li>환자 불만 시 우선 사과하고, 따로 조용한 장소로 모시고 분리시킨다.</li>
+      <li>전화 상담 시 치료종류 / 나이 / 성별 / 위치 / 소개 등을 꼭 메모하여야 한다.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h3>주기 관리</h3>
+    <p class="sec-note">1주관리 — 수 · 금 · 토 &nbsp;|&nbsp; 월말관리 — 마지막 주</p>
+    <ul class="list card">
+      <li><span class="t">치료중단환자 리콜</span><span class="n">치주 / 신경 / 충치 / 보철 / 임플 / 교정</span></li>
+      <li><span class="t">각 치료별 통계</span><span class="n">내원추이 확인, 미납자 관리</span></li>
+      <li><span class="t">치료계획 상담 성공률 확인</span><span class="n">각 상담자별</span></li>
+      <li><span class="t">청구 전 점검</span><span class="n">청구오류사항 확인 / 청구결과 관리 / 심사 재요청 등</span></li>
+      <li><span class="t">주기적 관리할 환자</span><span class="n">내원확인 / 예약확인</span></li>
+      <li><span class="t">VIP 리스트 확인</span><span class="n">해피콜 (문자)</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>월말결산</h3>
+    <div class="grid g3">
+      <div class="card"><h4>당월 청구결과</h4><div class="tags"><span class="tag">청구결정액</span><span class="tag">조정여부</span></div></div>
+      <div class="card"><h4>당월 비보험</h4><div class="tags"><span class="tag">치료별 통계</span></div></div>
+      <div class="card"><h4>당월 미수내역</h4><div class="tags"><span class="tag">미납자 관리</span><span class="tag">환불 내역</span></div></div>
+      <div class="card"><h4>당월 선수내역</h4></div>
+      <div class="card"><h4>당월 지출내역</h4><div class="tags"><span class="tag">식대</span><span class="tag">세금</span><span class="tag">잡비</span></div></div>
+      <div class="card gold"><h4>다음달 목표치</h4><div class="tags"><span class="tag g">다음달 매출목표</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h3>기본 상담 시스템</h3>
+    <p class="sec-note">상담 운영 원칙 — 누가, 언제, 무엇으로 상담하는가</p>
+    <ul class="principles">
+
+      <li>신환 · 구환 모두 <b>당일 주요 불편증상 진료는 해결하고 가는 게 원칙</b></li>
+
+      <li><b>미예약 환자라도 당장 c.c 진료</b> 하고 가도록 한다.
+        <span class="add">기본적인 sc 등의 보험 진료라도 하고 갈 수 있도록 한다.</span>
+      </li>
+
+      <li>원장님 설명 시(<b>특히 신환 분</b>) 처음부터 되도록 상담자(<b>실장 / 팀장님</b>)는 동행하여 들을 수 있도록 전달한다.</li>
+
+      <li><b>상담 시, 환자나 원장님이 표현했던 단어나 방식 그대로 사용하여 상담하도록 한다.</b></li>
+
+      <li>비용 배려 요구 시, 비용 부분은 실장님 권한이라 진료 후 실장님께 다시 잘 전달해 드리겠다 하고 토스.
+        <span class="add warn"><b>원래 치료 비용까지는 안내 필요.</b> 내원 경로와 소개자 확인 후 같은 비용까지 배려 가능!!</span>
+      </li>
+
+      <li><b>진료실 내 상담모형 + 덴트웹 전후 상담 사진, 덴트웹 동영상, 바탕화면 PPT</b> 활용하여 상담한다.
+        <span class="add">고령자는 모형 + 동영상 등 촉각 및 이해되기 쉬운 시각 자료 활용</span>
+      </li>
+
+      <li>간단 상담은(단순 진료 — 인레이 / RF / CR 등 2개 이하, 임플란트 제외) 진단 시 옆에 있었던 <b>메인 스텝이 체어사이드 상담</b> 하도록 한다.
+        <span class="add warn"><b>임플란트 / 예민하거나 주의 필요한 환자</b>의 경우 팀장님 → 실장님 순으로 상담 토스</span>
+      </li>
+
+      <li>상담자는 <b>상담 후 전자차트 → 비용계획 내 상담 결과 입력</b>한다.
+        <span class="add">결과에 따라 비용계획 입력 상이 — 하단 재설명 예정</span>
+      </li>
+
+      <li><b>신환 예진실(체어) 따로 구분</b>
+        <span class="add">#3, 4번 체어 쪽 / 개인정보 보호될 수 있는 공간 확보</span>
+        <span class="add">체어 착석 시 환자 시야에 원장님 약력 보일 수 있게</span>
+      </li>
+
+      <li><b>실장님 상담실 상담 시, 팀장님이 데스크 &amp; 전화 응대 업무 백업 진행한다.</b>
+        <span class="add">실장님이 팀장님께 설명 + 무선 전화기 맡기고 진행</span>
+      </li>
+
+    </ul>
+  </section>
+</div>
+
+<!-- ══════════ 02 신환 ══════════ -->
+<div class="panel" id="p2" role="tabpanel">
+  <div class="panel-head">
+    <h2>신환 등록 및 치료계획 후 상담</h2>
+    <p>처음 오신 환자의 접수 · 초진 · 진단 · 상담 흐름</p>
+  </div>
+
+  <div class="flow">
+    <span class="chip">접수</span><span class="arrow">→</span>
+    <span class="chip alt">신환등록 · 안내</span><span class="arrow">→</span>
+    <span class="chip">초진</span><span class="arrow">→</span>
+    <span class="chip">진단</span><span class="arrow">→</span>
+    <span class="chip">치료계획 상담</span><span class="arrow">→</span>
+    <span class="chip">동의 · 수납방식 결정</span>
+  </div>
+
+  <section>
+    <div class="grid g2">
+      <div class="card">
+        <h4>접수</h4>
+        <ul class="list">
+          <li><span class="t">환자등록</span></li>
+          <li><span class="t">CC 확인</span><span class="n">환자의 용어 그대로 · 전체 / 아픈 곳만 체크</span></li>
+          <li><span class="t">내원경로 확인</span><span class="n">꼭 확인해주셔요</span>
+            <ul class="sub">
+              <li>인터넷 <b>(검색어 확인)</b></li>
+              <li>블로그</li>
+              <li>유튜브</li>
+              <li>소개 <b>(소개자 확인)</b></li>
+              <li>주변치과 확인</li>
+            </ul>
+          </li>
+          <li><span class="t">전신질환 확인</span></li>
+          <li><span class="t">개인치과보험 확인</span></li>
+          <li><span class="t">파노라마 촬영</span></li>
+          <li><span class="t">신환등록 및 안내</span><span class="n">일반 / 미성년자 구분해서 동의서 받기 — 아래 참조</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>초진</h4>
+        <ul class="list">
+          <li><span class="t">구강촬영</span></li>
+          <li><span class="t">충치 체크</span></li>
+          <li><span class="t">보철물 체크</span></li>
+          <li><span class="t">잇몸 체크</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>신환등록 및 안내</h3>
+    <p class="sec-note">파노라마 촬영 다음 단계 — 일반과 미성년자를 구분해서 동의서를 받습니다</p>
+    <div class="grid g2">
+      <div class="card">
+        <h4>일반</h4>
+        <ul class="list">
+          <li><span class="t">신환안내 동의서</span></li>
+          <li><span class="t">신환등록 문진표</span><span class="n">직원이 체크</span></li>
+          <li><span class="t">교합신환</span><span class="n">교합이 아니면 스킵</span></li>
+          <li><span class="t">예약 및 환불규정</span><span class="n">큰 제목만 읽어주기</span></li>
+        </ul>
+      </div>
+      <div class="card gold">
+        <h4>미성년자</h4>
+        <div class="note" style="margin-bottom:12px">교합치료 대상이 될 가능성이 큽니다.</div>
+        <ul class="list">
+          <li><span class="t">일반과 동일한 서류 전부</span><span class="n">신환안내 동의서 · 문진표 · 교합신환 · 예약 및 환불규정</span></li>
+          <li><span class="t">어린이 체크 항목</span></li>
+          <li><span class="t">구강기능평가차트</span></li>
+          <li><span class="t">근기능훈련 검사용지</span></li>
+        </ul>
+        <div class="note" style="margin-top:12px"><b>있음</b>에 체크해 주기</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>진단 · 상담</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>구강검진</th><td>진단의 시작 — 상태 확인</td></tr>
+        <tr><th>치료계획 상담</th><td>치료 범위, 종류, 비용</td></tr>
+        <tr><th>동의서 작성</th><td>상담 내용에 대한 환자 동의</td></tr>
+        <tr><th>비용 수납방식 결정</th><td>수납 계획 확정</td></tr>
+        <tr><th>주의사항 설명</th><td>치료 전 안내</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h3>치료 분류</h3>
+    <div class="grid g2">
+      <div class="card tinted">
+        <h4>건강한 치료</h4>
+        <div class="tags">
+          <span class="tag">영유아검진</span><span class="tag">혼합치열기 관리</span><span class="tag">이갈이</span>
+          <span class="tag">턱관절질환</span><span class="tag">혀 · 호흡치료</span><span class="tag">치주치료</span>
+          <span class="tag">신경치료</span><span class="tag">보철치료</span><span class="tag">임플란트치료</span>
+          <span class="tag">자연치아살리기</span><span class="tag">틀니</span>
+        </div>
+      </div>
+      <div class="card gold">
+        <h4>아름다운 치료</h4>
+        <div class="tags">
+          <span class="tag g">교정치료</span><span class="tag g">4D 입체교정</span><span class="tag g">보톡스</span>
+          <span class="tag g">필러</span><span class="tag g">실리프팅</span><span class="tag g">치아미백</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════ 03 건강한 치료 ══════════ -->
+<div class="panel" id="p3" role="tabpanel">
+  <div class="panel-head">
+    <h2>건강한 치료 — 레진 · 신경치료 · 보철치료</h2>
+    <p>설명 항목, 임상 단계, 기공소 업무까지</p>
+  </div>
+
+  <section>
+    <h3>신경치료 — 환자에게 설명할 항목</h3>
+    <div class="grid g2">
+      <div class="card">
+        <h4>신경치료 설명</h4>
+        <ul class="list">
+          <li><span class="t">신경치료에 대한 설명 및 간단한 응답</span></li>
+          <li><span class="t">신경치료 단계, 횟수, 비용 설명</span></li>
+          <li><span class="t">통증여부, 마취여부, 처방여부</span></li>
+          <li><span class="t">MTA 설명</span><span class="n">비용 설명 / 장단점 설명</span></li>
+          <li><span class="t">코어 설명</span><span class="n">비보험, 보험재료 설명</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>보철 필요 설명</h4>
+        <ul class="list">
+          <li><span class="t">재료 설명, 비용 설명</span></li>
+          <li><span class="t">보철 과정 설명</span>
+            <ul class="sub">
+              <li>마취</li>
+              <li>치아모양잡기 (prep.)</li>
+              <li>임시치 만들기 (tempo.)</li>
+              <li>본뜨기 (imp.) → 기공소</li>
+              <li>5일 후 보철물 나옴</li>
+              <li>뼈대확인 (copping check)</li>
+              <li>세라믹층 추가 후 재확인</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>보철치료</h3>
+    <div class="grid g4">
+      <div class="card">
+        <h4>확인 항목</h4>
+        <ul class="list">
+          <li><span class="t">싱글, 브릿지</span></li>
+          <li><span class="t">재료 선택</span></li>
+          <li><span class="t">신경치료 필요여부</span></li>
+          <li><span class="t">부분교정 필요여부</span></li>
+          <li><span class="t">임플란트 필요여부</span></li>
+        </ul>
+      </div>
+      <div class="card tinted">
+        <h4>전치부 보철 (심미보철)</h4>
+        <div class="tags"><span class="tag">PFM</span><span class="tag">ZIR</span></div>
+      </div>
+      <div class="card tinted">
+        <h4>구치부 보철</h4>
+        <div class="tags"><span class="tag">PFM</span><span class="tag">ZIR</span><span class="tag">TC</span><span class="tag">GOLD</span></div>
+      </div>
+      <div class="card gold">
+        <h4>기공소와 업무</h4>
+        <ul class="list">
+          <li><span class="t">인상체, 바이트, 쉐이드</span></li>
+          <li><span class="t">환자정보</span></li>
+          <li><span class="t">기공물 도착일자</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>전치부 보철 — 체어 단계</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><td class="step">1</td><td>도포마취 (5분) — 니들마취 (5분)</td></tr>
+        <tr><td class="step">2</td><td>치아모양잡기 (prep.)</td></tr>
+        <tr><td class="step">3</td><td>바이트 확인 <small>유틸리티 왁스 사용</small></td></tr>
+        <tr><td class="step">4</td><td>인상 <small>실리콘 인상재</small></td></tr>
+        <tr><td class="step">5</td><td>바이트 인기 <small>실리콘 인기재</small></td></tr>
+        <tr><td class="step">6</td><td>Shade 기록 (환자와 확인) <small>챠트에도 기록, 기공의뢰서 사본 챠트에 끼워두기</small></td></tr>
+        <tr><td class="step">7</td><td>임시치 만들기 — 부착</td></tr>
+        <tr><td class="step">8</td><td>수납 확인</td></tr>
+        <tr><td class="step">9</td><td>예약잡기 <small>5일 ~ 1주</small></td></tr>
+      </table>
+    </div>
+    <div class="note" style="margin-top:12px"><b>보철물 delivery</b> — 임시로 붙이고 1주 써보기 → 1주 후 최종 부착</div>
+  </section>
+
+  <section>
+    <h3>레진치료</h3>
+    <div class="grid g3">
+      <div class="card">
+        <h4>신경치료 마치고 보철하지 않는 경우</h4>
+        <ul class="list">
+          <li><span class="t">전치부 코어</span></li>
+          <li><span class="t">구치부 코어</span></li>
+        </ul>
+        <p style="margin:10px 0 0;font-size:.8rem;color:var(--muted)">비용은 상담 시점 기준으로 안내</p>
+      </div>
+      <div class="card">
+        <h4>무삭제 레진보철</h4>
+        <ul class="list">
+          <li><span class="t">심미레진</span><span class="n">전치부, 치간</span></li>
+          <li><span class="t">충치레진</span><span class="n">전치부, 구치부, 인접면</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>GI 치료</h4>
+        <ul class="list"><li><span class="t">치아 목 떼우기</span></li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>임플란트</h3>
+    <p class="sec-note">전체 흐름 요약 — 부위별 주의사항, 수술 전후 관리는 <b>05 편안한 임플란트</b> 탭에</p>
+    <div class="flow">
+      <span class="chip alt">진단 · 전신병력</span><span class="arrow">→</span>
+      <span class="chip alt">상담 · 동의</span><span class="arrow">→</span>
+      <span class="chip alt">수술</span><span class="arrow">→</span>
+      <span class="chip alt">보철</span><span class="arrow">→</span>
+      <span class="chip">정기체크</span>
+    </div>
+    <div class="card tinted" style="margin-top:14px">
+      <ul class="list">
+        <li><span class="t">보철 단계에서 확인</span><span class="n">3개월 파노라마 → 인상일자 결정 → 보철 진행</span></li>
+        <li><span class="t">보험등록</span><span class="n">상담 동의 시 함께 처리</span></li>
+      </ul>
+      <p style="margin:10px 0 0"><a class="xlink" href="#" data-goto="p5">05 편안한 임플란트 탭에서 자세히 보기 →</a></p>
+    </div>
+  </section>
+
+  <section>
+    <h3>틀니 — 단계</h3>
+    <div class="flow">
+      <span class="chip alt">진단모형</span><span class="arrow">→</span>
+      <span class="chip alt">개인트레이</span><span class="arrow">→</span>
+      <span class="chip alt">왁스덴쳐</span><span class="arrow">→</span>
+      <span class="chip alt">프레임체크</span><span class="arrow">→</span>
+      <span class="chip alt">VD체크</span><span class="arrow">→</span>
+      <span class="chip alt">치아배열 확인</span><span class="arrow">→</span>
+      <span class="chip alt">큐어링</span><span class="arrow">→</span>
+      <span class="chip alt">교합조정</span><span class="arrow">→</span>
+      <span class="chip">정기체크</span>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════ 04 자연치아살리기 ══════════ -->
+<div class="panel" id="p4" role="tabpanel">
+  <div class="panel-head">
+    <h2>자연치아살리기</h2>
+    <p>초진 내원부터 증상별 처치 경로 — 모든 갈래에 교합분석이 들어갑니다</p>
+  </div>
+
+  <section>
+    <h3>치주치료</h3>
+    <div class="branch">
+      <div class="bh">양치질 교육</div>
+      <div class="bb">
+        <div class="path">
+          <div class="cond">간단 양치질교육</div>
+          <div class="act">체어사이드에서 진행</div>
+        </div>
+        <div class="path">
+          <div class="cond">정식 양치질교육</div>
+          <div class="act">양치질교육 동의서, 개인칫솔 구매<small>교육비 5만원 · 후기 작성 시 기념 선물 받기</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>파절</h3>
+    <div class="branch">
+      <div class="bh">신경치료 여부에 따라</div>
+      <div class="bb">
+        <div class="path">
+          <div class="cond">신경치료 하면</div>
+          <div class="act">MTA, post &amp; core → 교합분석 → 교합조정 / 교합치료<small>→ 보철 크라운</small></div>
+        </div>
+        <div class="path">
+          <div class="cond">신경치료 안 하면</div>
+          <div class="act">무삭제레진 → 교합분석 → 교합조정 / 교합치료</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>흔들림</h3>
+    <div class="branch">
+      <div class="bh">기본 치주치료부터</div>
+      <div class="bb">
+        <div class="path">
+          <div class="cond">기본 치주치료</div>
+          <div class="act">엠도게인 → 교합분석 → 교합조정 / 교합치료</div>
+        </div>
+        <div class="path">
+          <div class="cond">양치질 교육</div>
+          <div class="act">병행</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>동의서</h3>
+    <div class="grid g2">
+      <div class="card gold"><h4>자연치아살리기</h4><p style="margin:0;font-size:.86rem">자연치아살리기 동의서 — 종류별</p></div>
+      <div class="card gold"><h4>교합치료</h4><p style="margin:0;font-size:.86rem">교합진단 동의서</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════ 05 임플란트 ══════════ -->
+<div class="panel" id="p5" role="tabpanel">
+  <div class="panel-head">
+    <h2>편안한 임플란트</h2>
+    <p>부위별 주의사항, 진단부터 6개월 체크까지</p>
+  </div>
+
+  <section>
+    <h3>부위별 주의</h3>
+    <div class="grid g2">
+      <div class="card tinted"><h4>상악</h4><p style="margin:0;font-size:.88rem">상악동 거상</p></div>
+      <div class="card tinted"><h4>하악</h4><p style="margin:0;font-size:.88rem">하치조신경 주의</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h3>진단부터 수술까지</h3>
+    <div class="flow">
+      <span class="chip">진단</span><span class="arrow">→</span>
+      <span class="chip alt">분석 · 설명</span><span class="arrow">→</span>
+      <span class="chip alt">치료계획</span><span class="arrow">→</span>
+      <span class="chip alt">상담</span><span class="arrow">→</span>
+      <span class="chip alt">동의</span><span class="arrow">→</span>
+      <span class="chip">수술</span>
+    </div>
+    <div class="grid g2">
+      <div class="card"><h4>진단 자료</h4><div class="tags"><span class="tag">씨티</span><span class="tag">진단모형</span><span class="tag">구내사진</span></div></div>
+      <div class="card gold"><h4>동의</h4><p style="margin:0;font-size:.86rem">비용 안내 후 동의</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h3>수술 전후 관리</h3>
+    <ul class="tl">
+      <li><div class="when">수술 전 해피콜</div></li>
+      <li><div class="when">수술 당일 아침 해피콜</div></li>
+      <li><div class="when">다음날</div><div class="what">소독</div></li>
+      <li><div class="when">1주 ~ 10일 뒤</div><div class="what">체크 또는 s/o</div></li>
+      <li><div class="when">1달 체크</div><div class="what">치근단사진</div></li>
+      <li><div class="when">3달 체크</div><div class="what">파노라마 · 인상 시기 결정</div></li>
+      <li><div class="when">6개월 체크</div><div class="what">뼈가 붙는 시기에 따라 6개월째 들어가는 경우도 있음</div></li>
+    </ul>
+    <div class="note">치주 · 충치 · 보철과 병행하거나 교합치료도 함께 진행할 수 있습니다.</div>
+  </section>
+</div>
+
+<!-- ══════════ 06 아름다운 치료 ══════════ -->
+<div class="panel" id="p6" role="tabpanel">
+  <div class="panel-head">
+    <h2>아름다운 치료 — 교정 · 교합치료</h2>
+    <p>연령대별 접근, 진단 프로토콜, 장치와 훈련</p>
+  </div>
+
+  <section>
+    <h3>연령대별 접근</h3>
+    <p class="sec-note">나이에 따라 기본 방향이 갈립니다</p>
+    <div class="grid g3">
+      <div class="card"><h4>10대</h4><p style="margin:0;font-size:.88rem">성장교정</p></div>
+      <div class="card"><h4>청소년 ~ 청년</h4><p style="margin:0;font-size:.88rem">4D 입체교정</p></div>
+      <div class="card"><h4>중장년층</h4><p style="margin:0;font-size:.88rem">교합재건</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h3>복합 케이스</h3>
+    <p class="sec-note">나이만으로 정해지지 않는 경우 — 자연치아살리기와 함께 갑니다</p>
+    <div class="card gold">
+      <h4>심한 충치가 있는 10대</h4>
+      <ul class="list">
+        <li><span class="t">13세까지</span><span class="n">성장교정 + 자연치아살리기</span></li>
+        <li><span class="t">14세부터</span><span class="n">4D 입체교정 + 자연치아살리기</span></li>
+      </ul>
+      <p style="margin:10px 0 0"><a class="xlink" href="#" data-goto="p4">04 자연치아살리기 탭 보기 →</a></p>
+    </div>
+  </section>
+
+  <section>
+    <h3>진단</h3>
+    <div class="grid g2">
+      <div class="card">
+        <h4>교합진단 — 사전 안내</h4>
+        <ul class="list">
+          <li><span class="t">비용 안내</span></li>
+          <li><span class="t">진단과정 안내</span></li>
+          <li><span class="t">동의서</span><span class="n">교정진단 동의서</span></li>
+          <li><span class="t">복장 안내</span><span class="n">내원 전에 미리 전달</span></li>
+        </ul>
+        <div class="note" style="margin-top:12px">
+          <b>머리는 귀 뒤로 넘기고, 골반선이 보이는 옷</b>을 입고 오셔야 합니다. 헐렁한 옷은 안 됩니다.
+        </div>
+      </div>
+      <div class="card">
+        <h4>진단 자료 수집</h4>
+        <ul class="list">
+          <li><span class="t">구내촬영</span><span class="n">정 / 측 / 교합면 / 45도 하방</span></li>
+          <li><span class="t">구외촬영</span><span class="n">안모(정 · 측 · 스마일 — 치아 보이기), 전신(정 · 측 · 후 — 몸에 피팅되는 옷 안내, 머리 묶기)</span></li>
+          <li><span class="t">엑스레이</span><span class="n">파노, 라테랄, PA, AP, 필요시 CT · TMJ</span></li>
+          <li><span class="t">진단모형</span><span class="n">바이트 꼭</span></li>
+          <li><span class="t">턱관절 설문</span><span class="n">환자가 작성 후 다시 확인, 자세히 질의응답, 가족력 여부도 확인. 당일 데스크에서 설문결과 정리해 덴트웹 등록</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>진단상담</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>진단결과</th><td>PPT로 — 진단 PPT 양식에 맞춰 정리해서 원장에게 전달</td></tr>
+        <tr><th>진단 후 1.5주 후</th><td>원장실 — 꼭 의사결정권자 가족과 같이 내원하도록<br><small>*** 진단모형 준비 요망. 필요시 정상바이트 모형, 상하 뼈모델도 준비</small></td></tr>
+        <tr><th>상담</th><td>동의 및 상담 — 비용, 수납 상담<br><small>50% 수납 후 나머지는 1년 내 환자가 계획한 대로 · 교정치료 동의서</small></td></tr>
+      </table>
+    </div>
+
+    <div class="card tinted" style="margin-top:14px">
+      <h4>교합치료 월비</h4>
+      <p class="sec-note" style="margin-top:0">교합치료 환자에게는 월비가 있습니다. 아래 해당하면 5만원입니다.</p>
+      <ul class="list">
+        <li><span class="t">기본</span><span class="n">월 10만원</span></li>
+        <li><span class="t">가족 교합치료 환자</span><span class="n">월 5만원</span></li>
+        <li><span class="t">지방 환자</span><span class="n">월 5만원</span></li>
+        <li><span class="t">해외 환자</span><span class="n">월 5만원 — 한국에 들어왔을 때</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h3>치료 시작</h3>
+    <div class="grid g3">
+      <div class="card">
+        <h4>장치</h4>
+        <ul class="list">
+          <li><span class="t">고정성</span><span class="n">RPE, TPA, MARPE</span></li>
+          <li><span class="t">가철성</span><span class="n">Han's 2-Way, Han's 3-Way, Han's TA, Twin Block</span></li>
+          <li><span class="t">교합안정장치</span><span class="n">상악, 하악</span></li>
+        </ul>
+        <div class="note" style="margin-top:12px">
+          <b>Han's</b>가 붙으면 <b>교합평면을 커버</b>하는 장치입니다.
+        </div>
+        <ul class="list" style="margin-top:10px">
+          <li><span class="t">2-Way</span><span class="n">측방 확장 — 양방향</span></li>
+          <li><span class="t">3-Way</span><span class="n">전방 + 측방(양방향) 확장 — 세 방향</span></li>
+        </ul>
+        <p style="margin:8px 0 0;font-size:.8rem;color:var(--muted)">확장 방향이 다른 장치입니다. 차트에 2-Way / 3-Way를 정확히 구분해 기록하세요.</p>
+      </div>
+      <div class="card">
+        <h4>배열</h4>
+        <ul class="list">
+          <li><span class="t">고정성</span><span class="n">MEAW, 3Dsom</span></li>
+          <li><span class="t">투명</span><span class="n">Invisalign, 디오투명교정</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>근기능훈련 · 자세</h4>
+        <ul class="list">
+          <li><span class="t">설소대 치료</span></li>
+          <li><span class="t">혀 운동</span></li>
+          <li><span class="t">자세교정</span><span class="n">전신치료실</span></li>
+          <li><span class="t">스마일 리디자인</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>치료 완료</h3>
+    <div class="grid g2">
+      <div class="card"><h4>재진</h4><p style="margin:0;font-size:.88rem">구내외 촬영 / 엑스레이 팔로우업</p></div>
+      <div class="card"><h4>정기체크</h4><p style="margin:0;font-size:.88rem">지속 관리</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h3>치료목표 — 건강한 아름다움</h3>
+    <p class="sec-note">진단 및 치료계획을 중심에 두고, 두 축을 향해 각 치료가 맞물립니다</p>
+    <div class="pyramid">
+      <svg class="pyr-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <polygon points="50,17 90,88 10,88"/>
+      </svg>
+
+      <div class="node axis" style="--x:15;--y:9;--w:26">
+        <span class="nt">건강한 교합</span>
+        <span class="ns">턱, 몸의 균형</span>
+      </div>
+      <div class="node goal" style="--x:50;--y:8;--w:27">
+        <span class="nt">치료목표</span>
+        <span class="ns">건강한 아름다움</span>
+      </div>
+      <div class="node axis" style="--x:85;--y:9;--w:26">
+        <span class="nt">아름다운 얼굴</span>
+        <span class="ns">4D 얼굴디자인</span>
+      </div>
+
+      <div class="node hub" style="--x:50;--y:50;--w:28">
+        <span class="nt">진단 및 치료계획</span>
+      </div>
+
+      <div class="node mod" style="--x:15;--y:38;--w:27">
+        <span class="nt">4D 입체교정</span>
+        <span class="ns">두개골, 턱뼈</span>
+      </div>
+      <div class="node mod" style="--x:85;--y:38;--w:27">
+        <span class="nt">MFT 근기능훈련</span>
+        <span class="ns">혀, 호흡</span>
+      </div>
+
+      <div class="node mod" style="--x:15;--y:61;--w:27">
+        <span class="nt">3DSom &amp; MEAW</span>
+        <span class="ns">치아배열, 이동</span>
+      </div>
+      <div class="node mod" style="--x:85;--y:61;--w:27">
+        <span class="nt">자세교정 운동처방</span>
+        <span class="ns">전신의 균형</span>
+      </div>
+
+      <div class="node mod" style="--x:14;--y:86;--w:27">
+        <span class="nt">편안한 임플란트</span>
+        <span class="ns">최소절개, 자가혈 재생인자</span>
+      </div>
+      <div class="node close" style="--x:50;--y:89;--w:24">
+        <span class="nt">재진, 평가</span>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer class="wrap">
+  <div>쁘띠치과의원 · 대구 남구 대봉로 66, 2층 · 053-472-2828</div>
+  <button class="print-btn" onclick="window.print()">전체 인쇄 / PDF 저장</button>
+</footer>
+
+<script>
+(function(){
+  var tabs = document.querySelectorAll('.tab');
+  var panels = document.querySelectorAll('.panel');
+  function show(id){
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', t.dataset.p === id); });
+    panels.forEach(function(p){ p.classList.toggle('on', p.id === id); });
+    // 샌드박스 iframe(about:srcdoc)에서는 URL 변경이 차단되므로 실패해도 무시한다
+    try { history.replaceState(null, '', '#' + id); } catch (e) {}
+  }
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      show(t.dataset.p);
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+  document.querySelectorAll('[data-goto]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      show(a.dataset.goto);
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+  try {
+    var h = (location.hash || '').replace('#','');
+    if (h && document.getElementById(h)) show(h);
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
