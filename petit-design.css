@@ -566,6 +566,10 @@ body {
   margin-bottom: 20px;
   line-height: 1.7;
 }
+/* 밝은 배경 위 주소·전화 — 크림색 상속 차단 */
+.cta-sec .cta-info {
+  color: var(--color-text-mid);
+}
    petit_diagnosis.html 등 사용
    ──────────────────────────────────────────── */
 .navi-sub                { color: rgba(250,248,240,.85) !important; }
