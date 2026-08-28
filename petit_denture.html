@@ -20,17 +20,13 @@
 
 .wrap{padding:0 20px;background:#fff}
 
-/* 비교표 */
-.compare{margin:20px 0;border:1px solid #E0E0DA;border-radius:12px;overflow:hidden}
-.cmp-head{display:grid;grid-template-columns:1fr 1fr 1fr;background:#F5F5F1}
-.cmp-h{padding:11px 12px;font-size:12px;font-weight:500;color:#555550;text-align:center;border-right:1px solid #E0E0DA}
-.cmp-h:last-child{border-right:none}
-.cmp-h.highlight{background:#007A54;color:#FAF8F0}
-.cmp-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid #EAEAE4}
-.cmp-cell{padding:12px 12px;font-size:13px;color:#555550;text-align:center;border-right:1px solid #EAEAE4;line-height:1.5}
-.cmp-cell:last-child{border-right:none}
-.cmp-cell.label{color:#1A1A18;font-weight:500;background:#FAFAF9;text-align:left;font-size:12px}
-.cmp-cell.highlight{color:#007A54;font-weight:500;background:#FFFBEF}
+/* 특징 */
+.feat-lead{font-size:13.5px;color:#555550;line-height:1.9;margin:0 0 18px;padding-bottom:16px;border-bottom:1px solid #EAEAE4}
+.feat{padding:18px 0;border-bottom:1px solid #EAEAE4}
+.feat:last-child{border-bottom:none}
+.feat-label{font-size:10px;letter-spacing:.14em;color:#8A6820;text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.feat-title{font-family:'TmonMonsori',serif;font-size:17px;font-weight:400;color:#111110;line-height:1.5;margin-bottom:7px}
+.feat-desc{font-size:13px;color:#555550;line-height:1.8}
 
 /* 설계 단계 */
 .steps{padding:0 20px;background:#FAFAF9;padding-top:16px;padding-bottom:8px}
@@ -59,7 +55,8 @@
 @media(max-width:480px){.three-grid{grid-template-columns:1fr}}
 @media(min-width:640px){
   .hero,.wrap,.steps,.three,.phil{max-width:720px;margin-left:auto;margin-right:auto;padding-left:32px;padding-right:32px}
-  .sh,}
+  .sh{max-width:720px;margin-left:auto;margin-right:auto}
+}
 
 /* ── 색상 규칙 ── */
 /* 딥그린 배경 → 크림 글자 */
@@ -67,8 +64,7 @@
 .sh .sh-sub{color:#FAF8F0}
 .selfcheck .sc-title{color:#FAF8F0}
 .selfcheck .sc-sub{color:rgba(250,248,240,.55)}
-.selfcheck .sc-label{color:rgba(200,168,75,.7)}
-.cta .cta /* 밝은 배경 → 어두운 글자 */
+.selfcheck .sc-label{color:rgba(200,168,75,.7)} /* 밝은 배경 → 어두운 글자 */
 .hero .hero-title{color:#111110}
 .hero .hero-sub{color:#888880}
 .hero .hero-tag{color:#AAAAAA}
@@ -114,42 +110,35 @@
 </section>
 
 <div class="sh">
-  <div class="sh-title">무엇이 다른가요?</div>
-  <div class="sh-sub">일반 틀니 vs 아름다운 틀니</div>
+  <div class="sh-title">아름다운 틀니의 특징</div>
+  <div class="sh-sub">의사가 직접 설계합니다</div>
 </div>
 
 <div class="wrap" style="padding-top:20px;padding-bottom:20px">
-  <div class="compare">
-    <div class="cmp-head">
-      <div class="cmp-h">항목</div>
-      <div class="cmp-h">일반적인 틀니</div>
-      <div class="cmp-h highlight">쁘띠치과 아름다운 틀니</div>
-    </div>
-    <div class="cmp-row">
-      <div class="cmp-cell label">턱 위치 설정</div>
-      <div class="cmp-cell">기공소 기준</div>
-      <div class="cmp-cell highlight">의사가 직접 설정</div>
-    </div>
-    <div class="cmp-row">
-      <div class="cmp-cell label">교합 설계</div>
-      <div class="cmp-cell">표준 규격</div>
-      <div class="cmp-cell highlight">개인 교합 분석 후 설계</div>
-    </div>
-    <div class="cmp-row">
-      <div class="cmp-cell label">기능 확인</div>
-      <div class="cmp-cell">없음</div>
-      <div class="cmp-cell highlight">혀·발음·삼키기 직접 확인</div>
-    </div>
-    <div class="cmp-row">
-      <div class="cmp-cell label">심미 설계</div>
-      <div class="cmp-cell">치아 모양만</div>
-      <div class="cmp-cell highlight">얼굴·입술 지지 함께 설계</div>
-    </div>
-    <div class="cmp-row">
-      <div class="cmp-cell label">설계자</div>
-      <div class="cmp-cell">기공사 중심</div>
-      <div class="cmp-cell highlight">의사 직접 디자인</div>
-    </div>
+  <p class="feat-lead">틀니는 잇몸 위에 얹는 장치가 아니라, 턱의 위치를 다시 세우는 치료입니다.<br>쁘띠치과는 그 기준을 의사가 직접 잡습니다.</p>
+
+  <div class="feat">
+    <div class="feat-label">턱 위치</div>
+    <div class="feat-title">의사가 직접 설정합니다</div>
+    <div class="feat-desc">수직고경과 턱관절 상태를 진단해 안정 위치를 결정합니다. 이 기준이 이후 모든 단계의 출발점이 됩니다.</div>
+  </div>
+
+  <div class="feat">
+    <div class="feat-label">교합 설계</div>
+    <div class="feat-title">개인의 교합을 분석해 설계합니다</div>
+    <div class="feat-desc">씹는 힘이 고르게 분산되도록 교합을 균형 있게 맞춥니다. 사람마다 턱의 움직임이 다르기 때문입니다.</div>
+  </div>
+
+  <div class="feat">
+    <div class="feat-label">기능 확인</div>
+    <div class="feat-title">말하고 삼키는 것을 직접 확인합니다</div>
+    <div class="feat-desc">임시 틀니를 착용한 상태에서 혀 움직임, 발음, 삼키기를 함께 확인하며 조정합니다.</div>
+  </div>
+
+  <div class="feat">
+    <div class="feat-label">심미 설계</div>
+    <div class="feat-title">얼굴과 입술 지지까지 함께 봅니다</div>
+    <div class="feat-desc">치아 형태와 색상뿐 아니라 입술이 받쳐지는 정도, 얼굴 윤곽까지 고려해 자연스러운 인상을 만듭니다.</div>
   </div>
 </div>
 
