@@ -98,6 +98,50 @@
   font-style: normal;
   font-display: swap;
 }
+
+/* 검색 */
+.srch-wrap{position:relative;display:flex;align-items:center;margin-bottom:22px}
+.srch-ico{position:absolute;left:14px;pointer-events:none}
+.srch{width:100%;padding:12px 38px 12px 38px;font-family:inherit;font-size:14px;color:#111110;
+  background:#fff;border:1px solid #E0E0DA;border-radius:100px;outline:none;transition:border-color .15s}
+.srch:focus{border-color:#007A54}
+.srch::placeholder{color:#AAA9A0}
+.srch::-webkit-search-cancel-button{display:none}
+.srch-x{position:absolute;right:10px;width:24px;height:24px;border:none;background:none;color:#888880;
+  font-size:19px;line-height:1;cursor:pointer;display:none;border-radius:50%}
+.srch-x.on{display:block}
+.srch-x:hover{background:#F0F0EC;color:#111110}
+.srch-none{display:none;padding:26px 4px;text-align:center;font-size:13.5px;color:#888880}
+.srch-none.on{display:block}
+.q-group{margin-bottom:8px}
+.q-group.hide{display:none}
+/* 치료 후 목록 */
+.ac-cat{font-size:11px;letter-spacing:.12em;color:#8A6820;font-weight:600;text-transform:uppercase;
+  margin:20px 0 9px;padding-left:2px}
+.ac-cat:first-child{margin-top:0}
+.ac-list{display:flex;flex-direction:column;background:#fff;border:1px solid #E0E0DA;border-radius:12px;overflow:hidden;margin-bottom:6px}
+.ac-item{display:flex;align-items:center;gap:14px;padding:15px 18px;border-bottom:1px solid #EEEEE8;cursor:pointer;transition:background .12s}
+.ac-item:last-child{border-bottom:none}
+.ac-item:hover{background:#F9F9F7}
+.ac-body{flex:1;min-width:0}
+.ac-title{font-family:'TmonMonsori',serif;font-size:15px;font-weight:400;color:#111110;margin-bottom:3px;line-height:1.4}
+.ac-sub{font-size:12px;color:#888880;letter-spacing:.02em}
+.ac-arr{font-size:13px;color:#CCCCCC;flex-shrink:0}
+#grpAfter{padding-bottom:40px}
+/* 답변 내 이미지 */
+.a-imgs{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.a-imgs img{width:100%;max-width:520px;height:auto;border-radius:10px;border:1px solid #E0E0DA;display:block;margin:0 auto}
+
+/* 대분류 바로가기 */
+.jump{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.jump.hide{display:none}
+.jp{font-family:inherit;font-size:13px;font-weight:600;color:#007A54;background:#fff;
+  border:1px solid #C5E8DC;border-radius:100px;padding:8px 15px;cursor:pointer;transition:.15s}
+.jp:hover{background:#007A54;border-color:#007A54;color:#FAF8F0}
+
+.q-list{margin-bottom:6px}
+#qList .ac-cat:first-child{margin-top:0}
+#grpBefore{padding-bottom:8px}
 </style>
 <link rel="stylesheet" href="petit-design.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -113,15 +157,35 @@
 
 <section class="hero">
   <div class="hero-tag">Online Guide · 온라인 진료 안내</div>
-  <h1 class="hero-h">내원 전 궁금한 점을<br>먼저 알아보세요</h1>
-  <p class="hero-sub">이 안내는 진단·처방을 제공하지 않습니다.<br>실제 치료 여부는 내원 후 상담으로 결정됩니다.</p>
-  <div class="notice">이름·전화번호 등 개인정보는 입력하지 마세요.</div>
+  <h1 class="hero-h">오시기 전에도<br><strong>다녀가신 후에도</strong></h1>
+  <p class="hero-sub">내원 전 궁금한 점부터 치료 후 주의사항까지<br>필요할 때 언제든 꺼내 보세요.</p>
+  <div class="notice">이 안내는 진단·처방을 제공하지 않습니다. 실제 치료 여부는 내원 후 상담으로 결정됩니다.<br>이름·전화번호 등 개인정보는 입력하지 마세요.</div>
 </section>
 
 <!-- 질문 목록 -->
 <div class="q-section" id="qSection">
-  <div class="q-label">어떤 것이 궁금하신가요?</div>
-  <div class="q-list" id="qList"></div>
+  <div class="srch-wrap">
+    <svg class="srch-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888880" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    <input class="srch" id="srch" type="search" placeholder="찾으시는 내용을 입력하세요 (예: 임플란트, 발치, 틀니)" autocomplete="off">
+    <button class="srch-x" id="srchX" type="button" aria-label="지우기">×</button>
+  </div>
+  <div class="srch-none" id="srchNone">찾으시는 내용이 없습니다. 다른 단어로 검색해 보세요.</div>
+
+  <div class="jump" id="jump">
+    <button class="jp" type="button" data-go="g-first">처음 오시나요</button>
+    <button class="jp" type="button" data-go="g-symptom">증상별 안내</button>
+    <button class="jp" type="button" data-go="g-treat">치료가 궁금해요</button>
+    <button class="jp" type="button" data-go="grpAfterCare">치료 후 주의사항</button>
+    <button class="jp" type="button" data-go="grpDuring">치료중 질문사항</button>
+  </div>
+
+  <div class="q-group" id="grpBefore">
+    <div id="qList"></div>
+  </div>
+
+  <div class="q-group" id="grpAfter">
+    <div id="acList"></div>
+  </div>
 </div>
 
 <!-- 답변 화면 -->
@@ -159,6 +223,7 @@ const QUESTIONS = [
 
   // ── 처음 내원합니다 ──────────────────────────
   {
+    grp:'처음 오시나요',
     title:'처음 내원합니다',
     sub:'첫 방문 · 위치 · 준비물 · 접수 · 응급 안내',
     answer:`봉덕동에서 10년 넘게 진료하고 있는 쁘띠치과입니다. 처음 오시는 분들을 위한 안내입니다.
@@ -217,6 +282,7 @@ const QUESTIONS = [
 
   // ── 충치 ────────────────────────────────────
   {
+    grp:'증상별 안내',
     title:'충치 치료는 어떻게 진행되나요?',
     sub:'충치 · 치료 단계',
     answer:`충치는 진행 단계에 따라 치료 방법이 다릅니다.
@@ -240,6 +306,7 @@ const QUESTIONS = [
 
   // ── 자연치아살리기 — 발치 권유 ──────────────
   {
+    grp:'증상별 안내',
     title:'다른 치과에서 발치 권유를 받았어요',
     sub:'자연치아 보존 · 발치 전 확인',
     answer:`발치가 반드시 필요한 치아도 있지만, 검사 없이 단정 지을 수는 없습니다.
@@ -258,6 +325,7 @@ const QUESTIONS = [
 
   // ── 자연치아 — 부러진 치아 ──────────────────
   {
+    grp:'증상별 안내',
     title:'치아가 부러졌어요, 살릴 수 있을까요?',
     sub:'파절 · 자연치아살리기',
     answer:`치아가 부러진 경우 파절 위치와 깊이에 따라 살릴 수 있는지 결정됩니다.
@@ -281,6 +349,7 @@ const QUESTIONS = [
 
   // ── 자연치아 — 흔들리는 치아 ────────────────
   {
+    grp:'증상별 안내',
     title:'치아가 흔들려요, 살릴 수 있을까요?',
     sub:'치아동요 · 치주재생',
     answer:`치아가 흔들린다고 해서 반드시 뽑아야 하는 것은 아닙니다.
@@ -303,6 +372,7 @@ const QUESTIONS = [
 
   // ── 4D 입체교정 ──────────────────────────────
   {
+    grp:'치료가 궁금해요',
     title:'4D 입체교정이 뭔가요?',
     sub:'4D 입체교정 · 교합치료',
     answer:`4D 입체교정은 치아 배열만 맞추는 교정이 아닙니다.
@@ -327,6 +397,7 @@ const QUESTIONS = [
 
   // ── 비수술 주걱턱 ────────────────────────────
   {
+    grp:'증상별 안내',
     title:'비수술로 주걱턱 치료가 가능한가요?',
     sub:'주걱턱 · 비수술 교합치료',
     answer:`성장이 완전히 끝난 성인의 경우 수술 없이 완전한 골격 개선은 어렵습니다. 하지만 많은 경우 수술 없이도 기능과 외모를 의미 있게 개선할 수 있습니다.
@@ -349,6 +420,7 @@ const QUESTIONS = [
 
   // ── 비수술 안면비대칭 ────────────────────────
   {
+    grp:'증상별 안내',
     title:'비수술·비발치로 안면비대칭 치료가 가능한가요?',
     sub:'안면비대칭 · 비수술 교합치료',
     answer:`안면비대칭은 골격적 원인과 기능적 원인이 함께 있는 경우가 많습니다.
@@ -373,6 +445,7 @@ const QUESTIONS = [
 
   // ── 성장교정 ─────────────────────────────────
   {
+    grp:'치료가 궁금해요',
     title:'우리 아이 교정은 언제 해야 하나요?',
     sub:'성장교정 · 골든타임',
     answer:`치아가 다 날 때까지 기다리지 않아도 됩니다. 오히려 일찍 시작할수록 결과가 좋습니다.
@@ -401,6 +474,7 @@ const QUESTIONS = [
 
   // ── 기존 질문들 ──────────────────────────────
   {
+    grp:'증상별 안내',
     title:'치주염과 교합재건이 궁금해요',
     sub:'치주재생 · 교합재건',
     answer:`잇몸이 무너진 데에는 반드시 이유가 있습니다. 양치질만의 문제가 아닐 수 있습니다.
@@ -417,15 +491,31 @@ const QUESTIONS = [
     ]
   },
   {
+    grp:'증상별 안내',
     title:'턱관절 통증이 있어요',
-    sub:'교합 · 턱관절 · 수면',
+    sub:'교합 · 턱관절 · 수면 · 자가관리',
     answer:`턱 소리, 턱관절 통증, 입이 잘 안 벌어지는 증상은 단순한 근육 문제가 아닐 수 있습니다.
 
 교합이 맞지 않으면 턱관절과 주변 근육에 지속적인 긴장이 생깁니다. 두통, 목 통증, 어깨 결림으로 이어지는 경우도 많습니다.
 
 아침에 일어났을 때 턱이 더 아프거나, 자고 일어나도 개운하지 않다면 수면 중 이악물기·이갈이가 있을 수 있습니다. 이갈이는 나쁜 습관이 아니라 교합이 불안정할 때 몸이 안정점을 찾으려는 보상 반응입니다.
 
-쁘띠치과는 턱관절 물리치료 보험 인증기관으로, 턱관절 전문 특수 엑스레이와 물리치료가 건강보험 적용됩니다.`,
+쁘띠치과는 턱관절 물리치료 보험 인증기관으로, 턱관절 전문 특수 엑스레이와 물리치료가 건강보험 적용됩니다.
+
+━━━━━━━━━━━━━━━━━━━━
+지금 지켜주실 것
+
+피하실 것
+오징어처럼 단단하고 질긴 음식은 피해 주세요. 껌을 씹는 것도 좋지 않습니다.
+턱을 좌우로 틀어보거나, 일부러 턱을 틀어서 소리를 내는 행동은 정말 좋지 않습니다.
+입을 크게 벌리거나 한쪽으로만 씹는 것도 턱에 무리를 줍니다.
+
+해주실 것
+턱관절 부위에 온찜질을 해 주세요.
+이를 악무는 습관이 있다면 의식적으로 악물지 않도록 해 주세요.
+
+스트레칭
+입을 벌려주는 근육이 스트레칭되도록, 혀를 앞니 안쪽에 대고 혀를 떼지 않은 상태에서 입을 최대로 벌려 5~6초 지속하는 운동을 가끔 해 주세요.`,
     links:[
       {title:'근이완치료',sub:'이악물기 · 이갈이 · 턱관절 물리치료 보험',url:'petit_muscle_relax.html'},
       {title:'교합질환 자가체크',sub:'내 증상이 교합 문제인지 먼저 확인',url:'petit_occlusion_selfcheck.html'},
@@ -433,6 +523,7 @@ const QUESTIONS = [
     ]
   },
   {
+    grp:'치료가 궁금해요',
     title:'바른미소디자인훈련이 뭔가요?',
     sub:'MFT · 근기능훈련',
     answer:`바른미소디자인훈련은 입술, 혀, 호흡, 삼키기의 올바른 기능을 되찾는 훈련입니다.
@@ -450,17 +541,649 @@ const QUESTIONS = [
   }
 ];
 
+
+const AFTERCARE = [
+
+// ══════════ 치료 후 ══════════
+{ cat:'치료 후 주의사항', title:'발치 후', sub:'거즈 2시간 · 술·담배 2주',
+  answer:`오늘 — 지혈이 가장 중요합니다
+
+거즈를 2시간 동안 꽉 물고 계세요.
+입에 고인 침이나 피는 삼켜 주세요. 뱉어내면 피떡이 생기지 않아 지혈이 되지 않습니다.
+
+피가 멈춘 뒤에도 입을 세게 헹구거나 빨대로 음료를 드시면 다시 피가 날 수 있으니 조심해 주세요.
+다시 피가 난다면 발치 부위에 거즈를 몇 장 대고 꽉 물고 계세요. 침이나 피는 삼켜 주시고요.
+
+마취
+2~3시간 동안 감각이 없습니다. 입술이나 뺨을 씹지 않도록 주의해 주세요.
+
+붓고 아플 때
+하루 동안 발치 부위에 얼음찜질을 해 주세요.
+
+1~2일 동안
+목욕과 뜨거운 음식은 피해 주세요.
+
+2주 동안
+술과 담배는 피해 주세요.
+
+음식
+자극적이지 않고 부드러운 음식으로 드셔서 발치 부위에 자극이 되지 않도록 해 주세요.
+
+약
+아프지 않더라도 처방받으신 약은 끝까지 다 드세요.
+
+연락 주세요
+피가 계속 나거나 통증이 심할 때는 치과로 연락 주시고 내원해 주세요.` },
+
+{ cat:'치료 후 주의사항', title:'임플란트 수술 후', sub:'술·담배 2주 · 상악동 거상 안내 포함',
+  answer:`기본은 발치 후와 같습니다.
+
+1~2일 동안
+사우나, 운동 등 힘이 들거나 땀이 나는 일은 삼가해 주세요.
+
+조심하실 것
+코를 세게 풀거나 빨대로 음료를 드시지 않도록 주의해 주세요.
+
+붓고 아플 때
+수술 후 하루 동안 수술 부위에 얼음찜질을 해 주세요.
+
+2주 동안
+술과 담배는 피해 주세요.
+
+음식
+자극적이지 않고 부드러운 음식으로 드셔서 수술 부위에 자극이 되지 않도록 해 주세요.
+
+약
+아프지 않더라도 처방받으신 약은 끝까지 다 드세요.
+
+연락 주세요
+피가 계속 나거나 통증이 심할 때는 치과로 연락 주시고 내원해 주세요.
+
+━━━━━━━━━━━━━━━━━━━━
+상악동 거상 수술을 받으셨다면
+
+위턱 코 옆 공간인 상악동은 민감한 영역입니다.
+
+수술 당일에는 베개를 높여서 주무세요.
+기침하실 때도 가볍게 해 주세요.
+코로 진물이나 코피가 나올 수 있습니다. 이때는 가볍게 닦아주시면 됩니다.` },
+
+{ cat:'치료 후 주의사항', title:'신경치료(근관치료) 후', sub:'식사 · 양치 · 가글 사용법',
+  answer:`마취
+2~3시간 동안 감각이 없습니다. 입술이나 뺨을 씹지 않도록 주의해 주세요.
+
+치료 중에는
+딱딱한 음식을 피하고, 치료 중인 치아로는 씹지 마세요.
+
+약속에 따라 끝까지 치료를 받으셔야 합니다. 근관치료는 치아의 각 뿌리 신경을 제거하고 다른 재료로 신경관을 메꾸는 과정입니다. 한 번에 끝나기도 하고 수개월에 걸치기도 합니다.
+
+중간에 그만두고 방치하면 치아가 깨지는 등 치료가 불가능한 상태로 나빠질 수 있습니다.
+
+통증
+치료 과정 중에 통증이 있을 수 있습니다. 붓거나 통증이 심해지면 반드시 전화 주세요.
+
+알아두실 것
+치아의 미세균열 등 알 수 없는 원인으로 근관치료를 해도 증상이 해결되지 않는 경우, 발치가 필요할 수 있습니다.
+
+치료가 끝난 뒤
+신경치료가 끝난 치아는 감각 신경이 없어 충치가 생겨도 통증을 느끼지 못합니다. 정기 검진으로 조기 발견이 필수입니다.
+수분 공급이 줄어 치아가 잘 부서지므로 크라운 후에도 딱딱한 음식은 주의하세요.
+
+쁘띠치과는 신경치료 후 교합 조정을 함께 진행해 재발을 막습니다. 교합 원인이 해결되지 않으면 같은 방식으로 재발하기 때문입니다.
+
+━━━━━━━━━━━━━━━━━━━━
+자주 묻는 질문
+
+식사는 가능한가요?
+가능합니다. 신경관을 막아둔 재료가 굳는 데 시간이 걸리니 1시간 정도 주의하시고 부드러운 음식 위주로 드세요.
+
+마취가 풀린 후 아픈가요?
+아플 수 있습니다. 진통제 하나 정도 드시면 도움이 됩니다.
+
+양치질은 어떻게 하나요?
+식사 후 양치질은 평소대로 하시고, 신경치료한 치아는 부드럽게 닦아주세요. 치실보다 치간칫솔로 치아 사이를 닦아주세요.
+
+가글제(헥사메딘)는 어떻게 쓰나요?
+헥사메딘은 항생제입니다. 양치질 후 뚜껑 반 정도 담아 1분간 머금었다가 뱉어내세요. 그 후 30분 정도는 물을 마시거나 헹구지 마세요. 강하면 희석해서 쓰시면 됩니다.
+오래 쓰면 착색됩니다. 2주 이상은 권하지 않습니다.` },
+
+{ cat:'치료 후 주의사항', title:'설소대 수술 후', sub:'혀 운동 하루 3회 3분 이상',
+  answer:`혀 운동이 가장 중요합니다
+
+상처가 아물기 전에 혀 스트레칭을 하루 3회, 3분 이상 꾸준히 해 주세요.
+설소대가 다시 붙지 않게 하려면 혀 운동이 매우 중요합니다.
+
+혀의 자리
+혀는 입천장에 위치시켜야 코로 호흡할 수 있습니다.
+입술을 가볍게 닫고, 혀로 입천장을 살짝 밀폐시켜주는 느낌으로 생각하시면 됩니다.
+혀 운동은 올바른 호흡과 자세의 균형을 위해 중요합니다.
+
+왜 치료했는지
+설소대는 혀를 잡고 있는 인대입니다. 이것이 과하게 혀 바닥과 길게 연장되어 혀의 운동 범위를 제한하면, 갓난아기는 젖을 빨기도 힘들어 바로 치료가 필요합니다. 젖을 빨 정도인 경우 그냥 넘어가기 쉬운데, 나중에 부정교합과 구호흡(입으로 숨쉬기)의 원인이 됩니다.
+
+━━━━━━━━━━━━━━━━━━━━
+자주 묻는 질문
+
+혀 바닥에 있는 실밥은 언제 제거하나요?
+1주 뒤에 제거합니다. 그러나 혀 운동을 열심히 하시면 보통 없어집니다.
+
+혀가 두 개가 된 것처럼 부었어요.
+혀 바닥이 아래 앞니까지 붙어 있는 경우 깊게 제거되므로 많이 부을 수 있습니다. 1~2주 정도면 괜찮아집니다. 혀의 자유를 위해, 호흡을 위해 힘내세요.
+
+침이 많이 나와요.
+정상입니다. 가끔 혀 바닥 샘에서 침이 쭉 나온다고 놀라서 오시는 분이 계신데, 잠시 있는 증상이니 걱정 마세요.
+
+음식은 먹을 수 있나요?
+드실 수 있습니다. 맵고 짜고 뜨거운 자극적인 음식만 주의해 주세요.
+보통 1주는 주의하시라고 합니다. 약속 때문에 드셔야 하는 상황이라면 드셔보시고 불편한 느낌이 없으면 괜찮지만, 하루 이틀은 꼭 주의해 주세요. 발치와 달리 설소대 수술은 출혈이 많지 않아서 이틀만 지나면 괜찮습니다.
+
+운동해도 되나요?
+하셔도 됩니다. 다만 최소 2일은 몸을 무리하지 마세요.` },
+
+{ cat:'치료 후 주의사항', title:'잇몸치료 · 잇몸 수술 후', sub:'수술 부위 양치질 방법',
+  answer:`오늘 — 지혈
+
+거즈를 2시간 동안 꽉 물고 계세요. 입에 고인 침이나 피는 삼켜 주세요.
+피가 멈춘 뒤에도 입을 세게 헹구거나 빨대로 음료를 드시면 다시 피가 날 수 있으니 조심해 주세요.
+다시 피가 난다면 수술 부위에 거즈를 몇 장 대고 꽉 물고 계세요.
+
+마취
+2~3시간 동안 감각이 없습니다. 입술이나 뺨을 씹지 않도록 주의해 주세요.
+
+붓고 아플 때
+하루 동안 수술 부위에 얼음찜질을 해 주세요.
+
+1~2일 동안
+목욕과 뜨거운 음식은 피해 주세요.
+
+2주 동안
+술과 담배는 피해 주세요.
+
+음식
+자극적이지 않고 부드러운 음식으로 드셔서 수술 부위에 자극이 되지 않도록 해 주세요.
+
+약
+아프지 않더라도 처방받으신 약은 끝까지 다 드세요.
+
+연락 주세요
+피가 계속 나거나 통증이 심할 때는 치과로 연락 주시고 내원해 주세요.
+
+━━━━━━━━━━━━━━━━━━━━
+자주 묻는 질문
+
+수술한 부위 양치질해야 하나요?
+네, 수술한 부위의 치아를 가볍게 씻어내는 식의 양치질은 가능합니다.
+그러나 붓고 아픈 경우에는 수술한 부위 외의 치아만 닦아주셔도 괜찮습니다.
+수술은 잇몸 부위를 한 것이므로, 수술한 부위 잇몸 자극만 안 하시면 됩니다.
+예를 들어 혀나 손으로 만지지 않기, 짜고 맵고 뜨거운 음식 피하기입니다.
+
+수술하느라 고생하셨습니다. 잘 나을 테니 걱정 마세요.` },
+
+{ cat:'치료 후 주의사항', title:'스케일링(치석제거) 후', sub:'시림 · 출혈 · 잇몸 내려감은 정상',
+  answer:`왜 하는 치료인가
+
+치석 자체가 나쁜 것은 아닙니다. 다만 치석은 벌집처럼 내부에 구멍이 많아 세균과 음식물 찌꺼기가 많이 들어 있습니다. 그래서 치석이 있는 곳에는 반드시 잇몸 염증이 있습니다.
+스케일링은 치석을 제거해 잇몸 염증(부종·출혈·통증·기능 상실)을 치료하고 예방하는 치료입니다.
+
+━━━━━━━━━━━━━━━━━━━━
+이런 증상은 정상입니다
+
+시큰거리거나 불편할 수 있습니다
+치석제거는 치아에 진동을 줘서 치석을 떨궈내는 방식입니다. 치아를 손상시키지는 않습니다. 다만 진동으로 치아가 자극을 받아 통증이나 불편감이 있을 수 있습니다.
+
+찬물·뜨거운 물이 더 시릴 수 있습니다
+치석이 떨어져 나간 자리에 물이 직접 닿기 때문입니다.
+
+피가 날 수 있습니다
+치석이 많던 부위일수록 그렇습니다.
+
+치아가 흔들리는 느낌이 들 수 있습니다
+치아를 잡아주던 치석이 모두 제거되어서입니다.
+
+잇몸이 내려간 것처럼 보일 수 있습니다
+세균이 줄어들면서 염증으로 부어 있던 잇몸이 정상으로 회복되는 과정입니다.
+
+━━━━━━━━━━━━━━━━━━━━
+추가 치료가 필요할 수 있습니다
+
+치석에 가려 보이지 않던 충치가 제거 후 발견될 수 있습니다.
+치석이 많고 잇몸 염증이 심한 경우에는 염증이 가라앉은 뒤 추가 잇몸치료가 필요할 수 있습니다.
+
+얼마나 자주 받아야 하나요
+6개월에서 1년 주기로 정기적으로 받으시는 것이 좋습니다.` },
+
+{ cat:'치료 후 주의사항', title:'어린이 치과 치료 후', sub:'보호자님께 — 거즈 1시간 · 마취 주의',
+  answer:`유치를 뽑은 경우
+거즈를 1시간 동안 꽉 물고, 침이나 피는 삼키도록 얘기해 주세요.
+
+마취를 한 경우
+마취가 풀리기 전까지는 아이가 느낌이 이상해서 입술이나 혀를 씹는 경우가 있습니다.
+2시간 정도, 마취가 풀릴 때까지 수시로 얘기해 주세요.
+
+그 밖에
+치과 치료 후 아이에게는 충분한 휴식이 필요합니다.
+처방받은 약이 있다면 끝까지 규칙적으로 먹도록 해 주세요.
+
+아이에게 잘 했다고 칭찬해 주세요.` },
+
+{ cat:'치료 후 주의사항', title:'치아미백 후', sub:'시림 · 착색 음식 · 착색 원인',
+  answer:`시릴 수 있습니다
+차갑거나 뜨거운 자극적인 음식은 주의해 주세요.
+시린 부위는 보통 치아 목 파짐이나 잇몸 염증이 있습니다. 치료를 병행하셔야 합니다.
+건강한 치아가 더 아름다워질 수 있습니다.
+
+착색되는 음식
+카레처럼 색이 있는 음식은 주의해 주세요.
+
+관리
+미백만 믿고 관리를 소홀히 하시면 안 됩니다. 양치질 잘 하시고 정기 체크 받으세요.
+
+━━━━━━━━━━━━━━━━━━━━
+착색이 반복된다면
+
+입호흡이 있는지 확인해 보세요. 호흡이 힘든 경우 이비인후과 치료를 통해 입호흡이 되지 않도록 하는 것이 중요합니다.
+
+이갈이·이악물기가 있으면 치간 사이 벌어짐과 착색의 원인이 될 수 있습니다. 이럴 때는 쁘띠치과 교합치료가 병행되면 좋습니다.` },
+
+{ cat:'치료 후 주의사항', title:'무삭제레진 원데이보철 후', sub:'재료가 굳는 데 하루',
+  answer:`1단계 재료는 굳는 데 하루가 걸립니다.
+
+교합간섭이 있는 경우 일부 떨어질 수 있으나, 2단계에서 씹는 습관을 고려해 형태를 수정합니다.
+
+잘 씹고 삼키기 위해 필요한 치아의 움직임 경로를 환자마다 개별 분석하므로 이 단계의 의미는 매우 중요합니다.` },
+
+{ cat:'치료 후 주의사항', title:'근이완치료 후', sub:'하루 이틀 사우나 주의 · 생활습관 교정',
+  answer:`치료 후 주의사항
+
+하루에서 이틀 정도 사우나를 주의해 주세요.
+치료 부위를 자주 만지거나 문지르지 마세요.
+그 외에는 화장이나 일상적인 활동 모두 가능합니다.
+
+━━━━━━━━━━━━━━━━━━━━
+생활습관 교정 — 치아에 힘주는 습관 줄이기
+
+입천장 앞쪽, 위 앞니 뒤쪽에 약간 울퉁불퉁한 부분이 있습니다.
+치아는 닿게 하지 마시고 입천장만 살짝 혀로 대고, 입술은 닫고 코로 크게 길게 들이쉬고 내뱉기를 반복하세요.
+
+혀를 대는 순간 치아에 힘이 덜 들어가는 것을 즉각 느끼게 됩니다.
+숨을 들이쉬고 내쉴 때, 특히 내쉴 때 몸이 이완됩니다.
+힘을 주는 것은 몸과 마음의 긴장도 영향을 줍니다. 호흡에 집중하다 보면 긴장 완화도 되고 몸도 이완됩니다.
+
+습관은 습관교정으로, 교합은 교합치료로 교정해야 합니다.` },
+
+{ cat:'치료 후 주의사항', title:'미니스크류 식립 후', sub:'1~2일 주의 · 헥사메딘 1주',
+  answer:`미니스크류는 치아를 움직이기 위해 뼈에 고정하여 힘을 얻는 것입니다.
+마취를 하고 잇몸뼈에 식립하였지만 깊은 마취가 아니고 출혈이 거의 없습니다.
+
+1~2일 정도 처방된 약은 꼭 드시고, 맵고 짜고 뜨거운 음식을 주의하시길 바랍니다.
+
+양치질은 가능하나 가볍게 닦아주시고, 처방된 헥사메딘 가글을 1주는 꼭 해주시길 바랍니다.` },
+
+{ cat:'치료 후 주의사항', title:'MARPE 설치 후', sub:'1~2주 · 장치 돌리기는 1주 뒤부터',
+  answer:`악궁확장장치 MARPE를 입안에 셋팅하고 입천장에 미니스크류를 고정하였습니다.
+작은 수술이지만 출혈이 거의 없으니 걱정 안 하셔도 좋습니다.
+
+1~2주 정도 아래 주의사항을 따라주시길 바랍니다.
+
+처방된 약은 잘 챙겨 드시고, 입안 소독약은 양치질 후 가글용으로 사용해 주세요.
+식사 후 양치질하고 약 드시면 됩니다.
+식사는 맵고 짜고 뜨거운 것은 3일 정도 안 드시는 것이 좋습니다.
+
+장치를 낀 상태로 식사를 하시는 것입니다. 불편하지만 1~2주 내에 적응되실 거예요.
+혀가 입천장 스크류에 눌려서 아프실 수 있습니다.
+
+장치 돌리는 것은 1주 뒤부터 시작하시면 됩니다.
+
+진료 예약일을 꼭 지켜 주세요.
+
+입천장에 음식물이 끼면
+필립스 에어플로스를 추천드립니다. 쁘띠 원장도 쓰고 있어요. 10만원 내외로 사시고, 너무 비싼 것은 필요 없습니다.` },
+
+// ══════════ 치료중 질문사항 ══════════
+{ cat:'치료중 질문사항', title:'임플란트 보철 관리', sub:'6개월 정기 점검 · 응급 상황',
+  answer:`왜 정기 점검이 필요한가
+
+임플란트 보철물은 나사 구조로 고정됩니다. 이 나사는 시간이 지나면서 느슨해질 수 있어 정기 점검이 필요합니다.
+최소 6개월마다 정기 검진을 받으세요.
+
+나사 구멍과 레진
+보철물에는 나사 구멍이 있고, 이 구멍은 레진으로 막아둡니다. 레진은 시간이 지나면 마모되거나 떨어질 수 있습니다.
+떨어지면 치과에 오셔서 다시 채우셔야 합니다. 추가 비용이 발생할 수 있습니다.
+
+관리
+칫솔질은 물론 치간칫솔, 구강세정기로 임플란트 주변을 청결하게 유지하세요.
+너무 딱딱하거나 질긴 음식은 피해 주세요.
+
+임플란트 주위염
+임플란트도 자연치아처럼 염증이 생깁니다. 심각할 경우 임플란트의 기능 저하와 손실로 이어질 수 있습니다.
+
+보철 수명
+개인차가 있으며, 보철이 깨지거나 심미적 문제가 있으면 재보철이 필요할 수 있습니다.
+이때 내부 나사를 풀고 제거하는데, 나사가 풀리지 않으면 전체를 잘라서 제거해야 하는 경우가 가끔 있습니다. 정기 체크로 내부 나사를 확인해야 하는 이유입니다.
+
+━━━━━━━━━━━━━━━━━━━━
+이럴 땐 바로 오세요
+
+임플란트 머리가 흔들려요
+내부 나사가 풀린 것입니다. 빠른 시간 내로 오세요. 약간 움직일 때부터 과한 힘에 의해 내부 나사가 부러질 가능성이 커집니다. 작은 나사라서 잘 부러집니다.
+
+임플란트 머리가 빠져서 삼켰어요
+거의 없는 일이지만 쁘띠에서도 한 번 있었습니다. 찾아오시면 소독해서 다시 쓸 수 있습니다.
+
+반대쪽 치아가 아프기 시작했어요
+가끔 있는 일입니다. 반대쪽 치아 주변 뼈가 내려가 있으면 새 임플란트로 씹으면서 통증을 느낄 수 있습니다. 교합조정이나 잇몸치료가 필요합니다.
+
+임플란트 주변에 피가 나요
+임플란트 주위염일 수 있습니다. 치아 주변 염증과 같지만 더 급하게 진행되고 치료가 힘듭니다. 정기 체크가 중요한 이유입니다.` },
+
+{ cat:'치료중 질문사항', title:'보철물 임시부착 후', sub:'일상적으로 사용해보고 오세요',
+  answer:`임시로 붙인다는 것은 임시로 사용하는 기간을 드리고 수정사항이 있거나 불편사항이 있는지 확인하기 위함입니다.
+
+붙이고 임시라고 사용하지 않고 오시면 안 됩니다. 일상적으로 사용해보시고 오시길 바랍니다.
+
+당일 딱딱하거나 붙는 음식은 삼가해 주세요.
+임시로 붙여서 떨어질 수 있습니다.
+떨어지면 잘 보관해서 오세요. 분실하면 비용 문제, 새로 본떠야 하는 문제가 생깁니다.` },
+
+{ cat:'치료중 질문사항', title:'보철물 최종부착 후', sub:'치실 · 정기 체크 · 5~7년 후 재치료',
+  answer:`보철물이란 치아를 깎아서 본뜬 후 치아를 전체적, 부분적으로 만들어서 붙여주는 것입니다.
+
+붙인다는 것은 접착제를 쓴다는 뜻이며, 보철물이 치아와 한 몸으로 붙는 것이 아닙니다.
+보통 치과 접착제는 5년에서 7년 정도 뒤에는 누수가 되고 녹아 나오므로 치아와 보철물 사이 틈이 생겨 재치료가 필요합니다.
+
+당일 딱딱하거나 붙는 음식은 삼가해 주세요.
+주변을 잇몸 안까지 치실로 잘 닦아주세요.
+치과 정기 체크를 꼭 지켜주세요.
+
+그동안 고생하셨어요.` },
+
+{ cat:'치료중 질문사항', title:'틀니 사용 안내', sub:'세척 · 보관 · 식사 · 정기 검사',
+  answer:`항상 신던 신발을 같은 것으로 새로 사도 발에는 어색하듯이, 새로 만든 틀니는 처음에는 아프고 불편할 수 있습니다.
+
+아픈 곳이 생기면
+틀니를 끼고 식사를 하신 후, 틀니를 착용하신 상태로 내원해 주세요.
+
+매일 관리
+식사 후에는 치아·잇몸·혀를 깨끗하게 칫솔질하신 후, 틀니도 깨끗이 닦아주세요.
+틀니에 치약을 묻히면 안 됩니다. 설거지할 때 쓰는 액체세제를 묻혀서 닦아주세요. 약국에서 파는 틀니 세정제를 쓰시면 더 좋습니다.
+떨어뜨리면 깨집니다. 수건을 깔고 닦으시거나 물속에서 닦아주세요.
+뜨거운 물에 담그면 변형됩니다. 깨끗이 하신다고 물에 삶으시면 안 됩니다.
+
+밤에는
+빼서 찬물에 담가 두세요.
+
+식사
+너무 딱딱한 음식은 피하시고, 큰 음식물은 잘게 썰어 드세요.
+틀니를 끼고 처음부터 김치, 깍두기 같은 음식을 잘 씹어 드시기는 어렵습니다.
+
+틀니가 떨어질 때
+틀니는 잇몸에 얹혀 있기 때문에 말을 하거나 음식을 씹을 때 잇몸에서 떨어질 수 있습니다.
+혀의 움직임을 조절해 틀니가 떨어지지 않게 하는 방법을 터득하는 시간이 필요합니다.
+
+멀미가 날 것 같으면
+배나 비행기, 자동차 멀미로 구토가 날 것 같으면 틀니를 빼서 보관하세요.
+구토 시 틀니가 함께 나와 잃어버릴 수 있습니다. 특히 변기를 이용하는 경우 조심하셔야 합니다.
+
+정기 검사
+불편하지 않더라도 정기적인 검사와 수정이 필요합니다.` },
+
+{ cat:'치료중 질문사항', title:'교정 고무줄(엘라스틱)', sub:'24시간 착용 · 하루 하나씩 교체',
+  answer:`왜 쓰나요
+
+잘 움직이지 않는 치아, 반대로 물리는 치아, 위아래 턱 위치를 맞출 때 쓰는 방법입니다.
+
+언제 끼나요
+24시간이 원칙입니다.
+잘 때도 반드시 끼고 주무세요.
+양치할 때는 빼고, 끝나면 다시 끼세요. 새것으로 바꿔 껴도 좋습니다.
+밥 먹을 때도 끼고 드시는 게 좋습니다. 씹고 말할 때 고무줄이 작용하거든요. 너무 불편하면 빼고 드신 뒤 다시 끼시면 됩니다.
+
+언제 바꾸나요
+하루에 하나씩, 매일 새것으로 바꿔 끼세요. 고무줄은 시간이 지나면 힘이 빠집니다.
+
+챙기실 것
+끊어지거나 잃어버릴 때를 대비해 여분을 몇 개 갖고 다니세요.
+다음 예약까지 넉넉히 받아 가세요.
+자신이 쓰는 고무줄 규격을 확인해두세요.
+
+꼭 지켜주세요
+안내받은 위치에 정확히 거세요. 위치가 틀리면 심각한 부작용이 생길 수 있습니다.
+하루 걸러 하루씩 끼면 안 됩니다. 절반의 효과도 못 보고, 오히려 치아에 해롭습니다.
+빠뜨렸다고 다음날 두 배로 하지 마세요.
+
+처음 며칠
+2~3일은 불편한 느낌이 듭니다. 곧 적응됩니다.
+
+치료 결과는 환자분의 협조에 달려 있습니다. 고무줄은 장치 중에서 유일하게 환자분이 직접 관리하는 부분입니다.` },
+
+{ cat:'치료중 질문사항', title:'가철성 교정장치', sub:'하루 10시간 이상 · 어린이 성장교정 포함',
+  answer:`교정장치는 최대한 오래 끼고 있어야 덜 아프고 진도도 잘 나갑니다.
+식사하시는 시간 외에는 다 껴주시고, 주무실 때도 꼭 껴주세요.
+
+착용 시간
+하루 10시간 이상. 잠자는 시간에도.
+
+관리
+음식을 드신 후에는 칫솔질을 깨끗하게 해 주세요.
+양치질 후 교정장치도 흐르는 물에 깨끗이 씻은 후 장착해 주세요.
+끓는 물 주의. 찬 음식, 찬 음료는 장치 낀 상태로 드실 수 있어요.
+분실, 파손 시 추가 비용이 발생하오니 주의하세요.
+
+아플 때
+장치를 끼다가 아픈 경우 예약 전이라도 조정받으러 오세요.
+확장장치의 경우 일정이 맞지 않아 못 오실 때는 스크류를 거꾸로 돌려주시면 좀 나으십니다.
+
+━━━━━━━━━━━━━━━━━━━━
+어린이 성장교정장치
+
+성장교정장치는 습관치료에 도움이 되는 장치입니다.
+길게 못 끼는 경우 시간대를 정하여 자주 껴주셔야 하며, 아래 세 가지가 중요합니다.
+
+입에 끼고 입을 벌리고 있지 않기
+입술 닫고 코로 숨쉬기
+바른 자세 유지하기
+
+주의: 아이가 장치를 물고 씹지 않도록 하세요. 찢어집니다.
+
+진료 예약일을 꼭 지켜 주세요. 변경 시 꼭 전화해 주세요. 053-472-2828` },
+
+{ cat:'치료중 질문사항', title:'투명교정(인비절라인)', sub:'하루 22시간 · 절대 깨물지 않기',
+  images:['invisalign_wear.jpg','invisalign_deform.jpg','invisalign_care.jpg'],
+  answer:`하루 22시간 이상
+식사와 양치 시간을 빼고 계속 끼고 계셔야 합니다.
+
+━━━━━━━━━━━━━━━━━━━━
+절대 깨물어서 끼지 마세요
+
+가장 흔하면서 가장 위험한 실수입니다.
+
+「꽉 깨물면 더 잘 들어가겠지」 싶지만, 치아가 완전히 들어가지 않은 상태에서 깨물면 장치가 찌그러지거나 비틀려 변형됩니다.
+
+그러면 이런 일이 생깁니다.
+어라이너가 찌그러지거나 들뜸
+치아 이동이 부정확해져 다음 단계 장치가 맞지 않음
+교정 기간이 길어짐
+추가 장치 제작 필요
+
+━━━━━━━━━━━━━━━━━━━━
+올바른 착용 3단계
+
+① 손가락으로 앞니부터 살짝 눌러 맞춥니다
+② 천천히 어금니 쪽으로 밀며 착용합니다
+③ 밀착 상태를 확인합니다 — 씹는 면을 손으로 눌러보며 들뜬 곳이 없는지 봅니다
+
+특히 어금니가 들떠 있으면 교정력이 제대로 전달되지 않습니다.
+
+━━━━━━━━━━━━━━━━━━━━
+그 밖에
+
+츄이(chewie)는 착용할 때마다 최소 5분 이상
+어태치먼트 탈락 시 내원
+흐르는 찬물에 장치 세척
+음료 마신 후 장치 세척과 양치질
+자기 전 반드시 양치질과 가글
+물을 자주 마시기 — 구강건조증, 충치, 탈회 예방
+잇몸이 심하게 아프면 좌우측으로 살살 힘주어 장치 빼기
+내원 시 이전에 사용한 장치를 가져오기
+
+━━━━━━━━━━━━━━━━━━━━
+쁘띠치과는
+
+장치를 드릴 때 환자와 보호자 모두에게 직접 시연으로 착용법을 교육합니다.
+내원하실 때마다 장치 변형 여부와 밀착 상태를 체크하고, 필요하면 추가 보정을 진행합니다.
+
+투명교정도 쁘띠치과 교합치료의 치아 배열 단계입니다. 바른미소디자인 훈련(입술·혀·호흡·자세 + 바르게 씹고 삼키기)이 함께 갈 때 더 나은 결과가 나옵니다.
+
+작은 습관이 교정의 결과를 바꿉니다.` },
+
+{ cat:'치료중 질문사항', title:'악궁확장장치(RPE)', sub:'입천장 고정 장치 · 돌리는 요일 정하기',
+  answer:`입천장 확장 장치 유지관리 방법
+
+음식을 드신 후에는 칫솔질을 깨끗하게 해 주세요.
+입천장에 고정된 교정장치도 칫솔로 닦아주시고, 치아에 고정된 밴드 주변도 잘 닦아주세요.
+장치를 끼다가 아픈 경우 예약 전이라도 조정받으러 오세요.
+분실, 파손 시 추가 비용이 발생하오니 주의하세요.
+
+끓는 물 주의. 찬 음식, 찬 음료는 장치 낀 상태로 드실 수 있어요.
+
+장치 돌리는 요일을 정해두시고 진도 나가시길 바랍니다.
+
+진료 예약일을 꼭 지켜 주세요.
+
+입천장에 음식물이 끼면
+필립스 에어플로스를 추천드립니다. 쁘띠 원장도 쓰고 있어요. 10만원 내외로 사시고, 너무 비싼 것은 필요 없습니다.` }
+
+];;
+
+
 let curQ='', curA='';
 
-// 질문 목록 렌더링
+// 질문 목록 렌더링 — 분류별
 const list = document.getElementById('qList');
-QUESTIONS.forEach((q,i)=>{
-  const a = document.createElement('div');
-  a.className='q-item';
-  a.innerHTML=`<div class="q-num">${String(i+1).padStart(2,'0')}</div><div class="q-body"><div class="q-title">${q.title}</div><div class="q-sub">${q.sub}</div></div><div class="q-arr">→</div>`;
-  a.onclick=()=>show(i);
-  list.appendChild(a);
+const QGRPS = [
+  {name:'처음 오시나요', id:'g-first'},
+  {name:'증상별 안내',   id:'g-symptom'},
+  {name:'치료가 궁금해요', id:'g-treat'}
+];
+QGRPS.forEach(g=>{
+  const items = QUESTIONS.map((q,i)=>({q,i})).filter(o=>o.q.grp===g.name);
+  if(!items.length) return;
+  const h=document.createElement('div');
+  h.className='ac-cat'; h.textContent=g.name; h.id=g.id; h.dataset.cat=g.name;
+  list.appendChild(h);
+  const box=document.createElement('div');
+  box.className='q-list'; box.dataset.cat=g.name;
+  items.forEach((o,n)=>{
+    const a=document.createElement('div');
+    a.className='q-item';
+    a.innerHTML=`<div class="q-num">${String(n+1).padStart(2,'0')}</div><div class="q-body"><div class="q-title">${o.q.title}</div><div class="q-sub">${o.q.sub}</div></div><div class="q-arr">→</div>`;
+    a.onclick=()=>show(o.i);
+    box.appendChild(a);
+  });
+  list.appendChild(box);
 });
+
+// 치료 후 주의사항 렌더링 — 분류별
+const acWrap = document.getElementById('acList');
+const CATS = ['치료 후 주의사항','치료중 질문사항'];
+CATS.forEach(cat=>{
+  const items = AFTERCARE.map((a,i)=>({a,i})).filter(o=>o.a.cat===cat);
+  if(!items.length) return;
+  const h=document.createElement('div');
+  h.className='ac-cat'; h.textContent=cat; h.dataset.cat=cat;
+  h.id = (cat==='치료 후 주의사항') ? 'grpAfterCare' : 'grpDuring';
+  acWrap.appendChild(h);
+  const box=document.createElement('div');
+  box.className='ac-list'; box.dataset.cat=cat;
+  items.forEach(o=>{
+    const d=document.createElement('div');
+    d.className='ac-item';
+    d.innerHTML=`<div class="ac-body"><div class="ac-title">${o.a.title}</div><div class="ac-sub">${o.a.sub}</div></div><div class="ac-arr">→</div>`;
+    d.onclick=()=>showAC(o.i);
+    box.appendChild(d);
+  });
+  acWrap.appendChild(box);
+});
+
+// ── 검색 ──
+const srch=document.getElementById('srch'), srchX=document.getElementById('srchX'),
+      srchNone=document.getElementById('srchNone'),
+      grpBefore=document.getElementById('grpBefore'), grpAfter=document.getElementById('grpAfter');
+
+function norm(s){ return (s||'').toLowerCase().replace(/\s+/g,''); }
+
+function runSearch(){
+  const kw=norm(srch.value);
+  srchX.classList.toggle('on', srch.value.length>0);
+  let hits=0;
+
+  // 내원 전
+  const qItems=list.querySelectorAll('.q-item');
+  QUESTIONS.forEach((q,i)=>{
+    const hay=norm(q.title+q.sub+q.answer);
+    const on = !kw || hay.includes(kw);
+    qItems[i].style.display = on?'':'none';
+    if(on) hits++;
+  });
+  list.querySelectorAll('.q-list').forEach(box=>{
+    const any=[...box.querySelectorAll('.q-item')].some(e=>e.style.display!=='none');
+    box.style.display = any?'':'none';
+    const head=list.querySelector(`.ac-cat[data-cat="${box.dataset.cat}"]`);
+    if(head) head.style.display = any?'':'none';
+  });
+  grpBefore.classList.toggle('hide', kw && ![...qItems].some(e=>e.style.display!=='none'));
+
+  // 치료 후
+  const acItems=acWrap.querySelectorAll('.ac-item');
+  AFTERCARE.forEach((a,i)=>{
+    const hay=norm(a.title+a.sub+a.answer+a.cat);
+    const on = !kw || hay.includes(kw);
+    acItems[i].style.display = on?'':'none';
+    if(on) hits++;
+  });
+  // 빈 분류 숨기기
+  acWrap.querySelectorAll('.ac-list').forEach(box=>{
+    const any=[...box.querySelectorAll('.ac-item')].some(e=>e.style.display!=='none');
+    box.style.display = any?'':'none';
+    const head=acWrap.querySelector(`.ac-cat[data-cat="${box.dataset.cat}"]`);
+    if(head) head.style.display = any?'':'none';
+  });
+  grpAfter.classList.toggle('hide', kw && ![...acItems].some(e=>e.style.display!=='none'));
+
+  srchNone.classList.toggle('on', kw && hits===0);
+  document.getElementById('jump').classList.toggle('hide', !!kw);
+}
+srch.addEventListener('input',runSearch);
+srchX.addEventListener('click',()=>{ srch.value=''; runSearch(); srch.focus(); });
+
+// 대분류 바로가기
+document.querySelectorAll('.jp').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const el=document.getElementById(b.dataset.go);
+    if(!el) return;
+    const y=el.getBoundingClientRect().top+window.pageYOffset-14;
+    window.scrollTo({top:y,behavior:'smooth'});
+  });
+});
+
+// 치료 후 상세 보기
+function showAC(i){
+  const a=AFTERCARE[i];
+  curQ=a.title; curA=a.answer;
+  document.getElementById('qSection').style.display='none';
+  document.getElementById('respSection').style.display='block';
+  document.getElementById('qBubble').textContent=a.title;
+  document.getElementById('aText').textContent=a.answer;
+
+  const rw=document.getElementById('relWrap');
+  let html='';
+  if(a.images&&a.images.length){
+    html+=`<div class="a-imgs">`+a.images.map(src=>`<img src="${src}" alt="${a.title} 안내 이미지" loading="lazy">`).join('')+`</div>`;
+  }
+  rw.innerHTML=html;
+  rw.style.display = html?'block':'none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 
 document.getElementById('shareHint').textContent =
   navigator.share?'카카오톡 앱이 열립니다':'텍스트가 복사됩니다 — 카톡에 붙여넣기 하세요';

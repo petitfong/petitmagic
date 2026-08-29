@@ -114,15 +114,26 @@
 .bn{display:block;text-decoration:none;background:#fff;border:1px solid #E0E0DA;border-radius:14px;overflow:hidden;transition:border-color .15s,transform .15s}
 .bn:hover{border-color:#007A54;transform:translateY(-2px)}
 .bn img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:#F5F5F1}
-.bn-cover{aspect-ratio:16/9;background:#007A54;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16px}
-.bn-cover-sm{font-size:11px;letter-spacing:.14em;color:rgba(250,248,240,.75)}
-.bn-cover-lg{font-family:'TmonMonsori',serif;font-size:clamp(24px,5vw,32px);font-weight:400;color:#FAF8F0;margin:8px 0}
-.bn-cover-line{width:36px;height:2px;background:#C8A84B;margin:0 0 10px}
 .bn-body{padding:14px 16px 16px}
 .bn-tag{font-size:10px;letter-spacing:.14em;color:#8A6820;text-transform:uppercase;font-weight:600;margin-bottom:6px}
 .bn-title{font-family:'TmonMonsori',serif;font-size:16px;font-weight:400;color:#111110;margin-bottom:5px;line-height:1.4}
 .bn-sub{font-size:12.5px;color:#555550;line-height:1.6;margin-bottom:9px}
 .bn-more{font-size:12px;font-weight:600;color:#007A54}
+
+/* 히어로 롤링 */
+.hero-slide{transition:opacity .5s ease}
+.hero-slide.out{opacity:0}
+.hero-dots{display:flex;gap:6px;margin-top:20px}
+.hero-dot{width:20px;height:3px;border-radius:2px;background:#E0E0DA;transition:background .3s}
+.hero-dot.on{background:#007A54}
+@media(prefers-reduced-motion:reduce){.hero-slide{transition:none}}
+
+
+/* 섹션 제목 + 설명 */
+.sh{align-items:flex-start}
+.sh-body{flex:1;min-width:0}
+.sh-sub{font-size:12.5px;color:rgba(250,248,240,.72);margin-top:5px;line-height:1.5;letter-spacing:.01em}
+.sh-arr,.sh-count{margin-top:4px}
 </style>
 <link rel="stylesheet" href="petit-design.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -140,9 +151,12 @@
 </nav>
 
 <section class="hero">
-  <div class="hero-tag">Born to Be, Petit Dental · Daegu</div>
-  <h1 class="hero-h">치과는 먼 곳이 아닙니다.<br><strong>내 삶과 가장 가까운 곳.</strong></h1>
-  <p class="hero-sub">숨쉬고, 씹고, 삼키고, 서고, 앉고, 걷는<br>모든 순간이 쁘띠치과의 진료와 연결됩니다.</p>
+  <div class="hero-tag">Basic is Magic · Petit Dental Clinic</div>
+  <div class="hero-slide" id="heroSlide">
+    <h1 class="hero-h" id="heroH">편안하게.<br><strong>건강하게. 나답게.</strong></h1>
+    <p class="hero-sub" id="heroSub">아름다움은<br>건강한 기본에서 시작됩니다.</p>
+  </div>
+  <div class="hero-dots" id="heroDots" aria-hidden="true"></div>
 </section>
 
 <div style="background:#007A54;border-bottom:3px solid #C8A84B">
@@ -165,44 +179,44 @@
     </div>
   </a>
 
-  <a class="bn bn-text" href="petit_baby_dental_handbook.html" target="_blank">
-    <div class="bn-cover">
-      <div class="bn-cover-sm">엄마와 아기</div>
-      <div class="bn-cover-lg">치과수첩</div>
-      <div class="bn-cover-line"></div>
-      <div class="bn-cover-sm">임신 준비 · 첫 치아 · 기록</div>
-    </div>
+  <a class="bn bn-img" href="petit_guide.html" target="_blank">
+    <img src="guide_banner.jpg" alt="쁘띠치과 데스크에서 환자를 안내하는 모습" loading="lazy" width="1200" height="675">
     <div class="bn-body">
-      <div class="bn-tag">임신 · 육아</div>
-      <div class="bn-title">쁘띠 엄마와 아기 치과수첩</div>
-      <div class="bn-sub">아이의 얼굴과 교합은 태어나기 전부터 시작됩니다</div>
-      <div class="bn-more">열어보기 →</div>
+      <div class="bn-tag">내원 전 · 내원 후</div>
+      <div class="bn-title">오시기 전에도, 다녀가신 후에도</div>
+      <div class="bn-sub">첫 방문 안내 · 치료별 궁금증 · 치료 후 주의사항</div>
+      <div class="bn-more">찾아보기 →</div>
     </div>
   </a>
 </div>
 
-<div class="sh" id="sec-diagnosis-head" onclick="toggle('sec-diagnosis')">
-  <div class="sh-title">교합진단</div>
-  <div class="sh-arr">▼</div>
-</div>
+<div class="sh" id="sec-guide-head" onclick="toggle('sec-guide')">
+  <div class="sh-body">
+    <div class="sh-title">온라인 진료 안내</div>
+    <div class="sh-sub">궁금할 때 언제든 찾아보세요</div>
+  </div>
+  <div class="sh-arr">▼</div><div class="sh-count">1</div></div>
 <div class="sh-line"></div>
-<div class="acc-body" id="sec-diagnosis">
+<div class="acc-body" id="sec-guide">
 <div class="cards">
-  <a class="card" href="petit_diagnosis.html" target="_blank">
+  <a class="card" href="petit_guide.html" target="_blank">
     <div class="card-num">01</div>
     <div class="card-body">
-      <div class="card-cat">치아·턱·두개골·전신 · 종합 분석</div>
-      <div class="card-title">정확한 진단은 정확한 네비게이션</div>
-      <div class="card-sub">방향·시간·제한사항 — 치료 전 모든 것을 먼저 확인합니다</div>
+      <div class="card-cat">내원 전 · 내원 후 · Q&A</div>
+      <div class="card-title">오시기 전에도<br>다녀가신 후에도</div>
+      <div class="card-sub">첫 방문 안내 · 치료별 궁금증 · 치료 후 주의사항</div>
       <div class="card-more">자세히 보기 →</div>
     </div>
-    <div class="card-cover c-pine"><div class="cc-txt">교합<br>진단</div></div>
+    <div class="card-cover c-sage"><div class="cc-txt">진료<br>안내</div></div>
   </a>
 </div>
 </div>
 <div class="sh" id="sec-about-head" onclick="toggle('sec-about')">
-  <div class="sh-title">쁘띠치과 소개</div>
-  <div class="sh-arr">▼</div></div>
+  <div class="sh-body">
+    <div class="sh-title">쁘띠치과 소개</div>
+    <div class="sh-sub">쁘띠치과가 어떤 곳인지 먼저 보세요</div>
+  </div>
+  <div class="sh-arr">▼</div><div class="sh-count">2</div></div>
 <div class="sh-line"></div>
 <div class="acc-body" id="sec-about">
 <div class="cards">
@@ -226,77 +240,65 @@
     </div>
     <div class="card-cover c-pine"><div class="cc-txt">건강<br>치료</div></div>
   </a>
-  <a class="card" href="petit_beautiful_treatment.html" target="_blank">
-    <div class="card-num">03</div>
-    <div class="card-body">
-      <div class="card-cat">PRF · PDRN · 리프팅 · 피부 재생</div>
-      <div class="card-title">아름다운 치료</div>
-      <div class="card-sub">건강한 치아 위에 아름다운 얼굴을</div>
-      <div class="card-more">자세히 보기 →</div>
-    </div>
-    <div class="card-cover" style="background:#7A5A6A"><div class="cc-txt">아름<br>다운<br>치료</div></div>
-  </a>
 </div>
 </div>
-<div class="sh" id="sec-guide-head" onclick="toggle('sec-guide')">
-  <div class="sh-title">온라인 진료 안내</div>
-  <div class="sh-arr">▼</div></div>
+<div class="sh" id="sec-prevention-head" onclick="toggle('sec-prevention')">
+  <div class="sh-body">
+    <div class="sh-title">예방 · 습관치료</div>
+    <div class="sh-sub">기본부터 함께 합니다</div>
+  </div>
+  <div class="sh-arr">▼</div><div class="sh-count">4</div></div>
 <div class="sh-line"></div>
-<div class="acc-body" id="sec-guide">
+<div class="acc-body" id="sec-prevention">
 <div class="cards">
-  <a class="card" href="petit_guide.html" target="_blank">
+  <a class="card" href="petit_prevention.html" target="_blank">
     <div class="card-num">01</div>
     <div class="card-body">
-      <div class="card-cat">내원 전 · Q&A · 8가지 질문</div>
-      <div class="card-title">내원 전 궁금한 점을<br>먼저 알아보세요</div>
-      <div class="card-sub">발치 권유 · 치주염 · 턱관절 · 성장교정 · 첫 방문 안내</div>
+      <div class="card-cat">양치질교육 · 불소 · 치주염예방</div>
+      <div class="card-title">기본은 예방과 습관</div>
+      <div class="card-sub">3회 양치질 교육 · 만성복합치주염 예방</div>
       <div class="card-more">자세히 보기 →</div>
     </div>
-    <div class="card-cover c-sage"><div class="cc-txt">진료<br>안내</div></div>
+    <div class="card-cover c-sage"><div class="cc-txt">예방<br>습관</div></div>
   </a>
-</div>
-</div>
-<div class="sh" id="sec-occlusion-head" onclick="toggle('sec-occlusion')">
-  <div class="sh-title">바른턱얼굴 교합치료</div>
-  <div class="sh-arr">▼</div><div class="sh-count">3</div></div>
-<div class="sh-line"></div>
-<div class="acc-body" id="sec-occlusion">
-<div class="cards">
-  <a class="card" href="petit_treatment_by_age.html" target="_blank">
-    <div class="card-num">01</div>
-    <div class="card-body">
-      <div class="card-cat">성장교정 · 4D입체교정 · 교합재건</div>
-      <div class="card-title">바른턱얼굴 교합치료</div>
-      <div class="card-sub">어린이 · 청소년 · 중장년 대상별 안내</div>
-      <div class="card-more">자세히 보기 →</div>
-    </div>
-    <div class="card-cover c-green"><div class="cc-txt">교합<br>치료</div></div>
-  </a>
-  <a class="card" href="petit_smile_design.html" target="_blank">
+  <a class="card" href="petit_tongue_tie.html" target="_blank">
     <div class="card-num">02</div>
     <div class="card-body">
-      <div class="card-cat">근기능훈련 · 미소근육교정</div>
-      <div class="card-title">바른미소디자인</div>
-      <div class="card-sub">건강함과 아름다움은 함께 이뤄집니다</div>
+      <div class="card-cat">혀 · 호흡 · 성장 · 발음</div>
+      <div class="card-title">설소대단축증 치료</div>
+      <div class="card-sub">혀가 짧으면 숨쉬기도, 자라기도 달라집니다</div>
       <div class="card-more">자세히 보기 →</div>
     </div>
-    <div class="card-cover c-olive"><div class="cc-txt">바른<br>미소</div></div>
+    <div class="card-cover c-pine"><div class="cc-txt">설소<br>대</div></div>
   </a>
-  <a class="card" href="petit_consultation_widget.html" target="_blank">
+  <a class="card" href="petit_muscle_relax.html" target="_blank">
     <div class="card-num">03</div>
     <div class="card-body">
-      <div class="card-cat">중장년 · 심층상담</div>
-      <div class="card-title">교합재건 상담 위젯</div>
-      <div class="card-sub">증상 체크 → 교합 타입 → 치료 계획</div>
+      <div class="card-cat">이악물기 · 이갈이 · 보톡스</div>
+      <div class="card-title">근이완치료</div>
+      <div class="card-sub">이악물기·이갈이로부터 치아를 지킵니다</div>
       <div class="card-more">자세히 보기 →</div>
     </div>
-    <div class="card-cover c-stone"><div class="cc-txt">상담<br>위젯</div></div>
+    <div class="card-cover c-stone"><div class="cc-txt">근이<br>완</div></div>
+  </a>
+  <a class="card" href="petit_baby_dental_handbook.html" target="_blank">
+    <div class="card-num">04</div>
+    <div class="card-body">
+      <div class="card-cat">임신 준비 · 첫 치아 · 기록</div>
+      <div class="card-title">쁘띠 엄마와 아기 치과수첩</div>
+      <div class="card-sub">아이의 얼굴과 교합은 태어나기 전부터 시작됩니다</div>
+      <div class="card-more">자세히 보기 →</div>
+    </div>
+    <div class="card-cover c-warm"><div class="cc-txt">치과<br>수첩</div></div>
   </a>
 </div>
 
 </div>
 <div class="sh" id="sec-natural-head" onclick="toggle('sec-natural')">
-  <div class="sh-title">자연치아살리기</div>
+  <div class="sh-body">
+    <div class="sh-title">자연치아살리기</div>
+    <div class="sh-sub">자연치아를 지킵니다</div>
+  </div>
   <div class="sh-arr">▼</div><div class="sh-count">5</div></div>
 <div class="sh-line"></div>
 <div class="acc-body" id="sec-natural">
@@ -354,73 +356,76 @@
 </div>
 
 </div>
-<div class="sh" id="sec-prevention-head" onclick="toggle('sec-prevention')">
-  <div class="sh-title">예방 · 습관치료</div>
+<div class="sh" id="sec-occlusion-head" onclick="toggle('sec-occlusion')">
+  <div class="sh-body">
+    <div class="sh-title">바른턱얼굴 교합치료</div>
+    <div class="sh-sub">바른 턱과 얼굴을 세웁니다</div>
+  </div>
   <div class="sh-arr">▼</div><div class="sh-count">3</div></div>
 <div class="sh-line"></div>
-<div class="acc-body" id="sec-prevention">
+<div class="acc-body" id="sec-occlusion">
 <div class="cards">
-  <a class="card" href="petit_prevention.html" target="_blank">
+  <a class="card" href="petit_treatment_by_age.html" target="_blank">
     <div class="card-num">01</div>
     <div class="card-body">
-      <div class="card-cat">양치질교육 · 불소 · 치주염예방</div>
-      <div class="card-title">기본은 예방과 습관</div>
-      <div class="card-sub">3회 양치질 교육 · 만성복합치주염 예방</div>
+      <div class="card-cat">성장교정 · 4D입체교정 · 교합재건</div>
+      <div class="card-title">바른턱얼굴 교합치료</div>
+      <div class="card-sub">어린이 · 청소년 · 중장년 대상별 안내</div>
       <div class="card-more">자세히 보기 →</div>
     </div>
-    <div class="card-cover c-sage"><div class="cc-txt">예방<br>습관</div></div>
+    <div class="card-cover c-green"><div class="cc-txt">교합<br>치료</div></div>
   </a>
-  <a class="card" href="petit_tongue_tie.html" target="_blank">
+  <a class="card" href="petit_smile_design.html" target="_blank">
     <div class="card-num">02</div>
     <div class="card-body">
-      <div class="card-cat">혀 · 호흡 · 성장 · 발음</div>
-      <div class="card-title">설소대단축증 치료</div>
-      <div class="card-sub">혀가 짧으면 숨쉬기도, 자라기도 달라집니다</div>
+      <div class="card-cat">근기능훈련 · 미소근육교정</div>
+      <div class="card-title">바른미소디자인</div>
+      <div class="card-sub">건강함과 아름다움은 함께 이뤄집니다</div>
       <div class="card-more">자세히 보기 →</div>
     </div>
-    <div class="card-cover c-pine"><div class="cc-txt">설소<br>대</div></div>
+    <div class="card-cover c-olive"><div class="cc-txt">바른<br>미소</div></div>
   </a>
-  <a class="card" href="petit_muscle_relax.html" target="_blank">
+  <a class="card" href="petit_consultation_widget.html" target="_blank">
     <div class="card-num">03</div>
     <div class="card-body">
-      <div class="card-cat">이악물기 · 이갈이 · 보톡스</div>
-      <div class="card-title">근이완치료</div>
-      <div class="card-sub">이악물기·이갈이로부터 치아를 지킵니다</div>
+      <div class="card-cat">중장년 · 심층상담</div>
+      <div class="card-title">교합재건 상담 위젯</div>
+      <div class="card-sub">증상 체크 → 교합 타입 → 치료 계획</div>
       <div class="card-more">자세히 보기 →</div>
     </div>
-    <div class="card-cover c-stone"><div class="cc-txt">근이<br>완</div></div>
+    <div class="card-cover c-stone"><div class="cc-txt">상담<br>위젯</div></div>
   </a>
 </div>
 
 </div>
-<div class="sh" id="sec-edu-head" onclick="toggle('sec-edu')">
-  <div class="sh-title">교육 · 이해</div>
-  <div class="sh-arr">▼</div></div>
+<div class="sh" id="sec-diagnosis-head" onclick="toggle('sec-diagnosis')">
+  <div class="sh-body">
+    <div class="sh-title">교합진단</div>
+    <div class="sh-sub">모든 치료는 진단에서 시작합니다</div>
+  </div>
+  <div class="sh-arr">▼</div><div class="sh-count">1</div>
+</div>
 <div class="sh-line"></div>
-<div class="acc-body" id="sec-edu">
-<div class="articles">
-  <a class="article" href="petit_occlusion_edu.html" target="_blank">
-    <div class="art-num">01</div>
-    <div>
-      <div class="art-series">교합 이해</div>
-      <div class="art-title">교합이란 무엇인가</div>
-      <div class="art-sub">왜 같은 치아에 같은 문제가 반복될까요</div>
+<div class="acc-body" id="sec-diagnosis">
+<div class="cards">
+  <a class="card" href="petit_diagnosis.html" target="_blank">
+    <div class="card-num">01</div>
+    <div class="card-body">
+      <div class="card-cat">치아·턱·두개골·전신 · 종합 분석</div>
+      <div class="card-title">정확한 진단은 정확한 네비게이션</div>
+      <div class="card-sub">방향·시간·제한사항 — 치료 전 모든 것을 먼저 확인합니다</div>
+      <div class="card-more">자세히 보기 →</div>
     </div>
-  </a>
-  <a class="article" href="petit_lifecycle_occlusion.html" target="_blank">
-    <div class="art-num">02</div>
-    <div>
-      <div class="art-series">생애주기별 교합 노화</div>
-      <div class="art-title">태어남부터 노년까지</div>
-      <div class="art-sub">교합이 무너지는 이유 · 각 시기별 변화</div>
-    </div>
+    <div class="card-cover c-pine"><div class="cc-txt">교합<br>진단</div></div>
   </a>
 </div>
-
 </div>
 <div class="sh" id="sec-spa-head" onclick="toggle('sec-spa')">
-  <div class="sh-title">쁘띠 바른미소스파</div>
-  <div class="sh-arr">▼</div></div>
+  <div class="sh-body">
+    <div class="sh-title">쁘띠 바른미소스파</div>
+    <div class="sh-sub">지킨 치아를 오래 쓰도록</div>
+  </div>
+  <div class="sh-arr">▼</div><div class="sh-count">2</div></div>
 <div class="sh-line"></div>
 <div class="acc-body" id="sec-spa">
 <div class="cards">
@@ -434,12 +439,25 @@
     </div>
     <div class="card-cover c-teal"><div class="cc-txt">덴탈<br>스파</div></div>
   </a>
+  <a class="card" href="petit_beautiful_treatment.html" target="_blank">
+    <div class="card-num">02</div>
+    <div class="card-body">
+      <div class="card-cat">PRF · PDRN · 리프팅 · 피부 재생</div>
+      <div class="card-title">아름다운 치료</div>
+      <div class="card-sub">건강한 치아 위에 아름다운 얼굴을</div>
+      <div class="card-more">자세히 보기 →</div>
+    </div>
+    <div class="card-cover" style="background:#7A5A6A"><div class="cc-txt">아름<br>다운<br>치료</div></div>
+  </a>
 </div>
 </div>
 
 <div class="sh" id="sec-general-head" onclick="toggle('sec-general')">
-  <div class="sh-title">일반진료</div>
-  <div class="sh-arr">▼</div>
+  <div class="sh-body">
+    <div class="sh-title">일반진료</div>
+    <div class="sh-sub">기본을 제대로 하는 치과가 모든 치료를 잘합니다</div>
+  </div>
+  <div class="sh-arr">▼</div><div class="sh-count">3</div>
 </div>
 <div class="sh-line"></div>
 <div class="acc-body" id="sec-general">
@@ -476,9 +494,40 @@
   </a>
 </div>
 </div>
+<div class="sh" id="sec-edu-head" onclick="toggle('sec-edu')">
+  <div class="sh-body">
+    <div class="sh-title">교육 · 이해</div>
+    <div class="sh-sub">왜 그런지 알면 달라집니다</div>
+  </div>
+  <div class="sh-arr">▼</div><div class="sh-count">2</div></div>
+<div class="sh-line"></div>
+<div class="acc-body" id="sec-edu">
+<div class="articles">
+  <a class="article" href="petit_occlusion_edu.html" target="_blank">
+    <div class="art-num">01</div>
+    <div>
+      <div class="art-series">교합 이해</div>
+      <div class="art-title">교합이란 무엇인가</div>
+      <div class="art-sub">왜 같은 치아에 같은 문제가 반복될까요</div>
+    </div>
+  </a>
+  <a class="article" href="petit_lifecycle_occlusion.html" target="_blank">
+    <div class="art-num">02</div>
+    <div>
+      <div class="art-series">생애주기별 교합 노화</div>
+      <div class="art-title">태어남부터 노년까지</div>
+      <div class="art-sub">교합이 무너지는 이유 · 각 시기별 변화</div>
+    </div>
+  </a>
+</div>
+
+</div>
 <div class="sh" id="sec-foana-head" onclick="toggle('sec-foana')">
-  <div class="sh-title">FöANa</div>
-  <div class="sh-arr">▼</div></div>
+  <div class="sh-body">
+    <div class="sh-title">FöANa</div>
+    <div class="sh-sub">치과 밖에서도 이어지는 기본</div>
+  </div>
+  <div class="sh-arr">▼</div><div class="sh-count">1</div></div>
 <div class="sh-line"></div>
 <div class="acc-body" id="sec-foana">
 <div class="cards">
@@ -495,15 +544,10 @@
 </div>
 
 </div>
-<div class="phil">
-  <div class="ph-q">"편안하고, 건강하고, 나다운 상태.<br><em>기본에 집중할 때 만들어집니다.</em>"</div>
-  <div class="ph-src">쁘띠치과 · Basic is Magic · 기본이 기적이다</div>
-</div>
-
 <div class="foot">
   <div class="foot-logo">생활의 기본, <em>쁘띠치과</em></div>
   <div class="foot-info">
-    Born to Be, Petit Dental<br>
+    Basic is Magic · 기본이 기적이다<br>
     📍 대구시 남구 대봉로 66 2층<br>
     📞 053-472-2828<br>
     교합치료 · 근기능훈련(MFT) · 안면성장 디자인
@@ -523,6 +567,50 @@ document.addEventListener('DOMContentLoaded', function(){
   // 모두 닫힌 상태가 기본 (CSS display:none)
   // 원하는 섹션만 열기
 });
+</script>
+
+<script>
+(function(){
+  var slides=[
+    {h:'편안하게.<br><strong>건강하게. 나답게.</strong>',
+     s:'아름다움은<br>건강한 기본에서 시작됩니다.'},
+    {h:'<strong>기본부터 함께 합니다.</strong>',
+     s:'생활 습관부터 올바른 치아 관리법까지<br>스스로 건강을 지킬 수 있도록 교육합니다.'},
+    {h:'<strong>자연치아를 지킵니다.</strong>',
+     s:'가능한 자연치아를 보존하고,<br>반복되는 문제의 근본 원인을 찾아 개선합니다.'},
+    {h:'<strong>바른 턱 얼굴 교합</strong>',
+     s:'건강한 치아, 바른 턱과 얼굴,<br>그리고 자연스러운 아름다움을 목표합니다.'},
+    {h:'Basic is Magic.<br><strong>기본이 기적이다.</strong>',
+     s:'PETIT DENTAL · 쁘띠치과<br>건강한 치아 · 바른 턱 얼굴 · 나다운 아름다움'}
+  ];
+  var box=document.getElementById('heroSlide'),
+      hh=document.getElementById('heroH'),
+      hs=document.getElementById('heroSub'),
+      dots=document.getElementById('heroDots');
+  if(!box) return;
+  slides.forEach(function(_,i){
+    var d=document.createElement('span');
+    d.className='hero-dot'+(i===0?' on':'');
+    dots.appendChild(d);
+  });
+  var nodes=dots.children, cur=0, timer=null, paused=false;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function go(n){
+    box.classList.add('out');
+    setTimeout(function(){
+      hh.innerHTML=slides[n].h;
+      hs.innerHTML=slides[n].s;
+      box.classList.remove('out');
+      for(var i=0;i<nodes.length;i++) nodes[i].className='hero-dot'+(i===n?' on':'');
+    }, reduce?0:500);
+  }
+  function tick(){ if(paused) return; cur=(cur+1)%slides.length; go(cur); }
+  function start(){ if(timer) clearInterval(timer); timer=setInterval(tick,5000); }
+  box.addEventListener('mouseenter',function(){paused=true});
+  box.addEventListener('mouseleave',function(){paused=false});
+  document.addEventListener('visibilitychange',function(){paused=document.hidden});
+  setTimeout(start,3000);
+})();
 </script>
 </body>
 </html>
