@@ -103,6 +103,33 @@
   .hd{padding:24px 32px 12px}
   .hd-sub{padding:0 32px 14px}
 }
+
+/* 가이드 검색 */
+.gs-wrap{margin-bottom:18px}
+.gs-box{position:relative;display:flex;align-items:center}
+.gs-ico{position:absolute;left:13px;pointer-events:none}
+.gs{width:100%;padding:11px 36px 11px 36px;font-family:inherit;font-size:13.5px;color:#111110;
+  background:#fff;border:1px solid #E0E0DA;border-radius:100px;outline:none;transition:border-color .15s}
+.gs:focus{border-color:#007A54}
+.gs::placeholder{color:#AAA9A0}
+.gs::-webkit-search-cancel-button{display:none}
+.gs-x{position:absolute;right:9px;width:24px;height:24px;border:none;background:none;color:#888880;
+  font-size:19px;line-height:1;cursor:pointer;display:none;border-radius:50%}
+.gs-x.on{display:block}
+.gs-x:hover{background:#F0F0EC;color:#111110}
+.gs-res{display:none;margin-top:12px}
+.gs-res.on{display:block}
+.gs-hit{display:flex;align-items:flex-start;gap:11px;padding:12px 14px;background:#fff;
+  border:1px solid #E0E0DA;border-radius:10px;margin-bottom:7px;cursor:pointer;transition:border-color .13s}
+.gs-hit:hover{border-color:#007A54}
+.gs-tab{flex-shrink:0;font-size:10.5px;font-weight:600;letter-spacing:.04em;color:#8A6820;
+  background:#FFFBEF;border:1px solid #E8D090;border-radius:100px;padding:3px 9px;margin-top:1px}
+.gs-body{flex:1;min-width:0}
+.gs-name{font-size:13.5px;font-weight:600;color:#111110;margin-bottom:3px;line-height:1.45}
+.gs-snip{font-size:12px;color:#555550;line-height:1.6}
+.gs-snip mark{background:#FFF0C0;color:#111110;padding:0 1px;border-radius:2px}
+.gs-none{padding:22px 4px;text-align:center;font-size:13px;color:#888880}
+.gs-cnt{font-size:11.5px;color:#888880;margin-bottom:9px;padding-left:2px}
 </style>
 <link rel="stylesheet" href="../petit-design.css">
 
@@ -143,6 +170,16 @@
 </div><!-- /sticky-header -->
 
 <div class="main">
+
+<div class="gs-wrap">
+  <div class="gs-box">
+    <svg class="gs-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888880" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    <input class="gs" id="gs" type="search" placeholder="증상 · 유형 · 페이지 검색 (예: 이갈이, 발치, 임플란트)" autocomplete="off">
+    <button class="gs-x" id="gsX" type="button" aria-label="지우기">×</button>
+  </div>
+  <div class="gs-res" id="gsRes"></div>
+</div>
+
 
 <!-- 충치 걱정 부모 — 가장 흔한 유형 -->
 <div class="panel" id="panel-p0">
@@ -625,7 +662,7 @@
       <div class="step-line"><div class="step-dot dot-hub"></div><div class="step-connector conn-hub"></div></div>
       <div class="step-body">
         <div class="step-tag">메인 안내</div>
-        <div class="step-name">온라인 진료 안내 → 자연치아살리기</div>
+        <div class="step-name">온라인 진료 가이드 → 자연치아살리기</div>
         <div class="step-desc">Q&A "발치 권유를 받았어요" 항목 확인 후 자연치아 페이지로.</div>
         <a class="step-link" href="../petit_guide.html" target="_blank">진료 안내 열기</a>
         <a class="step-link" href="../petit_natural_tooth.html" target="_blank">자연치아살리기</a>
@@ -804,7 +841,7 @@
       <div class="step-line"><div class="step-dot dot-page"></div><div class="step-connector conn-page"></div></div>
       <div class="step-body">
         <div class="step-tag">Q&A</div>
-        <div class="step-name">온라인 진료 안내</div>
+        <div class="step-name">온라인 진료 가이드</div>
         <div class="step-desc">처음 내원하면 어떻게 되나요? 항목 안내.</div>
         <a class="step-link" href="../petit_guide.html" target="_blank">진료 안내 열기</a>
       </div>
@@ -1096,6 +1133,113 @@ function show(id, tabEl){
   document.getElementById('panel-'+id).classList.add('show');
   if(tabEl) tabEl.classList.add('act');
 }
+
+// ── 상담 가이드 검색 ──
+(function(){
+  var gs=document.getElementById('gs'), gsX=document.getElementById('gsX'), gsRes=document.getElementById('gsRes');
+  if(!gs) return;
+
+  // 탭 이름 매핑
+  var TABNAME={};
+  document.querySelectorAll('.tab').forEach(function(el){
+    var m=(el.getAttribute('onclick')||'').match(/show\('([^']+)'/);
+    if(m) TABNAME[m[1]]=el.textContent.trim();
+  });
+
+  // 색인 만들기
+  var INDEX=[];
+  document.querySelectorAll('.panel').forEach(function(p){
+    var pid=p.id.replace('panel-','');
+    var tab=TABNAME[pid]||pid;
+
+    // 유형 제목 + 키워드
+    var th=p.querySelector('.type-title');
+    if(th){
+      var kws=[].map.call(p.querySelectorAll('.kw'),function(k){return k.textContent.trim();}).join(' · ');
+      INDEX.push({pid:pid,tab:tab,name:th.textContent.trim(),snip:kws,hay:(th.textContent+' '+kws)});
+    }
+    // 단계
+    p.querySelectorAll('.step-body').forEach(function(s){
+      var n=s.querySelector('.step-name'), d=s.querySelector('.step-desc'), g=s.querySelector('.step-tag');
+      if(!n) return;
+      var name=n.textContent.trim(), desc=d?d.textContent.trim():'', tag=g?g.textContent.trim():'';
+      INDEX.push({pid:pid,tab:tab,name:name,snip:(tag?tag+' — ':'')+desc,hay:name+' '+desc+' '+tag});
+    });
+    // 상담 멘트
+    p.querySelectorAll('.script-box').forEach(function(s){
+      var txt=s.querySelector('.script-text');
+      if(!txt) return;
+      INDEX.push({pid:pid,tab:tab,name:'상담 멘트',snip:txt.textContent.trim(),hay:txt.textContent});
+    });
+    // 케이스 카드 (진료 중 연결)
+    p.querySelectorAll('.case-name').forEach(function(c){
+      INDEX.push({pid:pid,tab:tab,name:c.textContent.trim(),snip:'',hay:c.textContent});
+    });
+  });
+
+  function norm(s){ return (s||'').toLowerCase().replace(/\s+/g,''); }
+  function esc(s){ return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function hl(txt,kw){
+    if(!kw) return esc(txt);
+    var i=norm(txt).indexOf(kw);
+    if(i<0) return esc(txt);
+    // 원문에서 대략 위치 찾기 (공백 제거 인덱스 → 원문 인덱스)
+    var c=0, st=-1, en=-1;
+    for(var j=0;j<txt.length;j++){
+      if(!/\s/.test(txt[j])){
+        if(c===i && st<0) st=j;
+        if(c===i+kw.length-1){ en=j+1; break; }
+        c++;
+      }
+    }
+    if(st<0||en<0) return esc(txt);
+    return esc(txt.slice(0,st))+'<mark>'+esc(txt.slice(st,en))+'</mark>'+esc(txt.slice(en));
+  }
+  function cut(txt,kw,len){
+    if(txt.length<=len) return txt;
+    var i=norm(txt).indexOf(kw);
+    if(i<0) return txt.slice(0,len)+'…';
+    var s=Math.max(0,i-25);
+    return (s>0?'…':'')+txt.slice(s,s+len)+'…';
+  }
+
+  function run(){
+    var kw=norm(gs.value);
+    gsX.classList.toggle('on', gs.value.length>0);
+    if(!kw){ gsRes.classList.remove('on'); gsRes.innerHTML=''; return; }
+    var hits=INDEX.filter(function(o){ return norm(o.hay).indexOf(kw)>=0; }).slice(0,30);
+    if(!hits.length){
+      gsRes.innerHTML='<div class="gs-none">찾으시는 내용이 없습니다. 다른 단어로 검색해 보세요.</div>';
+    } else {
+      var html='<div class="gs-cnt">'+hits.length+'건'+(hits.length>=30?' 이상':'')+'</div>';
+      hits.forEach(function(o){
+        var sn=o.snip?cut(o.snip,kw,90):'';
+        html+='<div class="gs-hit" data-pid="'+o.pid+'">'
+          +'<span class="gs-tab">'+esc(o.tab)+'</span>'
+          +'<div class="gs-body"><div class="gs-name">'+hl(o.name,kw)+'</div>'
+          +(sn?'<div class="gs-snip">'+hl(sn,kw)+'</div>':'')+'</div></div>';
+      });
+      gsRes.innerHTML=html;
+      gsRes.querySelectorAll('.gs-hit').forEach(function(el){
+        el.addEventListener('click',function(){
+          var pid=el.dataset.pid;
+          var tabEl=null;
+          document.querySelectorAll('.tab').forEach(function(x){
+            var m=(x.getAttribute('onclick')||'').match(/show\('([^']+)'/);
+            if(m&&m[1]===pid) tabEl=x;
+          });
+          show(pid,tabEl);
+          gs.value=''; run();
+          var p=document.getElementById('panel-'+pid);
+          if(p) window.scrollTo({top:p.getBoundingClientRect().top+window.pageYOffset-120,behavior:'smooth'});
+        });
+      });
+    }
+    gsRes.classList.add('on');
+  }
+  gs.addEventListener('input',run);
+  gsX.addEventListener('click',function(){ gs.value=''; run(); gs.focus(); });
+})();
 </script>
 </body>
 </html>

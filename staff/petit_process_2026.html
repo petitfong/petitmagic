@@ -80,6 +80,9 @@ h3::before{content:"";width:16px;height:2px;background:var(--gold);flex:0 0 auto
 .grid{display:grid;gap:14px}
 .xlink{display:inline-block;font-size:.84rem;font-weight:600;color:var(--green);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:1px;transition:.15s}
 .xlink:hover{color:var(--green-d);border-bottom-color:var(--green)}
+.tsub{background:var(--tint);font-weight:700;font-size:.82rem;color:var(--green);letter-spacing:.04em;padding-top:9px;padding-bottom:9px}
+.mp{color:var(--green);font-weight:600;text-decoration:none;border-bottom:1px solid var(--line)}
+.mp:hover{border-bottom-color:var(--green)}
 .linkbox{margin-top:26px;padding:18px 20px;background:var(--tint);border:1px solid var(--line);border-radius:12px}
 .linkbox h3{margin:0 0 12px;font-size:1rem}
 .lk-group{margin-bottom:14px}
@@ -215,10 +218,11 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:.78rem;col
     <div class="tabs" role="tablist">
       <button class="tab" role="tab" aria-selected="true" data-p="p1"><span class="num">01</span>업무시스템</button>
       <button class="tab" role="tab" aria-selected="false" data-p="p2"><span class="num">02</span>신환 등록·상담</button>
-      <button class="tab" role="tab" aria-selected="false" data-p="p3"><span class="num">03</span>건강한 치료</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p3"><span class="num">03</span>기본치료</button>
       <button class="tab" role="tab" aria-selected="false" data-p="p4"><span class="num">04</span>자연치아살리기</button>
       <button class="tab" role="tab" aria-selected="false" data-p="p5"><span class="num">05</span>편안한 임플란트</button>
-      <button class="tab" role="tab" aria-selected="false" data-p="p6"><span class="num">06</span>아름다운 치료·교합</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p6"><span class="num">06</span>바른턱얼굴 교합치료</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="p7"><span class="num">07</span>서류·동의서</button>
     </div>
   </div>
 </nav>
@@ -279,8 +283,8 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:.78rem;col
           <li><span class="t">치료계획</span>
             <ul class="sub">
               <li>예방 / 습관</li>
-              <li>건강한 치료</li>
-              <li>아름다운 치료</li>
+              <li>기본치료</li>
+              <li>바른턱얼굴 교합치료</li>
             </ul>
           </li>
         </ul>
@@ -310,7 +314,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:.78rem;col
         <span class="stage-n">4</span>
         <div class="stage-t">치료</div>
         <ul class="list">
-          <li><span class="t">건강한 치료 / 아름다운 치료</span><span class="n">치료계획에 따라</span></li>
+          <li><span class="t">기본치료 / 바른턱얼굴 교합치료</span><span class="n">치료계획에 따라</span></li>
           <li><span class="t">환자교육</span><span class="n">예방 / 습관 교육</span></li>
           <li><span class="t">당일 치료 결과설명</span><span class="n">직접 눈으로 보고 설명</span></li>
           <li><span class="t">주의사항 설명</span></li>
@@ -552,7 +556,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:.78rem;col
     <h3>치료 분류</h3>
     <div class="grid g2">
       <div class="card tinted">
-        <h4>건강한 치료</h4>
+        <h4>기본치료</h4>
         <div class="tags">
           <span class="tag">영유아검진</span><span class="tag">혼합치열기 관리</span><span class="tag">이갈이</span>
           <span class="tag">턱관절질환</span><span class="tag">혀 · 호흡치료</span><span class="tag">치주치료</span>
@@ -561,12 +565,42 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:.78rem;col
         </div>
       </div>
       <div class="card gold">
-        <h4>아름다운 치료</h4>
+        <h4>바른턱얼굴 교합치료</h4>
         <div class="tags">
           <span class="tag g">교정치료</span><span class="tag g">4D 입체교정</span><span class="tag g">보톡스</span>
           <span class="tag g">필러</span><span class="tag g">실리프팅</span><span class="tag g">치아미백</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>홈페이지 분류와 맞추기</h3>
+    <p class="sec-note">환자는 홈페이지 섹션 이름으로 기억합니다. 상담에서 같은 말을 쓰려면 아래 대응을 확인하세요.</p>
+    <div class="note" style="margin-bottom:14px">
+      한 가지 업무가 여러 홈페이지 섹션에 걸치기도 합니다. 환자 앞에서는 <b>홈페이지 섹션 이름</b>을 쓰세요.
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>업무 분류</th><th>홈페이지 섹션</th><th>보여줄 페이지</th></tr>
+        <tr><td colspan="3" class="tsub">기본치료</td></tr>
+        <tr><td class="step">영유아검진</td><td>예방 · 습관치료</td><td><a class="mp" href="../petit_prevention.html" target="_blank" rel="noopener">기본은 예방과 습관 &#8599;</a></td></tr>
+        <tr><td class="step">혼합치열기 관리</td><td>예방 · 습관치료<br><small>+ 바른턱얼굴 교합치료 &mdash; 성장교정</small></td><td><a class="mp" href="../petit_prevention.html" target="_blank" rel="noopener">기본은 예방과 습관 &#8599;</a> · <a class="mp" href="../petit_treatment_by_age.html#sec-child" target="_blank" rel="noopener">성장교정 &#8599;</a></td></tr>
+        <tr><td class="step">이갈이</td><td>예방 · 습관치료</td><td><a class="mp" href="../petit_muscle_relax.html" target="_blank" rel="noopener">근이완치료 &#8599;</a></td></tr>
+        <tr><td class="step">턱관절질환</td><td>바른턱얼굴 교합치료</td><td><a class="mp" href="../petit_splint.html" target="_blank" rel="noopener">교합안정장치 &#8599;</a></td></tr>
+        <tr><td class="step">혀 · 호흡치료</td><td>예방 · 습관치료</td><td><a class="mp" href="../petit_tongue_tie.html" target="_blank" rel="noopener">설소대단축증 치료 &#8599;</a></td></tr>
+        <tr><td class="step">치주치료</td><td>자연치아살리기</td><td><a class="mp" href="../petit_periodontitis.html" target="_blank" rel="noopener">만성복합치주염 &#8599;</a></td></tr>
+        <tr><td class="step">신경치료</td><td>일반진료 · 자연치아살리기</td><td><a class="mp" href="../petit_nerve.html" target="_blank" rel="noopener">신경치료 &#8599;</a></td></tr>
+        <tr><td class="step">보철치료</td><td>일반진료</td><td><a class="mp" href="../petit_resin_oneday.html" target="_blank" rel="noopener">무삭제레진 원데이보철 &#8599;</a></td></tr>
+        <tr><td class="step">임플란트치료</td><td>일반진료</td><td><a class="mp" href="../petit_implant.html" target="_blank" rel="noopener">편안한 임플란트 &#8599;</a></td></tr>
+        <tr><td class="step">자연치아살리기</td><td>자연치아살리기</td><td><a class="mp" href="../petit_natural_tooth.html" target="_blank" rel="noopener">자연치아살리기 &#8599;</a></td></tr>
+        <tr><td class="step">틀니</td><td>일반진료</td><td><a class="mp" href="../petit_denture.html" target="_blank" rel="noopener">아름다운 틀니 &#8599;</a></td></tr>
+        <tr><td colspan="3" class="tsub">바른턱얼굴 교합치료</td></tr>
+        <tr><td class="step">교정치료</td><td>바른턱얼굴 교합치료</td><td><a class="mp" href="../petit_treatment_by_age.html" target="_blank" rel="noopener">바른턱얼굴 교합치료 &#8599;</a></td></tr>
+        <tr><td class="step">4D 입체교정</td><td>바른턱얼굴 교합치료</td><td><a class="mp" href="../petit_treatment_by_age.html#sec-teen" target="_blank" rel="noopener">바른턱얼굴 교합치료 &#8599;</a> · <a class="mp" href="../petit_4d_ortho.html" target="_blank" rel="noopener">장치 상세 &#8599;</a></td></tr>
+        <tr><td class="step">보톡스 · 필러 · 실리프팅</td><td>쁘띠 바른미소스파</td><td><a class="mp" href="../petit_dental_spa.html" target="_blank" rel="noopener">쁘띠 바른미소스파 &#8599;</a> · <a class="mp" href="../petit_beautiful_treatment.html" target="_blank" rel="noopener">아름다운 치료 &#8599;</a></td></tr>
+        <tr><td class="step">치아미백</td><td>쁘띠 바른미소스파</td><td><a class="mp" href="../petit_whitening.html" target="_blank" rel="noopener">치아미백 &#8599;</a></td></tr>
+      </table>
     </div>
   </section>
 
@@ -578,16 +612,16 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:.78rem;col
       <a class="lk" href="petit_clinic_guide.html"><span class="lk-name">신환 진료 도식도</span><span class="lk-desc">케이스별 진료 흐름</span><span class="lk-arr">→</span></a>
     </div></div>
     <div class="lk-group"><div class="lk-label">환자 페이지 <small>체어사이드에서 바로 보여주기</small></div><div class="lk-list">
-      <a class="lk pt" href="../petit_guide.html" target="_blank" rel="noopener"><span class="lk-name">온라인 진료 안내</span><span class="lk-desc">환자에게 보내는 사전 안내</span><span class="lk-arr">↗</span></a>
+      <a class="lk pt" href="../petit_guide.html" target="_blank" rel="noopener"><span class="lk-name">온라인 진료 가이드</span><span class="lk-desc">환자에게 보내는 사전 안내</span><span class="lk-arr">↗</span></a>
       <a class="lk pt" href="../petit_diagnosis.html" target="_blank" rel="noopener"><span class="lk-name">교합진단</span><span class="lk-desc">진단 항목과 비용</span><span class="lk-arr">↗</span></a>
     </div></div>
   </section>
 </div>
 
-<!-- ══════════ 03 건강한 치료 ══════════ -->
+<!-- ══════════ 03 기본치료 ══════════ -->
 <div class="panel" id="p3" role="tabpanel">
   <div class="panel-head">
-    <h2>건강한 치료 — 레진 · 신경치료 · 보철치료</h2>
+    <h2>기본치료 — 레진 · 신경치료 · 보철치료</h2>
     <p>설명 항목, 임상 단계, 기공소 업무까지</p>
   </div>
 
@@ -883,10 +917,10 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:.78rem;col
   </section>
 </div>
 
-<!-- ══════════ 06 아름다운 치료 ══════════ -->
+<!-- ══════════ 06 바른턱얼굴 교합치료 ══════════ -->
 <div class="panel" id="p6" role="tabpanel">
   <div class="panel-head">
-    <h2>아름다운 치료 — 교정 · 교합치료</h2>
+    <h2>바른턱얼굴 교합치료 — 교정 · 교합치료</h2>
     <p>연령대별 접근, 진단 프로토콜, 장치와 훈련</p>
   </div>
 
@@ -1078,6 +1112,74 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:.78rem;col
       <a class="lk pt" href="../petit_occlusion_selfcheck.html" target="_blank" rel="noopener"><span class="lk-name">교합질환 자가체크</span><span class="lk-arr">↗</span></a>
       <a class="lk pt" href="../petit_tongue_tie.html" target="_blank" rel="noopener"><span class="lk-name">설소대단축증 치료</span><span class="lk-arr">↗</span></a>
       <a class="lk pt" href="../petit_muscle_relax.html" target="_blank" rel="noopener"><span class="lk-name">근이완치료</span><span class="lk-arr">↗</span></a>
+    </div></div>
+  </section>
+</div>
+
+
+<div class="panel" id="p7" role="tabpanel">
+  <h2>서류 · 동의서 모아보기</h2>
+  <p class="sec-note">각 탭에 흩어져 있는 서류를 한 곳에 모았습니다. 상황에 맞는 묶음을 확인하세요.</p>
+
+  <section>
+    <h3>신환 등록</h3>
+    <div class="grid g2">
+      <div class="card">
+        <h4>일반 — 기본 4종</h4>
+        <ul class="list">
+          <li><span class="t">신환안내 동의서</span></li>
+          <li><span class="t">신환등록 문진표</span><span class="n">직원이 체크</span></li>
+          <li><span class="t">교합신환</span><span class="n">교합이 아니면 스킵</span></li>
+          <li><span class="t">예약 및 환불규정</span><span class="n">큰 제목만 읽어주기</span></li>
+        </ul>
+      </div>
+      <div class="card gold">
+        <h4>미성년자 — 기본 4종 + 3종</h4>
+        <p class="sec-note" style="margin-top:0">교합치료 대상이 될 가능성이 큽니다</p>
+        <ul class="list">
+          <li><span class="t">어린이 체크 항목</span><span class="n">있음에 체크</span></li>
+          <li><span class="t">구강기능평가차트</span></li>
+          <li><span class="t">근기능훈련 검사용지</span></li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin:12px 0 0"><a class="xlink" href="#" data-goto="p2">02 신환 등록·상담 탭 보기 &rarr;</a></p>
+  </section>
+
+  <section>
+    <h3>치료별 동의서</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>치료</th><th>받을 서류</th><th>시점</th></tr>
+        <tr><td class="step">자연치아살리기</td><td>자연치아살리기 동의서 <small>종류별</small></td><td>치료 결정 시</td></tr>
+        <tr><td class="step">양치질 교육</td><td>양치질교육 동의서 <small>· 개인칫솔 구매</small></td><td>정식 교육 전</td></tr>
+        <tr><td class="step">교합치료</td><td>교합진단 동의서</td><td>진단 전</td></tr>
+        <tr><td class="step">교정</td><td>교정진단 동의서</td><td>진단 전</td></tr>
+        <tr><td class="step">교정</td><td>교정치료 동의서</td><td>치료 시작 상담 시</td></tr>
+        <tr><td class="step">임플란트</td><td>수술 동의 <small>· 보험등록 함께 처리</small></td><td>비용 안내 후</td></tr>
+      </table>
+    </div>
+    <div class="note" style="margin-top:12px">
+      진단 동의서는 <b>진단 전</b>, 치료 동의서는 <b>치료 시작 상담 시</b> 받습니다. 순서가 바뀌지 않도록 주의하세요.
+    </div>
+  </section>
+
+  <section>
+    <h3>발급 서류</h3>
+    <p class="sec-note">환자가 요청하는 서류는 별도 시스템에서 신청합니다</p>
+    <div class="card tinted">
+      <ul class="list">
+        <li><span class="t">진단서 · 소견서 · 확인서</span><span class="n">서류 발급 신청에서 처리</span></li>
+      </ul>
+      <p style="margin:10px 0 0"><a class="xlink" href="petit_doc_request.html">서류 발급 신청 열기 &rarr;</a></p>
+    </div>
+  </section>
+
+  <section class="linkbox">
+    <h3>연결 자료</h3>
+    <div class="lk-group"><div class="lk-label">직원 문서</div><div class="lk-list">
+      <a class="lk" href="petit_doc_request.html"><span class="lk-name">서류 발급 신청</span><span class="lk-desc">진단서 · 소견서 · 확인서</span><span class="lk-arr">&rarr;</span></a>
+      <a class="lk" href="petit_staff_guide.html"><span class="lk-name">유형별 상담 가이드</span><span class="lk-desc">동의 받을 때 설명 화법</span><span class="lk-arr">&rarr;</span></a>
     </div></div>
   </section>
 </div>
