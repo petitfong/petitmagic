@@ -84,6 +84,8 @@ html{scroll-behavior:smooth}
   font-style: normal;
   font-display: swap;
 }
+.init-grp{margin-bottom:26px}
+.init-grp:last-child{margin-bottom:0}
 </style>
 <link rel="stylesheet" href="petit-design.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
@@ -110,24 +112,44 @@ html{scroll-behavior:smooth}
 
   <div class="results" id="resultsArea">
     <div class="initial">
-      <div class="init-label">추천 검색어</div>
-      <div class="init-tags" id="initTags">
-        <span class="init-tag" onclick="setQuery('교합')">교합</span>
-        <span class="init-tag" onclick="setQuery('자연치아')">자연치아</span>
-        <span class="init-tag" onclick="setQuery('예방')">예방</span>
-        <span class="init-tag" onclick="setQuery('이악물기')">이악물기</span>
-        <span class="init-tag" onclick="setQuery('치주염')">치주염</span>
-        <span class="init-tag" onclick="setQuery('성장교정')">성장교정</span>
-        <span class="init-tag" onclick="setQuery('MTA')">MTA</span>
-        <span class="init-tag" onclick="setQuery('엠도게인')">엠도게인</span>
-        <span class="init-tag" onclick="setQuery('혀')">혀</span>
-        <span class="init-tag" onclick="setQuery('호흡')">호흡</span>
-        <span class="init-tag" onclick="setQuery('레진')">레진</span>
-        <span class="init-tag" onclick="setQuery('보톡스')">보톡스</span>
-        <span class="init-tag" onclick="setQuery('어린이')">어린이</span>
-        <span class="init-tag" onclick="setQuery('중장년')">중장년</span>
-        <span class="init-tag" onclick="setQuery('양치질')">양치질</span>
-        <span class="init-tag" onclick="setQuery('설소대')">설소대</span>
+      <div class="init-grp">
+        <div class="init-label">추천</div>
+        <div class="init-tags">
+          <span class="init-tag" onclick="setQuery('교합')">교합</span>
+          <span class="init-tag" onclick="setQuery('자연치아')">자연치아</span>
+          <span class="init-tag" onclick="setQuery('근본 원인')">근본 원인</span>
+          <span class="init-tag" onclick="setQuery('예방')">예방</span>
+          <span class="init-tag" onclick="setQuery('교합진단')">교합진단</span>
+          <span class="init-tag" onclick="setQuery('바른미소디자인')">바른미소디자인</span>
+        </div>
+      </div>
+
+      <div class="init-grp">
+        <div class="init-label">나이별</div>
+        <div class="init-tags">
+          <span class="init-tag" onclick="setQuery('임신')">임신 · 아기</span>
+          <span class="init-tag" onclick="setQuery('어린이')">어린이</span>
+          <span class="init-tag" onclick="setQuery('성장교정')">성장교정</span>
+          <span class="init-tag" onclick="setQuery('4D 입체교정')">청소년 · 청년</span>
+          <span class="init-tag" onclick="setQuery('중장년')">중장년</span>
+          <span class="init-tag" onclick="setQuery('교합재건')">교합재건</span>
+        </div>
+      </div>
+
+      <div class="init-grp">
+        <div class="init-label">증상별</div>
+        <div class="init-tags">
+          <span class="init-tag" onclick="setQuery('충치')">충치</span>
+          <span class="init-tag" onclick="setQuery('치주염')">잇몸 · 치주염</span>
+          <span class="init-tag" onclick="setQuery('시림')">시림 · 파절</span>
+          <span class="init-tag" onclick="setQuery('발치')">발치 권유</span>
+          <span class="init-tag" onclick="setQuery('턱관절')">턱관절 · 이갈이</span>
+          <span class="init-tag" onclick="setQuery('주걱턱')">주걱턱 · 돌출</span>
+          <span class="init-tag" onclick="setQuery('안면비대칭')">안면비대칭</span>
+          <span class="init-tag" onclick="setQuery('호흡')">구호흡 · 코골이</span>
+          <span class="init-tag" onclick="setQuery('설소대')">설소대 · 발음</span>
+          <span class="init-tag" onclick="setQuery('착색')">착색 · 미백</span>
+        </div>
       </div>
     </div>
   </div>
@@ -136,6 +158,159 @@ html{scroll-behavior:smooth}
 
 <script>
 const PAGES = [
+  {
+    title:'근본 원인 치료',
+    subtitle:'세균 · 힘 · 환경 — 원인을 바로잡습니다',
+    category:'치료철학',
+    url:'petit_root_cause.html',
+    color:'c-pine',
+    tags:['근본원인','재발','교합'],
+    keywords:'근본 원인 치료 재발 반복 증상 세균 힘 환경 교합 불균형 호흡 혀자세 자세 이악물기 이갈이 씹기 삼키기 치태 치석 구강건조 진단'
+  },
+  {
+    title:'교합진단',
+    subtitle:'정확한 진단이 정확한 치료의 출발점',
+    category:'진단',
+    url:'petit_diagnosis.html',
+    color:'c-teal',
+    tags:['교합진단','정밀진단','검사'],
+    keywords:'교합진단 정밀진단 검사 파노라마 씨티 모형 구내사진 구강기능평가 근기능 분석 2주 진단비 치료계획'
+  },
+  {
+    title:'4D 입체교정',
+    subtitle:'비발치 · 비수술 · 장치별 원리와 적용 기준',
+    category:'교합치료',
+    url:'petit_4d_ortho.html',
+    color:'c-green',
+    tags:['4D','비발치','비수술'],
+    keywords:'4D 입체교정 비발치 비수술 장치 MARPE RPE Twin Block Han 2-Way 3-Way Biobloc 확장 주걱턱 돌출 무턱 안면비대칭 개구교합 성장교정'
+  },
+  {
+    title:'온라인 진료 가이드',
+    subtitle:'내원 전 궁금한 점부터 치료 후 주의사항까지',
+    category:'안내',
+    url:'petit_guide.html',
+    color:'c-sage',
+    tags:['진료안내','주의사항','Q&A'],
+    keywords:'온라인 진료 가이드 내원 전 내원 후 질문 주의사항 발치 임플란트 신경치료 잇몸수술 스케일링 설소대 어린이 틀니 교정 고무줄 투명교정 미백 첫방문'
+  },
+  {
+    title:'충치의 원인',
+    subtitle:'왜 반복되는지 원인부터',
+    category:'일반진료',
+    url:'petit_cavity.html',
+    color:'c-clay',
+    tags:['충치','원인','예방'],
+    keywords:'충치 원인 세균 치태 재발 반복 양치질 불소 실란트 교합 예방'
+  },
+  {
+    title:'신경치료',
+    subtitle:'치아를 살리는 치료 · MTA 보존 우선',
+    category:'자연치아',
+    url:'petit_nerve.html',
+    color:'c-olive',
+    tags:['신경치료','근관치료','MTA'],
+    keywords:'신경치료 근관치료 MTA 신경보존 재생 통증 크라운 보철 재발 교합조정 감각 정기검진'
+  },
+  {
+    title:'치아 시림',
+    subtitle:'시린 이의 원인과 치료',
+    category:'증상',
+    url:'petit_sensitive.html',
+    color:'c-stone',
+    tags:['시림','파절','마모'],
+    keywords:'치아 시림 시린이 지각과민 마모 파절 패임 치아목 교합 간섭 잇몸 내려감 원인'
+  },
+  {
+    title:'아름다운 틀니',
+    subtitle:'의사가 직접 턱 위치를 설정하고 설계합니다',
+    category:'일반진료',
+    url:'petit_denture.html',
+    color:'c-warm',
+    tags:['틀니','완전틀니','부분틀니'],
+    keywords:'틀니 완전틀니 부분틀니 의치 수직고경 턱관절 교합 설계 발음 씹기 세척 보관 정기검사'
+  },
+  {
+    title:'편안한 임플란트',
+    subtitle:'최소절개 · 자가혈 재생인자 · 상악동거상',
+    category:'일반진료',
+    url:'petit_implant.html',
+    color:'c-teal',
+    tags:['임플란트','상악동','재생'],
+    keywords:'임플란트 최소절개 flapless 자가혈 재생인자 PRF 피에조 상악동거상 뼈이식 보철 주위염 정기점검 나사'
+  },
+  {
+    title:'일반진료',
+    subtitle:'예방 · 충치 · 치주 · 심미보철 · 사랑니',
+    category:'일반진료',
+    url:'petit_general.html',
+    color:'c-stone',
+    tags:['기본진료','사랑니','보철'],
+    keywords:'일반진료 기본진료 예방 충치 치주 스케일링 심미보철 크라운 사랑니 발치 레진'
+  },
+  {
+    title:'교합안정장치',
+    subtitle:'이갈이 · 이악물기로부터 치아를 보호',
+    category:'교합치료',
+    url:'petit_splint.html',
+    color:'c-green',
+    tags:['교합안정장치','이갈이','턱관절'],
+    keywords:'교합안정장치 스플린트 이갈이 이악물기 턱관절 통증 두통 마모 파절 보호 야간 착용'
+  },
+  {
+    title:'어린이 성장교정',
+    subtitle:'턱과 얼굴이 자랄 방향을 유도합니다',
+    category:'성장교정',
+    url:'petit_pediatric.html',
+    color:'c-sage',
+    tags:['성장교정','어린이','혼합치열기'],
+    keywords:'어린이 성장교정 혼합치열기 유치 영구치 구강호흡 코골이 손가락빨기 혀내밀기 발음 좁은 위턱 교합유도 습관치료'
+  },
+  {
+    title:'우리 아이 치과수첩',
+    subtitle:'임신 준비 · 첫 치아 · 기록',
+    category:'예방',
+    url:'petit_baby_dental_handbook.html',
+    color:'c-warm',
+    tags:['임신','아기','유아'],
+    keywords:'임신 임산부 아기 신생아 유아 첫 치아 수유 젖병 설소대 구강 관리 기록 수첩 태아 성장 예방'
+  },
+  {
+    title:'쁘띠 바른미소스파',
+    subtitle:'자연치아를 지키는 생활 관리 프로그램',
+    category:'예방',
+    url:'petit_dental_spa.html',
+    color:'c-teal',
+    tags:['스파','관리','예방'],
+    keywords:'쁘띠 바른미소스파 덴탈스파 BASIC BALANCE RECOVERY BREATH 스케일링 PMTC 불소 실란트 양치질 교합 체크 미백 PDRN 재생 호흡 훈련'
+  },
+  {
+    title:'쁘띠 나다운 얼굴',
+    subtitle:'PRF · PDRN · 리프팅 · 피부 재생',
+    category:'아름다운치료',
+    url:'petit_beautiful_treatment.html',
+    color:'c-clay',
+    tags:['얼굴','재생','리프팅'],
+    keywords:'쁘띠 나다운 얼굴 PRF PDRN 리프팅 실리프팅 보톡스 필러 피부 재생 자가혈 재생인자 수분 윤곽 처짐 안면'
+  },
+  {
+    title:'치아미백',
+    subtitle:'착색 원인부터 확인합니다',
+    category:'아름다운치료',
+    url:'petit_whitening.html',
+    color:'c-warm',
+    tags:['미백','착색','변색'],
+    keywords:'치아미백 착색 변색 시림 커피 카레 입호흡 이갈이 이악물기 스케일링 관리 정기체크'
+  },
+  {
+    title:'교합이란 무엇인가',
+    subtitle:'왜 같은 치아에 같은 문제가 반복될까요',
+    category:'교육',
+    url:'petit_occlusion_edu.html',
+    color:'c-olive',
+    tags:['교합','교육','원인'],
+    keywords:'교합 이란 무엇 원인 반복 재발 구조적 기능적 발육적 부정교합 이해 교육'
+  },
   {
     title:'교합질환 자가체크',
     subtitle:'내 증상으로 알아보는 치료 방향',
@@ -155,8 +330,8 @@ const PAGES = [
     keywords:'비전 미션 철학 소개 Born to Be Basic is Magic 기본이 기적이다 생활의 기본 자연치아 교합치료 습관 예방 어린이 청년 중장년'
   },
   {
-    title:'쁘띠치과 건강한 치료',
-    subtitle:'치료 철학 · 특장점 · 보증 책임제',
+    title:'쁘띠치과 치료 원칙',
+    subtitle:'건강한 치료, 아름다운 치료 · 보증 책임제',
     category:'치료철학',
     url:'petit_treatment_philosophy.html',
     color:'c-pine',
