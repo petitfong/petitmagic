@@ -48,28 +48,8 @@ html{scroll-behavior:smooth}
 .sec-body strong{color:var(--tx);font-weight:500}
 .sec-body em{color:var(--g);font-style:normal;font-weight:600}
 .divider{height:1px;background:linear-gradient(90deg,transparent,var(--cr2),transparent);margin:8px 0}
-.insight{font-size:14px;background:var(--go2);border-left:3px solid var(--go);border-radius:0 10px 10px 0;padding:13px 16px;margin:14px 0;font-size:13px;color:var(--tx);line-height:1.75}
-.insight strong{color:var(--g);font-weight:600}
 
 /* HEALTH vs BEAUTY */
-.hb-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}
-.hb{border-radius:16px;padding:22px 20px}
-.hb-health{background:var(--g)}
-.hb-beauty{background:linear-gradient(135deg,#2a1f0e,#1a2e20);border:1.5px solid rgba(200,168,75,.2)}
-.hb-label{font-size:10px;letter-spacing:.12em;font-weight:600;text-transform:uppercase;margin-bottom:8px}
-.hb-health .hb-label{color:rgba(45,90,68,.8)}
-.hb-beauty .hb-label{color:#555550}
-.hb-title{font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;margin-bottom:8px}
-.hb-health .hb-title{color:#555550}
-.hb-beauty .hb-title{color:var(--go)}
-.hb-items{display:flex;flex-direction:column;gap:5px}
-.hb-item{font-size:12px;line-height:1.5;display:flex;align-items:center;gap:6px}
-.hb-health .hb-item{color:#555550}
-.hb-beauty .hb-item{color:#555550}
-.hb-item::before{content:'·';flex-shrink:0;font-size:16px;line-height:1}
-.hb-health .hb-item::before{color:var(--g2)}
-.hb-beauty .hb-item::before{color:var(--go)}
-
 /* 3 STAGES */
 .stages{display:flex;flex-direction:column;gap:14px;margin:24px 0}
 .stage{border-radius:18px;overflow:hidden;border:1.5px solid var(--cr2)}
@@ -122,8 +102,7 @@ html{scroll-behavior:smooth}
 @media(max-width:600px){
   .hero{padding:60px 18px 40px}
   .wrap{padding:0 16px}
-  .hb-cards{grid-template-columns:1fr}
-  .sd-grid{grid-template-columns:1fr 1fr}
+    .sd-grid{grid-template-columns:1fr 1fr}
   .stage-head{padding:15px 16px;gap:11px}
   .stage-body{padding:16px 16px}
   .btn-naver,}
@@ -135,8 +114,6 @@ html{scroll-behavior:smooth}
 .sec-body{font-size:15px;color:#555550;line-height:1.95;margin-bottom:18px;}
 .sec-body strong{color:#1A1A18;font-weight:500;}
 .divider{height:1px;background:#E8E8E4;margin:4px 0;}
-.insight{font-size:14px;background:#F5F5F1;border-left:2px solid #C8A84B;border-radius:0;padding:14px 18px;margin:16px 0;font-size:13.5px;color:#1A1A18;line-height:1.8;}
-.insight strong{color:#007A54;font-weight:500;}
 .warn,.warn-box{background:#FDF6F6;border-left:2px solid #D89090;border-radius:0;padding:14px 18px;margin:14px 0;font-size:13px;color:#1A1A18;line-height:1.75;}
 .warn strong,.warn-box strong{color:#A05050;font-weight:500;}
 /* sec-title serif */
@@ -177,9 +154,6 @@ h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-
 .funny-title{color:#007A54;}
 .funny-body{color:#555550;}
 /* hb cards */
-.hb-health,.hb-beauty{background:#F5F5F1;border:1px solid #E8E8E4;}
-.hb-health .hb-title,.hb-beauty .hb-title{color:#1A1A18;}
-.hb-health .hb-item,.hb-beauty .hb-item{color:#555550;}
 /* smile detail */
 .smile-detail{background:#F5F5F1;border:1px solid #E8E8E4;}
 .sd-kw{color:#555550;}
@@ -262,8 +236,7 @@ h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-
   .tt{flex:0 0 18%;}
 
   /* 비교 카드 */
-  .cmp,.vs,.rc,.hb{border-radius:10px !important;}
-
+  .cmp,.vs,.rc,
   /* footer */
   .foot,.footer{flex-direction:column;gap:8px;align-items:flex-start !important;}
   .foot-info,.footer-info{text-align:left !important;}
@@ -381,6 +354,10 @@ h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-
   .pc-img{flex:0 0 300px}
   .pc-body{flex:1}
 }
+
+.area-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#007A54;
+  text-decoration:none;border:1px solid #C5E8DC;padding:8px 15px;border-radius:100px;background:#fff;transition:.15s}
+.area-link:hover{background:#007A54;border-color:#007A54;color:#FAF8F0}
 </style>
 <link rel="stylesheet" href="petit-design.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -419,45 +396,16 @@ h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-
 
 <div class="wrap">
 
-  <!-- 건강함과 아름다움 -->
+  <!-- 영역 안내 -->
   <section class="sec">
     <div class="sec-kw">쁘띠치과 두 가지 치료 영역</div>
-    <h2 class="sec-title">건강한 치료가 기반이 되어야<br>아름다운 치료가 완성됩니다</h2>
+    <h2 class="sec-title">바른미소디자인은<br><em>아름다운 치료</em> 영역입니다</h2>
     <p class="sec-body">
-      쁘띠치과의 치료는 <em>건강한 치료</em>와 <em>아름다운 치료</em> 두 영역으로 나뉩니다.<br>
-      <strong>건강한 치료</strong>는 예방·습관치료에 집중하며 자연치아를 건강하게 유지·재건하는 것이고,<br>
-      <strong>아름다운 치료</strong>는 건강한 턱과 치아를 기반으로 아름다움까지 가질 수 있는 교합치료 영역입니다.
+      쁘띠치과의 치료는 <strong>건강한 치료</strong>와 <strong>아름다운 치료</strong> 두 영역으로 나뉩니다.
+      건강한 치아와 바른 교합이 기반이 될 때 아름다움도 오래갑니다.
     </p>
-
-    <div class="hb-cards">
-      <div class="hb hb-health">
-        <div class="hb-label">건강한 치료</div>
-        <div class="hb-title">자연치아를<br>살리고 유지</div>
-        <div class="hb-items">
-          <div class="hb-item">예방·습관치료</div>
-          <div class="hb-item">자연치아살리기</div>
-          <div class="hb-item">무삭제레진 재건</div>
-          <div class="hb-item">교합재건치료</div>
-        </div>
-      </div>
-      <div class="hb hb-beauty">
-        <div class="hb-label">아름다운 치료</div>
-        <div class="hb-title">바른미소로<br>완성하다</div>
-        <div class="hb-items">
-          <div class="hb-item">바른미소디자인</div>
-          <div class="hb-item">근기능훈련</div>
-          <div class="hb-item">미소근육교정</div>
-          <div class="hb-item">입술·혀·호흡·자세</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="insight">
-      건강함과 아름다움은 각각이 아닙니다. <strong>교합이 안정되고 기능이 회복되면, 얼굴은 자연스럽게 아름다워집니다.</strong>
-    </div>
+    <a class="area-link" href="petit_treatment_philosophy.html">두 가지 치료 영역 전체 보기 &rarr;</a>
   </section>
-
-  <div class="divider"></div>
 
   <!-- 교합치료 3단계 -->
   <section class="sec">

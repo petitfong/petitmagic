@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>근본 원인 치료 | 쁘띠치과</title>
+<link rel="stylesheet" href="petit-design.css">
+<style>
+@font-face{font-family:'TmonMonsori';src:url('fonts/TmonMonsori_otf.otf') format('opentype'),url('fonts/TmonMonsori_ttf.ttf') format('truetype');font-weight:normal;font-display:swap}
+@font-face{font-family:'Pretendard';src:url('fonts/pretendard-variable.woff2') format('woff2-variations');font-weight:100 900;font-display:swap}
+
+:root{
+  --g:#007A54;--g2:#009B6B;--gd:#005A3C;
+  --cr:#FAFAF9;--cr2:#EFEFEB;
+  --go:#C8A84B;--go2:#FFFBEF;--got:#8A6820;
+  --tx:#1A1A18;--mu:#555550;--lt:#888880;--wh:#fff;
+  --br:#E8E8E4;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#FAFAF9;color:var(--tx);
+  font-family:'Pretendard','Noto Sans KR',-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth}
+
+/* NAV */
+.gnav{position:sticky;top:0;z-index:200;background:rgba(250,250,249,.97);backdrop-filter:blur(12px);border-bottom:1px solid #F5F5F1}
+.gnav-inner{max-width:720px;margin:0 auto;display:flex;align-items:center;padding:0 20px}
+.gnav-logo{font-family:'TmonMonsori',serif;font-size:13px;color:#555550;font-weight:400;padding:14px 0;margin-right:auto}
+.gnav-logo em{color:#007A54;font-style:normal}
+.gnav-home{font-size:13px;color:#555550;text-decoration:none;padding:14px 12px}
+.gnav-home:hover{color:var(--go)}
+.gnav-cta{margin-left:8px;background:#03C75A;color:#fff;border:none;padding:7px 15px;border-radius:20px;font-size:11.5px;font-weight:600;text-decoration:none;display:inline-block}
+
+/* HERO */
+.hero{background:#fff;min-height:58vh;display:flex;flex-direction:column;justify-content:flex-end;padding:76px 28px 50px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 75% 25%,rgba(200,168,75,.1),transparent);z-index:0}
+.hero-inner{max-width:680px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-kw{font-size:10px;letter-spacing:.2em;color:var(--go);text-transform:uppercase;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.hero-kw::before{content:'';width:20px;height:1px;background:var(--go)}
+.hero-title{font-family:'TmonMonsori',serif;font-size:clamp(28px,5.5vw,50px);font-weight:700;color:#111110;line-height:1.25;margin:0 0 16px}
+.hero-title em{color:var(--go);font-style:normal}
+.hero-sub{font-size:14px;color:#555550;line-height:1.9;max-width:490px;margin:0}
+
+/* LAYOUT */
+.wrap{max-width:720px;margin:0 auto;padding:0 24px}
+.sec{padding:50px 0 6px}
+.sec-kw{font-size:10px;letter-spacing:.18em;color:var(--go);text-transform:uppercase;font-weight:600;margin-bottom:10px}
+.sec-title{font-family:'TmonMonsori',serif;font-size:clamp(21px,4vw,28px);font-weight:700;color:#111110;line-height:1.45;margin:0 0 18px}
+.sec-title em{color:var(--g);font-style:normal}
+.sec-body{font-size:13.5px;color:var(--mu);line-height:1.95;margin-bottom:20px}
+.sec-body strong{color:var(--tx);font-weight:600}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--cr2),transparent);margin:10px 0}
+
+/* 반복 고리 */
+.loop{background:#fff;border:1px solid var(--br);border-radius:16px;padding:22px 22px 18px;margin:22px 0}
+.loop-t{font-size:11px;letter-spacing:.1em;color:#A84818;font-weight:700;margin-bottom:14px}
+.loop-row{display:flex;flex-wrap:wrap;align-items:center;gap:7px}
+.loop-i{font-size:12.5px;color:#5A3018;background:#FBEEE8;border:1px solid #E8C0A8;border-radius:100px;padding:6px 13px;font-weight:500}
+.loop-a{color:#C08050;font-size:12px}
+.loop-note{margin-top:14px;padding-top:14px;border-top:1px dashed var(--cr2);font-size:12.5px;color:var(--mu);line-height:1.8}
+
+/* 원인 5 */
+.causes{display:grid;gap:10px;margin:20px 0 4px}
+@media(min-width:640px){.causes{grid-template-columns:repeat(2,1fr)}}
+.cause{background:#fff;border:1px solid var(--br);border-radius:12px;padding:15px 17px}
+.cause-h{font-size:13.5px;font-weight:700;color:var(--g);margin-bottom:5px}
+.cause-b{font-size:12.5px;color:var(--mu);line-height:1.75}
+
+/* 5단계 */
+.ladder{margin:22px 0 6px;display:flex;flex-direction:column-reverse;gap:8px}
+.rung{display:flex;align-items:flex-start;gap:13px;background:#fff;border:1px solid var(--br);
+  border-radius:12px;padding:14px 16px;position:relative}
+.rung-n{flex-shrink:0;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:12px;font-weight:700;color:#fff;background:var(--g)}
+.rung-b{flex:1;min-width:0}
+.rung-t{font-size:14px;font-weight:600;color:#111110;line-height:1.5;margin-bottom:3px}
+.rung-k{font-size:11px;letter-spacing:.08em;color:var(--got);font-weight:600}
+.rung.lv1{background:#FBEEE8;border-color:#E8C0A8}
+.rung.lv1 .rung-n{background:#A84818}
+.rung.lv1 .rung-k{color:#A84818}
+.rung.lv5{background:#E8F5F0;border-color:#C5E8DC}
+.rung.lv5 .rung-n{background:var(--gd)}
+.ladder-cap{font-size:11.5px;color:var(--lt);text-align:center;margin-bottom:6px}
+
+/* 대비 박스 */
+.vs{display:grid;gap:10px;margin:22px 0 6px}
+@media(min-width:640px){.vs{grid-template-columns:1fr 1fr}}
+.vs-box{border-radius:14px;padding:18px 19px}
+.vs-a{background:#F5F5F1;border:1px solid var(--br)}
+.vs-b{background:linear-gradient(160deg,#3a6a4a,#007A54)}
+.vs-h{font-size:11px;letter-spacing:.1em;font-weight:700;margin-bottom:9px}
+.vs-a .vs-h{color:#888880}
+.vs-b .vs-h{color:#C8A84B}
+.vs-t{font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;line-height:1.5;margin-bottom:8px}
+.vs-a .vs-t{color:#555550}
+.vs-b .vs-t{color:#FAF8F0}
+.vs-d{font-size:12.5px;line-height:1.8}
+.vs-a .vs-d{color:#666660}
+.vs-b .vs-d{color:rgba(250,248,240,.85)}
+
+/* 인용 */
+.quote{background:#FFFBEF;border:1px solid #E8D090;border-radius:14px;padding:20px 22px;margin:24px 0 6px}
+.quote-t{font-family:'TmonMonsori',serif;font-size:15px;font-weight:600;color:#5A4010;line-height:1.8}
+.quote-s{font-size:12px;color:var(--got);margin-top:9px;line-height:1.7}
+
+/* 진단 CTA */
+.dx{background:#fff;border:1px solid var(--br);border-radius:16px;padding:22px;margin:22px 0 6px}
+.dx-t{font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;color:#111110;margin-bottom:8px}
+.dx-b{font-size:13px;color:var(--mu);line-height:1.85;margin-bottom:14px}
+.dx-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--g);
+  text-decoration:none;border:1px solid #C5E8DC;padding:8px 15px;border-radius:100px;background:#fff;transition:.15s}
+.dx-link:hover{background:var(--g);border-color:var(--g);color:#FAF8F0}
+
+/* 관련 페이지 */
+.rel-section{padding:28px 20px 40px;background:#F5F5F1;border-top:1px solid #E0E0DA;margin-top:36px}
+.rel-inner{max-width:720px;margin:0 auto}
+.rel-title{font-size:12px;letter-spacing:.12em;color:#C8A84B;text-transform:uppercase;font-weight:600;margin-bottom:12px}
+.rel-links{display:flex;flex-direction:column;gap:8px}
+.rel-link{display:flex;align-items:center;gap:12px;padding:13px 15px;background:#fff;border-radius:10px;
+  border:1px solid #E0E0DA;text-decoration:none;color:#1A1A18;transition:opacity .15s}
+.rel-link:hover{opacity:.75}
+.rel-link-body{flex:1}
+.rel-link-title{font-size:14px;font-weight:600;color:#111110;margin-bottom:2px}
+.rel-link-sub{font-size:12px;color:#555550}
+.rel-link-arr{font-size:14px;color:#C8A84B;font-weight:600;flex-shrink:0}
+
+.foot{padding:26px 24px 40px;text-align:center;font-size:11.5px;color:#888880;line-height:1.9}
+
+/* 원인 3축 */
+.ax{background:#fff;border:1px solid var(--br);border-radius:14px;padding:18px 20px 16px;margin-bottom:10px}
+.ax-h{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+.ax-n{font-size:10px;font-weight:700;letter-spacing:.1em;color:#fff;background:var(--g);
+  border-radius:100px;padding:3px 8px}
+.ax-t{font-family:'TmonMonsori',serif;font-size:17px;font-weight:700;color:#111110}
+.ax-d{font-size:12.5px;color:var(--mu);line-height:1.75;margin-bottom:13px;
+  padding-bottom:12px;border-bottom:1px solid var(--cr2)}
+.ax-d strong{color:var(--tx);font-weight:600}
+.ax-items{display:grid;gap:8px}
+@media(min-width:640px){.ax-items{grid-template-columns:1fr 1fr}}
+.ax-i{font-size:12.5px;color:var(--mu);line-height:1.75}
+.ax-i b{display:block;font-size:13px;color:var(--g);font-weight:600;margin-bottom:2px}
+</style>
+</head>
+<body>
+
+<nav class="gnav">
+  <div class="gnav-inner">
+    <div class="gnav-logo">생활의 기본, <em>쁘띠치과</em></div>
+    <a class="gnav-home" href="index.html">← 홈</a>
+    <a class="gnav-cta" href="https://booking.naver.com/booking/13/bizes/743904" target="_blank" rel="noopener">예약</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-kw">Root Cause&ndash;Based Treatment · 근본 원인 치료</div>
+    <h1 class="hero-title">증상을 치료하는 것과<br><em>증상의 원인을 바로잡는 것은</em><br>다릅니다.</h1>
+    <p class="hero-sub">
+      아픈 곳을 치료하면 통증은 사라집니다.<br>
+      그런데 왜 같은 자리가 또 무너질까요.
+    </p>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <!-- 1. 왜 반복되는가 -->
+  <section class="sec">
+    <div class="sec-kw">왜 반복되는가</div>
+    <h2 class="sec-title">때우고 씌워도<br><em>같은 자리가 또 무너집니다</em></h2>
+    <div class="sec-body">
+      충치를 때우고, 깨진 치아를 씌우고, 흔들리는 치아를 뽑습니다.
+      치료는 잘 끝났는데 몇 년 뒤 <strong>같은 치아, 또는 바로 옆 치아</strong>에 같은 일이 생깁니다.
+    </div>
+
+    <div class="loop">
+      <div class="loop-t">반복되는 고리</div>
+      <div class="loop-row">
+        <span class="loop-i">증상</span><span class="loop-a">→</span>
+        <span class="loop-i">치료</span><span class="loop-a">→</span>
+        <span class="loop-i">회복</span><span class="loop-a">→</span>
+        <span class="loop-i">원인은 그대로</span><span class="loop-a">→</span>
+        <span class="loop-i">재발</span>
+      </div>
+      <div class="loop-note">
+        치료는 무너진 것을 되돌립니다. 그러나 <strong>무너뜨린 힘</strong>이 남아 있으면 같은 일이 반복됩니다.
+        치료 횟수가 늘수록 남은 치아는 줄어듭니다.
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 2. 원인은 무엇인가 -->
+  <section class="sec">
+    <div class="sec-kw">무엇이 원인인가</div>
+    <h2 class="sec-title">질병의 원인은<br><em>세균만이 아닙니다</em></h2>
+    <div class="sec-body">
+      내 몸 안과 나를 둘러싼 환경을 <strong>세균 · 힘 · 환경</strong>이라는 세 가지 기준으로 나누어 원인을 분석합니다.
+    </div>
+
+    <div class="ax">
+      <div class="ax-h"><span class="ax-n">01</span><span class="ax-t">세균</span></div>
+      <div class="ax-d">충치와 잇몸질환을 일으키는 직접 원인입니다.</div>
+      <div class="ax-items">
+        <div class="ax-i"><b>치태 · 치석</b>세균이 모여 사는 자리입니다. 쌓이는 속도와 위치는 사람마다 다릅니다.</div>
+        <div class="ax-i"><b>구강 위생</b>닦는 방법과 도구, 닦이지 않는 부위를 확인합니다.</div>
+        <div class="ax-i"><b>입안 건조</b>침이 줄면 세균이 늘어납니다. 입호흡, 약물, 수면과 이어집니다.</div>
+      </div>
+    </div>
+
+    <div class="ax">
+      <div class="ax-h"><span class="ax-n">02</span><span class="ax-t">힘 &mdash; 교합</span></div>
+      <div class="ax-d">치아와 턱에 반복해서 잘못된 방향과 위치로 힘이 가해지면, 치아 사이가 벌어지거나 뼈가 내려가 <strong>세균이 모이는 원인</strong>이 됩니다. 누적되면 <strong>치아 파절과 턱관절 질환</strong>으로 이어집니다.</div>
+      <div class="ax-items">
+        <div class="ax-i"><b>교합 불균형</b>위아래 치아가 만나는 방식이 고르지 않으면 힘이 한쪽으로 몰려 그 치아만 닳고 깨집니다.</div>
+        <div class="ax-i"><b>씹기와 삼키기</b>한쪽으로만 씹거나 비정상 삼킴이 굳으면 힘의 균형이 무너집니다.</div>
+        <div class="ax-i"><b>이악물기 · 이갈이</b>매일 반복되는 작은 힘이 결국 치아를 이깁니다.</div>
+      </div>
+    </div>
+
+    <div class="ax">
+      <div class="ax-h"><span class="ax-n">03</span><span class="ax-t">환경</span></div>
+      <div class="ax-d">세균과 힘이 만들어지는 조건입니다. 가장 근본에 있습니다.</div>
+      <div class="ax-items">
+        <div class="ax-i"><b>호흡</b>입으로 숨을 쉬면 입안이 마르고, 혀가 내려가며, 위턱이 좁아집니다.</div>
+        <div class="ax-i"><b>혀 자세</b>혀가 입천장을 받쳐주지 않으면 치아 배열과 턱 성장이 달라집니다.</div>
+        <div class="ax-i"><b>몸의 자세</b>머리와 목의 위치가 아래턱 위치를 바꿉니다. 몸의 균형과 교합은 이어져 있습니다.</div>
+        <div class="ax-i"><b>생활습관</b>식습관, 수면, 스트레스가 앞의 모든 조건에 영향을 줍니다.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 3. 치료를 원하는 이유 -->
+  <section class="sec">
+    <div class="sec-kw">치료를 원하는 이유</div>
+    <h2 class="sec-title">당신이 정말 원하는 것은<br><em>무엇인가요?</em></h2>
+    <div class="sec-body">
+      치과에 오시는 이유를 물으면 대부분 &ldquo;아파서&rdquo;라고 답하십니다.
+      그런데 조금 더 이야기를 나누다 보면, <strong>진짜 바라는 것은 그보다 위에</strong> 있습니다.
+    </div>
+
+    <div class="ladder-cap">아래에서 위로 &mdash; 원할수록 원인을 봐야 합니다</div>
+    <div class="ladder">
+      <div class="rung lv1">
+        <div class="rung-n">1</div>
+        <div class="rung-b">
+          <div class="rung-t">아프지 않았으면 좋겠다</div>
+          <div class="rung-k">회피</div>
+        </div>
+      </div>
+      <div class="rung">
+        <div class="rung-n">2</div>
+        <div class="rung-b">
+          <div class="rung-t">편하게 먹고, 편하게 자고 싶다</div>
+          <div class="rung-k">편안함</div>
+        </div>
+      </div>
+      <div class="rung">
+        <div class="rung-n">3</div>
+        <div class="rung-b">
+          <div class="rung-t">자신 있게 웃고 말하고 싶다</div>
+          <div class="rung-k">사회적</div>
+        </div>
+      </div>
+      <div class="rung">
+        <div class="rung-n">4</div>
+        <div class="rung-b">
+          <div class="rung-t">나를 잘 관리하고 싶다</div>
+          <div class="rung-k">자아</div>
+        </div>
+      </div>
+      <div class="rung lv5">
+        <div class="rung-n">5</div>
+        <div class="rung-b">
+          <div class="rung-t">억지로 꾸미지 않아도 되는 나로 살고 싶다</div>
+          <div class="rung-k">존재</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vs">
+      <div class="vs-box vs-a">
+        <div class="vs-h">증상만 없애면</div>
+        <div class="vs-t">1단계에서<br>멈춥니다</div>
+        <div class="vs-d">아픈 것은 사라집니다. 그러나 원인이 남아 있으면 다시 아프고, 다시 치료받는 자리로 돌아옵니다.</div>
+      </div>
+      <div class="vs-box vs-b">
+        <div class="vs-h">원인을 바꾸면</div>
+        <div class="vs-t">5단계까지<br>이어집니다</div>
+        <div class="vs-d">잘 씹고 잘 자게 되고, 웃을 때 편해지고, 스스로 관리하게 됩니다. 꾸미지 않아도 되는 상태에 가까워집니다.</div>
+      </div>
+    </div>
+
+    <div class="quote">
+      <div class="quote-t">
+        치과가 아플 때만 찾는 곳이 아니라<br>일상 속에서 이어지는 곳이 되기를 바랍니다.
+      </div>
+      <div class="quote-s">원인은 진료실 안에서만 생기지 않습니다. 숨 쉬고, 씹고, 삼키고, 앉고 서는 매일의 방식에서 만들어집니다. 그래서 치료도 일상으로 이어져야 합니다. 쁘띠치과는 통증을 없애는 데서 멈추지 않고, 다시 무너지지 않을 조건을 함께 만들어 갑니다.</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 4. 어떻게 찾는가 -->
+  <section class="sec">
+    <div class="sec-kw">어떻게 찾는가</div>
+    <h2 class="sec-title">원인은 눈으로 보이지 않습니다<br><em>진단이 먼저인 이유입니다</em></h2>
+    <div class="sec-body">
+      충치는 사진에 보입니다. 그러나 <strong>어떤 힘이 그 치아를 무너뜨렸는지</strong>는 보이지 않습니다.
+      교합 분석, 구강기능 평가, 호흡과 자세 확인을 통해 원인을 찾습니다.
+    </div>
+
+    <div class="dx">
+      <div class="dx-t">교합진단</div>
+      <div class="dx-b">
+        치아 배열만 보는 검사가 아닙니다.
+        턱 위치, 씹는 힘의 방향, 혀와 입술의 기능, 호흡과 자세까지 확인해
+        <strong>왜 그 치아에 문제가 생겼는지</strong>를 찾습니다.
+      </div>
+      <a class="dx-link" href="petit_diagnosis.html">교합진단 자세히 보기 &rarr;</a>
+    </div>
+  </section>
+
+</div>
+
+<div class="rel-section">
+  <div class="rel-inner">
+    <div class="rel-title">다음 단계 · 관련 페이지</div>
+    <div class="rel-links">
+      <a class="rel-link" href="petit_occlusion_selfcheck.html">
+        <div class="rel-link-body">
+          <div class="rel-link-title">교합질환 자가체크</div>
+          <div class="rel-link-sub">내 증상이 교합 문제인지 먼저 확인해보세요</div>
+        </div>
+        <div class="rel-link-arr">→</div>
+      </a>
+      <a class="rel-link" href="petit_occlusion_edu.html">
+        <div class="rel-link-body">
+          <div class="rel-link-title">교합이란 무엇인가</div>
+          <div class="rel-link-sub">왜 같은 치아에 같은 문제가 반복될까요</div>
+        </div>
+        <div class="rel-link-arr">→</div>
+      </a>
+      <a class="rel-link" href="petit_treatment_by_age.html">
+        <div class="rel-link-body">
+          <div class="rel-link-title">바른턱얼굴 교합치료</div>
+          <div class="rel-link-sub">성장교정 · 4D 입체교정 · 교합재건</div>
+        </div>
+        <div class="rel-link-arr">→</div>
+      </a>
+      <a class="rel-link" href="petit_guide.html">
+        <div class="rel-link-body">
+          <div class="rel-link-title">온라인 진료 가이드</div>
+          <div class="rel-link-sub">내원 전 궁금한 점부터 치료 후 주의사항까지</div>
+        </div>
+        <div class="rel-link-arr">→</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  생활의 기본, 쁘띠치과 · Basic is Magic<br>
+  대구시 남구 대봉로 66 2층 · 053-472-2828
+</div>
+
+</body>
+</html>

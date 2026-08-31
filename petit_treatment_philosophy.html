@@ -349,6 +349,29 @@ h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-
   font-style: normal;
   font-display: swap;
 }
+
+/* 두 가지 치료 영역 */
+.tw{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0 0}
+@media(max-width:560px){.tw{grid-template-columns:1fr}}
+.tw-c{background:#F5F5F1;border:1px solid #E8E8E4;border-radius:14px;padding:20px 19px 18px;display:flex;flex-direction:column}
+.tw-h{border-left:3px solid #007A54}
+.tw-b{border-left:3px solid #C8A84B}
+.tw-l{font-size:10px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;margin-bottom:9px}
+.tw-h .tw-l{color:#007A54}
+.tw-b .tw-l{color:#8A6820}
+.tw-t{font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;color:#111110;line-height:1.45;margin-bottom:12px}
+.tw-i{font-size:12.5px;color:#555550;line-height:1.6;padding-left:11px;position:relative;margin-bottom:5px}
+.tw-i::before{content:'';position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%}
+.tw-h .tw-i::before{background:#007A54}
+.tw-b .tw-i::before{background:#C8A84B}
+.tw-s{font-size:11px;line-height:1.6;color:#666660;padding-left:11px;margin:-2px 0 5px}
+.tw-now{margin-top:auto;padding-top:12px;font-size:11px;color:#8A6820;font-weight:600}
+.tw-go{margin-top:auto;padding-top:12px;font-size:12px;font-weight:600;color:#007A54;text-decoration:none}
+.tw-go:hover{text-decoration:underline}
+.tw-note{margin-top:16px;padding:14px 16px;background:#FFFBEF;border:1px solid #E8D090;border-radius:10px;font-size:13px;color:#5A4010;line-height:1.8}
+.tw-note strong{color:#4A3008;font-weight:600}
+.tw-links{margin-top:auto;padding-top:13px;display:flex;flex-direction:column;gap:6px}
+.tw-links .tw-go,.tw-links .tw-now{margin-top:0;padding-top:0}
 </style>
 <link rel="stylesheet" href="petit-design.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -374,12 +397,61 @@ h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-
     <h1 class="hero-title">예방과 습관부터,<br>보존과 재생까지.<br><em>근본을 바꿉니다.</em></h1>
     <p class="hero-sub">
       치료하더라도 기존 치아를 더 보존하고 건강하게 사용할 수 있도록 합니다.<br>
-      스스로 건강해지고 아름다워지는 것을 최종 목표로 합니다.
+      스스로 건강해지고, 나다운 아름다움을 가지는 것이 최종 목표입니다.
     </p>
   </div>
 </section>
 
 <div class="wrap">
+
+  <!-- 두 가지 치료 영역 -->
+  <section class="sec">
+    <div class="sec-kw">쁘띠치과 두 가지 치료 영역</div>
+    <h2 class="sec-title">건강한 치료가 기반이 되어야<br>아름다운 치료가 완성됩니다</h2>
+    <p class="sec-body">
+      쁘띠치과의 치료는 <strong>건강한 치료</strong>와 <strong>아름다운 치료</strong> 두 영역으로 나뉩니다.<br>
+      <strong>건강한 치료</strong>는 예방·습관치료에 집중하며 자연치아를 건강하게 유지·재건하는 것이고,<br>
+      <strong>아름다운 치료</strong>는 건강한 턱과 치아를 기반으로 아름다움까지 가질 수 있는 교합치료 영역입니다.
+    </p>
+
+    <div class="tw">
+      <div class="tw-c tw-h">
+        <div class="tw-l">건강한 치료</div>
+        <div class="tw-t">자연치아를<br>살리고 유지</div>
+        <div class="tw-i">예방·습관치료</div>
+        <div class="tw-i">자연치아살리기</div>
+        <div class="tw-i">무삭제레진 재건</div>
+        <div class="tw-i">교합안정장치</div>
+        <div class="tw-i">교합재건치료</div>
+        <div class="tw-s">임플란트 · 보철 · 자연치아살리기 + 교합치료</div>
+        <div class="tw-links">
+          <span class="tw-now">이 페이지에서 안내합니다</span>
+          <a class="tw-go" href="petit_prevention.html">예방과 습관 &rarr;</a>
+          <a class="tw-go" href="petit_natural_tooth.html">자연치아살리기 &rarr;</a>
+          <a class="tw-go" href="petit_splint.html">교합안정장치 &rarr;</a>
+        </div>
+      </div>
+      <div class="tw-c tw-b">
+        <div class="tw-l">아름다운 치료</div>
+        <div class="tw-t">바른교합, 바른미소로<br>완성하다</div>
+        <div class="tw-i">바른턱얼굴교합치료</div>
+        <div class="tw-i">바른미소디자인훈련</div>
+        <div class="tw-s">입술·혀·호흡·자세 · 바르게 씹고 삼키기</div>
+        <div class="tw-i">쁘띠 바른미소스파</div>
+        <div class="tw-links">
+          <a class="tw-go" href="petit_treatment_by_age.html">바른턱얼굴교합치료 &rarr;</a>
+          <a class="tw-go" href="petit_smile_design.html">바른미소디자인 &rarr;</a>
+          <a class="tw-go" href="petit_dental_spa.html">쁘띠 바른미소스파 &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="tw-note">
+      건강함과 아름다움은 각각이 아닙니다. <strong>교합이 안정되고 기능이 회복되면, 얼굴은 자연스럽게 아름다워집니다.</strong>
+    </div>
+  </section>
+
+  <div class="divider"></div>
 
   <!-- 치료 흐름 -->
   <section class="sec">
@@ -425,7 +497,7 @@ h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-
         <div class="feat-head">
           <div class="feat-num">1</div>
           <div class="feat-htxt">
-            <div class="feat-title">혀·호흡·턱·얼굴·몸 전체를 보는 진단</div>
+            <div class="feat-title">치아·턱·얼굴·몸 전체를 보는 진단</div>
             <div class="feat-sub">근본 원인을 찾는 통합 진단</div>
           </div>
           <div class="feat-arr">▼</div>
@@ -467,7 +539,7 @@ h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-
         <div class="feat-head">
           <div class="feat-num">3</div>
           <div class="feat-htxt">
-            <div class="feat-title">치아를 살리고, 몸을 살리는 치료</div>
+            <div class="feat-title">치아를 살리고, 재생하고, 균형을 찾는 치료</div>
             <div class="feat-sub">뽑기 전에 살리는 방법부터</div>
           </div>
           <div class="feat-arr">▼</div>
@@ -537,7 +609,7 @@ h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-
   <!-- 최종 목표 -->
   <div class="goal">
     <div class="goal-icon"></div>
-    <div class="goal-title">스스로 건강해지고<br><em>아름다워진다</em></div>
+    <div class="goal-title">스스로 건강해지고<br><em>나다운 아름다움을 가진다</em></div>
     <div class="goal-body">
       쁘띠치과의 모든 치료는 이 하나의 목표를 향합니다.<br>
       치아만 고치는 것이 아니라, 기본이 바로잡혀<br>
@@ -615,7 +687,7 @@ async function doShare(){
   <a class="rel-link" href="petit_guide.html" target="_blank">
     <div class="rel-link-body">
       <div class="rel-link-title">온라인 진료 가이드</div>
-      <div class="rel-link-sub">내원 전 궁금한 점 — Q&A 8가지</div>
+      <div class="rel-link-sub">내원 전 궁금한 점부터 치료 후 주의사항까지</div>
     </div>
     <div class="rel-link-arr">→</div>
   </a>

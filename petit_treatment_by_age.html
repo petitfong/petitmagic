@@ -327,6 +327,88 @@ body{background:#FAFAF9 !important;}
 .prob-row-on{background:#E8F5F0 !important}
 .prob-row-on .prob-num{color:#007A54 !important;font-weight:700 !important}
 .prob-row-on .prob-tag{background:#007A54 !important;color:#FAF8F0 !important}
+
+/* ── 개요 탭 ── */
+
+/* 개요 전용 */
+.ov-lead{font-size:14px;color:#555550;line-height:2;margin:0 0 8px}
+.ov-lead strong{color:#111110;font-weight:600}
+
+.ov-paren{font-weight:400;color:#555550;font-size:.92em}
+/* 정의 박스 */
+.ov-def{background:#fff;border:1px solid #E8E8E4;border-radius:16px;padding:24px 24px 20px;margin:26px 0}
+.ov-def-k{font-size:10px;letter-spacing:.16em;color:#C8A84B;font-weight:700;margin-bottom:12px}
+.ov-def-t{font-family:'TmonMonsori',serif;font-size:17px;font-weight:700;color:#111110;line-height:1.7;margin-bottom:12px}
+.ov-def-t em{color:#007A54;font-style:normal}
+.ov-def-b{font-size:13px;color:#555550;line-height:1.95}
+
+/* 세 기둥 */
+.ov-3{display:grid;gap:10px;margin:24px 0 6px}
+@media(min-width:700px){.ov-3{grid-template-columns:repeat(3,1fr)}}
+.ov-p{background:#fff;border:1px solid #E8E8E4;border-radius:14px;padding:18px 18px 16px}
+.ov-p-n{font-size:10px;letter-spacing:.14em;color:#8A6820;font-weight:700;margin-bottom:8px}
+.ov-p-t{font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;color:#007A54;margin-bottom:7px}
+.ov-p-b{font-size:12.5px;color:#555550;line-height:1.8}
+
+/* 재발 대비 */
+.ov-vs{display:grid;gap:10px;margin:24px 0 6px}
+@media(min-width:640px){.ov-vs{grid-template-columns:1fr 1fr}}
+.ov-vsb{border-radius:14px;padding:19px 20px}
+.ov-vs-a{background:#F5F5F1;border:1px solid #E8E8E4}
+.ov-vs-b{background:linear-gradient(160deg,#3a6a4a,#007A54)}
+.ov-vs-h{font-size:10.5px;letter-spacing:.12em;font-weight:700;margin-bottom:9px}
+.ov-vs-a .ov-vs-h{color:#888880}
+.ov-vs-b .ov-vs-h{color:#C8A84B}
+.ov-vs-t{font-family:'TmonMonsori',serif;font-size:15.5px;font-weight:700;line-height:1.55;margin-bottom:8px}
+.ov-vs-a .ov-vs-t{color:#555550}
+.ov-vs-b .ov-vs-t{color:#FAF8F0}
+.ov-vs-d{font-size:12.5px;line-height:1.8}
+.ov-vs-a .ov-vs-d{color:#666660}
+.ov-vs-b .ov-vs-d{color:rgba(250,248,240,.85)}
+
+
+/* 유지장치 */
+.ov-ret{margin-top:14px;background:linear-gradient(160deg,#2a5040,#005A3C);border-radius:16px;padding:24px 24px 22px}
+.ov-ret-k{font-size:10px;letter-spacing:.16em;color:#C8A84B;font-weight:700;margin-bottom:12px}
+.ov-ret-t{font-family:'TmonMonsori',serif;font-size:18px;font-weight:700;color:#FAF8F0;line-height:1.55;margin-bottom:13px}
+.ov-ret-t em{color:#C8A84B;font-style:normal}
+.ov-ret-b{font-size:13px;color:rgba(250,248,240,.88);line-height:1.95}
+.ov-ret-b strong{color:#FAF8F0;font-weight:600}
+/* 치료 3단계 */
+.ov-step{display:flex;gap:14px;padding:17px 0;border-bottom:1px solid #EFEFEB}
+.ov-step:last-child{border-bottom:none}
+.ov-step-n{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:#007A54;color:#FAF8F0;
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.ov-step-b{flex:1;min-width:0}
+.ov-step-t{font-size:14.5px;font-weight:600;color:#111110;margin-bottom:4px}
+.ov-step-s{font-size:11.5px;color:#8A6820;font-weight:600;margin-bottom:6px}
+.ov-step-d{font-size:12.5px;color:#555550;line-height:1.85}
+
+/* 이런 경우 */
+.ov-case{display:grid;gap:8px;margin:20px 0 6px}
+@media(min-width:640px){.ov-case{grid-template-columns:1fr 1fr}}
+.ov-c{display:flex;align-items:flex-start;gap:9px;background:#fff;border:1px solid #E8E8E4;
+  border-radius:10px;padding:13px 15px;font-size:12.5px;color:#555550;line-height:1.7}
+.ov-c::before{content:'';flex-shrink:0;width:5px;height:5px;border-radius:50%;background:#C8A84B;margin-top:7px}
+
+/* 연령 이정표 */
+.ov-age{display:grid;gap:10px;margin:22px 0 6px}
+@media(min-width:700px){.ov-age{grid-template-columns:repeat(3,1fr)}}
+.ov-a{border-radius:16px;overflow:hidden;border:1.5px solid #EFEFEB;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;background:#fff}
+.ov-a:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,122,84,.1)}
+.ov-a-h{padding:22px 18px 18px;text-align:center}
+.ov-a-w{font-size:10px;color:#C8A84B;letter-spacing:.08em;font-weight:700;margin-bottom:7px;line-height:1.5}
+.ov-a-t{font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;color:#FAF8F0;line-height:1.4}
+.ov-a-b{padding:15px 17px 17px}
+.ov-a-lead{font-size:12.5px;color:#111110;line-height:1.7;margin-bottom:9px}
+.ov-a-lead strong{color:#007A54}
+.ov-a-tag{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:11px}
+.ov-a-tag span{font-size:11px;color:#555550;background:#F5F5F1;border:1px solid #E8E8E4;
+  border-radius:100px;padding:3px 9px}
+.ov-a-go{font-size:12px;font-weight:600;color:#007A54}
+
+.ov-kw{font-size:11px;letter-spacing:.16em;color:#C8A84B;font-weight:700;margin-bottom:10px}
 </style>
 <link rel="stylesheet" href="petit-design.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -339,10 +421,10 @@ body{background:#FAFAF9 !important;}
   <div class="nav-inner">
     <div class="nav-logo" style="line-height:1.5">생활의 기본, 쁘띠치과<br><span style="font-size:10px;color:#555550;font-weight:300;letter-spacing:.04em">기본이 기적이다 · Basic is Magic</span></div>
     <div class="tabs">
-      <div class="tab act" onclick="show('overview',this)">바른턱얼굴교합치료</div>
+      <div class="tab act" onclick="show('overview',this)">개요</div>
       <div class="tab" onclick="show('child',this)">성장교정</div>
-      <div class="tab" onclick="show('teen',this)">청소년·청년 (12~40대)</div>
-      <div class="tab" onclick="show('adult',this)">중장년·인생2기 (50대 이상)</div>
+      <div class="tab" onclick="show('teen',this)">4D 입체교정</div>
+      <div class="tab" onclick="show('adult',this)">교합재건</div>
     </div>
   </div>
 </nav>
@@ -359,97 +441,226 @@ body{background:#FAFAF9 !important;}
 
   <div class="content">
 
-    <!-- 철학 -->
-    <div style="background:#F5F5F1;border:1px solid #E8E8E4;border-radius:16px;padding:24px 26px;margin-bottom:32px" class="rv">
-      <div style="width:3px;height:44px;background:linear-gradient(180deg,var(--go),rgba(200,168,75,.2));border-radius:2px;margin-bottom:16px"></div>
-      <div style="font-family:'TmonMonsori',serif;font-size:15px;font-weight:600;color:#1A1A18;line-height:1.75;margin-bottom:8px">교합은 기능이 만들고, 기능 이상이 무너뜨리며,<br><span style="color:var(--go)">기능 회복이 다시 완성한다.</span></div>
-      <div style="font-size:11px;color:#555550;font-style:italic;line-height:1.6">Occlusion is built by function, destroyed by dysfunction, and completed again by functional restoration.</div>
-    </div>
+    <!-- ── 1. 무엇이 다른가 (정의) ────────────────── -->
+    <section>
+      <div class="ov-kw">바른턱얼굴 교합치료란</div>
+      <h2 style="font-family:'TmonMonsori',serif;font-size:clamp(21px,4vw,28px);font-weight:700;color:#111110;line-height:1.45;margin:0 0 18px">
+        치아를 옮기는 것이 아니라<br><span style="color:#007A54">턱과 얼굴을 세우는 치료</span>입니다
+      </h2>
+      <p class="ov-lead">
+        치아, 턱, 얼굴이 틀어진 원인을 그대로 두고 치아만 가지런하게 하면 어떻게 될까요.
+        치아가 틀어진 가장 큰 원인인 <strong>생활습관 &mdash; 호흡, 자세, 씹고 삼키기 &mdash; 와
+        구강악습관<span class="ov-paren">(이갈이, 이악물기, 한쪽으로만 씹기 등)</span></strong>이 남아 있으면,
+        가지런해진 치아는 다시 변하게 됩니다.
+      </p>
+      <p class="ov-lead">
+        바른턱얼굴 교합치료는 근본 원인인 <strong>구조의 크기 부조화와 부정렬을 구조적으로 변화</strong>시키고,
+        바른 턱 크기와 위치 위에 치아를 배열하며, <strong>교합 균형을 유지하는 입술, 혀, 호흡, 자세와 씹고 삼키기 기능</strong>을 함께 다룹니다.
+      </p>
 
-    <!-- 욕망 5층 -->
-    <div class="block rv">
-      <div class="block-head">
-        <div class="block-tag">치료를 원하는 이유</div>
-        <div class="block-title">당신이 정말 원하는 것은<br>무엇인가요?</div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:0;border-radius:14px;overflow:hidden;border:1.5px solid var(--cr2);margin-bottom:20px">
-        <div class="prob-row" onmouseover="this.classList.add('prob-row-on')" onmouseout="this.classList.remove('prob-row-on')" style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--cr2);background:var(--wh);transition:all .2s;cursor:default">
-          <div class="prob-num" style="font-family:'TmonMonsori',serif;font-size:20px;color:var(--cr2);text-align:center;transition:color .2s">1</div>
-          <div><div style="font-size:15px;font-weight:500;color:var(--tx);transition:color .2s">아프지 않았으면 좋겠다</div></div>
-          <div class="prob-tag" style="font-size:11px;background:var(--cr2);color:var(--mu);border-radius:20px;padding:4px 11px;white-space:nowrap;transition:all .2s">회피</div>
-        </div>
-        <div class="prob-row" onmouseover="this.classList.add('prob-row-on')" onmouseout="this.classList.remove('prob-row-on')" style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--cr2);background:var(--wh);transition:all .2s;cursor:default">
-          <div class="prob-num" style="font-family:'TmonMonsori',serif;font-size:20px;color:var(--cr2);text-align:center;transition:color .2s">2</div>
-          <div><div style="font-size:15px;font-weight:500;color:var(--tx);transition:color .2s">편하게 먹고, 편하게 자고 싶다</div></div>
-          <div class="prob-tag" style="font-size:11px;background:var(--cr2);color:var(--mu);border-radius:20px;padding:4px 11px;white-space:nowrap;transition:all .2s">편안함</div>
-        </div>
-        <div class="prob-row" onmouseover="this.classList.add('prob-row-on')" onmouseout="this.classList.remove('prob-row-on')" style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--cr2);background:var(--wh);transition:all .2s;cursor:default">
-          <div class="prob-num" style="font-family:'TmonMonsori',serif;font-size:20px;color:var(--cr2);text-align:center;transition:color .2s">3</div>
-          <div><div style="font-size:15px;font-weight:500;color:var(--tx);transition:color .2s">자신 있게 웃고 말하고 싶다</div></div>
-          <div class="prob-tag" style="font-size:11px;background:var(--cr2);color:var(--mu);border-radius:20px;padding:4px 11px;white-space:nowrap;transition:all .2s">사회적</div>
-        </div>
-        <div class="prob-row" onmouseover="this.classList.add('prob-row-on')" onmouseout="this.classList.remove('prob-row-on')" style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--cr2);background:var(--wh);transition:all .2s;cursor:default">
-          <div class="prob-num" style="font-family:'TmonMonsori',serif;font-size:20px;color:var(--cr2);text-align:center;transition:color .2s">4</div>
-          <div><div style="font-size:15px;font-weight:500;color:var(--tx);transition:color .2s">나를 잘 관리하고 싶다</div></div>
-          <div class="prob-tag" style="font-size:11px;background:var(--cr2);color:var(--mu);border-radius:20px;padding:4px 11px;white-space:nowrap;transition:all .2s">자아</div>
-        </div>
-        <div class="prob-row prob-row-5" style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;padding:16px 16px;background:var(--wh);border-top:1px solid var(--cr2);transition:all .2s">
-          <div class="prob-num" style="font-family:'TmonMonsori',serif;font-size:20px;color:var(--cr2);text-align:center;transition:color .2s">5</div>
-          <div><div style="font-size:15px;font-weight:500;color:var(--tx)">억지로 꾸미지 않아도 되는 나로 살고 싶다</div></div>
-          <div class="prob-tag" style="font-size:11px;background:var(--cr2);color:var(--mu);border-radius:20px;padding:4px 11px;white-space:nowrap;transition:all .2s">존재</div>
+      <div class="ov-def">
+        <div class="ov-def-k">핵심 개념</div>
+        <div class="ov-def-t">교합은 구조와 기능입니다.<br>기능 이상은 구조를, 곧 교합을 무너뜨립니다.<br><em>무너진 교합은 다시 구조를 세우고<br>기능을 회복해야 균형을 찾습니다.</em></div>
+        <div class="ov-def-b">
+          <strong>구조</strong>는 턱의 크기와 위치, 그 위에 놓인 치아의 배열입니다.
+          <strong>기능</strong>은 코호흡, 혀와 입술의 자세, 씹고 삼키기, 몸의 자세입니다.<br><br>
+          입술이 닫히고 혀가 입천장에 있고 코로 숨 쉬면, 턱은 제 크기로 자라고 치아는 제자리에 자리 잡습니다.
+          반대로 입으로 숨 쉬고 혀가 내려가 있으면, 매일 같은 방향으로 가해지는 힘이 조금씩 구조를 밀어냅니다.
+          여기에 한쪽으로만 씹는 습관과 굽은 자세가 더해지면 그 방향은 더 굳어집니다.
         </div>
       </div>
-    </div>
+    </section>
 
 
+    <!-- ── 2. 교정과 교합치료 ────────────────────── -->
+    <section>
+      <div class="ov-kw" style="margin-top:34px">교정과 교합치료</div>
+      <h2 style="font-family:'TmonMonsori',serif;font-size:clamp(20px,3.6vw,25px);font-weight:700;color:#111110;line-height:1.45;margin:0 0 16px">
+        교정만으로 충분할 때와<br><span style="color:#007A54">교합치료가 필요할 때</span>
+      </h2>
 
-        <!-- 어린이 -->
-        <div style="border-radius:18px;overflow:hidden;border:1.5px solid var(--cr2);cursor:pointer;transition:all .2s" onclick="show('child',document.querySelectorAll('.tab')[1])" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,122,84,.1)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
-          <div style="background:linear-gradient(160deg,#4a7a5a,#009B6B);padding:28px 20px 22px;text-align:center;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end">
-            <div style="font-size:48px;margin-bottom:12px"></div>
-            <div style="font-size:10px;color:#C8A84B;letter-spacing:.1em;font-weight:600;margin-bottom:6px">어린아이 · 엄마</div>
-            <div style="font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;color:#FAF8F0;line-height:1.4">꿈을 꿀 수 있는<br>편안한 치과</div>
+      <p class="ov-lead" style="margin-bottom:6px">
+        <strong>치아 배열은 교정으로 합니다. 쁘띠치과도 마찬가지입니다.</strong>
+        다만 교정을 시작하기 전에 <strong>골격의 크기와 위치, 그리고 기능</strong>을 먼저 확인합니다.
+        이 두 가지가 어떤 상태인지에 따라 필요한 치료의 범위가 달라지기 때문입니다.
+      </p>
+
+      <div class="ov-vs">
+        <div class="ov-vsb ov-vs-a">
+          <div class="ov-vs-h">골격이 맞고 기능이 정상이면</div>
+          <div class="ov-vs-t">치아교정으로<br>충분합니다</div>
+          <div class="ov-vs-d">
+            치아를 배열하고 유지장치를 쓰며 기능훈련을 함께하면 잘 유지됩니다.
+            골격 부조화가 없고 기능이 정상이라면 유지장치도 오래 필요하지 않은 경우가 많습니다.
           </div>
-          <div style="padding:16px 18px;background:var(--wh)">
-            <div style="font-size:11.5px;color:#555550;font-style:italic;line-height:1.6;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--cr2)">"충치 때문에 데려왔다가 아이 입이 왜 벌어져 있는지 처음 들었습니다."</div>
-            <div style="font-size:12px;color:var(--g);font-weight:500;line-height:1.8"> 성장교정<br> 바른미소디자인훈련</div>
-            <div style="margin-top:10px;padding:10px 12px;background:#E8F5F0;border-radius:8px;font-size:12px;color:#1A5C3A;line-height:1.65">
-              혼합 치열기(6~12세)는 턱과 얼굴의 미래가 결정되는 골든타임입니다.<br>지금 발견하면 발치·수술 없이 방향을 바로잡을 수 있습니다.
-            </div>
-            <a href="petit_pediatric.html" style="display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:12px;font-weight:600;color:#007A54;text-decoration:none;border:1px solid #C5E8DC;padding:5px 12px;border-radius:100px;background:#fff">어린이 성장교정 자세히 보기 →</a>
+        </div>
+        <div class="ov-vsb ov-vs-b">
+          <div class="ov-vs-h">골격 부조화나 기능 이상이 있으면</div>
+          <div class="ov-vs-t">구조와 기능부터<br>다룹니다</div>
+          <div class="ov-vs-d">
+            유지장치를 끼고도 치아가 밀리는 경우가 있습니다.
+            턱관절과 근육의 부조화, 저작습관, 이악물기 같은 원인이 남아 있기 때문입니다.
+            이때 골격과 기능부터 바로잡는 것이 교합치료입니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="ov-def" style="margin-top:16px">
+        <div class="ov-def-k">정리하면</div>
+        <div class="ov-def-b" style="font-size:13px">
+          교합치료는 <strong>골격의 크기와 위치 조정 &rarr; 치아 배열 &rarr; 유지를 위한 기능훈련</strong>의 순서로 진행합니다.
+          가운데 단계인 치아 배열은 교정으로 합니다.<br><br>
+          앞뒤 조건이 이미 갖춰져 있다면 굳이 교합치료를 진행하지 않고
+          <strong>치아교정과 유지장치, 기능훈련</strong>으로 진행합니다.
+          교합치료는 근본 원인을 함께 다뤄 균형 있는 결과를 얻기 위한 것입니다.
+        </div>
+      </div>
+
+      <div class="ov-ret">
+        <div class="ov-ret-k">유지장치에 대하여</div>
+        <div class="ov-ret-t">진짜 유지장치는<br><em>바른 내 몸 사용하기입니다</em></div>
+        <div class="ov-ret-b">
+          입술과 혀, 호흡과 자세, 바르게 씹고 삼키기.
+          이것을 균형점에서 유지하도록 바르게 해주면 <strong>그 자체가 내 교합을 붙잡아 주는 유지장치</strong>가 됩니다.<br><br>
+          내가 나의 편안한 균형 범위를 스스로 유지할 수 있게 되는 것 &mdash; 그것이 유지장치의 완성입니다.
+          꼈다 뺐다 하는 유지장치는 <strong>아주 가볍게, 보조하는 정도</strong>로 만들어 드립니다.
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── 3. 세 가지를 함께 ─────────────────────── -->
+    <section>
+      <div class="ov-kw" style="margin-top:34px">무엇을 다루는가</div>
+      <h2 style="font-family:'TmonMonsori',serif;font-size:clamp(20px,3.6vw,25px);font-weight:700;color:#111110;line-height:1.45;margin:0 0 16px">
+        구조 · 치아 · 기능<br><span style="color:#007A54">세 가지가 함께 바뀌어야 합니다</span>
+      </h2>
+
+      <div class="ov-3">
+        <div class="ov-p">
+          <div class="ov-p-n">STRUCTURE</div>
+          <div class="ov-p-t">구조</div>
+          <div class="ov-p-b">위아래 턱 크기의 조화와 바른 정렬입니다. 좁아진 위턱을 넓히고 틀어진 아래턱을 제자리로 유도합니다. 치아가 설 자리를 먼저 만드는 단계로, <strong>4D 입체교정장치</strong>로 뼈를 이동시킵니다.</div>
+        </div>
+        <div class="ov-p">
+          <div class="ov-p-n">TEETH</div>
+          <div class="ov-p-t">치아</div>
+          <div class="ov-p-b">바른 턱의 크기와 위치 위에서 치아를 배열합니다. 어금니가 바르게 물려야 삼킬 때 턱이 안정되고 씹는 힘이 고르게 나뉩니다. 2단계 치아 배열을 위해 <strong>와이어나 투명장치</strong>를 사용합니다.</div>
+        </div>
+        <div class="ov-p">
+          <div class="ov-p-n">FUNCTION</div>
+          <div class="ov-p-t">기능</div>
+          <div class="ov-p-b">바른 코호흡, 입술, 혀 위치, 바르게 씹고 삼키기, 바른 자세입니다. 이 단계가 완성되어야 결과가 유지됩니다. 가장 근본이 되는 치료로, 기능훈련인 <strong>바른미소디자인</strong>은 1단계부터 환자에게 맞춰 함께 진행합니다.</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── 4. 치료 3단계 ────────────────────────── -->
+    <section>
+      <div class="ov-kw" style="margin-top:34px">치료 순서</div>
+      <h2 style="font-family:'TmonMonsori',serif;font-size:clamp(20px,3.6vw,25px);font-weight:700;color:#111110;line-height:1.45;margin:0 0 6px">
+        뼈의 이동 &rarr; 치아의 이동<br>&rarr; <span style="color:#007A54">바른미소디자인</span>
+      </h2>
+      <p class="ov-lead" style="margin-bottom:16px">이 순서를 지켜야 결과가 오래갑니다.</p>
+
+      <div style="background:#fff;border:1px solid #E8E8E4;border-radius:16px;padding:6px 20px">
+        <div class="ov-step">
+          <div class="ov-step-n">1</div>
+          <div class="ov-step-b">
+            <div class="ov-step-t">골격 교정 &mdash; 턱의 크기와 위치</div>
+            <div class="ov-step-s">4D 입체교정장치 · 목표 달성까지 약 6개월</div>
+            <div class="ov-step-d">장치를 쓰면 턱의 좌우·수직 위치가 즉시 달라지고, 크기는 주 1회 환자가 직접 스크류를 돌려 서서히 바꿉니다. 위턱이 아래턱을 덮고 좌우대칭이 되도록 유도합니다.</div>
+          </div>
+        </div>
+        <div class="ov-step">
+          <div class="ov-step-n">2</div>
+          <div class="ov-step-b">
+            <div class="ov-step-t">치아 배열 &mdash; 만들어진 자리 위에서</div>
+            <div class="ov-step-s">고정식 · 투명교정</div>
+            <div class="ov-step-d">뼈의 기반이 잡힌 뒤 치아를 정렬합니다. 순서가 바뀌면 좁은 자리에 억지로 치아를 밀어넣게 되고, 그때 발치가 필요해집니다.</div>
+          </div>
+        </div>
+        <div class="ov-step">
+          <div class="ov-step-n">3</div>
+          <div class="ov-step-b">
+            <div class="ov-step-t">바른미소디자인 &mdash; 기능 재훈련</div>
+            <div class="ov-step-s">입술 · 혀 · 호흡 · 자세 + 바르게 씹고 삼키기</div>
+            <div class="ov-step-d">구조가 바뀐 뒤에야 기능 훈련이 효과를 냅니다. 이 단계가 없으면 바뀐 구조는 다시 같은 방식으로 무너집니다.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── 5. 이런 경우 ─────────────────────────── -->
+    <section>
+      <div class="ov-kw" style="margin-top:34px">이런 경우</div>
+      <h2 style="font-family:'TmonMonsori',serif;font-size:clamp(20px,3.6vw,25px);font-weight:700;color:#111110;line-height:1.45;margin:0 0 6px">
+        치아만의 문제가<br><span style="color:#007A54">아닐 수 있습니다</span>
+      </h2>
+
+      <div class="ov-case">
+        <div class="ov-c">아이가 입을 벌리고 자거나 코를 곱니다</div>
+        <div class="ov-c">교정을 했는데 다시 비뚤어졌습니다</div>
+        <div class="ov-c">얼굴이 비대칭이거나 턱이 한쪽으로 틀어져 보입니다</div>
+        <div class="ov-c">입술이 자연스럽게 닫히지 않습니다</div>
+        <div class="ov-c">씹을 때 아프거나 턱에서 소리가 납니다</div>
+        <div class="ov-c">치아가 자꾸 깨지거나 특정 치아만 닳습니다</div>
+        <div class="ov-c">코로 숨쉬기 불편하고 자도 피곤합니다</div>
+        <div class="ov-c">여러 치과에서 발치나 수술을 권유받았습니다</div>
+      </div>
+    </section>
+
+
+    <!-- ── 6. 연령별로 갈립니다 (탭 이정표) ─────────── -->
+    <section>
+      <div class="ov-kw" style="margin-top:34px">언제 시작하나</div>
+      <h2 style="font-family:'TmonMonsori',serif;font-size:clamp(20px,3.6vw,25px);font-weight:700;color:#111110;line-height:1.45;margin:0 0 6px">
+        같은 원리, <span style="color:#007A54">다른 시작점</span>
+      </h2>
+      <p class="ov-lead" style="margin-bottom:14px">성장이 남았는지, 끝났는지, 이미 무너졌는지에 따라 시작점이 달라집니다.</p>
+
+      <div class="ov-age">
+
+        <div class="ov-a" onclick="show('child',document.querySelectorAll('.tab')[1])">
+          <div class="ov-a-h" style="background:linear-gradient(160deg,#4a7a5a,#009B6B)">
+            <div class="ov-a-w">만 4세 ~ 송곳니 나기 전</div>
+            <div class="ov-a-t">성장교정</div>
+          </div>
+          <div class="ov-a-b">
+            <div class="ov-a-lead">성장력이 있을 때 <strong>방향만 유도</strong>합니다.</div>
+            <div class="ov-a-tag"><span>혼합치열기</span><span>구강호흡</span><span>좁은 위턱</span></div>
+            <div class="ov-a-go">성장교정 보기 &rarr;</div>
           </div>
         </div>
 
-        <!-- 청소년·청년 -->
-        <div style="border-radius:18px;overflow:hidden;border:1.5px solid var(--cr2);cursor:pointer;transition:all .2s" onclick="show('teen',document.querySelectorAll('.tab')[2])" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,122,84,.1)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
-          <div style="background:linear-gradient(160deg,#3a6a4a,#007A54);padding:28px 20px 22px;text-align:center;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end">
-            <div style="font-size:48px;margin-bottom:12px"></div>
-            <div style="font-size:10px;color:#C8A84B;letter-spacing:.1em;font-weight:600;margin-bottom:6px">청소년·청년 (12~40대)</div>
-            <div style="font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;color:#FAF8F0;line-height:1.4">스스로의 건강함과<br>아름다움을</div>
+        <div class="ov-a" onclick="show('teen',document.querySelectorAll('.tab')[2])">
+          <div class="ov-a-h" style="background:linear-gradient(160deg,#3a6a4a,#007A54)">
+            <div class="ov-a-w">송곳니가 난 후 ~ 40대</div>
+            <div class="ov-a-t">4D 입체교정</div>
           </div>
-          <div style="padding:16px 18px;background:var(--wh)">
-            <div style="font-size:11.5px;color:#555550;font-style:italic;line-height:1.6;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--cr2)">"교정을 두 번 했는데 계속 재발했어요. 원인을 몰랐던 거겠죠."</div>
-            <div style="font-size:12px;color:var(--g);font-weight:500;line-height:1.8"> 4D 입체교정<br> 바른턱얼굴 교합치료</div>
-            <a href="petit_4d_ortho.html" style="display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:12px;font-weight:600;color:#007A54;text-decoration:none;border:1px solid #C5E8DC;padding:5px 12px;border-radius:100px;background:#fff">4D 입체교정 장치 보기 →</a>
+          <div class="ov-a-b">
+            <div class="ov-a-lead">성장이 끝나도 <strong>비발치·비수술</strong>로 접근합니다.</div>
+            <div class="ov-a-tag"><span>주걱턱</span><span>돌출·무턱</span><span>안면비대칭</span></div>
+            <div class="ov-a-go">4D 입체교정 보기 &rarr;</div>
           </div>
         </div>
 
-        <!-- 중장년 -->
-        <div style="border-radius:18px;overflow:hidden;border:1.5px solid var(--cr2);cursor:pointer;transition:all .2s" onclick="show('adult',document.querySelectorAll('.tab')[3])" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,122,84,.1)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
-          <div style="background:linear-gradient(160deg,#2a5040,#005A3C);padding:28px 20px 22px;text-align:center;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end">
-            <div style="font-size:48px;margin-bottom:12px"></div>
-            <div style="font-size:10px;color:#C8A84B;letter-spacing:.1em;font-weight:600;margin-bottom:6px">중장년·인생2기 (50대 이상)</div>
-            <div style="font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;color:#FAF8F0;line-height:1.4">신뢰할 수 있는<br>평생 파트너</div>
+        <div class="ov-a" onclick="show('adult',document.querySelectorAll('.tab')[3])">
+          <div class="ov-a-h" style="background:linear-gradient(160deg,#2a5040,#005A3C)">
+            <div class="ov-a-w">자연치아 2개 이상 상실 · 중장년</div>
+            <div class="ov-a-t">교합재건</div>
           </div>
-          <div style="padding:16px 18px;background:var(--wh)">
-            <div style="font-size:11.5px;color:#555550;font-style:italic;line-height:1.6;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--cr2)">"세 군데서 뽑아야 한다고 했는데 여기서 처음으로 다른 이야기를 들었습니다."</div>
-            <div style="font-size:12px;color:var(--g);font-weight:500;line-height:1.8"> 자연치아 살리기<br> 치주재생 교합재건</div>
-            <a href="petit_natural_tooth.html" style="display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:12px;font-weight:600;color:#007A54;text-decoration:none;border:1px solid #C5E8DC;padding:5px 12px;border-radius:100px;background:#fff">자연치아살리기 →</a>
+          <div class="ov-a-b">
+            <div class="ov-a-lead">무너진 교합을 <strong>다시 세웁니다</strong>.</div>
+            <div class="ov-a-tag"><span>마모·결손</span><span>흔들림</span><span>보철 재발</span></div>
+            <div class="ov-a-go">자연치아 살리기 보기 &rarr;</div>
           </div>
         </div>
 
       </div>
-    </div>
+    </section>
 
   </div>
 </div>
@@ -613,7 +824,6 @@ body{background:#FAFAF9 !important;}
         <div class="ch"><div class="ch-t">재발 방지</div><div class="ch-b">교정 후 재발 가능성이 낮아집니다</div></div>
         <div class="ch"><div class="ch-t">인상 변화</div><div class="ch-b">입꼬리 위치·인중 길이·얼굴 인상이 바뀝니다</div></div>
       </div>
-    </div>
 
 
   </div>
