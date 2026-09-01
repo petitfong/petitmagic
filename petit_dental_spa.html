@@ -79,10 +79,13 @@
 .lc-num{font-family:'TmonMonsori',serif;font-size:13px;flex-shrink:0}
 .lc.main .lc-num{color:#C8A84B}
 .lc.sub .lc-num{color:#BBBBAA}
-.lc.main .lc.sub .lc.main .lc.sub .lc.main .lc.sub /* CTA */
+/* CTA */
 @media(min-width:640px){
-  .hero,.sec-head,.sec-line,.programs,.levels,.link-sec,.hero,.sec-head{padding-left:32px;padding-right:32px}
-  .programs,.levels,}
+  .hero,.sec-head,.sec-line,.programs,.levels,.link-sec{padding-left:32px;padding-right:32px}
+}
+/* 넓은 화면 중앙 정렬 — 배경은 전체 폭, 내용만 가운데 */
+.hero>*,.sec-head>*{max-width:760px;margin-left:auto;margin-right:auto}
+.programs,.levels,.link-sec{max-width:760px;margin-left:auto;margin-right:auto}
 
 /* ── HERO BRUNCH ── */
 .hero{background:#fff;min-height:auto;padding:52px 28px 44px;border-bottom:1px solid #E0E0DA;position:relative;overflow:hidden}
