@@ -379,6 +379,76 @@ h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-
   font-style: normal;
   font-display: swap;
 }
+
+/* 4번 카드 · 확인 순서 · 기준 */
+.txc-4 .txc-head{background:#2a4a38}
+.txc-4 .txc-num{background:rgba(200,168,75,.2);color:var(--go)}
+.txc-4 .txc-kw{color:#C8A84B}
+.txc-4 .txc-title{color:#FAF8F0}
+.txc-4 .txc-tag{background:var(--go);color:var(--g)}
+.txc-check{background:#F1F7F4;border:1px solid #C5E8DC;border-radius:10px;padding:14px 16px;margin-bottom:12px}
+.txc-check-title{font-size:11px;letter-spacing:.1em;color:#007A54;text-transform:uppercase;font-weight:700;margin-bottom:9px}
+.txc-check-item{position:relative;padding-left:15px;font-size:13.5px;color:var(--tx);line-height:1.6;margin-bottom:6px}
+.txc-check-item:last-child{margin-bottom:0}
+.txc-check-item::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:#007A54}
+.txc-core{margin-top:12px;padding:12px 15px;background:#FFFBEF;border:1px solid #E8D090;border-radius:9px;
+  font-size:13px;color:#5A4010;line-height:1.75}
+.txc-core strong{color:#4A3008;font-weight:600}
+.std{margin-top:22px;background:linear-gradient(160deg,#2a5040,#005A3C);border-radius:18px;padding:26px 24px}
+.std-t{font-size:10px;letter-spacing:.16em;color:#C8A84B;font-weight:700;text-transform:uppercase;margin-bottom:14px}
+.std-b{font-family:'TmonMonsori',serif;font-size:clamp(16px,3vw,20px);font-weight:700;color:#FAF8F0;line-height:1.8;margin-bottom:14px}
+.std-c{font-size:13.5px;color:rgba(250,248,240,.85);line-height:1.9}
+.std-c strong{color:#C8A84B;font-weight:600}
+
+/* 상태별 자연치아살리기 */
+.ntx-lead{font-size:14px;color:var(--mu);line-height:1.95;margin:0 0 20px}
+.ntx-lead strong{color:var(--tx);font-weight:600}
+.ntx-list{display:flex;flex-direction:column;gap:9px}
+.ntx{background:var(--wh);border:1.5px solid var(--cr2);border-radius:14px;overflow:hidden;cursor:pointer;transition:border-color .15s}
+.ntx:hover{border-color:#C5E8DC}
+.ntx.open{border-color:#007A54}
+.ntx-head{display:flex;align-items:flex-start;gap:13px;padding:16px 18px}
+.ntx-n{flex-shrink:0;font-family:'TmonMonsori',serif;font-size:15px;font-weight:700;color:#C8A84B;min-width:24px;margin-top:1px}
+.ntx-h{flex:1;min-width:0}
+.ntx-t{font-family:'TmonMonsori',serif;font-size:16px;font-weight:700;color:#111110;margin-bottom:4px;line-height:1.45}
+.ntx-l{font-size:13px;color:var(--mu);line-height:1.7}
+.ntx-arr{flex-shrink:0;font-size:11px;color:#C8A84B;transition:transform .25s;margin-top:4px}
+.ntx.open .ntx-arr{transform:rotate(180deg)}
+.ntx-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.ntx.open .ntx-body{max-height:900px}
+.ntx-blk{margin:0 18px 10px;border-radius:10px;padding:14px 16px}
+.ntx-chk{background:#F1F7F4;border:1px solid #C5E8DC}
+.ntx-cure{background:#FAFAF9;border:1px solid var(--cr2)}
+.ntx-blk-t{font-size:11px;letter-spacing:.1em;font-weight:700;text-transform:uppercase;margin-bottom:9px}
+.ntx-chk .ntx-blk-t{color:#007A54}
+.ntx-cure .ntx-blk-t{color:#8A6820}
+.ntx-i{position:relative;padding-left:14px;font-size:13.5px;color:var(--tx);line-height:1.65;margin-bottom:5px}
+.ntx-i:last-child{margin-bottom:0}
+.ntx-i::before{content:'';position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:#007A54}
+.ntx-p{font-size:13.5px;color:var(--tx);line-height:1.8}
+.ntx-p b{color:#007A54;font-weight:600}
+.ntx-core{margin:0 18px 18px;padding:13px 15px;background:#FFFBEF;border:1px solid #E8D090;border-radius:9px;
+  font-size:13px;color:#5A4010;line-height:1.8}
+.ntx-core strong{color:#4A3008;font-weight:600}
+
+/* 원칙 */
+.rul-list{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.rul{display:flex;align-items:flex-start;gap:13px;background:var(--wh);border:1px solid var(--cr2);border-radius:12px;padding:15px 17px}
+.rul-n{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:#007A54;color:#FAF8F0;
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;margin-top:1px}
+.rul-b{flex:1;min-width:0}
+.rul-t{font-size:14.5px;font-weight:600;color:#111110;line-height:1.55;margin-bottom:4px}
+.rul-d{font-size:13px;color:var(--mu);line-height:1.7}
+
+/* 순서 */
+.ord{background:linear-gradient(160deg,#2a5040,#005A3C);border-radius:18px;padding:26px 24px}
+.ord-kw{font-size:10px;letter-spacing:.16em;color:#C8A84B;font-weight:700;text-transform:uppercase;margin-bottom:14px}
+.ord-flow{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-bottom:16px}
+.ord-i{font-size:12.5px;color:#FAF8F0;background:rgba(250,248,240,.12);border:1px solid rgba(250,248,240,.2);
+  border-radius:100px;padding:6px 13px}
+.ord-a{color:#C8A84B;font-size:12px}
+.ord-b{font-size:13.5px;color:rgba(250,248,240,.85);line-height:1.9}
+.ord-b strong{color:#C8A84B;font-weight:600}
 </style>
 <link rel="stylesheet" href="petit-design.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -459,102 +529,334 @@ h2.sec-title,h2{font-family:'TmonMonsori',serif;font-weight:400;letter-spacing:-
 
   <!-- TREATMENTS -->
   <section class="tx-sec">
-    <div class="sec-kw">상태별 치료</div>
-    <h2 class="sec-title">어떤 상태여도<br>방법이 있습니다</h2>
+    <div class="sec-kw">상태별 자연치아살리기</div>
+    <h2 class="sec-title">어떤 상태여도<br>먼저 확인합니다</h2>
+    <p class="ntx-lead">
+      치아가 흔들리거나, 깨지거나, 신경이 노출되었다고 해서 바로 발치하거나 신경치료를 결정하지 않습니다.<br>
+      <strong>왜 문제가 생겼는지 확인하고, 남아 있는 치아 · 신경 · 뿌리 · 잇몸뼈의 상태를 평가한 뒤, 살릴 수 있는 부분을 최대한 보존합니다.</strong>
+    </p>
 
-    <div class="tx-cards">
-
-      <!-- 1. 흔들리는 치아 -->
-      <div class="txc txc-1">
-        <div class="txc-head">
-          <div class="txc-num">1</div>
-          <div class="txc-htxt">
-            <div class="txc-kw">잇몸 · 치주 문제</div>
-            <div class="txc-title">흔들리는 치아</div>
+    <div class="ntx-list">
+      <div class="ntx" onclick="this.classList.toggle('open')">
+        <div class="ntx-head">
+          <div class="ntx-n">01</div>
+          <div class="ntx-h">
+            <div class="ntx-t">흔들리는 치아</div>
+            <div class="ntx-l">치아가 흔들린다고 바로 빼지 않습니다.</div>
           </div>
-          <div class="txc-tag">엠도게인 치주재생</div>
+          <div class="ntx-arr">▼</div>
         </div>
-        <div class="txc-body">
-          <div class="txc-symptom">
-            <div class="sym-chip">치아 흔들림</div>
-            <div class="sym-chip">잇몸 내려앉음</div>
-            <div class="sym-chip">잇몸 붓고 피남</div>
-            <div class="sym-chip">치아 시림</div>
+        <div class="ntx-body">
+          <div class="ntx-blk ntx-chk">
+            <div class="ntx-blk-t">확인합니다</div>
+            <div class="ntx-i">치아 흔들림 정도</div>
+            <div class="ntx-i">잇몸 염증과 치주낭</div>
+            <div class="ntx-i">잇몸뼈 소실 정도</div>
+            <div class="ntx-i">X-ray상 치근과 주변 골 상태</div>
+            <div class="ntx-i">특정 치아에 과도한 힘이 가해지는지</div>
+            <div class="ntx-i">이갈이 · 꽉 물기 · 교합외상 여부</div>
           </div>
-          <div class="txc-desc">
-            잇몸이 내려앉고 치아가 흔들린다고 해서 바로 뽑을 필요가 없습니다.<br>
-            <strong>엠도게인(Emdogain)은 치아 발생 단백질을 활용해 파괴된 치주 조직을 재생</strong>시키는 치료입니다. 잃었던 뼈와 잇몸을 되살려 흔들리던 치아를 안정시킵니다.
+          <div class="ntx-blk ntx-cure">
+            <div class="ntx-blk-t">치료합니다</div>
+            <div class="ntx-p">원인에 따라 <b>치주치료 · 염증조절 · 교합조정 · 치아고정 · 교합치료</b> 등을 시행합니다.</div>
           </div>
-          <div class="txc-how">
-            <div class="txc-how-title">치료 순서</div>
-            <div class="txc-how-item">철저한 잇몸치료 + 양치질 교육으로 염증 제거</div>
-            <div class="txc-how-item">엠도게인 단백질 적용으로 치주 조직 재생 유도</div>
-            <div class="txc-how-item">교합조정으로 흔들리는 치아에 걸리는 과부하 제거</div>
-            <div class="txc-how-item">기능 재훈련 — 재생된 조직이 오래 유지되도록</div>
-          </div>
+          <div class="ntx-core">흔들림 자체만 보는 것이 아니라 <strong>왜 그 치아가 흔들리게 되었는지를 먼저 찾습니다.</strong></div>
         </div>
       </div>
 
-      <!-- 2. 부러진 치아 -->
-      <div class="txc txc-2">
-        <div class="txc-head">
-          <div class="txc-num">2</div>
-          <div class="txc-htxt">
-            <div class="txc-kw">신경 · 치수 문제</div>
-            <div class="txc-title">부러진 치아</div>
+      <div class="ntx" onclick="this.classList.toggle('open')">
+        <div class="ntx-head">
+          <div class="ntx-n">02</div>
+          <div class="ntx-h">
+            <div class="ntx-t">부분 파절</div>
+            <div class="ntx-l">치아 일부가 깨졌지만 남아 있는 자연치아를 충분히 사용할 수 있는 상태입니다.</div>
           </div>
-          <div class="txc-tag">MTA 신경재생치료</div>
+          <div class="ntx-arr">▼</div>
         </div>
-        <div class="txc-body">
-          <div class="txc-symptom">
-            <div class="sym-chip">치아 파절</div>
-            <div class="sym-chip">깨진 치아</div>
-            <div class="sym-chip">뿌리만 남은 치아</div>
-            <div class="sym-chip">신경치료 반복</div>
+        <div class="ntx-body">
+          <div class="ntx-blk ntx-chk">
+            <div class="ntx-blk-t">확인합니다</div>
+            <div class="ntx-i">파절 범위</div>
+            <div class="ntx-i">남아 있는 치아량</div>
+            <div class="ntx-i">신경 노출 여부</div>
+            <div class="ntx-i">깨진 원인이 충치인지 과도한 힘인지</div>
+            <div class="ntx-i">교합간섭 여부</div>
           </div>
-          <div class="txc-desc">
-            부러졌다고 바로 뽑는 것이 아닙니다. <strong>MTA(Mineral Trioxide Aggregate)는 생체친화적 소재로 노출된 신경을 덮고, 치아 뿌리를 살려쓸 수 있게</strong> 합니다. 기존 신경치료로 마무리하던 것보다 치아 수명이 훨씬 길어집니다.
+          <div class="ntx-blk ntx-cure">
+            <div class="ntx-blk-t">치료합니다</div>
+            <div class="ntx-p">필요한 경우 먼저 <b>교합조정</b>을 시행하고, 남아 있는 치아는 가능한 삭제하지 않은 채 <b>무삭제 · 최소삭제 레진으로 재건</b>합니다.</div>
           </div>
-          <div class="txc-how">
-            <div class="txc-how-title">치료 순서</div>
-            <div class="txc-how-item">신경치료 후 MTA로 치수강 밀봉·재생 유도</div>
-            <div class="txc-how-item">치아 뿌리(치근)를 살려 기둥(포스트) 세우기</div>
-            <div class="txc-how-item">크라운으로 치아 머리 재건</div>
-            <div class="txc-how-item">교합조정으로 재건한 치아 보호</div>
-          </div>
+          <div class="ntx-core">깨진 부분을 단순히 메우는 것이 아니라 <strong>다시 깨지게 만든 힘까지 함께 확인합니다.</strong></div>
         </div>
       </div>
 
-      <!-- 3. 부분 파절 -->
-      <div class="txc txc-3">
-        <div class="txc-head">
-          <div class="txc-num">3</div>
-          <div class="txc-htxt">
-            <div class="txc-kw">치관 · 마모 문제</div>
-            <div class="txc-title">부분 파절·마모된 치아</div>
+      <div class="ntx" onclick="this.classList.toggle('open')">
+        <div class="ntx-head">
+          <div class="ntx-n">03</div>
+          <div class="ntx-h">
+            <div class="ntx-t">신경이 노출된 치아</div>
+            <div class="ntx-l">신경이 보인다고 바로 신경치료하지 않습니다.</div>
           </div>
-          <div class="txc-tag">무삭제 레진 재건</div>
+          <div class="ntx-arr">▼</div>
         </div>
-        <div class="txc-body">
-          <div class="txc-symptom">
-            <div class="sym-chip">부분 파절</div>
-            <div class="sym-chip">치아 마모·닳음</div>
-            <div class="sym-chip">치경부 패임</div>
-            <div class="sym-chip">치아 시림</div>
+        <div class="ntx-body">
+          <div class="ntx-blk ntx-chk">
+            <div class="ntx-blk-t">확인합니다</div>
+            <div class="ntx-i">신경 노출 범위</div>
+            <div class="ntx-i">출혈 상태</div>
+            <div class="ntx-i">오염 정도</div>
+            <div class="ntx-i">통증의 양상과 지속시간</div>
+            <div class="ntx-i">치수의 생활력</div>
+            <div class="ntx-i">뿌리 끝 염증 여부</div>
           </div>
-          <div class="txc-desc">
-            머리가 부분적으로 깨지거나 닳았다고 신경치료까지 갈 필요가 없습니다. <strong>무삭제 레진 재건은 치아를 깎지 않고 레진으로 형태를 복원</strong>합니다. 여기에 교합조정을 더하면 다시 파절되는 것을 막을 수 있습니다.
+          <div class="ntx-blk ntx-cure">
+            <div class="ntx-blk-t">치료합니다</div>
+            <div class="ntx-p">신경을 살릴 가능성이 있다면 <b>MTA를 이용하여 치수를 보호</b>하고 가능한 범위에서 생활치수를 보존합니다. 필요한 경우 이후 레진이나 보철로 치아를 재건합니다.</div>
           </div>
-          <div class="txc-how">
-            <div class="txc-how-title">치료 순서</div>
-            <div class="txc-how-item">교합 분석 — 어디서 힘이 잘못 걸리는지 확인</div>
-            <div class="txc-how-item">교합조정으로 과부하 제거</div>
-            <div class="txc-how-item">무삭제 레진으로 파절·마모 부위 재건</div>
-            <div class="txc-how-item">이갈이·이악물기 습관 차단 장치 병행 (필요시)</div>
-          </div>
+          <div class="ntx-core"><strong>살릴 수 있는 신경은 최대한 살립니다.</strong></div>
         </div>
       </div>
 
+      <div class="ntx" onclick="this.classList.toggle('open')">
+        <div class="ntx-head">
+          <div class="ntx-n">04</div>
+          <div class="ntx-h">
+            <div class="ntx-t">완전 파절 · 크게 부러진 치아</div>
+            <div class="ntx-l">치아 머리 부분이 대부분 없어졌더라도 뿌리가 건강하다면 자연치아를 다시 사용할 가능성이 있습니다.</div>
+          </div>
+          <div class="ntx-arr">▼</div>
+        </div>
+        <div class="ntx-body">
+          <div class="ntx-blk ntx-chk">
+            <div class="ntx-blk-t">확인합니다</div>
+            <div class="ntx-i">파절 위치와 깊이</div>
+            <div class="ntx-i">잇몸 아래까지 파절되었는지</div>
+            <div class="ntx-i">신경 노출 여부</div>
+            <div class="ntx-i">치근 파절 여부</div>
+            <div class="ntx-i">잇몸뼈 상태</div>
+            <div class="ntx-i">감염과 통증</div>
+            <div class="ntx-i">남아 있는 치아량</div>
+            <div class="ntx-i">교합력</div>
+          </div>
+          <div class="ntx-blk ntx-cure">
+            <div class="ntx-blk-t">치료합니다</div>
+            <div class="ntx-p">보존 가능하다면 상태에 따라 <b>MTA &rarr; Post &amp; Core &rarr; 레진 또는 보철 재건</b> 등으로 치아의 구조를 다시 만듭니다.</div>
+          </div>
+          <div class="ntx-core">치아가 얼마나 많이 부러졌는가만 보는 것이 아니라 <strong>남아 있는 뿌리를 다시 사용할 수 있는가를 판단합니다.</strong></div>
+        </div>
+      </div>
+
+      <div class="ntx" onclick="this.classList.toggle('open')">
+        <div class="ntx-head">
+          <div class="ntx-n">05</div>
+          <div class="ntx-h">
+            <div class="ntx-t">깊은 충치</div>
+            <div class="ntx-l">충치가 깊다고 해서 처음부터 신경치료를 목표로 하지 않습니다.</div>
+          </div>
+          <div class="ntx-arr">▼</div>
+        </div>
+        <div class="ntx-body">
+          <div class="ntx-blk ntx-chk">
+            <div class="ntx-blk-t">확인합니다</div>
+            <div class="ntx-i">충치 깊이</div>
+            <div class="ntx-i">신경과의 거리</div>
+            <div class="ntx-i">통증 여부</div>
+            <div class="ntx-i">치수 생활력</div>
+            <div class="ntx-i">치근단 염증 여부</div>
+            <div class="ntx-i">남아 있는 치아벽</div>
+          </div>
+          <div class="ntx-blk ntx-cure">
+            <div class="ntx-blk-t">치료합니다</div>
+            <div class="ntx-p">신경을 보존할 수 있다면 <b>충치 제거 &rarr; 치수 보호 &rarr; MTA 등 생체친화 재료 사용 &rarr; 치아 형태 재건</b> 순으로 진행합니다.</div>
+          </div>
+          <div class="ntx-core">충치를 치료하면서도 <strong>신경을 최대한 보존하는 것이 자연치아살리기의 중요한 기준입니다.</strong></div>
+        </div>
+      </div>
+
+      <div class="ntx" onclick="this.classList.toggle('open')">
+        <div class="ntx-head">
+          <div class="ntx-n">06</div>
+          <div class="ntx-h">
+            <div class="ntx-t">신경치료가 필요한 치아</div>
+            <div class="ntx-l">신경치료 역시 치아를 뽑기 위한 치료가 아니라 뿌리를 남겨 자연치아를 계속 사용하기 위한 보존치료입니다.</div>
+          </div>
+          <div class="ntx-arr">▼</div>
+        </div>
+        <div class="ntx-body">
+          <div class="ntx-blk ntx-chk">
+            <div class="ntx-blk-t">확인합니다</div>
+            <div class="ntx-i">자발통 · 야간통</div>
+            <div class="ntx-i">씹을 때 통증</div>
+            <div class="ntx-i">치수 생활력</div>
+            <div class="ntx-i">치근단 병소</div>
+            <div class="ntx-i">치근 상태</div>
+            <div class="ntx-i">치아 파절 여부</div>
+          </div>
+          <div class="ntx-blk ntx-cure">
+            <div class="ntx-blk-t">치료합니다</div>
+            <div class="ntx-p"><b>근관치료 &rarr; 치아 내부 보강 &rarr; Core 또는 Post &amp; Core &rarr; 필요한 경우 보철 재건</b>을 시행합니다.</div>
+          </div>
+          <div class="ntx-core"><strong>신경을 살릴 수 없다면 뿌리를 살립니다.</strong></div>
+        </div>
+      </div>
+
+      <div class="ntx" onclick="this.classList.toggle('open')">
+        <div class="ntx-head">
+          <div class="ntx-n">07</div>
+          <div class="ntx-h">
+            <div class="ntx-t">이미 신경치료한 치아</div>
+            <div class="ntx-l">신경치료한 치아가 아프다고 해서 곧바로 발치하는 것은 아닙니다.</div>
+          </div>
+          <div class="ntx-arr">▼</div>
+        </div>
+        <div class="ntx-body">
+          <div class="ntx-blk ntx-chk">
+            <div class="ntx-blk-t">확인합니다</div>
+            <div class="ntx-i">기존 근관치료 상태</div>
+            <div class="ntx-i">뿌리 끝 염증</div>
+            <div class="ntx-i">치근 파절 여부</div>
+            <div class="ntx-i">보철물 아래 충치</div>
+            <div class="ntx-i">치아벽 잔존량</div>
+            <div class="ntx-i">교합력</div>
+          </div>
+          <div class="ntx-blk ntx-cure">
+            <div class="ntx-blk-t">치료합니다</div>
+            <div class="ntx-p">원인에 따라 <b>재근관치료 · 치근단 치료 · 치아 재건 · 교합조정</b> 등을 검토합니다.</div>
+          </div>
+          <div class="ntx-core">이미 치료한 치아에서도 <strong>다시 살릴 수 있는 가능성을 먼저 확인합니다.</strong></div>
+        </div>
+      </div>
+
+      <div class="ntx" onclick="this.classList.toggle('open')">
+        <div class="ntx-head">
+          <div class="ntx-n">08</div>
+          <div class="ntx-h">
+            <div class="ntx-t">뿌리만 남은 치아</div>
+            <div class="ntx-l">겉으로 보기에는 뽑아야 할 것처럼 보여도 뿌리가 건강하면 보존할 가능성이 있습니다.</div>
+          </div>
+          <div class="ntx-arr">▼</div>
+        </div>
+        <div class="ntx-body">
+          <div class="ntx-blk ntx-chk">
+            <div class="ntx-blk-t">확인합니다</div>
+            <div class="ntx-i">치근 길이</div>
+            <div class="ntx-i">치근 파절</div>
+            <div class="ntx-i">뿌리 주변 잇몸뼈</div>
+            <div class="ntx-i">충치가 내려간 깊이</div>
+            <div class="ntx-i">치주 상태</div>
+            <div class="ntx-i">재건 후 사용할 수 있는 치아 구조</div>
+          </div>
+          <div class="ntx-blk ntx-cure">
+            <div class="ntx-blk-t">치료합니다</div>
+            <div class="ntx-p">보존 가능하다면 <b>감염 제거 &rarr; 필요한 경우 신경치료 &rarr; Post &amp; Core &rarr; 치아 형태 재건</b>을 시행합니다.</div>
+          </div>
+          <div class="ntx-core"><strong>치아 머리가 없어도 건강한 뿌리가 남아 있다면 다시 치아를 세울 수 있는지 먼저 판단합니다.</strong></div>
+        </div>
+      </div>
+
+      <div class="ntx" onclick="this.classList.toggle('open')">
+        <div class="ntx-head">
+          <div class="ntx-n">09</div>
+          <div class="ntx-h">
+            <div class="ntx-t">잇몸뼈가 많이 내려간 치아</div>
+            <div class="ntx-l">잇몸뼈가 줄었다고 해서 모든 치아를 같은 기준으로 발치하지 않습니다.</div>
+          </div>
+          <div class="ntx-arr">▼</div>
+        </div>
+        <div class="ntx-body">
+          <div class="ntx-blk ntx-chk">
+            <div class="ntx-blk-t">확인합니다</div>
+            <div class="ntx-i">치주낭 깊이</div>
+            <div class="ntx-i">수평 · 수직 골소실 형태</div>
+            <div class="ntx-i">치아 흔들림</div>
+            <div class="ntx-i">치근 형태</div>
+            <div class="ntx-i">염증</div>
+            <div class="ntx-i">교합외상</div>
+            <div class="ntx-i">치아별 예후</div>
+          </div>
+          <div class="ntx-blk ntx-cure">
+            <div class="ntx-blk-t">치료합니다</div>
+            <div class="ntx-p">상태에 따라 <b>치주치료 · 교합조정 · 치아고정 · 치주재생치료</b> 등을 시행합니다. 재생 가능성이 있는 수직성 골결손 등에서는 적응증에 따라 치주재생치료를 검토할 수 있습니다.</div>
+          </div>
+          <div class="ntx-core">잇몸뼈의 양만 보는 것이 아니라 <strong>염증과 힘을 함께 조절해야 합니다.</strong></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 원칙 -->
+  <section class="tx-sec">
+    <div class="sec-kw">치료 원칙</div>
+    <h2 class="sec-title">쁘띠치과 자연치아살리기의<br>일곱 가지 원칙</h2>
+
+    <div class="rul-list">
+      <div class="rul">
+        <div class="rul-n">1</div>
+        <div class="rul-b">
+          <div class="rul-t">흔들린다고 바로 빼지 않습니다</div>
+          <div class="rul-d">흔들리는 원인을 먼저 찾습니다.</div>
+        </div>
+      </div>
+      <div class="rul">
+        <div class="rul-n">2</div>
+        <div class="rul-b">
+          <div class="rul-t">깨졌다고 바로 씌우지 않습니다</div>
+          <div class="rul-d">남아 있는 치아를 최대한 보존합니다.</div>
+        </div>
+      </div>
+      <div class="rul">
+        <div class="rul-n">3</div>
+        <div class="rul-b">
+          <div class="rul-t">신경이 보인다고 바로 신경치료하지 않습니다</div>
+          <div class="rul-d">살릴 수 있는 신경은 살립니다.</div>
+        </div>
+      </div>
+      <div class="rul">
+        <div class="rul-n">4</div>
+        <div class="rul-b">
+          <div class="rul-t">신경을 살릴 수 없다면 뿌리를 살립니다</div>
+          <div class="rul-d">신경치료도 자연치아 보존을 위한 치료입니다.</div>
+        </div>
+      </div>
+      <div class="rul">
+        <div class="rul-n">5</div>
+        <div class="rul-b">
+          <div class="rul-t">뿌리가 남아 있다면 다시 사용할 수 있는지 확인합니다</div>
+          <div class="rul-d">Post &amp; Core 등을 통해 치아를 재건할 수 있습니다.</div>
+        </div>
+      </div>
+      <div class="rul">
+        <div class="rul-n">6</div>
+        <div class="rul-b">
+          <div class="rul-t">치료한 치아가 다시 아프다고 바로 발치하지 않습니다</div>
+          <div class="rul-d">재치료 가능성을 먼저 평가합니다.</div>
+        </div>
+      </div>
+      <div class="rul">
+        <div class="rul-n">7</div>
+        <div class="rul-b">
+          <div class="rul-t">치아만 치료하지 않습니다</div>
+          <div class="rul-d">반복해서 치아를 망가뜨리는 교합과 힘의 원인까지 확인합니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ord">
+      <div class="ord-kw">자연치아살리기의 순서</div>
+      <div class="ord-flow">
+        <span class="ord-i">염증을 줄이고</span><span class="ord-a">→</span>
+        <span class="ord-i">신경을 살리고</span><span class="ord-a">→</span>
+        <span class="ord-i">뿌리를 살리고</span><span class="ord-a">→</span>
+        <span class="ord-i">치아 구조를 다시 만들고</span><span class="ord-a">→</span>
+        <span class="ord-i">치아에 가해지는 힘을 조절합니다</span>
+      </div>
+      <div class="ord-b">
+        쁘띠치과가 생각하는 자연치아살리기는 단순히 &ldquo;치아를 뽑지 않는 것&rdquo;이 아닙니다.<br>
+        <strong>남아 있는 자연치아가 다시 편안하게 기능할 수 있도록 만드는 치료입니다.</strong>
+      </div>
     </div>
   </section>
 
